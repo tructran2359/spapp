@@ -3,4 +3,29 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--Default colors, can be changed in future-->
+
+    <color name="color_ui01">#4d80ef</color>
+    <color name="color_ui02">#4f5a60</color>
+    <color name="color_ui0250">#804f5a60</color>
+    <color name="color_ui03">#9ba6aa</color>
+    <color name="color_ui04">#cccccc</color>
+    <color name="color_ui05">#f3f3f3</color>
+    <color name="color_ui06">#ffffff</color>
+    <color name="color_ui0680">#ccffffff</color>
+
+    <color name="color_brand01">#00b0b2</color>
+    <color name="color_brand02">#2d779e</color>
+
+    <color name="color_btnpress">#4d6da7</color>
+    <color name="color_btninactive">#dbe5fb</color>
+
+    <color name="color_primarygradient">#f5515f</color>
+    <color name="color_primarygradientbase">#4392f1</color>
+    
+    <color name="color_alert">#d0021b</color>
+
+
+
 </resources>
