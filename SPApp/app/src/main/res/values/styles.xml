@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="FullScreenActivity" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--Customize here-->
+    </style>
+
 </resources>

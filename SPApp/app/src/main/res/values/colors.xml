@@ -23,9 +23,7 @@
 
     <color name="color_primarygradient">#f5515f</color>
     <color name="color_primarygradientbase">#4392f1</color>
-    
+
     <color name="color_alert">#d0021b</color>
-
-
-
+    
 </resources>
