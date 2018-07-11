@@ -13,9 +13,17 @@
     <RelativeLayout
         android:id="@+id/rl_hero_section"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/partner_details_hero_section_height"
+        android:layout_height="0dp"
         android:background="@color/color_ui03"
         >
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/laundry01"
+            android:scaleType="centerCrop"
+            />
 
         <ImageView
             android:id="@+id/iv_back"
