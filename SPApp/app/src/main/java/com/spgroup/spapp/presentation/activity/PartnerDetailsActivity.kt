@@ -59,6 +59,8 @@ class PartnerDetailsActivity : BaseActivity() {
         pager_images.offscreenPageLimit = 3
         pager_images.adapter = mImageAdapter
 
+        pager_indicator.setViewPager(pager_images)
+
     }
 
 }

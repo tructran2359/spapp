@@ -14,5 +14,6 @@
 
     <!--Partner Details Screen-->
     <dimen name="partner_detail_summary_section_height">70dp</dimen>
+    <dimen name="indicator_size">10dp</dimen>
 
 </resources>
