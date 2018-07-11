@@ -1,4 +1,4 @@
-package com.spgroup.spapp.presentation.Extension
+package com.spgroup.spapp.Extension
 
 import android.view.View
 import android.view.ViewTreeObserver

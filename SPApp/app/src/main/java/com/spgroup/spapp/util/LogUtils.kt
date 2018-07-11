@@ -1,4 +1,4 @@
-package com.spgroup.spapp.presentation.util
+package com.spgroup.spapp.util
 
 import android.util.Log
 import com.spgroup.spapp.BuildConfig.DEBUG
