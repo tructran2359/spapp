@@ -20,6 +20,10 @@
             </intent-filter>
         </activity>
 
+        <!--ParnerDetailsActivity-->
+        <activity android:name=".presentation.activity.PartnerDetailsActivity">
+        </activity>
+
     </application>
 
 </manifest>
