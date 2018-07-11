@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.spgroup.spapp.R
+import com.spgroup.spapp.presentation.Extension.setOnGlobalLayoutListener
 import kotlinx.android.synthetic.main.activity_partner_details.*
 
 class PartnerDetailsActivity : BaseActivity() {
@@ -38,6 +39,24 @@ class PartnerDetailsActivity : BaseActivity() {
         iv_back.setOnClickListener {
             onBackPressed()
         }
+        rl_hero_section.setOnGlobalLayoutListener {
+            val width = rl_hero_section.width
+            val height = (width * 9f / 16f).toInt()
+            val layoutParams = rl_hero_section.layoutParams
+            layoutParams.height = height
+            rl_hero_section.layoutParams = layoutParams
+        }
+
+//        rl_hero_section.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+//            override fun onGlobalLayout() {
+//                val width = rl_hero_section.width
+//                val height = (width * 9f / 16f).toInt()
+//                val layoutParams = rl_hero_section.layoutParams
+//                layoutParams.height = height
+//                rl_hero_section.layoutParams = layoutParams
+//                rl_hero_section.viewTreeObserver.removeOnGlobalLayoutListener(this)
+//            }
+//        })
     }
 
 }
