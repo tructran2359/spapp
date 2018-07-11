@@ -5,6 +5,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.activity.PartnerDetailsActivity">
+    android:background="@android:color/white"
+    tools:context=".presentation.activity.PartnerDetailsActivity"
+    >
+    
+    <!--Hero Section-->
+    <RelativeLayout
+        android:id="@+id/rl_hero_section"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/partner_details_hero_section_height"
+        android:background="@color/color_ui03"
+        >
 
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/common_icon_size"
+            android:layout_height="@dimen/common_icon_size"
+            android:layout_marginTop="@dimen/common_spacing_x2"
+            android:layout_marginLeft="@dimen/common_spacing_x2"
+            android:src="@drawable/arrow_left"
+            />
+
+    </RelativeLayout>
+
+    <!--Form Section-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_hero_section"
+        android:layout_above="@+id/rl_summary_section"
+        >
+        
+    </RelativeLayout>
+    
+    <!--Summary Section-->
+    <RelativeLayout
+        android:id="@+id/rl_summary_section"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/partner_detail_summary_section_height"
+        android:background="@color/color_ui03"
+        android:layout_alignParentBottom="true"
+        >
+
+    </RelativeLayout>
+    
 </RelativeLayout>

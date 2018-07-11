@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">SP App</string>
+    
+    <!--font-->
+    <string name="font_default">@string/font_regular</string>
+
+    <string name="font_book">fonts/Geomanist-Book.ttf</string>
+    <string name="font_medium">fonts/Geomanist-Medium.ttf</string>
+    <string name="font_regular">fonts/Geomanist-Regular.ttf</string>
 </resources>
