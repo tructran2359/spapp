@@ -6,6 +6,7 @@
     <!--common-->
     <dimen name="common_spacing">4dp</dimen>
     <dimen name="common_spacing_x2">8dp</dimen>
+    <dimen name="common_spacing_x3">12dp</dimen>
 
     <dimen name="common_icon_size">24dp</dimen>
 
