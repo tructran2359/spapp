@@ -17,12 +17,10 @@
         android:background="@color/color_ui03"
         >
 
-        <ImageView
-            android:id="@+id/iv_image"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager_images"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/laundry01"
-            android:scaleType="centerCrop"
             />
 
         <ImageView
