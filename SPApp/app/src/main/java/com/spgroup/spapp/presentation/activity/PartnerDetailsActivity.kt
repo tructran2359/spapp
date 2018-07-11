@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.spgroup.spapp.R
-import com.spgroup.spapp.presentation.Extension.setOnGlobalLayoutListener
+import com.spgroup.spapp.Extension.setOnGlobalLayoutListener
 import kotlinx.android.synthetic.main.activity_partner_details.*
 
 class PartnerDetailsActivity : BaseActivity() {
