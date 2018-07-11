@@ -12,4 +12,13 @@
         <!--Customize here-->
     </style>
 
+    <style name="textH1">
+        <item name="android:textSize">@dimen/text_size_h1</item>
+        <item name="fontPath">@string/font_regular</item>
+    </style>
+
+    <style name="textH1.white">
+        <item name="android:textColor">@color/color_ui06</item>
+    </style>
+
 </resources>

@@ -10,6 +10,8 @@
 
     <dimen name="common_icon_size">24dp</dimen>
 
+    <dimen name="text_size_h1">28sp</dimen>
+
     <!--Partner Details Screen-->
     <dimen name="partner_details_hero_section_height">180dp</dimen>
     <dimen name="partner_detail_summary_section_height">70dp</dimen>
