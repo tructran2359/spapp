@@ -27,5 +27,8 @@
     <color name="color_alert">#d0021b</color>
 
     <color name="black">@android:color/black</color>
-    
+
+    <color name="image_gradient_bottom">#96000000</color>
+    <color name="image_gradient_top">#32000000</color>
+
 </resources>
