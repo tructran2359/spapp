@@ -34,8 +34,14 @@ class ServiceItemView : RelativeLayout {
         LayoutInflater.from(context).inflate(R.layout.layout_service_item, this, true)
         tv_name.setText(serviceItem.name)
         tv_price.setText(serviceItem.price.getFormatedItemPrice(serviceItem.unit))
+
         fl_add_btn_container.setOnClickListener {
             serviceItem.count++
+            onCountUpdate()
+        }
+
+        iv_delete.setOnClickListener {
+            serviceItem.count = 0
             onCountUpdate()
         }
     }
@@ -43,10 +49,12 @@ class ServiceItemView : RelativeLayout {
     fun onCountUpdate() {
         if (serviceItem.count == 0) {
             tv_count.visibility = View.GONE
+            iv_delete.visibility = View.GONE
             iv_add.visibility = View.VISIBLE
             view_root.isSelected = false
         } else {
             tv_count.visibility = View.VISIBLE
+            iv_delete.visibility = View.VISIBLE
             tv_count.setText(serviceItem.count.toString())
             iv_add.visibility = View.GONE
             view_root.isSelected = true
