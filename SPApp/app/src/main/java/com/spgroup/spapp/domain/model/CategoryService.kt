@@ -3,9 +3,10 @@ package com.spgroup.spapp.domain.model
 /**
  * Service that a Category has
  */
-data class Service(
+data class CategoryService(
         var name: String,
-        var listItem: MutableList<ServiceItem>
+        var listItem: MutableList<ServiceItem>,
+        var expanded: Boolean = false
 )
 
 data class ServiceItem(
