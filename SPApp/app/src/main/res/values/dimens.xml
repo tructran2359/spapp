@@ -7,11 +7,18 @@
     <dimen name="common_spacing">4dp</dimen>
     <dimen name="common_spacing_x2">8dp</dimen>
     <dimen name="common_spacing_x3">12dp</dimen>
+    <dimen name="common_spacing_x4">16dp</dimen>
 
     <dimen name="common_icon_size">24dp</dimen>
 
     <dimen name="text_size_h1">28sp</dimen>
+    <dimen name="text_size_h5">16sp</dimen>
+    <dimen name="text_size_h6">14sp</dimen>
+
     <dimen name="text_size_menu">18sp</dimen>
+    <dimen name="text_size_caption">14sp</dimen>
+
+    <dimen name="line_width">1dp</dimen>
 
     <!--Partner Details Screen-->
     <dimen name="partner_detail_summary_section_height">70dp</dimen>

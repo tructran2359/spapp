@@ -7,4 +7,5 @@
     <string name="font_book">fonts/Geomanist-Book.ttf</string>
     <string name="font_medium">fonts/Geomanist-Medium.ttf</string>
     <string name="font_regular">fonts/Geomanist-Regular.ttf</string>
+    <string name="from">From</string>
 </resources>
