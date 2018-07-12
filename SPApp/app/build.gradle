@@ -39,6 +39,7 @@ dependencies {
 
     // Support
     implementation "com.android.support:appcompat-v7:$rootProject.supportVersion"
+    implementation "com.android.support:design:$rootProject.supportVersion"
 
     // Custom Font
     implementation "uk.co.chrisjenx:calligraphy:$rootProject.calligraphyVersion"
