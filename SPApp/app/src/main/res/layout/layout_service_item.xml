@@ -2,9 +2,10 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/view_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_rec_rounded_white_solid_grey_stroke"
+    android:background="@drawable/selector_service_item"
     android:layout_marginTop="@dimen/common_spacing_x2"
     tools:ignore="MissingPrefix"
     >
