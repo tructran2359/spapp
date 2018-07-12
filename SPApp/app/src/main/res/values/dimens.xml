@@ -11,6 +11,7 @@
     <dimen name="common_icon_size">24dp</dimen>
 
     <dimen name="text_size_h1">28sp</dimen>
+    <dimen name="text_size_menu">18sp</dimen>
 
     <!--Partner Details Screen-->
     <dimen name="partner_detail_summary_section_height">70dp</dimen>
