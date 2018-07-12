@@ -44,10 +44,12 @@ class ServiceItemView : RelativeLayout {
         if (serviceItem.count == 0) {
             tv_count.visibility = View.GONE
             iv_add.visibility = View.VISIBLE
+            view_root.isSelected = false
         } else {
             tv_count.visibility = View.VISIBLE
             tv_count.setText(serviceItem.count.toString())
             iv_add.visibility = View.GONE
+            view_root.isSelected = true
         }
     }
 
