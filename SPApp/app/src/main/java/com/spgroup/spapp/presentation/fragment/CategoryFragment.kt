@@ -1,10 +1,14 @@
 package com.spgroup.spapp.presentation.fragment
 
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
+import com.spgroup.spapp.domain.model.CategoryService
+import com.spgroup.spapp.domain.model.ServiceItem
+import com.spgroup.spapp.presentation.adapter.CategoryServiceAdapter
 import kotlinx.android.synthetic.main.fragment_category.*
 
 class CategoryFragment: BaseFragment() {
@@ -26,6 +30,7 @@ class CategoryFragment: BaseFragment() {
     ///////////////////////////////////////////////////////////////////////////
 
     lateinit var mCategoryName: String
+    lateinit var mServiceAdapter: CategoryServiceAdapter
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -42,6 +47,19 @@ class CategoryFragment: BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tv_content.setText("Category: $mCategoryName")
+
+        val item1 = ServiceItem("Paint", 10, " / item")
+        val item2 = ServiceItem("Shirt", 10, " / item")
+        val data1 = CategoryService("Test", mutableListOf(item1, item2), true)
+        val fakeData = mutableListOf(data1)
+
+        mServiceAdapter = CategoryServiceAdapter()
+        mServiceAdapter.submitData(fakeData)
+        recycler_view.layoutManager = LinearLayoutManager(activity)
+        recycler_view.adapter = mServiceAdapter
     }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Other
+    ///////////////////////////////////////////////////////////////////////////
 }

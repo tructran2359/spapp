@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_rec_rounded_white_solid_grey_stroke"
+    android:layout_marginTop="@dimen/common_spacing_x2"
+    tools:ignore="MissingPrefix"
+    >
+
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/delete"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/common_spacing_x4"
+        android:layout_marginRight="@dimen/common_spacing_x4"
+        />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textSize="@dimen/text_size_h5"
+        android:textColor="@color/black"
+        android:text="Blouse"
+        android:layout_toRightOf="@+id/iv_delete"
+        android:layout_marginTop="@dimen/common_spacing_x3"
+        android:layout_marginBottom="@dimen/common_spacing_x2"
+        fontPath="@string/font_book"
+        />
+
+    <TextView
+        android:id="@+id/tv_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/iv_delete"
+        android:layout_below="@+id/tv_name"
+        android:layout_marginBottom="@dimen/common_spacing_x3"
+        android:layout_marginRight="@dimen/common_spacing_x2"
+        android:text="@string/from"
+        fontPath="@string/font_regular"
+        android:textSize="@dimen/text_size_caption"
+        />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_from"
+        android:layout_alignBaseline="@+id/tv_from"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_caption"
+        fontPath="@string/font_book"
+
+        android:text="S$6 / item"
+        />
+
+    <ImageView
+        android:id="@+id/iv_add"
+        android:layout_width="@dimen/common_icon_size"
+        android:layout_height="@dimen/common_icon_size"
+        android:src="@drawable/plus"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/common_spacing_x4"
+        />
+
+</RelativeLayout>
