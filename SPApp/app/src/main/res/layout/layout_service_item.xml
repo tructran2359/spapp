@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/selector_service_item"
     android:layout_marginTop="@dimen/common_spacing_x2"
+    android:paddingLeft="@dimen/common_spacing_x4"
     tools:ignore="MissingPrefix"
     >
 
@@ -16,8 +17,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/delete"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/common_spacing_x4"
         android:layout_marginRight="@dimen/common_spacing_x4"
+        android:visibility="gone"
         />
 
     <TextView
@@ -62,11 +63,11 @@
 
     <FrameLayout
         android:id="@+id/fl_add_btn_container"
-        android:layout_width="@dimen/common_icon_size"
-        android:layout_height="@dimen/common_icon_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/common_spacing_x4"
+        android:padding="@dimen/common_spacing_x4"
         >
 
         <ImageView
