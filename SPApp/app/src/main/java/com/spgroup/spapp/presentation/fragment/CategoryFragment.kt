@@ -69,8 +69,9 @@ class CategoryFragment: BaseFragment() {
                 false
         )
 
-        val data1 = CategoryService("GARMENTS", mutableListOf(item1, item2, item3), true)
-        val fakeData = mutableListOf(data1)
+        val data1 = CategoryService("GARMENTS", mutableListOf(item1, item2, item3), false)
+        val data2 = CategoryService("GARMENTS 2", mutableListOf(item1, item2, item3), false)
+        val fakeData = mutableListOf(data1, data2)
 
         mServiceAdapter = CategoryServiceAdapter()
         mServiceAdapter.submitData(fakeData)

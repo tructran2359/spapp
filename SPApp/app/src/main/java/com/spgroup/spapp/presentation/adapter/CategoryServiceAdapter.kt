@@ -98,10 +98,9 @@ class CategoryServiceAdapter: RecyclerView.Adapter<CategoryServiceAdapter.Servic
 
                 }
 
-                // Wait to other story to add functionality for button
-//                rl_service_info_container.setOnClickListener {
-//                    listener.onCollapseClick(adapterPosition)
-//                }
+                rl_service_info_container.setOnClickListener {
+                    listener.onCollapseClick(adapterPosition)
+                }
             }
         }
     }
