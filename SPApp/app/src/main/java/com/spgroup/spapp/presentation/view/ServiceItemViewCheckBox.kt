@@ -34,7 +34,16 @@ class ServiceItemViewCheckBox: ServiceItemView {
         tv_name.setText(serviceItem.name)
         tv_price.setText(serviceItem.price.getFormatedItemPrice(serviceItem.unit))
         tv_description.setText(serviceItem.description)
+        onCheckUpdated()
 
+        fl_check_container.setOnClickListener {
+            serviceItem.selected = !serviceItem.selected
+            onCheckUpdated()
+        }
+    }
+
+    fun onCheckUpdated() {
+        view_root.isSelected = serviceItem.selected
     }
 
 }

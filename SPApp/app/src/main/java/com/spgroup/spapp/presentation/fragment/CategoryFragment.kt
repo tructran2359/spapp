@@ -61,7 +61,15 @@ class CategoryFragment: BaseFragment() {
                 "Also known as sheers, made of light coloured materials to allow light in from outside.",
                 false)
 
-        val data1 = CategoryService("Test", mutableListOf(item1, item2), true)
+        val item3 = CheckBoxServiceItem(
+                "Night Curtains",
+                9,
+                " / kg",
+                "Heavier in weight and are of dark coloured materials. These are drawn at night for privacy.",
+                false
+        )
+
+        val data1 = CategoryService("GARMENTS", mutableListOf(item1, item2, item3), true)
         val fakeData = mutableListOf(data1)
 
         mServiceAdapter = CategoryServiceAdapter()
