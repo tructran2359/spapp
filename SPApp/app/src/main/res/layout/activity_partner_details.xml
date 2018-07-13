@@ -57,6 +57,16 @@
             android:layout_centerInParent="true"
             />
 
+        <ImageView
+            android:id="@+id/iv_information"
+            android:layout_width="@dimen/common_icon_size"
+            android:layout_height="@dimen/common_icon_size"
+            android:layout_marginTop="@dimen/common_spacing_x3"
+            android:layout_marginRight="@dimen/common_spacing_x2"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/information"
+            />
+
     </RelativeLayout>
 
     <!--Form Section-->
