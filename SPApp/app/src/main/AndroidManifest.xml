@@ -25,17 +25,21 @@
         <!-- ParnerDetailsActivity -->
         <activity
             android:name=".presentation.activity.PartnerDetailsActivity"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait">
         </activity>
 
-        <!--OrderSummaryActivity-->
+        <!-- OrderSummaryActivity -->
         <activity
             android:name=".presentation.activity.OrderSummaryActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <!--PartnerInformationActivity-->
+        <activity
+            android:name=".presentation.activity.PartnerInformationActivity"
             android:screenOrientation="portrait"
             >
         </activity>
-
     </application>
 
 </manifest>

@@ -112,6 +112,10 @@ class PartnerDetailsActivity : BaseActivity() {
             onBackPressed()
         }
 
+        iv_information.setOnClickListener {
+            startActivity(PartnerInformationActivity.getLaunchIntent(this@PartnerDetailsActivity))
+        }
+
         rl_hero_section.setOnGlobalLayoutListener {
             val width = rl_hero_section.width
             val height = (width * 9f / 16f).toInt()
