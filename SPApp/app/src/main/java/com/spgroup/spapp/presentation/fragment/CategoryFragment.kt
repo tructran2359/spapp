@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.CategoryService
+import com.spgroup.spapp.domain.model.CheckBoxServiceItem
 import com.spgroup.spapp.domain.model.CounterServiceItem
 import com.spgroup.spapp.presentation.adapter.CategoryServiceAdapter
 import kotlinx.android.synthetic.main.fragment_category.*
@@ -48,8 +49,18 @@ class CategoryFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val item1 = CounterServiceItem("Paint", 10, " / item")
-        val item2 = CounterServiceItem("Shirt", 10, " / item")
+        val item1 = CounterServiceItem(
+                "Paint",
+                10,
+                " / item")
+
+        val item2 = CheckBoxServiceItem(
+                "Day Curtains",
+                10,
+                " / piece",
+                "Also known as sheers, made of light coloured materials to allow light in from outside.",
+                false)
+
         val data1 = CategoryService("Test", mutableListOf(item1, item2), true)
         val fakeData = mutableListOf(data1)
 

@@ -24,6 +24,7 @@ class CheckBoxServiceItem(
         override var name: String,
         override var price: Int,
         override var unit: String,
+        var description: String,
         var selected: Boolean
 
 ): ServiceItem(name, price, unit) {
