@@ -54,6 +54,7 @@ class PartnerDetailsActivity : BaseActivity() {
 
         setUpFormSection()
 
+        setUpSummarySection()
     }
 
     private fun setUpFormSection() {
@@ -124,6 +125,13 @@ class PartnerDetailsActivity : BaseActivity() {
         pager_images.adapter = mImageAdapter
 
         pager_indicator.setViewPager(pager_images)
+    }
+
+    private fun setUpSummarySection() {
+        rl_summary_button.setOnClickListener {
+            val intent = OrderSummaryActivity.getLaunchIntent(this)
+            startActivity(intent)
+        }
     }
 
 }

@@ -11,11 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/FullScreenActivity">
 
-        <!--HomeActivity-->
+        <!-- HomeActivity -->
         <activity
             android:name=".presentation.activity.HomeActivity"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -23,9 +22,16 @@
             </intent-filter>
         </activity>
 
-        <!--ParnerDetailsActivity-->
+        <!-- ParnerDetailsActivity -->
         <activity
             android:name=".presentation.activity.PartnerDetailsActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+        <!--OrderSummaryActivity-->
+        <activity
+            android:name=".presentation.activity.OrderSummaryActivity"
             android:screenOrientation="portrait"
             >
         </activity>

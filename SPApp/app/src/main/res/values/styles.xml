@@ -38,4 +38,18 @@
         <item name="fontPath">@string/font_book</item>
     </style>
 
+    <style name="textCounterIcon">
+        <item name="android:layout_width">@dimen/common_icon_size</item>
+        <item name="android:layout_height">@dimen/common_icon_size</item>
+        <item name="android:textColor">@color/color_ui06</item>
+        <item name="android:background">@drawable/bg_oval_blue</item>
+        <item name="android:textSize">@dimen/text_size_h6</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="textCounterIcon.white">
+        <item name="android:textColor">@color/color_ui01</item>
+        <item name="android:background">@drawable/bg_oval_white</item>
+    </style>
+
 </resources>

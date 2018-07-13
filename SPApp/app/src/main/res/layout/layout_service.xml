@@ -46,8 +46,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_below="@+id/rl_service_info_container"
-        android:layout_marginLeft="@dimen/common_spacing_x4"
-        android:layout_marginRight="@dimen/common_spacing_x4"
+        android:layout_marginLeft="@dimen/service_item_horz_spacing"
+        android:layout_marginRight="@dimen/service_item_horz_spacing"
         android:layout_marginBottom="@dimen/common_spacing_x2"
         />
 

@@ -20,6 +20,8 @@
     <dimen name="text_size_menu">18sp</dimen>
     <dimen name="text_size_caption">14sp</dimen>
     <dimen name="text_size_paragraph">16sp</dimen>
+    <dimen name="text_size_button">18sp</dimen>
+    <dimen name="text_size_counter">14sp</dimen>
 
     <dimen name="line_width">1dp</dimen>
 
@@ -31,5 +33,6 @@
     <dimen name="service_item_vert_spacing">12dp</dimen>
     <dimen name="service_item_price_spacing">8dp</dimen>
     <dimen name="service_item_space_between_items">8dp</dimen>
+    <dimen name="btn_sumary_height">65dp</dimen>
 
 </resources>
