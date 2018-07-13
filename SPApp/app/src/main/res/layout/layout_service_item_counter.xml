@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/selector_service_item"
-    android:layout_marginTop="@dimen/common_spacing_x2"
-    android:paddingLeft="@dimen/common_spacing_x4"
+    android:layout_marginTop="@dimen/service_item_space_between_items"
+    android:paddingLeft="@dimen/service_item_horz_spacing"
     tools:ignore="MissingPrefix"
     >
 
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/delete"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/common_spacing_x4"
+        android:layout_marginRight="@dimen/service_item_horz_spacing"
         android:visibility="gone"
         />
 
@@ -30,33 +30,25 @@
         android:textColor="@color/black"
         android:text="Blouse"
         android:layout_toRightOf="@+id/iv_delete"
-        android:layout_marginTop="@dimen/common_spacing_x3"
+        android:layout_marginTop="@dimen/service_item_vert_spacing"
         android:layout_marginBottom="@dimen/common_spacing_x2"
         fontPath="@string/font_book"
         />
 
     <TextView
+        style="@style/textServiceItemFrom"
         android:id="@+id/tv_from"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/iv_delete"
         android:layout_below="@+id/tv_name"
-        android:layout_marginBottom="@dimen/common_spacing_x3"
-        android:layout_marginRight="@dimen/common_spacing_x2"
-        android:text="@string/from"
-        fontPath="@string/font_regular"
-        android:textSize="@dimen/text_size_caption"
+        android:layout_marginBottom="@dimen/service_item_vert_spacing"
+        android:layout_marginRight="@dimen/service_item_price_spacing"
         />
 
     <TextView
+        style="@style/textServiceItemPrice"
         android:id="@+id/tv_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/tv_from"
         android:layout_alignBaseline="@+id/tv_from"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_caption"
-        fontPath="@string/font_book"
 
         android:text="S$6 / item"
         />
@@ -67,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:padding="@dimen/common_spacing_x4"
+        android:padding="@dimen/service_item_horz_spacing"
         >
 
         <ImageView
