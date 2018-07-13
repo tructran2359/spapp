@@ -70,14 +70,9 @@
             />
 
         <TextView
+            style="@style/textCounterIcon"
             android:id="@+id/tv_count"
-            android:layout_width="@dimen/common_icon_size"
-            android:layout_height="@dimen/common_icon_size"
-            android:textColor="@color/color_ui06"
-            android:background="@drawable/bg_oval_blue"
             android:text="1"
-            android:textSize="@dimen/text_size_h6"
-            android:gravity="center"
             fontPath="@string/font_book"
             android:visibility="gone"
             />
