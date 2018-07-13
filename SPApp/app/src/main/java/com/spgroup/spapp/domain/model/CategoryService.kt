@@ -5,6 +5,7 @@ package com.spgroup.spapp.domain.model
  */
 data class CategoryService(
         var name: String,
+        var description: String,
         var listItem: MutableList<ServiceItem>,
         var expanded: Boolean = false
 )
