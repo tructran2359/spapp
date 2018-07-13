@@ -8,12 +8,3 @@ data class CategoryService(
         var listItem: MutableList<ServiceItem>,
         var expanded: Boolean = false
 )
-
-data class ServiceItem(
-        var name: String,
-        var price: Int,
-        var unit: String,
-        var minCount: Int = 0,
-        var maxCount: Int = 0,
-        var count: Int = 0
-)

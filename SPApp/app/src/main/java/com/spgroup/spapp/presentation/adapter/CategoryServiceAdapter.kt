@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.CategoryService
-import com.spgroup.spapp.presentation.view.ServiceItemView
+import com.spgroup.spapp.presentation.view.ServiceItemViewCounter
 import kotlinx.android.synthetic.main.layout_service.view.*
 
 class CategoryServiceAdapter: RecyclerView.Adapter<CategoryServiceAdapter.ServiceVH>() {
@@ -72,7 +72,7 @@ class CategoryServiceAdapter: RecyclerView.Adapter<CategoryServiceAdapter.Servic
                     ll_item_container.removeAllViews()
                     val itemCount = service.listItem.size
                     for (i in 0 until itemCount) {
-                        ll_item_container.addView(ServiceItemView(itemView.context, service.listItem[i]))
+                        ll_item_container.addView(ServiceItemViewCounter(itemView.context, service.listItem[i]))
                     }
 
                     iv_collapse.setImageResource(R.drawable.arrow_up_blue)
