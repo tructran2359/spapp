@@ -69,8 +69,11 @@ class CategoryFragment: BaseFragment() {
                 false
         )
 
-        val data1 = CategoryService("GARMENTS", mutableListOf(item1, item2, item3), false)
-        val data2 = CategoryService("GARMENTS 2", mutableListOf(item1, item2, item3), false)
+        val data1 = CategoryService("GARMENTS",
+                "Includes free dismantling & installation. Measurement & evaluation will be done on-site, price estimation will not be included in this request.",
+                mutableListOf(item1, item2, item3),
+                false)
+        val data2 = data1.copy(name = "GARMENTS 2")
         val fakeData = mutableListOf(data1, data2)
 
         mServiceAdapter = CategoryServiceAdapter()

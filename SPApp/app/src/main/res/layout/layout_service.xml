@@ -41,15 +41,39 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/ll_item_container"
+        android:id="@+id/ll_collapsed_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_below="@+id/rl_service_info_container"
-        android:layout_marginLeft="@dimen/service_item_horz_spacing"
-        android:layout_marginRight="@dimen/service_item_horz_spacing"
-        android:layout_marginBottom="@dimen/common_spacing_x2"
-        />
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/tv_service_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/service_name_margin_left"
+            android:layout_marginRight="@dimen/service_name_margin_left"
+            android:layout_marginBottom="@dimen/service_item_vert_spacing"
+            android:textSize="@dimen/text_size_paragraph"
+            android:textColor="@color/color_ui02"
+            fontPath="@string/font_regular"
+            android:text="123456asdfasdfasdklfhasdjhfalksjdhf"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_item_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/service_item_horz_spacing"
+            android:layout_marginRight="@dimen/service_item_horz_spacing"
+            android:layout_marginBottom="@dimen/common_spacing_x2"
+            />
+
+    </LinearLayout>
+
+
 
     <View
         android:id="@+id/v_devider"

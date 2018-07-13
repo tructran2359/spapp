@@ -69,6 +69,7 @@ class CategoryServiceAdapter: RecyclerView.Adapter<CategoryServiceAdapter.Servic
         fun bind(service: CategoryService) {
             with(itemView) {
                 tv_service_name.setText(service.name)
+                tv_service_description.setText(service.description)
 
                 if (service.expanded) {
 
@@ -89,12 +90,12 @@ class CategoryServiceAdapter: RecyclerView.Adapter<CategoryServiceAdapter.Servic
                     }
 
                     iv_collapse.setImageResource(R.drawable.arrow_up_blue)
-                    ll_item_container.visibility = View.VISIBLE
+                    ll_collapsed_container.visibility = View.VISIBLE
 
                 } else {
 
                     iv_collapse.setImageResource(R.drawable.arrow_down_blue)
-                    ll_item_container.visibility = View.GONE
+                    ll_collapsed_container.visibility = View.GONE
 
                 }
 
