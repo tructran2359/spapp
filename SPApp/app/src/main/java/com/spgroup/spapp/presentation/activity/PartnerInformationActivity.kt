@@ -24,6 +24,14 @@ class PartnerInformationActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_partner_information)
 
+        initViews()
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Other
+    ///////////////////////////////////////////////////////////////////////////
+
+    private fun initViews() {
         val list = listOf(
                 "Dry Cleaning",
                 "Curtain Cleaning",
@@ -33,6 +41,10 @@ class PartnerInformationActivity : BaseActivity() {
         for (str in list) {
             val view = IndicatorTextView(this, str)
             ll_service_container.addView(view)
+        }
+
+        iv_close.setOnClickListener {
+            onBackPressed()
         }
     }
 }
