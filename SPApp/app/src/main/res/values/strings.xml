@@ -9,4 +9,6 @@
     <string name="font_regular">fonts/Geomanist-Regular.ttf</string>
     <string name="from">From</string>
     <string name="view_summary">VIEW SUMMARY</string>
+    <string name="service_desc_header">Exclusive On This App</string>
+    <string name="bussiness_info_header">Business Information</string>
 </resources>

@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.spgroup.spapp.R
+import com.spgroup.spapp.presentation.view.IndicatorTextView
+import kotlinx.android.synthetic.main.activity_partner_information.*
 
 class PartnerInformationActivity : BaseActivity() {
 
@@ -21,5 +23,16 @@ class PartnerInformationActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_partner_information)
+
+        val list = listOf(
+                "Dry Cleaning",
+                "Curtain Cleaning",
+                "Enjoy free collection & delivery over $30",
+                "Special request available")
+
+        for (str in list) {
+            val view = IndicatorTextView(this, str)
+            ll_service_container.addView(view)
+        }
     }
 }
