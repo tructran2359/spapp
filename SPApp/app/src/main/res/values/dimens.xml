@@ -11,6 +11,7 @@
 
     <dimen name="common_icon_size">24dp</dimen>
     <dimen name="common_icon_size_small">15dp</dimen>
+    <dimen name="common_icon_size_medium">28dp</dimen>
 
     <dimen name="text_size_h1">28sp</dimen>
     <dimen name="text_size_h4">18sp</dimen>
@@ -23,7 +24,12 @@
     <dimen name="text_size_button">18sp</dimen>
     <dimen name="text_size_counter">14sp</dimen>
 
+    <dimen name="line_space_h1">6sp</dimen>
+    <dimen name="line_space_h4">3sp</dimen>
+    <dimen name="line_space_paragraph">8sp</dimen>
+
     <dimen name="line_width">1dp</dimen>
+    <dimen name="dot_size">5dp</dimen>
 
     <!--Partner Details Screen-->
     <dimen name="partner_detail_summary_section_height">70dp</dimen>
@@ -34,5 +40,15 @@
     <dimen name="service_item_price_spacing">8dp</dimen>
     <dimen name="service_item_space_between_items">8dp</dimen>
     <dimen name="btn_sumary_height">65dp</dimen>
+
+    <!--PartnerInformationActivity-->
+    <dimen name="partner_info_margin_vert_small">9dp</dimen>
+    <dimen name="partner_info_margin_vert_medium">20dp</dimen>
+    <dimen name="partner_info_margin_vert_large">24dp</dimen>
+    <dimen name="partner_info_margin_right">15dp</dimen>
+    <dimen name="partner_info_margin_left">33dp</dimen>
+    <dimen name="partner_infor_header_margin_top">20dp</dimen>
+    <dimen name="partner_info_desc_margin">11dp</dimen>
+    <dimen name="partner_info_service_content_right">39dp</dimen>
 
 </resources>

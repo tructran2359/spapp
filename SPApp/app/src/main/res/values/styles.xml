@@ -15,10 +15,33 @@
     <style name="textH1">
         <item name="android:textSize">@dimen/text_size_h1</item>
         <item name="fontPath">@string/font_regular</item>
+        <item name="android:lineSpacingExtra">@dimen/line_space_h1</item>
     </style>
 
     <style name="textH1.white">
         <item name="android:textColor">@color/color_ui06</item>
+    </style>
+    
+    <style name="textH4">
+        <item name="android:textSize">@dimen/text_size_h4</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontPath">@string/font_book</item>
+        <item name="android:lineSpacingExtra">@dimen/line_space_h4</item>
+    </style>
+
+    <style name="textParagraph">
+        <item name="android:textSize">@dimen/text_size_paragraph</item>
+        <item name="fontPath">@string/font_regular</item>
+        <item name="android:lineSpacingExtra">@dimen/line_space_paragraph</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="textParagraph.white">
+        <item name="android:textColor">@color/color_ui06</item>
+    </style>
+
+    <style name="textParagraph.grey">
+        <item name="android:textColor">@color/color_ui02</item>
     </style>
 
     <style name="textServiceItemFrom">
