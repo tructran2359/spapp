@@ -5,6 +5,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+
     signingConfigs {
         defaultConfig {
             keyAlias 'vmlalias'
@@ -13,20 +14,38 @@ android {
             storePassword 'vmlqais'
         }
     }
+
     compileSdkVersion 28
+
     defaultConfig {
         applicationId "com.spgroup.spapp"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.defaultConfig
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+
+            def formattedDate = new Date().format('yyyyMMdd')
+
+//            def flavorName = variant.productFlavors[0].name
+
+            def buildName = variant.buildType.name
+
+//            def fileName = formattedDate + "_" + "SPApp_Android_" + flavorName + "_" + buildName + "_v" + defaultConfig.versionName + "-" + defaultConfig.versionCode + ".apk"
+            outputFileName = formattedDate + "_" + "SPApp_Android_" + buildName + "_v" + defaultConfig.versionName + "-" + defaultConfig.versionCode + ".apk"
+
         }
     }
 }
