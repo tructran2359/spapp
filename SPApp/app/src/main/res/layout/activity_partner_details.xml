@@ -96,62 +96,28 @@
             android:layout_height="match_parent"/>
         
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_shadow_height"
+        android:background="@drawable/gradient_button_shadow"
+        android:layout_above="@+id/rl_summary_section"
+        />
     
     <!--Summary Section-->
     <RelativeLayout
+        style="@style/summaryButton"
         android:id="@+id/rl_summary_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_ui06"
         android:layout_alignParentBottom="true"
-        android:paddingLeft="@dimen/service_item_horz_spacing"
-        android:paddingRight="@dimen/service_item_horz_spacing"
-        android:paddingTop="@dimen/service_item_vert_spacing"
-        android:paddingBottom="@dimen/service_item_vert_spacing"
         >
 
-        <RelativeLayout
-            android:id="@+id/rl_summary_button"
+        <com.spgroup.spapp.presentation.view.SummaryButton
+            android:id="@+id/btn_summary"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/btn_sumary_height"
-            android:background="@drawable/selector_btn_blue"
-            android:paddingLeft="@dimen/service_item_horz_spacing"
-            android:paddingRight="@dimen/service_item_horz_spacing"
-            >
-
-            <TextView
-                style="@style/textCounterIcon.white"
-                android:id="@+id/tv_total_count"
-                android:layout_centerVertical="true"
-                android:text="1"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/view_summary"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/tv_total_count"
-                android:layout_marginLeft="@dimen/service_item_horz_spacing"
-                android:textColor="@color/color_ui06"
-                android:textSize="@dimen/text_size_button"
-                fontPath="@string/font_medium"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:maxLines="1"
-                android:textColor="@color/color_ui06"
-                android:textSize="@dimen/text_size_counter"
-                android:gravity="right"
-                fontPath="@string/font_medium"
-
-                android:text="EST: S$66.00"
-                />
-
-        </RelativeLayout>
+            android:layout_height="@dimen/btn_summary_height"
+            />
 
     </RelativeLayout>
     

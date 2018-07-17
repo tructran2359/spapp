@@ -11,4 +11,15 @@
     <string name="view_summary">VIEW SUMMARY</string>
     <string name="service_desc_header">Exclusive On This App</string>
     <string name="bussiness_info_header">Business Information</string>
+    <string name="summary">Summary</string>
+    <string name="your_contact_info">Your Contact Information</string>
+    <string name="name">Name</string>
+    <string name="contact_no">Contact Number</string>
+    <string name="preferred_time">Preferred Time of Contact</string>
+    <string name="address">Address</string>
+    <string name="postal_code">Postal Code</string>
+    <string name="notes">Notes</string>
+    <string name="summary_notes_hint">Eg. Delivered items to be placed in the cabinet beside the front gate.</string>
+    <string name="remember_me">Remember me</string>
+    <string name="sum_order_agreement">By submitting, you allow us to send this request to our partner to contact you on the above-mentioned request.</string>
 </resources>

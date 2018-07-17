@@ -31,7 +31,9 @@
         <!-- OrderSummaryActivity -->
         <activity
             android:name=".presentation.activity.OrderSummaryActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
+            >
         </activity>
 
         <!--PartnerInformationActivity-->
