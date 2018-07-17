@@ -1,5 +1,7 @@
 package com.spgroup.spapp.extension
 
+import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.TextView
@@ -15,9 +17,13 @@ fun View.setOnGlobalLayoutListener(action: () -> Unit) {
 }
 
 fun TextView.setUpMenuActive() {
-    setTextColor(context.resources.getColor(R.color.color_ui02))
+    setTextColor(getColor(R.color.color_ui02))
 }
 
 fun TextView.setUpMenuInactive() {
-    setTextColor(context.resources.getColor(R.color.color_ui03))
+    setTextColor(getColor(R.color.color_ui03))
 }
+
+fun View.getColor(colorId: Int) = ContextCompat.getColor(context, colorId)
+
+fun Context.getColor(colorId: Int) = ContextCompat.getColor(this, colorId)

@@ -12,13 +12,26 @@
         <!--Customize here-->
     </style>
 
+    <!--Text style-->
+
     <style name="textH1">
         <item name="android:textSize">@dimen/text_size_h1</item>
         <item name="fontPath">@string/font_regular</item>
         <item name="android:lineSpacingExtra">@dimen/line_space_h1</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="textH1.white">
+        <item name="android:textColor">@color/color_ui06</item>
+    </style>
+
+    <style name="textH3">
+        <item name="android:textSize">@dimen/text_size_h3</item>
+        <item name="android:lineSpacingExtra">@dimen/line_space_h3</item>
+        <item name="fontPath">@string/font_book</item>
+    </style>
+
+    <style name="textH3.white">
         <item name="android:textColor">@color/color_ui06</item>
     </style>
     
@@ -73,6 +86,53 @@
     <style name="textCounterIcon.white">
         <item name="android:textColor">@color/color_ui01</item>
         <item name="android:background">@drawable/bg_oval_white</item>
+    </style>
+
+    <style name="lineDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/line_width</item>
+        <item name="android:background">@color/color_ui04</item>
+    </style>
+
+    <style name="lineDivider2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/common_spacing_x2</item>
+        <item name="android:background">@color/color_ui05</item>
+    </style>
+
+    <style name="textH4.orderSumLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/order_sum_vert_space_small</item>
+    </style>
+
+    <style name="textH4.orderSumInput">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_rec_rounded_white_solid_grey_stroke</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:layout_marginTop">@dimen/order_sum_small_space</item>
+        <item name="android:padding">@dimen/common_spacing_x2</item>
+    </style>
+
+    <style name="textCaption">
+        <item name="android:textColor">@color/color_ui02</item>
+        <item name="android:textSize">@dimen/text_size_caption</item>
+        <item name="android:lineSpacingExtra">@dimen/line_space_caption</item>
+        <item name="fontPath">@string/font_regular</item>
+    </style>
+
+    <style name="summaryButton">
+        <item name="android:paddingLeft">@dimen/service_item_horz_spacing</item>
+        <item name="android:paddingRight">@dimen/service_item_horz_spacing</item>
+        <item name="android:paddingTop">@dimen/service_item_vert_spacing</item>
+        <item name="android:paddingBottom">@dimen/service_item_vert_spacing</item>
+    </style>
+
+    <style name="iconWithPadding">
+        <item name="android:layout_width">@dimen/common_icon_size_with_padding</item>
+        <item name="android:layout_height">@dimen/common_icon_size_with_padding</item>
+        <item name="android:padding">@dimen/common_spacing</item>
     </style>
 
 </resources>

@@ -132,7 +132,7 @@ class PartnerDetailsActivity : BaseActivity() {
     }
 
     private fun setUpSummarySection() {
-        rl_summary_button.setOnClickListener {
+        btn_summary.setOnClickListener {
             val intent = OrderSummaryActivity.getLaunchIntent(this)
             startActivity(intent)
         }
