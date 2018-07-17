@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.CounterServiceItem
+import com.spgroup.spapp.domain.model.ServiceItemCounter
 import com.spgroup.spapp.domain.model.ServiceItem
 import com.spgroup.spapp.extension.getFormatedItemPrice
 import kotlinx.android.synthetic.main.layout_service_item_counter.view.*
@@ -15,14 +15,14 @@ class ServiceItemViewCounter: ServiceItemView {
     // Property
     ///////////////////////////////////////////////////////////////////////////
 
-    var serviceItem: CounterServiceItem
+    var serviceItem: ServiceItemCounter
 
     ///////////////////////////////////////////////////////////////////////////
     // Constructor
     ///////////////////////////////////////////////////////////////////////////
 
     constructor(context: Context, item: ServiceItem): super(context, item) {
-        serviceItem = item as CounterServiceItem
+        serviceItem = item as ServiceItemCounter
         init()
     }
 

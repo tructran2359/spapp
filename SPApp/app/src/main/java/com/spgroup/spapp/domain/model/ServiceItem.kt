@@ -1,14 +1,16 @@
 package com.spgroup.spapp.domain.model
 
+import java.io.Serializable
+
 abstract class ServiceItem(
         open var name: String,
         open var price: Int,
         open var unit: String
-) {
+): Serializable {
     abstract fun getItemCount(): Int
 }
 
-class CounterServiceItem(
+class ServiceItemCounter(
         override var name: String,
         override var price: Int,
         override var unit: String,
@@ -20,7 +22,7 @@ class CounterServiceItem(
     override fun getItemCount() = count
 }
 
-class CheckBoxServiceItem(
+class ServiceItemCheckBox(
         override var name: String,
         override var price: Int,
         override var unit: String,
@@ -32,7 +34,7 @@ class CheckBoxServiceItem(
     override fun getItemCount() = if (selected) 1 else 0
 }
 
-class ComboServiceItem(
+class ServiceItemCombo(
         override var name: String,
         override var price: Int,
         override var unit: String,
