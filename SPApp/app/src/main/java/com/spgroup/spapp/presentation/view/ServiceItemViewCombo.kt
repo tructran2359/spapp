@@ -3,7 +3,7 @@ package com.spgroup.spapp.presentation.view
 import android.content.Context
 import android.view.LayoutInflater
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.ComboServiceItem
+import com.spgroup.spapp.domain.model.ServiceItemCombo
 import com.spgroup.spapp.domain.model.ServiceItem
 import com.spgroup.spapp.extension.getFormatedItemPrice
 import kotlinx.android.synthetic.main.layout_service_item_combo.view.*
@@ -14,14 +14,14 @@ class ServiceItemViewCombo: ServiceItemView {
     // Property
     ///////////////////////////////////////////////////////////////////////////
 
-    var serviceItem: ComboServiceItem
+    var serviceItem: ServiceItemCombo
 
     ///////////////////////////////////////////////////////////////////////////
     // Constructor
     ///////////////////////////////////////////////////////////////////////////
 
     constructor(context: Context, item: ServiceItem): super(context, item) {
-        serviceItem = item as ComboServiceItem
+        serviceItem = item as ServiceItemCombo
         init()
     }
 

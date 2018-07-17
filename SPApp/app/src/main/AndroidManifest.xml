@@ -39,6 +39,12 @@
         <!--PartnerInformationActivity-->
         <activity
             android:name=".presentation.activity.PartnerInformationActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <!--ServiceCustomisationActivity-->
+        <activity
+            android:name=".presentation.activity.ServiceCustomisationActivity"
             android:screenOrientation="portrait"
             >
         </activity>
