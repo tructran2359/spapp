@@ -6,9 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.CheckBoxServiceItem
-import com.spgroup.spapp.domain.model.CounterServiceItem
-import com.spgroup.spapp.domain.model.ServiceGroup
+import com.spgroup.spapp.domain.model.CategoryService
+import com.spgroup.spapp.domain.model.ServiceItemCheckBox
+import com.spgroup.spapp.domain.model.ServiceItemCombo
+import com.spgroup.spapp.domain.model.ServiceItemCounter
 import com.spgroup.spapp.presentation.adapter.CategoryServiceAdapter
 import kotlinx.android.synthetic.main.fragment_category.*
 
@@ -49,19 +50,19 @@ class CategoryFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val item1 = CounterServiceItem(
+        val item1 = ServiceItemCounter(
                 "Paint",
                 10,
                 " / item")
 
-        val item2 = CheckBoxServiceItem(
+        val item2 = ServiceItemCheckBox(
                 "Day Curtains",
                 10,
                 " / piece",
                 "Also known as sheers, made of light coloured materials to allow light in from outside.",
                 false)
 
-        val item3 = CheckBoxServiceItem(
+        val item3 = ServiceItemCheckBox(
                 "Night Curtains",
                 9,
                 " / kg",
@@ -69,17 +70,26 @@ class CategoryFragment: BaseFragment() {
                 false
         )
 
-        val data1 = ServiceGroup("GARMENTS",
+        val item4 = ServiceItemCombo("3 Dishes Plus 1 Soup Meal Set",
+                165,
+                " per month",
+                "Weekdays only. Island-wide delivery. Packed in microwavable containers only.",
+                false)
+
+        val data1 = CategoryService("GARMENTS",
                 "Includes free dismantling & installation. Measurement & evaluation will be done on-site, price estimation will not be included in this request.",
-                mutableListOf(item1, item2, item3),
+                mutableListOf(item1, item2, item3, item4),
                 false)
         val data2 = data1.copy(name = "GARMENTS 2")
         val fakeData = mutableListOf(data1, data2)
 
-        mServiceAdapter = CategoryServiceAdapter()
-        mServiceAdapter.submitData(fakeData)
-        recycler_view.layoutManager = LinearLayoutManager(activity)
-        recycler_view.adapter = mServiceAdapter
+        activity?.let {
+            mServiceAdapter = CategoryServiceAdapter(it)
+            mServiceAdapter.submitData(fakeData)
+            recycler_view.layoutManager = LinearLayoutManager(it)
+            recycler_view.adapter = mServiceAdapter
+        }
+
     }
 
     ///////////////////////////////////////////////////////////////////////////

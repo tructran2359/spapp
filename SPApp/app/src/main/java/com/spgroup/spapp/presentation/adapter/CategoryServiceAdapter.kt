@@ -1,29 +1,43 @@
 package com.spgroup.spapp.presentation.adapter
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.CheckBoxServiceItem
-import com.spgroup.spapp.domain.model.CounterServiceItem
-import com.spgroup.spapp.domain.model.ServiceGroup
+import com.spgroup.spapp.domain.model.CategoryService
+import com.spgroup.spapp.domain.model.ServiceItemCheckBox
+import com.spgroup.spapp.domain.model.ServiceItemCombo
+import com.spgroup.spapp.domain.model.ServiceItemCounter
+import com.spgroup.spapp.presentation.activity.ServiceCustomisationActivity
 import com.spgroup.spapp.presentation.view.ServiceItemViewCheckBox
+import com.spgroup.spapp.presentation.view.ServiceItemViewCombo
 import com.spgroup.spapp.presentation.view.ServiceItemViewCounter
 import kotlinx.android.synthetic.main.layout_service.view.*
 
-class CategoryServiceAdapter: RecyclerView.Adapter<CategoryServiceAdapter.ServiceVH>() {
+class CategoryServiceAdapter(val context: Context): RecyclerView.Adapter<CategoryServiceAdapter.ServiceVH>() {
 
     ///////////////////////////////////////////////////////////////////////////
     // Property
     ///////////////////////////////////////////////////////////////////////////
 
-    val mData = mutableListOf<ServiceGroup>()
+    val mData = mutableListOf<CategoryService>()
+
     val mItemInteractedListener = object : OnItemInteractedListener {
+
         override fun onCollapseClick(position: Int) {
             val expanded = mData[position].expanded
             mData[position].expanded = expanded.not()
             notifyItemChanged(position)
+        }
+
+        override fun onServiceItemClick(servicePos: Int, itemPos: Int) {
+            val serviceItem = mData[servicePos].listItem[itemPos]
+            if (serviceItem is ServiceItemCombo) {
+                val intent = ServiceCustomisationActivity.getLaunchIntent(context, serviceItem)
+                context.startActivity(intent)
+            }
         }
     }
 
@@ -46,7 +60,7 @@ class CategoryServiceAdapter: RecyclerView.Adapter<CategoryServiceAdapter.Servic
     // Other
     ///////////////////////////////////////////////////////////////////////////
 
-    fun submitData(data: List<ServiceGroup>) {
+    fun submitData(data: List<CategoryService>) {
         mData.clear()
         mData.addAll(data)
         notifyDataSetChanged()
@@ -58,6 +72,8 @@ class CategoryServiceAdapter: RecyclerView.Adapter<CategoryServiceAdapter.Servic
 
     interface OnItemInteractedListener {
         fun onCollapseClick(positioni: Int)
+
+        fun onServiceItemClick(servicePos: Int, itemPos: Int)
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -66,7 +82,7 @@ class CategoryServiceAdapter: RecyclerView.Adapter<CategoryServiceAdapter.Servic
 
     class ServiceVH(var view: View, var listener: OnItemInteractedListener) : RecyclerView.ViewHolder(view) {
 
-        fun bind(service: ServiceGroup) {
+        fun bind(service: CategoryService) {
             with(itemView) {
                 tv_service_name.setText(service.name)
                 tv_service_description.setText(service.description)
@@ -75,16 +91,31 @@ class CategoryServiceAdapter: RecyclerView.Adapter<CategoryServiceAdapter.Servic
 
                     ll_item_container.removeAllViews()
                     val itemCount = service.listItem.size
+                    val servicePos = adapterPosition
+
                     for (i in 0 until itemCount) {
                         val item = service.listItem[i]
-                        when (item) {
-                            is CounterServiceItem -> {
-                                ll_item_container.addView(ServiceItemViewCounter(itemView.context, item))
+                        val view = when (item) {
+                            is ServiceItemCounter -> {
+                                ServiceItemViewCounter(itemView.context, item)
                             }
 
-                            is CheckBoxServiceItem -> {
-                                ll_item_container.addView(ServiceItemViewCheckBox(itemView.context, item))
+                            is ServiceItemCheckBox -> {
+                                ServiceItemViewCheckBox(itemView.context, item)
                             }
+
+                            is ServiceItemCombo -> {
+                                ServiceItemViewCombo(itemView.context, item)
+                            }
+
+                            else -> null
+                        }
+
+                        view?.let {
+                            view.setOnClickListener {
+                                listener.onServiceItemClick(servicePos, i)
+                            }
+                            ll_item_container.addView(view)
                         }
 
                     }
