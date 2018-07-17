@@ -6,7 +6,6 @@
     tools:ignore="MissingPrefix"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".presentation.activity.OrderSummaryActivity"
     >
 
@@ -33,10 +32,10 @@
 
             <ImageView
                 android:id="@+id/iv_back"
-                android:layout_width="@dimen/common_icon_size_with_padding"
-                android:layout_height="@dimen/common_icon_size_with_padding"
-                android:padding="@dimen/common_spacing"
-                android:layout_marginLeft="@dimen/common_spacing_x2"
+                android:layout_width="@dimen/common_icon_size_medium_with_padding"
+                android:layout_height="@dimen/common_icon_size_medium_with_padding"
+                android:padding="@dimen/common_icon_padding"
+                android:layout_marginLeft="@dimen/common_spacing"
                 android:scaleType="fitXY"
                 android:src="@drawable/arrow_left"
                 android:layout_centerVertical="true"
@@ -49,33 +48,49 @@
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/order_sum_horz_space"
+            android:paddingLeft="@dimen/order_sum_horz_large"
+            android:paddingRight="@dimen/order_sum_horz_large"
+            android:paddingTop="@dimen/order_sum_vert_medium"
+            android:paddingBottom="@dimen/order_sum_vert_medium"
             android:background="@color/color_ui05"
+
+            android:layout_marginBottom="@dimen/order_sum_vert_large"
 
             android:text="QuiKlean Laundry"
             />
 
-        <LinearLayout
-            android:id="@+id/ll_item_container"
+        <!--Dummy UI start-->
+
+        <include layout="@layout/layout_summary_header"/>
+
+        <com.spgroup.spapp.presentation.view.SummaryItemView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            />
+            android:layout_marginBottom="@dimen/order_sum_vert_large"/>
 
-        <View
-            style="@style/lineDivider"/>
+        <include layout="@layout/layout_summary_header"/>
 
-        <View
-            style="@style/lineDivider2"/>
+        <com.spgroup.spapp.presentation.view.SummaryItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.spgroup.spapp.presentation.view.SummaryItemView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/order_sum_vert_large"/>
+
+        <!--Dummy UI end-->
+
+        <include layout="@layout/layout_summary_estimated"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_ui06"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/order_sum_horz_space"
-            android:paddingRight="@dimen/order_sum_horz_space"
-            android:paddingTop="@dimen/order_sum_vert_space">
+            android:paddingLeft="@dimen/order_sum_horz_large"
+            android:paddingRight="@dimen/order_sum_horz_large"
+            android:paddingTop="@dimen/order_sum_vert_xlarge">
 
             <TextView
                 style="@style/textH4"
@@ -170,7 +185,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/order_sum_vert_space"
+                android:layout_marginTop="@dimen/order_sum_vert_medium"
                 >
 
                 <CheckBox
@@ -195,8 +210,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/sum_order_agreement"
-                android:layout_marginTop="@dimen/order_sum_vert_space"
-                android:layout_marginBottom="@dimen/order_sum_vert_space"
+                android:layout_marginTop="@dimen/order_sum_vert_medium"
+                android:layout_marginBottom="@dimen/order_sum_vert_large"
                 />
 
         </LinearLayout>
