@@ -6,6 +6,7 @@ ext {
     rxJavaVersion = "2.1.12"
     rxKotlinVersion = "2.2.0"
     rxAndroidVersion = "2.0.2"
+    daggerVersion = "2.16"
 
     calligraphyVersion = "2.3.0"
 }
