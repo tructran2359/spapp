@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.CategoryService
 import com.spgroup.spapp.domain.model.CheckBoxServiceItem
+import com.spgroup.spapp.domain.model.ComboServiceItem
 import com.spgroup.spapp.domain.model.CounterServiceItem
 import com.spgroup.spapp.presentation.view.ServiceItemViewCheckBox
+import com.spgroup.spapp.presentation.view.ServiceItemViewCombo
 import com.spgroup.spapp.presentation.view.ServiceItemViewCounter
 import kotlinx.android.synthetic.main.layout_service.view.*
 
@@ -84,6 +86,10 @@ class CategoryServiceAdapter: RecyclerView.Adapter<CategoryServiceAdapter.Servic
 
                             is CheckBoxServiceItem -> {
                                 ll_item_container.addView(ServiceItemViewCheckBox(itemView.context, item))
+                            }
+
+                            is ComboServiceItem -> {
+                                ll_item_container.addView(ServiceItemViewCombo(itemView.context, item))
                             }
                         }
 

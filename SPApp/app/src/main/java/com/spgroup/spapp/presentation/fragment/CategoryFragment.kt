@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.CategoryService
 import com.spgroup.spapp.domain.model.CheckBoxServiceItem
+import com.spgroup.spapp.domain.model.ComboServiceItem
 import com.spgroup.spapp.domain.model.CounterServiceItem
 import com.spgroup.spapp.presentation.adapter.CategoryServiceAdapter
 import kotlinx.android.synthetic.main.fragment_category.*
@@ -69,9 +70,15 @@ class CategoryFragment: BaseFragment() {
                 false
         )
 
+        val item4 = ComboServiceItem("3 Dishes Plus 1 Soup Meal Set",
+                165,
+                " per month",
+                "Weekdays only. Island-wide delivery. Packed in microwavable containers only.",
+                false)
+
         val data1 = CategoryService("GARMENTS",
                 "Includes free dismantling & installation. Measurement & evaluation will be done on-site, price estimation will not be included in this request.",
-                mutableListOf(item1, item2, item3),
+                mutableListOf(item1, item2, item3, item4),
                 false)
         val data2 = data1.copy(name = "GARMENTS 2")
         val fakeData = mutableListOf(data1, data2)
