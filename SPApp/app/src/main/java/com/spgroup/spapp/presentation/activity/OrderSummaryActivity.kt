@@ -48,5 +48,9 @@ class OrderSummaryActivity : BaseActivity() {
 //        }
 
         btn_summary.isEnabled = false
+
+        iv_back.setOnClickListener {
+            onBackPressed()
+        }
     }
 }
