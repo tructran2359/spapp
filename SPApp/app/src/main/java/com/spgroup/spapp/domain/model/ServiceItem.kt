@@ -1,6 +1,6 @@
 package com.spgroup.spapp.domain.model
 
-abstract class ServiceItem(
+sealed class ServiceItem(
         open var name: String,
         open var price: Int,
         open var unit: String

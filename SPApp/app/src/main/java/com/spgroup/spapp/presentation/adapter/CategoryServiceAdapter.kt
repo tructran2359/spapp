@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.CategoryService
 import com.spgroup.spapp.domain.model.CheckBoxServiceItem
 import com.spgroup.spapp.domain.model.CounterServiceItem
+import com.spgroup.spapp.domain.model.ServiceGroup
 import com.spgroup.spapp.presentation.view.ServiceItemViewCheckBox
 import com.spgroup.spapp.presentation.view.ServiceItemViewCounter
 import kotlinx.android.synthetic.main.layout_service.view.*
@@ -18,7 +18,7 @@ class CategoryServiceAdapter: RecyclerView.Adapter<CategoryServiceAdapter.Servic
     // Property
     ///////////////////////////////////////////////////////////////////////////
 
-    val mData = mutableListOf<CategoryService>()
+    val mData = mutableListOf<ServiceGroup>()
     val mItemInteractedListener = object : OnItemInteractedListener {
         override fun onCollapseClick(position: Int) {
             val expanded = mData[position].expanded
@@ -46,7 +46,7 @@ class CategoryServiceAdapter: RecyclerView.Adapter<CategoryServiceAdapter.Servic
     // Other
     ///////////////////////////////////////////////////////////////////////////
 
-    fun submitData(data: List<CategoryService>) {
+    fun submitData(data: List<ServiceGroup>) {
         mData.clear()
         mData.addAll(data)
         notifyDataSetChanged()
@@ -66,7 +66,7 @@ class CategoryServiceAdapter: RecyclerView.Adapter<CategoryServiceAdapter.Servic
 
     class ServiceVH(var view: View, var listener: OnItemInteractedListener) : RecyclerView.ViewHolder(view) {
 
-        fun bind(service: CategoryService) {
+        fun bind(service: ServiceGroup) {
             with(itemView) {
                 tv_service_name.setText(service.name)
                 tv_service_description.setText(service.description)

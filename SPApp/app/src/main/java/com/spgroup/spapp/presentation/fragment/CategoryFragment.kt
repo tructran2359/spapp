@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.CategoryService
 import com.spgroup.spapp.domain.model.CheckBoxServiceItem
 import com.spgroup.spapp.domain.model.CounterServiceItem
+import com.spgroup.spapp.domain.model.ServiceGroup
 import com.spgroup.spapp.presentation.adapter.CategoryServiceAdapter
 import kotlinx.android.synthetic.main.fragment_category.*
 
@@ -69,7 +69,7 @@ class CategoryFragment: BaseFragment() {
                 false
         )
 
-        val data1 = CategoryService("GARMENTS",
+        val data1 = ServiceGroup("GARMENTS",
                 "Includes free dismantling & installation. Measurement & evaluation will be done on-site, price estimation will not be included in this request.",
                 mutableListOf(item1, item2, item3),
                 false)
