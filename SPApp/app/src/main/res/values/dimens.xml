@@ -57,7 +57,7 @@
     <dimen name="partner_infor_header_margin_top">20dp</dimen>
     <dimen name="partner_info_desc_margin">11dp</dimen>
     <dimen name="partner_info_service_content_right">39dp</dimen>
-    <dimen name="top_bar_height">70dp</dimen>
+    <dimen name="action_bar_height">70dp</dimen>
 
     <!--OrderSummaryActivity-->
     <dimen name="common_counter_text_width">32dp</dimen>

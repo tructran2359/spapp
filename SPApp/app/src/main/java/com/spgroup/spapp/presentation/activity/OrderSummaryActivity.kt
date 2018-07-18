@@ -33,6 +33,8 @@ class OrderSummaryActivity : BaseActivity() {
 
     private fun initViews() {
 
+        action_bar.setTitle(R.string.summary)
+
         btn_summary.isEnabled = true
         btn_summary.setText(getString(R.string.submit_request))
         btn_summary.setCount(1)
@@ -41,7 +43,7 @@ class OrderSummaryActivity : BaseActivity() {
             startActivity(ConfirmationActivity.getLaunchIntent(this@OrderSummaryActivity))
         }
 
-        iv_back.setOnClickListener {
+        action_bar.setOnBackPress {
             onBackPressed()
         }
 
