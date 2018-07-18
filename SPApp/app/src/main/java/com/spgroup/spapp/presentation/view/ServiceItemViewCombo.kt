@@ -3,25 +3,25 @@ package com.spgroup.spapp.presentation.view
 import android.content.Context
 import android.view.LayoutInflater
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.ServiceItemCheckBox
+import com.spgroup.spapp.domain.model.ServiceItemCombo
 import com.spgroup.spapp.domain.model.ServiceItem
 import com.spgroup.spapp.extension.getFormatedItemPrice
-import kotlinx.android.synthetic.main.layout_service_item_check_box.view.*
+import kotlinx.android.synthetic.main.layout_service_item_combo.view.*
 
-class ServiceItemViewCheckBox: ServiceItemView {
+class ServiceItemViewCombo: ServiceItemView {
 
     ///////////////////////////////////////////////////////////////////////////
     // Property
     ///////////////////////////////////////////////////////////////////////////
 
-    var serviceItem: ServiceItemCheckBox
+    var serviceItem: ServiceItemCombo
 
     ///////////////////////////////////////////////////////////////////////////
     // Constructor
     ///////////////////////////////////////////////////////////////////////////
 
     constructor(context: Context, item: ServiceItem): super(context, item) {
-        serviceItem = item as ServiceItemCheckBox
+        serviceItem = item as ServiceItemCombo
         init()
     }
 
@@ -30,20 +30,11 @@ class ServiceItemViewCheckBox: ServiceItemView {
     ///////////////////////////////////////////////////////////////////////////
 
     fun init() {
-        LayoutInflater.from(context).inflate(R.layout.layout_service_item_check_box, this, true)
+        LayoutInflater.from(context).inflate(R.layout.layout_service_item_combo, this, true)
         tv_name.setText(serviceItem.name)
         tv_price.setText(serviceItem.price.getFormatedItemPrice(serviceItem.unit))
         tv_description.setText(serviceItem.description)
-        onCheckUpdated()
-
-        fl_check_container.setOnClickListener {
-            serviceItem.selected = !serviceItem.selected
-            onCheckUpdated()
-        }
     }
 
-    fun onCheckUpdated() {
-        view_root.isSelected = serviceItem.selected
-    }
 
 }

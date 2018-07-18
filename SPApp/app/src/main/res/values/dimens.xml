@@ -13,6 +13,8 @@
     <dimen name="common_icon_size_with_padding">29dp</dimen>
     <dimen name="common_icon_size_small">15dp</dimen>
     <dimen name="common_icon_size_medium">28dp</dimen>
+    <dimen name="common_icon_size_medium_with_padding">33dp</dimen>
+    <dimen name="common_icon_padding">5dp</dimen>
 
     <dimen name="text_size_h1">28sp</dimen>
     <dimen name="text_size_h3">20sp</dimen>
@@ -29,6 +31,7 @@
     <dimen name="line_space_h1">6sp</dimen>
     <dimen name="line_space_h3">4sp</dimen>
     <dimen name="line_space_h4">3sp</dimen>
+    <dimen name="line_space_h6">6sp</dimen>
     <dimen name="line_space_paragraph">8sp</dimen>
     <dimen name="line_space_caption">6sp</dimen>
 
@@ -57,13 +60,20 @@
     <dimen name="top_bar_height">70dp</dimen>
 
     <!--OrderSummaryActivity-->
-    <dimen name="order_sum_horz_space">30dp</dimen>
-    <dimen name="order_sum_horz_space_for_icon">25dp</dimen>
-    <dimen name="order_sum_vert_space">30dp</dimen>
-    <dimen name="order_sum_vert_space_for_icon">25dp</dimen>
-    <dimen name="order_sum_vert_space_small">17dp</dimen>
     <dimen name="order_sum_small_space">5dp</dimen>
     <dimen name="order_sum_counter_text_width">32dp</dimen>
+
+    <dimen name="order_sum_vert_xlarge">50dp</dimen>
+    <dimen name="order_sum_vert_large">30dp</dimen>
+    <dimen name="order_sum_vert_medium">20dp</dimen>
+    <dimen name="order_sum_vert_medium_sub">15dp</dimen>
+    <dimen name="order_sum_vert_small">10dp</dimen>
+
+    <dimen name="order_sum_horz_large">30dp</dimen>
+    <dimen name="order_sum_horz_large_for_icon">25dp</dimen>
+
+
+    <!--OrderSummaryActivity-->
 
     <dimen name="button_shadow_height">20dp</dimen>
 
