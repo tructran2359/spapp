@@ -32,7 +32,7 @@ class SummaryItemView: RelativeLayout {
     private fun initViews(context: Context) {
         LayoutInflater.from(context).inflate(R.layout.layout_summary_item, this, true)
 
-        iv_minus.isEnabled = false
+        counter_view.setEnableMinus(false)
     }
 
 }

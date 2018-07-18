@@ -24,45 +24,26 @@
             android:background="@color/color_ui06"
             >
 
-            <RelativeLayout
+            <com.spgroup.spapp.presentation.view.SimpleActionBar
+                android:id="@+id/action_bar"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/top_bar_height"
+                android:layout_height="@dimen/action_bar_height"
                 android:background="@color/color_primarygradientbase"
-                >
-
-                <TextView
-                    style="@style/textH3.white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="@string/summary"
-                    />
-
-                <ImageView
-                    android:id="@+id/iv_back"
-                    android:layout_width="@dimen/common_icon_size_medium_with_padding"
-                    android:layout_height="@dimen/common_icon_size_medium_with_padding"
-                    android:padding="@dimen/common_icon_padding"
-                    android:layout_marginLeft="@dimen/common_spacing"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/arrow_left"
-                    android:layout_centerVertical="true"
-                    />
-
-            </RelativeLayout>
+                app:title="@string/summary"
+                />
 
             <TextView
                 style="@style/textH1"
                 android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/order_sum_horz_large"
-                android:paddingRight="@dimen/order_sum_horz_large"
-                android:paddingTop="@dimen/order_sum_vert_medium"
-                android:paddingBottom="@dimen/order_sum_vert_medium"
+                android:paddingLeft="@dimen/common_horz_large"
+                android:paddingRight="@dimen/common_horz_large"
+                android:paddingTop="@dimen/common_vert_medium"
+                android:paddingBottom="@dimen/common_vert_medium"
                 android:background="@color/color_ui05"
 
-                android:layout_marginBottom="@dimen/order_sum_vert_large"
+                android:layout_marginBottom="@dimen/common_vert_large"
 
                 android:text="QuiKlean Laundry"
                 />
@@ -74,7 +55,7 @@
             <com.spgroup.spapp.presentation.view.SummaryItemView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/order_sum_vert_large"/>
+                android:layout_marginBottom="@dimen/common_vert_large"/>
 
             <include layout="@layout/layout_summary_header"/>
 
@@ -85,7 +66,7 @@
             <com.spgroup.spapp.presentation.view.SummaryItemView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/order_sum_vert_large"/>
+                android:layout_marginBottom="@dimen/common_vert_large"/>
 
             <!--Dummy UI end-->
 
@@ -98,9 +79,9 @@
                 android:layout_height="wrap_content"
                 android:background="@color/color_ui06"
                 android:orientation="vertical"
-                android:paddingLeft="@dimen/order_sum_horz_large"
-                android:paddingRight="@dimen/order_sum_horz_large"
-                android:paddingTop="@dimen/order_sum_vert_xlarge">
+                android:paddingLeft="@dimen/common_horz_large"
+                android:paddingRight="@dimen/common_horz_large"
+                android:paddingTop="@dimen/common_vert_xxlarge">
 
                 <TextView
                     style="@style/textH4"
@@ -149,7 +130,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_rec_rounded_white_solid_grey_stroke"
-                        android:layout_marginTop="@dimen/order_sum_vert_xsmall"
+                        android:layout_marginTop="@dimen/common_vert_xsmall"
                         android:spinnerMode="dropdown"
                         />
 
@@ -214,7 +195,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/order_sum_vert_medium"
+                    android:layout_marginTop="@dimen/common_vert_medium"
                     >
 
                     <CheckBox
@@ -239,8 +220,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sum_order_agreement"
-                    android:layout_marginTop="@dimen/order_sum_vert_medium"
-                    android:layout_marginBottom="@dimen/order_sum_vert_large"
+                    android:layout_marginTop="@dimen/common_vert_medium"
+                    android:layout_marginBottom="@dimen/common_vert_large"
                     />
 
             </LinearLayout>
@@ -251,14 +232,12 @@
 
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/button_shadow_height"
-        android:background="@drawable/gradient_button_shadow"
+        style="@style/buttonShadow"
         android:layout_above="@+id/rl_summary_button_container"
         />
 
     <RelativeLayout
-        style="@style/summaryButton"
+        style="@style/bottomButtonContainer"
         android:id="@+id/rl_summary_button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -268,7 +247,7 @@
         <com.spgroup.spapp.presentation.view.SummaryButton
             android:id="@+id/btn_summary"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/btn_summary_height"
+            android:layout_height="@dimen/bottom_button_height"
             />
 
     </RelativeLayout>

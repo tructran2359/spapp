@@ -10,7 +10,7 @@ import com.spgroup.spapp.domain.model.ServiceGroup
 import com.spgroup.spapp.domain.model.ServiceItemCheckBox
 import com.spgroup.spapp.domain.model.ServiceItemCombo
 import com.spgroup.spapp.domain.model.ServiceItemCounter
-import com.spgroup.spapp.presentation.activity.ServiceCustomisationActivity
+import com.spgroup.spapp.presentation.activity.CustomiseActivity
 import com.spgroup.spapp.presentation.view.ServiceItemViewCheckBox
 import com.spgroup.spapp.presentation.view.ServiceItemViewCombo
 import com.spgroup.spapp.presentation.view.ServiceItemViewCounter
@@ -35,7 +35,7 @@ class CategoryServiceAdapter(val context: Context): RecyclerView.Adapter<Categor
         override fun onServiceItemClick(servicePos: Int, itemPos: Int) {
             val serviceItem = mData[servicePos].listItem[itemPos]
             if (serviceItem is ServiceItemCombo) {
-                val intent = ServiceCustomisationActivity.getLaunchIntent(context, serviceItem)
+                val intent = CustomiseActivity.getLaunchIntent(context, serviceItem)
                 context.startActivity(intent)
             }
         }

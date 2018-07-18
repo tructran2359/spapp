@@ -13,8 +13,8 @@
         android:id="@+id/tv_discount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/order_sum_vert_medium"
-        android:layout_marginLeft="@dimen/order_sum_horz_large"
+        android:layout_marginTop="@dimen/common_vert_medium"
+        android:layout_marginLeft="@dimen/common_horz_large"
 
 
         android:text="Discount (10%)"
@@ -27,8 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:textColor="@color/color_alert"
-        android:layout_marginTop="@dimen/order_sum_vert_medium"
-        android:layout_marginRight="@dimen/order_sum_horz_large"
+        android:layout_marginTop="@dimen/common_vert_medium"
+        android:layout_marginRight="@dimen/common_horz_large"
 
         android:text="-5.9"
         />
@@ -38,8 +38,8 @@
         android:id="@+id/tv_total_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/order_sum_vert_medium_sub"
-        android:layout_marginLeft="@dimen/order_sum_horz_large"
+        android:layout_marginTop="@dimen/common_vert_medium_sub"
+        android:layout_marginLeft="@dimen/common_horz_large"
         android:textColor="@color/black"
         android:text="@string/est_total"
         android:layout_below="@id/tv_discount"
@@ -50,8 +50,8 @@
         android:id="@+id/tv_total_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/order_sum_vert_medium_sub"
-        android:layout_marginRight="@dimen/order_sum_horz_large"
+        android:layout_marginTop="@dimen/common_vert_medium_sub"
+        android:layout_marginRight="@dimen/common_horz_large"
         android:layout_below="@id/tv_discount"
         android:layout_alignParentRight="true"
         android:textColor="@color/black"
@@ -62,7 +62,7 @@
     <View
         style="@style/lineDivider"
         android:layout_below="@+id/tv_total_value"
-        android:layout_marginTop="@dimen/order_sum_vert_medium"
+        android:layout_marginTop="@dimen/common_vert_medium"
         />
 
 </RelativeLayout>
