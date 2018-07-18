@@ -64,6 +64,10 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxkotlin:${rootProject.rxKotlinVersion}"
     implementation "io.reactivex.rxjava2:rxandroid:${rootProject.rxAndroidVersion}"
 
+    // ViewModel - LiveData
+    implementation "android.arch.lifecycle:extensions:${rootProject.lifecycleVersion}"
+    kapt "android.arch.lifecycle:compiler:${rootProject.lifecycleVersion}"
+
     // Dagger
     implementation "com.google.dagger:dagger:${rootProject.daggerVersion}"
     kapt "com.google.dagger:dagger-compiler:${rootProject.daggerVersion}"
