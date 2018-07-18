@@ -1,5 +1,7 @@
 package com.spgroup.spapp.presentation.activity
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +14,8 @@ import com.spgroup.spapp.extension.setUpMenuActive
 import com.spgroup.spapp.extension.setUpMenuInactive
 import com.spgroup.spapp.presentation.adapter.CategoryPagerAdapter
 import com.spgroup.spapp.presentation.adapter.PartnerImagesAdapter
+import com.spgroup.spapp.presentation.viewmodel.SupplierDetailsViewModel
+import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_partner_details.*
 
 class PartnerDetailsActivity : BaseActivity() {
@@ -41,6 +45,20 @@ class PartnerDetailsActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_partner_details)
+
+
+        // This is demo for using ViewModel
+        val factory = ViewModelFactory.getInstance()
+        val viewmodel = ViewModelProviders.of(this, factory).get(SupplierDetailsViewModel::class.java)
+        with(viewmodel) {
+            serviceCategories.observe(this@PartnerDetailsActivity, Observer {
+                // do something with serviceCategories
+            })
+            error.observe(this@PartnerDetailsActivity, Observer {
+                // do something with error
+            })
+        }
+
 
         setUpViews()
     }
