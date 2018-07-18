@@ -118,7 +118,7 @@
 
                 <EditText
                     android:id="@+id/et_Name"
-                    style="@style/textH4.orderSumInput"
+                    style="@style/textParagraph.grey.orderSumInput"
                     />
 
                 <!--Contact No-->
@@ -130,7 +130,7 @@
 
                 <EditText
                     android:id="@+id/et_contact_no"
-                    style="@style/textH4.orderSumInput"
+                    style="@style/textParagraph.grey.orderSumInput"
                     />
 
                 <!--Preferred Time-->
@@ -140,10 +140,29 @@
                     android:text="@string/preferred_time"
                     />
 
-                <EditText
-                    android:id="@+id/et_preferred_time"
-                    style="@style/textH4.orderSumInput"
-                    />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Spinner
+                        android:id="@+id/spinner_preferred_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_rec_rounded_white_solid_grey_stroke"
+                        android:layout_marginTop="@dimen/order_sum_vert_xsmall"
+                        android:spinnerMode="dropdown"
+                        />
+
+                    <ImageView
+                        android:layout_width="@dimen/common_icon_size_small"
+                        android:layout_height="@dimen/common_icon_size_small"
+                        android:src="@drawable/arrow_down_blue"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_marginRight="@dimen/common_spacing_x3"
+                        />
+
+                </FrameLayout>
+
 
                 <!--Address-->
 
@@ -154,12 +173,12 @@
 
                 <EditText
                     android:id="@+id/et_address_1"
-                    style="@style/textH4.orderSumInput"
+                    style="@style/textParagraph.grey.orderSumInput"
                     />
 
                 <EditText
                     android:id="@+id/et_address_2"
-                    style="@style/textH4.orderSumInput"
+                    style="@style/textParagraph.grey.orderSumInput"
                     />
 
                 <!--Postal Code-->
@@ -171,7 +190,7 @@
 
                 <EditText
                     android:id="@+id/et_postal_code"
-                    style="@style/textH4.orderSumInput"
+                    style="@style/textParagraph.grey.orderSumInput"
                     />
 
                 <!--Notes-->
@@ -183,7 +202,7 @@
 
                 <EditText
                     android:id="@+id/et_notes"
-                    style="@style/textH4.orderSumInput"
+                    style="@style/textParagraph.grey.orderSumInput"
                     android:layout_height="wrap_content"
                     android:gravity="top|left"
                     android:hint="@string/summary_notes_hint"

@@ -113,13 +113,13 @@
         <item name="android:layout_marginTop">@dimen/order_sum_vert_medium_sub</item>
     </style>
 
-    <style name="textH4.orderSumInput">
+    <style name="textParagraph.grey.orderSumInput">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/bg_rec_rounded_white_solid_grey_stroke</item>
         <item name="android:maxLines">1</item>
-        <item name="android:layout_marginTop">@dimen/order_sum_small_space</item>
-        <item name="android:padding">@dimen/common_spacing_x2</item>
+        <item name="android:layout_marginTop">@dimen/order_sum_vert_xsmall</item>
+        <item name="android:padding">@dimen/common_spacing_x3</item>
     </style>
 
     <style name="textCaption">
