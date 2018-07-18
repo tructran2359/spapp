@@ -33,32 +33,12 @@
             android:text="Blouse"
             />
         
-        <ImageView
-            style="@style/iconWithPadding"
-            android:id="@+id/iv_plus"
-            android:src="@drawable/selector_plus_blue"
-            android:layout_alignParentRight="true"
-            />
-        
-        
-        <TextView
-            style="@style/textH3"
-            android:id="@+id/tv_count"
-            android:layout_width="@dimen/order_sum_counter_text_width"
+        <com.spgroup.spapp.presentation.view.CounterView
+            android:id="@+id/counter_view"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/iv_plus"
-            android:layout_marginRight="@dimen/common_spacing_x2"
-            android:gravity="center_horizontal"
-
-            android:text="1"
-            />
-
-        <ImageView
-            style="@style/iconWithPadding"
-            android:id="@+id/iv_minus"
-            android:src="@drawable/selector_minus_blue"
-            android:layout_toLeftOf="@+id/tv_count"
-            android:layout_marginRight="@dimen/common_spacing_x2"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             />
 
     </RelativeLayout>
