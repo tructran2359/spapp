@@ -31,12 +31,18 @@
     <dimen name="line_space_h1">6sp</dimen>
     <dimen name="line_space_h3">4sp</dimen>
     <dimen name="line_space_h4">3sp</dimen>
+    <dimen name="line_space_h5">5sp</dimen>
     <dimen name="line_space_h6">6sp</dimen>
     <dimen name="line_space_paragraph">8sp</dimen>
     <dimen name="line_space_caption">6sp</dimen>
 
     <dimen name="line_width">1dp</dimen>
     <dimen name="dot_size">5dp</dimen>
+
+    <!--Bottom Button-->
+    <dimen name="bottom_button_container_horz">17dp</dimen>
+    <dimen name="bottom_button_container_vert">21dp</dimen>
+    <dimen name="bottom_button_height">65dp</dimen>
 
     <!--Partner Details Screen-->
     <dimen name="partner_detail_summary_section_height">70dp</dimen>
@@ -46,7 +52,6 @@
     <dimen name="service_item_vert_spacing">12dp</dimen>
     <dimen name="service_item_price_spacing">8dp</dimen>
     <dimen name="service_item_space_between_items">8dp</dimen>
-    <dimen name="btn_summary_height">65dp</dimen>
 
     <!--PartnerInformationActivity-->
     <dimen name="partner_info_margin_vert_small">9dp</dimen>
@@ -62,7 +67,8 @@
     <!--OrderSummaryActivity-->
     <dimen name="common_counter_text_width">32dp</dimen>
 
-    <dimen name="common_vert_xlarge">50dp</dimen>
+    <dimen name="common_vert_xxlarge">50dp</dimen>
+    <dimen name="common_vert_xlarge">40dp</dimen>
     <dimen name="common_vert_large">30dp</dimen>
     <dimen name="common_vert_medium">20dp</dimen>
     <dimen name="common_vert_medium_sub">15dp</dimen>
@@ -73,5 +79,6 @@
     <dimen name="common_horz_large_for_icon">25dp</dimen>
 
     <dimen name="button_shadow_height">20dp</dimen>
+    <dimen name="common_text_areal_height">140dp</dimen>
 
 </resources>

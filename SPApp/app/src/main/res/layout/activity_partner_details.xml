@@ -106,7 +106,7 @@
     
     <!--Summary Section-->
     <RelativeLayout
-        style="@style/summaryButton"
+        style="@style/bottomButtonContainer"
         android:id="@+id/rl_summary_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
         <com.spgroup.spapp.presentation.view.SummaryButton
             android:id="@+id/btn_summary"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/btn_summary_height"
+            android:layout_height="@dimen/bottom_button_height"
             />
 
     </RelativeLayout>

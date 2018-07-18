@@ -42,6 +42,13 @@
         <item name="android:lineSpacingExtra">@dimen/line_space_h4</item>
     </style>
 
+    <style name="textH5">
+        <item name="android:textSize">@dimen/text_size_h5</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:lineSpacingExtra">@dimen/line_space_h5</item>
+        <item name="fontPath">@string/font_book</item>
+    </style>
+
     <style name="textH6">
         <item name="android:textSize">@dimen/text_size_h6</item>
         <item name="android:textColor">@color/black</item>
@@ -129,17 +136,23 @@
         <item name="fontPath">@string/font_regular</item>
     </style>
 
-    <style name="summaryButton">
-        <item name="android:paddingLeft">@dimen/service_item_horz_spacing</item>
-        <item name="android:paddingRight">@dimen/service_item_horz_spacing</item>
-        <item name="android:paddingTop">@dimen/service_item_vert_spacing</item>
-        <item name="android:paddingBottom">@dimen/service_item_vert_spacing</item>
+    <style name="bottomButtonContainer">
+        <item name="android:paddingLeft">@dimen/bottom_button_container_horz</item>
+        <item name="android:paddingRight">@dimen/bottom_button_container_horz</item>
+        <item name="android:paddingTop">@dimen/bottom_button_container_vert</item>
+        <item name="android:paddingBottom">@dimen/bottom_button_container_vert</item>
     </style>
 
     <style name="iconWithPadding">
         <item name="android:layout_width">@dimen/common_icon_size_with_padding</item>
         <item name="android:layout_height">@dimen/common_icon_size_with_padding</item>
         <item name="android:padding">@dimen/common_icon_padding</item>
+    </style>
+
+    <style name="buttonShadow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/button_shadow_height</item>
+        <item name="android:background">@drawable/gradient_button_shadow</item>
     </style>
 
 </resources>

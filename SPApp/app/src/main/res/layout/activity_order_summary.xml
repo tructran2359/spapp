@@ -27,7 +27,10 @@
             <com.spgroup.spapp.presentation.view.SimpleActionBar
                 android:id="@+id/action_bar"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/action_bar_height"/>
+                android:layout_height="@dimen/action_bar_height"
+                android:background="@color/color_primarygradientbase"
+                app:title="@string/summary"
+                />
 
             <TextView
                 style="@style/textH1"
@@ -78,7 +81,7 @@
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/common_horz_large"
                 android:paddingRight="@dimen/common_horz_large"
-                android:paddingTop="@dimen/common_vert_xlarge">
+                android:paddingTop="@dimen/common_vert_xxlarge">
 
                 <TextView
                     style="@style/textH4"
@@ -229,14 +232,12 @@
 
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/button_shadow_height"
-        android:background="@drawable/gradient_button_shadow"
+        style="@style/buttonShadow"
         android:layout_above="@+id/rl_summary_button_container"
         />
 
     <RelativeLayout
-        style="@style/summaryButton"
+        style="@style/bottomButtonContainer"
         android:id="@+id/rl_summary_button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -246,7 +247,7 @@
         <com.spgroup.spapp.presentation.view.SummaryButton
             android:id="@+id/btn_summary"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/btn_summary_height"
+            android:layout_height="@dimen/bottom_button_height"
             />
 
     </RelativeLayout>

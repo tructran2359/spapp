@@ -5,16 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItem
-import com.spgroup.spapp.extension.formatPriceWithUnit
+import com.spgroup.spapp.domain.model.ServiceItemCombo
 import com.spgroup.spapp.util.ConstUtils
-import kotlinx.android.synthetic.main.activity_service_customisation.*
+import kotlinx.android.synthetic.main.activity_customise.*
 
-class ServiceCustomisationActivity : BaseActivity() {
+class CustomiseActivity : BaseActivity() {
 
     companion object {
 
         fun getLaunchIntent(context: Context, item: ServiceItem): Intent {
-            val intent = Intent(context, ServiceCustomisationActivity::class.java)
+            val intent = Intent(context, CustomiseActivity::class.java)
             intent.putExtra(ConstUtils.EXTRA_SERVICE_ITEM, item)
             return intent
         }
@@ -24,7 +24,7 @@ class ServiceCustomisationActivity : BaseActivity() {
     // Property
     ///////////////////////////////////////////////////////////////////////////
 
-    lateinit var mServiceItem: ServiceItem
+    lateinit var mServiceItem: ServiceItemCombo
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -32,9 +32,9 @@ class ServiceCustomisationActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_service_customisation)
+        setContentView(R.layout.activity_customise)
 
-        mServiceItem = intent.getSerializableExtra(ConstUtils.EXTRA_SERVICE_ITEM) as ServiceItem
+        mServiceItem = intent.getSerializableExtra(ConstUtils.EXTRA_SERVICE_ITEM) as ServiceItemCombo
 
         initViews()
     }
@@ -44,7 +44,14 @@ class ServiceCustomisationActivity : BaseActivity() {
     ///////////////////////////////////////////////////////////////////////////
 
     private fun initViews() {
-        val message = "Service:\nName: ${mServiceItem.name}\nPrice: ${mServiceItem.price.formatPriceWithUnit(mServiceItem.unit)}"
-        tv_content.setText(message)
+        tv_name.setText(mServiceItem.name)
+        tv_description.setText(mServiceItem.description)
+
+        custom_view_1.setName("No. of Pax")
+        custom_view_1.setOption("[min. 1 pax]")
+        custom_view_1.enableMinus(false)
+
+        custom_view_2.setName("Plain Rice")
+        custom_view_2.setOption("[optional]")
     }
 }
