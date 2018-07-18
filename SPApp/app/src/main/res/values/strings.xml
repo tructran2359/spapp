@@ -24,4 +24,6 @@
     <string name="sum_order_agreement">By submitting, you allow us to send this request to our partner to contact you on the above-mentioned request.</string>
     <string name="est_price">Est. Price</string>
     <string name="est_total">Est. Total</string>
+    <string name="submit_request">SUBMIT REQUEST</string>
+
 </resources>

@@ -1,3 +1,7 @@
 package com.spgroup.spapp.extension
 
-fun Int.getFormatedItemPrice(unit: String) = "S$$this $unit"
+fun Float.formatPrice() = "S$%.2f".format(this)
+
+fun Float.formatPriceWithUnit(unit: String) = "S$${this.formatPrice()} $unit"
+
+fun Float.formatEstPrice() = "EST: ${this.formatPrice()}"

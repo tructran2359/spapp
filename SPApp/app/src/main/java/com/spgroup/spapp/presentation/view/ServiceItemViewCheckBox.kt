@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItemCheckBox
 import com.spgroup.spapp.domain.model.ServiceItem
-import com.spgroup.spapp.extension.getFormatedItemPrice
+import com.spgroup.spapp.extension.formatPriceWithUnit
 import kotlinx.android.synthetic.main.layout_service_item_check_box.view.*
 
 class ServiceItemViewCheckBox: ServiceItemView {
@@ -32,7 +32,7 @@ class ServiceItemViewCheckBox: ServiceItemView {
     fun init() {
         LayoutInflater.from(context).inflate(R.layout.layout_service_item_check_box, this, true)
         tv_name.setText(serviceItem.name)
-        tv_price.setText(serviceItem.price.getFormatedItemPrice(serviceItem.unit))
+        tv_price.setText(serviceItem.price.formatPriceWithUnit(serviceItem.unit))
         tv_description.setText(serviceItem.description)
         onCheckUpdated()
 

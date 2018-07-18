@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItem
-import com.spgroup.spapp.extension.getFormatedItemPrice
+import com.spgroup.spapp.extension.formatPriceWithUnit
 import com.spgroup.spapp.util.ConstUtils
 import kotlinx.android.synthetic.main.activity_service_customisation.*
 
@@ -44,7 +44,7 @@ class ServiceCustomisationActivity : BaseActivity() {
     ///////////////////////////////////////////////////////////////////////////
 
     private fun initViews() {
-        val message = "Service:\nName: ${mServiceItem.name}\nPrice: ${mServiceItem.price.getFormatedItemPrice(mServiceItem.unit)}"
+        val message = "Service:\nName: ${mServiceItem.name}\nPrice: ${mServiceItem.price.formatPriceWithUnit(mServiceItem.unit)}"
         tv_content.setText(message)
     }
 }

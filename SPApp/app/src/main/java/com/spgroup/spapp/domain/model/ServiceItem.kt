@@ -4,7 +4,7 @@ import java.io.Serializable
 
 abstract class ServiceItem(
         open var name: String,
-        open var price: Int,
+        open var price: Float,
         open var unit: String
 ): Serializable {
     abstract fun getItemCount(): Int
@@ -12,7 +12,7 @@ abstract class ServiceItem(
 
 class ServiceItemCounter(
         override var name: String,
-        override var price: Int,
+        override var price: Float,
         override var unit: String,
         var minCount: Int = 0,
         var maxCount: Int = 0,
@@ -24,7 +24,7 @@ class ServiceItemCounter(
 
 class ServiceItemCheckBox(
         override var name: String,
-        override var price: Int,
+        override var price: Float,
         override var unit: String,
         var description: String,
         var selected: Boolean
@@ -36,7 +36,7 @@ class ServiceItemCheckBox(
 
 class ServiceItemCombo(
         override var name: String,
-        override var price: Int,
+        override var price: Float,
         override var unit: String,
         var description: String,
         var selected: Boolean

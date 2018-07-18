@@ -52,26 +52,26 @@ class CategoryFragment: BaseFragment() {
 
         val item1 = ServiceItemCounter(
                 "Paint",
-                10,
+                10f,
                 " / item")
 
         val item2 = ServiceItemCheckBox(
                 "Day Curtains",
-                10,
+                10f,
                 " / piece",
                 "Also known as sheers, made of light coloured materials to allow light in from outside.",
                 false)
 
         val item3 = ServiceItemCheckBox(
                 "Night Curtains",
-                9,
+                9f,
                 " / kg",
                 "Heavier in weight and are of dark coloured materials. These are drawn at night for privacy.",
                 false
         )
 
         val item4 = ServiceItemCombo("3 Dishes Plus 1 Soup Meal Set",
-                165,
+                165f,
                 " per month",
                 "Weekdays only. Island-wide delivery. Packed in microwavable containers only.",
                 false)

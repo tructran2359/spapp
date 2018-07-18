@@ -6,7 +6,7 @@ import android.view.View
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItemCounter
 import com.spgroup.spapp.domain.model.ServiceItem
-import com.spgroup.spapp.extension.getFormatedItemPrice
+import com.spgroup.spapp.extension.formatPriceWithUnit
 import kotlinx.android.synthetic.main.layout_service_item_counter.view.*
 
 class ServiceItemViewCounter: ServiceItemView {
@@ -33,7 +33,7 @@ class ServiceItemViewCounter: ServiceItemView {
     fun init() {
         LayoutInflater.from(context).inflate(R.layout.layout_service_item_counter, this, true)
         tv_name.setText(serviceItem.name)
-        tv_price.setText(serviceItem.price.getFormatedItemPrice(serviceItem.unit))
+        tv_price.setText(serviceItem.price.formatPriceWithUnit(serviceItem.unit))
 
         fl_add_btn_container.setOnClickListener {
             serviceItem.count++

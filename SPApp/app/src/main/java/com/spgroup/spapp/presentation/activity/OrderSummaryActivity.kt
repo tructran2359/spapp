@@ -33,7 +33,10 @@ class OrderSummaryActivity : BaseActivity() {
 
     private fun initViews() {
 
-        btn_summary.isEnabled = false
+        btn_summary.isEnabled = true
+        btn_summary.setText(getString(R.string.submit_request))
+        btn_summary.setCount(1)
+        btn_summary.setEstPrice(0.01f)
 
         iv_back.setOnClickListener {
             onBackPressed()
