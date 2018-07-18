@@ -5,6 +5,8 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import com.spgroup.spapp.R
+import com.spgroup.spapp.extension.formatEstPrice
+import com.spgroup.spapp.extension.formatPrice
 import com.spgroup.spapp.extension.getColor
 import kotlinx.android.synthetic.main.layout_summary_button.view.*
 
@@ -47,6 +49,22 @@ class SummaryButton: RelativeLayout {
 
     private fun initViews(context: Context) {
         LayoutInflater.from(context).inflate(R.layout.layout_summary_button, this, true)
+    }
+
+    fun setText(text: String) {
+        tv_summary.setText(text)
+    }
+
+    fun setCount(count: Int) {
+        tv_total_count.setText("$count")
+    }
+
+    fun setPrice(price: Float) {
+        tv_price.setText(price.formatPrice())
+    }
+
+    fun setEstPrice(price: Float) {
+        tv_price.setText(price.formatEstPrice())
     }
 
 }

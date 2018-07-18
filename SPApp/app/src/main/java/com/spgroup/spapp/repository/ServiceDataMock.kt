@@ -29,17 +29,17 @@ class ServiceDataMock : ServicesRepository {
         return Single.fromCallable {
             val service1 = ServiceItemCounter(
                     "Paint",
-                    10,
+                    10f,
                     "item")
             val service2 = ServiceItemCheckBox(
                     "Day Curtains",
-                    10,
+                    10f,
                     "piece",
                     "Also known as sheers, made of light coloured materials to allow light in from outside.",
                     false)
             val service3 = ServiceItemCheckBox(
                     "Night Curtains",
-                    9,
+                    9f,
                     "kg",
                     "Heavier in weight and are of dark coloured materials. These are drawn at night for privacy.",
                     false

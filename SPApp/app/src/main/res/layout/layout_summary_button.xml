@@ -34,6 +34,7 @@
 
     <TextView
         fontPath="@string/font_medium"
+        android:id="@+id/tv_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
