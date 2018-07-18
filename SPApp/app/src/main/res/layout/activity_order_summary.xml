@@ -56,13 +56,13 @@
                 android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/order_sum_horz_large"
-                android:paddingRight="@dimen/order_sum_horz_large"
-                android:paddingTop="@dimen/order_sum_vert_medium"
-                android:paddingBottom="@dimen/order_sum_vert_medium"
+                android:paddingLeft="@dimen/common_horz_large"
+                android:paddingRight="@dimen/common_horz_large"
+                android:paddingTop="@dimen/common_vert_medium"
+                android:paddingBottom="@dimen/common_vert_medium"
                 android:background="@color/color_ui05"
 
-                android:layout_marginBottom="@dimen/order_sum_vert_large"
+                android:layout_marginBottom="@dimen/common_vert_large"
 
                 android:text="QuiKlean Laundry"
                 />
@@ -74,7 +74,7 @@
             <com.spgroup.spapp.presentation.view.SummaryItemView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/order_sum_vert_large"/>
+                android:layout_marginBottom="@dimen/common_vert_large"/>
 
             <include layout="@layout/layout_summary_header"/>
 
@@ -85,7 +85,7 @@
             <com.spgroup.spapp.presentation.view.SummaryItemView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/order_sum_vert_large"/>
+                android:layout_marginBottom="@dimen/common_vert_large"/>
 
             <!--Dummy UI end-->
 
@@ -98,9 +98,9 @@
                 android:layout_height="wrap_content"
                 android:background="@color/color_ui06"
                 android:orientation="vertical"
-                android:paddingLeft="@dimen/order_sum_horz_large"
-                android:paddingRight="@dimen/order_sum_horz_large"
-                android:paddingTop="@dimen/order_sum_vert_xlarge">
+                android:paddingLeft="@dimen/common_horz_large"
+                android:paddingRight="@dimen/common_horz_large"
+                android:paddingTop="@dimen/common_vert_xlarge">
 
                 <TextView
                     style="@style/textH4"
@@ -149,7 +149,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_rec_rounded_white_solid_grey_stroke"
-                        android:layout_marginTop="@dimen/order_sum_vert_xsmall"
+                        android:layout_marginTop="@dimen/common_vert_xsmall"
                         android:spinnerMode="dropdown"
                         />
 
@@ -214,7 +214,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/order_sum_vert_medium"
+                    android:layout_marginTop="@dimen/common_vert_medium"
                     >
 
                     <CheckBox
@@ -239,8 +239,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sum_order_agreement"
-                    android:layout_marginTop="@dimen/order_sum_vert_medium"
-                    android:layout_marginBottom="@dimen/order_sum_vert_large"
+                    android:layout_marginTop="@dimen/common_vert_medium"
+                    android:layout_marginBottom="@dimen/common_vert_large"
                     />
 
             </LinearLayout>

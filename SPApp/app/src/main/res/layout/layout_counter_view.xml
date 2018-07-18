@@ -17,7 +17,7 @@
     <TextView
         style="@style/textH3"
         android:id="@+id/tv_count"
-        android:layout_width="@dimen/order_sum_counter_text_width"
+        android:layout_width="@dimen/common_counter_text_width"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/common_spacing_x2"
         android:layout_marginRight="@dimen/common_spacing_x2"

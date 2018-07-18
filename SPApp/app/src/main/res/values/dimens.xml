@@ -60,20 +60,17 @@
     <dimen name="top_bar_height">70dp</dimen>
 
     <!--OrderSummaryActivity-->
-    <dimen name="order_sum_counter_text_width">32dp</dimen>
+    <dimen name="common_counter_text_width">32dp</dimen>
 
-    <dimen name="order_sum_vert_xlarge">50dp</dimen>
-    <dimen name="order_sum_vert_large">30dp</dimen>
-    <dimen name="order_sum_vert_medium">20dp</dimen>
-    <dimen name="order_sum_vert_medium_sub">15dp</dimen>
-    <dimen name="order_sum_vert_small">10dp</dimen>
-    <dimen name="order_sum_vert_xsmall">5dp</dimen>
+    <dimen name="common_vert_xlarge">50dp</dimen>
+    <dimen name="common_vert_large">30dp</dimen>
+    <dimen name="common_vert_medium">20dp</dimen>
+    <dimen name="common_vert_medium_sub">15dp</dimen>
+    <dimen name="common_vert_small">10dp</dimen>
+    <dimen name="common_vert_xsmall">5dp</dimen>
 
-    <dimen name="order_sum_horz_large">30dp</dimen>
-    <dimen name="order_sum_horz_large_for_icon">25dp</dimen>
-
-
-    <!--OrderSummaryActivity-->
+    <dimen name="common_horz_large">30dp</dimen>
+    <dimen name="common_horz_large_for_icon">25dp</dimen>
 
     <dimen name="button_shadow_height">20dp</dimen>
 
