@@ -9,13 +9,15 @@ import android.support.design.widget.TabLayout
 import android.view.LayoutInflater
 import android.widget.TextView
 import com.spgroup.spapp.R
-import com.spgroup.spapp.extension.setOnGlobalLayoutListener
-import com.spgroup.spapp.extension.setUpMenuActive
-import com.spgroup.spapp.extension.setUpMenuInactive
 import com.spgroup.spapp.presentation.adapter.CategoryPagerAdapter
 import com.spgroup.spapp.presentation.adapter.PartnerImagesAdapter
 import com.spgroup.spapp.presentation.viewmodel.SupplierDetailsViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.doLogD
+import com.spgroup.spapp.util.doLogE
+import com.spgroup.spapp.util.extension.setOnGlobalLayoutListener
+import com.spgroup.spapp.util.extension.setUpMenuActive
+import com.spgroup.spapp.util.extension.setUpMenuInactive
 import kotlinx.android.synthetic.main.activity_partner_details.*
 
 class PartnerDetailsActivity : BaseActivity() {
@@ -53,9 +55,11 @@ class PartnerDetailsActivity : BaseActivity() {
         with(viewmodel) {
             serviceCategories.observe(this@PartnerDetailsActivity, Observer {
                 // do something with serviceCategories
+                doLogD(msg = "Size: ${it?.size}")
             })
             error.observe(this@PartnerDetailsActivity, Observer {
                 // do something with error
+                doLogE(msg = "Error: ${it?.message}")
             })
 
             loadServices(-1)
@@ -106,7 +110,7 @@ class PartnerDetailsActivity : BaseActivity() {
             tab?.setCustomView(customView)
         }
 
-        tab_layout.addOnTabSelectedListener(object :  TabLayout.BaseOnTabSelectedListener<TabLayout.Tab> {
+        tab_layout.addOnTabSelectedListener(object : TabLayout.BaseOnTabSelectedListener<TabLayout.Tab> {
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 //Do nothing
             }
