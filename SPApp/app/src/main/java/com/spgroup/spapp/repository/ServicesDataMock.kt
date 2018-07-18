@@ -4,7 +4,7 @@ import com.spgroup.spapp.domain.ServicesRepository
 import com.spgroup.spapp.domain.model.*
 import io.reactivex.Single
 
-class ServiceDataMock : ServicesRepository {
+class ServicesDataMock : ServicesRepository {
 
     override fun getTopLevelServiceCategories(): Single<List<TopLevelServiceCategory>> {
         return Single.fromCallable {

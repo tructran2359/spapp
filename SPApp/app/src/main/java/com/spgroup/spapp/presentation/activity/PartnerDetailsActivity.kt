@@ -57,6 +57,8 @@ class PartnerDetailsActivity : BaseActivity() {
             error.observe(this@PartnerDetailsActivity, Observer {
                 // do something with error
             })
+
+            loadServices(-1)
         }
 
 
