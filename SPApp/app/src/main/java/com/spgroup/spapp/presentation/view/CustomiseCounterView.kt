@@ -5,15 +5,15 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import com.spgroup.spapp.R
-import kotlinx.android.synthetic.main.layout_summary_item.view.*
+import kotlinx.android.synthetic.main.layout_customise_counter.view.*
 
-class SummaryItemView: RelativeLayout {
+class CustomiseCounterView: RelativeLayout {
 
     ///////////////////////////////////////////////////////////////////////////
     // Constructor
     ///////////////////////////////////////////////////////////////////////////
 
-    constructor(context: Context): super(context){
+    constructor(context: Context) : super(context) {
         initViews(context)
     }
 
@@ -30,9 +30,23 @@ class SummaryItemView: RelativeLayout {
     ///////////////////////////////////////////////////////////////////////////
 
     private fun initViews(context: Context) {
-        LayoutInflater.from(context).inflate(R.layout.layout_summary_item, this, true)
+        LayoutInflater.from(context).inflate(R.layout.layout_customise_counter, this, true)
+    }
 
-        counter_view.setEnableMinus(false)
+    fun setName(name: String) {
+        tv_name.setText(name)
+    }
+
+    fun setOption(option: String) {
+        tv_option.setText(option)
+    }
+
+    fun enablePlus(enable: Boolean) {
+        counter_view.setEnablePlus(enable)
+    }
+
+    fun enableMinus(enable: Boolean) {
+        counter_view.setEnableMinus(enable)
     }
 
 }

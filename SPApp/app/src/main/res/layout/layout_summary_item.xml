@@ -9,10 +9,10 @@
         android:id="@+id/rl_content_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/order_sum_horz_large_for_icon"
-        android:layout_marginRight="@dimen/order_sum_horz_large_for_icon"
-        android:layout_marginTop="@dimen/order_sum_vert_small"
-        android:layout_marginBottom="@dimen/order_sum_vert_small"
+        android:layout_marginLeft="@dimen/common_horz_large_for_icon"
+        android:layout_marginRight="@dimen/common_horz_large_for_icon"
+        android:layout_marginTop="@dimen/common_vert_small"
+        android:layout_marginBottom="@dimen/common_vert_small"
         >
 
         <ImageView
@@ -33,32 +33,12 @@
             android:text="Blouse"
             />
         
-        <ImageView
-            style="@style/iconWithPadding"
-            android:id="@+id/iv_plus"
-            android:src="@drawable/selector_plus_blue"
-            android:layout_alignParentRight="true"
-            />
-        
-        
-        <TextView
-            style="@style/textH3"
-            android:id="@+id/tv_count"
-            android:layout_width="@dimen/order_sum_counter_text_width"
+        <com.spgroup.spapp.presentation.view.CounterView
+            android:id="@+id/counter_view"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/iv_plus"
-            android:layout_marginRight="@dimen/common_spacing_x2"
-            android:gravity="center_horizontal"
-
-            android:text="1"
-            />
-
-        <ImageView
-            style="@style/iconWithPadding"
-            android:id="@+id/iv_minus"
-            android:src="@drawable/selector_minus_blue"
-            android:layout_toLeftOf="@+id/tv_count"
-            android:layout_marginRight="@dimen/common_spacing_x2"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             />
 
     </RelativeLayout>
@@ -68,9 +48,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_rec_rounded_grey"
         android:layout_below="@+id/rl_content_container"
-        android:layout_marginLeft="@dimen/order_sum_horz_large_for_icon"
-        android:layout_marginRight="@dimen/order_sum_horz_large"
-        android:layout_marginBottom="@dimen/order_sum_vert_small"
+        android:layout_marginLeft="@dimen/common_horz_large_for_icon"
+        android:layout_marginRight="@dimen/common_horz_large"
+        android:layout_marginBottom="@dimen/common_vert_small"
         android:paddingLeft="@dimen/common_spacing_x3"
         android:paddingRight="@dimen/common_spacing_x3"
         android:paddingTop="@dimen/common_spacing_x2"

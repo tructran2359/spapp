@@ -27,3 +27,5 @@ fun TextView.setUpMenuInactive() {
 fun View.getColor(colorId: Int) = ContextCompat.getColor(context, colorId)
 
 fun Context.getColor(colorId: Int) = ContextCompat.getColor(this, colorId)
+
+fun Context.getDimensionPixelSize(resId: Int) = this.resources.getDimensionPixelSize(resId)
