@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.CategoryService
+import com.spgroup.spapp.domain.model.ServiceGroup
 import com.spgroup.spapp.domain.model.ServiceItemCheckBox
 import com.spgroup.spapp.domain.model.ServiceItemCombo
 import com.spgroup.spapp.domain.model.ServiceItemCounter
@@ -22,7 +22,7 @@ class CategoryServiceAdapter(val context: Context): RecyclerView.Adapter<Categor
     // Property
     ///////////////////////////////////////////////////////////////////////////
 
-    val mData = mutableListOf<CategoryService>()
+    val mData = mutableListOf<ServiceGroup>()
 
     val mItemInteractedListener = object : OnItemInteractedListener {
 
@@ -60,7 +60,7 @@ class CategoryServiceAdapter(val context: Context): RecyclerView.Adapter<Categor
     // Other
     ///////////////////////////////////////////////////////////////////////////
 
-    fun submitData(data: List<CategoryService>) {
+    fun submitData(data: List<ServiceGroup>) {
         mData.clear()
         mData.addAll(data)
         notifyDataSetChanged()
@@ -82,7 +82,7 @@ class CategoryServiceAdapter(val context: Context): RecyclerView.Adapter<Categor
 
     class ServiceVH(var view: View, var listener: OnItemInteractedListener) : RecyclerView.ViewHolder(view) {
 
-        fun bind(service: CategoryService) {
+        fun bind(service: ServiceGroup) {
             with(itemView) {
                 tv_service_name.setText(service.name)
                 tv_service_description.setText(service.description)
