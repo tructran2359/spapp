@@ -10,6 +10,14 @@ import kotlinx.android.synthetic.main.layout_counter_view.view.*
 class CounterView: LinearLayout {
 
     ///////////////////////////////////////////////////////////////////////////
+    // Property
+    ///////////////////////////////////////////////////////////////////////////
+
+    var mCount = 0
+    var mMin = 0
+    var mMax = 0
+
+    ///////////////////////////////////////////////////////////////////////////
     // Constructor
     ///////////////////////////////////////////////////////////////////////////
 
@@ -31,11 +39,28 @@ class CounterView: LinearLayout {
 
     private fun initViews(context: Context) {
         LayoutInflater.from(context).inflate(R.layout.layout_counter_view, this, true)
+        onCountChanged()
+
+        iv_plus.setOnClickListener {
+            mCount++
+            onCountChanged()
+        }
+
+        iv_minus.setOnClickListener {
+            mCount--
+            onCountChanged()
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // Other
     ///////////////////////////////////////////////////////////////////////////
+
+    private fun onCountChanged() {
+        tv_count.setText("$mCount")
+        setEnableMinus(mCount > mMin)
+        setEnablePlus(mCount < mMax)
+    }
 
     fun setEnablePlus(enable: Boolean) {
         iv_plus.isEnabled = enable
@@ -46,7 +71,13 @@ class CounterView: LinearLayout {
     }
 
     fun setCount(count: Int) {
-        tv_count.setText("$count")
+        mCount = count
+        onCountChanged()
+    }
+
+    fun setLimit(min: Int, max: Int) {
+        mMin = min
+        mMax = max
     }
 
 }

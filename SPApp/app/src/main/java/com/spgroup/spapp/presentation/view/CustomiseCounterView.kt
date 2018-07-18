@@ -10,6 +10,14 @@ import kotlinx.android.synthetic.main.layout_customise_counter.view.*
 class CustomiseCounterView: RelativeLayout {
 
     ///////////////////////////////////////////////////////////////////////////
+    // Property
+    ///////////////////////////////////////////////////////////////////////////
+
+    var mCount = 0
+    var mMin = 0
+    var mMax = 0
+
+    ///////////////////////////////////////////////////////////////////////////
     // Constructor
     ///////////////////////////////////////////////////////////////////////////
 
@@ -39,6 +47,14 @@ class CustomiseCounterView: RelativeLayout {
 
     fun setOption(option: String) {
         tv_option.setText(option)
+    }
+
+    fun setLimit(min: Int, max: Int) {
+        counter_view.setLimit(min, max)
+    }
+
+    fun setCount(count: Int) {
+        counter_view.setCount(count)
     }
 
     fun enablePlus(enable: Boolean) {
