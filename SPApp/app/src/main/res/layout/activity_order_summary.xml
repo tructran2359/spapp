@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,235 +7,251 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.activity.OrderSummaryActivity"
+    android:background="@color/color_ui06"
     >
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scroll_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/color_ui06"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_summary_button_container"
         >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/top_bar_height"
-            android:background="@color/color_primarygradientbase"
-            >
-
-            <TextView
-                style="@style/textH3.white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/summary"
-                />
-
-            <ImageView
-                android:id="@+id/iv_back"
-                android:layout_width="@dimen/common_icon_size_medium_with_padding"
-                android:layout_height="@dimen/common_icon_size_medium_with_padding"
-                android:padding="@dimen/common_icon_padding"
-                android:layout_marginLeft="@dimen/common_spacing"
-                android:scaleType="fitXY"
-                android:src="@drawable/arrow_left"
-                android:layout_centerVertical="true"
-                />
-
-        </RelativeLayout>
-
-        <TextView
-            style="@style/textH1"
-            android:id="@+id/tv_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/order_sum_horz_large"
-            android:paddingRight="@dimen/order_sum_horz_large"
-            android:paddingTop="@dimen/order_sum_vert_medium"
-            android:paddingBottom="@dimen/order_sum_vert_medium"
-            android:background="@color/color_ui05"
-
-            android:layout_marginBottom="@dimen/order_sum_vert_large"
-
-            android:text="QuiKlean Laundry"
-            />
-
-        <!--Dummy UI start-->
-
-        <include layout="@layout/layout_summary_header"/>
-
-        <com.spgroup.spapp.presentation.view.SummaryItemView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/order_sum_vert_large"/>
-
-        <include layout="@layout/layout_summary_header"/>
-
-        <com.spgroup.spapp.presentation.view.SummaryItemView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <com.spgroup.spapp.presentation.view.SummaryItemView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/order_sum_vert_large"/>
-
-        <!--Dummy UI end-->
-
-        <include layout="@layout/layout_summary_estimated"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_ui06"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/order_sum_horz_large"
-            android:paddingRight="@dimen/order_sum_horz_large"
-            android:paddingTop="@dimen/order_sum_vert_xlarge">
+            android:background="@color/color_ui06"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/top_bar_height"
+                android:background="@color/color_primarygradientbase"
+                >
+
+                <TextView
+                    style="@style/textH3.white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/summary"
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="@dimen/common_icon_size_medium_with_padding"
+                    android:layout_height="@dimen/common_icon_size_medium_with_padding"
+                    android:padding="@dimen/common_icon_padding"
+                    android:layout_marginLeft="@dimen/common_spacing"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/arrow_left"
+                    android:layout_centerVertical="true"
+                    />
+
+            </RelativeLayout>
 
             <TextView
-                style="@style/textH4"
+                style="@style/textH1"
+                android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/your_contact_info"
+                android:paddingLeft="@dimen/order_sum_horz_large"
+                android:paddingRight="@dimen/order_sum_horz_large"
+                android:paddingTop="@dimen/order_sum_vert_medium"
+                android:paddingBottom="@dimen/order_sum_vert_medium"
+                android:background="@color/color_ui05"
+
+                android:layout_marginBottom="@dimen/order_sum_vert_large"
+
+                android:text="QuiKlean Laundry"
                 />
 
-            <!--Name-->
+            <!--Dummy UI start-->
 
-            <TextView
-                style="@style/textH4.orderSumLabel"
-                android:text="@string/name"
-                />
+            <include layout="@layout/layout_summary_header"/>
 
-            <EditText
-                android:id="@+id/et_Name"
-                style="@style/textH4.orderSumInput"
-                />
-
-            <!--Contact No-->
-
-            <TextView
-                style="@style/textH4.orderSumLabel"
-                android:text="@string/contact_no"
-                />
-
-            <EditText
-                android:id="@+id/et_contact_no"
-                style="@style/textH4.orderSumInput"
-                />
-
-            <!--Preferred Time-->
-
-            <TextView
-                style="@style/textH4.orderSumLabel"
-                android:text="@string/preferred_time"
-                />
-
-            <EditText
-                android:id="@+id/et_preferred_time"
-                style="@style/textH4.orderSumInput"
-                />
-
-            <!--Address-->
-
-            <TextView
-                style="@style/textH4.orderSumLabel"
-                android:text="@string/address"
-                />
-
-            <EditText
-                android:id="@+id/et_address_1"
-                style="@style/textH4.orderSumInput"
-                />
-
-            <EditText
-                android:id="@+id/et_address_2"
-                style="@style/textH4.orderSumInput"
-                />
-
-            <!--Postal Code-->
-
-            <TextView
-                style="@style/textH4.orderSumLabel"
-                android:text="@string/postal_code"
-                />
-
-            <EditText
-                android:id="@+id/et_postal_code"
-                style="@style/textH4.orderSumInput"
-                />
-
-            <!--Notes-->
-
-            <TextView
-                style="@style/textH4.orderSumLabel"
-                android:text="@string/notes"
-                />
-
-            <EditText
-                android:id="@+id/et_notes"
-                style="@style/textH4.orderSumInput"
+            <com.spgroup.spapp.presentation.view.SummaryItemView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="top|left"
-                android:hint="@string/summary_notes_hint"
-                android:minLines="5"
-                android:textColorHint="@color/color_ui04"
-                />
+                android:layout_marginBottom="@dimen/order_sum_vert_large"/>
+
+            <include layout="@layout/layout_summary_header"/>
+
+            <com.spgroup.spapp.presentation.view.SummaryItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.spgroup.spapp.presentation.view.SummaryItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/order_sum_vert_large"/>
+
+            <!--Dummy UI end-->
+
+            <include layout="@layout/layout_summary_estimated"/>
+
+            <!--Contact Info container-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/order_sum_vert_medium"
-                >
-
-                <CheckBox
-                    android:id="@+id/cb_remember"
-                    android:layout_width="@dimen/common_icon_size"
-                    android:layout_height="@dimen/common_icon_size"
-                    android:button="@drawable/selector_check_box_square"
-                    />
+                android:background="@color/color_ui06"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/order_sum_horz_large"
+                android:paddingRight="@dimen/order_sum_horz_large"
+                android:paddingTop="@dimen/order_sum_vert_xlarge">
 
                 <TextView
-                    style="@style/textParagraph.grey"
+                    style="@style/textH4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/remember_me"
-                    android:layout_marginLeft="@dimen/common_spacing_x3"
+                    android:text="@string/your_contact_info"
+                    />
+
+                <!--Name-->
+
+                <TextView
+                    style="@style/textH4.orderSumLabel"
+                    android:text="@string/name"
+                    />
+
+                <EditText
+                    android:id="@+id/et_Name"
+                    style="@style/textH4.orderSumInput"
+                    />
+
+                <!--Contact No-->
+
+                <TextView
+                    style="@style/textH4.orderSumLabel"
+                    android:text="@string/contact_no"
+                    />
+
+                <EditText
+                    android:id="@+id/et_contact_no"
+                    style="@style/textH4.orderSumInput"
+                    />
+
+                <!--Preferred Time-->
+
+                <TextView
+                    style="@style/textH4.orderSumLabel"
+                    android:text="@string/preferred_time"
+                    />
+
+                <EditText
+                    android:id="@+id/et_preferred_time"
+                    style="@style/textH4.orderSumInput"
+                    />
+
+                <!--Address-->
+
+                <TextView
+                    style="@style/textH4.orderSumLabel"
+                    android:text="@string/address"
+                    />
+
+                <EditText
+                    android:id="@+id/et_address_1"
+                    style="@style/textH4.orderSumInput"
+                    />
+
+                <EditText
+                    android:id="@+id/et_address_2"
+                    style="@style/textH4.orderSumInput"
+                    />
+
+                <!--Postal Code-->
+
+                <TextView
+                    style="@style/textH4.orderSumLabel"
+                    android:text="@string/postal_code"
+                    />
+
+                <EditText
+                    android:id="@+id/et_postal_code"
+                    style="@style/textH4.orderSumInput"
+                    />
+
+                <!--Notes-->
+
+                <TextView
+                    style="@style/textH4.orderSumLabel"
+                    android:text="@string/notes"
+                    />
+
+                <EditText
+                    android:id="@+id/et_notes"
+                    style="@style/textH4.orderSumInput"
+                    android:layout_height="wrap_content"
+                    android:gravity="top|left"
+                    android:hint="@string/summary_notes_hint"
+                    android:minLines="5"
+                    android:textColorHint="@color/color_ui04"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/order_sum_vert_medium"
+                    >
+
+                    <CheckBox
+                        android:id="@+id/cb_remember"
+                        android:layout_width="@dimen/common_icon_size"
+                        android:layout_height="@dimen/common_icon_size"
+                        android:button="@drawable/selector_check_box_square"
+                        />
+
+                    <TextView
+                        style="@style/textParagraph.grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/remember_me"
+                        android:layout_marginLeft="@dimen/common_spacing_x3"
+                        />
+
+                </LinearLayout>
+
+                <TextView
+                    style="@style/textCaption"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sum_order_agreement"
+                    android:layout_marginTop="@dimen/order_sum_vert_medium"
+                    android:layout_marginBottom="@dimen/order_sum_vert_large"
                     />
 
             </LinearLayout>
 
-            <TextView
-                style="@style/textCaption"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/sum_order_agreement"
-                android:layout_marginTop="@dimen/order_sum_vert_medium"
-                android:layout_marginBottom="@dimen/order_sum_vert_large"
-                />
-
         </LinearLayout>
 
-        <View
+    </ScrollView>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_shadow_height"
+        android:background="@drawable/gradient_button_shadow"
+        android:layout_above="@+id/rl_summary_button_container"
+        />
+
+    <RelativeLayout
+        style="@style/summaryButton"
+        android:id="@+id/rl_summary_button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+
+        <com.spgroup.spapp.presentation.view.SummaryButton
+            android:id="@+id/btn_summary"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/button_shadow_height"
-            android:background="@drawable/gradient_button_shadow"
+            android:layout_height="@dimen/btn_summary_height"
             />
 
-        <RelativeLayout
-            style="@style/summaryButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+    </RelativeLayout>
 
-            <com.spgroup.spapp.presentation.view.SummaryButton
-                android:id="@+id/btn_summary"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/btn_summary_height"
-                />
-
-        </RelativeLayout>
-
-    </LinearLayout>
-
-</ScrollView>
+</RelativeLayout>
