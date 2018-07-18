@@ -27,17 +27,17 @@ class ServiceDataMock : ServicesRepository {
 
     override fun getSupplierServicesDetails(supplierId: Int): Single<List<SupplierServiceCategory>> {
         return Single.fromCallable {
-            val service1 = CounterServiceItem(
+            val service1 = ServiceItemCounter(
                     "Paint",
                     10,
                     "item")
-            val service2 = CheckBoxServiceItem(
+            val service2 = ServiceItemCheckBox(
                     "Day Curtains",
                     10,
                     "piece",
                     "Also known as sheers, made of light coloured materials to allow light in from outside.",
                     false)
-            val service3 = CheckBoxServiceItem(
+            val service3 = ServiceItemCheckBox(
                     "Night Curtains",
                     9,
                     "kg",

@@ -3,7 +3,6 @@ package com.spgroup.spapp.presentation.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.RelativeLayout
 import com.spgroup.spapp.R
 import kotlinx.android.synthetic.main.layout_summary_item.view.*
@@ -32,10 +31,8 @@ class SummaryItemView: RelativeLayout {
 
     private fun initViews(context: Context) {
         LayoutInflater.from(context).inflate(R.layout.layout_summary_item, this, true)
-    }
 
-    fun setShowDivider(show: Boolean) {
-        v_devider.visibility = if (show) View.VISIBLE else View.GONE
+        iv_minus.isEnabled = false
     }
 
 }

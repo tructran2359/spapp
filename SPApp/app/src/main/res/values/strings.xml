@@ -22,4 +22,6 @@
     <string name="summary_notes_hint">Eg. Delivered items to be placed in the cabinet beside the front gate.</string>
     <string name="remember_me">Remember me</string>
     <string name="sum_order_agreement">By submitting, you allow us to send this request to our partner to contact you on the above-mentioned request.</string>
+    <string name="est_price">Est. Price</string>
+    <string name="est_total">Est. Total</string>
 </resources>
