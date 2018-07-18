@@ -37,6 +37,9 @@ class OrderSummaryActivity : BaseActivity() {
         btn_summary.setText(getString(R.string.submit_request))
         btn_summary.setCount(1)
         btn_summary.setEstPrice(0.01f)
+        btn_summary.setOnClickListener {
+            startActivity(ConfirmationActivity.getLaunchIntent(this@OrderSummaryActivity))
+        }
 
         iv_back.setOnClickListener {
             onBackPressed()
