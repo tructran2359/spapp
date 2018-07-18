@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItem
 import com.spgroup.spapp.domain.model.ServiceItemCombo
+import com.spgroup.spapp.extension.toast
 import com.spgroup.spapp.util.ConstUtils
 import kotlinx.android.synthetic.main.activity_customise.*
 
@@ -49,9 +50,20 @@ class CustomiseActivity : BaseActivity() {
 
         custom_view_1.setName("No. of Pax")
         custom_view_1.setOption("[min. 1 pax]")
-        custom_view_1.enableMinus(false)
+        custom_view_1.setLimit(1, 10)
+        custom_view_1.setCount(1)
 
         custom_view_2.setName("Plain Rice")
         custom_view_2.setOption("[optional]")
+        custom_view_2.setLimit(0, 10)
+        custom_view_2.setCount(1)
+
+        tv_add_to_request.setOnClickListener {
+            this.toast("CLICKED")
+        }
+
+        action_bar.setOnBackPress {
+            onBackPressed()
+        }
     }
 }
