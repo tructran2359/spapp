@@ -5,8 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.view.LayoutInflater
+import android.view.View
+import android.view.animation.Animation
 import android.widget.TextView
 import com.spgroup.spapp.R
+import com.spgroup.spapp.extension.loadAnimation
 import com.spgroup.spapp.extension.setOnGlobalLayoutListener
 import com.spgroup.spapp.extension.setUpMenuActive
 import com.spgroup.spapp.extension.setUpMenuInactive
@@ -33,6 +36,8 @@ class PartnerDetailsActivity : BaseActivity() {
 
     lateinit var mImageAdapter: PartnerImagesAdapter
     lateinit var mCategoryAdapter: CategoryPagerAdapter
+    lateinit var mAnimationAppear: Animation
+    lateinit var mAnimationDisappear: Animation
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -42,12 +47,43 @@ class PartnerDetailsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_partner_details)
 
+        initAnimations()
+
         setUpViews()
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // Other
     ///////////////////////////////////////////////////////////////////////////
+
+    private fun initAnimations() {
+        mAnimationAppear = loadAnimation(R.anim.anim_slide_up)
+        mAnimationAppear.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(p0: Animation?) {
+            }
+
+            override fun onAnimationEnd(p0: Animation?) {
+                updateVisibility(true)
+            }
+
+            override fun onAnimationStart(p0: Animation?) {
+            }
+
+        })
+
+        mAnimationDisappear = loadAnimation(R.anim.anim_slide_down)
+        mAnimationDisappear.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(p0: Animation?) {
+            }
+
+            override fun onAnimationEnd(p0: Animation?) {
+                updateVisibility(false)
+            }
+
+            override fun onAnimationStart(p0: Animation?) {
+            }
+        })
+    }
 
     private fun setUpViews() {
         setUpHeroSection()
@@ -136,6 +172,17 @@ class PartnerDetailsActivity : BaseActivity() {
             val intent = OrderSummaryActivity.getLaunchIntent(this)
             startActivity(intent)
         }
+    }
+
+    private fun showSummaryButton(show: Boolean) {
+        val animation = if (show) mAnimationAppear else mAnimationDisappear
+        ll_summary_section.startAnimation(animation)
+    }
+
+    private fun updateVisibility(show: Boolean) {
+        val visibility = if (show) View.VISIBLE else View.GONE
+        rl_summary_container.visibility = visibility
+        v_shadow.visibility = visibility
     }
 
 }
