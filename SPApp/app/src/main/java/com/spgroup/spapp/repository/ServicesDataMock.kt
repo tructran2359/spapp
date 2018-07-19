@@ -68,6 +68,10 @@ class ServicesDataMock : ServicesRepository {
 
             }
 
+            // Create This week's menu
+            val thisWeekMenuCate = SupplierServiceCategory(6, "This week's menu", mutableListOf())
+            listServiceCategory.add(thisWeekMenuCate)
+
             // Return:
             listServiceCategory
         }
