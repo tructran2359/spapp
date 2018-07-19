@@ -5,7 +5,7 @@ import com.spgroup.spapp.BuildConfig.DEBUG
 
 const val TAG_MAX_LENGTH = 23
 const val TAG_PREFIX = "SP_"
-const val TAG_DEFAULT = TAG_PREFIX + "DEFAULT"
+const val TAG_DEFAULT = "DEFAULT"
 val DEBUGABLE = DEBUG
 
 fun Any.createTag(tag: String): String {

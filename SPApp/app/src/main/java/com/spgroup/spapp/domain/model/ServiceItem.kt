@@ -8,6 +8,7 @@ abstract class ServiceItem(
         open var unit: String
 ): Serializable {
     abstract fun getItemCount(): Int
+    abstract fun copy(): ServiceItem
 }
 
 class ServiceItemCounter(
@@ -20,6 +21,8 @@ class ServiceItemCounter(
 ) : ServiceItem(name, price, unit) {
 
     override fun getItemCount() = count
+
+    override fun copy() = ServiceItemCounter(name, price, unit, minCount, maxCount, count)
 }
 
 class ServiceItemCheckBox(
@@ -32,6 +35,8 @@ class ServiceItemCheckBox(
 ): ServiceItem(name, price, unit) {
 
     override fun getItemCount() = if (selected) 1 else 0
+
+    override fun copy() = ServiceItemCheckBox(name, price, unit, description, selected)
 }
 
 class ServiceItemCombo(
@@ -43,4 +48,6 @@ class ServiceItemCombo(
 ) : ServiceItem(name, price, unit) {
 
     override fun getItemCount() = if (selected) 1 else 0
+
+    override fun copy() = ServiceItemCombo(name, price, unit, description, selected)
 }

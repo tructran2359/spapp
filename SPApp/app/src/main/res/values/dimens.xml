@@ -79,6 +79,7 @@
     <dimen name="common_horz_large_for_icon">25dp</dimen>
 
     <dimen name="button_shadow_height">20dp</dimen>
+    <dimen name="button_shadow_height_negative">-20dp</dimen>
     <dimen name="common_text_areal_height">140dp</dimen>
 
 </resources>

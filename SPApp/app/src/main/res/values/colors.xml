@@ -31,7 +31,7 @@
     <color name="image_gradient_bottom">#96000000</color>
     <color name="image_gradient_top">#32000000</color>
 
-    <color name="button_gradient_bottom">#11000000</color>
+    <color name="button_gradient_bottom">#22000000</color>
     <color name="button_gradient_top">#00000000</color>
 
 </resources>

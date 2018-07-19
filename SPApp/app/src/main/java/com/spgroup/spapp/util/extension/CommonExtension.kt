@@ -1,4 +1,4 @@
-package com.spgroup.spapp.extension
+package com.spgroup.spapp.util.extension
 
 fun Float.formatPrice() = "S$%.2f".format(this)
 

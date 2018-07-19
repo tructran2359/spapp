@@ -1,17 +1,26 @@
 package com.spgroup.spapp.presentation.activity
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.view.LayoutInflater
+import android.view.View
+import android.view.animation.Animation
 import android.widget.TextView
 import com.spgroup.spapp.R
-import com.spgroup.spapp.extension.setOnGlobalLayoutListener
-import com.spgroup.spapp.extension.setUpMenuActive
-import com.spgroup.spapp.extension.setUpMenuInactive
 import com.spgroup.spapp.presentation.adapter.CategoryPagerAdapter
 import com.spgroup.spapp.presentation.adapter.PartnerImagesAdapter
+import com.spgroup.spapp.presentation.viewmodel.SupplierDetailsViewModel
+import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.doLogD
+import com.spgroup.spapp.util.doLogE
+import com.spgroup.spapp.util.extension.loadAnimation
+import com.spgroup.spapp.util.extension.setOnGlobalLayoutListener
+import com.spgroup.spapp.util.extension.setUpMenuActive
+import com.spgroup.spapp.util.extension.setUpMenuInactive
 import kotlinx.android.synthetic.main.activity_partner_details.*
 
 class PartnerDetailsActivity : BaseActivity() {
@@ -33,6 +42,8 @@ class PartnerDetailsActivity : BaseActivity() {
 
     lateinit var mImageAdapter: PartnerImagesAdapter
     lateinit var mCategoryAdapter: CategoryPagerAdapter
+    lateinit var mAnimationAppear: Animation
+    lateinit var mAnimationDisappear: Animation
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -42,12 +53,77 @@ class PartnerDetailsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_partner_details)
 
+        initAnimations()
+
         setUpViews()
+
+        // This is demo for using ViewModel
+        val factory = ViewModelFactory.getInstance()
+        val viewmodel = ViewModelProviders.of(this, factory).get(SupplierDetailsViewModel::class.java)
+        with(viewmodel) {
+
+            serviceCategories.observe(this@PartnerDetailsActivity, Observer {
+                // do something with serviceCategories
+                doLogD(msg = "Size: ${it?.size}")
+                mCategoryAdapter.setData(it)
+                selectedServiceCategories = it?.toList()
+                setUpTabLayout()
+            })
+
+            selectedCount.observe(this@PartnerDetailsActivity, Observer {
+                doLogD("Test", "Selected $it item")
+                it?.let {
+                    // Temporarily hide this line coz updating total count textview is not in this task
+//                    btn_summary.setCount(it)
+                    if (it != 0 && ll_summary_section.visibility == View.GONE) {
+                        showSummaryButton(true)
+                    } else if (it == 0 && ll_summary_section.visibility == View.VISIBLE) {
+                        showSummaryButton(false)
+                    }
+                }
+            })
+
+            error.observe(this@PartnerDetailsActivity, Observer {
+                // do something with error
+                doLogE(msg = "Error: ${it?.message}")
+            })
+
+            loadServices(-1)
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // Other
     ///////////////////////////////////////////////////////////////////////////
+
+    private fun initAnimations() {
+        mAnimationAppear = loadAnimation(R.anim.anim_slide_up)
+        mAnimationAppear.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(p0: Animation?) {
+            }
+
+            override fun onAnimationEnd(p0: Animation?) {
+                updateVisibility(true)
+            }
+
+            override fun onAnimationStart(p0: Animation?) {
+            }
+
+        })
+
+        mAnimationDisappear = loadAnimation(R.anim.anim_slide_down)
+        mAnimationDisappear.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(p0: Animation?) {
+            }
+
+            override fun onAnimationEnd(p0: Animation?) {
+                updateVisibility(false)
+            }
+
+            override fun onAnimationStart(p0: Animation?) {
+            }
+        })
+    }
 
     private fun setUpViews() {
         setUpHeroSection()
@@ -60,33 +136,10 @@ class PartnerDetailsActivity : BaseActivity() {
     private fun setUpFormSection() {
         mCategoryAdapter = CategoryPagerAdapter(supportFragmentManager)
 
-        // Fake data:
-        val data = listOf(
-                "Dry Clean",
-                "Wash & Press",
-                "Press Only",
-                "Wash & Fold",
-                "Curtains & Carpets")
-        mCategoryAdapter.setData(data)
-
         pager_forms.offscreenPageLimit = 3
         pager_forms.adapter = mCategoryAdapter
 
-        tab_layout.setupWithViewPager(pager_forms)
-        for (i in 0 until tab_layout.tabCount) {
-            val customView = LayoutInflater.from(this).inflate(R.layout.view_custom_service_cate_tab, null, false)
-            val tvContent = customView.findViewById<TextView>(R.id.tv_content)
-            tvContent.setText(mCategoryAdapter.getPageTitle(i))
-            if (i == 0) {
-                tvContent.setUpMenuActive()
-            } else {
-                tvContent.setUpMenuInactive()
-            }
-            val tab = tab_layout.getTabAt(i)
-            tab?.setCustomView(customView)
-        }
-
-        tab_layout.addOnTabSelectedListener(object :  TabLayout.BaseOnTabSelectedListener<TabLayout.Tab> {
+        tab_layout.addOnTabSelectedListener(object : TabLayout.BaseOnTabSelectedListener<TabLayout.Tab> {
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 //Do nothing
             }
@@ -105,6 +158,22 @@ class PartnerDetailsActivity : BaseActivity() {
 
         })
 
+    }
+
+    private fun setUpTabLayout() {
+        tab_layout.setupWithViewPager(pager_forms)
+        for (i in 0 until tab_layout.tabCount) {
+            val customView = LayoutInflater.from(this).inflate(R.layout.view_custom_service_cate_tab, null, false)
+            val tvContent = customView.findViewById<TextView>(R.id.tv_content)
+            tvContent.setText(mCategoryAdapter.getPageTitle(i))
+            if (i == 0) {
+                tvContent.setUpMenuActive()
+            } else {
+                tvContent.setUpMenuInactive()
+            }
+            val tab = tab_layout.getTabAt(i)
+            tab?.setCustomView(customView)
+        }
     }
 
     private fun setUpHeroSection() {
@@ -132,10 +201,22 @@ class PartnerDetailsActivity : BaseActivity() {
     }
 
     private fun setUpSummarySection() {
+        ll_summary_section.visibility = View.GONE
+
         btn_summary.setOnClickListener {
             val intent = OrderSummaryActivity.getLaunchIntent(this)
             startActivity(intent)
         }
+    }
+
+    private fun showSummaryButton(show: Boolean) {
+        val animation = if (show) mAnimationAppear else mAnimationDisappear
+        ll_summary_section.startAnimation(animation)
+    }
+
+    private fun updateVisibility(show: Boolean) {
+        val visibility = if (show) View.VISIBLE else View.GONE
+        ll_summary_section.visibility = visibility
     }
 
 }
