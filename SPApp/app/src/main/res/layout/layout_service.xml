@@ -17,13 +17,11 @@
         >
 
         <TextView
+            style="@style/textH4"
             android:id="@+id/tv_service_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_h4"
-            android:textColor="@color/black"
             android:layout_marginLeft="@dimen/service_name_margin_left"
-            fontPath="@string/font_book"
 
             android:text="GARMENTS"
             />
@@ -49,15 +47,13 @@
         >
 
         <TextView
+            style="@style/textParagraph.grey"
             android:id="@+id/tv_service_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/service_name_margin_left"
             android:layout_marginRight="@dimen/service_name_margin_left"
             android:layout_marginBottom="@dimen/service_item_vert_spacing"
-            android:textSize="@dimen/text_size_paragraph"
-            android:textColor="@color/color_ui02"
-            fontPath="@string/font_regular"
             android:text="123456asdfasdfasdklfhasdjhfalksjdhf"
             />
 

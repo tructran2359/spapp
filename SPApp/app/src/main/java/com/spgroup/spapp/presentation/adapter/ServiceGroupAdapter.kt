@@ -79,7 +79,12 @@ class ServiceGroupAdapter(val mItemInteractedListener: OnItemInteractedListener)
         fun bind(service: ServiceGroup) {
             with(itemView) {
                 tv_service_name.setText(service.name)
-                tv_service_description.setText(service.description)
+                if (service.description.isEmpty()) {
+                    tv_service_description.visibility = View.GONE
+                } else {
+                    tv_service_description.visibility = View.VISIBLE
+                    tv_service_description.setText(service.description)
+                }
 
                 if (service.expanded) {
                     doLogD("Test", "expanded")
