@@ -104,7 +104,6 @@
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="@dimen/button_shadow_height_negative"
-        android:background="@android:color/transparent"
         >
 
         <View

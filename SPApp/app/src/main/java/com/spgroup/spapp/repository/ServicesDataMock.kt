@@ -27,36 +27,49 @@ class ServicesDataMock : ServicesRepository {
 
     override fun getSupplierServicesDetails(supplierId: Int): Single<List<SupplierServiceCategory>> {
         return Single.fromCallable {
-            val service1 = ServiceItemCounter(
-                    "Paint",
-                    10f,
-                    "item")
-            val service2 = ServiceItemCheckBox(
-                    "Day Curtains",
-                    10f,
-                    "piece",
-                    "Also known as sheers, made of light coloured materials to allow light in from outside.",
-                    false)
-            val service3 = ServiceItemCheckBox(
-                    "Night Curtains",
-                    9f,
-                    "kg",
-                    "Heavier in weight and are of dark coloured materials. These are drawn at night for privacy.",
-                    false
-            )
 
-            val serviceGroup1 = ServiceGroup("GARMENTS",
-                    "Includes free dismantling & installation. Measurement & evaluation will be done on-site, price estimation will not be included in this request.",
-                    mutableListOf(service1, service2, service3),
-                    false)
-            val serviceGroup2 = serviceGroup1.copy(name = "GARMENTS 2")
+            val listCategoryName = listOf("Dry Clean", "Wash & Press", "Press Only", "Wash & Fold", "Curtains & Carpets")
+            val listServiceCategory = mutableListOf<SupplierServiceCategory>()
 
-            listOf(
-                    SupplierServiceCategory(1, "Dry Clean", listOf(serviceGroup1, serviceGroup2)),
-                    SupplierServiceCategory(2, "Wash & Press", listOf(serviceGroup1, serviceGroup2)),
-                    SupplierServiceCategory(3, "Press Only", listOf(serviceGroup1, serviceGroup2)),
-                    SupplierServiceCategory(4, "Wash & Fold", listOf(serviceGroup1, serviceGroup2)),
-                    SupplierServiceCategory(5, "Curtains & Carpets", listOf(serviceGroup1, serviceGroup2)))
+            // Create 5 dummy category
+            for (cateId in 1..5) {
+
+                // Create 2 service for each category
+                val listServiceGroup = mutableListOf<ServiceGroup>()
+                for (serviceId in 1..2) {
+                    val service1 = ServiceItemCounter(
+                            "Paint $serviceId",
+                            10f,
+                            "item")
+
+                    val service2 = ServiceItemCheckBox(
+                            "Day Curtains $serviceId",
+                            10f,
+                            "piece",
+                            "Also known as sheers, made of light coloured materials to allow light in from outside.",
+                            false)
+
+                    val service3 = ServiceItemCheckBox(
+                            "Night Curtains $serviceId",
+                            9f,
+                            "kg",
+                            "Heavier in weight and are of dark coloured materials. These are drawn at night for privacy.",
+                            false
+                    )
+                    val serviceGroup = ServiceGroup("GARMENTS $serviceId",
+                            "Includes free dismantling & installation. Measurement & evaluation will be done on-site, price estimation will not be included in this request.",
+                            mutableListOf(service1, service2, service3),
+                            false)
+                    listServiceGroup.add(serviceGroup)
+                }
+
+                val supplierServiceCategory = SupplierServiceCategory(cateId, listCategoryName[cateId - 1], listServiceGroup)
+                listServiceCategory.add(supplierServiceCategory)
+
+            }
+
+            // Return:
+            listServiceCategory
         }
     }
 

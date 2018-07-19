@@ -66,7 +66,21 @@ class PartnerDetailsActivity : BaseActivity() {
                 // do something with serviceCategories
                 doLogD(msg = "Size: ${it?.size}")
                 mCategoryAdapter.setData(it)
+                selectedServiceCategories = it?.toList()
                 setUpTabLayout()
+            })
+
+            selectedCount.observe(this@PartnerDetailsActivity, Observer {
+                doLogD("Test", "Selected $it item")
+                it?.let {
+                    // Temporarily hide this line coz updating total count textview is not in this task
+//                    btn_summary.setCount(it)
+                    if (it != 0 && ll_summary_section.visibility == View.GONE) {
+                        showSummaryButton(true)
+                    } else if (it == 0 && ll_summary_section.visibility == View.VISIBLE) {
+                        showSummaryButton(false)
+                    }
+                }
             })
 
             error.observe(this@PartnerDetailsActivity, Observer {
@@ -202,8 +216,7 @@ class PartnerDetailsActivity : BaseActivity() {
 
     private fun updateVisibility(show: Boolean) {
         val visibility = if (show) View.VISIBLE else View.GONE
-        rl_summary_container.visibility = visibility
-        v_shadow.visibility = visibility
+        ll_summary_section.visibility = visibility
     }
 
 }

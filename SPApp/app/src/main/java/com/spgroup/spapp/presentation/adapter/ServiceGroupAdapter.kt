@@ -12,15 +12,16 @@ import com.spgroup.spapp.domain.model.ServiceItemCounter
 import com.spgroup.spapp.presentation.view.ServiceItemViewCheckBox
 import com.spgroup.spapp.presentation.view.ServiceItemViewCombo
 import com.spgroup.spapp.presentation.view.ServiceItemViewCounter
+import com.spgroup.spapp.util.doLogD
 import kotlinx.android.synthetic.main.layout_service.view.*
 
-class CategoryServiceAdapter(val mItemInteractedListener: OnItemInteractedListener): RecyclerView.Adapter<CategoryServiceAdapter.ServiceVH>() {
+class ServiceGroupAdapter(val mItemInteractedListener: OnItemInteractedListener): RecyclerView.Adapter<ServiceGroupAdapter.ServiceVH>() {
 
     ///////////////////////////////////////////////////////////////////////////
     // Property
     ///////////////////////////////////////////////////////////////////////////
 
-    val mData = mutableListOf<ServiceGroup>()
+    var mData = mutableListOf<ServiceGroup>()
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -43,7 +44,7 @@ class CategoryServiceAdapter(val mItemInteractedListener: OnItemInteractedListen
 
     fun submitData(data: List<ServiceGroup>) {
         mData.clear()
-        mData.addAll(data)
+        mData = data.toMutableList()
         notifyDataSetChanged()
     }
 
@@ -65,6 +66,8 @@ class CategoryServiceAdapter(val mItemInteractedListener: OnItemInteractedListen
         fun onServiceItemClick(servicePos: Int, itemPos: Int)
 
         fun onCountChanged(count: Int, servicePos: Int, itemPos: Int)
+
+        fun onCheckChanged(checked: Boolean, servicePos: Int, itemPos: Int)
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -79,6 +82,7 @@ class CategoryServiceAdapter(val mItemInteractedListener: OnItemInteractedListen
                 tv_service_description.setText(service.description)
 
                 if (service.expanded) {
+                    doLogD("Test", "expanded")
 
                     ll_item_container.removeAllViews()
                     val itemCount = service.listItem.size
@@ -92,7 +96,7 @@ class CategoryServiceAdapter(val mItemInteractedListener: OnItemInteractedListen
                             }
 
                             is ServiceItemCheckBox -> {
-                                ServiceItemViewCheckBox(itemView.context, item)
+                                ServiceItemViewCheckBox(itemView.context, item, servicePos, i, listener)
                             }
 
                             is ServiceItemCombo -> {

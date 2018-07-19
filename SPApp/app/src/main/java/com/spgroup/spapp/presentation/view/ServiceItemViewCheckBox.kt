@@ -3,8 +3,9 @@ package com.spgroup.spapp.presentation.view
 import android.content.Context
 import android.view.LayoutInflater
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.ServiceItemCheckBox
 import com.spgroup.spapp.domain.model.ServiceItem
+import com.spgroup.spapp.domain.model.ServiceItemCheckBox
+import com.spgroup.spapp.presentation.adapter.ServiceGroupAdapter
 import com.spgroup.spapp.util.extension.formatPriceWithUnit
 import kotlinx.android.synthetic.main.layout_service_item_check_box.view.*
 
@@ -15,13 +16,19 @@ class ServiceItemViewCheckBox: ServiceItemView {
     ///////////////////////////////////////////////////////////////////////////
 
     var serviceItem: ServiceItemCheckBox
+    var servicePos: Int
+    var itemPos: Int
+    var listener: ServiceGroupAdapter.OnItemInteractedListener
 
     ///////////////////////////////////////////////////////////////////////////
     // Constructor
     ///////////////////////////////////////////////////////////////////////////
 
-    constructor(context: Context, item: ServiceItem): super(context, item) {
+    constructor(context: Context, item: ServiceItem, servicePos: Int, itemPos: Int, listener: ServiceGroupAdapter.OnItemInteractedListener): super(context, item) {
         serviceItem = item as ServiceItemCheckBox
+        this.servicePos = servicePos
+        this.itemPos = itemPos
+        this.listener = listener
         init()
     }
 
@@ -44,6 +51,7 @@ class ServiceItemViewCheckBox: ServiceItemView {
 
     fun onCheckUpdated() {
         view_root.isSelected = serviceItem.selected
+        listener.onCheckChanged(serviceItem.selected, servicePos, itemPos)
     }
 
 }

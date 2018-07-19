@@ -6,11 +6,16 @@ import android.view.View
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItem
 import com.spgroup.spapp.domain.model.ServiceItemCounter
-import com.spgroup.spapp.presentation.adapter.CategoryServiceAdapter
+import com.spgroup.spapp.presentation.adapter.ServiceGroupAdapter
 import com.spgroup.spapp.util.extension.formatPriceWithUnit
 import kotlinx.android.synthetic.main.layout_service_item_counter.view.*
 
 class ServiceItemViewCounter: ServiceItemView {
+
+    companion object {
+        @JvmField val ACTION_PLUS = 1
+        @JvmField val ACTION_DELETE = 2
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     // Property
@@ -19,7 +24,7 @@ class ServiceItemViewCounter: ServiceItemView {
     var serviceItem: ServiceItemCounter
     var itemPosition: Int
     var servicePosition: Int
-    var listener: CategoryServiceAdapter.OnItemInteractedListener
+    var listener: ServiceGroupAdapter.OnItemInteractedListener
 
     ///////////////////////////////////////////////////////////////////////////
     // Constructor
@@ -30,7 +35,7 @@ class ServiceItemViewCounter: ServiceItemView {
             item: ServiceItem,
             servicePosition: Int,
             itemPosition: Int,
-            listener: CategoryServiceAdapter.OnItemInteractedListener
+            listener: ServiceGroupAdapter.OnItemInteractedListener
     ): super(context, item) {
 
         serviceItem = item as ServiceItemCounter
@@ -49,6 +54,8 @@ class ServiceItemViewCounter: ServiceItemView {
         LayoutInflater.from(context).inflate(R.layout.layout_service_item_counter, this, true)
         tv_name.setText(serviceItem.name)
         tv_price.setText(serviceItem.price.formatPriceWithUnit(serviceItem.unit))
+
+        onCountUpdate()
 
         fl_add_btn_container.setOnClickListener {
             serviceItem.count++

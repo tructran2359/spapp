@@ -1,28 +1,31 @@
 package com.spgroup.spapp.presentation.fragment
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.ServiceGroup
 import com.spgroup.spapp.domain.model.ServiceItemCheckBox
 import com.spgroup.spapp.domain.model.ServiceItemCombo
 import com.spgroup.spapp.domain.model.ServiceItemCounter
+import com.spgroup.spapp.domain.model.SupplierServiceCategory
 import com.spgroup.spapp.presentation.activity.CustomiseActivity
-import com.spgroup.spapp.presentation.adapter.CategoryServiceAdapter
+import com.spgroup.spapp.presentation.adapter.ServiceGroupAdapter
+import com.spgroup.spapp.presentation.viewmodel.SupplierDetailsViewModel
+import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_category.*
 
-class CategoryFragment: BaseFragment(), CategoryServiceAdapter.OnItemInteractedListener {
+class CategoryFragment: BaseFragment(), ServiceGroupAdapter.OnItemInteractedListener {
 
     companion object {
         @JvmField val KEY_CATEGORY = "CategoryFragment.KEY_CATEGORY"
 
-        fun newInstance(category: String): CategoryFragment {
+        fun newInstance(category: SupplierServiceCategory): CategoryFragment {
             val fragment = CategoryFragment()
             val bundle = Bundle()
-            bundle.putString(KEY_CATEGORY, category)
+            bundle.putSerializable(KEY_CATEGORY, category)
             fragment.arguments = bundle
             return fragment
         }
@@ -32,8 +35,9 @@ class CategoryFragment: BaseFragment(), CategoryServiceAdapter.OnItemInteractedL
     // Property
     ///////////////////////////////////////////////////////////////////////////
 
-    lateinit var mCategoryName: String
-    lateinit var mServiceAdapter: CategoryServiceAdapter
+    lateinit var mServiceAdapter: ServiceGroupAdapter
+    lateinit var mViewModel: SupplierDetailsViewModel
+    lateinit var mServiceCategory: SupplierServiceCategory
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -41,52 +45,30 @@ class CategoryFragment: BaseFragment(), CategoryServiceAdapter.OnItemInteractedL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mCategoryName = arguments?.getString(KEY_CATEGORY) ?: ""
+
+        arguments?.let {
+            mServiceCategory = it.getSerializable(KEY_CATEGORY) as SupplierServiceCategory
+        }
+
+        mServiceAdapter = ServiceGroupAdapter(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_category, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_category, container, false)
+
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val item1 = ServiceItemCounter(
-                "Paint",
-                10f,
-                " / item")
-
-        val item2 = ServiceItemCheckBox(
-                "Day Curtains",
-                10f,
-                " / piece",
-                "Also known as sheers, made of light coloured materials to allow light in from outside.",
-                false)
-
-        val item3 = ServiceItemCheckBox(
-                "Night Curtains",
-                9f,
-                " / kg",
-                "Heavier in weight and are of dark coloured materials. These are drawn at night for privacy.",
-                false
-        )
-
-        val item4 = ServiceItemCombo("3 Dishes Plus 1 Soup Meal Set",
-                165f,
-                " per month",
-                "Weekdays only. Island-wide delivery. Packed in microwavable containers only.",
-                false)
-
-        val data1 = ServiceGroup("GARMENTS",
-                "Includes free dismantling & installation. Measurement & evaluation will be done on-site, price estimation will not be included in this request.",
-                mutableListOf(item1, item2, item3, item4),
-                false)
-        val data2 = data1.copy(name = "GARMENTS 2")
-        val fakeData = mutableListOf(data1, data2)
+        val factory = ViewModelFactory.getInstance()
+        mViewModel = ViewModelProviders.of(activity!!, factory).get(SupplierDetailsViewModel::class.java)
 
         activity?.let {
-            mServiceAdapter = CategoryServiceAdapter(this@CategoryFragment)
-            mServiceAdapter.submitData(fakeData)
+
+            mServiceAdapter = ServiceGroupAdapter(this@CategoryFragment)
+            mServiceAdapter.submitData(mServiceCategory.services)
             recycler_view.layoutManager = LinearLayoutManager(it)
             recycler_view.adapter = mServiceAdapter
         }
@@ -112,9 +94,19 @@ class CategoryFragment: BaseFragment(), CategoryServiceAdapter.OnItemInteractedL
     }
 
     override fun onCountChanged(count: Int, servicePos: Int, itemPos: Int) {
+        val serviceItem = (mServiceCategory.getServiceItem(servicePos, itemPos) as ServiceItemCounter)
+        serviceItem.count = count
+        mViewModel.updateSelectedServiceCategories(serviceItem.count, mServiceCategory.id, servicePos, itemPos)
+    }
+
+    override fun onCheckChanged(checked: Boolean, servicePos: Int, itemPos: Int) {
+        val serviceItem = (mServiceCategory.getServiceItem(servicePos, itemPos) as ServiceItemCheckBox)
+        serviceItem.selected = checked
+        mViewModel.updateSelectedServiceCategories(serviceItem.getItemCount(), mServiceCategory.id, servicePos, itemPos)
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // Other
     ///////////////////////////////////////////////////////////////////////////
+
 }

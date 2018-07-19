@@ -8,4 +8,8 @@ data class ServiceGroup(
         var description: String,
         var listItem: MutableList<ServiceItem>,
         var expanded: Boolean = false
-)
+) {
+
+    fun clone() = ServiceGroup(name, description, listItem, expanded)
+
+}

@@ -19,7 +19,7 @@ class CategoryPagerAdapter(fragmentManager: FragmentManager): FragmentStatePager
     ///////////////////////////////////////////////////////////////////////////
 
     override fun getItem(position: Int): Fragment {
-        return CategoryFragment.newInstance(mData[position].title)
+        return CategoryFragment.newInstance(mData[position])
     }
 
     override fun getCount() = mData.size
