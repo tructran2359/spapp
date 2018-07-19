@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/common_vert_small"
+    >
+
+    <TextView
+        style="@style/textLink"
+        android:id="@+id/tv_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="3 Dishes Plus 1 Soup Meal Set"
+        />
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="@dimen/common_icon_size_small"
+        android:layout_height="@dimen/common_icon_size_small"
+        android:src="@drawable/link_out_color"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/common_spacing_x2"
+        />
+
+</LinearLayout>

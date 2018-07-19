@@ -17,23 +17,27 @@
     <dimen name="common_icon_padding">5dp</dimen>
 
     <dimen name="text_size_h1">28sp</dimen>
+    <dimen name="text_size_h2">23sp</dimen>
     <dimen name="text_size_h3">20sp</dimen>
     <dimen name="text_size_h4">18sp</dimen>
     <dimen name="text_size_h5">16sp</dimen>
     <dimen name="text_size_h6">14sp</dimen>
 
-    <dimen name="text_size_menu">18sp</dimen>
     <dimen name="text_size_caption">14sp</dimen>
-    <dimen name="text_size_paragraph">16sp</dimen>
-    <dimen name="text_size_button">18sp</dimen>
     <dimen name="text_size_counter">14sp</dimen>
+    <dimen name="text_size_paragraph">16sp</dimen>
+    <dimen name="text_size_text_link">16sp</dimen>
+    <dimen name="text_size_menu">18sp</dimen>
+    <dimen name="text_size_button">18sp</dimen>
 
     <dimen name="line_space_h1">6sp</dimen>
+    <dimen name="line_space_h2">7sp</dimen>
     <dimen name="line_space_h3">4sp</dimen>
     <dimen name="line_space_h4">3sp</dimen>
     <dimen name="line_space_h5">5sp</dimen>
     <dimen name="line_space_h6">6sp</dimen>
     <dimen name="line_space_paragraph">8sp</dimen>
+    <dimen name="line_space_text_link">8sp</dimen>
     <dimen name="line_space_caption">6sp</dimen>
 
     <dimen name="line_width">1dp</dimen>
@@ -76,6 +80,7 @@
     <dimen name="common_vert_xsmall">5dp</dimen>
 
     <dimen name="common_horz_large">30dp</dimen>
+    <dimen name="common_horz_medium">20dp</dimen>
     <dimen name="common_horz_large_for_icon">25dp</dimen>
 
     <dimen name="button_shadow_height">20dp</dimen>

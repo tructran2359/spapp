@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/common_horz_large"
+    android:paddingRight="@dimen/common_horz_large"
+    android:paddingTop="@dimen/common_vert_medium"
+    android:paddingBottom="@dimen/common_vert_medium"
+    >
+
+    <TextView
+        style="@style/textH4"
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Menu for 2 Jul - 6 Jul"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_menu_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        />
+
+</LinearLayout>
