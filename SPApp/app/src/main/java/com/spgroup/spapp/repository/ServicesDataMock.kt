@@ -63,13 +63,20 @@ class ServicesDataMock : ServicesRepository {
                     listServiceGroup.add(serviceGroup)
                 }
 
-                val supplierServiceCategory = SupplierServiceCategory(cateId, listCategoryName[cateId - 1], listServiceGroup)
+                val supplierServiceCategory = SupplierServiceCategory(
+                        id = cateId,
+                        title = listCategoryName[cateId - 1],
+                        services = listServiceGroup)
                 listServiceCategory.add(supplierServiceCategory)
 
             }
 
             // Create This week's menu
-            val thisWeekMenuCate = SupplierServiceCategory(6, "This week's menu", mutableListOf())
+            val thisWeekMenuCate = SupplierServiceCategory(
+                    6,
+                    SupplierServiceCategory.TYPE_WEEKLY_MENU,
+                    "This week's menu",
+                    mutableListOf())
             listServiceCategory.add(thisWeekMenuCate)
 
             // Return:

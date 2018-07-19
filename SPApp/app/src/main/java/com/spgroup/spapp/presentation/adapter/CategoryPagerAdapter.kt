@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.spgroup.spapp.domain.model.SupplierServiceCategory
 import com.spgroup.spapp.presentation.fragment.CategoryFragment
+import com.spgroup.spapp.presentation.fragment.WeeklyMenuFragment
 
 class CategoryPagerAdapter(fragmentManager: FragmentManager): FragmentStatePagerAdapter(fragmentManager) {
 
@@ -19,7 +20,15 @@ class CategoryPagerAdapter(fragmentManager: FragmentManager): FragmentStatePager
     ///////////////////////////////////////////////////////////////////////////
 
     override fun getItem(position: Int): Fragment {
-        return CategoryFragment.newInstance(mData[position])
+        val category = mData[position]
+
+        return when(category.type) {
+            SupplierServiceCategory.TYPE_WEEKLY_MENU -> WeeklyMenuFragment()
+
+            SupplierServiceCategory.TYPE_LAUNDRY -> CategoryFragment.newInstance(category)
+
+            else -> Fragment()
+        }
     }
 
     override fun getCount() = mData.size

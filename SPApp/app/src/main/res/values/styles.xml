@@ -21,6 +21,13 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="textH2">
+        <item name="android:textSize">@dimen/text_size_h2</item>
+        <item name="fontPath">@string/font_book</item>
+        <item name="android:lineSpacingExtra">@dimen/line_space_h2</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="textH1.white">
         <item name="android:textColor">@color/color_ui06</item>
     </style>
@@ -69,6 +76,13 @@
 
     <style name="textParagraph.grey">
         <item name="android:textColor">@color/color_ui02</item>
+    </style>
+
+    <style name="textLink">
+        <item name="android:textSize">@dimen/text_size_text_link</item>
+        <item name="fontPath">@string/font_regular</item>
+        <item name="android:lineSpacingExtra">@dimen/text_size_text_link</item>
+        <item name="android:textColor">@color/color_ui01</item>
     </style>
 
     <style name="textServiceItemFrom">
