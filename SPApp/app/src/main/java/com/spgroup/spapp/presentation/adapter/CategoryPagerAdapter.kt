@@ -3,6 +3,7 @@ package com.spgroup.spapp.presentation.adapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
+import com.spgroup.spapp.domain.model.SupplierServiceCategory
 import com.spgroup.spapp.presentation.fragment.CategoryFragment
 
 class CategoryPagerAdapter(fragmentManager: FragmentManager): FragmentStatePagerAdapter(fragmentManager) {
@@ -11,27 +12,29 @@ class CategoryPagerAdapter(fragmentManager: FragmentManager): FragmentStatePager
     // Property
     ///////////////////////////////////////////////////////////////////////////
 
-    val mData = mutableListOf<String>()
+    val mData = mutableListOf<SupplierServiceCategory>()
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
     ///////////////////////////////////////////////////////////////////////////
 
     override fun getItem(position: Int): Fragment {
-        return CategoryFragment.newInstance(mData[position])
+        return CategoryFragment.newInstance(mData[position].title)
     }
 
     override fun getCount() = mData.size
 
-    override fun getPageTitle(position: Int) = mData[position]
+    override fun getPageTitle(position: Int) = mData[position].title
 
     ///////////////////////////////////////////////////////////////////////////
     // Other
     ///////////////////////////////////////////////////////////////////////////
 
-    fun setData(data: List<String>) {
+    fun setData(data: List<SupplierServiceCategory>?) {
         mData.clear()
-        mData.addAll(data)
+        data?.let {
+            mData.addAll(it)
+        }
         notifyDataSetChanged()
     }
 }

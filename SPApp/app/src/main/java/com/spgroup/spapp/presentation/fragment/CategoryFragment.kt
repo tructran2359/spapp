@@ -10,10 +10,11 @@ import com.spgroup.spapp.domain.model.ServiceGroup
 import com.spgroup.spapp.domain.model.ServiceItemCheckBox
 import com.spgroup.spapp.domain.model.ServiceItemCombo
 import com.spgroup.spapp.domain.model.ServiceItemCounter
+import com.spgroup.spapp.presentation.activity.CustomiseActivity
 import com.spgroup.spapp.presentation.adapter.CategoryServiceAdapter
 import kotlinx.android.synthetic.main.fragment_category.*
 
-class CategoryFragment: BaseFragment() {
+class CategoryFragment: BaseFragment(), CategoryServiceAdapter.OnItemInteractedListener {
 
     companion object {
         @JvmField val KEY_CATEGORY = "CategoryFragment.KEY_CATEGORY"
@@ -84,12 +85,33 @@ class CategoryFragment: BaseFragment() {
         val fakeData = mutableListOf(data1, data2)
 
         activity?.let {
-            mServiceAdapter = CategoryServiceAdapter(it)
+            mServiceAdapter = CategoryServiceAdapter(this@CategoryFragment)
             mServiceAdapter.submitData(fakeData)
             recycler_view.layoutManager = LinearLayoutManager(it)
             recycler_view.adapter = mServiceAdapter
         }
 
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // OnItemInteractedListener
+    ///////////////////////////////////////////////////////////////////////////
+    override fun onCollapseClick(position: Int) {
+        mServiceAdapter.collapseItem(position)
+    }
+
+    override fun onServiceItemClick(servicePos: Int, itemPos: Int) {
+        val serviceItem = mServiceAdapter.getItem(servicePos, itemPos)
+            activity?.let {
+                if (serviceItem is ServiceItemCombo) {
+                    val intent = CustomiseActivity.getLaunchIntent(it, serviceItem)
+                    it.startActivity(intent)
+                }
+            }
+
+    }
+
+    override fun onCountChanged(count: Int, servicePos: Int, itemPos: Int) {
     }
 
     ///////////////////////////////////////////////////////////////////////////

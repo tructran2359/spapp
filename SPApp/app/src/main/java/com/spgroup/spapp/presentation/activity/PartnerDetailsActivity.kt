@@ -16,12 +16,11 @@ import com.spgroup.spapp.presentation.adapter.PartnerImagesAdapter
 import com.spgroup.spapp.presentation.viewmodel.SupplierDetailsViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.doLogD
-import com.spgroup.spapp.util.extension.setUpMenuActive
-import com.spgroup.spapp.util.extension.setUpMenuInactive
-
+import com.spgroup.spapp.util.doLogE
 import com.spgroup.spapp.util.extension.loadAnimation
 import com.spgroup.spapp.util.extension.setOnGlobalLayoutListener
-import com.spgroup.spapp.util.doLogE
+import com.spgroup.spapp.util.extension.setUpMenuActive
+import com.spgroup.spapp.util.extension.setUpMenuInactive
 import kotlinx.android.synthetic.main.activity_partner_details.*
 
 class PartnerDetailsActivity : BaseActivity() {
@@ -56,14 +55,20 @@ class PartnerDetailsActivity : BaseActivity() {
 
         initAnimations()
 
+        setUpViews()
+
         // This is demo for using ViewModel
         val factory = ViewModelFactory.getInstance()
         val viewmodel = ViewModelProviders.of(this, factory).get(SupplierDetailsViewModel::class.java)
         with(viewmodel) {
+
             serviceCategories.observe(this@PartnerDetailsActivity, Observer {
                 // do something with serviceCategories
                 doLogD(msg = "Size: ${it?.size}")
+                mCategoryAdapter.setData(it)
+                setUpTabLayout()
             })
+
             error.observe(this@PartnerDetailsActivity, Observer {
                 // do something with error
                 doLogE(msg = "Error: ${it?.message}")
@@ -71,9 +76,6 @@ class PartnerDetailsActivity : BaseActivity() {
 
             loadServices(-1)
         }
-
-
-        setUpViews()
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -120,31 +122,8 @@ class PartnerDetailsActivity : BaseActivity() {
     private fun setUpFormSection() {
         mCategoryAdapter = CategoryPagerAdapter(supportFragmentManager)
 
-        // Fake data:
-        val data = listOf(
-                "Dry Clean",
-                "Wash & Press",
-                "Press Only",
-                "Wash & Fold",
-                "Curtains & Carpets")
-        mCategoryAdapter.setData(data)
-
         pager_forms.offscreenPageLimit = 3
         pager_forms.adapter = mCategoryAdapter
-
-        tab_layout.setupWithViewPager(pager_forms)
-        for (i in 0 until tab_layout.tabCount) {
-            val customView = LayoutInflater.from(this).inflate(R.layout.view_custom_service_cate_tab, null, false)
-            val tvContent = customView.findViewById<TextView>(R.id.tv_content)
-            tvContent.setText(mCategoryAdapter.getPageTitle(i))
-            if (i == 0) {
-                tvContent.setUpMenuActive()
-            } else {
-                tvContent.setUpMenuInactive()
-            }
-            val tab = tab_layout.getTabAt(i)
-            tab?.setCustomView(customView)
-        }
 
         tab_layout.addOnTabSelectedListener(object : TabLayout.BaseOnTabSelectedListener<TabLayout.Tab> {
             override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -165,6 +144,22 @@ class PartnerDetailsActivity : BaseActivity() {
 
         })
 
+    }
+
+    private fun setUpTabLayout() {
+        tab_layout.setupWithViewPager(pager_forms)
+        for (i in 0 until tab_layout.tabCount) {
+            val customView = LayoutInflater.from(this).inflate(R.layout.view_custom_service_cate_tab, null, false)
+            val tvContent = customView.findViewById<TextView>(R.id.tv_content)
+            tvContent.setText(mCategoryAdapter.getPageTitle(i))
+            if (i == 0) {
+                tvContent.setUpMenuActive()
+            } else {
+                tvContent.setUpMenuInactive()
+            }
+            val tab = tab_layout.getTabAt(i)
+            tab?.setCustomView(customView)
+        }
     }
 
     private fun setUpHeroSection() {
@@ -192,6 +187,8 @@ class PartnerDetailsActivity : BaseActivity() {
     }
 
     private fun setUpSummarySection() {
+        ll_summary_section.visibility = View.GONE
+
         btn_summary.setOnClickListener {
             val intent = OrderSummaryActivity.getLaunchIntent(this)
             startActivity(intent)
