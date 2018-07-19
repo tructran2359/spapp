@@ -1,5 +1,7 @@
 package com.spgroup.spapp.presentation.activity
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,12 +11,17 @@ import android.view.View
 import android.view.animation.Animation
 import android.widget.TextView
 import com.spgroup.spapp.R
-import com.spgroup.spapp.extension.loadAnimation
-import com.spgroup.spapp.extension.setOnGlobalLayoutListener
-import com.spgroup.spapp.extension.setUpMenuActive
-import com.spgroup.spapp.extension.setUpMenuInactive
 import com.spgroup.spapp.presentation.adapter.CategoryPagerAdapter
 import com.spgroup.spapp.presentation.adapter.PartnerImagesAdapter
+import com.spgroup.spapp.presentation.viewmodel.SupplierDetailsViewModel
+import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.doLogD
+import com.spgroup.spapp.util.extension.setUpMenuActive
+import com.spgroup.spapp.util.extension.setUpMenuInactive
+
+import com.spgroup.spapp.util.extension.loadAnimation
+import com.spgroup.spapp.util.extension.setOnGlobalLayoutListener
+import com.spgroup.spapp.util.doLogE
 import kotlinx.android.synthetic.main.activity_partner_details.*
 
 class PartnerDetailsActivity : BaseActivity() {
@@ -48,6 +55,23 @@ class PartnerDetailsActivity : BaseActivity() {
         setContentView(R.layout.activity_partner_details)
 
         initAnimations()
+
+        // This is demo for using ViewModel
+        val factory = ViewModelFactory.getInstance()
+        val viewmodel = ViewModelProviders.of(this, factory).get(SupplierDetailsViewModel::class.java)
+        with(viewmodel) {
+            serviceCategories.observe(this@PartnerDetailsActivity, Observer {
+                // do something with serviceCategories
+                doLogD(msg = "Size: ${it?.size}")
+            })
+            error.observe(this@PartnerDetailsActivity, Observer {
+                // do something with error
+                doLogE(msg = "Error: ${it?.message}")
+            })
+
+            loadServices(-1)
+        }
+
 
         setUpViews()
     }
@@ -122,7 +146,7 @@ class PartnerDetailsActivity : BaseActivity() {
             tab?.setCustomView(customView)
         }
 
-        tab_layout.addOnTabSelectedListener(object :  TabLayout.BaseOnTabSelectedListener<TabLayout.Tab> {
+        tab_layout.addOnTabSelectedListener(object : TabLayout.BaseOnTabSelectedListener<TabLayout.Tab> {
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 //Do nothing
             }

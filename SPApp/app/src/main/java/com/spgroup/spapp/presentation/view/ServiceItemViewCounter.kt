@@ -6,7 +6,7 @@ import android.view.View
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItemCounter
 import com.spgroup.spapp.domain.model.ServiceItem
-import com.spgroup.spapp.extension.formatPriceWithUnit
+import com.spgroup.spapp.util.extension.formatPriceWithUnit
 import kotlinx.android.synthetic.main.layout_service_item_counter.view.*
 
 class ServiceItemViewCounter: ServiceItemView {

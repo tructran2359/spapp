@@ -5,9 +5,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import com.spgroup.spapp.R
-import com.spgroup.spapp.extension.formatEstPrice
-import com.spgroup.spapp.extension.formatPrice
-import com.spgroup.spapp.extension.getColor
+import com.spgroup.spapp.util.extension.formatEstPrice
+import com.spgroup.spapp.util.extension.formatPrice
+import com.spgroup.spapp.util.extension.getColor
 import kotlinx.android.synthetic.main.layout_summary_button.view.*
 
 class SummaryButton: RelativeLayout {

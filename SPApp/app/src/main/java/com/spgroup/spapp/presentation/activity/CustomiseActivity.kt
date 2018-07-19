@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItem
 import com.spgroup.spapp.domain.model.ServiceItemCombo
-import com.spgroup.spapp.extension.toast
+import com.spgroup.spapp.util.extension.toast
 import com.spgroup.spapp.util.ConstUtils
 import kotlinx.android.synthetic.main.activity_customise.*
 
