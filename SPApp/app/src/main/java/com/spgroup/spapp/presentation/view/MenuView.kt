@@ -34,7 +34,7 @@ class MenuView: LinearLayout {
     ///////////////////////////////////////////////////////////////////////////
 
     fun addMenu(menuName: String) {
-        val view = DrawableTextView(context)
+        val view = MenuTextView(context)
         view.setText(menuName)
         ll_menu_container.addView(view)
     }
