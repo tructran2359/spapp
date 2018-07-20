@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:textSize="@dimen/text_size_menu"
+        android:layout_centerInParent="true"
         fontPath="@string/font_medium"
         />
 
