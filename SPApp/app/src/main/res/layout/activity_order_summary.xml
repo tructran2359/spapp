@@ -184,11 +184,13 @@
                 <EditText
                     android:id="@+id/et_notes"
                     style="@style/textParagraph.grey.orderSumInput"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/common_text_area_height"
                     android:gravity="top|left"
                     android:hint="@string/summary_notes_hint"
-                    android:minLines="5"
                     android:textColorHint="@color/text_hint"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:lines="10"
                     />
 
                 <LinearLayout
