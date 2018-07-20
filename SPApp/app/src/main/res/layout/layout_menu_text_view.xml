@@ -20,9 +20,9 @@
 
     <ImageView
         android:id="@+id/iv_icon"
-        android:layout_width="@dimen/common_icon_size_small"
-        android:layout_height="@dimen/common_icon_size_small"
-        android:src="@drawable/link_out_color"
+        android:layout_width="@dimen/common_icon_size"
+        android:layout_height="@dimen/common_icon_size"
+        android:src="@drawable/pdf"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/common_spacing_x2"
         />

@@ -5,9 +5,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.spgroup.spapp.R
-import kotlinx.android.synthetic.main.layout_drawable_text_view.view.*
+import kotlinx.android.synthetic.main.layout_menu_text_view.view.*
 
-class DrawableTextView: LinearLayout {
+class MenuTextView: LinearLayout {
 
     ///////////////////////////////////////////////////////////////////////////
     // Constructor
@@ -26,7 +26,7 @@ class DrawableTextView: LinearLayout {
     }
 
     private fun initViews(context: Context) {
-        LayoutInflater.from(context).inflate(R.layout.layout_drawable_text_view, this, true)
+        LayoutInflater.from(context).inflate(R.layout.layout_menu_text_view, this, true)
     }
 
     ///////////////////////////////////////////////////////////////////////////
