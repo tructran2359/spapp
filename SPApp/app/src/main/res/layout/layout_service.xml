@@ -70,6 +70,11 @@
     </LinearLayout>
 
     <View
+        style="@style/lineDivider"
+        android:layout_above="@+id/v_devider"
+        />
+
+    <View
         android:id="@+id/v_devider"
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_spacing_x2"
