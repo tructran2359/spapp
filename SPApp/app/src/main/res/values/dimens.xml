@@ -50,7 +50,7 @@
 
     <!--Partner Details Screen-->
     <dimen name="partner_detail_summary_section_height">70dp</dimen>
-    <dimen name="indicator_size">10dp</dimen>
+    <dimen name="indicator_size">8dp</dimen>
     <dimen name="service_name_margin_left">32dp</dimen>
     <dimen name="service_item_horz_spacing">16dp</dimen>
     <dimen name="service_item_vert_spacing">12dp</dimen>
