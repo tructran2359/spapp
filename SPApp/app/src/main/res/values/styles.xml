@@ -94,7 +94,7 @@
         <item name="fontPath">@string/font_regular</item>
     </style>
 
-    <style name="textServiceItemPrice">
+    <style name="textH6.textServiceItemPrice">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/black</item>
