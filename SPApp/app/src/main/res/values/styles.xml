@@ -81,7 +81,7 @@
     <style name="textLink">
         <item name="android:textSize">@dimen/text_size_text_link</item>
         <item name="fontPath">@string/font_regular</item>
-        <item name="android:lineSpacingExtra">@dimen/text_size_text_link</item>
+        <item name="android:lineSpacingExtra">@dimen/line_space_text_link</item>
         <item name="android:textColor">@color/color_ui01</item>
     </style>
 

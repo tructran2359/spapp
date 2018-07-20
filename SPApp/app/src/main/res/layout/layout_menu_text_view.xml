@@ -15,16 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="3 Dishes Plus 1 Soup Meal Set"
-        />
-
-    <ImageView
-        android:id="@+id/iv_icon"
-        android:layout_width="@dimen/common_icon_size"
-        android:layout_height="@dimen/common_icon_size"
-        android:src="@drawable/pdf"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/common_spacing_x2"
+        android:text="3 Dishes Plus 1 Soup Meal Set\nhello"
         />
 
 </LinearLayout>

@@ -28,9 +28,13 @@ fun TextView.setUpMenuInactive() {
 
 fun View.getColor(colorId: Int) = ContextCompat.getColor(context, colorId)
 
+fun View.getDrawable(drawableId: Int) = ContextCompat.getDrawable(context, drawableId)
+
 fun Context.getColor(colorId: Int) = ContextCompat.getColor(this, colorId)
 
 fun Context.getDimensionPixelSize(resId: Int) = this.resources.getDimensionPixelSize(resId)
+
+fun View.getDimensionPixelSize(resId: Int) = context.getDimensionPixelSize(resId)
 
 fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
