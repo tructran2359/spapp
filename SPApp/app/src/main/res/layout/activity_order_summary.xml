@@ -188,7 +188,7 @@
                     android:gravity="top|left"
                     android:hint="@string/summary_notes_hint"
                     android:minLines="5"
-                    android:textColorHint="@color/color_ui04"
+                    android:textColorHint="@color/text_hint"
                     />
 
                 <LinearLayout

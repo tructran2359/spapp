@@ -160,7 +160,7 @@
                 android:gravity="top|left"
                 android:padding="@dimen/common_vert_small"
                 android:hint="@string/service_customise_hint"
-                android:textColorHint="@color/color_ui02"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginBottom="@dimen/common_vert_xxlarge"
                 />
 
