@@ -163,6 +163,9 @@
                 android:hint="@string/service_customise_hint"
                 android:textColorHint="@color/text_hint"
                 android:layout_marginBottom="@dimen/common_vert_xxlarge"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:lines="10"
                 />
 
         </LinearLayout>
