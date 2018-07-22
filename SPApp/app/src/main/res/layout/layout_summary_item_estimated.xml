@@ -30,20 +30,13 @@
             android:layout_marginLeft="@dimen/common_spacing_x4"
             android:layout_centerVertical="true"
             
-            android:text="Blouse"
-            />
-        
-        <com.spgroup.spapp.presentation.view.CounterView
-            android:id="@+id/counter_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
+            android:text="Day Curtains Cleaning"
             />
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/tv_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_rec_rounded_grey"
@@ -55,27 +48,9 @@
         android:paddingRight="@dimen/common_spacing_x3"
         android:paddingTop="@dimen/common_spacing_x2"
         android:paddingBottom="@dimen/common_spacing_x2"
-        >
 
-        <TextView
-            style="@style/textCaption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/est_price"
-            />
+        android:text="Price estimate excludes curtains &amp; carpets"
+        />
 
-        <TextView
-            style="@style/textH6"
-            android:id="@+id/tv_est_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-
-            android:text="S$0.001"
-            />
-
-    </RelativeLayout>
 
 </RelativeLayout>

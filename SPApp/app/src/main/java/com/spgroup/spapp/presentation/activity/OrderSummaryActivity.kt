@@ -35,6 +35,10 @@ class OrderSummaryActivity : BaseActivity() {
 
         action_bar.setTitle(R.string.summary)
 
+        summary_view_1.initData(1, 10, 1)
+        summary_view_2.initData(5, 10, 5)
+        summary_view_3.initData(1, 10, 1)
+
         btn_summary.isEnabled = true
         btn_summary.setText(getString(R.string.submit_request))
         btn_summary.setCount(1)

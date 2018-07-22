@@ -50,23 +50,59 @@
 
             <!--Dummy UI start-->
 
-            <include layout="@layout/layout_summary_header"/>
+            <TextView
+                style="@style/textH4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_horz_large"
+
+                android:text="Dry Cleaning"
+                />
 
             <com.spgroup.spapp.presentation.view.SummaryItemView
+                android:id="@+id/summary_view_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/common_vert_large"/>
+                android:layout_marginBottom="@dimen/common_vert_large"
+                />
 
-            <include layout="@layout/layout_summary_header"/>
+            <TextView
+                style="@style/textH4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_horz_large"
+
+                android:text="Wash &amp; Fold"
+                />
 
             <com.spgroup.spapp.presentation.view.SummaryItemView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <com.spgroup.spapp.presentation.view.SummaryItemView
+                android:id="@+id/summary_view_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/common_vert_large"/>
+                />
+
+            <com.spgroup.spapp.presentation.view.SummaryItemView
+                android:id="@+id/summary_view_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_vert_medium"
+                android:layout_marginBottom="@dimen/common_vert_large"
+                />
+
+            <TextView
+                style="@style/textH4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/common_horz_large"
+
+                android:text="Curtains &amp; Carpets"
+                />
+
+            <com.spgroup.spapp.presentation.view.SummaryItemViewEstimated
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/common_vert_large"
+                />
 
             <!--Dummy UI end-->
 
@@ -176,10 +212,29 @@
 
                 <!--Notes-->
 
-                <TextView
-                    style="@style/textH4.orderSumLabel"
-                    android:text="@string/notes"
-                    />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        style="@style/textH4.orderSumLabel"
+                        android:id="@+id/tv_notes"
+                        android:text="@string/notes"
+                        />
+
+                    <TextView
+                        style="@style/textCaption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/optional_with_symbol"
+                        android:layout_toRightOf="@+id/tv_notes"
+                        android:layout_alignBaseline="@id/tv_notes"
+                        android:layout_marginLeft="@dimen/common_spacing"
+                        />
+
+                </RelativeLayout>
 
                 <EditText
                     android:id="@+id/et_notes"
