@@ -33,6 +33,10 @@ class SummaryItemView: RelativeLayout {
         LayoutInflater.from(context).inflate(R.layout.layout_summary_item, this, true)
     }
 
+    fun setName(name: String) {
+        tv_name.setText(name)
+    }
+
     fun setLimit(min: Int, max: Int) {
         counter_view.setLimit(min, max)
     }
