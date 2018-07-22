@@ -83,13 +83,12 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/action_bar_height"
-            android:layout_marginLeft="@dimen/common_spacing_x2"
-            android:layout_marginRight="@dimen/common_spacing_x2"
             custom:tabMode="scrollable"
             custom:tabIndicatorColor="@color/color_ui01"
             custom:tabIndicatorHeight="@dimen/common_spacing"
             custom:tabPaddingStart="@dimen/common_horz_large"
             custom:tabPaddingEnd="@dimen/common_horz_large"
+            custom:tabIndicator="@drawable/tab_indicator"
             />
 
         <android.support.v4.view.ViewPager
