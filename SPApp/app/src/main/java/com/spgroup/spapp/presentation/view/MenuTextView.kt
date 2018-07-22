@@ -47,7 +47,7 @@ class MenuTextView: LinearLayout {
         drawable?.let {
             it.setBounds(0, 0, iconSizeWidth, iconSizeHeight)
 
-            val imageSpan = ImageSpan(it, ImageSpan.ALIGN_BASELINE)
+            val imageSpan = CenterImageSpan(it)
             val length = spannable.length
             spannable.setSpan(imageSpan, length - 1, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
