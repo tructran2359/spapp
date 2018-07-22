@@ -36,7 +36,7 @@
             android:textColor="@color/color_alert"
             android:layout_marginRight="@dimen/common_horz_large"
 
-            android:text="-5.9"
+            android:text="-5.90"
             />
 
     </RelativeLayout>
@@ -67,7 +67,6 @@
             android:layout_marginRight="@dimen/common_horz_large"
             android:layout_alignParentRight="true"
             android:includeFontPadding="false"
-            android:textColor="@color/black"
 
             android:text="S$185.00"
             />
