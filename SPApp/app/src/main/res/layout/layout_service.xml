@@ -64,7 +64,7 @@
             android:orientation="vertical"
             android:layout_marginLeft="@dimen/service_item_horz_spacing"
             android:layout_marginRight="@dimen/service_item_horz_spacing"
-            android:layout_marginBottom="@dimen/common_spacing_x2"
+            android:layout_marginBottom="@dimen/common_vert_large"
             />
 
     </LinearLayout>
