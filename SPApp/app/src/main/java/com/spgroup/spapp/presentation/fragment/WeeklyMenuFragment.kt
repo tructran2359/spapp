@@ -21,7 +21,7 @@ class WeeklyMenuFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        menu_view_1.addMenu("3 Dishes Plus 1 Soup Meal Set")
+        menu_view_1.addMenu("3 Dishes Plus 1 Soup Meal Set\nSpecial Meal Set")
         menu_view_1.addMenu("4 Dishes")
 
         menu_view_2.addMenu("3 Dishes Plus 1 Soup Meal Set")

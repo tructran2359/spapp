@@ -12,29 +12,25 @@
     >
 
     <TextView
+        style="@style/textH4"
         android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_h5"
         android:layout_marginTop="@dimen/service_item_vert_spacing"
         android:layout_toLeftOf="@id/fl_check_container"
-        fontPath="@string/font_book"
 
         android:text="Day Curtains"
         />
 
     <TextView
+        style="@style/textParagraph.grey"
         android:id="@+id/tv_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_name"
         android:layout_marginTop="@dimen/service_item_vert_spacing"
         android:layout_toLeftOf="@id/fl_check_container"
-        android:textSize="@dimen/text_size_paragraph"
-        android:textColor="@color/color_ui02"
-        fontPath="@string/font_regular"
 
         android:text="Also known as sheers, made of light coloured materials to allow light in from outside."
         />
@@ -48,7 +44,7 @@
         />
 
     <TextView
-        style="@style/textServiceItemPrice"
+        style="@style/textH6.textServiceItemPrice"
         android:id="@+id/tv_price"
         android:layout_alignBaseline="@+id/tv_from"
         android:layout_toRightOf="@id/tv_from"
@@ -72,8 +68,8 @@
 
         <ImageView
             android:id="@+id/iv_arrow"
-            android:layout_width="@dimen/common_icon_size"
-            android:layout_height="@dimen/common_icon_size"
+            android:layout_width="@dimen/common_icon_size_small"
+            android:layout_height="@dimen/common_icon_size_small"
             android:src="@drawable/arrow_right_blue"
             />
     </FrameLayout>

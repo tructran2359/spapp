@@ -102,11 +102,12 @@
                     style="@style/textH5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:text="@string/estimated_price"
                     />
 
                 <TextView
-                    style="@style/textH5"
+                    style="@style/textH3"
                     android:id="@+id/tv_est_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -152,16 +153,19 @@
                 style="@style/textParagraph"
                 android:id="@+id/et_instruction"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/common_text_areal_height"
+                android:layout_height="@dimen/common_text_area_height"
                 android:background="@drawable/bg_rec_rounded_white_solid_grey_stroke"
                 android:layout_marginLeft="@dimen/common_horz_large"
                 android:layout_marginRight="@dimen/common_horz_large"
-                android:layout_marginTop="@dimen/common_vert_small"
+                android:layout_marginTop="@dimen/common_vert_medium_sub"
                 android:gravity="top|left"
                 android:padding="@dimen/common_vert_small"
                 android:hint="@string/service_customise_hint"
-                android:textColorHint="@color/color_ui02"
+                android:textColorHint="@color/text_hint"
                 android:layout_marginBottom="@dimen/common_vert_xxlarge"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:lines="10"
                 />
 
         </LinearLayout>

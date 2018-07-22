@@ -5,9 +5,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import com.spgroup.spapp.R
-import kotlinx.android.synthetic.main.layout_summary_item.view.*
+import kotlinx.android.synthetic.main.layout_summary_item_estimated.view.*
 
-class SummaryItemView: RelativeLayout {
+class SummaryItemViewEstimated: RelativeLayout {
 
     ///////////////////////////////////////////////////////////////////////////
     // Constructor
@@ -30,26 +30,11 @@ class SummaryItemView: RelativeLayout {
     ///////////////////////////////////////////////////////////////////////////
 
     private fun initViews(context: Context) {
-        LayoutInflater.from(context).inflate(R.layout.layout_summary_item, this, true)
+        LayoutInflater.from(context).inflate(R.layout.layout_summary_item_estimated, this, true)
     }
 
-    fun setName(name: String) {
-        tv_name.setText(name)
-    }
-
-    fun setLimit(min: Int, max: Int) {
-        counter_view.setLimit(min, max)
-    }
-
-    fun setCount(count: Int) {
-        counter_view.setCount(count)
-    }
-
-    fun initData(min: Int, max: Int, count: Int) {
-        with(counter_view) {
-            setLimit(min, max)
-            setCount(count)
-        }
+    fun setText(text: String) {
+        tv_text.setText(text)
     }
 
 }

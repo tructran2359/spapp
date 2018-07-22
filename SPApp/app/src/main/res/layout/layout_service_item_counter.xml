@@ -45,7 +45,7 @@
         />
 
     <TextView
-        style="@style/textServiceItemPrice"
+        style="@style/textH6.textServiceItemPrice"
         android:id="@+id/tv_price"
         android:layout_toRightOf="@+id/tv_from"
         android:layout_alignBaseline="@+id/tv_from"

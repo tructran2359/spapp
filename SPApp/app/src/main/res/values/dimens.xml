@@ -85,6 +85,9 @@
 
     <dimen name="button_shadow_height">20dp</dimen>
     <dimen name="button_shadow_height_negative">-20dp</dimen>
-    <dimen name="common_text_areal_height">140dp</dimen>
+    <dimen name="common_text_area_height">140dp</dimen>
+
+    <dimen name="pdf_width">30dp</dimen>
+    <dimen name="pdf_height">17dp</dimen>
 
 </resources>

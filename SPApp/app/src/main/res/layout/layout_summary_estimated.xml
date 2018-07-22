@@ -1,68 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_ui05"
+    android:orientation="vertical"
     >
 
     <View style="@style/lineDivider"/>
-    
-    <TextView
-        style="@style/textH6"
-        android:id="@+id/tv_discount"
-        android:layout_width="wrap_content"
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_marginTop="@dimen/common_vert_medium"
-        android:layout_marginLeft="@dimen/common_horz_large"
+        >
+
+        <TextView
+            style="@style/textH6"
+            android:id="@+id/tv_discount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_horz_large"
 
 
-        android:text="Discount (10%)"
-        />
+            android:text="Discount (10%)"
+            />
 
-    <TextView
-        style="@style/textH6"
-        android:id="@+id/tv_discount_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:textColor="@color/color_alert"
-        android:layout_marginTop="@dimen/common_vert_medium"
-        android:layout_marginRight="@dimen/common_horz_large"
+        <TextView
+            style="@style/textH6"
+            android:id="@+id/tv_discount_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/color_alert"
+            android:layout_marginRight="@dimen/common_horz_large"
 
-        android:text="-5.9"
-        />
+            android:text="-5.90"
+            />
 
-    <TextView
-        style="@style/textH3"
-        android:id="@+id/tv_total_label"
-        android:layout_width="wrap_content"
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_vert_medium_sub"
-        android:layout_marginLeft="@dimen/common_horz_large"
-        android:textColor="@color/black"
-        android:text="@string/est_total"
-        android:layout_below="@id/tv_discount"
-        />
+        >
 
-    <TextView
-        style="@style/textH3"
-        android:id="@+id/tv_total_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_vert_medium_sub"
-        android:layout_marginRight="@dimen/common_horz_large"
-        android:layout_below="@id/tv_discount"
-        android:layout_alignParentRight="true"
-        android:textColor="@color/black"
+        <TextView
+            style="@style/textH5"
+            android:id="@+id/tv_total_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_horz_large"
+            android:layout_centerVertical="true"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            android:text="@string/estimated_total_price"
+            />
 
-        android:text="S$185.00"
-        />
+        <TextView
+            style="@style/textH3"
+            android:id="@+id/tv_total_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/common_horz_large"
+            android:layout_alignParentRight="true"
+            android:includeFontPadding="false"
+
+            android:text="S$185.00"
+            />
+
+    </RelativeLayout>
+
+
 
     <View
         style="@style/lineDivider"
-        android:layout_below="@+id/tv_total_value"
         android:layout_marginTop="@dimen/common_vert_medium"
         />
 
-</RelativeLayout>
+</LinearLayout>

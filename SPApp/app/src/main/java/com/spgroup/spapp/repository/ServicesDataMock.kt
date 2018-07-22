@@ -56,9 +56,17 @@ class ServicesDataMock : ServicesRepository {
                             "Heavier in weight and are of dark coloured materials. These are drawn at night for privacy.",
                             false
                     )
+
+                    val service4 = ServiceItemCombo (
+                            "3 Dishes Plus 1 Soup Meal Set",
+                            165f,
+                            "month",
+                            "Weekdays only. Island-wide delivery. Packed in microwavable containers only.",
+                            false
+                    )
                     val serviceGroup = ServiceGroup("GARMENTS $serviceId",
                             "Includes free dismantling & installation. Measurement & evaluation will be done on-site, price estimation will not be included in this request.",
-                            mutableListOf(service1, service2, service3),
+                            mutableListOf(service1, service2, service3, service4),
                             false)
                     listServiceGroup.add(serviceGroup)
                 }

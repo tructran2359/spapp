@@ -15,6 +15,8 @@
     <color name="color_ui06">#ffffff</color>
     <color name="color_ui0680">#ccffffff</color>
 
+    <color name="text_hint">#9B9B9B</color>
+
     <color name="color_brand01">#00b0b2</color>
     <color name="color_brand02">#2d779e</color>
 
