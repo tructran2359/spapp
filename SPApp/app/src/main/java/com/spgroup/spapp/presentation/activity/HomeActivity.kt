@@ -22,8 +22,13 @@ class HomeActivity : BaseActivity() {
     ///////////////////////////////////////////////////////////////////////////
 
     fun setupViews() {
-        tv_view.setOnClickListener {
+        view_button.setOnClickListener {
             moveToPartnerDetails()
+        }
+
+        view_partner_listing.setOnClickListener {
+            val intent = PartnerListingActivity.getLaunchIntent(this@HomeActivity)
+            startActivity(intent)
         }
     }
 
