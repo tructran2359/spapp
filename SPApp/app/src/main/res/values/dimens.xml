@@ -89,5 +89,7 @@
 
     <dimen name="pdf_width">30dp</dimen>
     <dimen name="pdf_height">17dp</dimen>
+    <dimen name="action_bar_height_expanded">178dp</dimen>
+    <dimen name="partner_listing_toolbar_logo_size">80dp</dimen>
 
 </resources>

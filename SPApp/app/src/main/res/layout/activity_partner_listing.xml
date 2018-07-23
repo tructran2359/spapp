@@ -1,8 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    >
 
-</LinearLayout>
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_primarygradientbase"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            >
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:contentScrim="@color/color_primarygradientbase"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                >
+
+
+                <ImageView
+                    android:id="@+id/iv_logo"
+                    android:layout_width="@dimen/partner_listing_toolbar_logo_size"
+                    android:layout_height="@dimen/partner_listing_toolbar_logo_size"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/common_vert_medium"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/partner_listing_avatar"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                    />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+            <TextView
+                style="@style/textH3.white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="@dimen/common_vert_medium"
+                android:layout_marginBottom="@dimen/common_vert_medium"
+                android:gravity="center"
+
+                android:text="Food"
+                />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/common_horz_large"
+                android:text="@string/large_text"/>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="@dimen/common_icon_size"
+        android:layout_height="@dimen/common_icon_size"
+        android:layout_marginLeft="@dimen/common_horz_medium"
+        android:layout_marginTop="@dimen/common_vert_medium"
+        android:src="@drawable/arrow_left"
+        />
+
+</FrameLayout>
