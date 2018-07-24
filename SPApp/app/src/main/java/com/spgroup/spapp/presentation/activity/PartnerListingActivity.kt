@@ -11,9 +11,10 @@ import com.spgroup.spapp.presentation.adapter.PartnerAdapter
 import com.spgroup.spapp.presentation.viewmodel.PartnerListingViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.doLogD
+import com.spgroup.spapp.util.extension.toast
 import kotlinx.android.synthetic.main.activity_partner_listing.*
 
-class PartnerListingActivity: BaseActivity() {
+class PartnerListingActivity: BaseActivity(), PartnerAdapter.OnItemClickListener {
 
     companion object {
 
@@ -28,7 +29,8 @@ class PartnerListingActivity: BaseActivity() {
     // Property
     ///////////////////////////////////////////////////////////////////////////
 
-    val mAdapter = PartnerAdapter()
+    val mAdapter = PartnerAdapter(this)
+    lateinit var mViewModel: PartnerListingViewModel
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -41,17 +43,34 @@ class PartnerListingActivity: BaseActivity() {
         initViews()
 
         val factory = ViewModelFactory.getInstance()
-        val viewModel = ViewModelProviders
+        mViewModel = ViewModelProviders
                 .of(this, factory)
                 .get(PartnerListingViewModel::class.java)
 
-        with(viewModel) {
+        with(mViewModel) {
             partnerListing.observe(this@PartnerListingActivity, Observer {
                 doLogD("PListing", "List: ${it?.size}")
                 mAdapter.setData(it)
             })
 
             loadPartnerListing(-1)
+        }
+
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // PartnerAdapter.OnItemClickListener
+    ///////////////////////////////////////////////////////////////////////////
+
+    override fun onItemClick(position: Int) {
+        val partner = mViewModel.getPartner(position)
+        partner?.let {
+            if (it.isPromotion) {
+                toast("Promotion 's coming soon")
+            } else {
+                val intent = PartnerDetailsActivity.getLaunchIntent(this, it)
+                startActivity(intent)
+            }
         }
 
     }

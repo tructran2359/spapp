@@ -40,4 +40,6 @@ class PartnerListingViewModel(
 
         disposeBag.addAll(disposable)
     }
+
+    fun getPartner(position: Int) = partnerListing.value?.get(position)
 }

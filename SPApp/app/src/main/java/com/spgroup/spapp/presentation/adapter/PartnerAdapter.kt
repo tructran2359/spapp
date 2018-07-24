@@ -12,7 +12,9 @@ import com.spgroup.spapp.util.extension.inflate
 import kotlinx.android.synthetic.main.layout_partner_item.view.*
 import kotlinx.android.synthetic.main.layout_partner_promotion.view.*
 
-class PartnerAdapter: RecyclerView.Adapter<PartnerAdapter.PartnerVH>() {
+class PartnerAdapter(
+        private val onItemClickListener: OnItemClickListener
+): RecyclerView.Adapter<PartnerAdapter.PartnerVH>() {
 
     ///////////////////////////////////////////////////////////////////////////
     // Property
@@ -37,7 +39,7 @@ class PartnerAdapter: RecyclerView.Adapter<PartnerAdapter.PartnerVH>() {
             else -> throw IllegalArgumentException("Undefined type")
         }
 
-        return PartnerVH(view)
+        return PartnerVH(view, onItemClickListener)
     }
 
     override fun getItemCount() = mData.size
@@ -67,9 +69,19 @@ class PartnerAdapter: RecyclerView.Adapter<PartnerAdapter.PartnerVH>() {
     // ViewHolder
     ///////////////////////////////////////////////////////////////////////////
 
-    class PartnerVH(val view: View): RecyclerView.ViewHolder(view) {
+    class PartnerVH(
+            val view: View,
+            val listener: OnItemClickListener
+    ): RecyclerView.ViewHolder(view) {
+
+        init {
+            view.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+            }
+        }
 
         fun bind(partner: Supplier) {
+
             if (partner.isPromotion) {
                 bindPromotion(partner)
             } else {
@@ -91,5 +103,13 @@ class PartnerAdapter: RecyclerView.Adapter<PartnerAdapter.PartnerVH>() {
                 tv_promotion.setText(partner.name)
             }
         }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Listener
+    ///////////////////////////////////////////////////////////////////////////
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
     }
 }
