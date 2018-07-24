@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_ui06"
-    tools:context=".presentation.activity.ConfirmationActivity"
+    tools:context=".presentation.activity.AcknowledgementActivity"
     >
 
     <com.spgroup.spapp.presentation.view.SimpleActionBar

@@ -5,11 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import com.spgroup.spapp.R
 
-class ConfirmationActivity : BaseActivity() {
+class AcknowledgementActivity : BaseActivity() {
 
     companion object {
         fun getLaunchIntent(context: Context): Intent {
-            val intent = Intent(context, ConfirmationActivity::class.java)
+            val intent = Intent(context, AcknowledgementActivity::class.java)
             return intent
         }
     }
@@ -20,6 +20,6 @@ class ConfirmationActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_confirmation)
+        setContentView(R.layout.activity_acknowledgement)
     }
 }
