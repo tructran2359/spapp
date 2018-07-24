@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_ui06"
+    android:layout_marginBottom="@dimen/common_vert_small"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rl_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/common_horz_large"
+        android:layout_marginRight="@dimen/common_horz_xlarge"
+        android:layout_marginTop="@dimen/common_vert_medium"
+        android:layout_marginBottom="@dimen/common_vert_medium"
+        >
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="@dimen/partner_listing_logo_size"
+            android:layout_height="@dimen/partner_listing_logo_size"
+            android:src="@drawable/food_logo"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/iv_logo"
+            android:layout_toLeftOf="@+id/iv_right_arrow"
+            android:layout_marginLeft="@dimen/common_horz_medium"
+            android:layout_centerVertical="true"
+            >
+
+            <ImageView
+                android:id="@+id/iv_sponsored"
+                android:layout_width="@dimen/sponsored_width"
+                android:layout_height="@dimen/sponsored_height"
+                android:src="@drawable/sponsored"
+                android:scaleType="fitXY"
+                />
+
+            <TextView
+                style="@style/textH4"
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_spacing"
+
+                android:text="Tingkat-A-Day"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/common_vert_small"
+                >
+
+                <TextView
+                    style="@style/textServiceItemFrom"
+                    />
+
+                <TextView
+                    style="@style/textH6"
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/common_spacing"
+
+                    android:text="S$165.00 per month"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_right_arrow"
+            android:layout_width="@dimen/common_icon_size_small"
+            android:layout_height="@dimen/common_icon_size_small"
+            android:src="@drawable/arrow_right_blue"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            />
+
+    </RelativeLayout>
+
+    <View
+        style="@style/lineDivider"
+        android:layout_below="@+id/rl_container"/>
+
+</RelativeLayout>

@@ -55,6 +55,14 @@
             android:screenOrientation="portrait"
             >
         </activity>
+
+        <!--PartnerListingActivity-->
+        <activity
+            android:name=".presentation.activity.PartnerListingActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
     </application>
 
 </manifest>

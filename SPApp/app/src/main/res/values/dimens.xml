@@ -79,8 +79,10 @@
     <dimen name="common_vert_small">10dp</dimen>
     <dimen name="common_vert_xsmall">5dp</dimen>
 
+    <dimen name="common_horz_xlarge">35dp</dimen>
     <dimen name="common_horz_large">30dp</dimen>
     <dimen name="common_horz_medium">20dp</dimen>
+    <dimen name="common_horz_medium_sub">15dp</dimen>
     <dimen name="common_horz_large_for_icon">25dp</dimen>
 
     <dimen name="button_shadow_height">20dp</dimen>
@@ -89,5 +91,10 @@
 
     <dimen name="pdf_width">30dp</dimen>
     <dimen name="pdf_height">17dp</dimen>
+    <dimen name="action_bar_height_expanded">178dp</dimen>
+    <dimen name="partner_listing_logo_size">80dp</dimen>
+    <dimen name="sponsored_width">62dp</dimen>
+    <dimen name="sponsored_height">18dp</dimen>
+    <dimen name="partner_promotion_thumbnail_size">100dp</dimen>
 
 </resources>

@@ -19,9 +19,20 @@ class ServicesDataMock : ServicesRepository {
 
     override fun getSuppliersByCategory(categoryId: Int): Single<List<Supplier>> {
         return Single.fromCallable {
-            listOf(Supplier(1, "QuiKlean Laundry"),
-                    Supplier(2, "ABC Laundry"),
-                    Supplier(3, "XYZ Laundry"))
+            val list = mutableListOf<Supplier>()
+            for (i in 1..10) {
+                list.add(
+                        Supplier(
+                        i,
+                        "Partner $i",
+                        165f + i,
+                        "month",
+                        "testUrl $i",
+                        (i % 2 == 0))
+                )
+            }
+
+            list
         }
     }
 

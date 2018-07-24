@@ -2,7 +2,9 @@ package com.spgroup.spapp.util.extension
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.animation.AnimationUtils
 import android.widget.TextView
@@ -41,3 +43,5 @@ fun Context.toast(message: String) {
 }
 
 fun Context.loadAnimation(resId: Int) = AnimationUtils.loadAnimation(this, resId)
+
+fun ViewGroup.inflate(layoutId: Int, attachToRoot: Boolean) = LayoutInflater.from(context).inflate(layoutId, this, attachToRoot)

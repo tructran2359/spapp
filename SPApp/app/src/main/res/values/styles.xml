@@ -170,4 +170,17 @@
         <item name="android:background">@drawable/gradient_button_shadow</item>
     </style>
 
+    <style name="homeScreenTempButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_ui01</item>
+        <item name="android:background">@drawable/bg_rec_rounded_white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:layout_marginLeft">50dp</item>
+        <item name="android:layout_marginRight">50dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
+    </style>
+
 </resources>
