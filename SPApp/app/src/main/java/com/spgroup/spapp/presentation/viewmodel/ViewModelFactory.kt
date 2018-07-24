@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import com.spgroup.spapp.di.Injection
 import com.spgroup.spapp.domain.SchedulerFacade
 import com.spgroup.spapp.domain.ServicesRepository
+import com.spgroup.spapp.domain.usecase.GetPartnerListingUsecase
 import com.spgroup.spapp.domain.usecase.GetServicesListBySupplierUsecase
 
 class ViewModelFactory private constructor(
@@ -14,7 +15,11 @@ class ViewModelFactory private constructor(
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
+
             modelClass.isAssignableFrom(SupplierDetailsViewModel::class.java) -> createSupplierDetailsViewModel()
+
+            modelClass.isAssignableFrom(PartnerListingViewModel::class.java) -> createPartnerListingViewModel()
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         } as T
     }
@@ -23,6 +28,11 @@ class ViewModelFactory private constructor(
     private fun createSupplierDetailsViewModel(): SupplierDetailsViewModel {
         val getServicesUsecase = GetServicesListBySupplierUsecase(schedulerFacade, servicesRepository)
         return SupplierDetailsViewModel(getServicesUsecase)
+    }
+
+    private fun createPartnerListingViewModel(): PartnerListingViewModel {
+        val getPartnerListingUsecase = GetPartnerListingUsecase(schedulerFacade, servicesRepository)
+        return PartnerListingViewModel(getPartnerListingUsecase)
     }
 
 

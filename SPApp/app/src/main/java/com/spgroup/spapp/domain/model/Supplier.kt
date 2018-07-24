@@ -1,9 +1,11 @@
 package com.spgroup.spapp.domain.model
 
 data class Supplier(
-        val id: Int,
+        val id: Int = -1,
         val name: String,
-        val price: Float,
-        val unit: String,
-        val imgUrl: String,
-        val isSponsored: Boolean)
+        val price: Float = 0f,
+        val unit: String = "",
+        val imgUrl: String = "",
+        val isSponsored: Boolean = false,
+        val isPromotion: Boolean = false
+)

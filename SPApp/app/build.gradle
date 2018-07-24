@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+androidExtensions {
+    experimental = true
+}
 
 android {
 
@@ -76,6 +79,9 @@ dependencies {
     implementation "uk.co.chrisjenx:calligraphy:$rootProject.calligraphyVersion"
     // ViewPager Indicator
     implementation "me.relex:circleindicator:1.2.2@aar"
+
+    // Rounded ImageView
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 
     // Test
     testImplementation 'junit:junit:4.12'

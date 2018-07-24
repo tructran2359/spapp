@@ -25,7 +25,7 @@ class ServicesDataMock : ServicesRepository {
                         Supplier(
                         i,
                         "Partner $i",
-                        (165+i) as Float,
+                        165f + i,
                         "month",
                         "testUrl $i",
                         (i % 2 == 0))

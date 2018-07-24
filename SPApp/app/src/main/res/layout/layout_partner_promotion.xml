@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/common_vert_medium_sub"
+    android:paddingBottom="@dimen/common_vert_large"
+    android:paddingLeft="@dimen/common_horz_large"
+    android:paddingRight="@dimen/common_horz_large"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_rec_rounded_white_solid_grey_stroke"
+        >
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_promotion"
+            android:layout_width="@dimen/partner_promotion_thumbnail_size"
+            android:layout_height="@dimen/partner_promotion_thumbnail_size"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius_top_left="@dimen/common_radius"
+            app:riv_corner_radius_bottom_left="@dimen/common_radius"
+            />
+
+        <TextView
+            style="@style/textH4"
+            android:id="@+id/tv_promotion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/common_horz_medium"
+            android:paddingRight="@dimen/common_horz_large"
+
+            android:text="$50 OFF whenyou order from SGHeartyMeals.sg"
+            />
+
+    </LinearLayout>
+
+</FrameLayout>
