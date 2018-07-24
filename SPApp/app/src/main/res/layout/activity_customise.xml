@@ -180,20 +180,13 @@
     <RelativeLayout
         style="@style/bottomButtonContainer"
         android:id="@+id/bottom_button_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         >
 
         <TextView
-            style="@style/textH4"
+            style="@style/textH4.blueButton"
             android:id="@+id/tv_add_to_request"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/bottom_button_height"
-            android:background="@drawable/selector_btn_blue"
-            android:gravity="center"
             android:text="@string/add_to_request"
-            android:textColor="@color/color_ui06"
             />
 
     </RelativeLayout>

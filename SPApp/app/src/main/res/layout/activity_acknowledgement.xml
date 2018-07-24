@@ -8,11 +8,79 @@
     tools:context=".presentation.activity.AcknowledgementActivity"
     >
 
+    <ImageView
+        android:id="@+id/iv_confirm"
+        android:layout_width="230dp"
+        android:layout_height="188dp"
+        android:src="@drawable/submitted"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="20dp"
+        />
+
     <TextView
+        style="@style/textH1"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="CONFIRMATION"
+        android:layout_below="@+id/iv_confirm"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:text="Your request has\nbeen submitted."
         />
+
+    <TextView
+        style="@style/textH5"
+        android:id="@+id/tv_request_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/common_vert_medium_sub"
+
+        android:text="@string/request_number"
+        />
+
+    <TextView
+        style="@style/textParagraph.grey"
+        android:id="@+id/tv_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tv_request_number"
+        android:layout_marginTop="@dimen/common_vert_medium"
+        android:text="@string/ack_get_in_touch"
+        />
+
+    <TextView
+        style="@style/textParagraph.grey"
+        android:id="@+id/tv_detail_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tv_detail"
+        android:layout_marginTop="@dimen/common_vert_small"
+        android:text="@string/ack_email_sent"
+        />
+
+    <View
+        style="@style/buttonShadow"
+        android:layout_above="@+id/bottom_button_container"
+        />
+
+    <FrameLayout
+        style="@style/bottomButtonContainer"
+        android:id="@+id/bottom_button_container"
+        android:layout_alignParentBottom="true"
+        >
+
+        <TextView
+            style="@style/textH4.blueButton"
+            android:text="@string/see_more_services"
+            />
+
+    </FrameLayout>
 
 </RelativeLayout>
