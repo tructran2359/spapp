@@ -21,8 +21,9 @@
             android:id="@+id/iv_logo"
             android:layout_width="@dimen/partner_listing_logo_size"
             android:layout_height="@dimen/partner_listing_logo_size"
-            android:src="@drawable/partner_listing_avatar"
+            android:src="@drawable/food_logo"
             android:layout_centerVertical="true"
+            android:scaleType="fitXY"
             />
 
         <LinearLayout
