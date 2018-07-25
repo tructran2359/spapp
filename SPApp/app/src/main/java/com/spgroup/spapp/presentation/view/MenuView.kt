@@ -9,6 +9,8 @@ import kotlinx.android.synthetic.main.layout_menu_view.view.*
 
 class MenuView: LinearLayout {
 
+    var mListener: OnMenuItemClickListener? = null
+
     ///////////////////////////////////////////////////////////////////////////
     // Constructor
     ///////////////////////////////////////////////////////////////////////////
@@ -33,9 +35,28 @@ class MenuView: LinearLayout {
     // Other
     ///////////////////////////////////////////////////////////////////////////
 
-    fun addMenu(menuName: String) {
+    fun addMenuItem(menuItem: String) {
         val view = MenuTextView(context)
-        view.setText(menuName)
+        view.setText(menuItem)
+        view.setOnClickListener {
+            mListener?.onMenuItemClick(menuItem)
+        }
         ll_menu_container.addView(view)
+    }
+
+    fun setMenuName(menuName: String) {
+        tv_name.setText(menuName)
+    }
+
+    fun setOnMenuItemClickListener(listener: OnMenuItemClickListener) {
+        mListener = listener
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Listener
+    ///////////////////////////////////////////////////////////////////////////
+
+    interface OnMenuItemClickListener {
+        fun onMenuItemClick(menuItem: String)
     }
 }

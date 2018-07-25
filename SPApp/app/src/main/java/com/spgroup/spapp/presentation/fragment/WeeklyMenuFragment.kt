@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
+import com.spgroup.spapp.presentation.activity.MenuDetailActivity
+import com.spgroup.spapp.presentation.view.MenuView
 import kotlinx.android.synthetic.main.fragment_weekly_menu.*
 
-class WeeklyMenuFragment: BaseFragment() {
+class WeeklyMenuFragment: BaseFragment(), MenuView.OnMenuItemClickListener {
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -21,10 +23,30 @@ class WeeklyMenuFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        menu_view_1.addMenu("3 Dishes Plus 1 Soup Meal Set\nSpecial Meal Set")
-        menu_view_1.addMenu("4 Dishes")
+        with(menu_view_1) {
+            setMenuName("Menu for 2 Jul - 6 Jul")
+            setOnMenuItemClickListener(this@WeeklyMenuFragment)
+            addMenuItem("3 Dishes Plus 1 Soup Meal Set\nSpecial Meal Set")
+            addMenuItem("4 Dishes")
+        }
 
-        menu_view_2.addMenu("3 Dishes Plus 1 Soup Meal Set")
-        menu_view_2.addMenu("4 Dishes")
+        with(menu_view_2) {
+            setMenuName("Menu for 9 Jul - 13 Jul")
+            setOnMenuItemClickListener(this@WeeklyMenuFragment)
+            addMenuItem("3 Dishes Plus 1 Soup Meal Set")
+            addMenuItem("4 Dishes")
+        }
+
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // MenuView.OnMenuItemClickListener
+    ///////////////////////////////////////////////////////////////////////////
+
+    override fun onMenuItemClick(menuItem: String) {
+        activity?.let {
+            val intent = MenuDetailActivity.getLaunchIntent(it)
+            it.startActivity(intent)
+        }
     }
 }
