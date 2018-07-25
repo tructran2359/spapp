@@ -54,7 +54,7 @@ class SimpleActionBar: RelativeLayout {
     }
 
     fun setOnBackPress(action: () -> Unit) {
-        iv_back.setOnClickListener {
+        fl_back_container.setOnClickListener {
             action()
         }
     }
