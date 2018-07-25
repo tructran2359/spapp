@@ -83,6 +83,9 @@ dependencies {
     // Rounded ImageView
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
+    // PDF Reader
+    implementation 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
+
     // Test
     testImplementation 'junit:junit:4.12'
 }
