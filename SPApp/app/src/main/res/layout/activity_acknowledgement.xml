@@ -78,6 +78,7 @@
 
         <TextView
             style="@style/textH4.blueButton"
+            android:id="@+id/tv_see_more"
             android:text="@string/see_more_services"
             />
 

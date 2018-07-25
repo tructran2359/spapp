@@ -24,5 +24,12 @@ class AcknowledgementActivity : BaseActivity() {
         setContentView(R.layout.activity_acknowledgement)
 
         tv_request_number.setText(getString(R.string.request_number, "123456"))
+
+        tv_see_more.setOnClickListener {
+            val intent = HomeActivity.getLaunchIntent(this)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+            finish()
+        }
     }
 }
