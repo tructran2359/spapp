@@ -48,7 +48,7 @@ class OrderSummaryActivity : BaseActivity() {
         btn_summary.setCount(1)
         btn_summary.setEstPrice(0.01f)
         btn_summary.setOnClickListener {
-            startActivity(ConfirmationActivity.getLaunchIntent(this@OrderSummaryActivity))
+            startActivity(AcknowledgementActivity.getLaunchIntent(this@OrderSummaryActivity))
         }
 
         action_bar.setOnBackPress {

@@ -51,7 +51,7 @@
 
         <!--ConfirmationActivity-->
         <activity
-            android:name=".presentation.activity.ConfirmationActivity"
+            android:name=".presentation.activity.AcknowledgementActivity"
             android:screenOrientation="portrait"
             >
         </activity>

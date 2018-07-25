@@ -152,6 +152,8 @@
     </style>
 
     <style name="bottomButtonContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingLeft">@dimen/bottom_button_container_horz</item>
         <item name="android:paddingRight">@dimen/bottom_button_container_horz</item>
         <item name="android:paddingTop">@dimen/bottom_button_container_vert</item>
@@ -181,6 +183,14 @@
         <item name="android:layout_marginRight">50dp</item>
         <item name="android:paddingTop">20dp</item>
         <item name="android:paddingBottom">20dp</item>
+    </style>
+
+    <style name="textH4.blueButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/bottom_button_height</item>
+        <item name="android:background">@drawable/selector_btn_blue</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/color_ui06</item>
     </style>
 
 </resources>

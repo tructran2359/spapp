@@ -4,12 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.spgroup.spapp.R
+import kotlinx.android.synthetic.main.activity_acknowledgement.*
 
-class ConfirmationActivity : BaseActivity() {
+class AcknowledgementActivity : BaseActivity() {
 
     companion object {
         fun getLaunchIntent(context: Context): Intent {
-            val intent = Intent(context, ConfirmationActivity::class.java)
+            val intent = Intent(context, AcknowledgementActivity::class.java)
             return intent
         }
     }
@@ -20,6 +21,15 @@ class ConfirmationActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_confirmation)
+        setContentView(R.layout.activity_acknowledgement)
+
+        tv_request_number.setText(getString(R.string.request_number, "123456"))
+
+        tv_see_more.setOnClickListener {
+            val intent = HomeActivity.getLaunchIntent(this)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+            finish()
+        }
     }
 }
