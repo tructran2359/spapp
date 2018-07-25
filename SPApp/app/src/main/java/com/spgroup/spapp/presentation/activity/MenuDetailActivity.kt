@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.spgroup.spapp.R
+import kotlinx.android.synthetic.main.activity_menu_detail.*
 
 class MenuDetailActivity: BaseActivity() {
 
@@ -21,5 +22,13 @@ class MenuDetailActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_detail)
+
+        pdf_view
+                .fromAsset("dummy.pdf")
+                .pages(0)
+                .defaultPage(0)
+                .enableSwipe(false)
+                .load()
+
     }
 }
