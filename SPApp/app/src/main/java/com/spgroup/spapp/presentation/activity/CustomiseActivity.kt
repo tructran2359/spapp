@@ -5,6 +5,8 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItem
 import com.spgroup.spapp.domain.model.ServiceItemCombo
@@ -86,6 +88,22 @@ class CustomiseActivity : BaseActivity() {
 
             // In edit screen, set content of instruction here. Now just use dummy text
             et_instruction.setText(mViewModel.mInitData.instruction)
+            et_instruction.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(p0: Editable?) {
+                    var text = ""
+                    if (p0 != null) {
+                        text = p0.toString()
+                    }
+                    mViewModel.instructionChange(text)
+                }
+
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+            })
         }
 
         tv_name.setText(mViewModel.mServiceItem.name)

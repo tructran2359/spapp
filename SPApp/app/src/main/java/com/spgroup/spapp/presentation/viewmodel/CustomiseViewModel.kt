@@ -9,8 +9,8 @@ class CustomiseViewModel: ViewModel() {
     val isUpdated: MutableLiveData<Boolean> = MutableLiveData()
     val paxCount: MutableLiveData<Int> = MutableLiveData()
     val riceCount: MutableLiveData<Int> = MutableLiveData()
-    val instruction: MutableLiveData<String> = MutableLiveData()
     val mInitData = Content(paxCount = 1, riceCount = 1, instruction = "No beef and peanut. Low salt.")
+    var mCurrentInstruction = mInitData.instruction
     lateinit var mServiceItem: ServiceItemCombo
     var mIsEdit = false
 
@@ -18,7 +18,6 @@ class CustomiseViewModel: ViewModel() {
         isUpdated.value = false
         paxCount.value = mInitData.paxCount
         riceCount.value = mInitData.riceCount
-        instruction.value = mInitData.instruction
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -43,11 +42,15 @@ class CustomiseViewModel: ViewModel() {
         }
     }
 
+    fun instructionChange(instruction: String) {
+        mCurrentInstruction = instruction
+        checkUpdate()
+    }
 
     private fun checkUpdate() {
         val sameData = paxCount.value!! == mInitData.paxCount
         && riceCount.value!! == mInitData.riceCount
-        && instruction.value!!.equals(mInitData.instruction)
+        && mCurrentInstruction.equals(mInitData.instruction)
 
         if (sameData && isUpdated.value == true) {
             isUpdated.value = false
