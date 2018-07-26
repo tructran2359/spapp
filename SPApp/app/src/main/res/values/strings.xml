@@ -38,5 +38,6 @@
     <string name="ack_email_sent">We have sent a copy of your service\nrequest to your email inbox.</string>
     <string name="ack_get_in_touch">The service provider will get in touch\nwith you soon.</string>
     <string name="request_number">Request number: #%s</string>
+    <string name="hardcode_3_dishes">3 Dishes Plus 1 Soup\nMeal Set</string>
 
 </resources>

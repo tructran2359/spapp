@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/common_horz_large_for_icon"
+    android:layout_marginRight="@dimen/common_horz_large_for_icon"
+    android:layout_marginTop="@dimen/common_vert_small"
+    android:layout_marginBottom="@dimen/common_icon_size_medium"
+    >
+
+    <ImageView
+        style="@style/iconWithPadding"
+        android:id="@+id/iv_delete"
+        android:src="@drawable/delete"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/iv_delete"
+        android:layout_toLeftOf="@+id/iv_edit"
+        android:paddingTop="@dimen/common_icon_padding"
+        android:layout_marginLeft="@dimen/common_horz_medium_sub"
+        >
+
+        <TextView
+            style="@style/textH4"
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/common_horz_medium_sub"
+
+            android:text="@string/hardcode_3_dishes"
+            />
+
+        <TextView
+            style="@style/textParagraph.grey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_vert_small"
+
+            android:text="Weekdays only. Island-wide delivery. Packed in microwavable containers only."
+            />
+        
+        <LinearLayout
+            android:id="@+id/ll_option_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/common_vert_small"
+            >
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/textH6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_vert_medium_sub"
+            android:text="@string/special_instructions"
+            />
+
+        <TextView
+            style="@style/textCaption"
+            android:id="@+id/tv_instruction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_spacing"
+
+            android:text="No beef and peanuts. Low salt"
+            />
+
+    </LinearLayout>
+
+    <ImageView
+        style="@style/iconWithPadding"
+        android:id="@+id/iv_edit"
+        android:src="@drawable/edit"
+        android:layout_alignParentRight="true"
+        />
+
+</RelativeLayout>
