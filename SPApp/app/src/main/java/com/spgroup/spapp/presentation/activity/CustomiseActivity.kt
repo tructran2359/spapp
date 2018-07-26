@@ -10,6 +10,7 @@ import android.text.TextWatcher
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItem
 import com.spgroup.spapp.domain.model.ServiceItemCombo
+import com.spgroup.spapp.presentation.fragment.UnsavedDataDialog
 import com.spgroup.spapp.presentation.view.CounterView
 import com.spgroup.spapp.presentation.view.CustomiseCounterView
 import com.spgroup.spapp.presentation.viewmodel.CustomiseViewModel
@@ -81,6 +82,20 @@ class CustomiseActivity : BaseActivity() {
         }
 
         initViews()
+    }
+
+    override fun onBackPressed() {
+        if (mViewModel.mIsEdit) {
+            mViewModel.isUpdated.value?.let {
+                if (it) {
+                    showConfirmPopUp()
+                } else {
+                    super.onBackPressed()
+                }
+            }
+        } else {
+            super.onBackPressed()
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -160,5 +175,20 @@ class CustomiseActivity : BaseActivity() {
         action_bar.setOnBackPress {
             onBackPressed()
         }
+    }
+
+    private fun showConfirmPopUp() {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val prevDialog = supportFragmentManager.findFragmentByTag(ConstUtils.TAG_DIALOG)
+        if (prevDialog != null) {
+            fragmentTransaction.remove(prevDialog)
+        }
+
+        val newDialog = UnsavedDataDialog()
+        newDialog.setActions(
+                { super.onBackPressed() },
+                null
+        )
+        newDialog.show(fragmentTransaction, ConstUtils.TAG_DIALOG)
     }
 }

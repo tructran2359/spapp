@@ -42,5 +42,8 @@
     <string name="edit">Edit</string>
     <string name="back_to_view_summary">BACK TO VIEW SUMMARY</string>
     <string name="update_and_view_summary">UPDATE AND VIEW SUMMARY</string>
+    <string name="unsaved_data_alert">Leave without\nupdating changes?</string>
+    <string name="yes_all_caps">YES</string>
+    <string name="no_all_caps">NO</string>
 
 </resources>

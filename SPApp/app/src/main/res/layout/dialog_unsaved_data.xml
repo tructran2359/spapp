@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/common_vert_xlarge"
+    android:paddingBottom="@dimen/common_vert_small"
+    android:paddingLeft="@dimen/common_horz_medium"
+    android:paddingRight="@dimen/common_horz_medium"
+    android:orientation="vertical"
+    android:background="@drawable/bg_rec_rounded_white"
+    >
+
+    <LinearLayout
+        android:id="@+id/ll_alert_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:id="@+id/iv_alert"
+            android:layout_width="@dimen/common_icon_size_large"
+            android:layout_height="@dimen/common_icon_size_large"
+            android:src="@drawable/alert"
+            android:layout_gravity="center_vertical"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_vert_medium_sub"
+            android:textSize="@dimen/text_size_h3"
+            android:textColor="@color/color_ui02"
+            fontPath="@string/font_book"
+            android:text="@string/unsaved_data_alert"
+            android:layout_gravity="center_vertical"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/textButton"
+        android:id="@+id/tv_yes"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_height"
+        android:layout_below="@+id/ll_alert_container"
+        android:layout_alignLeft="@+id/ll_alert_container"
+        android:layout_alignRight="@+id/ll_alert_container"
+        android:layout_marginTop="@dimen/common_vert_large"
+        android:background="@drawable/selector_btn_blue"
+        android:textColor="@color/color_ui06"
+        android:text="@string/yes_all_caps"
+        android:gravity="center"
+        />
+
+
+
+    <TextView
+        style="@style/textButton"
+        android:id="@+id/tv_no"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_height"
+        android:layout_below="@+id/tv_yes"
+        android:layout_alignLeft="@+id/ll_alert_container"
+        android:layout_alignRight="@+id/ll_alert_container"
+        android:layout_marginTop="@dimen/common_vert_small"
+        android:background="@drawable/selector_btn_white"
+        android:textColor="@color/color_ui01"
+        android:text="@string/no_all_caps"
+        android:gravity="center"
+        />
+
+</RelativeLayout>
