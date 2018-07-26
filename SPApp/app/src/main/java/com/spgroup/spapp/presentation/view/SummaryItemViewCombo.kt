@@ -39,4 +39,10 @@ class SummaryItemViewCombo: RelativeLayout {
         optionView.setPrice(optionPrice)
         ll_option_container.addView(optionView)
     }
+
+    fun setOnEditClickListener(action: () -> Unit) {
+        iv_edit.setOnClickListener {
+            action()
+        }
+    }
 }

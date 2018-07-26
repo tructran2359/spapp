@@ -29,7 +29,7 @@
     <string name="estimated_price">Estimated Price</string>
     <string name="special_instructions">Special Instructions</string>
     <string name="formated_optional">[optional]</string>
-    <string name="service_customise_hint">Eg. No beff and peanus. Low salt.</string>
+    <string name="service_customise_hint">Eg. No beef and peanut. Low salt.</string>
     <string name="add_to_request">ADD TO REQUEST</string>
     <string name="estimated_total_price">Estimated Total Price</string>
     <string name="optional_with_symbol">[optional]</string>
@@ -39,5 +39,8 @@
     <string name="ack_get_in_touch">The service provider will get in touch\nwith you soon.</string>
     <string name="request_number">Request number: #%s</string>
     <string name="hardcode_3_dishes">3 Dishes Plus 1 Soup\nMeal Set</string>
+    <string name="edit">Edit</string>
+    <string name="back_to_view_summary">BACK TO VIEW SUMMARY</string>
+    <string name="update_and_view_summary">UPDATE AND VIEW SUMMARY</string>
 
 </resources>

@@ -16,6 +16,7 @@ class CounterView: LinearLayout {
     var mCount = 0
     var mMin = 0
     var mMax = 0
+    var mListener: OnCountChangeListener? = null
 
     ///////////////////////////////////////////////////////////////////////////
     // Constructor
@@ -39,16 +40,14 @@ class CounterView: LinearLayout {
 
     private fun initViews(context: Context) {
         LayoutInflater.from(context).inflate(R.layout.layout_counter_view, this, true)
-        onCountChanged()
+        updateCount()
 
         iv_plus.setOnClickListener {
-            mCount++
-            onCountChanged()
+            mListener?.onPlus()
         }
 
         iv_minus.setOnClickListener {
-            mCount--
-            onCountChanged()
+            mListener?.onMinus()
         }
     }
 
@@ -56,7 +55,7 @@ class CounterView: LinearLayout {
     // Other
     ///////////////////////////////////////////////////////////////////////////
 
-    private fun onCountChanged() {
+    private fun updateCount() {
         tv_count.setText("$mCount")
         setEnableMinus(mCount > mMin)
         setEnablePlus(mCount < mMax)
@@ -72,12 +71,25 @@ class CounterView: LinearLayout {
 
     fun setCount(count: Int) {
         mCount = count
-        onCountChanged()
+        updateCount()
     }
 
     fun setLimit(min: Int, max: Int) {
         mMin = min
         mMax = max
+    }
+
+    fun setOnCountChangeListener(listener: OnCountChangeListener) {
+        mListener = listener
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Listener
+    ///////////////////////////////////////////////////////////////////////////
+
+    interface OnCountChangeListener {
+        fun onPlus()
+        fun onMinus()
     }
 
 }

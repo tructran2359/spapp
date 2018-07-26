@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import com.spgroup.spapp.R
+import com.spgroup.spapp.domain.model.ServiceItemCombo
 import kotlinx.android.synthetic.main.activity_order_summary.*
 
 class OrderSummaryActivity : BaseActivity() {
@@ -35,23 +36,50 @@ class OrderSummaryActivity : BaseActivity() {
 
         action_bar.setTitle(R.string.summary)
 
-        summary_view_combo.addOption("Lunch for 1 pax", 165f)
-        summary_view_combo.addOption("1 Plain Rice", 20f)
+        with(summary_view_combo) {
+
+            addOption("Lunch for 1 pax", 165f)
+
+            addOption("1 Plain Rice", 20f)
+
+            setOnEditClickListener {
+
+                //Create dummy data:
+                val service = ServiceItemCombo (
+                        "3 Dishes Plus 1 Soup Meal Set",
+                        165f,
+                        "month",
+                        "Weekdays only. Island-wide delivery. Packed in microwavable containers only.",
+                        false
+                )
+                val intent = CustomiseActivity.getLaunchIntent(
+                        this@OrderSummaryActivity,
+                        service,
+                        true)
+                this@OrderSummaryActivity.startActivity(intent)
+            }
+        }
 
         summary_view_1.initData(1, 10, 1)
 
-        summary_view_2.setName("Load Wash / kg")
-        summary_view_2.initData(5, 10, 5)
+        with(summary_view_2) {
+            setName("Load Wash / kg")
+            initData(5, 10, 5)
+        }
 
-        summary_view_3.setName("Load Wash / kg")
-        summary_view_3.initData(1, 10, 1)
+        with(summary_view_3) {
+            setName("Load Wash / kg")
+            initData(1, 10, 1)
+        }
 
-        btn_summary.isEnabled = true
-        btn_summary.setText(getString(R.string.submit_request))
-        btn_summary.setCount(1)
-        btn_summary.setEstPrice(0.01f)
-        btn_summary.setOnClickListener {
-            startActivity(AcknowledgementActivity.getLaunchIntent(this@OrderSummaryActivity))
+        with(btn_summary) {
+            isEnabled = true
+            setText(getString(R.string.submit_request))
+            setCount(1)
+            setEstPrice(0.01f)
+            setOnClickListener {
+                startActivity(AcknowledgementActivity.getLaunchIntent(this@OrderSummaryActivity))
+            }
         }
 
         action_bar.setOnBackPress {

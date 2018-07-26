@@ -1,21 +1,28 @@
 package com.spgroup.spapp.presentation.activity
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItem
 import com.spgroup.spapp.domain.model.ServiceItemCombo
-import com.spgroup.spapp.util.extension.toast
+import com.spgroup.spapp.presentation.view.CounterView
+import com.spgroup.spapp.presentation.view.CustomiseCounterView
+import com.spgroup.spapp.presentation.viewmodel.CustomiseViewModel
+import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
+import com.spgroup.spapp.util.extension.toast
 import kotlinx.android.synthetic.main.activity_customise.*
 
 class CustomiseActivity : BaseActivity() {
 
     companion object {
 
-        fun getLaunchIntent(context: Context, item: ServiceItem): Intent {
+        fun getLaunchIntent(context: Context, item: ServiceItem, isEdit: Boolean = false): Intent {
             val intent = Intent(context, CustomiseActivity::class.java)
+            intent.putExtra(ConstUtils.EXTRA_IS_EDIT, isEdit)
             intent.putExtra(ConstUtils.EXTRA_SERVICE_ITEM, item)
             return intent
         }
@@ -25,7 +32,9 @@ class CustomiseActivity : BaseActivity() {
     // Property
     ///////////////////////////////////////////////////////////////////////////
 
-    lateinit var mServiceItem: ServiceItemCombo
+    lateinit var mViewModel: CustomiseViewModel
+    lateinit var mPaxView: CustomiseCounterView
+    lateinit var mRiceView: CustomiseCounterView
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -35,7 +44,32 @@ class CustomiseActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_customise)
 
-        mServiceItem = intent.getSerializableExtra(ConstUtils.EXTRA_SERVICE_ITEM) as ServiceItemCombo
+        val factory = ViewModelFactory.getInstance()
+        mViewModel = ViewModelProviders.of(this, factory).get(CustomiseViewModel::class.java)
+        mViewModel.mServiceItem = intent.getSerializableExtra(ConstUtils.EXTRA_SERVICE_ITEM) as ServiceItemCombo
+        mViewModel.mIsEdit = intent.getBooleanExtra(ConstUtils.EXTRA_IS_EDIT, false)
+
+        with(mViewModel) {
+            if (mViewModel.mIsEdit) {
+                paxCount.observe(this@CustomiseActivity, Observer {
+                    it?.let {
+                        mPaxView.setCount(it)
+                    }
+                })
+
+                riceCount.observe(this@CustomiseActivity, Observer {
+                    it?.let {
+                        mRiceView.setCount(it)
+                    }
+                })
+
+                isUpdated.observe(this@CustomiseActivity, Observer {
+                    it?.let {
+                        tv_bottom.setText(if (it) R.string.update_and_view_summary else R.string.back_to_view_summary)
+                    }
+                })
+            }
+        }
 
         initViews()
     }
@@ -45,20 +79,56 @@ class CustomiseActivity : BaseActivity() {
     ///////////////////////////////////////////////////////////////////////////
 
     private fun initViews() {
-        tv_name.setText(mServiceItem.name)
-        tv_description.setText(mServiceItem.description)
 
-        custom_view_1.setName("No. of Pax")
-        custom_view_1.setOption("[min. 1 pax]")
-        custom_view_1.setLimit(1, 10)
-        custom_view_1.setCount(1)
+        if (mViewModel.mIsEdit) {
+            action_bar.setTitle(R.string.edit)
+            tv_bottom.setText(R.string.back_to_view_summary)
 
-        custom_view_2.setName("Plain Rice")
-        custom_view_2.setOption("[optional]")
-        custom_view_2.setLimit(0, 10)
-        custom_view_2.setCount(1)
+            // In edit screen, set content of instruction here. Now just use dummy text
+            et_instruction.setText(mViewModel.mInitData.instruction)
+        }
 
-        tv_add_to_request.setOnClickListener {
+        tv_name.setText(mViewModel.mServiceItem.name)
+        tv_description.setText(mViewModel.mServiceItem.description)
+
+        mPaxView = CustomiseCounterView(this)
+        with(mPaxView) {
+            setName("No. of Pax")
+            setOption("[min. 1 pax]")
+            setLimit(mViewModel.mInitData.paxMin, mViewModel.mInitData.paxMax)
+            setCount(mViewModel.mInitData.paxCount)
+            setOnCountChangeListener(object : CounterView.OnCountChangeListener {
+                override fun onPlus() {
+                    mViewModel.paxChange(true)
+                }
+
+                override fun onMinus() {
+                    mViewModel.paxChange(false)
+                }
+            })
+        }
+
+        mRiceView = CustomiseCounterView(this)
+        with(mRiceView) {
+            setName("Plain Rice")
+            setOption("[optional]")
+            setLimit(mViewModel.mInitData.riceMin, mViewModel.mInitData.riceMax)
+            setCount(mViewModel.mInitData.riceCount)
+            setOnCountChangeListener(object : CounterView.OnCountChangeListener {
+                override fun onPlus() {
+                    mViewModel.riceChange(true)
+                }
+
+                override fun onMinus() {
+                    mViewModel.riceChange(false)
+                }
+            })
+        }
+
+        ll_option_container.addView(mPaxView)
+        ll_option_container.addView(mRiceView)
+
+        tv_bottom.setOnClickListener {
             this.toast("CLICKED")
         }
 
