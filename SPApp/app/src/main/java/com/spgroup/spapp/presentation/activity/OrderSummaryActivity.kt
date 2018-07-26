@@ -35,6 +35,9 @@ class OrderSummaryActivity : BaseActivity() {
 
         action_bar.setTitle(R.string.summary)
 
+        summary_view_combo.addOption("Lunch for 1 pax", 165f)
+        summary_view_combo.addOption("1 Plain Rice", 20f)
+
         summary_view_1.initData(1, 10, 1)
 
         summary_view_2.setName("Load Wash / kg")

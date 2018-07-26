@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_rec_rounded_grey"
+    android:layout_below="@+id/rl_content_container"
+    android:layout_marginBottom="@dimen/common_vert_small"
+    android:paddingLeft="@dimen/common_spacing_x3"
+    android:paddingRight="@dimen/common_spacing_x3"
+    android:paddingTop="@dimen/common_spacing_x2"
+    android:paddingBottom="@dimen/common_spacing_x2"
+    >
+
+    <TextView
+        style="@style/textCaption"
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="@string/est_price"
+        />
+
+    <TextView
+        style="@style/textH6"
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+
+        android:text="S$0.001"
+        />
+
+</RelativeLayout>
