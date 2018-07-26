@@ -9,6 +9,8 @@ class CustomiseViewModel: ViewModel() {
     val isUpdated: MutableLiveData<Boolean> = MutableLiveData()
     val paxCount: MutableLiveData<Int> = MutableLiveData()
     val riceCount: MutableLiveData<Int> = MutableLiveData()
+    val estimatedPrice: MutableLiveData<Float> = MutableLiveData()
+
     val mInitData = Content(paxCount = 1, riceCount = 1, instruction = "No beef and peanut. Low salt.")
     var mCurrentInstruction = mInitData.instruction
     lateinit var mServiceItem: ServiceItemCombo
@@ -18,6 +20,9 @@ class CustomiseViewModel: ViewModel() {
         isUpdated.value = false
         paxCount.value = mInitData.paxCount
         riceCount.value = mInitData.riceCount
+        estimatedPrice.value = with(mInitData) {
+            paxCount * paxPrice + riceCount * ricePrice
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -29,6 +34,7 @@ class CustomiseViewModel: ViewModel() {
             if (isPlus) paxCount.value = it + 1
             else paxCount.value = it - 1
 
+            calculateEstPrice()
             checkUpdate()
         }
     }
@@ -38,6 +44,7 @@ class CustomiseViewModel: ViewModel() {
             if (isPlus) riceCount.value = it + 1
             else riceCount.value = it - 1
 
+            calculateEstPrice()
             checkUpdate()
         }
     }
@@ -59,6 +66,19 @@ class CustomiseViewModel: ViewModel() {
         }
     }
 
+    private fun calculateEstPrice() {
+        var estPrice = 0f
+        paxCount.value?.let {
+            estPrice += it * mInitData.paxPrice
+        }
+
+        riceCount.value?.let {
+            estPrice += it * mInitData.ricePrice
+        }
+
+        estimatedPrice.value = estPrice
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // Dummy data class
     ///////////////////////////////////////////////////////////////////////////
@@ -67,10 +87,12 @@ class CustomiseViewModel: ViewModel() {
             var paxCount: Int = 0,
             var paxMax: Int = 10,
             var paxMin: Int = 1,
+            var paxPrice: Float = 165f,
 
             var riceCount: Int = 0,
             var riceMax: Int = 10,
             var riceMin: Int = 0,
+            var ricePrice: Float = 20f,
 
             val instruction: String = ""
     )

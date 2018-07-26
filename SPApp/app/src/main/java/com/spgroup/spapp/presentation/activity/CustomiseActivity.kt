@@ -15,6 +15,7 @@ import com.spgroup.spapp.presentation.view.CustomiseCounterView
 import com.spgroup.spapp.presentation.viewmodel.CustomiseViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
+import com.spgroup.spapp.util.extension.formatPrice
 import com.spgroup.spapp.util.extension.toast
 import kotlinx.android.synthetic.main.activity_customise.*
 
@@ -52,7 +53,7 @@ class CustomiseActivity : BaseActivity() {
         mViewModel.mIsEdit = intent.getBooleanExtra(ConstUtils.EXTRA_IS_EDIT, false)
 
         with(mViewModel) {
-            if (mViewModel.mIsEdit) {
+            if (mIsEdit) {
                 paxCount.observe(this@CustomiseActivity, Observer {
                     it?.let {
                         mPaxView.setCount(it)
@@ -68,6 +69,12 @@ class CustomiseActivity : BaseActivity() {
                 isUpdated.observe(this@CustomiseActivity, Observer {
                     it?.let {
                         tv_bottom.setText(if (it) R.string.update_and_view_summary else R.string.back_to_view_summary)
+                    }
+                })
+
+                estimatedPrice.observe(this@CustomiseActivity, Observer {
+                    it?.let {
+                        tv_est_price.setText(it.formatPrice())
                     }
                 })
             }
