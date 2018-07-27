@@ -152,6 +152,18 @@
                     style="@style/textParagraph.grey.orderSumInput"
                     />
 
+                <!--Email-->
+
+                <TextView
+                    style="@style/textH4.orderSumLabel"
+                    android:text="@string/email"
+                    />
+
+                <EditText
+                    android:id="@+id/et_email"
+                    style="@style/textParagraph.grey.orderSumInput"
+                    />
+
                 <!--Contact No-->
 
                 <TextView

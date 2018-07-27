@@ -14,6 +14,7 @@
     <string name="summary">Summary</string>
     <string name="your_contact_info">Your Contact Information</string>
     <string name="name">Name</string>
+    <string name="email">Email</string>
     <string name="contact_no">Contact Number</string>
     <string name="preferred_time">Preferred Time of Contact</string>
     <string name="address">Address</string>
