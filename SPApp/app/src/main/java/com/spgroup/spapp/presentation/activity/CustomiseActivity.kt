@@ -56,28 +56,30 @@ class CustomiseActivity : BaseActivity() {
         mViewModel.mIsEdit = intent.getBooleanExtra(ConstUtils.EXTRA_IS_EDIT, false)
 
         with(mViewModel) {
-            if (mIsEdit) {
-                paxCount.observe(this@CustomiseActivity, Observer {
-                    it?.let {
-                        mPaxView.setCount(it)
-                    }
-                })
 
-                riceCount.observe(this@CustomiseActivity, Observer {
-                    it?.let {
-                        mRiceView.setCount(it)
-                    }
-                })
+            paxCount.observe(this@CustomiseActivity, Observer {
+                it?.let {
+                    mPaxView.setCount(it)
+                }
+            })
+
+            riceCount.observe(this@CustomiseActivity, Observer {
+                it?.let {
+                    mRiceView.setCount(it)
+                }
+            })
+
+            estimatedPrice.observe(this@CustomiseActivity, Observer {
+                it?.let {
+                    tv_est_price.setText(it.formatPrice())
+                }
+            })
+
+            if (mIsEdit) {
 
                 isUpdated.observe(this@CustomiseActivity, Observer {
                     it?.let {
                         tv_bottom.setText(if (it) R.string.update_and_view_summary else R.string.back_to_view_summary)
-                    }
-                })
-
-                estimatedPrice.observe(this@CustomiseActivity, Observer {
-                    it?.let {
-                        tv_est_price.setText(it.formatPrice())
                     }
                 })
             }
