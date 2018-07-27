@@ -88,11 +88,12 @@ class CustomiseActivity : BaseActivity() {
         if (mViewModel.mIsEdit) {
             mViewModel.isUpdated.value?.let {
                 if (it) {
-                    showConfirmPopUp()
+                    showConfirmDialog()
                 } else {
                     super.onBackPressed()
                 }
             }
+
         } else {
             super.onBackPressed()
         }
@@ -177,7 +178,7 @@ class CustomiseActivity : BaseActivity() {
         }
     }
 
-    private fun showConfirmPopUp() {
+    private fun showConfirmDialog() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         val prevDialog = supportFragmentManager.findFragmentByTag(ConstUtils.TAG_DIALOG)
         if (prevDialog != null) {
@@ -185,10 +186,12 @@ class CustomiseActivity : BaseActivity() {
         }
 
         val newDialog = UnsavedDataDialog()
-        newDialog.setActions(
-                { super.onBackPressed() },
-                null
-        )
-        newDialog.show(fragmentTransaction, ConstUtils.TAG_DIALOG)
+        with(newDialog) {
+            setActions(
+                    { super.onBackPressed() },
+                    null
+            )
+            show(fragmentTransaction, ConstUtils.TAG_DIALOG)
+        }
     }
 }
