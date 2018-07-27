@@ -13,10 +13,6 @@ class CustomiseCounterView: RelativeLayout {
     // Property
     ///////////////////////////////////////////////////////////////////////////
 
-    var mCount = 0
-    var mMin = 0
-    var mMax = 0
-
     ///////////////////////////////////////////////////////////////////////////
     // Constructor
     ///////////////////////////////////////////////////////////////////////////
@@ -55,6 +51,10 @@ class CustomiseCounterView: RelativeLayout {
 
     fun setCount(count: Int) {
         counter_view.setCount(count)
+    }
+
+    fun setOnCountChangeListener(listener: CounterView.OnCountChangeListener) {
+        counter_view.setOnCountChangeListener(listener)
     }
 
     fun enablePlus(enable: Boolean) {
