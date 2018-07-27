@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.LinearLayout
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItem
 import com.spgroup.spapp.domain.model.ServiceItemCombo
@@ -17,6 +18,7 @@ import com.spgroup.spapp.presentation.viewmodel.CustomiseViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.extension.formatPrice
+import com.spgroup.spapp.util.extension.getDimensionPixelSize
 import com.spgroup.spapp.util.extension.toast
 import kotlinx.android.synthetic.main.activity_customise.*
 
@@ -133,6 +135,9 @@ class CustomiseActivity : BaseActivity() {
         tv_description.setText(mViewModel.mServiceItem.description)
 
         mPaxView = CustomiseCounterView(this)
+        val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        layoutParams.setMargins(0, 0, 0, getDimensionPixelSize(R.dimen.common_vert_large))
+        mPaxView.layoutParams = layoutParams
         with(mPaxView) {
             setName("No. of Pax")
             setOption("[min. 1 pax]")
