@@ -41,7 +41,7 @@
         android:layout_toRightOf="@+id/iv_delete"
         android:layout_below="@+id/tv_name"
         android:layout_marginBottom="@dimen/service_item_vert_spacing"
-        android:layout_marginRight="@dimen/service_item_price_spacing"
+        android:layout_marginRight="@dimen/common_spacing"
         />
 
     <TextView
