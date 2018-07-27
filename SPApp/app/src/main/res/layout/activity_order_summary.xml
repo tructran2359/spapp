@@ -143,7 +143,7 @@
                 <!--Name-->
 
                 <TextView
-                    style="@style/textH4.orderSumLabel"
+                    style="@style/orderSumLabel"
                     android:text="@string/name"
                     />
 
@@ -155,7 +155,7 @@
                 <!--Email-->
 
                 <TextView
-                    style="@style/textH4.orderSumLabel"
+                    style="@style/orderSumLabel"
                     android:text="@string/email"
                     />
 
@@ -167,7 +167,7 @@
                 <!--Contact No-->
 
                 <TextView
-                    style="@style/textH4.orderSumLabel"
+                    style="@style/orderSumLabel"
                     android:text="@string/contact_no"
                     />
 
@@ -179,7 +179,7 @@
                 <!--Preferred Time-->
 
                 <TextView
-                    style="@style/textH4.orderSumLabel"
+                    style="@style/orderSumLabel"
                     android:text="@string/preferred_time"
                     />
 
@@ -210,7 +210,7 @@
                 <!--Address-->
 
                 <TextView
-                    style="@style/textH4.orderSumLabel"
+                    style="@style/orderSumLabel"
                     android:text="@string/address"
                     />
 
@@ -227,7 +227,7 @@
                 <!--Postal Code-->
 
                 <TextView
-                    style="@style/textH4.orderSumLabel"
+                    style="@style/orderSumLabel"
                     android:text="@string/postal_code"
                     />
 
@@ -245,7 +245,7 @@
                     >
 
                     <TextView
-                        style="@style/textH4.orderSumLabel"
+                        style="@style/orderSumLabel"
                         android:id="@+id/tv_notes"
                         android:text="@string/notes"
                         />
