@@ -49,15 +49,6 @@
 
             <!--Dummy UI start-->
 
-            <TextView
-                style="@style/textH4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/common_horz_large"
-
-                android:text="Tingkat-A-Day"
-                />
-
             <com.spgroup.spapp.presentation.view.SummaryItemViewCombo
                 android:id="@+id/summary_view_combo"
                 android:layout_width="match_parent"
