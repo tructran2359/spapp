@@ -25,10 +25,13 @@ class MenuDetailActivity: BaseActivity() {
 
         pdf_view
                 .fromAsset("dummy.pdf")
-                .pages(0)
                 .defaultPage(0)
-                .enableSwipe(false)
+                .swipeVertical(true)
                 .load()
+
+        action_bar.setOnBackPress {
+            this@MenuDetailActivity.onBackPressed()
+        }
 
     }
 }
