@@ -20,10 +20,15 @@ class ViewModelFactory private constructor(
 
             modelClass.isAssignableFrom(PartnerListingViewModel::class.java) -> createPartnerListingViewModel()
 
+            modelClass.isAssignableFrom(CustomiseViewModel::class.java) -> createCustomiseViewModel()
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         } as T
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    // ViewModel creation
+    ///////////////////////////////////////////////////////////////////////////
 
     private fun createSupplierDetailsViewModel(): SupplierDetailsViewModel {
         val getServicesUsecase = GetServicesListBySupplierUsecase(schedulerFacade, servicesRepository)
@@ -35,6 +40,9 @@ class ViewModelFactory private constructor(
         return PartnerListingViewModel(getPartnerListingUsecase)
     }
 
+    private fun createCustomiseViewModel(): CustomiseViewModel {
+        return CustomiseViewModel()
+    }
 
     companion object {
 

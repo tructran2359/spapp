@@ -67,23 +67,15 @@
 
             </LinearLayout>
 
-            <com.spgroup.spapp.presentation.view.CustomiseCounterView
-                android:id="@+id/custom_view_1"
+            <LinearLayout
+                android:id="@+id/ll_option_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:paddingLeft="@dimen/common_horz_large"
                 android:paddingRight="@dimen/common_horz_large_for_icon"
-                android:layout_marginTop="@dimen/common_vert_large"
-                />
-
-            <com.spgroup.spapp.presentation.view.CustomiseCounterView
-                android:id="@+id/custom_view_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/common_horz_large"
-                android:paddingRight="@dimen/common_horz_large_for_icon"
-                android:layout_marginTop="@dimen/common_vert_large"
-                android:layout_marginBottom="@dimen/common_vert_large"
+                android:paddingTop="@dimen/common_vert_large"
+                android:paddingBottom="@dimen/common_vert_large"
                 />
 
             <RelativeLayout
@@ -183,7 +175,7 @@
 
         <TextView
             style="@style/textH4.blueButton"
-            android:id="@+id/tv_add_to_request"
+            android:id="@+id/tv_bottom"
             android:text="@string/add_to_request"
             />
 

@@ -151,6 +151,14 @@
         <item name="fontPath">@string/font_regular</item>
     </style>
 
+    <style name="textButton">
+        <item name="android:textSize">@dimen/text_size_button</item>
+        <item name="android:lineSpacingExtra">@dimen/line_space_button</item>
+        <item name="fontPath">@string/font_medium</item>
+    </style>
+
+    <!--Other-->
+
     <style name="bottomButtonContainer">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
