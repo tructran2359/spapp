@@ -54,40 +54,32 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-
-    // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    // Android Support
-    implementation "com.android.support:appcompat-v7:$rootProject.supportVersion"
-    implementation "com.android.support:design:$rootProject.supportVersion"
-
-    // KTX
-    implementation ("androidx.core:core-ktx:1.0.0-beta01") {
+    // Android KTX
+    implementation("androidx.core:core-ktx:$rootProject.ktxVersion") {
         transitive = false
     }
-
-    // Reactive
-    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxJavaVersion"
-    implementation "io.reactivex.rxjava2:rxkotlin:${rootProject.rxKotlinVersion}"
-    implementation "io.reactivex.rxjava2:rxandroid:${rootProject.rxAndroidVersion}"
-
-    // ViewModel - LiveData
+    // Android Support (refactor to use AndroidX package later)
+    implementation "com.android.support:appcompat-v7:$rootProject.supportVersion"
+    implementation "com.android.support:design:$rootProject.supportVersion"
+    // ViewModel - LiveData (refactor to use AndroidX package later)
     implementation "android.arch.lifecycle:extensions:${rootProject.lifecycleVersion}"
     kapt "android.arch.lifecycle:compiler:${rootProject.lifecycleVersion}"
 
-    // Dagger
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:${rootProject.rxKotlinVersion}"
+    implementation "io.reactivex.rxjava2:rxandroid:${rootProject.rxAndroidVersion}"
+    // Dagger 2
     implementation "com.google.dagger:dagger:${rootProject.daggerVersion}"
     kapt "com.google.dagger:dagger-compiler:${rootProject.daggerVersion}"
-
     // Custom Font
     implementation "uk.co.chrisjenx:calligraphy:$rootProject.calligraphyVersion"
     // ViewPager Indicator
     implementation "me.relex:circleindicator:1.2.2@aar"
-
     // Rounded ImageView
     implementation 'com.makeramen:roundedimageview:2.3.0'
-
     // PDF Reader
     implementation 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
 
