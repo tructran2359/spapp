@@ -88,7 +88,6 @@
             custom:tabIndicatorHeight="@dimen/common_spacing"
             custom:tabPaddingStart="@dimen/common_horz_large"
             custom:tabPaddingEnd="@dimen/common_horz_large"
-            custom:tabIndicator="@drawable/tab_indicator"
             />
 
         <android.support.v4.view.ViewPager

@@ -49,7 +49,7 @@
         android:layout_alignBaseline="@+id/tv_from"
         android:layout_toRightOf="@id/tv_from"
         android:layout_toLeftOf="@id/fl_check_container"
-        android:layout_marginLeft="@dimen/service_item_price_spacing"
+        android:layout_marginLeft="@dimen/common_spacing"
 
         android:text="S$6 / item"
         />
