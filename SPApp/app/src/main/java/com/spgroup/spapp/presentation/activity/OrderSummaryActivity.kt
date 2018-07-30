@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItemCombo
 import com.spgroup.spapp.presentation.view.ValidationInputView
+import com.spgroup.spapp.util.extension.isValidEmail
 import kotlinx.android.synthetic.main.activity_order_summary.*
 
 class OrderSummaryActivity : BaseActivity() {
@@ -28,6 +29,7 @@ class OrderSummaryActivity : BaseActivity() {
 
     private lateinit var mAnimAppear: Animation
     private lateinit var mAnimDisappear: Animation
+    private var mInvalidView: ValidationInputView? = null
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -115,6 +117,7 @@ class OrderSummaryActivity : BaseActivity() {
         }
 
         validation_email.setInputType(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
+        validation_email.setValidation { emailAddress: String -> emailAddress.isValidEmail() }
         validation_contact_no.setInputType(InputType.TYPE_CLASS_PHONE)
         validation_postal_code.setInputType(InputType.TYPE_CLASS_NUMBER)
 
@@ -125,7 +128,7 @@ class OrderSummaryActivity : BaseActivity() {
             setEstPrice(0.01f)
             setOnClickListener {
                 var invalidCount = 0
-                var invalidView : ValidationInputView? = null
+                mInvalidView = null
 
                 val listValidationField = listOf(
                         validation_postal_code,
@@ -138,7 +141,7 @@ class OrderSummaryActivity : BaseActivity() {
                     val valid = it.validate()
                     if (!valid) {
                         invalidCount++
-                        invalidView = it
+                        mInvalidView = it
                     }
                 }
                 if (invalidCount == 0) {

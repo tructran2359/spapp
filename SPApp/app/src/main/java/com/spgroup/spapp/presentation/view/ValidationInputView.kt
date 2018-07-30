@@ -55,6 +55,10 @@ class ValidationInputView: RelativeLayout {
         }
     }
 
+    fun setValidation(action: (text: String) -> Boolean) {
+        mValidate = action
+    }
+
     fun setInputType(inputType: Int) {
         et_input.inputType = inputType
     }
