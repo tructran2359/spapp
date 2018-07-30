@@ -3,9 +3,12 @@ package com.spgroup.spapp.presentation.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.widget.ArrayAdapter
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItemCombo
+import com.spgroup.spapp.presentation.view.ValidationInputView
+import com.spgroup.spapp.util.extension.toast
 import kotlinx.android.synthetic.main.activity_order_summary.*
 
 class OrderSummaryActivity : BaseActivity() {
@@ -72,13 +75,38 @@ class OrderSummaryActivity : BaseActivity() {
             initData(1, 10, 1)
         }
 
+        validation_email.setInputType(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
+        validation_contact_no.setInputType(InputType.TYPE_CLASS_PHONE)
+        validation_postal_code.setInputType(InputType.TYPE_CLASS_NUMBER)
+
         with(btn_summary) {
             isEnabled = true
             setText(getString(R.string.submit_request))
             setCount(1)
             setEstPrice(0.01f)
             setOnClickListener {
-                startActivity(AcknowledgementActivity.getLaunchIntent(this@OrderSummaryActivity))
+                var invalidCount = 0
+                var invalidView : ValidationInputView? = null
+
+                val listValidationField = listOf(
+                        validation_postal_code,
+                        validation_address,
+                        validation_contact_no,
+                        validation_email,
+                        validation_name)
+
+                listValidationField.forEach {
+                    val valid = it.validate()
+                    if (!valid) {
+                        invalidCount++
+                        invalidView = it
+                    }
+                }
+                if (invalidCount == 0) {
+                    startActivity(AcknowledgementActivity.getLaunchIntent(this@OrderSummaryActivity))
+                } else {
+                    toast("Invalid Count: $invalidCount")
+                }
             }
         }
 

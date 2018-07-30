@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        style="@style/textH5"
+        android:id="@+id/tv_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        />
+
+    <TextView
+        style="@style/textAlert"
+        android:id="@+id/tv_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/invalid"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        />
+
+    <EditText
+        style="@style/textParagraph.grey.orderSumInput"
+        android:id="@+id/et_input"
+        android:layout_below="@id/tv_label"
+        android:layout_marginTop="@dimen/common_vert_xsmall"
+        android:background="@drawable/selector_validation_field"
+        />
+
+</RelativeLayout>
