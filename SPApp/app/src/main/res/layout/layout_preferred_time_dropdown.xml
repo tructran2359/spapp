@@ -9,5 +9,4 @@
     android:background="@color/color_ui06"
     style="@style/textParagraph.grey"
 
-    android:text="Test 1234"
     />
