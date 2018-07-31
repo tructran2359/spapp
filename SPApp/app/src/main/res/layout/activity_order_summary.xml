@@ -296,7 +296,7 @@
 
         <View
             android:id="@+id/v_error_divider"
-            style="@style/lineDivider"/>
+            style="@style/lineDividerDark"/>
 
         <TextView
             style="@style/textAlert"

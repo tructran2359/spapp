@@ -50,7 +50,7 @@
                 />
 
             <View
-                style="@style/lineDivider"
+                style="@style/lineDividerDark"
                 android:layout_marginLeft="@dimen/common_horz_medium"
                 android:layout_marginRight="@dimen/common_horz_medium"
                 />

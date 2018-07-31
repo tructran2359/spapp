@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_ui06"
+    android:orientation="vertical"
     tools:ignore="MissingPrefix"
     >
 
@@ -42,7 +43,6 @@
         android:id="@+id/ll_collapsed_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rl_service_info_container"
         android:orientation="vertical"
         >
 
@@ -54,7 +54,6 @@
             android:layout_marginLeft="@dimen/service_name_margin_left"
             android:layout_marginRight="@dimen/service_name_margin_left"
             android:layout_marginBottom="@dimen/service_item_vert_spacing"
-            android:text="123456asdfasdfasdklfhasdjhfalksjdhf"
             />
 
         <LinearLayout
@@ -70,16 +69,13 @@
     </LinearLayout>
 
     <View
-        style="@style/lineDivider"
-        android:layout_above="@+id/v_devider"
+        style="@style/lineDividerDark"
+        android:id="@+id/v_devider_dark"
         />
 
     <View
-        android:id="@+id/v_devider"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/common_spacing_x2"
-        android:background="@color/color_ui05"
-        android:layout_below="@+id/ll_collapsed_container"
+        style="@style/lineDividerLight"
+        android:id="@+id/v_devider_light"
         />
 
-</RelativeLayout>
+</LinearLayout>

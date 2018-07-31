@@ -91,7 +91,7 @@
     </RelativeLayout>
 
     <View
-        style="@style/lineDivider"
+        style="@style/lineDividerDark"
         android:layout_below="@+id/rl_container"/>
 
 </RelativeLayout>

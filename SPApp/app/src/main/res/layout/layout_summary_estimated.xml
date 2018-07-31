@@ -7,7 +7,7 @@
     android:orientation="vertical"
     >
 
-    <View style="@style/lineDivider"/>
+    <View style="@style/lineDividerDark"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -76,7 +76,7 @@
 
 
     <View
-        style="@style/lineDivider"
+        style="@style/lineDividerDark"
         android:layout_marginTop="@dimen/common_vert_medium"
         />
 
