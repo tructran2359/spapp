@@ -180,6 +180,7 @@ class OrderSummaryActivity : BaseActivity() {
                 val position = location[1] - getDimensionPixelSize(R.dimen.action_bar_height) - getDimensionPixelSize(R.dimen.common_vert_large)
                 scroll_content.scrollTo(0, position)
                 it.requestFocus()
+                showErrorView(false)
             }
         }
     }
