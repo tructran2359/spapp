@@ -17,6 +17,11 @@ import kotlinx.android.synthetic.main.layout_service.view.*
 
 class ServiceGroupAdapter(val mItemInteractedListener: OnItemInteractedListener): RecyclerView.Adapter<ServiceGroupAdapter.ServiceVH>() {
 
+    companion object {
+        val VIEW_TYPE_LAST = 1
+        val VIEW_TYPE_NORMAL = 2
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // Property
     ///////////////////////////////////////////////////////////////////////////
@@ -28,14 +33,25 @@ class ServiceGroupAdapter(val mItemInteractedListener: OnItemInteractedListener)
     ///////////////////////////////////////////////////////////////////////////
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServiceVH {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_service, parent, false);
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_service, parent, false)
+        with(view) {
+            if (viewType == VIEW_TYPE_LAST) {
+                v_devider_light.visibility = View.GONE
+            } else {
+                v_devider_light.visibility = View.VISIBLE
+            }
+        }
         return ServiceVH(view, mItemInteractedListener)
     }
 
     override fun getItemCount() = mData.size
 
-    override fun onBindViewHolder(vh: ServiceVH, positioni: Int) {
-        vh.bind(mData[positioni])
+    override fun onBindViewHolder(vh: ServiceVH, position: Int) {
+        vh.bind(mData[position])
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (position == mData.size - 1) VIEW_TYPE_LAST else VIEW_TYPE_NORMAL
     }
 
     ///////////////////////////////////////////////////////////////////////////

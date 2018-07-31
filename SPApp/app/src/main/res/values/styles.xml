@@ -117,13 +117,13 @@
         <item name="android:background">@drawable/bg_oval_white</item>
     </style>
 
-    <style name="lineDivider">
+    <style name="lineDividerDark">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/line_width</item>
         <item name="android:background">@color/color_ui04</item>
     </style>
 
-    <style name="lineDivider2">
+    <style name="lineDividerLight">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/common_spacing_x2</item>
         <item name="android:background">@color/color_ui05</item>
