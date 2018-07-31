@@ -6,7 +6,7 @@
     android:id="@+id/view_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/selector_service_item"
+    android:background="@color/color_ui06"
     android:paddingLeft="@dimen/service_item_horz_spacing"
     android:layout_marginTop="@dimen/service_item_space_between_items"
     >
