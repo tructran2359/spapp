@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu
 import com.spgroup.spapp.R
-import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : BaseActivity() {
 
@@ -40,14 +39,6 @@ class HomeActivity : BaseActivity() {
     fun setupViews() {
         setUpMenu()
 
-        view_button.setOnClickListener {
-            moveToPartnerDetails()
-        }
-
-        view_partner_listing.setOnClickListener {
-            val intent = PartnerListingActivity.getLaunchIntent(this@HomeActivity)
-            startActivity(intent)
-        }
     }
 
     fun setUpMenu() {
@@ -62,8 +53,4 @@ class HomeActivity : BaseActivity() {
         }
     }
 
-    fun moveToPartnerDetails() {
-        val intent = PartnerDetailsActivity.getLaunchIntent(this)
-        startActivity(intent)
-    }
 }
