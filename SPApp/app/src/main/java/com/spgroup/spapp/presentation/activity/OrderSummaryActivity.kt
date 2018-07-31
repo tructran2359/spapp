@@ -7,9 +7,9 @@ import android.text.InputType
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.ArrayAdapter
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItemCombo
+import com.spgroup.spapp.presentation.adapter.PreferredTimeAdapter
 import com.spgroup.spapp.presentation.view.ValidationInputView
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.extension.getDimensionPixelSize
@@ -165,9 +165,8 @@ class OrderSummaryActivity : BaseActivity() {
             onBackPressed()
         }
 
-        val list = listOf("11AM - 12PM", "12PM - 2PM", "2PM - 4PM")
-        val adapter = ArrayAdapter(this, R.layout.layout_preferred_time, list)
-        adapter.setDropDownViewResource(R.layout.layout_preferred_time_dropdown)
+        val list = listOf("Select Time", "11AM - 12PM", "12PM - 2PM", "2PM - 4PM")
+        val adapter = PreferredTimeAdapter(this, R.layout.layout_preferred_time, list)
 
         spinner_preferred_time.adapter = adapter
 
