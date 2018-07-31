@@ -30,6 +30,7 @@
     <dimen name="text_size_text_link">16sp</dimen>
     <dimen name="text_size_menu">18sp</dimen>
     <dimen name="text_size_button">18sp</dimen>
+    <dimen name="text_size_alert">16sp</dimen>
 
     <dimen name="line_space_h1">6sp</dimen>
     <dimen name="line_space_h2">7sp</dimen>
@@ -41,6 +42,7 @@
     <dimen name="line_space_text_link">8sp</dimen>
     <dimen name="line_space_caption">6sp</dimen>
     <dimen name="line_space_button">3sp</dimen>
+    <dimen name="line_space_alert">8sp</dimen>
 
     <dimen name="line_width">1dp</dimen>
     <dimen name="dot_size">5dp</dimen>

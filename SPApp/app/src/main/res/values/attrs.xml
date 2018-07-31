@@ -5,4 +5,8 @@
         <attr name="title" format="string"/>
     </declare-styleable>
 
+    <declare-styleable name="ValidationInputView">
+        <attr name="label" format="string"/>
+    </declare-styleable>
+
 </resources>

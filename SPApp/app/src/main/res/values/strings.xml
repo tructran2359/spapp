@@ -46,5 +46,10 @@
     <string name="unsaved_data_alert">Leave without\nupdating changes?</string>
     <string name="yes_all_caps">YES</string>
     <string name="no_all_caps">NO</string>
+    <string name="invalid">Invalid</string>
+    <string name="required">Required</string>
+    <string name="check_input_warning">Please check your input again</string>
+    <string name="error_detected_format">%d Errors Detected</string>
+    <string name="error_detected_1">1 Error Detected</string>
 
 </resources>

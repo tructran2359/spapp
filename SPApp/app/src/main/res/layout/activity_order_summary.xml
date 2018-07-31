@@ -133,38 +133,26 @@
 
                 <!--Name-->
 
-                <TextView
-                    style="@style/orderSumLabel"
-                    android:text="@string/name"
-                    />
-
-                <EditText
-                    android:id="@+id/et_Name"
-                    style="@style/textParagraph.grey.orderSumInput"
+                <com.spgroup.spapp.presentation.view.ValidationInputView
+                    style="@style/validationInputField"
+                    android:id="@+id/validation_name"
+                    app:label="@string/name"
                     />
 
                 <!--Email-->
 
-                <TextView
-                    style="@style/orderSumLabel"
-                    android:text="@string/email"
-                    />
-
-                <EditText
-                    android:id="@+id/et_email"
-                    style="@style/textParagraph.grey.orderSumInput"
+                <com.spgroup.spapp.presentation.view.ValidationInputView
+                    style="@style/validationInputField"
+                    android:id="@+id/validation_email"
+                    app:label="@string/email"
                     />
 
                 <!--Contact No-->
 
-                <TextView
-                    style="@style/orderSumLabel"
-                    android:text="@string/contact_no"
-                    />
-
-                <EditText
-                    android:id="@+id/et_contact_no"
-                    style="@style/textParagraph.grey.orderSumInput"
+                <com.spgroup.spapp.presentation.view.ValidationInputView
+                    style="@style/validationInputField"
+                    android:id="@+id/validation_contact_no"
+                    app:label="@string/contact_no"
                     />
 
                 <!--Preferred Time-->
@@ -200,14 +188,11 @@
 
                 <!--Address-->
 
-                <TextView
-                    style="@style/orderSumLabel"
-                    android:text="@string/address"
-                    />
-
-                <EditText
-                    android:id="@+id/et_address_1"
-                    style="@style/textParagraph.grey.orderSumInput"
+                <com.spgroup.spapp.presentation.view.ValidationInputView
+                    style="@style/validationInputField"
+                    android:id="@+id/validation_address"
+                    android:layout_marginBottom="@dimen/common_vert_small"
+                    app:label="@string/address"
                     />
 
                 <EditText
@@ -217,14 +202,10 @@
 
                 <!--Postal Code-->
 
-                <TextView
-                    style="@style/orderSumLabel"
-                    android:text="@string/postal_code"
-                    />
-
-                <EditText
-                    android:id="@+id/et_postal_code"
-                    style="@style/textParagraph.grey.orderSumInput"
+                <com.spgroup.spapp.presentation.view.ValidationInputView
+                    style="@style/validationInputField"
+                    android:id="@+id/validation_postal_code"
+                    app:label="@string/postal_code"
                     />
 
                 <!--Notes-->
@@ -304,6 +285,51 @@
 
     </ScrollView>
 
+    <RelativeLayout
+        android:id="@+id/rl_error_cointainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_summary_button_container"
+        android:background="@color/color_ui06"
+        android:visibility="gone"
+        >
+
+        <View
+            android:id="@+id/v_error_divider"
+            style="@style/lineDivider"/>
+
+        <TextView
+            style="@style/textAlert"
+            android:id="@+id/tv_error_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:layout_marginLeft="@dimen/common_horz_large"
+            android:layout_marginTop="@dimen/common_vert_medium_sub"
+            android:layout_below="@+id/v_error_divider"
+
+            android:text="2 errors detected"
+            />
+
+        <TextView
+            style="@style/textParagraph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_horz_large"
+            android:layout_marginBottom="@dimen/common_horz_medium_sub"
+            android:text="@string/check_input_warning"
+            android:layout_below="@+id/tv_error_counter"
+            />
+        <ImageView
+            android:layout_width="@dimen/common_icon_size_medium"
+            android:layout_height="@dimen/common_icon_size_medium"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/common_horz_large"
+            android:src="@drawable/btn_up"
+            />
+
+    </RelativeLayout>
 
     <View
         style="@style/buttonShadow"

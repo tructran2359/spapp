@@ -3,9 +3,17 @@ package com.spgroup.spapp.presentation.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItemCombo
+import com.spgroup.spapp.presentation.view.ValidationInputView
+import com.spgroup.spapp.util.doLogD
+import com.spgroup.spapp.util.extension.getDimensionPixelSize
+import com.spgroup.spapp.util.extension.isValidEmail
 import kotlinx.android.synthetic.main.activity_order_summary.*
 
 class OrderSummaryActivity : BaseActivity() {
@@ -18,6 +26,14 @@ class OrderSummaryActivity : BaseActivity() {
     }
 
     ///////////////////////////////////////////////////////////////////////////
+    // Property
+    ///////////////////////////////////////////////////////////////////////////
+
+    private lateinit var mAnimAppear: Animation
+    private lateinit var mAnimDisappear: Animation
+    private var mFirstInvalidView: ValidationInputView? = null
+
+    ///////////////////////////////////////////////////////////////////////////
     // Override
     ///////////////////////////////////////////////////////////////////////////
 
@@ -25,12 +41,42 @@ class OrderSummaryActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_summary)
 
+        initAnimations()
         initViews()
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // Other
     ///////////////////////////////////////////////////////////////////////////
+
+    private fun initAnimations() {
+        mAnimAppear = AnimationUtils.loadAnimation(this, R.anim.anim_slide_up)
+        mAnimDisappear = AnimationUtils.loadAnimation(this, R.anim.anim_slide_down)
+
+        mAnimAppear.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(p0: Animation?) {
+            }
+
+            override fun onAnimationEnd(p0: Animation?) {
+                rl_error_cointainer.visibility = View.VISIBLE
+            }
+
+            override fun onAnimationStart(p0: Animation?) {
+            }
+        })
+
+        mAnimDisappear.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(p0: Animation?) {
+            }
+
+            override fun onAnimationEnd(p0: Animation?) {
+                rl_error_cointainer.visibility = View.GONE
+            }
+
+            override fun onAnimationStart(p0: Animation?) {
+            }
+        })
+    }
 
     private fun initViews() {
 
@@ -72,13 +118,46 @@ class OrderSummaryActivity : BaseActivity() {
             initData(1, 10, 1)
         }
 
+        validation_email.setInputType(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
+        validation_email.setValidation { emailAddress: String -> emailAddress.isValidEmail() }
+        validation_contact_no.setInputType(InputType.TYPE_CLASS_PHONE)
+        validation_postal_code.setInputType(InputType.TYPE_CLASS_NUMBER)
+
         with(btn_summary) {
             isEnabled = true
             setText(getString(R.string.submit_request))
             setCount(1)
             setEstPrice(0.01f)
             setOnClickListener {
-                startActivity(AcknowledgementActivity.getLaunchIntent(this@OrderSummaryActivity))
+                var invalidCount = 0
+                mFirstInvalidView = null
+
+                val listValidationField = listOf(
+                        validation_postal_code,
+                        validation_address,
+                        validation_contact_no,
+                        validation_email,
+                        validation_name)
+
+                listValidationField.forEach {
+                    val valid = it.validate()
+                    if (!valid) {
+                        invalidCount++
+                        mFirstInvalidView = it
+                    }
+                }
+                if (invalidCount == 0) {
+                    rl_error_cointainer.visibility = View.GONE
+                    startActivity(AcknowledgementActivity.getLaunchIntent(this@OrderSummaryActivity))
+                } else {
+                    var errorMsg = if(invalidCount == 1) {
+                        this@OrderSummaryActivity.getString(R.string.error_detected_1)
+                    } else {
+                        this@OrderSummaryActivity.getString(R.string.error_detected_format, invalidCount)
+                    }
+                    tv_error_counter.setText(errorMsg)
+                    showErrorView(true)
+                }
             }
         }
 
@@ -91,5 +170,26 @@ class OrderSummaryActivity : BaseActivity() {
         adapter.setDropDownViewResource(R.layout.layout_preferred_time_dropdown)
 
         spinner_preferred_time.adapter = adapter
+
+        rl_error_cointainer.setOnClickListener {
+            mFirstInvalidView?.let {
+                scroll_content.scrollTo(0, 0)
+                val location = IntArray(2)
+                it.getLocationOnScreen(location)
+                doLogD("Scroll", "Pos on screen: ${location[0]} , ${location[1]}")
+                val position = location[1] - getDimensionPixelSize(R.dimen.action_bar_height) - getDimensionPixelSize(R.dimen.common_vert_large)
+                scroll_content.scrollTo(0, position)
+                it.requestFocus()
+                showErrorView(false)
+            }
+        }
+    }
+
+    private fun showErrorView(show: Boolean) {
+        if (show && rl_error_cointainer.visibility != View.VISIBLE) {
+            rl_error_cointainer.startAnimation(mAnimAppear)
+        } else if (!show && rl_error_cointainer.visibility == View.VISIBLE) {
+            rl_error_cointainer.startAnimation(mAnimDisappear)
+        }
     }
 }
