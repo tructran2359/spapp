@@ -15,6 +15,7 @@ class ServiceItemViewCounter: ServiceItemView {
     companion object {
         @JvmField val ACTION_PLUS = 1
         @JvmField val ACTION_DELETE = 2
+        @JvmField val MAX_COUNT = 99
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -58,8 +59,10 @@ class ServiceItemViewCounter: ServiceItemView {
         onCountUpdate()
 
         fl_add_btn_container.setOnClickListener {
-            serviceItem.count++
-            onCountUpdate()
+            if (serviceItem.count < MAX_COUNT) {
+                serviceItem.count++
+                onCountUpdate()
+            }
         }
 
         iv_delete.setOnClickListener {
