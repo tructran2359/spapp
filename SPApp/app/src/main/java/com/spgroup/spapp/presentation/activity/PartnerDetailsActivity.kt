@@ -193,11 +193,11 @@ class PartnerDetailsActivity : BaseActivity() {
     }
 
     private fun setUpHeroSection() {
-        iv_back.setOnClickListener {
+        fl_back_container.setOnClickListener {
             onBackPressed()
         }
 
-        iv_information.setOnClickListener {
+        fl_info_container.setOnClickListener {
             startActivity(PartnerInformationActivity.getLaunchIntent(this@PartnerDetailsActivity))
         }
 
