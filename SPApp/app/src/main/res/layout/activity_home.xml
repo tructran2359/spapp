@@ -70,22 +70,81 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <!--Content-->
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/color_ui05"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 
-        <com.spgroup.spapp.presentation.view.TopLeverCateGroupView
-            android:id="@+id/cate_group_view"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/common_vert_medium_sub"
-            android:layout_marginLeft="@dimen/common_horz_large"
-            android:layout_marginRight="@dimen/common_horz_large"
-            />
+            android:orientation="vertical"
+            android:background="@color/color_ui06"
+            >
+
+            <com.spgroup.spapp.presentation.view.TopLeverCateGroupView
+                android:id="@+id/cate_group_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_vert_medium_sub"
+                android:layout_marginLeft="@dimen/common_horz_large"
+                android:layout_marginRight="@dimen/common_horz_large"
+                />
+
+            <TextView
+                style="@style/textH3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/featured_promotions"
+                android:layout_marginTop="@dimen/common_vert_xxxlarge"
+                android:layout_marginLeft="@dimen/common_horz_large"
+                android:layout_marginRight="@dimen/common_horz_large"
+                />
+            
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_promotions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_vert_medium_sub"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_ui05"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/common_vert_xlarge"
+                android:paddingTop="@dimen/common_vert_large"
+                android:paddingBottom="@dimen/common_vert_xxxlarge"
+                >
+
+                <TextView
+                    style="@style/textH3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/featured_merchants"
+                    android:layout_marginLeft="@dimen/common_horz_large"
+                    android:layout_marginRight="@dimen/common_horz_large"
+                    />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_merchant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_vert_medium_sub"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+    <!--Hidden action bar and menu button-->
 
     <TextView
         style="@style/textH3.white"

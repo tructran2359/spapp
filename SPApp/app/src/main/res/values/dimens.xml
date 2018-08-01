@@ -78,6 +78,7 @@
     <!--OrderSummaryActivity-->
     <dimen name="common_counter_text_width">32dp</dimen>
 
+    <dimen name="common_vert_xxxlarge">60dp</dimen>
     <dimen name="common_vert_xxlarge">50dp</dimen>
     <dimen name="common_vert_xlarge">40dp</dimen>
     <dimen name="common_vert_large">30dp</dimen>
