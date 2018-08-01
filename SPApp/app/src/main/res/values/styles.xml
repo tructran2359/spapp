@@ -86,6 +86,13 @@
         <item name="android:textColor">@color/color_ui01</item>
     </style>
 
+    <style name="textCounter">
+        <item name="android:textSize">@dimen/text_size_counter</item>
+        <item name="fontPath">@string/font_medium</item>
+        <item name="android:lineSpacingExtra">@dimen/line_space_counter</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="textServiceItemFrom">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

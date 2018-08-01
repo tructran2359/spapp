@@ -76,10 +76,13 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 
-        <TextView
+        <com.spgroup.spapp.presentation.view.TopLeverCateGroupView
+            android:id="@+id/cate_group_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/huge_text"
+            android:layout_marginTop="@dimen/common_vert_medium_sub"
+            android:layout_marginLeft="@dimen/common_horz_large"
+            android:layout_marginRight="@dimen/common_horz_large"
             />
 
     </android.support.v4.widget.NestedScrollView>

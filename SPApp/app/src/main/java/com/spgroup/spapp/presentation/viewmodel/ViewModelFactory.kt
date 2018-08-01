@@ -7,6 +7,7 @@ import com.spgroup.spapp.domain.SchedulerFacade
 import com.spgroup.spapp.domain.ServicesRepository
 import com.spgroup.spapp.domain.usecase.GetPartnerListingUsecase
 import com.spgroup.spapp.domain.usecase.GetServicesListBySupplierUsecase
+import com.spgroup.spapp.domain.usecase.GetTopLevelCategoryUsecase
 
 class ViewModelFactory private constructor(
         private val schedulerFacade: SchedulerFacade,
@@ -21,6 +22,8 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(PartnerListingViewModel::class.java) -> createPartnerListingViewModel()
 
             modelClass.isAssignableFrom(CustomiseViewModel::class.java) -> createCustomiseViewModel()
+
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> createHomeViewModel()
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         } as T
@@ -42,6 +45,10 @@ class ViewModelFactory private constructor(
 
     private fun createCustomiseViewModel(): CustomiseViewModel {
         return CustomiseViewModel()
+    }
+
+    private fun createHomeViewModel(): HomeViewModel {
+        return HomeViewModel(GetTopLevelCategoryUsecase(schedulerFacade, servicesRepository))
     }
 
     companion object {

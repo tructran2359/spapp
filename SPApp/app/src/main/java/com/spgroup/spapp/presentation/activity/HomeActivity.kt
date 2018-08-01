@@ -1,10 +1,16 @@
 package com.spgroup.spapp.presentation.activity
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu
 import com.spgroup.spapp.R
+import com.spgroup.spapp.presentation.viewmodel.HomeViewModel
+import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.extension.toast
+import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : BaseActivity() {
 
@@ -20,6 +26,7 @@ class HomeActivity : BaseActivity() {
     ///////////////////////////////////////////////////////////////////////////
 
     private lateinit var mMenu: SlidingMenu
+    private lateinit var mViewModel: HomeViewModel
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -28,6 +35,8 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        subcribeUI()
 
         setupViews()
     }
@@ -38,7 +47,25 @@ class HomeActivity : BaseActivity() {
 
     fun setupViews() {
         setUpMenu()
+    }
 
+    fun subcribeUI() {
+        val factory = ViewModelFactory.getInstance()
+        mViewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
+
+        with(mViewModel) {
+            listTopLevelCate.observe(this@HomeActivity, Observer {
+                it?.let {
+                    cate_group_view.setListCategory(it)
+                }
+            })
+
+            error.observe(this@HomeActivity,  Observer {
+                this@HomeActivity.toast("Error ${it?.message}")
+            })
+
+            mViewModel.load()
+        }
     }
 
     fun setUpMenu() {
