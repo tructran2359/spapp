@@ -31,4 +31,7 @@ class HomeViewModel(
                 )
         disposeBag.addAll(disposable)
     }
+
+    fun getCategoryByIndex(index: Int) = listTopLevelCate.value?.get(index)
+
 }

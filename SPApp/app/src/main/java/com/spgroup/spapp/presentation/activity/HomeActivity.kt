@@ -12,6 +12,7 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.adapter.HomeMerchantAdapter
 import com.spgroup.spapp.presentation.adapter.HomePromotionAdapter
 import com.spgroup.spapp.presentation.adapter.item_decoration.HomeMerchantItemtDecoration
+import com.spgroup.spapp.presentation.view.TopLeverCateGroupView
 import com.spgroup.spapp.presentation.viewmodel.HomeViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
@@ -58,6 +59,15 @@ class HomeActivity : BaseActivity() {
         iv_menu.setOnClickListener {
             mMenu.toggle()
         }
+
+        cate_group_view.setOnCategoryClickListener(object : TopLeverCateGroupView.OnCategoryClickListener {
+            override fun onCategoryClick(position: Int) {
+                val category = mViewModel.getCategoryByIndex(position)
+                category?.let {
+                    startActivity(PartnerListingActivity.getLaunchIntent(this@HomeActivity, category))
+                }
+            }
+        })
 
         setupPromotions()
         setupMerchants()

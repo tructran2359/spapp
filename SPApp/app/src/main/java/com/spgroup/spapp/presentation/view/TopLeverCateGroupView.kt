@@ -16,6 +16,7 @@ class TopLeverCateGroupView: LinearLayout {
 
     private lateinit var mList: List<TopLevelServiceCategory>
     private lateinit var mListCateView: List<TopLevelCateView>
+    private var mListener: OnCategoryClickListener? = null
 
     ///////////////////////////////////////////////////////////////////////////
     // Constructor
@@ -62,7 +63,25 @@ class TopLeverCateGroupView: LinearLayout {
                 else -> throw IllegalArgumentException("ID ${topLevelServiceCategory.id} not found")
             }
 
-            mListCateView[index].setData(topLevelServiceCategory.name, imageId)
+            with(mListCateView[index]) {
+                setData(topLevelServiceCategory.name, imageId)
+                setOnClickListener {
+                    mListener?.onCategoryClick(index)
+                }
+            }
         }
     }
+
+    fun setOnCategoryClickListener(listener: OnCategoryClickListener) {
+        mListener = listener
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Listener
+    ///////////////////////////////////////////////////////////////////////////
+
+    interface OnCategoryClickListener {
+        fun onCategoryClick(position: Int)
+    }
+
 }
