@@ -14,7 +14,7 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_ui06"
+        android:background="@color/color_ui0680"
         >
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -83,7 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/color_ui06"
+            android:background="@color/color_ui0680"
             >
 
             <com.spgroup.spapp.presentation.view.TopLeverCateGroupView
@@ -110,6 +110,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_vert_medium_sub"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:clipToPadding="false"
                 />
 
             <LinearLayout

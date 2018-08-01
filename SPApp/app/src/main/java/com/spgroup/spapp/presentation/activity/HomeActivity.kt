@@ -5,10 +5,13 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu
 import com.spgroup.spapp.R
+import com.spgroup.spapp.presentation.adapter.HomePromotionAdapter
 import com.spgroup.spapp.presentation.viewmodel.HomeViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.extension.getDisplayMetrics
 import com.spgroup.spapp.util.extension.toast
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -73,6 +76,7 @@ class HomeActivity : BaseActivity() {
 
     fun setUpMenu() {
         mMenu = SlidingMenu(this)
+
         with(mMenu) {
             touchModeAbove = SlidingMenu.TOUCHMODE_NONE
             setShadowWidthRes(R.dimen.common_spacing)
@@ -81,6 +85,13 @@ class HomeActivity : BaseActivity() {
             setMenu(R.layout.menu_home)
             attachToActivity(this@HomeActivity, SlidingMenu.SLIDING_CONTENT)
         }
+
+        val promotionLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recycler_view_promotions.layoutManager = promotionLayoutManager
+
+        val displayMetrics = getDisplayMetrics()
+        val screenWidth = displayMetrics.widthPixels
+        recycler_view_promotions.adapter = HomePromotionAdapter(this, screenWidth)
     }
 
 }

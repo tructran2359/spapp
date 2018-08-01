@@ -63,6 +63,7 @@ dependencies {
     // Android Support (refactor to use AndroidX package later)
     implementation "com.android.support:appcompat-v7:$rootProject.supportVersion"
     implementation "com.android.support:design:$rootProject.supportVersion"
+    implementation "com.android.support:cardview-v7:$rootProject.supportVersion"
     // ViewModel - LiveData (refactor to use AndroidX package later)
     implementation "android.arch.lifecycle:extensions:${rootProject.lifecycleVersion}"
     kapt "android.arch.lifecycle:compiler:${rootProject.lifecycleVersion}"

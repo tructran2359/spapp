@@ -2,6 +2,7 @@
 <resources>
 
     <dimen name="common_radius">5dp</dimen>
+    <dimen name="common_radius_large">15dp</dimen>
 
     <!--common-->
     <dimen name="common_spacing">4dp</dimen>
@@ -33,6 +34,8 @@
     <dimen name="text_size_menu">18sp</dimen>
     <dimen name="text_size_button">18sp</dimen>
     <dimen name="text_size_alert">16sp</dimen>
+    <dimen name="text_size_banner_title">11sp</dimen>
+    <dimen name="text_size_banner_desc">15sp</dimen>
 
     <dimen name="line_space_h1">6sp</dimen>
     <dimen name="line_space_h2">7sp</dimen>
@@ -111,5 +114,6 @@
 
     <dimen name="menu_margin_right">90dp</dimen>
     <dimen name="home_category_icon_size">90dp</dimen>
+    <dimen name="card_view_shadow_width">7dp</dimen>
 
 </resources>
