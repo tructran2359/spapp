@@ -31,27 +31,23 @@
             />
 
         <TextView
+            style="@style/textBannerTitle"
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_ui01"
-            android:textSize="@dimen/text_size_banner_title"
             android:layout_marginTop="@dimen/common_vert_small"
             android:layout_marginLeft="@dimen/common_vert_medium_sub"
-            fontPath="@string/font_bold"
 
             android:text="TINGKAT-A-DAY"
             />
 
         <TextView
+            style="@style/textBannerDesc"
             android:id="@+id/tv_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_banner_desc"
             android:layout_marginLeft="@dimen/common_vert_medium_sub"
             android:layout_marginBottom="@dimen/common_vert_medium_sub"
-            fontPath="@string/font_light"
 
             android:text="Get 2 free meals with first booking"
             />

@@ -226,4 +226,18 @@
         <item name="android:layout_marginTop">@dimen/common_vert_medium</item>
     </style>
 
+    <style name="textBannerTitle">
+        <item name="android:textColor">@color/color_ui01</item>
+        <item name="android:textSize">@dimen/text_size_banner_title</item>
+        <item name="android:lineSpacingExtra">@dimen/line_space_banner_title</item>
+        <item name="fontPath">@string/font_bold</item>
+    </style>
+
+    <style name="textBannerDesc">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_banner_desc</item>
+        <item name="android:lineSpacingExtra">@dimen/line_space_banner_desc</item>
+        <item name="fontPath">@string/font_light</item>
+    </style>
+
 </resources>

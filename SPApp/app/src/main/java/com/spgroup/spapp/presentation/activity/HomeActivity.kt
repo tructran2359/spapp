@@ -5,12 +5,16 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu
 import com.spgroup.spapp.R
+import com.spgroup.spapp.presentation.adapter.HomeMerchantAdapter
 import com.spgroup.spapp.presentation.adapter.HomePromotionAdapter
+import com.spgroup.spapp.presentation.adapter.item_decoration.HomeMerchantItemtDecoration
 import com.spgroup.spapp.presentation.viewmodel.HomeViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.extension.getDisplayMetrics
 import com.spgroup.spapp.util.extension.toast
 import kotlinx.android.synthetic.main.activity_home.*
@@ -50,12 +54,39 @@ class HomeActivity : BaseActivity() {
 
     fun setupViews() {
         setUpMenu()
+
         iv_menu.setOnClickListener {
             mMenu.toggle()
         }
+
+        setupPromotions()
+        setupMerchants()
     }
 
-    fun subcribeUI() {
+    private fun setupPromotions() {
+        val promotionLayoutManager = LinearLayoutManager(
+                this,
+                LinearLayoutManager.HORIZONTAL,
+                false)
+        recycler_view_promotions.layoutManager = promotionLayoutManager
+
+        val displayMetrics = getDisplayMetrics()
+        val screenWidth = displayMetrics.widthPixels
+        recycler_view_promotions.adapter = HomePromotionAdapter(this, screenWidth)
+    }
+
+    private fun setupMerchants() {
+        val merchantLayoutManager = GridLayoutManager(
+                this,
+                ConstUtils.HOME_MERCHANT_ROW_COUNT,
+                GridLayoutManager.HORIZONTAL,
+                false)
+        recycler_view_merchant.layoutManager = merchantLayoutManager
+        recycler_view_merchant.addItemDecoration(HomeMerchantItemtDecoration(ConstUtils.HOME_MERCHANT_ROW_COUNT))
+        recycler_view_merchant.adapter = HomeMerchantAdapter()
+    }
+
+    private fun subcribeUI() {
         val factory = ViewModelFactory.getInstance()
         mViewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
 
@@ -74,7 +105,7 @@ class HomeActivity : BaseActivity() {
         }
     }
 
-    fun setUpMenu() {
+    private fun setUpMenu() {
         mMenu = SlidingMenu(this)
 
         with(mMenu) {
@@ -85,13 +116,6 @@ class HomeActivity : BaseActivity() {
             setMenu(R.layout.menu_home)
             attachToActivity(this@HomeActivity, SlidingMenu.SLIDING_CONTENT)
         }
-
-        val promotionLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        recycler_view_promotions.layoutManager = promotionLayoutManager
-
-        val displayMetrics = getDisplayMetrics()
-        val screenWidth = displayMetrics.widthPixels
-        recycler_view_promotions.adapter = HomePromotionAdapter(this, screenWidth)
     }
 
 }

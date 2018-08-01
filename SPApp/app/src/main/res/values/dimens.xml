@@ -49,6 +49,8 @@
     <dimen name="line_space_button">3sp</dimen>
     <dimen name="line_space_alert">8sp</dimen>
     <dimen name="line_space_counter">1sp</dimen>
+    <dimen name="line_space_banner_title">4sp</dimen>
+    <dimen name="line_space_banner_desc">3sp</dimen>
 
     <dimen name="line_width">1dp</dimen>
     <dimen name="dot_size">5dp</dimen>
@@ -115,5 +117,6 @@
     <dimen name="menu_margin_right">90dp</dimen>
     <dimen name="home_category_icon_size">90dp</dimen>
     <dimen name="card_view_shadow_width">7dp</dimen>
+    <dimen name="merchant_label_width">95dp</dimen>
 
 </resources>
