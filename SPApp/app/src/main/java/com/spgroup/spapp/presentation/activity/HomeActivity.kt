@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.adapter.HomeMerchantAdapter
@@ -58,6 +59,10 @@ class HomeActivity : BaseActivity() {
 
         iv_menu.setOnClickListener {
             mMenu.toggle()
+        }
+
+        iv_close.setOnClickListener {
+            rl_noti_container.visibility = View.GONE
         }
 
         cate_group_view.setOnCategoryClickListener(object : TopLeverCateGroupView.OnCategoryClickListener {

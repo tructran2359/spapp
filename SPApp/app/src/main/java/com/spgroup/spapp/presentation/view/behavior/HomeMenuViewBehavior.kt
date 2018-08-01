@@ -50,8 +50,6 @@ class HomeMenuViewBehavior(
     ///////////////////////////////////////////////////////////////////////////
 
     private fun initProperties(appBarLayout: AppBarLayout) {
-        if (mMaxScroll == 0) {
-            mMaxScroll = appBarLayout.totalScrollRange
-        }
+        mMaxScroll = appBarLayout.totalScrollRange
     }
 }

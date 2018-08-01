@@ -118,5 +118,6 @@
     <dimen name="home_category_icon_size">90dp</dimen>
     <dimen name="card_view_shadow_width">7dp</dimen>
     <dimen name="merchant_label_width">95dp</dimen>
+    <dimen name="home_noti_top_margin">80dp</dimen>
 
 </resources>
