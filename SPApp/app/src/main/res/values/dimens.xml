@@ -17,6 +17,8 @@
     <dimen name="common_icon_size_large">42dp</dimen>
     <dimen name="common_icon_padding">5dp</dimen>
 
+    <dimen name="home_menu_icon_size">84dp</dimen>
+
     <dimen name="text_size_h1">28sp</dimen>
     <dimen name="text_size_h2">23sp</dimen>
     <dimen name="text_size_h3">20sp</dimen>
