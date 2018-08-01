@@ -47,6 +47,9 @@ class HomeActivity : BaseActivity() {
 
     fun setupViews() {
         setUpMenu()
+        iv_menu.setOnClickListener {
+            mMenu.toggle()
+        }
     }
 
     fun subcribeUI() {
@@ -71,7 +74,7 @@ class HomeActivity : BaseActivity() {
     fun setUpMenu() {
         mMenu = SlidingMenu(this)
         with(mMenu) {
-            touchModeAbove = SlidingMenu.TOUCHMODE_FULLSCREEN
+            touchModeAbove = SlidingMenu.TOUCHMODE_NONE
             setShadowWidthRes(R.dimen.common_spacing)
             setShadowDrawable(R.drawable.gradient_menu_shadow)
             setBehindOffsetRes(R.dimen.menu_margin_right)
