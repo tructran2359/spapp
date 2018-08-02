@@ -74,6 +74,12 @@
             android:screenOrientation="portrait"
             />
 
+        <!--TermsAndConditionsActivity-->
+        <activity
+            android:name=".presentation.activity.TermsAndConditionsActivity"
+            android:screenOrientation="portrait"
+            />
+
     </application>
 
 </manifest>

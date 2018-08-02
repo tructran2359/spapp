@@ -142,6 +142,10 @@ class HomeActivity : BaseActivity() {
             startActivity(AboutUsActivity.getLaunchIntent(this@HomeActivity))
         }
 
+        tv_tnc.setOnClickListener {
+            startActivity(TermsAndConditionsActivity.getLaunchIntent(this@HomeActivity))
+        }
+
         mMenuAdapter = HomeMenuItemAdapter()
         mMenuAdapter.setOnItemClickListener(object : HomeMenuItemAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
