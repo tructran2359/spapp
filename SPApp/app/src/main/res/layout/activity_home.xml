@@ -1,34 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_primarygradientbase"
+    android:background="@color/color_ui06"
     tools:context=".presentation.activity.HomeActivity"
+    tools:ignore="MissingPrefix"
     >
 
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:orientation="vertical"
+        android:background="@color/color_ui0680"
         >
 
-        <TextView
-            style="@style/homeScreenTempButton"
-            android:id="@+id/view_button"
-            android:text="VIEW"
-            />
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+            app:contentScrim="@color/color_primarygradientbase"
+            app:scrimVisibleHeightTrigger="@dimen/action_bar_height"
+            >
 
-        <TextView
-            style="@style/homeScreenTempButton"
-            android:id="@+id/view_partner_listing"
-            android:layout_marginTop="@dimen/common_vert_medium"
-            android:text="VIEW LISTING"
-            />
+            <RelativeLayout
+                android:id="@+id/rl_header_expanded"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_collapseMode="parallax"
+                >
 
-    </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/rl_noti_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/home_noti_top_margin"
+                    android:background="@drawable/bg_rec_rounded_grey"
+                    android:paddingTop="@dimen/common_vert_medium_sub"
+                    android:paddingBottom="@dimen/common_vert_medium_sub"
+                    android:paddingLeft="@dimen/common_horz_medium_sub"
+                    android:paddingRight="@dimen/common_horz_medium_sub"
+                    android:layout_marginLeft="@dimen/common_horz_large"
+                    android:layout_marginRight="@dimen/common_horz_large"
+                    >
+
+                    <ImageView
+                        android:id="@+id/iv_notification"
+                        android:layout_width="@dimen/common_icon_size"
+                        android:layout_height="@dimen/common_icon_size"
+                        android:src="@drawable/notification"
+                        android:layout_centerVertical="true"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/iv_notification"
+                        android:layout_toLeftOf="@id/iv_close"
+                        android:layout_marginLeft="@dimen/common_horz_medium_sub"
+                        android:textSize="@dimen/text_size_caption"
+                        android:textColor="@color/color_ui02"
+                        fontPath="@string/font_regular"
+
+                        android:text="Alert to the user with maximum 2 lines of text with option to dismiss."
+                        />
+
+                    <ImageView
+                        android:id="@+id/iv_close"
+                        android:layout_width="@dimen/common_icon_size"
+                        android:layout_height="@dimen/common_icon_size"
+                        android:src="@drawable/ic_close_grey"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/iv_brand_icon"
+                    android:layout_width="108dp"
+                    android:layout_height="118dp"
+                    android:src="@drawable/brandicons"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/common_vert_large"
+                    android:layout_marginRight="@dimen/common_horz_large"
+                    android:layout_below="@+id/rl_noti_container"
+                    />
 
 
-</RelativeLayout>
+                <TextView
+                    style="@style/textH1"
+                    android:id="@+id/tv_home_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_header"
+                    android:layout_marginTop="90dp"
+                    android:layout_marginLeft="@dimen/common_horz_large"
+                    android:layout_below="@+id/rl_noti_container"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_short_desc"
+                    android:layout_below="@+id/tv_home_header"
+                    android:layout_marginLeft="@dimen/common_horz_large"
+                    android:layout_marginRight="84dp"
+                    android:layout_marginTop="@dimen/common_vert_medium_sub"
+                    />
+
+            </RelativeLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!--Content-->
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_ui05"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/color_ui0680"
+            >
+
+            <com.spgroup.spapp.presentation.view.TopLeverCateGroupView
+                android:id="@+id/cate_group_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_vert_medium_sub"
+                android:layout_marginLeft="@dimen/common_horz_large"
+                android:layout_marginRight="@dimen/common_horz_large"
+                />
+
+            <TextView
+                style="@style/textH3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/featured_promotions"
+                android:layout_marginTop="@dimen/common_vert_xxxlarge"
+                android:layout_marginLeft="@dimen/common_horz_large"
+                android:layout_marginRight="@dimen/common_horz_large"
+                />
+            
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_promotions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_vert_medium_sub"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:clipToPadding="false"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_ui05"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/common_vert_xlarge"
+                android:paddingTop="@dimen/common_vert_large"
+                android:paddingBottom="@dimen/common_vert_xxxlarge"
+                >
+
+                <TextView
+                    style="@style/textH3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/featured_merchants"
+                    android:layout_marginLeft="@dimen/common_horz_large"
+                    android:layout_marginRight="@dimen/common_horz_large"
+                    />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_merchant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_vert_medium_sub"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <!--Hidden action bar and menu button-->
+
+    <TextView
+        style="@style/textH3.white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_height"
+        android:background="@color/color_primarygradientbase"
+        android:paddingTop="@dimen/common_horz_large"
+        android:gravity="center_horizontal"
+        android:text="@string/home"
+        app:layout_behavior="com.spgroup.spapp.presentation.view.behavior.HomeTextViewBehavior"
+        />
+
+    <ImageView
+        android:id="@+id/iv_menu"
+        android:layout_width="@dimen/home_menu_icon_size"
+        android:layout_height="@dimen/home_menu_icon_size"
+        android:padding="@dimen/common_horz_large"
+        android:src="@drawable/ic_menu_blue"
+        app:layout_behavior="com.spgroup.spapp.presentation.view.behavior.HomeMenuViewBehavior"
+        />
+
+</android.support.design.widget.CoordinatorLayout>

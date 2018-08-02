@@ -2,6 +2,7 @@
 <resources>
 
     <dimen name="common_radius">5dp</dimen>
+    <dimen name="common_radius_large">15dp</dimen>
 
     <!--common-->
     <dimen name="common_spacing">4dp</dimen>
@@ -17,6 +18,8 @@
     <dimen name="common_icon_size_large">42dp</dimen>
     <dimen name="common_icon_padding">5dp</dimen>
 
+    <dimen name="home_menu_icon_size">84dp</dimen>
+
     <dimen name="text_size_h1">28sp</dimen>
     <dimen name="text_size_h2">23sp</dimen>
     <dimen name="text_size_h3">20sp</dimen>
@@ -31,6 +34,8 @@
     <dimen name="text_size_menu">18sp</dimen>
     <dimen name="text_size_button">18sp</dimen>
     <dimen name="text_size_alert">16sp</dimen>
+    <dimen name="text_size_banner_title">11sp</dimen>
+    <dimen name="text_size_banner_desc">15sp</dimen>
 
     <dimen name="line_space_h1">6sp</dimen>
     <dimen name="line_space_h2">7sp</dimen>
@@ -43,6 +48,9 @@
     <dimen name="line_space_caption">6sp</dimen>
     <dimen name="line_space_button">3sp</dimen>
     <dimen name="line_space_alert">8sp</dimen>
+    <dimen name="line_space_counter">1sp</dimen>
+    <dimen name="line_space_banner_title">4sp</dimen>
+    <dimen name="line_space_banner_desc">3sp</dimen>
 
     <dimen name="line_width">1dp</dimen>
     <dimen name="dot_size">5dp</dimen>
@@ -75,6 +83,7 @@
     <!--OrderSummaryActivity-->
     <dimen name="common_counter_text_width">32dp</dimen>
 
+    <dimen name="common_vert_xxxlarge">60dp</dimen>
     <dimen name="common_vert_xxlarge">50dp</dimen>
     <dimen name="common_vert_xlarge">40dp</dimen>
     <dimen name="common_vert_large">30dp</dimen>
@@ -104,5 +113,11 @@
     <dimen name="chip_radius">15dp</dimen>
     <dimen name="chip_horz_padding">10dp</dimen>
     <dimen name="chip_vert_padding">5dp</dimen>
+
+    <dimen name="menu_margin_right">90dp</dimen>
+    <dimen name="home_category_icon_size">90dp</dimen>
+    <dimen name="card_view_shadow_width">7dp</dimen>
+    <dimen name="merchant_label_width">95dp</dimen>
+    <dimen name="home_noti_top_margin">80dp</dimen>
 
 </resources>

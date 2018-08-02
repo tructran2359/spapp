@@ -7,9 +7,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.spgroup.spapp.R
+import com.spgroup.spapp.domain.model.TopLevelServiceCategory
 import com.spgroup.spapp.presentation.adapter.PartnerAdapter
 import com.spgroup.spapp.presentation.viewmodel.PartnerListingViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.extension.toast
 import kotlinx.android.synthetic.main.activity_partner_listing.*
@@ -18,8 +20,10 @@ class PartnerListingActivity: BaseActivity(), PartnerAdapter.OnItemClickListener
 
     companion object {
 
-        fun getLaunchIntent(context: Context) : Intent {
+        fun getLaunchIntent(context: Context, topLevelCategory: TopLevelServiceCategory) : Intent {
             val intent = Intent(context, PartnerListingActivity::class.java)
+            intent.putExtra(ConstUtils.EXTRA_TOP_LEVEL_CATE_NAME, topLevelCategory.name)
+            intent.putExtra(ConstUtils.EXTRA_TOP_LEVEL_CATE_ID, topLevelCategory.id)
             return intent
         }
 
@@ -30,6 +34,8 @@ class PartnerListingActivity: BaseActivity(), PartnerAdapter.OnItemClickListener
     ///////////////////////////////////////////////////////////////////////////
 
     val mAdapter = PartnerAdapter(this)
+    var mCateName = ""
+    var mCateId = -1
     lateinit var mViewModel: PartnerListingViewModel
 
     ///////////////////////////////////////////////////////////////////////////
@@ -39,6 +45,9 @@ class PartnerListingActivity: BaseActivity(), PartnerAdapter.OnItemClickListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_partner_listing)
+
+        mCateId = intent.getIntExtra(ConstUtils.EXTRA_TOP_LEVEL_CATE_ID, -1)
+        mCateName = intent.getStringExtra(ConstUtils.EXTRA_TOP_LEVEL_CATE_NAME)
 
         initViews()
 
@@ -80,6 +89,10 @@ class PartnerListingActivity: BaseActivity(), PartnerAdapter.OnItemClickListener
     ///////////////////////////////////////////////////////////////////////////
 
     fun initViews() {
+        tv_title.setText(mCateName)
+        iv_back.setOnClickListener {
+            onBackPressed()
+        }
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.adapter = mAdapter
     }

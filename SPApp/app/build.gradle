@@ -63,6 +63,7 @@ dependencies {
     // Android Support (refactor to use AndroidX package later)
     implementation "com.android.support:appcompat-v7:$rootProject.supportVersion"
     implementation "com.android.support:design:$rootProject.supportVersion"
+    implementation "com.android.support:cardview-v7:$rootProject.supportVersion"
     // ViewModel - LiveData (refactor to use AndroidX package later)
     implementation "android.arch.lifecycle:extensions:${rootProject.lifecycleVersion}"
     kapt "android.arch.lifecycle:compiler:${rootProject.lifecycleVersion}"
@@ -82,6 +83,8 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
     // PDF Reader
     implementation 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
+    // Sliding Menu
+    implementation 'com.jeremyfeinstein.slidingmenu:library:1.3@aar'
 
     // Test
     testImplementation 'junit:junit:4.12'

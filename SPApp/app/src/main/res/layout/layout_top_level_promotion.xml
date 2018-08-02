@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="MissingPrefix"
+    android:id="@+id/view_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="@dimen/card_view_shadow_width"
+    app:cardCornerRadius="@dimen/common_radius_large"
+    app:cardPreventCornerOverlap="false"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <com.spgroup.spapp.presentation.view.RatioImageView
+            android:id="@+id/iv_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/dummy_promotion"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius_top_left="@dimen/common_radius_large"
+            app:riv_corner_radius_top_right="@dimen/common_radius_large"
+            />
+
+        <TextView
+            style="@style/textBannerTitle"
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_vert_small"
+            android:layout_marginLeft="@dimen/common_vert_medium_sub"
+
+            android:text="TINGKAT-A-DAY"
+            />
+
+        <TextView
+            style="@style/textBannerDesc"
+            android:id="@+id/tv_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_vert_medium_sub"
+            android:layout_marginBottom="@dimen/common_vert_medium_sub"
+
+            android:text="Get 2 free meals with first booking"
+            />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
