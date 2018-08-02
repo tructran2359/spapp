@@ -61,6 +61,7 @@
     <dimen name="bottom_button_container_horz">17dp</dimen>
     <dimen name="bottom_button_container_vert">21dp</dimen>
     <dimen name="bottom_button_height">65dp</dimen>
+    <dimen name="bottom_button_total_height">107dp</dimen>
 
     <!--Partner Details Screen-->
     <dimen name="partner_detail_summary_section_height">70dp</dimen>

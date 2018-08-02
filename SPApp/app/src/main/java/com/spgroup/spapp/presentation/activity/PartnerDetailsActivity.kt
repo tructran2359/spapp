@@ -5,10 +5,12 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.Animation
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.Supplier
@@ -19,13 +21,10 @@ import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.doLogE
-import com.spgroup.spapp.util.extension.loadAnimation
-import com.spgroup.spapp.util.extension.setOnGlobalLayoutListener
-import com.spgroup.spapp.util.extension.setUpMenuActive
-import com.spgroup.spapp.util.extension.setUpMenuInactive
+import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_partner_details.*
 
-class PartnerDetailsActivity : BaseActivity() {
+class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
 
     ///////////////////////////////////////////////////////////////////////////
     // Static
@@ -53,6 +52,7 @@ class PartnerDetailsActivity : BaseActivity() {
     lateinit var mCategoryAdapter: CategoryPagerAdapter
     lateinit var mAnimationAppear: Animation
     lateinit var mAnimationDisappear: Animation
+    var mActionBarHeight: Int = 0
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -68,11 +68,16 @@ class PartnerDetailsActivity : BaseActivity() {
         } else {
             doLogD("Partner", "onCreate partner: ${serializable as Supplier}")
         }
+        mActionBarHeight = getDimensionPixelSize(R.dimen.action_bar_height)
 
         initAnimations()
 
         setUpViews()
 
+        subcribeUI()
+    }
+
+    fun subcribeUI() {
         // This is demo for using ViewModel
         val factory = ViewModelFactory.getInstance()
         val viewmodel = ViewModelProviders.of(this, factory).get(SupplierDetailsViewModel::class.java)
@@ -90,7 +95,7 @@ class PartnerDetailsActivity : BaseActivity() {
                 doLogD("Test", "Selected $it item")
                 it?.let {
                     // Temporarily hide this line coz updating total count textview is not in this task
-//                    btn_summary.setCount(it)
+    //                    btn_summary.setCount(it)
                     if (it != 0 && ll_summary_section.visibility == View.GONE) {
                         showSummaryButton(true)
                     } else if (it == 0 && ll_summary_section.visibility == View.VISIBLE) {
@@ -106,6 +111,29 @@ class PartnerDetailsActivity : BaseActivity() {
 
             loadServices(-1)
         }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // AppBarLayout
+    ///////////////////////////////////////////////////////////////////////////
+
+    override fun onOffsetChanged(appBarLayout: AppBarLayout?, offset: Int) {
+        if(appBarLayout == null) return
+        val currentScroll = appBarLayout.bottom
+        val mMaxScroll = appBarLayout.totalScrollRange
+        val percentage = currentScroll.toFloat() / (mMaxScroll).toFloat()
+        val layoutParam = rl_top_button_container.layoutParams
+        if (currentScroll <= mActionBarHeight) {
+            v_background_color.alpha = 1f
+            layoutParam.height = mActionBarHeight
+        } else {
+            v_background_color.alpha = 1f - percentage
+            layoutParam.height = currentScroll
+        }
+        rl_top_button_container.layoutParams = layoutParam
+        val scale = if (percentage <= 0.7f) 0.7f else percentage
+        tv_partner_name.scaleX = scale
+        tv_partner_name.scaleY = scale
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -205,9 +233,14 @@ class PartnerDetailsActivity : BaseActivity() {
             val width = rl_hero_section.width
             val height = (width * 9f / 16f).toInt()
             val layoutParams = rl_hero_section.layoutParams
+            val layoutParamsMask = rl_top_button_container.layoutParams
             layoutParams.height = height
+            layoutParamsMask.height = height
             rl_hero_section.layoutParams = layoutParams
+            rl_top_button_container.layoutParams = layoutParamsMask
         }
+
+        appbar.addOnOffsetChangedListener(this)
 
         mImageAdapter = PartnerImagesAdapter(supportFragmentManager)
         pager_images.offscreenPageLimit = 3
@@ -233,6 +266,9 @@ class PartnerDetailsActivity : BaseActivity() {
     private fun updateVisibility(show: Boolean) {
         val visibility = if (show) View.VISIBLE else View.GONE
         ll_summary_section.visibility = visibility
+        val params = pager_forms.layoutParams as LinearLayout.LayoutParams
+        params.bottomMargin = if (show) getDimensionPixelSize(R.dimen.bottom_button_total_height) else 0
+        pager_forms.layoutParams = params
     }
 
 }
