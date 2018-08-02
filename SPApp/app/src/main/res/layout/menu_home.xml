@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/ll_about_us_container"
+        android:layout_marginTop="@dimen/common_vert_large"
         android:layout_marginBottom="@dimen/common_vert_large"
         />
     
