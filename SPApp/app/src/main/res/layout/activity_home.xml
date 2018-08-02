@@ -208,7 +208,7 @@
         android:paddingTop="@dimen/common_horz_large"
         android:gravity="center_horizontal"
         android:text="@string/home"
-        app:layout_behavior="com.spgroup.spapp.presentation.view.behavior.HomeTextViewBehavior"
+        app:layout_behavior="@string/behavior_home_text_view"
         />
 
     <ImageView
@@ -217,7 +217,7 @@
         android:layout_height="@dimen/home_menu_icon_size"
         android:padding="@dimen/common_horz_large"
         android:src="@drawable/ic_menu_blue"
-        app:layout_behavior="com.spgroup.spapp.presentation.view.behavior.HomeMenuViewBehavior"
+        app:layout_behavior="@string/behavior_home_menu_view"
         />
 
 </android.support.design.widget.CoordinatorLayout>
