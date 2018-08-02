@@ -139,6 +139,11 @@ class HomeActivity : BaseActivity() {
         tv_app_version.setText(getString(R.string.app_version, BuildConfig.VERSION_NAME))
 
         mMenuAdapter = HomeMenuItemAdapter()
+        mMenuAdapter.setOnItemClickListener(object : HomeMenuItemAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                this@HomeActivity.onCategoryClick(position)
+            }
+        })
         recycler_view_home_menu.layoutManager = LinearLayoutManager(this)
         val space = getDimensionPixelSize(R.dimen.common_vert_medium_sub)
         recycler_view_home_menu.addItemDecoration(HomeMenuItemDecoration(space))
