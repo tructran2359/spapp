@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu
+import com.spgroup.spapp.BuildConfig
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.adapter.HomeMerchantAdapter
 import com.spgroup.spapp.presentation.adapter.HomePromotionAdapter
@@ -20,6 +21,7 @@ import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.extension.getDisplayMetrics
 import com.spgroup.spapp.util.extension.toast
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.menu_home.*
 
 class HomeActivity : BaseActivity() {
 
@@ -125,12 +127,14 @@ class HomeActivity : BaseActivity() {
 
         with(mMenu) {
             touchModeAbove = SlidingMenu.TOUCHMODE_NONE
-            setShadowWidthRes(R.dimen.common_spacing)
+            setShadowWidthRes(R.dimen.common_spacing_x3)
             setShadowDrawable(R.drawable.gradient_menu_shadow)
             setBehindOffsetRes(R.dimen.menu_margin_right)
             setMenu(R.layout.menu_home)
             attachToActivity(this@HomeActivity, SlidingMenu.SLIDING_CONTENT)
         }
+
+        tv_app_version.setText(getString(R.string.app_version, BuildConfig.VERSION_NAME))
     }
 
 }
