@@ -146,6 +146,10 @@ class HomeActivity : BaseActivity() {
             startActivity(TermsAndConditionsActivity.getLaunchIntent(this@HomeActivity))
         }
 
+        tv_ack.setOnClickListener {
+            startActivity(HomeAcknowledgementActivity.getLaunchIntent(this@HomeActivity))
+        }
+
         mMenuAdapter = HomeMenuItemAdapter()
         mMenuAdapter.setOnItemClickListener(object : HomeMenuItemAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
