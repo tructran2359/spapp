@@ -1,23 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_ui06"
     >
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_home_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_about_us_container"
+        android:layout_marginTop="@dimen/common_vert_large"
+        android:layout_marginBottom="@dimen/common_vert_large"
+        />
+    
+    <LinearLayout
+        android:id="@+id/ll_about_us_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/common_horz_large"
+        android:layout_marginTop="@dimen/common_vert_large"
+        android:layout_marginBottom="@dimen/common_vert_xlarge"
+        android:layout_above="@+id/ll_ack_tnc"
+        >
+        
+        <ImageView
+            android:layout_width="@dimen/home_menu_item_icon_size"
+            android:layout_height="@dimen/home_menu_item_icon_size"
+            android:src="@drawable/ic_about_us"
+            />
+
+        <TextView
+            style="@style/textMenuItem"
+            android:text="@string/about_us"
+            />
+        
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/ll_ack_tnc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/common_horz_large"
+        android:layout_marginRight="@dimen/common_horz_large"
+        android:layout_above="@+id/tv_powered_by"
+        android:layout_marginBottom="@dimen/common_vert_medium_sub"
+        >
+
+        <TextView
+            style="@style/textMenuFooter"
+            android:id="@+id/tv_ack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ack"
+            />
+
+        <View
+            android:id="@+id/divider_ack"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/line_width"
+            android:background="@color/color_ui02"
+            android:layout_below="@+id/tv_ack"
+            android:layout_alignRight="@+id/tv_ack"
+            />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="@dimen/line_width"
+            android:layout_height="match_parent"
+            android:background="@color/color_ui02"
+            android:layout_toRightOf="@+id/tv_ack"
+            android:layout_marginLeft="@dimen/common_horz_small"
+            android:layout_marginRight="@dimen/common_horz_small"
+            android:layout_alignTop="@+id/tv_ack"
+            android:layout_alignBottom="@+id/divider_ack"
+            />
+
+        <TextView
+            style="@style/textMenuFooter"
+            android:id="@+id/tv_tnc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/divider"
+            android:text="@string/tnc"
+            android:gravity="right"
+            />
+
+        <View
+            android:id="@+id/divider_tnc"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/line_width"
+            android:background="@color/color_ui02"
+            android:layout_below="@+id/tv_ack"
+            android:layout_alignLeft="@+id/tv_tnc"
+            android:layout_alignRight="@+id/tv_tnc"
+            />
+
+    </RelativeLayout>
+
     <TextView
+        style="@style/textMenuFooter"
+        android:id="@+id/tv_powered_by"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="MENU"
+        android:layout_marginLeft="@dimen/common_horz_large"
+        android:layout_marginBottom="@dimen/common_vert_xsmall"
+        android:layout_above="@+id/tv_app_version"
+        android:text="@string/powered_by"
         />
 
-    <View
-        android:layout_width="@dimen/common_spacing_x4"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/gradient_menu_shadow"
+    <TextView
+        style="@style/textMenuFooter"
+        android:id="@+id/tv_app_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/common_horz_large"
+        android:layout_marginBottom="@dimen/common_vert_large"
+        android:text="Version 1.0.1"
         />
 
 </RelativeLayout>

@@ -1,7 +1,9 @@
 package com.spgroup.spapp.util.extension
 
 import android.content.Context
+import android.os.Build
 import android.support.v4.content.ContextCompat
+import android.text.Html
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
@@ -52,4 +54,14 @@ fun BaseActivity.getDisplayMetrics(): DisplayMetrics {
     val displayMetrics = DisplayMetrics()
     windowManager.defaultDisplay.getMetrics(displayMetrics)
     return displayMetrics
+}
+
+fun TextView.setTextUnderline(resId: Int) {
+    val text = "<u> ${context.getString(resId)}</u>"
+    val spanned = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY)
+    } else {
+        Html.fromHtml(text)
+    }
+    setText(spanned)
 }
