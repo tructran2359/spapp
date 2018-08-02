@@ -68,6 +68,12 @@
             android:screenOrientation="portrait"
             />
 
+        <!--AboutUsActivity-->
+        <activity
+            android:name=".presentation.activity.AboutUsActivity"
+            android:screenOrientation="portrait"
+            />
+
     </application>
 
 </manifest>

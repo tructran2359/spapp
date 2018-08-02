@@ -138,6 +138,10 @@ class HomeActivity : BaseActivity() {
 
         tv_app_version.setText(getString(R.string.app_version, BuildConfig.VERSION_NAME))
 
+        ll_about_us_container.setOnClickListener {
+            startActivity(AboutUsActivity.getLaunchIntent(this@HomeActivity))
+        }
+
         mMenuAdapter = HomeMenuItemAdapter()
         mMenuAdapter.setOnItemClickListener(object : HomeMenuItemAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
