@@ -68,6 +68,24 @@
             android:screenOrientation="portrait"
             />
 
+        <!--AboutUsActivity-->
+        <activity
+            android:name=".presentation.activity.AboutUsActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <!--TermsAndConditionsActivity-->
+        <activity
+            android:name=".presentation.activity.TermsAndConditionsActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <!--HomeAcknowledgementActivity-->
+        <activity
+            android:name=".presentation.activity.HomeAcknowledgementActivity"
+            android:screenOrientation="portrait"
+            />
+
     </application>
 
 </manifest>
