@@ -28,7 +28,13 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
+
     buildTypes {
+
+        debug {
+            buildConfigField "String", "BASE_API", "\"http://sp-backend-proto.ap-southeast-1.elasticbeanstalk.com\""
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
