@@ -3,6 +3,7 @@ package com.spgroup.spapp.presentation.viewmodel
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.spgroup.spapp.domain.model.ServiceItemCombo
+import java.io.Serializable
 
 class CustomiseViewModel: ViewModel() {
 
@@ -11,12 +12,12 @@ class CustomiseViewModel: ViewModel() {
     val riceCount: MutableLiveData<Int> = MutableLiveData()
     val estimatedPrice: MutableLiveData<Float> = MutableLiveData()
 
-    val mInitData = Content(paxCount = 1, riceCount = 1, instruction = "No beef and peanut. Low salt.")
-    var mCurrentInstruction = mInitData.instruction
+    lateinit var mInitData: Content
+    lateinit var mCurrentInstruction: String
     lateinit var mServiceItem: ServiceItemCombo
     var mIsEdit = false
 
-    init {
+    fun initData() {
         isUpdated.value = false
         paxCount.value = mInitData.paxCount
         riceCount.value = mInitData.riceCount
@@ -95,5 +96,5 @@ class CustomiseViewModel: ViewModel() {
             var ricePrice: Float = 20f,
 
             val instruction: String = ""
-    )
+    ): Serializable
 }

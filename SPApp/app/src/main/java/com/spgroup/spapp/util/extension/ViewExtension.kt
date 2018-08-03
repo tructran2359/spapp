@@ -1,5 +1,6 @@
 package com.spgroup.spapp.util.extension
 
+import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.support.v4.content.ContextCompat
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import com.spgroup.spapp.R
@@ -66,4 +68,9 @@ fun TextView.setTextUnderline(resId: Int) {
         Html.fromHtml(text)
     }
     setText(spanned)
+}
+
+fun View.hideKeyboard() {
+    val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(this.getWindowToken(), 0)
 }
