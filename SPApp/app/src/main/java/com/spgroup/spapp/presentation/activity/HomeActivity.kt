@@ -26,7 +26,12 @@ import com.spgroup.spapp.util.extension.toast
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.menu_home.*
 
-class HomeActivity : BaseActivity(), HomePromotionAdapter.OnPromotionClickListener {
+private val homeMerchantAdapter = HomeMerchantAdapter()
+
+class HomeActivity :
+        BaseActivity(),
+        HomePromotionAdapter.OnPromotionClickListener,
+        HomeMerchantAdapter.OnMerchantClickListener {
 
     companion object {
         fun getLaunchIntent(context: Context) : Intent {
@@ -43,6 +48,7 @@ class HomeActivity : BaseActivity(), HomePromotionAdapter.OnPromotionClickListen
     private lateinit var mViewModel: HomeViewModel
     private lateinit var mMenuAdapter: HomeMenuItemAdapter
     private lateinit var mPromotionAdapter: HomePromotionAdapter
+    private lateinit var mMerchantAdapter: HomeMerchantAdapter
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -62,6 +68,14 @@ class HomeActivity : BaseActivity(), HomePromotionAdapter.OnPromotionClickListen
     ///////////////////////////////////////////////////////////////////////////
 
     override fun onPromotionClick(position: Int) {
+        startActivity(PartnerDetailsActivity.getLaunchIntent(this))
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // HomeMerchantAdapter.OnMerchantClickListener
+    ///////////////////////////////////////////////////////////////////////////
+
+    override fun onMerchantClick(position: Int) {
         startActivity(PartnerDetailsActivity.getLaunchIntent(this))
     }
 
@@ -112,7 +126,9 @@ class HomeActivity : BaseActivity(), HomePromotionAdapter.OnPromotionClickListen
                 false)
         recycler_view_merchant.layoutManager = merchantLayoutManager
         recycler_view_merchant.addItemDecoration(HomeMerchantItemtDecoration(ConstUtils.HOME_MERCHANT_ROW_COUNT))
-        recycler_view_merchant.adapter = HomeMerchantAdapter()
+        mMerchantAdapter = HomeMerchantAdapter()
+        mMerchantAdapter.setOnMerchantClickListener(this)
+        recycler_view_merchant.adapter = mMerchantAdapter
     }
 
     private fun subcribeUI() {

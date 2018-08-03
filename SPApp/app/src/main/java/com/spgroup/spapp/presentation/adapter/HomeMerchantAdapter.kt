@@ -8,6 +8,17 @@ import com.spgroup.spapp.util.extension.inflate
 import kotlinx.android.synthetic.main.layout_merchant.view.*
 
 class HomeMerchantAdapter: RecyclerView.Adapter<HomeMerchantAdapter.HomeMerchantVH>() {
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Property
+    ///////////////////////////////////////////////////////////////////////////
+
+    private var mListener: OnMerchantClickListener? = null
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Override
+    ///////////////////////////////////////////////////////////////////////////
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeMerchantVH {
         val view = parent.inflate(R.layout.layout_merchant, false)
         return HomeMerchantVH(view)
@@ -20,15 +31,37 @@ class HomeMerchantAdapter: RecyclerView.Adapter<HomeMerchantAdapter.HomeMerchant
     }
 
     ///////////////////////////////////////////////////////////////////////////
+    // Other
+    ///////////////////////////////////////////////////////////////////////////
+
+    fun setOnMerchantClickListener(listener: OnMerchantClickListener) {
+        mListener = listener
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
     // ViewHolder
     ///////////////////////////////////////////////////////////////////////////
 
-    class HomeMerchantVH(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class HomeMerchantVH(itemView: View): RecyclerView.ViewHolder(itemView) {
+
+        init {
+            itemView.setOnClickListener {
+                mListener?.onMerchantClick(adapterPosition)
+            }
+        }
 
         fun bind(position: Int) {
             with(itemView) {
                 tv_merchant_name.setText("Cate $position")
             }
         }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Listener
+    ///////////////////////////////////////////////////////////////////////////
+
+    interface OnMerchantClickListener {
+        fun onMerchantClick(position: Int)
     }
 }
