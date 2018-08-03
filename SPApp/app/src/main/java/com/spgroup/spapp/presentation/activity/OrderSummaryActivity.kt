@@ -13,6 +13,7 @@ import com.spgroup.spapp.presentation.adapter.PreferredTimeAdapter
 import com.spgroup.spapp.presentation.view.ValidationInputView
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.extension.getDimensionPixelSize
+import com.spgroup.spapp.util.extension.isNumberOnly
 import com.spgroup.spapp.util.extension.isValidEmail
 import kotlinx.android.synthetic.main.activity_order_summary.*
 
@@ -118,10 +119,16 @@ class OrderSummaryActivity : BaseActivity() {
             initData(1, 10, 1)
         }
 
+        validation_name.setValidation { name: String -> name.length > 1 }
+
         validation_email.setInputType(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
         validation_email.setValidation { emailAddress: String -> emailAddress.isValidEmail() }
-        validation_contact_no.setInputType(InputType.TYPE_CLASS_PHONE)
+
+        validation_contact_no.setInputType(InputType.TYPE_CLASS_NUMBER)
+        validation_contact_no.setValidation { phone: String -> phone.length == 8 && phone.isNumberOnly() }
+
         validation_postal_code.setInputType(InputType.TYPE_CLASS_NUMBER)
+        validation_postal_code.setValidation { postalCode: String -> postalCode.isNumberOnly() }
 
         with(btn_summary) {
             isEnabled = true
