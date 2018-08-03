@@ -26,7 +26,7 @@ import com.spgroup.spapp.util.extension.toast
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.menu_home.*
 
-class HomeActivity : BaseActivity() {
+class HomeActivity : BaseActivity(), HomePromotionAdapter.OnPromotionClickListener {
 
     companion object {
         fun getLaunchIntent(context: Context) : Intent {
@@ -42,6 +42,7 @@ class HomeActivity : BaseActivity() {
     private lateinit var mMenu: SlidingMenu
     private lateinit var mViewModel: HomeViewModel
     private lateinit var mMenuAdapter: HomeMenuItemAdapter
+    private lateinit var mPromotionAdapter: HomePromotionAdapter
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -54,6 +55,14 @@ class HomeActivity : BaseActivity() {
         subcribeUI()
 
         setupViews()
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // HomePromotionAdapter.OnPromotionClickListener
+    ///////////////////////////////////////////////////////////////////////////
+
+    override fun onPromotionClick(position: Int) {
+        startActivity(PartnerDetailsActivity.getLaunchIntent(this))
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -90,7 +99,9 @@ class HomeActivity : BaseActivity() {
 
         val displayMetrics = getDisplayMetrics()
         val screenWidth = displayMetrics.widthPixels
-        recycler_view_promotions.adapter = HomePromotionAdapter(this, screenWidth)
+        mPromotionAdapter = HomePromotionAdapter(this, screenWidth)
+        mPromotionAdapter.setOnPromotionClickListener(this)
+        recycler_view_promotions.adapter = mPromotionAdapter
     }
 
     private fun setupMerchants() {
