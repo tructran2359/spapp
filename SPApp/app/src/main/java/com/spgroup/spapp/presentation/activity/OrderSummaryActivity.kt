@@ -1,5 +1,6 @@
 package com.spgroup.spapp.presentation.activity
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +12,8 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItemCombo
 import com.spgroup.spapp.presentation.adapter.PreferredTimeAdapter
 import com.spgroup.spapp.presentation.view.ValidationInputView
+import com.spgroup.spapp.presentation.viewmodel.CustomiseViewModel
+import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.extension.getDimensionPixelSize
 import com.spgroup.spapp.util.extension.isNumberOnly
@@ -20,6 +23,9 @@ import kotlinx.android.synthetic.main.activity_order_summary.*
 class OrderSummaryActivity : BaseActivity() {
 
     companion object {
+
+        @JvmField val RC_EDIT = 11
+
         fun getLaunchIntent(context: Context): Intent {
             val intent = Intent(context, OrderSummaryActivity::class.java)
             return intent
@@ -44,6 +50,16 @@ class OrderSummaryActivity : BaseActivity() {
 
         initAnimations()
         initViews()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_EDIT && resultCode == Activity.RESULT_OK) {
+            data?.let {
+                val content = data.getSerializableExtra(ConstUtils.EXTRA_CONTENT) as CustomiseViewModel.Content
+                summary_view_combo.setDummyData(content)
+            }
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -85,9 +101,8 @@ class OrderSummaryActivity : BaseActivity() {
 
         with(summary_view_combo) {
 
-            addOption("Lunch for 1 pax", 165f)
-
-            addOption("1 Plain Rice", 20f)
+            val dummy = CustomiseViewModel.Content(paxCount = 1, riceCount = 1, instruction = "No beef and peanut. Low salt.")
+            setDummyData(dummy)
 
             setOnEditClickListener {
 
@@ -99,11 +114,15 @@ class OrderSummaryActivity : BaseActivity() {
                         "Weekdays only. Island-wide delivery. Packed in microwavable containers only.",
                         false
                 )
+
+                val dummyData = getDummyData()
+
                 val intent = CustomiseActivity.getLaunchIntent(
                         this@OrderSummaryActivity,
                         service,
+                        dummyData,
                         true)
-                this@OrderSummaryActivity.startActivity(intent)
+                this@OrderSummaryActivity.startActivityForResult(intent, RC_EDIT)
             }
         }
 

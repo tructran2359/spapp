@@ -1,5 +1,6 @@
 package com.spgroup.spapp.presentation.activity
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
@@ -19,17 +20,23 @@ import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.extension.formatPrice
 import com.spgroup.spapp.util.extension.getDimensionPixelSize
-import com.spgroup.spapp.util.extension.toast
+import com.spgroup.spapp.util.extension.hideKeyboard
 import kotlinx.android.synthetic.main.activity_customise.*
 
 class CustomiseActivity : BaseActivity() {
 
     companion object {
 
-        fun getLaunchIntent(context: Context, item: ServiceItem, isEdit: Boolean = false): Intent {
+        fun getLaunchIntent(context: Context, item: ServiceItem, initContent: CustomiseViewModel.Content? = null, isEdit: Boolean = false): Intent {
             val intent = Intent(context, CustomiseActivity::class.java)
             intent.putExtra(ConstUtils.EXTRA_IS_EDIT, isEdit)
             intent.putExtra(ConstUtils.EXTRA_SERVICE_ITEM, item)
+            if (initContent != null) {
+                intent.putExtra(ConstUtils.EXTRA_CONTENT, initContent)
+            } else {
+                intent.putExtra(ConstUtils.EXTRA_CONTENT, CustomiseViewModel.Content(paxCount = 1, riceCount = 1, instruction = "No beef and peanut. Low salt."))
+
+            }
             return intent
         }
     }
@@ -51,11 +58,16 @@ class CustomiseActivity : BaseActivity() {
         setContentView(R.layout.activity_customise)
 
         val factory = ViewModelFactory.getInstance()
+
         mViewModel = ViewModelProviders.of(this, factory).get(CustomiseViewModel::class.java)
-        mViewModel.mServiceItem = intent.getSerializableExtra(ConstUtils.EXTRA_SERVICE_ITEM) as ServiceItemCombo
-        mViewModel.mIsEdit = intent.getBooleanExtra(ConstUtils.EXTRA_IS_EDIT, false)
+
 
         with(mViewModel) {
+            mServiceItem = intent.getSerializableExtra(ConstUtils.EXTRA_SERVICE_ITEM) as ServiceItemCombo
+            mInitData = intent.getSerializableExtra(ConstUtils.EXTRA_CONTENT) as CustomiseViewModel.Content
+            mCurrentInstruction = mInitData.instruction
+            mIsEdit = intent.getBooleanExtra(ConstUtils.EXTRA_IS_EDIT, false)
+            initData()
 
             paxCount.observe(this@CustomiseActivity, Observer {
                 it?.let {
@@ -111,7 +123,23 @@ class CustomiseActivity : BaseActivity() {
 
         if (mViewModel.mIsEdit) {
             action_bar.setTitle(R.string.edit)
+
             tv_bottom.setText(R.string.back_to_view_summary)
+            tv_bottom.setOnClickListener {
+
+                et_instruction.hideKeyboard()
+
+                with(mViewModel) {
+                    val content = mInitData.copy(
+                            paxCount = paxCount.value!!,
+                            riceCount = riceCount.value!!,
+                            instruction = mCurrentInstruction)
+                    val intent = Intent()
+                    intent.putExtra(ConstUtils.EXTRA_CONTENT, content)
+                    setResult(Activity.RESULT_OK, intent)
+                    finish()
+                }
+            }
 
             // In edit screen, set content of instruction here. Now just use dummy text
             et_instruction.setText(mViewModel.mInitData.instruction)
@@ -175,10 +203,6 @@ class CustomiseActivity : BaseActivity() {
 
         ll_option_container.addView(mPaxView)
         ll_option_container.addView(mRiceView)
-
-        tv_bottom.setOnClickListener {
-            this.toast("CLICKED")
-        }
 
         action_bar.setOnBackPress {
             onBackPressed()
