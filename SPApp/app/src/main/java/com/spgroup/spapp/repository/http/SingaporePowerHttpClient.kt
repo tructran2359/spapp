@@ -1,5 +1,6 @@
 package com.spgroup.spapp.repository.http
 
+import com.spgroup.spapp.repository.entity.PartnerEntity
 import com.spgroup.spapp.repository.entity.TopLevelCategoryEntity
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -11,7 +12,7 @@ interface SingaporePowerHttpClient {
     fun getTopLevelCategories(): Single<List<TopLevelCategoryEntity>>
 
     @GET("api/v1/partner/category/{top-level-category-id}")
-    fun getPartnersByCategory(@Path("top-level-category-id") categoryId: String): Single<Any>
+    fun getPartnersByCategory(@Path("top-level-category-id") categoryId: String): Single<List<PartnerEntity>>
 
     @GET("api/v1/partner/detail/{partnerUEN}")
     fun getPartnerDetails(@Path("partnerUEN") partnerUEN: String): Single<Any>

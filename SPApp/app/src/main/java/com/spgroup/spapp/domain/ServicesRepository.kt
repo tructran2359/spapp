@@ -9,7 +9,7 @@ interface ServicesRepository {
 
     fun getTopLevelServiceCategories(): Single<List<TopLevelServiceCategory>>
 
-    fun getSuppliersByCategory(categoryId: Int): Single<List<Supplier>>
+    fun getSuppliersByCategory(categoryId: String): Single<List<Supplier>>
 
     fun getSupplierServicesDetails(supplierId: Int): Single<List<SupplierServiceCategory>>
 

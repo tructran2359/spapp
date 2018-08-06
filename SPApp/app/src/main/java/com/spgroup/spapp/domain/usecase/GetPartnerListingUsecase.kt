@@ -13,7 +13,7 @@ class GetPartnerListingUsecase(
 
 ) : BaseUsecase(schedulerFacade) {
 
-    fun getPartnerListing(topLeverServiceCategoryId: Int): Single<List<Supplier>> {
+    fun getPartnerListing(topLeverServiceCategoryId: String): Single<List<Supplier>> {
         return servicesRepository.getSuppliersByCategory(topLeverServiceCategoryId)
                 .subscribeOn(schedulerFacade.workerScheduler())
                 .observeOn(schedulerFacade.callbackScheduler())

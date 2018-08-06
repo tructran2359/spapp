@@ -17,7 +17,7 @@ class PartnerListingViewModel(
 
     fun loadPartnerListing(id: Int) {
         val disposable = getPartnerListingUsecase
-                .getPartnerListing(id)
+                .getPartnerListing(id.toString())
                 .subscribe(
 
                         {
