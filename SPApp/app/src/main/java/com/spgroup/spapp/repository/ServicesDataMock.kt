@@ -6,29 +6,29 @@ import io.reactivex.Single
 
 class ServicesDataMock : ServicesRepository {
 
-    override fun getTopLevelServiceCategories(): Single<List<TopLevelServiceCategory>> {
+    override fun getTopLevelServiceCategories(): Single<List<TopLevelCategory>> {
         return Single.fromCallable {
-            listOf(TopLevelServiceCategory(1, "Food"),
-                    TopLevelServiceCategory(2, "House-keeping"),
-                    TopLevelServiceCategory(3, "Aircon Servicing"),
-                    TopLevelServiceCategory(4, "Laundry"),
-                    TopLevelServiceCategory(5, "Education"),
-                    TopLevelServiceCategory(6, "Grocery"))
+            listOf(TopLevelCategory("food", "Food"),
+                    TopLevelCategory("housekeeping", "House-keeping"),
+                    TopLevelCategory("aircon", "Aircon Servicing"),
+                    TopLevelCategory("laundry", "Laundry"),
+                    TopLevelCategory("education", "Education"),
+                    TopLevelCategory("groceries", "Grocery"))
         }
     }
 
-    override fun getSuppliersByCategory(categoryId: Int): Single<List<Supplier>> {
+    override fun getSuppliersByCategory(categoryId: String): Single<List<Supplier>> {
         return Single.fromCallable {
             val list = mutableListOf<Supplier>()
             for (i in 1..10) {
                 list.add(
                         Supplier(
-                        i,
-                        "Partner $i",
-                        165f + i,
-                        "month",
-                        "testUrl $i",
-                        (i % 2 == 0))
+                        id = i,
+                        name = "Partner $i",
+                        price = 165f + i,
+                        unit = "month",
+                        imgUrl = "testUrl $i",
+                        isSponsored = (i % 2 == 0))
                 )
             }
 

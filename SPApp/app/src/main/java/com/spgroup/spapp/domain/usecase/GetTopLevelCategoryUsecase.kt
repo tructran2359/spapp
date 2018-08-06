@@ -2,7 +2,7 @@ package com.spgroup.spapp.domain.usecase
 
 import com.spgroup.spapp.domain.SchedulerFacade
 import com.spgroup.spapp.domain.ServicesRepository
-import com.spgroup.spapp.domain.model.TopLevelServiceCategory
+import com.spgroup.spapp.domain.model.TopLevelCategory
 import io.reactivex.Single
 
 class GetTopLevelCategoryUsecase(
@@ -10,7 +10,7 @@ class GetTopLevelCategoryUsecase(
         private val servicesRepository: ServicesRepository
 ): BaseUsecase(schedulerFacade) {
 
-    fun getTopLevelCategory() : Single<List<TopLevelServiceCategory>> {
+    fun getTopLevelCategory() : Single<List<TopLevelCategory>> {
         return servicesRepository
                 .getTopLevelServiceCategories()
                 .subscribeOn(schedulerFacade.workerScheduler())

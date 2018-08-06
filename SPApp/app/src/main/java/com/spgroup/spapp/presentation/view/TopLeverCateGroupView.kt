@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.TopLevelServiceCategory
+import com.spgroup.spapp.domain.model.TopLevelCategory
 import kotlinx.android.synthetic.main.view_top_level_category_group.view.*
 
 class TopLeverCateGroupView: LinearLayout {
@@ -14,7 +14,7 @@ class TopLeverCateGroupView: LinearLayout {
     // Property
     ///////////////////////////////////////////////////////////////////////////
 
-    private lateinit var mList: List<TopLevelServiceCategory>
+    private lateinit var mList: List<TopLevelCategory>
     private lateinit var mListCateView: List<TopLevelCateView>
     private var mListener: OnCategoryClickListener? = null
 
@@ -50,16 +50,16 @@ class TopLeverCateGroupView: LinearLayout {
     // Other
     ///////////////////////////////////////////////////////////////////////////
 
-    fun setListCategory(list: List<TopLevelServiceCategory>) {
+    fun setListCategory(list: List<TopLevelCategory>) {
         mList = list
         mList.forEachIndexed { index, topLevelServiceCategory ->
             val imageId = when (topLevelServiceCategory.id) {
-                1 -> R.drawable.cate_food
-                2 -> R.drawable.cate_house_keeping
-                3 -> R.drawable.cate_aircon
-                4 -> R.drawable.cate_laundry
-                5 -> R.drawable.cate_edu
-                6 -> R.drawable.cate_gro
+                "food" -> R.drawable.cate_food
+                "housekeeping" -> R.drawable.cate_house_keeping
+                "aircon" -> R.drawable.cate_aircon
+                "laundry" -> R.drawable.cate_laundry
+                "education" -> R.drawable.cate_edu
+                "groceries" -> R.drawable.cate_gro
                 else -> throw IllegalArgumentException("ID ${topLevelServiceCategory.id} not found")
             }
 

@@ -3,7 +3,7 @@ package com.spgroup.spapp.repository
 import com.spgroup.spapp.domain.ServicesRepository
 import com.spgroup.spapp.domain.model.Supplier
 import com.spgroup.spapp.domain.model.SupplierServiceCategory
-import com.spgroup.spapp.domain.model.TopLevelServiceCategory
+import com.spgroup.spapp.domain.model.TopLevelCategory
 import com.spgroup.spapp.repository.http.SingaporePowerHttpClient
 import com.spgroup.spapp.repository.mapper.PartnerMapper
 import com.spgroup.spapp.repository.mapper.TopLevelCatMapper
@@ -15,7 +15,7 @@ class ServicesCloudDataStore(
         private val partnerMapper: PartnerMapper
 ) : ServicesRepository {
 
-    override fun getTopLevelServiceCategories(): Single<List<TopLevelServiceCategory>> =
+    override fun getTopLevelServiceCategories(): Single<List<TopLevelCategory>> =
             singaporePowerHttpClient
                     .getTopLevelCategories()
                     .map { topLevelCatMapper.transform(it) }

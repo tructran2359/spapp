@@ -7,7 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.TopLevelServiceCategory
+import com.spgroup.spapp.domain.model.TopLevelCategory
 import com.spgroup.spapp.presentation.adapter.PartnerAdapter
 import com.spgroup.spapp.presentation.viewmodel.PartnerListingViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
@@ -20,7 +20,7 @@ class PartnerListingActivity: BaseActivity(), PartnerAdapter.OnItemClickListener
 
     companion object {
 
-        fun getLaunchIntent(context: Context, topLevelCategory: TopLevelServiceCategory) : Intent {
+        fun getLaunchIntent(context: Context, topLevelCategory: TopLevelCategory) : Intent {
             val intent = Intent(context, PartnerListingActivity::class.java)
             intent.putExtra(ConstUtils.EXTRA_TOP_LEVEL_CATE_NAME, topLevelCategory.name)
             intent.putExtra(ConstUtils.EXTRA_TOP_LEVEL_CATE_ID, topLevelCategory.id)

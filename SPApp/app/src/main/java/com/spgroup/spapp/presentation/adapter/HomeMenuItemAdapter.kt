@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.TopLevelServiceCategory
+import com.spgroup.spapp.domain.model.TopLevelCategory
 import com.spgroup.spapp.presentation.adapter.diff_utils.HomeMenuDiffCallback
 import com.spgroup.spapp.util.extension.inflate
 import kotlinx.android.synthetic.main.menu_item.view.*
@@ -16,7 +16,7 @@ class HomeMenuItemAdapter: RecyclerView.Adapter<HomeMenuItemAdapter.HomeMenuVH>(
     // Property
     ///////////////////////////////////////////////////////////////////////////
 
-    var mData = mutableListOf<TopLevelServiceCategory>()
+    var mData = mutableListOf<TopLevelCategory>()
     var mListener: OnItemClickListener? = null
 
     ///////////////////////////////////////////////////////////////////////////
@@ -38,7 +38,7 @@ class HomeMenuItemAdapter: RecyclerView.Adapter<HomeMenuItemAdapter.HomeMenuVH>(
     // Other
     ///////////////////////////////////////////////////////////////////////////
 
-    fun setData(data: List<TopLevelServiceCategory>) {
+    fun setData(data: List<TopLevelCategory>) {
         val callback = HomeMenuDiffCallback(mData, data)
         val result = DiffUtil.calculateDiff(callback)
         mData.clear()
@@ -62,15 +62,15 @@ class HomeMenuItemAdapter: RecyclerView.Adapter<HomeMenuItemAdapter.HomeMenuVH>(
             }
         }
 
-        fun bind(item: TopLevelServiceCategory) {
+        fun bind(item: TopLevelCategory) {
             with(itemView) {
                 val imageId = when (item.id) {
-                    1 -> R.drawable.menu_food
-                    2 -> R.drawable.menu_housekeeping
-                    3 -> R.drawable.menu_aircon
-                    4 -> R.drawable.menu_laundry
-                    5 -> R.drawable.menu_education
-                    6 -> R.drawable.menu_grocery
+                    "food" -> R.drawable.menu_food
+                    "housekeeping" -> R.drawable.menu_housekeeping
+                    "aircon" -> R.drawable.menu_aircon
+                    "laundry" -> R.drawable.menu_laundry
+                    "education" -> R.drawable.menu_education
+                    "groceries" -> R.drawable.menu_grocery
                     else -> throw IllegalArgumentException("ID ${item.id} not found")
                 }
                 iv_logo.setImageResource(imageId)

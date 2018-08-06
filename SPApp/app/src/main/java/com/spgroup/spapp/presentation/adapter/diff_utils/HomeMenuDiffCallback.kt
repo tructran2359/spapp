@@ -1,11 +1,11 @@
 package com.spgroup.spapp.presentation.adapter.diff_utils
 
 import android.support.v7.util.DiffUtil
-import com.spgroup.spapp.domain.model.TopLevelServiceCategory
+import com.spgroup.spapp.domain.model.TopLevelCategory
 
 class HomeMenuDiffCallback(
-        val oldList: List<TopLevelServiceCategory>,
-        val newList: List<TopLevelServiceCategory>
+        val oldList: List<TopLevelCategory>,
+        val newList: List<TopLevelCategory>
 ): DiffUtil.Callback() {
 
     override fun areItemsTheSame(oldPos: Int, newPos: Int): Boolean {

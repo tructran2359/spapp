@@ -9,9 +9,9 @@ data class Supplier(
         val isSponsored: Boolean = false,
         val isPromotion: Boolean = false,
 
-        val uen: String,
-        val name: String,
+        val uen: String = "",
+        val name: String = "",
         val imgUrl: String = "",
-        val priceDescription: String,
-        val highlight: String
+        val priceDescription: String = "",
+        val highlight: String = ""
 ): Serializable
