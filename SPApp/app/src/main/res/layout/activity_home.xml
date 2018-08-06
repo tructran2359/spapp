@@ -18,107 +18,96 @@
         android:background="@color/color_ui0680"
         >
 
-        <android.support.design.widget.CollapsingToolbarLayout
+        <RelativeLayout
+            android:id="@+id/rl_header_expanded"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap"
-            app:contentScrim="@color/color_primarygradientbase"
-            app:scrimVisibleHeightTrigger="@dimen/action_bar_height"
             >
 
             <RelativeLayout
-                android:id="@+id/rl_header_expanded"
+                android:id="@+id/rl_noti_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_collapseMode="parallax"
+                android:layout_marginLeft="@dimen/common_horz_large"
+                android:layout_marginRight="@dimen/common_horz_large"
+                android:layout_marginTop="@dimen/home_noti_top_margin"
+                android:background="@drawable/bg_rec_rounded_grey"
+                android:paddingBottom="@dimen/common_vert_medium_sub"
+                android:paddingLeft="@dimen/common_horz_medium_sub"
+                android:paddingRight="@dimen/common_horz_medium_sub"
+                android:paddingTop="@dimen/common_vert_medium_sub"
                 >
 
-                <RelativeLayout
-                    android:id="@+id/rl_noti_container"
+                <ImageView
+                    android:id="@+id/iv_notification"
+                    android:layout_width="@dimen/common_icon_size"
+                    android:layout_height="@dimen/common_icon_size"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/notification"
+                    />
+
+                <TextView
+                    fontPath="@string/font_regular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/home_noti_top_margin"
-                    android:background="@drawable/bg_rec_rounded_grey"
-                    android:paddingTop="@dimen/common_vert_medium_sub"
-                    android:paddingBottom="@dimen/common_vert_medium_sub"
-                    android:paddingLeft="@dimen/common_horz_medium_sub"
-                    android:paddingRight="@dimen/common_horz_medium_sub"
-                    android:layout_marginLeft="@dimen/common_horz_large"
-                    android:layout_marginRight="@dimen/common_horz_large"
-                    >
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/common_horz_medium_sub"
+                    android:layout_toLeftOf="@id/iv_close"
+                    android:layout_toRightOf="@+id/iv_notification"
+                    android:maxLines="2"
+                    android:text="Alert to the user with maximum 2 lines of text with option to dismiss."
+                    android:textColor="@color/color_ui02"
 
-                    <ImageView
-                        android:id="@+id/iv_notification"
-                        android:layout_width="@dimen/common_icon_size"
-                        android:layout_height="@dimen/common_icon_size"
-                        android:src="@drawable/notification"
-                        android:layout_centerVertical="true"
-                        />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:maxLines="2"
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/iv_notification"
-                        android:layout_toLeftOf="@id/iv_close"
-                        android:layout_marginLeft="@dimen/common_horz_medium_sub"
-                        android:textSize="@dimen/text_size_caption"
-                        android:textColor="@color/color_ui02"
-                        fontPath="@string/font_regular"
-
-                        android:text="Alert to the user with maximum 2 lines of text with option to dismiss."
-                        />
-
-                    <ImageView
-                        android:id="@+id/iv_close"
-                        android:layout_width="@dimen/common_icon_size"
-                        android:layout_height="@dimen/common_icon_size"
-                        android:src="@drawable/ic_close_grey"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        />
-
-                </RelativeLayout>
+                    android:textSize="@dimen/text_size_caption"
+                    />
 
                 <ImageView
-                    android:id="@+id/iv_brand_icon"
-                    android:layout_width="108dp"
-                    android:layout_height="118dp"
-                    android:src="@drawable/brandicons"
+                    android:id="@+id/iv_close"
+                    android:layout_width="@dimen/common_icon_size"
+                    android:layout_height="@dimen/common_icon_size"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="@dimen/common_vert_large"
-                    android:layout_marginRight="@dimen/common_horz_large"
-                    android:layout_below="@+id/rl_noti_container"
-                    />
-
-
-                <TextView
-                    style="@style/textH1"
-                    android:id="@+id/tv_home_header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/home_header"
-                    android:layout_marginTop="90dp"
-                    android:layout_marginLeft="@dimen/common_horz_large"
-                    android:layout_below="@+id/rl_noti_container"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/home_short_desc"
-                    android:layout_below="@+id/tv_home_header"
-                    android:layout_marginLeft="@dimen/common_horz_large"
-                    android:layout_marginRight="84dp"
-                    android:layout_marginTop="@dimen/common_vert_medium_sub"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_close_grey"
                     />
 
             </RelativeLayout>
 
-        </android.support.design.widget.CollapsingToolbarLayout>
+            <ImageView
+                android:id="@+id/iv_brand_icon"
+                android:layout_width="108dp"
+                android:layout_height="118dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/rl_noti_container"
+                android:layout_marginRight="@dimen/common_horz_large"
+                android:layout_marginTop="@dimen/common_vert_large"
+                android:src="@drawable/brandicons"
+                />
 
 
+            <TextView
+                android:id="@+id/tv_home_header"
+                style="@style/textH1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_noti_container"
+                android:layout_marginLeft="@dimen/common_horz_large"
+                android:layout_marginTop="90dp"
+                android:text="@string/home_header"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_home_header"
+                android:layout_marginLeft="@dimen/common_horz_large"
+                android:layout_marginRight="84dp"
+                android:layout_marginTop="@dimen/common_vert_medium_sub"
+                android:text="@string/home_short_desc"
+                />
+
+        </RelativeLayout>
+        
     </android.support.design.widget.AppBarLayout>
 
     <!--Content-->
