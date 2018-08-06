@@ -14,7 +14,15 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/ll_about_us_container"
         android:layout_marginTop="@dimen/common_vert_large"
-        android:layout_marginBottom="@dimen/common_vert_large"
+        android:layout_marginBottom="@dimen/common_vert_medium"
+        />
+
+    <View
+        style="@style/lineDividerDark"
+        android:id="@+id/divider_about_us"
+        android:layout_above="@+id/ll_about_us_container"
+        android:layout_marginLeft="@dimen/common_horz_medium"
+        android:layout_marginRight="@dimen/common_horz_medium"
         />
     
     <LinearLayout
@@ -23,7 +31,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/common_horz_large"
-        android:layout_marginTop="@dimen/common_vert_large"
+        android:layout_marginTop="@dimen/common_vert_medium"
         android:layout_marginBottom="@dimen/common_vert_xlarge"
         android:paddingTop="@dimen/common_spacing"
         android:paddingBottom="@dimen/common_spacing"
