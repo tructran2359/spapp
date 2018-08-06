@@ -3,7 +3,7 @@ package com.spgroup.spapp.presentation.adapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.spgroup.spapp.domain.model.SupplierServiceCategory
+import com.spgroup.spapp.domain.model.ServiceCategory
 import com.spgroup.spapp.presentation.fragment.CategoryFragment
 import com.spgroup.spapp.presentation.fragment.WeeklyMenuFragment
 
@@ -13,7 +13,7 @@ class CategoryPagerAdapter(fragmentManager: FragmentManager): FragmentStatePager
     // Property
     ///////////////////////////////////////////////////////////////////////////
 
-    val mData = mutableListOf<SupplierServiceCategory>()
+    val mData = mutableListOf<ServiceCategory>()
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -23,9 +23,9 @@ class CategoryPagerAdapter(fragmentManager: FragmentManager): FragmentStatePager
         val category = mData[position]
 
         return when(category.type) {
-            SupplierServiceCategory.TYPE_WEEKLY_MENU -> WeeklyMenuFragment()
+            ServiceCategory.TYPE_WEEKLY_MENU -> WeeklyMenuFragment()
 
-            SupplierServiceCategory.TYPE_LAUNDRY -> CategoryFragment.newInstance(category)
+            ServiceCategory.TYPE_LAUNDRY -> CategoryFragment.newInstance(category)
 
             else -> Fragment()
         }
@@ -39,7 +39,7 @@ class CategoryPagerAdapter(fragmentManager: FragmentManager): FragmentStatePager
     // Other
     ///////////////////////////////////////////////////////////////////////////
 
-    fun setData(data: List<SupplierServiceCategory>?) {
+    fun setData(data: List<ServiceCategory>?) {
         mData.clear()
         data?.let {
             mData.addAll(it)

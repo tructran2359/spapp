@@ -2,7 +2,7 @@ package com.spgroup.spapp.domain.model
 
 import java.io.Serializable
 
-data class SupplierServiceCategory(
+data class ServiceCategory(
         val id: Int,
         val type: Int = TYPE_LAUNDRY,
         val title: String,

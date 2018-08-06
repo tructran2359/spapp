@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.Supplier
+import com.spgroup.spapp.domain.model.Partner
 import com.spgroup.spapp.presentation.adapter.diff_utils.PartnerListingDiffCallback
 import com.spgroup.spapp.util.extension.formatPriceWithUnit
 import com.spgroup.spapp.util.extension.inflate
@@ -23,7 +23,7 @@ class PartnerAdapter(
     val TYPE_PARTNER = 1
     val TYPE_PROMOTION = 2
 
-    var mData = mutableListOf<Supplier>()
+    var mData = mutableListOf<Partner>()
 
     ///////////////////////////////////////////////////////////////////////////
     // Overrie
@@ -54,7 +54,7 @@ class PartnerAdapter(
     // Other
     ///////////////////////////////////////////////////////////////////////////
 
-    fun setData(list: List<Supplier>?) {
+    fun setData(list: List<Partner>?) {
         list?.let {
             val diffCallback = PartnerListingDiffCallback(mData, list)
             val result = DiffUtil.calculateDiff(diffCallback)
@@ -80,7 +80,7 @@ class PartnerAdapter(
             }
         }
 
-        fun bind(partner: Supplier) {
+        fun bind(partner: Partner) {
 
             if (partner.isPromotion) {
                 bindPromotion(partner)
@@ -89,7 +89,7 @@ class PartnerAdapter(
             }
         }
 
-        fun bindPartner(partner: Supplier) {
+        fun bindPartner(partner: Partner) {
             view.run {
                 iv_sponsored.visibility = if (partner.isSponsored) View.VISIBLE else View.GONE
                 tv_name.setText(partner.name)
@@ -97,7 +97,7 @@ class PartnerAdapter(
             }
         }
 
-        fun bindPromotion(partner: Supplier) {
+        fun bindPromotion(partner: Partner) {
             view.run {
                 iv_promotion.setImageResource(R.drawable.rice_temp)
                 tv_promotion.setText(partner.name)

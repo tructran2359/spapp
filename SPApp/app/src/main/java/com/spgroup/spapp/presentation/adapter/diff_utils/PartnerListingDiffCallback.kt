@@ -1,11 +1,11 @@
 package com.spgroup.spapp.presentation.adapter.diff_utils
 
 import android.support.v7.util.DiffUtil
-import com.spgroup.spapp.domain.model.Supplier
+import com.spgroup.spapp.domain.model.Partner
 
 class PartnerListingDiffCallback(
-        val oldList: List<Supplier>,
-        val newList: List<Supplier>
+        val oldList: List<Partner>,
+        val newList: List<Partner>
 ): DiffUtil.Callback() {
 
     override fun areItemsTheSame(oldPos: Int, newPos: Int): Boolean {

@@ -4,7 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.spgroup.spapp.domain.model.ServiceItemCheckBox
 import com.spgroup.spapp.domain.model.ServiceItemCounter
-import com.spgroup.spapp.domain.model.SupplierServiceCategory
+import com.spgroup.spapp.domain.model.ServiceCategory
 import com.spgroup.spapp.domain.usecase.GetServicesListBySupplierUsecase
 import com.spgroup.spapp.util.doLogD
 import io.reactivex.disposables.CompositeDisposable
@@ -15,8 +15,8 @@ class SupplierDetailsViewModel(
 
     private val disposeBag = CompositeDisposable()
 
-    val serviceCategories = MutableLiveData<List<SupplierServiceCategory>>()
-    var selectedServiceCategories: List<SupplierServiceCategory>? = null
+    val serviceCategories = MutableLiveData<List<ServiceCategory>>()
+    var selectedServiceCategories: List<ServiceCategory>? = null
     val selectedCount = MutableLiveData<Int>()
     val error = MutableLiveData<Throwable>()
 

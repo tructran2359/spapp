@@ -1,8 +1,8 @@
 package com.spgroup.spapp.repository
 
 import com.spgroup.spapp.domain.ServicesRepository
-import com.spgroup.spapp.domain.model.Supplier
-import com.spgroup.spapp.domain.model.SupplierServiceCategory
+import com.spgroup.spapp.domain.model.Partner
+import com.spgroup.spapp.domain.model.ServiceCategory
 import com.spgroup.spapp.domain.model.TopLevelCategory
 import com.spgroup.spapp.repository.http.SingaporePowerHttpClient
 import com.spgroup.spapp.repository.mapper.PartnerMapper
@@ -20,12 +20,12 @@ class ServicesCloudDataStore(
                     .getTopLevelCategories()
                     .map { topLevelCatMapper.transform(it) }
 
-    override fun getSuppliersByCategory(categoryId: String): Single<List<Supplier>> =
+    override fun getSuppliersByCategory(categoryId: String): Single<List<Partner>> =
             singaporePowerHttpClient
                     .getPartnersByCategory(categoryId)
                     .map { partnerMapper.transform(it) }
 
-    override fun getSupplierServicesDetails(supplierId: Int): Single<List<SupplierServiceCategory>> {
+    override fun getSupplierServicesDetails(supplierId: Int): Single<List<ServiceCategory>> {
         // TODO truc
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

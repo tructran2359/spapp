@@ -10,7 +10,7 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ServiceItemCheckBox
 import com.spgroup.spapp.domain.model.ServiceItemCombo
 import com.spgroup.spapp.domain.model.ServiceItemCounter
-import com.spgroup.spapp.domain.model.SupplierServiceCategory
+import com.spgroup.spapp.domain.model.ServiceCategory
 import com.spgroup.spapp.presentation.activity.CustomiseActivity
 import com.spgroup.spapp.presentation.adapter.ServiceGroupAdapter
 import com.spgroup.spapp.presentation.viewmodel.SupplierDetailsViewModel
@@ -22,7 +22,7 @@ class CategoryFragment: BaseFragment(), ServiceGroupAdapter.OnItemInteractedList
     companion object {
         @JvmField val KEY_CATEGORY = "CategoryFragment.KEY_CATEGORY"
 
-        fun newInstance(category: SupplierServiceCategory): CategoryFragment {
+        fun newInstance(category: ServiceCategory): CategoryFragment {
             val fragment = CategoryFragment()
             val bundle = Bundle()
             bundle.putSerializable(KEY_CATEGORY, category)
@@ -37,7 +37,7 @@ class CategoryFragment: BaseFragment(), ServiceGroupAdapter.OnItemInteractedList
 
     lateinit var mServiceAdapter: ServiceGroupAdapter
     lateinit var mViewModel: SupplierDetailsViewModel
-    lateinit var mServiceCategory: SupplierServiceCategory
+    lateinit var mServiceCategory: ServiceCategory
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -47,7 +47,7 @@ class CategoryFragment: BaseFragment(), ServiceGroupAdapter.OnItemInteractedList
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            mServiceCategory = it.getSerializable(KEY_CATEGORY) as SupplierServiceCategory
+            mServiceCategory = it.getSerializable(KEY_CATEGORY) as ServiceCategory
         }
 
         mServiceAdapter = ServiceGroupAdapter(this)

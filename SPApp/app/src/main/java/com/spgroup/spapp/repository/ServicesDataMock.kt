@@ -17,12 +17,12 @@ class ServicesDataMock : ServicesRepository {
         }
     }
 
-    override fun getSuppliersByCategory(categoryId: String): Single<List<Supplier>> {
+    override fun getSuppliersByCategory(categoryId: String): Single<List<Partner>> {
         return Single.fromCallable {
-            val list = mutableListOf<Supplier>()
+            val list = mutableListOf<Partner>()
             for (i in 1..10) {
                 list.add(
-                        Supplier(
+                        Partner(
                         id = i,
                         name = "Partner $i",
                         price = 165f + i,
@@ -36,11 +36,11 @@ class ServicesDataMock : ServicesRepository {
         }
     }
 
-    override fun getSupplierServicesDetails(supplierId: Int): Single<List<SupplierServiceCategory>> {
+    override fun getSupplierServicesDetails(supplierId: Int): Single<List<ServiceCategory>> {
         return Single.fromCallable {
 
             val listCategoryName = listOf("Dry Clean", "Wash & Press", "Press Only", "Wash & Fold", "Curtains & Carpets")
-            val listServiceCategory = mutableListOf<SupplierServiceCategory>()
+            val listServiceCategory = mutableListOf<ServiceCategory>()
 
             // Create 5 dummy category
             for (cateId in 1..5) {
@@ -82,7 +82,7 @@ class ServicesDataMock : ServicesRepository {
                     listServiceGroup.add(serviceGroup)
                 }
 
-                val supplierServiceCategory = SupplierServiceCategory(
+                val supplierServiceCategory = ServiceCategory(
                         id = cateId,
                         title = listCategoryName[cateId - 1],
                         services = listServiceGroup)
@@ -91,9 +91,9 @@ class ServicesDataMock : ServicesRepository {
             }
 
             // Create This week's menu
-            val thisWeekMenuCate = SupplierServiceCategory(
+            val thisWeekMenuCate = ServiceCategory(
                     6,
-                    SupplierServiceCategory.TYPE_WEEKLY_MENU,
+                    ServiceCategory.TYPE_WEEKLY_MENU,
                     "This week's menu",
                     mutableListOf())
             listServiceCategory.add(thisWeekMenuCate)

@@ -13,7 +13,7 @@ import android.view.animation.Animation
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.Supplier
+import com.spgroup.spapp.domain.model.Partner
 import com.spgroup.spapp.presentation.adapter.CategoryPagerAdapter
 import com.spgroup.spapp.presentation.adapter.PartnerImagesAdapter
 import com.spgroup.spapp.presentation.viewmodel.SupplierDetailsViewModel
@@ -37,7 +37,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
             return intent
         }
 
-        fun getLaunchIntent(context: Context, partner: Supplier): Intent {
+        fun getLaunchIntent(context: Context, partner: Partner): Intent {
             val intent = Intent(context, PartnerDetailsActivity::class.java)
             intent.putExtra(ConstUtils.EXTRA_PARTNER, partner)
             return intent
@@ -66,7 +66,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         if (serializable == null) {
             doLogD("Partner", "onCreate partner: null")
         } else {
-            doLogD("Partner", "onCreate partner: ${serializable as Supplier}")
+            doLogD("Partner", "onCreate partner: ${serializable as Partner}")
         }
         mActionBarHeight = getDimensionPixelSize(R.dimen.action_bar_height)
 
