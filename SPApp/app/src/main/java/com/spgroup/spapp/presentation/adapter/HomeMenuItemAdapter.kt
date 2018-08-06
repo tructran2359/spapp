@@ -65,12 +65,12 @@ class HomeMenuItemAdapter: RecyclerView.Adapter<HomeMenuItemAdapter.HomeMenuVH>(
         fun bind(item: TopLevelServiceCategory) {
             with(itemView) {
                 val imageId = when (item.id) {
-                    1 -> R.drawable.cate_food
-                    2 -> R.drawable.cate_house_keeping
-                    3 -> R.drawable.cate_aircon
-                    4 -> R.drawable.cate_laundry
-                    5 -> R.drawable.cate_edu
-                    6 -> R.drawable.cate_gro
+                    1 -> R.drawable.menu_food
+                    2 -> R.drawable.menu_housekeeping
+                    3 -> R.drawable.menu_aircon
+                    4 -> R.drawable.menu_laundry
+                    5 -> R.drawable.menu_education
+                    6 -> R.drawable.menu_grocery
                     else -> throw IllegalArgumentException("ID ${item.id} not found")
                 }
                 iv_logo.setImageResource(imageId)

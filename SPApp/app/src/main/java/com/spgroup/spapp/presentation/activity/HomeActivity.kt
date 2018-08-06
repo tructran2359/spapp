@@ -184,7 +184,7 @@ class HomeActivity :
             }
         })
         recycler_view_home_menu.layoutManager = LinearLayoutManager(this)
-        val space = getDimensionPixelSize(R.dimen.common_vert_medium_sub)
+        val space = getDimensionPixelSize(R.dimen.home_menu_item_distance)
         recycler_view_home_menu.addItemDecoration(HomeMenuItemDecoration(space))
         recycler_view_home_menu.adapter = mMenuAdapter
     }
