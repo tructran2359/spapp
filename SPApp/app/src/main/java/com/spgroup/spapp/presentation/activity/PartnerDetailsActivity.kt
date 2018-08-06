@@ -122,14 +122,19 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         val currentScroll = appBarLayout.bottom
         val mMaxScroll = appBarLayout.totalScrollRange
         val percentage = currentScroll.toFloat() / (mMaxScroll).toFloat()
+
         val layoutParam = rl_top_button_container.layoutParams
         if (currentScroll <= mActionBarHeight) {
             v_background_color.alpha = 1f
+            fl_info_container.visibility = View.GONE
             layoutParam.height = mActionBarHeight
         } else {
             v_background_color.alpha = 1f - percentage
+            fl_info_container.visibility = View.VISIBLE
+            fl_info_container.alpha = percentage
             layoutParam.height = currentScroll
         }
+
         rl_top_button_container.layoutParams = layoutParam
         val scale = if (percentage <= 0.7f) 0.7f else percentage
         tv_partner_name.scaleX = scale
