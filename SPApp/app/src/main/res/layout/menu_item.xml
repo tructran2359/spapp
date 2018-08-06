@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingLeft="@dimen/common_horz_large"
+    android:paddingLeft="@dimen/common_horz_medium"
     >
 
     <ImageView
         android:id="@+id/iv_logo"
-        android:layout_width="@dimen/home_menu_item_icon_size"
-        android:layout_height="@dimen/home_menu_item_icon_size"
-        android:scaleType="centerCrop"
+        android:layout_width="@dimen/home_menu_item_icon_size_width"
+        android:layout_height="@dimen/home_menu_item_icon_size_height"
+        android:scaleType="fitXY"
         android:src="@drawable/cate_food"
         />
 
