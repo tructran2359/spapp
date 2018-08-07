@@ -102,6 +102,20 @@ class OrderSummaryActivity : BaseActivity() {
                 }
             })
 
+            mDeletedServiceId.observe(this@OrderSummaryActivity, Observer {
+                it?.let {
+                    val view = ll_item_container.findViewWithTag<View>(createServiceTag(it))
+                    ll_item_container.removeView(view)
+                }
+            })
+
+            mDeletedCateId.observe(this@OrderSummaryActivity, Observer {
+                it?.let {
+                    val view = ll_item_container.findViewWithTag<View>(createCateTag(it))
+                    ll_item_container.removeView(view)
+                }
+            })
+
             initData(createDummyData())
         }
     }
@@ -286,6 +300,9 @@ class OrderSummaryActivity : BaseActivity() {
                     setCount(item.count)
                 }
             })
+            setOnDeleteListener {
+                mViewModel.deleteService(item.id)
+            }
         }
 
         ll_item_container.addView(view)
@@ -306,6 +323,9 @@ class OrderSummaryActivity : BaseActivity() {
             setName(item.name)
             setDescription(item.description)
             setTag(tag)
+            setOnDeleteListener {
+                mViewModel.deleteService(item.id)
+            }
         }
 
         ll_item_container.addView(view)
@@ -334,6 +354,9 @@ class OrderSummaryActivity : BaseActivity() {
                 startActivityForResult(intent, RC_EDIT)
             }
             setTag(tag)
+            setOnDeleteListener {
+                mViewModel.deleteService(item.id)
+            }
         }
 
         ll_item_container.addView(view)

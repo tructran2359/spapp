@@ -17,6 +17,7 @@ class SummaryItemViewCombo: RelativeLayout {
     private lateinit var mViewPax: PriceTextView
     private lateinit var mViewRice: PriceTextView
     private var content = CustomiseViewModel.Content()
+    private var mDeleteListener: (() -> Unit)? = null
 
     constructor(context: Context) : super(context) {
         initViews(context)
@@ -39,6 +40,12 @@ class SummaryItemViewCombo: RelativeLayout {
 
         ll_option_container.addView(mViewPax)
         ll_option_container.addView(mViewRice)
+
+        iv_delete.setOnClickListener {
+            mDeleteListener?.let {
+                it()
+            }
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -81,5 +88,9 @@ class SummaryItemViewCombo: RelativeLayout {
         iv_edit.setOnClickListener {
             action()
         }
+    }
+
+    fun setOnDeleteListener(action: (() -> Unit)?) {
+        mDeleteListener = action
     }
 }

@@ -9,10 +9,12 @@ import com.spgroup.spapp.domain.usecase.GetOrderSummaryUsecase
 
 class OrderSummaryViewModel(val usecase: GetOrderSummaryUsecase): ViewModel() {
 
-    val mListNormalizedData = MutableLiveData<List<NormalizedSummaryData>>()
+    val mListNormalizedData = MutableLiveData<MutableList<NormalizedSummaryData>>()
+    val mDeletedCateId = MutableLiveData<Int>()
+    val mDeletedServiceId = MutableLiveData<Int>()
 
     fun initData(listCate: List<ServiceCategory>) {
-        mListNormalizedData.value = usecase.normalizeSummaryData(listCate)
+        mListNormalizedData.value = usecase.normalizeSummaryData(listCate).toMutableList()
     }
 
     fun getServiceById(id: Int): ServiceItem? {
@@ -26,6 +28,24 @@ class OrderSummaryViewModel(val usecase: GetOrderSummaryUsecase): ViewModel() {
             }
         }
         return null
+    }
+
+    fun deleteService(id: Int) {
+        mListNormalizedData.value?.run {
+            for (data in this) {
+                for (service in data.listService) {
+                    if (service.id == id) {
+                        data.listService.remove(service)
+                        mDeletedServiceId.value = service.id
+                        if (data.listService.isEmpty()) {
+                            this.remove(data)
+                            mDeletedCateId.value = data.cateId
+                        }
+                        return
+                    }
+                }
+            }
+        }
     }
 
 }

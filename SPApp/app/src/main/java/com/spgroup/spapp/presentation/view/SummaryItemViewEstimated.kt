@@ -10,6 +10,12 @@ import kotlinx.android.synthetic.main.layout_summary_item_estimated.view.*
 class SummaryItemViewEstimated: RelativeLayout {
 
     ///////////////////////////////////////////////////////////////////////////
+    // Property
+    ///////////////////////////////////////////////////////////////////////////
+
+    private var mDeleteListener: (() -> Unit)? = null
+
+    ///////////////////////////////////////////////////////////////////////////
     // Constructor
     ///////////////////////////////////////////////////////////////////////////
 
@@ -31,6 +37,12 @@ class SummaryItemViewEstimated: RelativeLayout {
 
     private fun initViews(context: Context) {
         LayoutInflater.from(context).inflate(R.layout.layout_summary_item_estimated, this, true)
+
+        iv_delete.setOnClickListener {
+            mDeleteListener?.let {
+                it()
+            }
+        }
     }
 
     fun setDescription(text: String) {
@@ -39,6 +51,10 @@ class SummaryItemViewEstimated: RelativeLayout {
 
     fun setName(name: String) {
         tv_name.setText(name)
+    }
+
+    fun setOnDeleteListener(action: (() -> Unit)?) {
+        mDeleteListener = action
     }
 
 }
