@@ -69,5 +69,8 @@
     <string name="behavior_home_text_view">com.spgroup.spapp.presentation.view.behavior.HomeTextViewBehavior</string>
     <string name="behavior_home_menu_view">com.spgroup.spapp.presentation.view.behavior.HomeMenuViewBehavior</string>
     <string name="behavior_partner_detail">com.spgroup.spapp.presentation.view.behavior.PartnerDetailBehavior</string>
+    <string name="empty_request_summary">Empty Request\nSummary</string>
+    <string name="no_service_request">You have no service request.</string>
+    <string name="see_services">SEE SERVICES</string>
 
 </resources>
