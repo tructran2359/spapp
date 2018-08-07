@@ -128,5 +128,6 @@
     <dimen name="home_menu_item_icon_size_height">43dp</dimen>
     <dimen name="home_menu_item_icon_size_about_us">32dp</dimen>
     <dimen name="home_menu_item_distance">9dp</dimen>
+    <dimen name="empty_request_icon_size">82dp</dimen>
 
 </resources>
