@@ -5,8 +5,6 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/common_horz_large_for_icon"
     android:layout_marginRight="@dimen/common_horz_large_for_icon"
-    android:layout_marginTop="@dimen/common_vert_small"
-    android:layout_marginBottom="@dimen/common_icon_size_medium"
     >
 
     <ImageView

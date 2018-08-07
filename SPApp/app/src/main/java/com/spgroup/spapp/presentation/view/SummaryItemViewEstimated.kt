@@ -33,8 +33,12 @@ class SummaryItemViewEstimated: RelativeLayout {
         LayoutInflater.from(context).inflate(R.layout.layout_summary_item_estimated, this, true)
     }
 
-    fun setText(text: String) {
+    fun setDescription(text: String) {
         tv_text.setText(text)
+    }
+
+    fun setName(name: String) {
+        tv_name.setText(name)
     }
 
 }

@@ -52,4 +52,8 @@ class SummaryItemView: RelativeLayout {
         }
     }
 
+    fun setOnCountChangedListener(listener: CounterView.OnCountChangeListener?) {
+        counter_view.setOnCountChangeListener(listener)
+    }
+
 }
