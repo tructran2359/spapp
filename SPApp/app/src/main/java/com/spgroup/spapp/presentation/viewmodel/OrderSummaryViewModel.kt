@@ -12,6 +12,7 @@ class OrderSummaryViewModel(val usecase: GetOrderSummaryUsecase): ViewModel() {
     val mListNormalizedData = MutableLiveData<MutableList<NormalizedSummaryData>>()
     val mDeletedCateId = MutableLiveData<Int>()
     val mDeletedServiceId = MutableLiveData<Int>()
+    val mEmpty = MutableLiveData<Boolean>()
 
     fun initData(listCate: List<ServiceCategory>) {
         mListNormalizedData.value = usecase.normalizeSummaryData(listCate).toMutableList()
@@ -40,6 +41,10 @@ class OrderSummaryViewModel(val usecase: GetOrderSummaryUsecase): ViewModel() {
                         if (data.listService.isEmpty()) {
                             this.remove(data)
                             mDeletedCateId.value = data.cateId
+                        }
+
+                        if (this.isEmpty()) {
+                            mEmpty.value = true
                         }
                         return
                     }

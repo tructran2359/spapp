@@ -91,6 +91,11 @@
             android:screenOrientation="portrait"
             />
 
+        <activity
+            android:name=".presentation.activity.EmptyRequestActivity"
+            android:screenOrientation="portrait"
+            />
+
     </application>
 
 </manifest>

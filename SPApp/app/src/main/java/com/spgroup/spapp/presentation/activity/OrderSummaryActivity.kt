@@ -116,6 +116,15 @@ class OrderSummaryActivity : BaseActivity() {
                 }
             })
 
+            mEmpty.observe(this@OrderSummaryActivity, Observer {
+                it?.let {
+                    if (it) {
+                        startActivity(EmptyRequestActivity.getLaunchIntent(this@OrderSummaryActivity))
+                        this@OrderSummaryActivity.finish()
+                    }
+                }
+            })
+
             initData(createDummyData())
         }
     }
