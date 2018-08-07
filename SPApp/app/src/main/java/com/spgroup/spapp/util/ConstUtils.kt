@@ -20,6 +20,8 @@ class ConstUtils {
 
         @JvmField val EXTRA_TOP_LEVEL_CATE_ID = "EXTRA_TOP_LEVEL_CATE_ID"
 
+        @JvmField val EXTRA_SERVICE_ID = "EXTRA_SERVICE_ID"
+
         @JvmField val TAG_DIALOG = "TAG_DIALOG"
     }
 }

@@ -25,6 +25,8 @@ class ViewModelFactory private constructor(
 
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> createHomeViewModel()
 
+            modelClass.isAssignableFrom(OrderSummaryViewModel::class.java) -> createOrderSummaryViewModel()
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         } as T
     }
@@ -51,6 +53,10 @@ class ViewModelFactory private constructor(
         return HomeViewModel(GetTopLevelCategoryUsecase(schedulerFacade, servicesRepository))
     }
 
+    private fun createOrderSummaryViewModel(): OrderSummaryViewModel {
+        return OrderSummaryViewModel(Injection.provideGetOrderSummaryUsecase())
+    }
+
     companion object {
 
         @Volatile
@@ -58,7 +64,10 @@ class ViewModelFactory private constructor(
 
         fun getInstance(): ViewModelFactory? {
             if (INSTANCE == null) {
-                INSTANCE = ViewModelFactory(Injection.provideSchedulerFacade(), Injection.provideServicesRepository())
+                INSTANCE = ViewModelFactory(
+                        Injection.provideSchedulerFacade(),
+                        Injection.provideServicesRepository()
+                )
             }
             return INSTANCE
         }

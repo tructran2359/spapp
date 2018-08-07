@@ -1,18 +1,27 @@
 package com.spgroup.spapp.presentation.activity
 
-import android.app.Activity
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
+import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.LinearLayout
+import android.widget.LinearLayout.LayoutParams
+import android.widget.LinearLayout.LayoutParams.MATCH_PARENT
+import android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
+import android.widget.TextView
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.ServiceItemCombo
+import com.spgroup.spapp.domain.model.*
 import com.spgroup.spapp.presentation.adapter.PreferredTimeAdapter
-import com.spgroup.spapp.presentation.view.ValidationInputView
+import com.spgroup.spapp.presentation.view.*
 import com.spgroup.spapp.presentation.viewmodel.CustomiseViewModel
+import com.spgroup.spapp.presentation.viewmodel.OrderSummaryViewModel
+import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.extension.getDimensionPixelSize
@@ -39,6 +48,7 @@ class OrderSummaryActivity : BaseActivity() {
     private lateinit var mAnimAppear: Animation
     private lateinit var mAnimDisappear: Animation
     private var mFirstInvalidView: ValidationInputView? = null
+    private lateinit var mViewModel: OrderSummaryViewModel
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -50,21 +60,74 @@ class OrderSummaryActivity : BaseActivity() {
 
         initAnimations()
         initViews()
+
+        subscribeUI()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RC_EDIT && resultCode == Activity.RESULT_OK) {
+        if (requestCode == RC_EDIT && resultCode == RESULT_OK) {
             data?.let {
                 val content = data.getSerializableExtra(ConstUtils.EXTRA_CONTENT) as CustomiseViewModel.Content
-                summary_view_combo.setDummyData(content)
+                val serviceId = data.getIntExtra(ConstUtils.EXTRA_SERVICE_ID, -1)
+                if (serviceId != -1) {
+                    val service = mViewModel.getServiceById(serviceId)
+                    if (service != null) {
+                        val view = ll_item_container.findViewWithTag<SummaryItemViewCombo>(createServiceTag(serviceId))
+                        (service as ServiceItemComboDummy).run {
+                            this.dummyContent = content
+                            view.setDummyData(this.dummyContent)
+                        }
+                    }
+                }
             }
         }
+
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // Other
     ///////////////////////////////////////////////////////////////////////////
+
+    private fun subscribeUI() {
+        val factory = ViewModelFactory.getInstance()
+        mViewModel = ViewModelProviders.of(this, factory).get(OrderSummaryViewModel::class.java)
+
+        mViewModel.run {
+
+            mListNormalizedData.observe(this@OrderSummaryActivity, Observer {
+                it?.let {
+                    doLogD("Dummy", it.toString())
+                    addView(it)
+                }
+            })
+
+            mDeletedServiceId.observe(this@OrderSummaryActivity, Observer {
+                it?.let {
+                    val view = ll_item_container.findViewWithTag<View>(createServiceTag(it))
+                    ll_item_container.removeView(view)
+                }
+            })
+
+            mDeletedCateId.observe(this@OrderSummaryActivity, Observer {
+                it?.let {
+                    val view = ll_item_container.findViewWithTag<View>(createCateTag(it))
+                    ll_item_container.removeView(view)
+                }
+            })
+
+            mEmpty.observe(this@OrderSummaryActivity, Observer {
+                it?.let {
+                    if (it) {
+                        startActivity(EmptyRequestActivity.getLaunchIntent(this@OrderSummaryActivity))
+                        this@OrderSummaryActivity.finish()
+                    }
+                }
+            })
+
+            initData(createDummyData())
+        }
+    }
 
     private fun initAnimations() {
         mAnimAppear = AnimationUtils.loadAnimation(this, R.anim.anim_slide_up)
@@ -98,45 +161,6 @@ class OrderSummaryActivity : BaseActivity() {
     private fun initViews() {
 
         action_bar.setTitle(R.string.summary)
-
-        with(summary_view_combo) {
-
-            val dummy = CustomiseViewModel.Content(paxCount = 1, riceCount = 1, instruction = "No beef and peanut. Low salt.")
-            setDummyData(dummy)
-
-            setOnEditClickListener {
-
-                //Create dummy data:
-                val service = ServiceItemCombo (
-                        "3 Dishes Plus 1 Soup Meal Set",
-                        165f,
-                        "month",
-                        "Weekdays only. Island-wide delivery. Packed in microwavable containers only.",
-                        false
-                )
-
-                val dummyData = getDummyData()
-
-                val intent = CustomiseActivity.getLaunchIntent(
-                        this@OrderSummaryActivity,
-                        service,
-                        dummyData,
-                        true)
-                this@OrderSummaryActivity.startActivityForResult(intent, RC_EDIT)
-            }
-        }
-
-        summary_view_1.initData(1, 10, 1)
-
-        with(summary_view_2) {
-            setName("Load Wash / kg")
-            initData(5, 10, 5)
-        }
-
-        with(summary_view_3) {
-            setName("Load Wash / kg")
-            initData(1, 10, 1)
-        }
 
         validation_name.setValidation { name: String -> name.length > 1 }
 
@@ -210,6 +234,143 @@ class OrderSummaryActivity : BaseActivity() {
         }
     }
 
+    private fun addView(list: List<NormalizedSummaryData>?) {
+        ll_item_container.removeAllViews()
+        if (list == null || list.isEmpty()) return
+
+        val inflater = LayoutInflater.from(this)
+
+        for (data in list) {
+                addHeader(inflater, data.cateName, data.cateId, data.needHeader())
+
+            for (item in data.listService) {
+                when (item) {
+                    is ServiceItemCounter -> addItemCounter(item)
+
+                    is ServiceItemCheckBox -> addItemCheckbox(item)
+
+                    is ServiceItemComboDummy -> addItemCombo(item)
+                }
+            }
+        }
+    }
+
+    private fun addHeader(inflater: LayoutInflater, cateName: String, cateId: Int, needHeader: Boolean) {
+        val tag = createCateTag(cateId)
+        if (!needHeader) {
+            val view = View(this)
+            view.setTag(tag)
+            view.visibility = View.GONE
+            ll_item_container.addView(view)
+            ll_item_container.setPadding(0, getDimensionPixelSize(R.dimen.common_horz_large), 0, 0)
+            return
+        }
+
+        val tvHeader = inflater.inflate(R.layout.item_summary_header, null, false) as TextView
+        val layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+
+        layoutParams.run {
+            topMargin = getDimensionPixelSize(R.dimen.common_vert_large)
+            leftMargin = getDimensionPixelSize(R.dimen.common_horz_large)
+            rightMargin = getDimensionPixelSize(R.dimen.common_horz_large)
+        }
+
+        tvHeader.run {
+            setText(cateName)
+            setLayoutParams(layoutParams)
+            setTag(tag)
+        }
+        ll_item_container.addView(tvHeader)
+    }
+
+    private fun addItemCounter(item: ServiceItemCounter) {
+        val tag = createServiceTag(item.id)
+        val view = SummaryItemView(this)
+        val layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+
+        layoutParams.run {
+            topMargin = getDimensionPixelSize(R.dimen.common_vert_small)
+            bottomMargin = getDimensionPixelSize(R.dimen.common_vert_medium)
+        }
+
+        view.run {
+            setLayoutParams(layoutParams)
+            setName(item.name)
+            initData(item.minCount, item.maxCount, item.count)
+            setTag(tag)
+            setOnCountChangedListener(object : CounterView.OnCountChangeListener {
+                override fun onPlus() {
+                    item.count++
+                    setCount(item.count)
+                }
+
+                override fun onMinus() {
+                    item.count--
+                    setCount(item.count)
+                }
+            })
+            setOnDeleteListener {
+                mViewModel.deleteService(item.id)
+            }
+        }
+
+        ll_item_container.addView(view)
+    }
+
+    private fun addItemCheckbox(item: ServiceItemCheckBox) {
+        val tag = createServiceTag(item.id)
+        val view = SummaryItemViewEstimated(this)
+        val layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+
+        layoutParams.run {
+            topMargin = getDimensionPixelSize(R.dimen.common_vert_small)
+            bottomMargin = getDimensionPixelSize(R.dimen.common_vert_medium)
+        }
+
+        view.run {
+            setLayoutParams(layoutParams)
+            setName(item.name)
+            setDescription(item.description)
+            setTag(tag)
+            setOnDeleteListener {
+                mViewModel.deleteService(item.id)
+            }
+        }
+
+        ll_item_container.addView(view)
+    }
+
+    private fun addItemCombo(item: ServiceItemComboDummy) {
+        val tag = createServiceTag(item.id)
+        val view = SummaryItemViewCombo(this)
+        val layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
+
+        layoutParams.run {
+            topMargin = getDimensionPixelSize(R.dimen.common_vert_small)
+            bottomMargin = getDimensionPixelSize(R.dimen.common_vert_medium)
+        }
+
+        view.run {
+            setLayoutParams(layoutParams)
+            setDummyData(item.dummyContent)
+            setOnEditClickListener {
+                val dummy = item.dummyContent
+                val intent = CustomiseActivity.getLaunchIntent(
+                        this@OrderSummaryActivity,
+                        item.toServiceItemCombo(),
+                        dummy,
+                        true)
+                startActivityForResult(intent, RC_EDIT)
+            }
+            setTag(tag)
+            setOnDeleteListener {
+                mViewModel.deleteService(item.id)
+            }
+        }
+
+        ll_item_container.addView(view)
+    }
+
     private fun showErrorView(show: Boolean) {
         if (show && rl_error_cointainer.visibility != View.VISIBLE) {
             rl_error_cointainer.startAnimation(mAnimAppear)
@@ -217,4 +378,27 @@ class OrderSummaryActivity : BaseActivity() {
             rl_error_cointainer.startAnimation(mAnimDisappear)
         }
     }
+
+    private fun createDummyData(): List<ServiceCategory> {
+
+        val serviceCounter1 = ServiceItemCounter(id = 1, name = "Counter 1", price = 1f, minCount = 1, maxCount = 10, unit = "item", count = 1)
+        val serviceCounter2 = ServiceItemCounter(id = 2, name = "Counter 2", price = 2f, minCount = 1, maxCount = 10, unit = "item", count = 2)
+        val serviceCheckbox3 = ServiceItemCheckBox(id = 3, name = "Checkbox 3", price = 3f, unit = "item", description = "Description 3", selected = true)
+
+        val dummy = CustomiseViewModel.Content(paxCount = 1, riceCount = 1, instruction = "No beef and peanut. Low salt.")
+        val serviceItemCombo4 = ServiceItemComboDummy(id = 4, name = "Customise 4", price = 4f, unit = "item", description = "Description 4", selected = true, dummyContent = dummy)
+
+        val subCate1 = ServiceGroup(id = 1, name = "SubCate 1", description = "Sub description 1", listItem = mutableListOf(serviceItemCombo4), expanded = true)
+        val subCate2 = ServiceGroup(id = 2, name = "SubCate 2", description = "Sub description 2", listItem = mutableListOf(serviceCounter1, serviceCounter2, serviceCheckbox3), expanded = true)
+
+        val cate1 = ServiceCategory(id = 1, title = "Category 1", services = listOf(subCate1))
+        val cate2 = ServiceCategory(id = 2, title = "Category 2", services = listOf(subCate2))
+
+        return listOf(cate1, cate2)
+
+    }
+
+    private fun createCateTag(cateId: Int) = "Cate" + cateId
+
+    private fun createServiceTag(serviceId: Int) = "ServiceID${serviceId}"
 }

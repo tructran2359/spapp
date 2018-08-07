@@ -79,7 +79,7 @@ class CounterView: LinearLayout {
         mMax = max
     }
 
-    fun setOnCountChangeListener(listener: OnCountChangeListener) {
+    fun setOnCountChangeListener(listener: OnCountChangeListener?) {
         mListener = listener
     }
 

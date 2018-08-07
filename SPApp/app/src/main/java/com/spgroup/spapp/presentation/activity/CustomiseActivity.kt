@@ -27,7 +27,12 @@ class CustomiseActivity : BaseActivity() {
 
     companion object {
 
-        fun getLaunchIntent(context: Context, item: ServiceItem, initContent: CustomiseViewModel.Content? = null, isEdit: Boolean = false): Intent {
+        fun getLaunchIntent(
+                context: Context,
+                item: ServiceItem,
+                initContent: CustomiseViewModel.Content? = null,
+                isEdit: Boolean = false): Intent {
+
             val intent = Intent(context, CustomiseActivity::class.java)
             intent.putExtra(ConstUtils.EXTRA_IS_EDIT, isEdit)
             intent.putExtra(ConstUtils.EXTRA_SERVICE_ITEM, item)
@@ -136,6 +141,7 @@ class CustomiseActivity : BaseActivity() {
                             instruction = mCurrentInstruction)
                     val intent = Intent()
                     intent.putExtra(ConstUtils.EXTRA_CONTENT, content)
+                    intent.putExtra(ConstUtils.EXTRA_SERVICE_ID, mViewModel.mServiceItem.id)
                     setResult(Activity.RESULT_OK, intent)
                     finish()
                 }

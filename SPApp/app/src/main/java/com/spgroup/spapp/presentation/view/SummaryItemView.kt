@@ -10,6 +10,12 @@ import kotlinx.android.synthetic.main.layout_summary_item.view.*
 class SummaryItemView: RelativeLayout {
 
     ///////////////////////////////////////////////////////////////////////////
+    // Property
+    ///////////////////////////////////////////////////////////////////////////
+
+    private var mDeleteListener: (() -> Unit)? = null
+
+    ///////////////////////////////////////////////////////////////////////////
     // Constructor
     ///////////////////////////////////////////////////////////////////////////
 
@@ -31,6 +37,12 @@ class SummaryItemView: RelativeLayout {
 
     private fun initViews(context: Context) {
         LayoutInflater.from(context).inflate(R.layout.layout_summary_item, this, true)
+
+        iv_delete.setOnClickListener {
+            mDeleteListener?.let {
+                it()
+            }
+        }
     }
 
     fun setName(name: String) {
@@ -50,6 +62,14 @@ class SummaryItemView: RelativeLayout {
             setLimit(min, max)
             setCount(count)
         }
+    }
+
+    fun setOnCountChangedListener(listener: CounterView.OnCountChangeListener?) {
+        counter_view.setOnCountChangeListener(listener)
+    }
+
+    fun setOnDeleteListener(action: (() -> Unit)?) {
+        mDeleteListener = action
     }
 
 }

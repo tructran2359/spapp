@@ -49,11 +49,13 @@ class ServicesDataMock : ServicesRepository {
                 val listServiceGroup = mutableListOf<ServiceGroup>()
                 for (serviceId in 1..2) {
                     val service1 = ServiceItemCounter(
+                            0,
                             "Paint $serviceId",
                             10f,
                             "item")
 
                     val service2 = ServiceItemCheckBox(
+                            0,
                             "Day Curtains $serviceId",
                             10f,
                             "piece",
@@ -61,6 +63,7 @@ class ServicesDataMock : ServicesRepository {
                             false)
 
                     val service3 = ServiceItemCheckBox(
+                            0,
                             "Night Curtains $serviceId",
                             9f,
                             "kg",
@@ -69,13 +72,16 @@ class ServicesDataMock : ServicesRepository {
                     )
 
                     val service4 = ServiceItemCombo (
+                            0,
                             "3 Dishes Plus 1 Soup Meal Set",
                             165f,
                             "month",
                             "Weekdays only. Island-wide delivery. Packed in microwavable containers only.",
                             false
                     )
-                    val serviceGroup = ServiceGroup("GARMENTS $serviceId",
+                    val serviceGroup = ServiceGroup(
+                            0,
+                            "GARMENTS $serviceId",
                             "Includes free dismantling & installation. Measurement & evaluation will be done on-site, price estimation will not be included in this request.",
                             mutableListOf(service1, service2, service3, service4),
                             false)

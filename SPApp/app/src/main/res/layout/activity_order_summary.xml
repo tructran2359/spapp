@@ -42,74 +42,17 @@
                 android:paddingBottom="@dimen/common_vert_medium"
                 android:background="@color/color_ui05"
 
-                android:layout_marginBottom="@dimen/common_vert_large"
-
                 android:text="QuiKlean Laundry"
                 />
 
-            <!--Dummy UI start-->
-
-            <com.spgroup.spapp.presentation.view.SummaryItemViewCombo
-                android:id="@+id/summary_view_combo"
+            <LinearLayout
+                android:id="@+id/ll_item_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                android:orientation="vertical"
+                >
 
-            <TextView
-                style="@style/textH4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/common_horz_large"
-
-                android:text="Dry Cleaning"
-                />
-
-            <com.spgroup.spapp.presentation.view.SummaryItemView
-                android:id="@+id/summary_view_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/common_vert_large"
-                />
-
-            <TextView
-                style="@style/textH4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/common_horz_large"
-
-                android:text="Wash &amp; Fold"
-                />
-
-            <com.spgroup.spapp.presentation.view.SummaryItemView
-                android:id="@+id/summary_view_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-
-            <com.spgroup.spapp.presentation.view.SummaryItemView
-                android:id="@+id/summary_view_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_vert_medium"
-                android:layout_marginBottom="@dimen/common_vert_large"
-                />
-
-            <TextView
-                style="@style/textH4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/common_horz_large"
-
-                android:text="Curtains &amp; Carpets"
-                />
-
-            <com.spgroup.spapp.presentation.view.SummaryItemViewEstimated
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/common_vert_large"
-                />
-
-            <!--Dummy UI end-->
+            </LinearLayout>
 
             <include layout="@layout/layout_summary_estimated"/>
 
