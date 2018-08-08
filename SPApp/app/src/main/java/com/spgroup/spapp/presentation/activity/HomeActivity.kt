@@ -163,7 +163,7 @@ open class HomeActivity :
         tv_app_version.setText(getString(R.string.app_version, BuildConfig.VERSION_NAME))
 
         ll_about_us_container.setOnClickListener {
-            startActivity(AboutUsActivity.getLaunchIntent(this@HomeActivity))
+            startActivity(PageActivity.getLaunchIntent(this@HomeActivity, PageActivity.TYPE_ABOUT))
         }
 
         tv_tnc.setOnClickListener {
