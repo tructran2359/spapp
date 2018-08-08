@@ -87,6 +87,10 @@ class PageActivity: BaseActivity() {
             TYPE_ACK -> addAckViews()
         }
 
+        iv_close.setOnClickListener {
+            onBackPressed()
+        }
+
         scroll_view.setOnScrollChangeListener(object : NestedScrollView.OnScrollChangeListener {
             override fun onScrollChange(view: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
                 if (scrollY > oldScrollY) {
