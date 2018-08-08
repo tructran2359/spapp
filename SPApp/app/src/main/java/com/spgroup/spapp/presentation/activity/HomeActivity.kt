@@ -171,7 +171,7 @@ open class HomeActivity :
         }
 
         tv_ack.setOnClickListener {
-            startActivity(HomeAcknowledgementActivity.getLaunchIntent(this@HomeActivity))
+            startActivity(PageActivity.getLaunchIntent(this@HomeActivity, PageActivity.TYPE_ACK))
         }
 
         mMenuAdapter = HomeMenuItemAdapter()

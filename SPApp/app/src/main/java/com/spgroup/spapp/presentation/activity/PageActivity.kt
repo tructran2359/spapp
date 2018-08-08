@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.spgroup.spapp.R
+import com.spgroup.spapp.presentation.view.IndicatorTextView
 import com.spgroup.spapp.util.extension.inflate
 import kotlinx.android.synthetic.main.activity_page.*
-import kotlinx.android.synthetic.main.layout_about_us.view.*
+import kotlinx.android.synthetic.main.layout_page_about_us.view.*
+import kotlinx.android.synthetic.main.layout_page_acknowledgement.view.*
 
 class PageActivity: BaseActivity() {
 
@@ -46,11 +48,38 @@ class PageActivity: BaseActivity() {
         tv_title.text = mPage.title
         when(mPage.code) {
             TYPE_ABOUT -> addAboutViews()
+
+            TYPE_ACK -> addAckViews()
         }
     }
 
+    private fun addAckViews() {
+        val view = inflate(R.layout.layout_page_acknowledgement)
+        view.run {
+            val sectionText = mPage.findSection(SECTION_TEXT)
+            val sectionLink = mPage.findSection(SECTION_LIST)
+            if (sectionText == null || sectionLink == null) {
+                throw IllegalArgumentException("Invalid data")
+            }
+
+            (sectionText as SectionLongText).run {
+                tv_ack_content.text = this.text
+            }
+
+            (sectionLink as SectionList).run {
+                tv_ack_title.text = this.title
+
+                this.options.forEach {
+                    val textView = IndicatorTextView(this@PageActivity, it)
+                    ll_ack_option_container.addView(textView)
+                }
+            }
+        }
+        ll_container.addView(view)
+    }
+
     private fun addAboutViews() {
-        val view = inflate(R.layout.layout_about_us)
+        val view = inflate(R.layout.layout_page_about_us)
         view.run {
             val sectionText = mPage.findSection(SECTION_TEXT)
             val sectionLink = mPage.findSection(SECTION_LINK)
@@ -74,8 +103,25 @@ class PageActivity: BaseActivity() {
         return when (mType) {
             TYPE_ABOUT -> createAbout()
 
+            TYPE_ACK -> createAck()
+
             else -> throw IllegalArgumentException("Type $mType is invalid")
         }
+    }
+
+    private fun createAck(): Page {
+        val section1 = SectionLongText(SECTION_TEXT, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi imperdiet sed metus at dapibus. Curabitur eget nisl euismod, aliquam felis sed, faucibus tortor. Duis nec ligula sit amet tortor finibus malesuada. Nullam id finibus eros. Sed magna metus, euismod a nisl nec, tincidunt facilisis justo. Etiam pulvinar et enim vel porttitor. Proin bibendum bibendum eros a convallis.")
+
+        val options = listOf(
+                "Ut gravida dictum lorem, id auctor dolor condimentum quis.",
+                "Etiam malesuada eros quam, eu ornare sapien consequat at.",
+                "In hac habitasse platea dictumst.",
+                "Phasellus nec mollis odio.",
+                "Etiam egestas luctus est vel pharetra, Fusce a egestas arcu"
+        )
+
+        val section2 = SectionList(SECTION_LIST, "On This App", options)
+        return Page("Acknowledgement", TYPE_ACK, listOf(section1, section2))
     }
 
     private fun createAbout(): Page {
