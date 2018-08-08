@@ -4,13 +4,15 @@ import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.TopLevelCategory
 import com.spgroup.spapp.presentation.adapter.diff_utils.HomeMenuDiffCallback
 import com.spgroup.spapp.util.extension.inflate
+import com.spgroup.spapp.util.extension.toFullImgUrl
 import kotlinx.android.synthetic.main.menu_item.view.*
 
-class HomeMenuItemAdapter: RecyclerView.Adapter<HomeMenuItemAdapter.HomeMenuVH>() {
+class HomeMenuItemAdapter : RecyclerView.Adapter<HomeMenuItemAdapter.HomeMenuVH>() {
 
     ///////////////////////////////////////////////////////////////////////////
     // Property
@@ -54,7 +56,7 @@ class HomeMenuItemAdapter: RecyclerView.Adapter<HomeMenuItemAdapter.HomeMenuVH>(
     // ViewHolder
     ///////////////////////////////////////////////////////////////////////////
 
-    class HomeMenuVH(itemView: View, val listener: OnItemClickListener?): RecyclerView.ViewHolder(itemView) {
+    class HomeMenuVH(itemView: View, val listener: OnItemClickListener?) : RecyclerView.ViewHolder(itemView) {
 
         init {
             itemView.setOnClickListener {
@@ -64,17 +66,10 @@ class HomeMenuItemAdapter: RecyclerView.Adapter<HomeMenuItemAdapter.HomeMenuVH>(
 
         fun bind(item: TopLevelCategory) {
             with(itemView) {
-                val imageId = when (item.id) {
-                    "food" -> R.drawable.menu_food
-                    "housekeeping" -> R.drawable.menu_housekeeping
-                    "aircon" -> R.drawable.menu_aircon
-                    "laundry" -> R.drawable.menu_laundry
-                    "education" -> R.drawable.menu_education
-                    "groceries" -> R.drawable.menu_grocery
-                    else -> throw IllegalArgumentException("ID ${item.id} not found")
-                }
-                iv_logo.setImageResource(imageId)
-                tv_name.setText(item.name)
+                Glide.with(context)
+                        .load(item.menuIcon.toFullImgUrl())
+                        .into(iv_logo)
+                tv_name.text = item.name
             }
         }
     }

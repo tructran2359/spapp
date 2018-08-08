@@ -2,15 +2,18 @@
 
 ext {
     ktxVersion = "1.0.0-beta01"
+    ankoVersion = "0.10.5"
     supportVersion = "28.0.0-beta01"
     lifecycleVersion = "1.1.1"
 
     retrofitVersion = "2.4.0"
+    okhttpLoggingVersion = "3.11.0"
     rxJavaVersion = "2.1.12"
     rxKotlinVersion = "2.2.0"
     rxAndroidVersion = "2.0.2"
     daggerVersion = "2.16"
     calligraphyVersion = "2.3.0"
+    glideVersion = "4.7.1"
 }
 
 buildscript {

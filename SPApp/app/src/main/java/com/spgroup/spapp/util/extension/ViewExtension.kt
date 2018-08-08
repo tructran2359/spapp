@@ -13,7 +13,6 @@ import android.view.ViewTreeObserver
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
-import android.widget.Toast
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.activity.BaseActivity
 
@@ -45,10 +44,6 @@ fun Context.getDimensionPixelSize(resId: Int) = this.resources.getDimensionPixel
 fun Context.getDimension(resId: Int) = this.resources.getDimension(resId)
 
 fun View.getDimensionPixelSize(resId: Int) = context.getDimensionPixelSize(resId)
-
-fun Context.toast(message: String) {
-    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-}
 
 fun Context.loadAnimation(resId: Int) = AnimationUtils.loadAnimation(this, resId)
 

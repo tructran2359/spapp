@@ -13,8 +13,8 @@ import com.spgroup.spapp.presentation.viewmodel.PartnerListingViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.doLogD
-import com.spgroup.spapp.util.extension.toast
 import kotlinx.android.synthetic.main.activity_partner_listing.*
+import org.jetbrains.anko.longToast
 
 class PartnerListingActivity: BaseActivity(), PartnerAdapter.OnItemClickListener {
 
@@ -75,7 +75,7 @@ class PartnerListingActivity: BaseActivity(), PartnerAdapter.OnItemClickListener
         val partner = mViewModel.getPartner(position)
         partner?.let {
             if (it.isPromotion) {
-                toast("Promotion 's coming soon")
+                longToast("Promotion 's coming soon")
             } else {
                 val intent = PartnerDetailsActivity.getLaunchIntent(this, it)
                 startActivity(intent)

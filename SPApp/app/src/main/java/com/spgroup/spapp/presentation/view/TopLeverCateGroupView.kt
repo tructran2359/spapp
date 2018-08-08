@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.TopLevelCategory
+import com.spgroup.spapp.util.extension.toFullImgUrl
 import kotlinx.android.synthetic.main.view_top_level_category_group.view.*
 
 class TopLeverCateGroupView: LinearLayout {
@@ -52,19 +53,9 @@ class TopLeverCateGroupView: LinearLayout {
 
     fun setListCategory(list: List<TopLevelCategory>) {
         mList = list
-        mList.forEachIndexed { index, topLevelServiceCategory ->
-            val imageId = when (topLevelServiceCategory.id) {
-                "food" -> R.drawable.cate_food
-                "housekeeping" -> R.drawable.cate_house_keeping
-                "aircon" -> R.drawable.cate_aircon
-                "laundry" -> R.drawable.cate_laundry
-                "education" -> R.drawable.cate_edu
-                "groceries" -> R.drawable.cate_gro
-                else -> throw IllegalArgumentException("ID ${topLevelServiceCategory.id} not found")
-            }
-
+        mList.forEachIndexed { index, cat ->
             with(mListCateView[index]) {
-                setData(topLevelServiceCategory.name, imageId)
+                setData(cat.name, cat.homeThumbnail.toFullImgUrl())
                 setOnClickListener {
                     mListener?.onCategoryClick(index)
                 }

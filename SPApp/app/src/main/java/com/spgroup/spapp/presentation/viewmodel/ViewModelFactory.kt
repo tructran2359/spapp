@@ -5,17 +5,22 @@ import android.arch.lifecycle.ViewModelProvider
 import com.spgroup.spapp.di.Injection
 import com.spgroup.spapp.domain.SchedulerFacade
 import com.spgroup.spapp.domain.ServicesRepository
+import com.spgroup.spapp.domain.usecase.GetInitialDataUsecase
 import com.spgroup.spapp.domain.usecase.GetPartnerListingUsecase
 import com.spgroup.spapp.domain.usecase.GetServicesListBySupplierUsecase
-import com.spgroup.spapp.domain.usecase.GetTopLevelCategoryUsecase
+import com.spgroup.spapp.manager.AppDataCache
 
 class ViewModelFactory private constructor(
         private val schedulerFacade: SchedulerFacade,
-        private val servicesRepository: ServicesRepository
+        private val mockRepository: ServicesRepository,
+        private val cloudRepository: ServicesRepository,
+        private val appDataCache: AppDataCache
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
+
+            modelClass.isAssignableFrom(SplashViewModel::class.java) -> createSplashVM()
 
             modelClass.isAssignableFrom(SupplierDetailsViewModel::class.java) -> createSupplierDetailsViewModel()
 
@@ -32,16 +37,22 @@ class ViewModelFactory private constructor(
     }
 
     ///////////////////////////////////////////////////////////////////////////
-    // ViewModel creation
+
     ///////////////////////////////////////////////////////////////////////////
+    // ViewModel creation
+
+    private fun createSplashVM(): SplashViewModel {
+        val getInitialDataUsecase = GetInitialDataUsecase(schedulerFacade, cloudRepository)
+        return SplashViewModel(getInitialDataUsecase, appDataCache)
+    }
 
     private fun createSupplierDetailsViewModel(): SupplierDetailsViewModel {
-        val getServicesUsecase = GetServicesListBySupplierUsecase(schedulerFacade, servicesRepository)
+        val getServicesUsecase = GetServicesListBySupplierUsecase(schedulerFacade, mockRepository)
         return SupplierDetailsViewModel(getServicesUsecase)
     }
 
     private fun createPartnerListingViewModel(): PartnerListingViewModel {
-        val getPartnerListingUsecase = GetPartnerListingUsecase(schedulerFacade, servicesRepository)
+        val getPartnerListingUsecase = GetPartnerListingUsecase(schedulerFacade, mockRepository)
         return PartnerListingViewModel(getPartnerListingUsecase)
     }
 
@@ -50,7 +61,7 @@ class ViewModelFactory private constructor(
     }
 
     private fun createHomeViewModel(): HomeViewModel {
-        return HomeViewModel(GetTopLevelCategoryUsecase(schedulerFacade, servicesRepository))
+        return HomeViewModel(appDataCache)
     }
 
     private fun createOrderSummaryViewModel(): OrderSummaryViewModel {
@@ -66,7 +77,9 @@ class ViewModelFactory private constructor(
             if (INSTANCE == null) {
                 INSTANCE = ViewModelFactory(
                         Injection.provideSchedulerFacade(),
-                        Injection.provideServicesRepository()
+                        Injection.provideMockRepository(),
+                        Injection.provideCloudRepository(),
+                        Injection.provideAppDataCache()
                 )
             }
             return INSTANCE
