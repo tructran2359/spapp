@@ -130,4 +130,6 @@
     <dimen name="home_menu_item_distance">9dp</dimen>
     <dimen name="empty_request_icon_size">82dp</dimen>
 
+    <dimen name="splash_image_size">112dp</dimen>
+
 </resources>

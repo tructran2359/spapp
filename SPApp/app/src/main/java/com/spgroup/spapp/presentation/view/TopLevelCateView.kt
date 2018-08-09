@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import com.bumptech.glide.Glide
 import com.spgroup.spapp.R
 import kotlinx.android.synthetic.main.view_top_level_category.view.*
 
@@ -39,8 +40,10 @@ class TopLevelCateView: LinearLayout {
      * @param cateName : category name
      * @param cateImage: drawable id for dummy data
      */
-    fun setData(cateName: String, cateImage: Int) {
+    fun setData(cateName: String, cateImage: String) {
         tv_cate_name.setText(cateName)
-        iv_cate_image.setImageResource(cateImage)
+        Glide.with(context)
+                .load(cateImage)
+                .into(iv_cate_image)
     }
 }

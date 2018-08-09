@@ -1,24 +1,24 @@
 package com.spgroup.spapp.repository
 
 import com.spgroup.spapp.domain.ServicesRepository
+import com.spgroup.spapp.domain.model.HomeData
 import com.spgroup.spapp.domain.model.Partner
 import com.spgroup.spapp.domain.model.ServiceCategory
-import com.spgroup.spapp.domain.model.TopLevelCategory
 import com.spgroup.spapp.repository.http.SingaporePowerHttpClient
+import com.spgroup.spapp.repository.mapper.HomeDataMapper
 import com.spgroup.spapp.repository.mapper.PartnerMapper
-import com.spgroup.spapp.repository.mapper.TopLevelCatMapper
 import io.reactivex.Single
 
 class ServicesCloudDataStore(
         private val singaporePowerHttpClient: SingaporePowerHttpClient,
-        private val topLevelCatMapper: TopLevelCatMapper,
+        private val homeDataMapper: HomeDataMapper,
         private val partnerMapper: PartnerMapper
 ) : ServicesRepository {
 
-    override fun getTopLevelServiceCategories(): Single<List<TopLevelCategory>> =
+    override fun getInitialData(): Single<HomeData> =
             singaporePowerHttpClient
-                    .getTopLevelCategories()
-                    .map { topLevelCatMapper.transform(it) }
+                    .getInitialData()
+                    .map { homeDataMapper.transform(it) }
 
     override fun getSuppliersByCategory(categoryId: String): Single<List<Partner>> =
             singaporePowerHttpClient

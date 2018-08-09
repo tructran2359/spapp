@@ -22,21 +22,18 @@ import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.extension.getDimensionPixelSize
 import com.spgroup.spapp.util.extension.getDisplayMetrics
-import com.spgroup.spapp.util.extension.toast
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.menu_home.*
+import org.jetbrains.anko.longToast
 
-private val homeMerchantAdapter = HomeMerchantAdapter()
-
-class HomeActivity :
+open class HomeActivity :
         BaseActivity(),
         HomePromotionAdapter.OnPromotionClickListener,
         HomeMerchantAdapter.OnMerchantClickListener {
 
     companion object {
-        fun getLaunchIntent(context: Context) : Intent {
-            val intent = Intent(context, HomeActivity::class.java)
-            return intent
+        fun getLaunchIntent(context: Context): Intent {
+            return Intent(context, HomeActivity::class.java)
         }
     }
 
@@ -57,10 +54,15 @@ class HomeActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
-        subcribeUI()
-
+        setupViewModel()
+        subscribeUI()
         setupViews()
+    }
+
+    private fun setupViewModel() {
+        val factory = ViewModelFactory.getInstance()
+        mViewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
+        mViewModel.onInitialIntent(intent)
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -131,10 +133,7 @@ class HomeActivity :
         recycler_view_merchant.adapter = mMerchantAdapter
     }
 
-    private fun subcribeUI() {
-        val factory = ViewModelFactory.getInstance()
-        mViewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
-
+    private fun subscribeUI() {
         with(mViewModel) {
             listTopLevelCate.observe(this@HomeActivity, Observer {
                 it?.let {
@@ -143,11 +142,9 @@ class HomeActivity :
                 }
             })
 
-            error.observe(this@HomeActivity,  Observer {
-                this@HomeActivity.toast("Error ${it?.message}")
+            error.observe(this@HomeActivity, Observer {
+                this@HomeActivity.longToast("Error ${it?.message}")
             })
-
-            mViewModel.load()
         }
     }
 

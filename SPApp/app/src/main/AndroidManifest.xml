@@ -2,6 +2,8 @@
 <manifest package="com.spgroup.spapp"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".presentation.SPApplication"
         android:allowBackup="true"
@@ -13,13 +15,19 @@
 
         <!-- HomeActivity -->
         <activity
-            android:name=".presentation.activity.HomeActivity"
+            android:name=".presentation.activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <!-- ParnerDetailsActivity -->
+        <activity
+            android:name=".presentation.activity.HomeActivity"
+            android:screenOrientation="portrait">
         </activity>
 
         <!-- ParnerDetailsActivity -->

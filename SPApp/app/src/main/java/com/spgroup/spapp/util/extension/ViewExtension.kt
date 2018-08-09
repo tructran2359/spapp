@@ -13,7 +13,6 @@ import android.view.ViewTreeObserver
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
-import android.widget.Toast
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.activity.BaseActivity
 
@@ -46,10 +45,6 @@ fun Context.getDimension(resId: Int) = this.resources.getDimension(resId)
 
 fun View.getDimensionPixelSize(resId: Int) = context.getDimensionPixelSize(resId)
 
-fun Context.toast(message: String) {
-    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-}
-
 fun Context.loadAnimation(resId: Int) = AnimationUtils.loadAnimation(this, resId)
 
 fun ViewGroup.inflate(layoutId: Int, attachToRoot: Boolean) = LayoutInflater.from(context).inflate(layoutId, this, attachToRoot)
@@ -73,4 +68,16 @@ fun TextView.setTextUnderline(resId: Int) {
 fun View.hideKeyboard() {
     val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(this.getWindowToken(), 0)
+}
+
+fun View.setLayoutParamsHeight(heightInPixel: Int) {
+    val layoutParams = this.layoutParams
+    layoutParams.height = heightInPixel
+    this.layoutParams = layoutParams
+}
+
+fun View.setLayoutParamsWidth(widthInPixel: Int) {
+    val layoutParams = this.layoutParams
+    layoutParams.width = widthInPixel
+    this.layoutParams = layoutParams
 }

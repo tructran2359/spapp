@@ -5,17 +5,20 @@ import com.spgroup.spapp.domain.model.*
 import io.reactivex.Single
 
 class ServicesDataMock : ServicesRepository {
-
-    override fun getTopLevelServiceCategories(): Single<List<TopLevelCategory>> {
-        return Single.fromCallable {
-            listOf(TopLevelCategory("food", "Food"),
-                    TopLevelCategory("housekeeping", "House-keeping"),
-                    TopLevelCategory("aircon", "Aircon Servicing"),
-                    TopLevelCategory("laundry", "Laundry"),
-                    TopLevelCategory("education", "Education"),
-                    TopLevelCategory("groceries", "Grocery"))
-        }
+    override fun getInitialData(): Single<HomeData> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+//    override fun getTopLevelServiceCategories(): Single<List<TopLevelCategory>> {
+//        return Single.fromCallable {
+//            listOf(TopLevelCategory("food", "Food"),
+//                    TopLevelCategory("housekeeping", "House-keeping"),
+//                    TopLevelCategory("aircon", "Aircon Servicing"),
+//                    TopLevelCategory("laundry", "Laundry"),
+//                    TopLevelCategory("education", "Education"),
+//                    TopLevelCategory("groceries", "Grocery"))
+//        }
+//    }
 
     override fun getSuppliersByCategory(categoryId: String): Single<List<Partner>> {
         return Single.fromCallable {
