@@ -3,6 +3,7 @@ package com.spgroup.spapp.presentation.viewmodel
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.spgroup.spapp.domain.model.Partner
+import com.spgroup.spapp.domain.model.TopLevelCategory
 import com.spgroup.spapp.domain.usecase.GetPartnerListingUsecase
 import com.spgroup.spapp.util.doLogD
 import io.reactivex.disposables.CompositeDisposable
@@ -14,6 +15,11 @@ class PartnerListingViewModel(
     private val disposeBag = CompositeDisposable()
     val partnerListing = MutableLiveData<List<Partner>>()
     val error = MutableLiveData<Throwable>()
+    val topLevelCategory = MutableLiveData<TopLevelCategory>()
+
+    fun setInitialData(topLevelCategory: TopLevelCategory) {
+        this.topLevelCategory.value = topLevelCategory
+    }
 
     fun loadPartnerListing(id: Int) {
         val disposable = getPartnerListingUsecase

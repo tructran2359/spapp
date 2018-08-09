@@ -16,9 +16,7 @@ class ConstUtils {
 
         @JvmField val EXTRA_IS_EDIT = "EXTRA_IS_EDIT"
 
-        @JvmField val EXTRA_TOP_LEVEL_CATE_NAME = "EXTRA_TOP_LEVEL_CATE_NAME"
-
-        @JvmField val EXTRA_TOP_LEVEL_CATE_ID = "EXTRA_TOP_LEVEL_CATE_ID"
+        @JvmField val EXTRA_TOP_LEVEL_CATEGORY = "EXTRA_TOP_LEVEL_CATEGORY"
 
         @JvmField val EXTRA_SERVICE_ID = "EXTRA_SERVICE_ID"
 

@@ -20,27 +20,16 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             >
 
-            <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:contentScrim="@color/color_primarygradientbase"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-                >
-
-
-                <ImageView
-                    android:id="@+id/iv_logo"
-                    android:layout_width="@dimen/partner_listing_logo_size"
-                    android:layout_height="@dimen/partner_listing_logo_size"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/common_vert_medium"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/partner_listing_avatar"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                    />
-
-            </android.support.design.widget.CollapsingToolbarLayout>
+            <ImageView
+                android:id="@+id/iv_banner"
+                android:layout_width="@dimen/partner_listing_logo_size"
+                android:layout_height="@dimen/partner_listing_logo_size"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/common_vert_medium"
+                android:scaleType="fitXY"
+                android:src="@drawable/partner_listing_avatar"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                />
 
             <TextView
                 style="@style/textH3.white"
@@ -51,7 +40,6 @@
                 android:layout_marginTop="@dimen/common_vert_medium"
                 android:layout_marginBottom="@dimen/common_vert_medium"
                 android:gravity="center"
-
                 android:text="Food"
                 />
 
