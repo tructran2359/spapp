@@ -26,8 +26,6 @@ import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.menu_home.*
 import org.jetbrains.anko.longToast
 
-private val homeMerchantAdapter = HomeMerchantAdapter()
-
 open class HomeActivity :
         BaseActivity(),
         HomePromotionAdapter.OnPromotionClickListener,

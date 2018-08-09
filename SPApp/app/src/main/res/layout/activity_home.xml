@@ -22,7 +22,7 @@
             android:id="@+id/rl_header_expanded"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed|snap"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
             >
 
             <RelativeLayout
@@ -104,6 +104,7 @@
                 android:layout_marginRight="84dp"
                 android:layout_marginTop="@dimen/common_vert_medium_sub"
                 android:text="@string/home_short_desc"
+                android:layout_marginBottom="@dimen/common_vert_medium_sub"
                 />
 
         </RelativeLayout>
@@ -113,6 +114,7 @@
     <!--Content-->
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_ui05"
@@ -130,7 +132,6 @@
                 android:id="@+id/cate_group_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_vert_medium_sub"
                 android:layout_marginLeft="@dimen/common_horz_large"
                 android:layout_marginRight="@dimen/common_horz_large"
                 />
