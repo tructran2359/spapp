@@ -122,10 +122,12 @@
         >
 
         <LinearLayout
+            android:id="@+id/ll_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@color/color_ui0680"
+            android:descendantFocusability="blocksDescendants"
             >
 
             <com.spgroup.spapp.presentation.view.TopLeverCateGroupView
