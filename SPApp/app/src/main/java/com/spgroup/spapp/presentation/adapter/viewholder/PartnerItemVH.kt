@@ -15,7 +15,7 @@ class PartnerItemVH(
 
     fun bind(partner: Partner) {
         view.run {
-            iv_sponsored.visibility = if (partner.isSponsored) View.VISIBLE else View.GONE
+            iv_sponsored.visibility = if (partner.highlight.isEmpty()) View.GONE else View.VISIBLE
             tv_name.text = partner.name
             tv_price.text = partner.priceDescription
             Glide.with(context)

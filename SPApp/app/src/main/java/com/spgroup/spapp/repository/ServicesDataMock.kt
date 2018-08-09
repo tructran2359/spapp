@@ -22,19 +22,7 @@ class ServicesDataMock : ServicesRepository {
 
     override fun getPartnersListingData(categoryId: String): Single<PartnersListingData> {
         return Single.fromCallable {
-            val list = mutableListOf<Partner>()
-            for (i in 1..10) {
-                list.add(
-                        Partner(
-                                id = i,
-                                name = "Partner $i",
-                                price = 165f + i,
-                                unit = "month",
-                                imgUrl = "testUrl $i",
-                                isSponsored = (i % 2 == 0))
-                )
-            }
-            PartnersListingData(list, listOf())
+            PartnersListingData(listOf(), listOf())
         }
     }
 
