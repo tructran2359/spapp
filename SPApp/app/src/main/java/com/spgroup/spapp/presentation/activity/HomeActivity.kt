@@ -64,7 +64,7 @@ open class HomeActivity :
     private fun setupViewModel() {
         val factory = ViewModelFactory.getInstance()
         mViewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
-        mViewModel.onInitialIntent(intent)
+        mViewModel.getTopLevelCategory()
     }
 
     ///////////////////////////////////////////////////////////////////////////

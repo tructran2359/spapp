@@ -1,115 +1,77 @@
 package com.spgroup.spapp.presentation.adapter
 
-import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.Partner
-import com.spgroup.spapp.presentation.adapter.diff_utils.PartnerListingDiffCallback
-import com.spgroup.spapp.util.extension.formatPriceWithUnit
+import com.spgroup.spapp.domain.model.PartnersListingItem
+import com.spgroup.spapp.domain.model.Promotion
+import com.spgroup.spapp.presentation.adapter.viewholder.PartnerItemVH
+import com.spgroup.spapp.presentation.adapter.viewholder.PromotionItemVH
 import com.spgroup.spapp.util.extension.inflate
-import kotlinx.android.synthetic.main.layout_partner_item.view.*
-import kotlinx.android.synthetic.main.layout_partner_promotion.view.*
 
 class PartnerAdapter(
-        private val onItemClickListener: OnItemClickListener
-): RecyclerView.Adapter<PartnerAdapter.PartnerVH>() {
+        private val onItemClickListener: (View, PartnersListingItem, Int) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     ///////////////////////////////////////////////////////////////////////////
     // Property
     ///////////////////////////////////////////////////////////////////////////
 
-    val TYPE_PARTNER = 1
-    val TYPE_PROMOTION = 2
+    companion object {
+        const val UNEXPECTED = -1
+        const val TYPE_PARTNER = 1
+        const val TYPE_PROMOTION = 2
+    }
 
-    var mData = mutableListOf<Partner>()
+    private val mData = mutableListOf<PartnersListingItem>()
 
     ///////////////////////////////////////////////////////////////////////////
     // Overrie
     ///////////////////////////////////////////////////////////////////////////
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PartnerVH {
-        val view = when(viewType) {
-
-            TYPE_PARTNER -> parent.inflate(R.layout.layout_partner_item, false)
-
-            TYPE_PROMOTION -> parent.inflate(R.layout.layout_partner_promotion, false)
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            TYPE_PARTNER -> {
+                val view = parent.inflate(R.layout.layout_partner_item, false)
+                PartnerItemVH(view, onItemClickListener)
+            }
+            TYPE_PROMOTION -> {
+                val view = parent.inflate(R.layout.layout_partner_promotion, false)
+                PromotionItemVH(view, onItemClickListener)
+            }
             else -> throw IllegalArgumentException("Undefined type")
         }
+    }
 
-        return PartnerVH(view, onItemClickListener)
+    override fun onBindViewHolder(vh: RecyclerView.ViewHolder, position: Int) {
+        when (getItemViewType(position)) {
+            TYPE_PARTNER -> (vh as PartnerItemVH).bind(mData[position] as Partner)
+            TYPE_PROMOTION -> (vh as PromotionItemVH).bind(mData[position] as Promotion)
+            else -> throw IllegalArgumentException("Undefined type")
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (mData[position]) {
+            is Partner -> TYPE_PARTNER
+            is Promotion -> TYPE_PROMOTION
+            else -> UNEXPECTED
+        }
     }
 
     override fun getItemCount() = mData.size
 
-    override fun onBindViewHolder(vh: PartnerVH, position: Int) {
-        vh.bind(mData[position])
-    }
+///////////////////////////////////////////////////////////////////////////
+// Other
+///////////////////////////////////////////////////////////////////////////
 
-    override fun getItemViewType(position: Int) = if (mData[position].isPromotion) TYPE_PROMOTION else TYPE_PARTNER
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Other
-    ///////////////////////////////////////////////////////////////////////////
-
-    fun setData(list: List<Partner>?) {
+    fun setData(list: List<PartnersListingItem>?) {
         list?.let {
-            val diffCallback = PartnerListingDiffCallback(mData, list)
-            val result = DiffUtil.calculateDiff(diffCallback)
             mData.clear()
             mData.addAll(list)
-            result.dispatchUpdatesTo(this)
-
+            notifyDataSetChanged()
         }
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // ViewHolder
-    ///////////////////////////////////////////////////////////////////////////
-
-    class PartnerVH(
-            val view: View,
-            val listener: OnItemClickListener
-    ): RecyclerView.ViewHolder(view) {
-
-        init {
-            view.setOnClickListener {
-                listener.onItemClick(adapterPosition)
-            }
-        }
-
-        fun bind(partner: Partner) {
-
-            if (partner.isPromotion) {
-                bindPromotion(partner)
-            } else {
-                bindPartner(partner)
-            }
-        }
-
-        fun bindPartner(partner: Partner) {
-            view.run {
-                iv_sponsored.visibility = if (partner.isSponsored) View.VISIBLE else View.GONE
-                tv_name.setText(partner.name)
-                tv_price.setText(partner.price.formatPriceWithUnit(partner.unit))
-            }
-        }
-
-        fun bindPromotion(partner: Partner) {
-            view.run {
-                iv_promotion.setImageResource(R.drawable.rice_temp)
-                tv_promotion.setText(partner.name)
-            }
-        }
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Listener
-    ///////////////////////////////////////////////////////////////////////////
-
-    interface OnItemClickListener {
-        fun onItemClick(position: Int)
     }
 }

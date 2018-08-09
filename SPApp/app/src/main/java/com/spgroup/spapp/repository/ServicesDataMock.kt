@@ -20,22 +20,21 @@ class ServicesDataMock : ServicesRepository {
 //        }
 //    }
 
-    override fun getSuppliersByCategory(categoryId: String): Single<List<Partner>> {
+    override fun getPartnersListingData(categoryId: String): Single<PartnersListingData> {
         return Single.fromCallable {
             val list = mutableListOf<Partner>()
             for (i in 1..10) {
                 list.add(
                         Partner(
-                        id = i,
-                        name = "Partner $i",
-                        price = 165f + i,
-                        unit = "month",
-                        imgUrl = "testUrl $i",
-                        isSponsored = (i % 2 == 0))
+                                id = i,
+                                name = "Partner $i",
+                                price = 165f + i,
+                                unit = "month",
+                                imgUrl = "testUrl $i",
+                                isSponsored = (i % 2 == 0))
                 )
             }
-
-            list
+            PartnersListingData(list, listOf())
         }
     }
 
@@ -74,7 +73,7 @@ class ServicesDataMock : ServicesRepository {
                             false
                     )
 
-                    val service4 = ServiceItemCombo (
+                    val service4 = ServiceItemCombo(
                             0,
                             "3 Dishes Plus 1 Soup Meal Set",
                             165f,

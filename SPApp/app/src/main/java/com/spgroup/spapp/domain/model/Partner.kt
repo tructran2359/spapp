@@ -16,4 +16,4 @@ data class Partner(
         val imgUrl: String = "",
         val priceDescription: String = "",
         val highlight: String = ""
-): Serializable
+) : Serializable, PartnersListingItem

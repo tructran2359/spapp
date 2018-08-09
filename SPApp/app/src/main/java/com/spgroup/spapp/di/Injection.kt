@@ -11,6 +11,7 @@ import com.spgroup.spapp.repository.ServicesDataMock
 import com.spgroup.spapp.repository.http.SingaporePowerHttpClient
 import com.spgroup.spapp.repository.mapper.HomeDataMapper
 import com.spgroup.spapp.repository.mapper.PartnerMapper
+import com.spgroup.spapp.repository.mapper.PromotionMapper
 import com.spgroup.spapp.repository.mapper.TopLevelCatMapper
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -29,7 +30,8 @@ object Injection {
         val topLevelCatMapper = TopLevelCatMapper()
         val homeDataMapper = HomeDataMapper(topLevelCatMapper)
         val partnerMapper = PartnerMapper()
-        return ServicesCloudDataStore(provideSingaporePowerHttpClient(), homeDataMapper, partnerMapper)
+        val promotionMapper = PromotionMapper()
+        return ServicesCloudDataStore(provideSingaporePowerHttpClient(), homeDataMapper, partnerMapper, promotionMapper)
     }
 
     fun provideSchedulerFacade(): SchedulerFacade = SchedulerFacade()

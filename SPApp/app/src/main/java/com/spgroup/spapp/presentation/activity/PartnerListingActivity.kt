@@ -5,8 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.bumptech.glide.Glide
 import com.spgroup.spapp.R
+import com.spgroup.spapp.domain.model.Partner
+import com.spgroup.spapp.domain.model.PartnersListingItem
+import com.spgroup.spapp.domain.model.Promotion
 import com.spgroup.spapp.domain.model.TopLevelCategory
 import com.spgroup.spapp.presentation.adapter.PartnerAdapter
 import com.spgroup.spapp.presentation.viewmodel.PartnerListingViewModel
@@ -17,7 +21,7 @@ import com.spgroup.spapp.util.extension.toFullImgUrl
 import kotlinx.android.synthetic.main.activity_partner_listing.*
 import org.jetbrains.anko.longToast
 
-class PartnerListingActivity : BaseActivity(), PartnerAdapter.OnItemClickListener {
+class PartnerListingActivity : BaseActivity() {
 
     companion object {
 
@@ -33,7 +37,7 @@ class PartnerListingActivity : BaseActivity(), PartnerAdapter.OnItemClickListene
     ///////////////////////////////////////////////////////////////////////////
 
     lateinit var mViewModel: PartnerListingViewModel
-    private val mPartnerListAdapter = PartnerAdapter(this)
+    lateinit var mPartnerListAdapter: PartnerAdapter
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -49,13 +53,13 @@ class PartnerListingActivity : BaseActivity(), PartnerAdapter.OnItemClickListene
         mViewModel.setInitialData(cat)
 
         with(mViewModel) {
-            partnerListing.observe(this@PartnerListingActivity, Observer {
-                mPartnerListAdapter.setData(it)
-            })
             topLevelCategory.observe(this@PartnerListingActivity, Observer {
                 it?.let { updateBanner(it) }
             })
-            loadPartnerListing(-1)
+            partnerListingItems.observe(this@PartnerListingActivity, Observer {
+                mPartnerListAdapter.setData(it)
+            })
+            loadPartnerListing()
         }
     }
 
@@ -70,17 +74,14 @@ class PartnerListingActivity : BaseActivity(), PartnerAdapter.OnItemClickListene
     // PartnerAdapter.OnItemClickListener
     ///////////////////////////////////////////////////////////////////////////
 
-    override fun onItemClick(position: Int) {
-        val partner = mViewModel.getPartner(position)
-        partner?.let {
-            if (it.isPromotion) {
-                longToast("Promotion 's coming soon")
-            } else {
-                val intent = PartnerDetailsActivity.getLaunchIntent(this, it)
+    private fun onPartnerListingItemClick(view: View, itemData: PartnersListingItem, position: Int) {
+        when (itemData) {
+            is Partner -> {
+                val intent = PartnerDetailsActivity.getLaunchIntent(this, itemData)
                 startActivity(intent)
             }
+            is Promotion -> longToast("Promotion 's coming soon")
         }
-
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -92,6 +93,9 @@ class PartnerListingActivity : BaseActivity(), PartnerAdapter.OnItemClickListene
             onBackPressed()
         }
         recycler_view.layoutManager = LinearLayoutManager(this)
+        mPartnerListAdapter = PartnerAdapter { view, itemData, position ->
+            onPartnerListingItemClick(view, itemData, position)
+        }
         recycler_view.adapter = mPartnerListAdapter
     }
 }
