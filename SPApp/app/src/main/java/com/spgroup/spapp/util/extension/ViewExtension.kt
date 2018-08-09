@@ -69,3 +69,15 @@ fun View.hideKeyboard() {
     val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(this.getWindowToken(), 0)
 }
+
+fun View.setLayoutParamsHeight(heightInPixel: Int) {
+    val layoutParams = this.layoutParams
+    layoutParams.height = heightInPixel
+    this.layoutParams = layoutParams
+}
+
+fun View.setLayoutParamsWidth(widthInPixel: Int) {
+    val layoutParams = this.layoutParams
+    layoutParams.width = widthInPixel
+    this.layoutParams = layoutParams
+}
