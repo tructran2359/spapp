@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/color_ui07"
+        android:lineSpacingExtra="8sp"
+        fontPath="@string/font_regular"
+        android:text="123asdf"
+        />
+
+    <View
+        style="@style/lineDividerDark"
+        android:layout_marginTop="@dimen/common_vert_large"
+        android:layout_marginBottom="@dimen/common_vert_large"
+        />
+
+    <TextView
+        android:id="@+id/tv_link_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/color_ui07"
+        fontPath="@string/font_book"
+        android:text="Feedback"
+        />
+
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/email"
+        android:drawablePadding="@dimen/common_horz_small"
+        android:textSize="16sp"
+        android:textColor="@color/color_ui01"
+        android:layout_marginTop="@dimen/common_vert_medium"
+        android:text="email@email.com"
+        android:layout_marginBottom="@dimen/common_vert_xxxlarge"
+        />
+
+</LinearLayout>

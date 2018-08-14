@@ -131,5 +131,7 @@
     <dimen name="empty_request_icon_size">82dp</dimen>
 
     <dimen name="splash_image_size">112dp</dimen>
+    <dimen name="page_top_img_width">198dp</dimen>
+    <dimen name="page_top_img_height">90dp</dimen>
 
 </resources>
