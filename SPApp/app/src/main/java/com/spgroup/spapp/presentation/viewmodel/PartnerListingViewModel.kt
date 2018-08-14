@@ -36,7 +36,9 @@ class PartnerListingViewModel(
             return data.partners
         } else {
             if (data.partners.size < promotionIndex) {
-                return data.partners
+                val mergedList: MutableList<PartnersListingItem> = data.partners.toMutableList()
+                mergedList.add(data.promotions[0])
+                return mergedList
             } else {
                 val mergedList: MutableList<PartnersListingItem> = data.partners.toMutableList()
                 if (data.partners.size == promotionIndex) {
