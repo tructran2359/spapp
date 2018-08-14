@@ -166,12 +166,12 @@ open class HomeActivity :
             startActivity(PageActivity.getLaunchIntent(this@HomeActivity, PageActivity.TYPE_ABOUT))
         }
 
-        tv_tnc.setOnClickListener {
+        rl_tnc_container.setOnClickListener {
             startActivity(TermsAndConditionsActivity.getLaunchIntent(this@HomeActivity))
         }
 
-        tv_ack.setOnClickListener {
-            startActivity(HomeAcknowledgementActivity.getLaunchIntent(this@HomeActivity))
+        rl_ack_container.setOnClickListener {
+            startActivity(PageActivity.getLaunchIntent(this@HomeActivity, PageActivity.TYPE_ACK))
         }
 
         mMenuAdapter = HomeMenuItemAdapter()
