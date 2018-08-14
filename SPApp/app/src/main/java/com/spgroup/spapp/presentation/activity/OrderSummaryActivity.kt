@@ -27,6 +27,7 @@ import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.extension.getDimensionPixelSize
 import com.spgroup.spapp.util.extension.isNumberOnly
 import com.spgroup.spapp.util.extension.isValidEmail
+import com.spgroup.spapp.util.extension.updateVisibility
 import kotlinx.android.synthetic.main.activity_order_summary.*
 
 class OrderSummaryActivity : BaseActivity() {
@@ -232,6 +233,21 @@ class OrderSummaryActivity : BaseActivity() {
                 showErrorView(false)
             }
         }
+
+        setUpKeyboardDetection()
+    }
+
+    private fun setUpKeyboardDetection() {
+        view_root.viewTreeObserver.addOnGlobalLayoutListener {
+            val diff = view_root.rootView.height - view_root.height
+            val keyboardOpen = diff > getDimensionPixelSize(R.dimen.soft_keyboar_detection_height)
+            updateBottomButtonVisibility(!keyboardOpen)
+        }
+    }
+
+    private fun updateBottomButtonVisibility(show: Boolean) {
+        rl_summary_button_container.updateVisibility(show)
+        v_shadow.updateVisibility(show)
     }
 
     private fun addView(list: List<NormalizedSummaryData>?) {
