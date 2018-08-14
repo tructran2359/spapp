@@ -79,10 +79,10 @@ class PageActivity: BaseActivity() {
     }
 
     private fun createAbout(): Page {
-        val section1 = SectionLongText("page_long_text", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi imperdiet sed metus at dapibus. Curabitur eget nisl euismod, aliquam felis sed, faucibus tortor. Duis nec ligula sit amet tortor finibus malesuada. Nullam id finibus eros. Sed magna metus, euismod a nisl nec, tincidunt facilisis justo. Etiam pulvinar et enim vel porttitor. Proin bibendum bibendum eros a convallis.\r\n\r\nFusce a egestas arcu. Etiam malesuada eros quam, eu ornare sapien consequat at. Phasellus nec mollis odio. Etiam egestas luctus est vel pharetra. In hac habitasse platea dictumst. Nulla facilisi. Ut gravida dictum lorem, id auctor dolor condimentum quis.")
-        val section2 = SectionLink("page_link", "Feedback / Enquiries", "info@spgroup.com")
+        val section1 = SectionLongText(SECTION_TEXT, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi imperdiet sed metus at dapibus. Curabitur eget nisl euismod, aliquam felis sed, faucibus tortor. Duis nec ligula sit amet tortor finibus malesuada. Nullam id finibus eros. Sed magna metus, euismod a nisl nec, tincidunt facilisis justo. Etiam pulvinar et enim vel porttitor. Proin bibendum bibendum eros a convallis.\r\n\r\nFusce a egestas arcu. Etiam malesuada eros quam, eu ornare sapien consequat at. Phasellus nec mollis odio. Etiam egestas luctus est vel pharetra. In hac habitasse platea dictumst. Nulla facilisi. Ut gravida dictum lorem, id auctor dolor condimentum quis.")
+        val section2 = SectionLink(SECTION_LINK, "Feedback / Enquiries", "info@spgroup.com")
 
-        return Page(title = "About us", code = "about", sections = listOf(section1, section2))
+        return Page(title = "About us", code = TYPE_ABOUT, sections = listOf(section1, section2))
     }
 
     ///////////////////////////////////////////////////////////////////////////
