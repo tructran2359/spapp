@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/view_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_ui06"
@@ -140,22 +141,22 @@
             </LinearLayout>
 
             <EditText
-                style="@style/textParagraph"
                 android:id="@+id/et_instruction"
+                style="@style/textParagraph"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/common_text_area_height"
-                android:background="@drawable/bg_rec_rounded_white_solid_grey_stroke"
+                android:layout_marginBottom="@dimen/common_vert_xxlarge"
                 android:layout_marginLeft="@dimen/common_horz_large"
                 android:layout_marginRight="@dimen/common_horz_large"
                 android:layout_marginTop="@dimen/common_vert_medium_sub"
+                android:background="@drawable/bg_rec_rounded_white_solid_grey_stroke"
                 android:gravity="top|left"
-                android:padding="@dimen/common_vert_small"
                 android:hint="@string/service_customise_hint"
-                android:textColorHint="@color/text_hint"
-                android:layout_marginBottom="@dimen/common_vert_xxlarge"
                 android:inputType="textMultiLine"
-                android:scrollbars="vertical"
                 android:lines="10"
+                android:padding="@dimen/common_vert_small"
+                android:scrollbars="vertical"
+                android:textColorHint="@color/text_hint"
                 />
 
         </LinearLayout>
@@ -164,6 +165,7 @@
 
     <View
         style="@style/buttonShadow"
+        android:id="@+id/v_shadow"
         android:layout_above="@+id/bottom_button_container"
         />
 

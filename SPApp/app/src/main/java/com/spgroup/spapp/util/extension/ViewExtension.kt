@@ -83,3 +83,7 @@ fun View.setLayoutParamsWidth(widthInPixel: Int) {
     layoutParams.width = widthInPixel
     this.layoutParams = layoutParams
 }
+
+fun View.updateVisibility(show: Boolean) {
+    visibility = if (show) View.VISIBLE else View.GONE
+}

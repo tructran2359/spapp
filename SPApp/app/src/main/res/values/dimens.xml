@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="soft_keyboar_detection_height">200dp</dimen>
+
     <dimen name="common_radius">5dp</dimen>
     <dimen name="common_radius_large">15dp</dimen>
 
