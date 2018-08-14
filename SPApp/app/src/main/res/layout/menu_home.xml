@@ -62,56 +62,82 @@
         android:layout_marginBottom="@dimen/common_vert_medium_sub"
         >
 
-        <TextView
-            style="@style/textMenuFooter"
-            android:id="@+id/tv_ack"
+        <!--Acknowledgement-->
+        <RelativeLayout
+            android:id="@+id/rl_ack_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ack"
+            android:paddingTop="@dimen/common_spacing"
+            android:paddingBottom="@dimen/common_spacing"
             android:background="@drawable/selector_btn_white"
-            />
+            >
 
-        <View
-            android:id="@+id/divider_ack"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/line_width"
-            android:background="@color/color_ui02"
-            android:layout_below="@+id/tv_ack"
-            android:layout_alignRight="@+id/tv_ack"
-            />
+            <TextView
+                style="@style/textMenuFooter"
+                android:id="@+id/tv_ack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ack"
+                />
+
+            <View
+                android:id="@+id/divider_ack"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/line_width"
+                android:background="@color/color_ui02"
+                android:layout_below="@+id/tv_ack"
+                android:layout_alignRight="@+id/tv_ack"
+                />
+
+        </RelativeLayout>
+
 
         <View
             android:id="@+id/divider"
             android:layout_width="@dimen/line_width"
             android:layout_height="match_parent"
             android:background="@color/color_ui02"
-            android:layout_toRightOf="@+id/tv_ack"
+            android:layout_toRightOf="@+id/rl_ack_container"
             android:layout_marginLeft="@dimen/common_horz_small"
             android:layout_marginRight="@dimen/common_horz_small"
-            android:layout_alignTop="@+id/tv_ack"
-            android:layout_alignBottom="@+id/divider_ack"
+            android:layout_alignTop="@+id/rl_ack_container"
+            android:layout_alignBottom="@+id/rl_ack_container"
+            android:layout_marginTop="@dimen/common_spacing"
+            android:layout_marginBottom="@dimen/common_spacing"
             />
 
-        <TextView
-            style="@style/textMenuFooter"
-            android:id="@+id/tv_tnc"
+        <!--TnC-->
+
+        <RelativeLayout
+            android:id="@+id/rl_tnc_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/divider"
-            android:text="@string/tnc"
-            android:gravity="right"
+            android:paddingTop="@dimen/common_spacing"
+            android:paddingBottom="@dimen/common_spacing"
             android:background="@drawable/selector_btn_white"
-            />
+            >
 
-        <View
-            android:id="@+id/divider_tnc"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/line_width"
-            android:background="@color/color_ui02"
-            android:layout_below="@+id/tv_ack"
-            android:layout_alignLeft="@+id/tv_tnc"
-            android:layout_alignRight="@+id/tv_tnc"
-            />
+            <TextView
+                style="@style/textMenuFooter"
+                android:id="@+id/tv_tnc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tnc"
+                android:gravity="right"
+                />
+
+            <View
+                android:id="@+id/divider_tnc"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/line_width"
+                android:background="@color/color_ui02"
+                android:layout_below="@+id/tv_tnc"
+                android:layout_alignLeft="@+id/tv_tnc"
+                android:layout_alignRight="@+id/tv_tnc"
+                />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
