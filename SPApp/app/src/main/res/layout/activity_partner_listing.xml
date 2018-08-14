@@ -16,6 +16,7 @@
             android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="@color/color_primarygradientbase"
             >
 
             <ImageView
@@ -49,21 +50,22 @@
             android:id="@+id/v_title_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/color_primarygradientbase"
             />
 
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:layout_gravity="bottom"
-                android:textSize="34sp"
-                android:layout_marginLeft="@dimen/common_vert_large"
-                android:layout_marginBottom="26dp"
-                android:textColor="@color/color_ui06"
-                fontPath="@string/font_medium"
-                android:text="Food"
-                />
+        <TextView
+            android:id="@+id/tv_title"
+            fontPath="@string/font_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="26dp"
+            android:layout_marginLeft="@dimen/common_vert_large"
+            android:gravity="center_horizontal"
+            android:text="Food"
+            android:textColor="@color/color_ui06"
+            android:textSize="34sp"
+            />
 
     </FrameLayout>
 
