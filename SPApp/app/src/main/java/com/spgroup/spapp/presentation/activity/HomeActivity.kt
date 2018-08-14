@@ -167,7 +167,7 @@ open class HomeActivity :
         }
 
         rl_tnc_container.setOnClickListener {
-            startActivity(TermsAndConditionsActivity.getLaunchIntent(this@HomeActivity))
+            startActivity(PageActivity.getLaunchIntent(this@HomeActivity, PageActivity.TYPE_TNC))
         }
 
         rl_ack_container.setOnClickListener {
