@@ -21,6 +21,7 @@ import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.extension.formatPrice
 import com.spgroup.spapp.util.extension.getDimensionPixelSize
 import com.spgroup.spapp.util.extension.hideKeyboard
+import com.spgroup.spapp.util.extension.updateVisibility
 import kotlinx.android.synthetic.main.activity_customise.*
 
 class CustomiseActivity : BaseActivity() {
@@ -213,6 +214,21 @@ class CustomiseActivity : BaseActivity() {
         action_bar.setOnBackPress {
             onBackPressed()
         }
+
+        setUpKeyboardDetection()
+    }
+
+    private fun setUpKeyboardDetection() {
+        view_root.viewTreeObserver.addOnGlobalLayoutListener {
+            val diff = view_root.rootView.height - view_root.height
+            val keyboardOpen = diff > getDimensionPixelSize(R.dimen.soft_keyboar_detection_height)
+            updateBottomButtonVisibility(!keyboardOpen)
+        }
+    }
+
+    private fun updateBottomButtonVisibility(show: Boolean) {
+        bottom_button_container.updateVisibility(show)
+        v_shadow.updateVisibility(show)
     }
 
     private fun showConfirmDialog() {
