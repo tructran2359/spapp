@@ -44,8 +44,9 @@ object Injection {
 
         val isDebug = BuildConfig.DEBUG
 
+        //2018-09-01T00:00:00
         val gson = GsonBuilder()
-                .setDateFormat("yyyy-MM-dd")
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 .create()
 
         val loggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
