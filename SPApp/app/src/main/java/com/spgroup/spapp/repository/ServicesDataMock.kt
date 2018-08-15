@@ -26,7 +26,7 @@ class ServicesDataMock : ServicesRepository {
         }
     }
 
-    override fun getSupplierServicesDetails(supplierId: Int): Single<List<ServiceCategory>> {
+    override fun getPartnerDetailsData(supplierId: Int): Single<List<ServiceCategory>> {
         return Single.fromCallable {
 
             val listCategoryName = listOf("Dry Clean", "Wash & Press", "Press Only", "Wash & Fold", "Curtains & Carpets")
