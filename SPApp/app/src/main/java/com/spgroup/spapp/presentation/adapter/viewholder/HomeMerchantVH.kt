@@ -16,7 +16,7 @@ class HomeMerchantVH(itemView: View, private val listener: HomeMerchantAdapter.O
             tv_partner_name.text = partner.name
             iv_logo.loadImage(partner.logoUrl.toFullImgUrl())
             setOnClickListener {
-                listener.onMerchantClick(adapterPosition)
+                listener.onMerchantClick(partner, adapterPosition)
             }
         }
     }

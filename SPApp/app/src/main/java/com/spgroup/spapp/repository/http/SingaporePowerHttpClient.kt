@@ -1,5 +1,6 @@
 package com.spgroup.spapp.repository.http
 
+import com.spgroup.spapp.domain.model.PartnerDetails
 import com.spgroup.spapp.repository.entity.HomeDataEntity
 import com.spgroup.spapp.repository.entity.PartnersListingResponse
 import io.reactivex.Single
@@ -15,5 +16,5 @@ interface SingaporePowerHttpClient {
     fun getPartnersByCategory(@Path("top-level-category-id") categoryId: String): Single<PartnersListingResponse>
 
     @GET("api/v1/partner/detail/{partnerUEN}")
-    fun getPartnerDetails(@Path("partnerUEN") partnerUEN: String): Single<Any>
+    fun getPartnerDetails(@Path("partnerUEN") partnerUEN: String): Single<List<PartnerDetails>>
 }

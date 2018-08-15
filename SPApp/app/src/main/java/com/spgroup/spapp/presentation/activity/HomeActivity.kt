@@ -11,6 +11,8 @@ import android.view.View
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu
 import com.spgroup.spapp.BuildConfig
 import com.spgroup.spapp.R
+import com.spgroup.spapp.domain.model.TopLevelFeaturedPartner
+import com.spgroup.spapp.domain.model.TopLevelPromotion
 import com.spgroup.spapp.presentation.adapter.HomeMenuItemAdapter
 import com.spgroup.spapp.presentation.adapter.HomeMerchantAdapter
 import com.spgroup.spapp.presentation.adapter.HomePromotionAdapter
@@ -69,16 +71,16 @@ open class HomeActivity :
     // HomePromotionAdapter.OnPromotionClickListener
     ///////////////////////////////////////////////////////////////////////////
 
-    override fun onPromotionClick(position: Int) {
-        startActivity(PartnerDetailsActivity.getLaunchIntent(this))
+    override fun onPromotionClick(promotion: TopLevelPromotion, position: Int) {
+        startActivity(PartnerDetailsActivity.getLaunchIntent(this, promotion.partnerId))
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // HomeMerchantAdapter.OnMerchantClickListener
     ///////////////////////////////////////////////////////////////////////////
 
-    override fun onMerchantClick(position: Int) {
-        startActivity(PartnerDetailsActivity.getLaunchIntent(this))
+    override fun onMerchantClick(topLevelFeaturedPartner: TopLevelFeaturedPartner, position: Int) {
+        startActivity(PartnerDetailsActivity.getLaunchIntent(this, topLevelFeaturedPartner.id))
     }
 
     ///////////////////////////////////////////////////////////////////////////

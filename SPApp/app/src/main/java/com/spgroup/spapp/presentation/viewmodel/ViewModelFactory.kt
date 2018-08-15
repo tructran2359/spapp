@@ -47,7 +47,7 @@ class ViewModelFactory private constructor(
     }
 
     private fun createPartnerDetailsViewModel(): PartnerDetailsViewModel {
-        val getServicesUsecase = GetServicesListByPartnerUsecase(schedulerFacade, mockRepository)
+        val getServicesUsecase = GetServicesListByPartnerUsecase(schedulerFacade, cloudRepository)
         return PartnerDetailsViewModel(getServicesUsecase)
     }
 

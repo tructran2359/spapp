@@ -62,7 +62,7 @@ class HomePromotionAdapter(
     ///////////////////////////////////////////////////////////////////////////
 
     interface OnPromotionClickListener {
-        fun onPromotionClick(position: Int)
+        fun onPromotionClick(promotion: TopLevelPromotion, position: Int)
     }
 
 }

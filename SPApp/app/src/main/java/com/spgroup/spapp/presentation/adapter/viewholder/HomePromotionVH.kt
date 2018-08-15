@@ -18,7 +18,7 @@ class HomePromotionVH(
             tv_description.text = promotion.promoText
             iv_image.loadImage(promotion.imageUrl.toFullImgUrl())
             setOnClickListener {
-                listener.onPromotionClick(adapterPosition)
+                listener.onPromotionClick(promotion, adapterPosition)
             }
         }
     }

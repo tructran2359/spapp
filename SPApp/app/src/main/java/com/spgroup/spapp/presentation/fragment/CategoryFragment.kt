@@ -7,20 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
+import com.spgroup.spapp.domain.model.ServiceCategory
 import com.spgroup.spapp.domain.model.ServiceItemCheckBox
 import com.spgroup.spapp.domain.model.ServiceItemCombo
 import com.spgroup.spapp.domain.model.ServiceItemCounter
-import com.spgroup.spapp.domain.model.ServiceCategory
 import com.spgroup.spapp.presentation.activity.CustomiseActivity
 import com.spgroup.spapp.presentation.adapter.ServiceGroupAdapter
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_category.*
 
-class CategoryFragment: BaseFragment(), ServiceGroupAdapter.OnItemInteractedListener {
+class CategoryFragment : BaseFragment(), ServiceGroupAdapter.OnItemInteractedListener {
 
     companion object {
-        @JvmField val KEY_CATEGORY = "CategoryFragment.KEY_CATEGORY"
+        const val KEY_CATEGORY = "CategoryFragment.KEY_CATEGORY"
 
         fun newInstance(category: ServiceCategory): CategoryFragment {
             val fragment = CategoryFragment()
@@ -84,25 +84,25 @@ class CategoryFragment: BaseFragment(), ServiceGroupAdapter.OnItemInteractedList
 
     override fun onServiceItemClick(servicePos: Int, itemPos: Int) {
         val serviceItem = mServiceAdapter.getItem(servicePos, itemPos)
-            activity?.let {
-                if (serviceItem is ServiceItemCombo) {
-                    val intent = CustomiseActivity.getLaunchIntent(it, serviceItem)
-                    it.startActivity(intent)
-                }
+        activity?.let {
+            if (serviceItem is ServiceItemCombo) {
+                val intent = CustomiseActivity.getLaunchIntent(it, serviceItem)
+                it.startActivity(intent)
             }
+        }
 
     }
 
     override fun onCountChanged(count: Int, servicePos: Int, itemPos: Int) {
         val serviceItem = (mServiceCategory.getServiceItem(servicePos, itemPos) as ServiceItemCounter)
         serviceItem.count = count
-        mViewModel.updateSelectedServiceCategories(serviceItem.count, mServiceCategory.id, servicePos, itemPos)
+        mViewModel.updateSelectedServiceCategories(serviceItem.count, mServiceCategory.id.toString(), "")
     }
 
     override fun onCheckChanged(checked: Boolean, servicePos: Int, itemPos: Int) {
         val serviceItem = (mServiceCategory.getServiceItem(servicePos, itemPos) as ServiceItemCheckBox)
         serviceItem.selected = checked
-        mViewModel.updateSelectedServiceCategories(serviceItem.getItemCount(), mServiceCategory.id, servicePos, itemPos)
+        mViewModel.updateSelectedServiceCategories(serviceItem.getItemCount(), mServiceCategory.id.toString(), "")
     }
 
     ///////////////////////////////////////////////////////////////////////////

@@ -26,7 +26,11 @@ class ServicesDataMock : ServicesRepository {
         }
     }
 
-    override fun getPartnerDetailsData(supplierId: Int): Single<List<ServiceCategory>> {
+    override fun getPartnerDetailsData(partnerId: String): Single<PartnerDetails> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    fun getPartnerDetailsData(supplierId: Int): Single<List<ServiceCategory>> {
         return Single.fromCallable {
 
             val listCategoryName = listOf("Dry Clean", "Wash & Press", "Press Only", "Wash & Fold", "Curtains & Carpets")
