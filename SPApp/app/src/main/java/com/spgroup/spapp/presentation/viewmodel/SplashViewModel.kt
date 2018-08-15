@@ -13,7 +13,9 @@ class SplashViewModel(private val getInitialDataUsecase: GetInitialDataUsecase,
     fun getInitialData() {
         val disposable = getInitialDataUsecase
                 .run()
-                .doOnSuccess { appDataCache.saveTopLevelCategories(it.categories) }
+                .doOnSuccess {
+                    appDataCache.saveInitData(it.categories, it.promotions, it.featuredPartners)
+                }
                 .subscribe(
                         { isSuccess.value = true },
                         { error.value = it })
