@@ -1,19 +1,16 @@
 package com.spgroup.spapp.presentation.adapter
 
 import android.support.v7.widget.RecyclerView
-import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
+import com.spgroup.spapp.domain.model.TopLevelFeaturedPartner
+import com.spgroup.spapp.presentation.adapter.viewholder.HomeMerchantVH
 import com.spgroup.spapp.util.extension.inflate
-import kotlinx.android.synthetic.main.layout_merchant.view.*
 
-class HomeMerchantAdapter: RecyclerView.Adapter<HomeMerchantAdapter.HomeMerchantVH>() {
+class HomeMerchantAdapter(private var mListener: OnMerchantClickListener): RecyclerView.Adapter<HomeMerchantVH>() {
 
-    ///////////////////////////////////////////////////////////////////////////
-    // Property
-    ///////////////////////////////////////////////////////////////////////////
 
-    private var mListener: OnMerchantClickListener? = null
+    private var mData = mutableListOf<TopLevelFeaturedPartner>()
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -21,13 +18,13 @@ class HomeMerchantAdapter: RecyclerView.Adapter<HomeMerchantAdapter.HomeMerchant
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeMerchantVH {
         val view = parent.inflate(R.layout.layout_merchant, false)
-        return HomeMerchantVH(view)
+        return HomeMerchantVH(view, mListener)
     }
 
-    override fun getItemCount() = 30
+    override fun getItemCount() = mData.size
 
     override fun onBindViewHolder(vh: HomeMerchantVH, position: Int) {
-        vh.bind(position)
+        vh.bind(mData[position])
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -38,23 +35,10 @@ class HomeMerchantAdapter: RecyclerView.Adapter<HomeMerchantAdapter.HomeMerchant
         mListener = listener
     }
 
-    ///////////////////////////////////////////////////////////////////////////
-    // ViewHolder
-    ///////////////////////////////////////////////////////////////////////////
-
-    inner class HomeMerchantVH(itemView: View): RecyclerView.ViewHolder(itemView) {
-
-        init {
-            itemView.setOnClickListener {
-                mListener?.onMerchantClick(adapterPosition)
-            }
-        }
-
-        fun bind(position: Int) {
-            with(itemView) {
-                tv_merchant_name.setText("Cate $position")
-            }
-        }
+    fun setData(data: List<TopLevelFeaturedPartner>) {
+        mData.clear()
+        mData.addAll(data)
+        notifyDataSetChanged()
     }
 
     ///////////////////////////////////////////////////////////////////////////

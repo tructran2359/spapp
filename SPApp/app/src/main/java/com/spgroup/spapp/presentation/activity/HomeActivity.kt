@@ -127,8 +127,7 @@ open class HomeActivity :
                 false)
         recycler_view_merchant.layoutManager = merchantLayoutManager
         recycler_view_merchant.addItemDecoration(HomeMerchantItemtDecoration(ConstUtils.HOME_MERCHANT_ROW_COUNT))
-        mMerchantAdapter = HomeMerchantAdapter()
-        mMerchantAdapter.setOnMerchantClickListener(this)
+        mMerchantAdapter = HomeMerchantAdapter(this)
         recycler_view_merchant.adapter = mMerchantAdapter
     }
 
@@ -144,6 +143,12 @@ open class HomeActivity :
             listTopLevelPromotion.observe(this@HomeActivity, Observer {
                 it?.let {
                     mPromotionAdapter.setData(it)
+                }
+            })
+
+            listTopLevelPartner.observe(this@HomeActivity, Observer {
+                it?.let {
+                    mMerchantAdapter.setData(it)
                 }
             })
 
