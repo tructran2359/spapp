@@ -12,7 +12,9 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.activity.BaseActivity
 
@@ -86,4 +88,11 @@ fun View.setLayoutParamsWidth(widthInPixel: Int) {
 
 fun View.updateVisibility(show: Boolean) {
     visibility = if (show) View.VISIBLE else View.GONE
+}
+
+fun ImageView.loadImage(url: String) {
+    Glide
+            .with(this)
+            .load(url)
+            .into(this)
 }

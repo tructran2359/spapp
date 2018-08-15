@@ -9,10 +9,7 @@ import com.spgroup.spapp.manager.AppDataMemCache
 import com.spgroup.spapp.repository.ServicesCloudDataStore
 import com.spgroup.spapp.repository.ServicesDataMock
 import com.spgroup.spapp.repository.http.SingaporePowerHttpClient
-import com.spgroup.spapp.repository.mapper.HomeDataMapper
-import com.spgroup.spapp.repository.mapper.PartnerMapper
-import com.spgroup.spapp.repository.mapper.PromotionMapper
-import com.spgroup.spapp.repository.mapper.TopLevelCatMapper
+import com.spgroup.spapp.repository.mapper.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -28,7 +25,10 @@ object Injection {
 
     fun provideCloudRepository(): ServicesRepository {
         val topLevelCatMapper = TopLevelCatMapper()
-        val homeDataMapper = HomeDataMapper(topLevelCatMapper)
+        val topLevelPromoMapper = TopLevelPromotionMapper()
+        val toplevelPartnerMapper = TopLevelFeaturedPartnerMapper()
+        val homeDataMapper = HomeDataMapper(topLevelCatMapper, topLevelPromoMapper, toplevelPartnerMapper)
+
         val partnerMapper = PartnerMapper()
         val promotionMapper = PromotionMapper()
         return ServicesCloudDataStore(provideSingaporePowerHttpClient(), homeDataMapper, partnerMapper, promotionMapper)

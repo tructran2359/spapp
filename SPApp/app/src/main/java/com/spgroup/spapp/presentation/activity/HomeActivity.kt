@@ -62,7 +62,7 @@ open class HomeActivity :
     private fun setupViewModel() {
         val factory = ViewModelFactory.getInstance()
         mViewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
-        mViewModel.getTopLevelCategory()
+        mViewModel.getInitData()
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -115,8 +115,7 @@ open class HomeActivity :
 
         val displayMetrics = getDisplayMetrics()
         val screenWidth = displayMetrics.widthPixels
-        mPromotionAdapter = HomePromotionAdapter(this, screenWidth)
-        mPromotionAdapter.setOnPromotionClickListener(this)
+        mPromotionAdapter = HomePromotionAdapter(screenWidth, this)
         recycler_view_promotions.adapter = mPromotionAdapter
     }
 
@@ -139,6 +138,12 @@ open class HomeActivity :
                 it?.let {
                     cate_group_view.setListCategory(it)
                     mMenuAdapter.setData(it)
+                }
+            })
+
+            listTopLevelPromotion.observe(this@HomeActivity, Observer {
+                it?.let {
+                    mPromotionAdapter.setData(it)
                 }
             })
 
