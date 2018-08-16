@@ -46,6 +46,7 @@ class PartnerInformationActivity : BaseActivity() {
         tv_phone.text = mData.phone
         tv_uen.text = mData.uen
         tv_nea.text = mData.nea
+        tv_offer_tittle.text = mData.offerTitle
 
         for (str in mData.offers) {
             val view = IndicatorTextView(this, str)
@@ -60,6 +61,7 @@ class PartnerInformationActivity : BaseActivity() {
     data class PartnerInfo(
             val name: String,
             val desc: String,
+            val offerTitle: String,
             val offers: List<String>,
             val phone: String,
             val uen: String,

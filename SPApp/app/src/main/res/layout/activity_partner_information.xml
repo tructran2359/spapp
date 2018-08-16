@@ -50,14 +50,14 @@
                 android:textSize="16sp"
                 android:textColor="@color/color_ui02"
                 android:lineSpacingExtra="8sp"
-                fontPath="@string/font_medium"
+                fontPath="@string/font_regular"
                 tools:text="As fresh laundry experts, we combine our expertise and passion for service to deliver a delightful laundry experience that leaves you worry-free. We are committed to ensuring that you’re clothed in freshness to soak in life’s joys everyday."
                 />
 
 
             <TextView
                 style="@style/textH4"
-                android:id="@+id/tv_service_header"
+                android:id="@+id/tv_offer_tittle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_vert_large"
