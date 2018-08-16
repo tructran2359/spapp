@@ -1,6 +1,7 @@
 package com.spgroup.spapp.presentation.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
+import com.spgroup.spapp.domain.model.Category
 import com.spgroup.spapp.domain.model.PartnerDetails
 import com.spgroup.spapp.domain.usecase.GetServicesListByPartnerUsecase
 
@@ -47,6 +48,13 @@ class PartnerDetailsViewModel(
                 .flatten() // to list of all List<SelectedValueItem>
                 .map { it.count } // to list of SelectedValueItem#count
                 .sum() // sum of SelectedValueItem#count
+    }
+
+    fun getCategory(categoryId: String): Category? {
+        return partnerDetails
+                .value
+                ?.categories
+                ?.first { it.id == categoryId }
     }
 }
 

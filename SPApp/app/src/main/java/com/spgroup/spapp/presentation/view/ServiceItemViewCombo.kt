@@ -1,40 +1,21 @@
 package com.spgroup.spapp.presentation.view
 
 import android.content.Context
-import android.view.LayoutInflater
+import androidx.core.view.isGone
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.ServiceItemCombo
-import com.spgroup.spapp.domain.model.ServiceItem
-import com.spgroup.spapp.util.extension.formatPriceWithUnit
+import com.spgroup.spapp.domain.model.ComplexCustomisationService
+import com.spgroup.spapp.util.extension.inflate
 import kotlinx.android.synthetic.main.layout_service_item_combo.view.*
 
-class ServiceItemViewCombo: ServiceItemView {
+class ServiceItemViewCombo(
+        context: Context,
+        service: ComplexCustomisationService)
+    : ServiceItemView(context) {
 
-    ///////////////////////////////////////////////////////////////////////////
-    // Property
-    ///////////////////////////////////////////////////////////////////////////
-
-    var serviceItem: ServiceItemCombo
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Constructor
-    ///////////////////////////////////////////////////////////////////////////
-
-    constructor(context: Context, item: ServiceItem): super(context, item) {
-        serviceItem = item as ServiceItemCombo
-        init()
+    init {
+        inflate(R.layout.layout_service_item_combo, true)
+        tv_name.text = service.label
+        tv_price.isGone = true
+        tv_description.text = service.serviceDescription
     }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Other
-    ///////////////////////////////////////////////////////////////////////////
-
-    fun init() {
-        LayoutInflater.from(context).inflate(R.layout.layout_service_item_combo, this, true)
-        tv_name.setText(serviceItem.name)
-        tv_price.setText(serviceItem.price.formatPriceWithUnit(serviceItem.unit))
-        tv_description.setText(serviceItem.description)
-    }
-
-
 }

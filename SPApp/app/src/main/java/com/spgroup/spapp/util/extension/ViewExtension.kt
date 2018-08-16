@@ -3,6 +3,7 @@ package com.spgroup.spapp.util.extension
 import android.app.Activity
 import android.content.Context
 import android.os.Build
+import android.support.annotation.LayoutRes
 import android.support.v4.content.ContextCompat
 import android.text.Html
 import android.util.DisplayMetrics
@@ -49,7 +50,7 @@ fun View.getDimensionPixelSize(resId: Int) = context.getDimensionPixelSize(resId
 
 fun Context.loadAnimation(resId: Int) = AnimationUtils.loadAnimation(this, resId)
 
-fun ViewGroup.inflate(layoutId: Int, attachToRoot: Boolean) = LayoutInflater.from(context).inflate(layoutId, this, attachToRoot)
+fun ViewGroup.inflate(@LayoutRes layoutId: Int, attachToRoot: Boolean = false) = LayoutInflater.from(context).inflate(layoutId, this, attachToRoot)
 
 fun Context.inflate(layoutId: Int) = LayoutInflater.from(this).inflate(layoutId, null,false)
 
