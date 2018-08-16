@@ -17,8 +17,12 @@ class ServiceItemViewCombo(
     init {
         inflate(R.layout.layout_service_item_combo, true)
         tv_name.text = service.label
-        tv_price.isGone = true
-        tv_description.text = service.serviceDescription
+        if (service.priceText == null) {
+            tv_price.isGone = true
+        } else {
+            tv_price.isGone = false
+            tv_price.text = service.priceText
+        }
         setOnClickListener { itemListener.onComplexCustomisationItemClick(service) }
     }
 }
