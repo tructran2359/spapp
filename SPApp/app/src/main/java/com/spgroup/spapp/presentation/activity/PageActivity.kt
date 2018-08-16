@@ -8,14 +8,14 @@ import android.support.v4.widget.NestedScrollView
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.TopLevelPage
-import com.spgroup.spapp.domain.model.TopLevelPageSectionLink
-import com.spgroup.spapp.domain.model.TopLevelPageSectionList
-import com.spgroup.spapp.domain.model.TopLevelPageSectionLongText
+import com.spgroup.spapp.domain.model.*
 import com.spgroup.spapp.presentation.view.IndicatorTextView
 import com.spgroup.spapp.presentation.viewmodel.PageViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.extension.getDimensionPixelSize
 import com.spgroup.spapp.util.extension.inflate
 import com.spgroup.spapp.util.extension.obtainViewModel
 import kotlinx.android.synthetic.main.activity_page.*
@@ -65,7 +65,7 @@ class PageActivity: BaseActivity() {
 
                         TYPE_ACK -> addAckViews(it)
 
-                        TYPE_TNC -> addTncViews()
+                        TYPE_TNC -> addTncViews(it)
                     }
                 }
 
@@ -126,17 +126,33 @@ class PageActivity: BaseActivity() {
         })
     }
 
-    private fun addTncViews() {
-//        val view = inflate(R.layout.layout_page_tnc)
-//        view.run {
-//            val sectionTnc = mPage.sections[0] as SectionLongText
-//            val sectionCopyright = mPage.sections[1] as SectionLongText
-//
-//            tv_tnc.text = sectionTnc.text
-//            tv_copyright_title.text = sectionCopyright.title
-//            tv_copyright.text = sectionCopyright.text
-//        }
-//        ll_container.addView(view)
+    private fun addTncViews(page: TopLevelPage) {
+        page.sections.forEachIndexed { index, section ->
+            val view = when (section) {
+                is TopLevelPageSectionLongText -> createTncText(section)
+                is TopLevelPageSectionSubtitle -> createTncSubTitle(section)
+                else -> null
+            }
+
+            if (view != null) {
+                val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                layoutParams.topMargin = if (index == 0) 0 else getDimensionPixelSize(R.dimen.common_vert_medium_sub)
+                view.layoutParams = layoutParams
+                ll_container.addView(view)
+            }
+        }
+    }
+
+    private fun createTncSubTitle(section: TopLevelPageSectionSubtitle): View {
+        val view = inflate(R.layout.layout_tnc_subtitle) as TextView
+        view.text = section.title
+        return view
+    }
+
+    private fun createTncText(section: TopLevelPageSectionLongText): View {
+        val view = inflate(R.layout.layout_tnc_text) as TextView
+        view.text = section.text
+        return view
     }
 
     private fun addAckViews(page: TopLevelPage) {

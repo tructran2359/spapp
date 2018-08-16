@@ -17,6 +17,5 @@ data class TopLevelPageSectionList (
 ): TopLevelPageSection()
 
 data class TopLevelPageSectionSubtitle (
-        val title: String,
-        val text: String
+        val title: String
 ): TopLevelPageSection()

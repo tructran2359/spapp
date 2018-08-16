@@ -10,7 +10,7 @@ class TopLevelPageSectionMapper: IMapper<TopLevelPageSectionEntity, TopLevelPage
             "page_long_text" -> TopLevelPageSectionLongText(getTextOrEmpty(entity.text))
             "page_link" -> TopLevelPageSectionLink(email = getTextOrEmpty(entity.email), title = getTextOrEmpty(entity.title))
             "page_list" -> TopLevelPageSectionList(title = getTextOrEmpty(entity.title), options = if (entity.options != null) entity.options else listOf<String>())
-            "page_subtitle" -> TopLevelPageSectionSubtitle(title = getTextOrEmpty(entity.title), text = getTextOrEmpty(entity.text))
+            "page_subtitle" -> TopLevelPageSectionSubtitle(title = getTextOrEmpty(entity.title))
             else -> throw IllegalArgumentException("Invalid type: ${entity.type}")
         }
     }
