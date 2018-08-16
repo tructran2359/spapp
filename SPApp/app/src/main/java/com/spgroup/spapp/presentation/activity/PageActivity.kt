@@ -8,14 +8,14 @@ import android.support.v4.widget.NestedScrollView
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.TopLevelPage
-import com.spgroup.spapp.domain.model.TopLevelPageSectionLink
-import com.spgroup.spapp.domain.model.TopLevelPageSectionList
-import com.spgroup.spapp.domain.model.TopLevelPageSectionLongText
+import com.spgroup.spapp.domain.model.*
 import com.spgroup.spapp.presentation.view.IndicatorTextView
 import com.spgroup.spapp.presentation.viewmodel.PageViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.extension.getDimensionPixelSize
 import com.spgroup.spapp.util.extension.inflate
 import com.spgroup.spapp.util.extension.obtainViewModel
 import kotlinx.android.synthetic.main.activity_page.*
@@ -45,6 +45,7 @@ class PageActivity: BaseActivity() {
     private lateinit var mAnimAppear: Animation
     private lateinit var mAnimDisappear: Animation
     private lateinit var mViewModel: PageViewModel
+    private var mAnimIsRunning = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +66,7 @@ class PageActivity: BaseActivity() {
 
                         TYPE_ACK -> addAckViews(it)
 
-                        TYPE_TNC -> addTncViews()
+                        TYPE_TNC -> addTncViews(it)
                     }
                 }
 
@@ -88,6 +89,7 @@ class PageActivity: BaseActivity() {
 
             override fun onAnimationEnd(p0: Animation?) {
                 iv_close.visibility = View.VISIBLE
+                mAnimIsRunning = false
             }
 
             override fun onAnimationStart(p0: Animation?) {
@@ -117,7 +119,9 @@ class PageActivity: BaseActivity() {
             override fun onScrollChange(view: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
                 if (scrollY > oldScrollY) {
                     // Scroll down
-                    updateCloseIcon(false)
+                    if (!mAnimIsRunning) {
+                        updateCloseIcon(false)
+                    }
                 } else if (scrollY == 0) {
                     // Reach Top
                     updateCloseIcon(true)
@@ -126,17 +130,33 @@ class PageActivity: BaseActivity() {
         })
     }
 
-    private fun addTncViews() {
-//        val view = inflate(R.layout.layout_page_tnc)
-//        view.run {
-//            val sectionTnc = mPage.sections[0] as SectionLongText
-//            val sectionCopyright = mPage.sections[1] as SectionLongText
-//
-//            tv_tnc.text = sectionTnc.text
-//            tv_copyright_title.text = sectionCopyright.title
-//            tv_copyright.text = sectionCopyright.text
-//        }
-//        ll_container.addView(view)
+    private fun addTncViews(page: TopLevelPage) {
+        page.sections.forEachIndexed { index, section ->
+            val view = when (section) {
+                is TopLevelPageSectionLongText -> createTncText(section)
+                is TopLevelPageSectionSubtitle -> createTncSubTitle(section)
+                else -> null
+            }
+
+            if (view != null) {
+                val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                layoutParams.topMargin = if (index == 0) 0 else getDimensionPixelSize(R.dimen.common_vert_medium_sub)
+                view.layoutParams = layoutParams
+                ll_container.addView(view)
+            }
+        }
+    }
+
+    private fun createTncSubTitle(section: TopLevelPageSectionSubtitle): View {
+        val view = inflate(R.layout.layout_tnc_subtitle) as TextView
+        view.text = section.title
+        return view
+    }
+
+    private fun createTncText(section: TopLevelPageSectionLongText): View {
+        val view = inflate(R.layout.layout_tnc_text) as TextView
+        view.text = section.text
+        return view
     }
 
     private fun addAckViews(page: TopLevelPage) {
@@ -181,90 +201,12 @@ class PageActivity: BaseActivity() {
         ll_container.addView(view)
     }
 
-    private fun createDummy(): Page {
-        return when (mType) {
-            TYPE_ABOUT -> createAbout()
-
-            TYPE_ACK -> createAck()
-
-            TYPE_TNC -> createTnc()
-
-            else -> throw IllegalArgumentException("Type $mType is invalid")
-        }
-    }
-
-    private fun createTnc(): Page {
-        val sectionTnC = SectionLongText("PLEASE READ THESE TERMS AND CONDITIONS OF USE (“TERMS AND CONDITIONS”) CAREFULLY. BY ACCESSING THIS WEBSITE AND/OR USING THE ONLINE SERVICES, YOU AGREE TO BE BOUND BY THE FOLLOWING TERMS AND CONDITIONS. IF YOU DO NOT ACCEPT ANY OF THESE TERMS AND CONDITIONS, YOU MUST IMMEDIATELY DISCONTINUE YOUR ACCESS OF THIS WEBSITE AND/OR USE OF THE ONLINE SERVICES.")
-        val sectionCopyright = SectionLongText("Except as otherwise expressly stated herein, the copyright and all other intellectual property in the contents of this Website (including, but not limited to, all design, text, sound recordings, images or links) are the property of Singapore Power Limited and/or its subsidiaries and/or their respective subsidiaries (together the \"SP Group\"). As such, they may not be reproduced, transmitted, published, performed, broadcast, stored, adapted, distributed, displayed, licensed, altered, hyperlinked or otherwise used in whole or in part in any manner without the prior written consent of the SP Group. Save and except with the SP Group's prior written consent, you may not insert a hyperlink to this Website or any part thereof on any other website or \"mirror\" or frame this Website, any part thereof, or any information or materials contained in this Website on any other server, website or webpage.\n" +
-                "\n" +
-                "All trade marks, service marks and logos used in this Website are the property of the SP Group and/or the respective third party proprietors identified in this Website. No licence or right is granted and your access to this Website and/or use of the online services should not be construed as granting, by implication, estoppel or otherwise, any license or right to use any trade marks, service marks or logos appearing on the Website without the prior written consent of the SP Group or the relevant third party proprietor thereof. Save and except with the SP Group's prior written consent, no such trade mark, service mark or logo may be used as a hyperlink or to mark any hyperlink to any SP Group member's site or any other site.",
-                "Copyright and Trademark Notices")
-
-        return Page(title = "Terms & Conditions", code = TYPE_TNC, sections = listOf(sectionTnC, sectionCopyright))
-    }
-
-    private fun createAck(): Page {
-        val section1 = SectionLongText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi imperdiet sed metus at dapibus. Curabitur eget nisl euismod, aliquam felis sed, faucibus tortor. Duis nec ligula sit amet tortor finibus malesuada. Nullam id finibus eros. Sed magna metus, euismod a nisl nec, tincidunt facilisis justo. Etiam pulvinar et enim vel porttitor. Proin bibendum bibendum eros a convallis.")
-
-        val options = listOf(
-                "Ut gravida dictum lorem, id auctor dolor condimentum quis.",
-                "Etiam malesuada eros quam, eu ornare sapien consequat at.",
-                "In hac habitasse platea dictumst.",
-                "Phasellus nec mollis odio.",
-                "Etiam egestas luctus est vel pharetra, Fusce a egestas arcu"
-        )
-
-        val section2 = SectionList("On This App", options)
-        return Page("Acknowledgement", TYPE_ACK, listOf(section1, section2))
-    }
-
-    private fun createAbout(): Page {
-        val section1 = SectionLongText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi imperdiet sed metus at dapibus. Curabitur eget nisl euismod, aliquam felis sed, faucibus tortor. Duis nec ligula sit amet tortor finibus malesuada. Nullam id finibus eros. Sed magna metus, euismod a nisl nec, tincidunt facilisis justo. Etiam pulvinar et enim vel porttitor. Proin bibendum bibendum eros a convallis.\r\n\r\nFusce a egestas arcu. Etiam malesuada eros quam, eu ornare sapien consequat at. Phasellus nec mollis odio. Etiam egestas luctus est vel pharetra. In hac habitasse platea dictumst. Nulla facilisi. Ut gravida dictum lorem, id auctor dolor condimentum quis.")
-        val section2 = SectionLink("Feedback / Enquiries", "info@spgroup.com")
-
-        return Page(title = "About us", code = TYPE_ABOUT, sections = listOf(section1, section2))
-    }
-
     private fun updateCloseIcon(show: Boolean) {
         if (show && iv_close.visibility == View.GONE) {
             iv_close.startAnimation(mAnimAppear)
-        } else if (!show && iv_close.visibility == View.VISIBLE) {
+        } else if (!show && iv_close.visibility == View.VISIBLE && !mAnimIsRunning) {
+            mAnimIsRunning = true
             iv_close.startAnimation(mAnimDisappear)
         }
     }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Class
-    ///////////////////////////////////////////////////////////////////////////
-
-    data class Page(
-            val title: String,
-            val code: String,
-            val sections: List<Section>
-    ) {
-        fun findSection(type: String): Section? {
-            sections.forEach {
-                if (it.type.equals(type)) return it
-            }
-
-            return null
-        }
-    }
-
-    open class Section (open val type: String)
-
-    class SectionLongText(
-            val text: String,
-            val title: String = ""
-    ): Section(SECTION_TEXT)
-
-    class SectionLink(
-            val title: String,
-            val email: String
-    ): Section(SECTION_LINK)
-
-    class SectionList(
-            val title: String,
-            val options: List<String>
-    ): Section(SECTION_LIST)
 }
