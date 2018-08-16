@@ -45,6 +45,7 @@ class PageActivity: BaseActivity() {
     private lateinit var mAnimAppear: Animation
     private lateinit var mAnimDisappear: Animation
     private lateinit var mViewModel: PageViewModel
+    private var mAnimIsRunning = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +89,7 @@ class PageActivity: BaseActivity() {
 
             override fun onAnimationEnd(p0: Animation?) {
                 iv_close.visibility = View.VISIBLE
+                mAnimIsRunning = false
             }
 
             override fun onAnimationStart(p0: Animation?) {
@@ -117,7 +119,9 @@ class PageActivity: BaseActivity() {
             override fun onScrollChange(view: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
                 if (scrollY > oldScrollY) {
                     // Scroll down
-                    updateCloseIcon(false)
+                    if (!mAnimIsRunning) {
+                        updateCloseIcon(false)
+                    }
                 } else if (scrollY == 0) {
                     // Reach Top
                     updateCloseIcon(true)
@@ -200,43 +204,9 @@ class PageActivity: BaseActivity() {
     private fun updateCloseIcon(show: Boolean) {
         if (show && iv_close.visibility == View.GONE) {
             iv_close.startAnimation(mAnimAppear)
-        } else if (!show && iv_close.visibility == View.VISIBLE) {
+        } else if (!show && iv_close.visibility == View.VISIBLE && !mAnimIsRunning) {
+            mAnimIsRunning = true
             iv_close.startAnimation(mAnimDisappear)
         }
     }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Class
-    ///////////////////////////////////////////////////////////////////////////
-
-    data class Page(
-            val title: String,
-            val code: String,
-            val sections: List<Section>
-    ) {
-        fun findSection(type: String): Section? {
-            sections.forEach {
-                if (it.type.equals(type)) return it
-            }
-
-            return null
-        }
-    }
-
-    open class Section (open val type: String)
-
-    class SectionLongText(
-            val text: String,
-            val title: String = ""
-    ): Section(SECTION_TEXT)
-
-    class SectionLink(
-            val title: String,
-            val email: String
-    ): Section(SECTION_LINK)
-
-    class SectionList(
-            val title: String,
-            val options: List<String>
-    ): Section(SECTION_LIST)
 }
