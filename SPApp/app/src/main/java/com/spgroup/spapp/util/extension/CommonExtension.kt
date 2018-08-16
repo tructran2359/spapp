@@ -20,3 +20,5 @@ fun String.toFullImgUrl() =
         } else {
             this
         }
+
+fun Boolean.toInt() = if (this) 1 else 0

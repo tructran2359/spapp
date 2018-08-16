@@ -4,12 +4,18 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import com.spgroup.spapp.R
+import com.spgroup.spapp.domain.model.CheckboxService
+import com.spgroup.spapp.domain.model.ComplexCustomisationService
+import com.spgroup.spapp.domain.model.MultiplierService
 import com.spgroup.spapp.domain.model.SubCategory
 import com.spgroup.spapp.presentation.adapter.viewholder.ServiceVH
 import com.spgroup.spapp.util.extension.inflate
+import com.spgroup.spapp.util.extension.toInt
 import kotlinx.android.synthetic.main.layout_service.view.*
 
-class ServiceListingAdapter(private val mItemInteractedListener: OnItemInteractedListener) : RecyclerView.Adapter<ServiceVH>() {
+class ServiceListingAdapter(
+        private val mItemDelegate: OnItemInteractedListener
+) : RecyclerView.Adapter<ServiceVH>() {
 
     companion object {
         const val VIEW_TYPE_LAST = 1
@@ -21,7 +27,24 @@ class ServiceListingAdapter(private val mItemInteractedListener: OnItemInteracte
     ///////////////////////////////////////////////////////////////////////////
 
     private val mData = mutableListOf<SubCategory>()
-    private val mMapExpandedItem = mutableMapOf<String, Boolean>()
+    private val mMapExpandedItem = mutableMapOf<String, Boolean>() //<SubCatId, isExpanded>
+    private val mMapSelectedValue = mutableMapOf<Int, Int>() //<ServiceId, Count>
+
+    private val internalItemListener = object : OnItemInteractedListener {
+        override fun onComplexCustomisationItemClick(itemData: ComplexCustomisationService) {
+            mItemDelegate.onComplexCustomisationItemClick(itemData)
+        }
+
+        override fun onMultiplierItemChanged(itemData: MultiplierService, count: Int) {
+            mMapSelectedValue[itemData.id] = count
+            mItemDelegate.onMultiplierItemChanged(itemData, count)
+        }
+
+        override fun onCheckboxItemChanged(itemData: CheckboxService, checked: Boolean) {
+            mMapSelectedValue[itemData.id] = checked.toInt()
+            mItemDelegate.onCheckboxItemChanged(itemData, checked)
+        }
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -30,14 +53,14 @@ class ServiceListingAdapter(private val mItemInteractedListener: OnItemInteracte
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServiceVH {
         val view = parent.inflate(R.layout.layout_service)
         view.v_devider_light.isGone = (viewType == VIEW_TYPE_LAST)
-        return ServiceVH(view, mItemInteractedListener)
+        return ServiceVH(view, internalItemListener, this::collapseItem)
+    }
+
+    override fun onBindViewHolder(vh: ServiceVH, position: Int) {
+        vh.bind(mData[position], mMapSelectedValue, isItemExpanded(position))
     }
 
     override fun getItemCount() = mData.size
-
-    override fun onBindViewHolder(vh: ServiceVH, position: Int) {
-        vh.bind(mData[position], isItemExpanded(position))
-    }
 
     override fun getItemViewType(position: Int): Int {
         return if (position == mData.size - 1) VIEW_TYPE_LAST else VIEW_TYPE_NORMAL
@@ -55,13 +78,11 @@ class ServiceListingAdapter(private val mItemInteractedListener: OnItemInteracte
         }
     }
 
-    fun collapseItem(position: Int) {
+    private fun collapseItem(position: Int) {
         val expanded = isItemExpanded(position)
         mMapExpandedItem[mData[position].id] = expanded.not()
         notifyItemChanged(position)
     }
-
-//    fun getItem(servicePos: Int, itemPos: Int) = mData[servicePos].listItem[itemPos]
 
     private fun isItemExpanded(position: Int): Boolean {
         val subCatId = mData[position].id
@@ -73,13 +94,11 @@ class ServiceListingAdapter(private val mItemInteractedListener: OnItemInteracte
     ///////////////////////////////////////////////////////////////////////////
 
     interface OnItemInteractedListener {
-        fun onCollapseClick(position: Int)
+        fun onComplexCustomisationItemClick(itemData: ComplexCustomisationService)
 
-        fun onServiceItemClick(servicePos: Int, itemPos: Int)
+        fun onMultiplierItemChanged(itemData: MultiplierService, count: Int)
 
-        fun onCountChanged(count: Int, servicePos: Int, itemPos: Int)
-
-        fun onCheckChanged(checked: Boolean, servicePos: Int, itemPos: Int)
+        fun onCheckboxItemChanged(itemData: CheckboxService, checked: Boolean)
     }
 
 }

@@ -4,12 +4,14 @@ import android.content.Context
 import androidx.core.view.isGone
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ComplexCustomisationService
+import com.spgroup.spapp.presentation.adapter.ServiceListingAdapter
 import com.spgroup.spapp.util.extension.inflate
 import kotlinx.android.synthetic.main.layout_service_item_combo.view.*
 
 class ServiceItemViewCombo(
         context: Context,
-        service: ComplexCustomisationService)
+        private val service: ComplexCustomisationService,
+        private val itemListener: ServiceListingAdapter.OnItemInteractedListener)
     : ServiceItemView(context) {
 
     init {
@@ -17,5 +19,6 @@ class ServiceItemViewCombo(
         tv_name.text = service.label
         tv_price.isGone = true
         tv_description.text = service.serviceDescription
+        setOnClickListener { itemListener.onComplexCustomisationItemClick(service) }
     }
 }

@@ -4,13 +4,14 @@ import android.arch.lifecycle.MutableLiveData
 import com.spgroup.spapp.domain.model.Category
 import com.spgroup.spapp.domain.model.PartnerDetails
 import com.spgroup.spapp.domain.usecase.GetServicesListByPartnerUsecase
+import com.spgroup.spapp.util.doLogD
 
 class PartnerDetailsViewModel(
         private val getServicesListByPartnerUsecase: GetServicesListByPartnerUsecase
 ) : BaseViewModel() {
 
     lateinit var partnerUEN: String
-    private val mapSelectedValue = mutableMapOf<String, List<SelectedValueItem>>()
+    private val mapSelectedValue = mutableMapOf<String, MutableList<SelectedValueItem>>()
 
     val partnerDetails = MutableLiveData<PartnerDetails>()
     val selectedCount = MutableLiveData<Int>()
@@ -23,23 +24,31 @@ class PartnerDetailsViewModel(
         val disposable = getServicesListByPartnerUsecase
                 .getPartnerDetails(partnerUEN)
                 .subscribe(
-                        { partnerDetails.value = it },
+                        {
+                            partnerDetails.value = it
+                        },
                         { error.value = it }
                 )
         disposeBag.add(disposable)
     }
 
-    fun updateSelectedServiceCategories(count: Int, categoryId: String, serviceId: String) {
+    fun updateSelectedServiceCategories(count: Int, categoryId: String, serviceId: Int) {
+        doLogD(msg = "count:$count catId:$categoryId serId:$serviceId")
         var selectedValueList = mapSelectedValue[categoryId]
         if (selectedValueList != null) {
+            var existed = false
             selectedValueList.forEach { valueItem ->
                 if (valueItem.serviceId == serviceId) {
+                    existed = true
                     valueItem.count = count
                 }
             }
+            if (!existed) {
+                selectedValueList.add(SelectedValueItem(serviceId, count))
+            }
         } else {
             val valueItem = SelectedValueItem(serviceId, count)
-            selectedValueList = listOf(valueItem)
+            selectedValueList = mutableListOf(valueItem)
         }
         mapSelectedValue[categoryId] = selectedValueList
 
@@ -59,7 +68,7 @@ class PartnerDetailsViewModel(
 }
 
 data class SelectedValueItem(
-        var serviceId: String,
+        var serviceId: Int,
         var count: Int = 0,
         var subTotal: Float = 0F
 )

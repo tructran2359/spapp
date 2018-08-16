@@ -16,9 +16,13 @@ import com.spgroup.spapp.util.doLogD
 import kotlinx.android.synthetic.main.layout_service.view.*
 import org.jetbrains.anko.collections.forEachWithIndex
 
-class ServiceVH(var view: View, var listener: ServiceListingAdapter.OnItemInteractedListener) : RecyclerView.ViewHolder(view) {
+class ServiceVH(
+        val view: View,
+        private val itemListener: ServiceListingAdapter.OnItemInteractedListener,
+        private val onCollapseAction: (Int) -> Unit
+) : RecyclerView.ViewHolder(view) {
 
-    fun bind(subCat: SubCategory, isExpanded: Boolean) {
+    fun bind(subCat: SubCategory, mapSelectedValue: Map<Int, Int>, isExpanded: Boolean) {
         with(itemView) {
             tv_service_name.text = subCat.label
             if (subCat.description.isEmpty()) {
@@ -32,18 +36,18 @@ class ServiceVH(var view: View, var listener: ServiceListingAdapter.OnItemIntera
                 doLogD("Test", "expanded")
 
                 ll_item_container.removeAllViews()
-                val servicePos = adapterPosition
 
-                subCat.services.forEachWithIndex { idx, absServiceItem ->
+                subCat.services.forEachWithIndex { _, absServiceItem ->
+                    val initCount = mapSelectedValue[absServiceItem.getServiceId()] ?: 0
                     val view = when (absServiceItem) {
-                        is MultiplierService -> ServiceItemViewCounter(itemView.context, absServiceItem)
 
-                        is CheckboxService -> ServiceItemViewCheckBox(itemView.context, absServiceItem)
+                        is MultiplierService -> ServiceItemViewCounter(itemView.context, absServiceItem, initCount, itemListener)
 
-                        is ComplexCustomisationService -> ServiceItemViewCombo(itemView.context, absServiceItem)
+                        is CheckboxService -> ServiceItemViewCheckBox(itemView.context, absServiceItem, initCount, itemListener)
+
+                        is ComplexCustomisationService -> ServiceItemViewCombo(itemView.context, absServiceItem, itemListener)
                     }
 
-                    view.setOnClickListener { listener.onServiceItemClick(servicePos, idx) }
                     ll_item_container.addView(view)
                 }
 
@@ -58,7 +62,7 @@ class ServiceVH(var view: View, var listener: ServiceListingAdapter.OnItemIntera
             }
 
             rl_service_info_container.setOnClickListener {
-                listener.onCollapseClick(adapterPosition)
+                onCollapseAction.invoke(adapterPosition)
             }
         }
     }

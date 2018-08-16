@@ -69,7 +69,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         doLogD("Partner", "onCreate partner: ${partnerUEN ?: "null"}")
         // This is demo for using ViewModel
         val viewmodel = obtainViewModel(PartnerDetailsViewModel::class.java, ViewModelFactory.getInstance())
-                .apply { this.partnerUEN =  partnerUEN}
+                .apply { this.partnerUEN = partnerUEN }
         with(viewmodel) {
 
             partnerDetails.observe(this@PartnerDetailsActivity, Observer {
@@ -78,7 +78,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
             })
 
             selectedCount.observe(this@PartnerDetailsActivity, Observer {
-                doLogD("Test", "Selected $it item")
+                doLogD(msg = "Selected $it item")
                 it?.let {
                     // Temporarily hide this line coz updating total count textview is not in this task
                     //                    btn_summary.setCount(it)

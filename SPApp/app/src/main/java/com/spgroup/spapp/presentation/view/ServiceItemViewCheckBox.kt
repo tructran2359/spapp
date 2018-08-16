@@ -3,21 +3,25 @@ package com.spgroup.spapp.presentation.view
 import android.content.Context
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.CheckboxService
+import com.spgroup.spapp.presentation.adapter.ServiceListingAdapter
 import com.spgroup.spapp.util.extension.inflate
 import kotlinx.android.synthetic.main.layout_service_item_check_box.view.*
 
 class ServiceItemViewCheckBox(
         context: Context,
-        service: CheckboxService
+        private val service: CheckboxService,
+        count: Int,
+        private val itemListener: ServiceListingAdapter.OnItemInteractedListener
 ) : ServiceItemView(context) {
 
-    private var isChecked = false
+    private var isChecked: Boolean
 
     init {
         inflate(R.layout.layout_service_item_check_box, true)
         tv_name.text = service.label
         tv_price.text = service.priceText
         tv_description.text = service.serviceDescription
+        isChecked = (count == 1)
         onCheckUpdated()
 
         fl_check_container.setOnClickListener {
@@ -27,6 +31,7 @@ class ServiceItemViewCheckBox(
     }
 
     private fun onCheckUpdated() {
+        itemListener.onCheckboxItemChanged(service, isChecked)
         view_root.isSelected = isChecked
     }
 
