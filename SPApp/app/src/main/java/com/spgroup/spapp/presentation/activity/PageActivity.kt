@@ -1,5 +1,6 @@
 package com.spgroup.spapp.presentation.activity
 
+import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,12 +9,15 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.spgroup.spapp.R
-import com.spgroup.spapp.presentation.view.IndicatorTextView
+import com.spgroup.spapp.domain.model.TopLevelPage
+import com.spgroup.spapp.domain.model.TopLevelPageSectionLink
+import com.spgroup.spapp.domain.model.TopLevelPageSectionLongText
+import com.spgroup.spapp.presentation.viewmodel.PageViewModel
+import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.extension.inflate
+import com.spgroup.spapp.util.extension.obtainViewModel
 import kotlinx.android.synthetic.main.activity_page.*
 import kotlinx.android.synthetic.main.layout_page_about_us.view.*
-import kotlinx.android.synthetic.main.layout_page_acknowledgement.view.*
-import kotlinx.android.synthetic.main.layout_page_tnc.view.*
 
 class PageActivity: BaseActivity() {
 
@@ -34,9 +38,10 @@ class PageActivity: BaseActivity() {
     }
 
     private var mType: String? = null
-    private lateinit var mPage: Page
+//    private lateinit var mPage: Page
     private lateinit var mAnimAppear: Animation
     private lateinit var mAnimDisappear: Animation
+    private lateinit var mViewModel: PageViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +50,26 @@ class PageActivity: BaseActivity() {
         mType = intent.getStringExtra(EXTRA_TYPE)
         if (mType == null) throw IllegalArgumentException("Type is null")
 
-        mPage = createDummy()
+//        mPage = createDummy()
+
+        mViewModel = obtainViewModel(PageViewModel::class.java, ViewModelFactory.getInstance())
+        mViewModel.run {
+            page.observe(this@PageActivity, Observer {
+                it?.let {
+                    tv_title.text = it.title
+                    when(it.code) {
+                        TYPE_ABOUT -> addAboutViews(it)
+
+                        TYPE_ACK -> addAckViews()
+
+                        TYPE_TNC -> addTncViews()
+                    }
+                }
+
+            })
+
+            loadPageFromCache(mType!!)
+        }
 
         initAnimation()
 
@@ -81,14 +105,6 @@ class PageActivity: BaseActivity() {
     }
 
     private fun setUpViews() {
-        tv_title.text = mPage.title
-        when(mPage.code) {
-            TYPE_ABOUT -> addAboutViews()
-
-            TYPE_ACK -> addAckViews()
-
-            TYPE_TNC -> addTncViews()
-        }
 
         iv_close.setOnClickListener {
             onBackPressed()
@@ -108,60 +124,59 @@ class PageActivity: BaseActivity() {
     }
 
     private fun addTncViews() {
-        val view = inflate(R.layout.layout_page_tnc)
-        view.run {
-            val sectionTnc = mPage.sections[0] as SectionLongText
-            val sectionCopyright = mPage.sections[1] as SectionLongText
-
-            tv_tnc.text = sectionTnc.text
-            tv_copyright_title.text = sectionCopyright.title
-            tv_copyright.text = sectionCopyright.text
-        }
-        ll_container.addView(view)
+//        val view = inflate(R.layout.layout_page_tnc)
+//        view.run {
+//            val sectionTnc = mPage.sections[0] as SectionLongText
+//            val sectionCopyright = mPage.sections[1] as SectionLongText
+//
+//            tv_tnc.text = sectionTnc.text
+//            tv_copyright_title.text = sectionCopyright.title
+//            tv_copyright.text = sectionCopyright.text
+//        }
+//        ll_container.addView(view)
     }
 
     private fun addAckViews() {
-        val view = inflate(R.layout.layout_page_acknowledgement)
-        view.run {
-            val sectionText = mPage.findSection(SECTION_TEXT)
-            val sectionLink = mPage.findSection(SECTION_LIST)
-            if (sectionText == null || sectionLink == null) {
-                throw IllegalArgumentException("Invalid data")
-            }
-
-            (sectionText as SectionLongText).run {
-                tv_ack_content.text = this.text
-            }
-
-            (sectionLink as SectionList).run {
-                tv_ack_title.text = this.title
-
-                this.options.forEach {
-                    val textView = IndicatorTextView(this@PageActivity, it)
-                    ll_ack_option_container.addView(textView)
-                }
-            }
-        }
-        ll_container.addView(view)
+//        val view = inflate(R.layout.layout_page_acknowledgement)
+//        view.run {
+//            val sectionText = mPage.findSection(SECTION_TEXT)
+//            val sectionLink = mPage.findSection(SECTION_LIST)
+//            if (sectionText == null || sectionLink == null) {
+//                throw IllegalArgumentException("Invalid data")
+//            }
+//
+//            (sectionText as SectionLongText).run {
+//                tv_ack_content.text = this.text
+//            }
+//
+//            (sectionLink as SectionList).run {
+//                tv_ack_title.text = this.title
+//
+//                this.options.forEach {
+//                    val textView = IndicatorTextView(this@PageActivity, it)
+//                    ll_ack_option_container.addView(textView)
+//                }
+//            }
+//        }
+//        ll_container.addView(view)
     }
 
-    private fun addAboutViews() {
+    private fun addAboutViews(it: TopLevelPage) {
         val view = inflate(R.layout.layout_page_about_us)
         view.run {
-            val sectionText = mPage.findSection(SECTION_TEXT)
-            val sectionLink = mPage.findSection(SECTION_LINK)
-            if (sectionText == null || sectionLink == null) {
-                throw IllegalArgumentException("Invalid data")
+            it.sections.forEach {
+                when (it) {
+                    is TopLevelPageSectionLink -> {
+                        tv_link_title.text = it.title
+                        tv_email.text = it.email
+                    }
+
+                    is TopLevelPageSectionLongText -> {
+                        tv_content.text = it.text
+                    }
+                }
             }
 
-            (sectionText as SectionLongText).run {
-                tv_content.text = this.text
-            }
-
-            (sectionLink as SectionLink).run {
-                tv_link_title.text = this.title
-                tv_email.text = this.email
-            }
         }
         ll_container.addView(view)
     }
