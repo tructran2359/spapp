@@ -21,6 +21,7 @@ class AppDataMemCache : AppDataCache {
         saveTopLevelCategories(topCategories)
         saveTopLevelPromotions(promotions)
         saveTopLevelPartners(partners)
+        saveTopLevelPages(pages)
     }
 
     override fun saveTopLevelCategories(categories: List<TopLevelCategory>) {
