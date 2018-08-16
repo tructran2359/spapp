@@ -3,6 +3,10 @@ package com.spgroup.spapp.presentation.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.widget.NestedScrollView
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.view.IndicatorTextView
 import kotlinx.android.synthetic.main.activity_partner_information.*
@@ -21,6 +25,9 @@ class PartnerInformationActivity : BaseActivity() {
     }
 
     private lateinit var mData: PartnerInfo
+    private lateinit var mAnimAppear: Animation
+    private lateinit var mAnimDisappear: Animation
+    private var mAnimIsRunning = false
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -32,6 +39,7 @@ class PartnerInformationActivity : BaseActivity() {
 
         mData = intent.getSerializableExtra(EXTRA_PARTNER_INFO) as PartnerInfo
 
+        initAnimation()
         initViews()
     }
 
@@ -55,6 +63,59 @@ class PartnerInformationActivity : BaseActivity() {
 
         iv_close.setOnClickListener {
             onBackPressed()
+        }
+
+
+
+        scroll_view.setOnScrollChangeListener(object : NestedScrollView.OnScrollChangeListener {
+            override fun onScrollChange(view: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
+                if (scrollY > oldScrollY) {
+                    // Scroll down
+                    if (!mAnimIsRunning) {
+                        updateCloseIcon(false)
+                    }
+                } else if (scrollY == 0) {
+                    // Reach Top
+                    updateCloseIcon(true)
+                }
+            }
+        })
+    }
+
+    private fun initAnimation() {
+        mAnimAppear = AnimationUtils.loadAnimation(this, R.anim.anim_fade_in)
+        mAnimAppear.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(p0: Animation?) {
+            }
+
+            override fun onAnimationEnd(p0: Animation?) {
+                iv_close.visibility = View.VISIBLE
+                mAnimIsRunning = false
+            }
+
+            override fun onAnimationStart(p0: Animation?) {
+            }
+        })
+        mAnimDisappear = AnimationUtils.loadAnimation(this, R.anim.anim_fade_out)
+        mAnimDisappear.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(p0: Animation?) {
+            }
+
+            override fun onAnimationEnd(p0: Animation?) {
+                iv_close.visibility = View.GONE
+            }
+
+            override fun onAnimationStart(p0: Animation?) {
+            }
+        })
+    }
+
+    private fun updateCloseIcon(show: Boolean) {
+        if (show && iv_close.visibility == View.GONE) {
+            iv_close.startAnimation(mAnimAppear)
+        } else if (!show && iv_close.visibility == View.VISIBLE && !mAnimIsRunning) {
+            mAnimIsRunning = true
+            iv_close.startAnimation(mAnimDisappear)
         }
     }
 
