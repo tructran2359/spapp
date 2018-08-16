@@ -16,7 +16,7 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.Partner
 import com.spgroup.spapp.presentation.adapter.CategoryPagerAdapter
 import com.spgroup.spapp.presentation.adapter.PartnerImagesAdapter
-import com.spgroup.spapp.presentation.viewmodel.SupplierDetailsViewModel
+import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.doLogD
@@ -80,7 +80,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     fun subcribeUI() {
         // This is demo for using ViewModel
         val factory = ViewModelFactory.getInstance()
-        val viewmodel = ViewModelProviders.of(this, factory).get(SupplierDetailsViewModel::class.java)
+        val viewmodel = ViewModelProviders.of(this, factory).get(PartnerDetailsViewModel::class.java)
         with(viewmodel) {
 
             serviceCategories.observe(this@PartnerDetailsActivity, Observer {

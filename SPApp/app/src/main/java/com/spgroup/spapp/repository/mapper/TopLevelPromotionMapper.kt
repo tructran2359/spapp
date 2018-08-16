@@ -10,6 +10,7 @@ class TopLevelPromotionMapper: IMapper<TopLevelPromotionEntity, TopLevelPromotio
                 promoText = entity.promoText,
                 partnerName = entity.partnerName,
                 partnerId = entity.partnerId,
-                startEnd = entity.startEnd)
+                start = entity.start,
+                end = entity.end)
     }
 }

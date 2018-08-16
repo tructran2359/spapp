@@ -7,7 +7,7 @@ import com.spgroup.spapp.domain.SchedulerFacade
 import com.spgroup.spapp.domain.ServicesRepository
 import com.spgroup.spapp.domain.usecase.GetInitialDataUsecase
 import com.spgroup.spapp.domain.usecase.GetPartnerListingUsecase
-import com.spgroup.spapp.domain.usecase.GetServicesListBySupplierUsecase
+import com.spgroup.spapp.domain.usecase.GetServicesListByPartnerUsecase
 import com.spgroup.spapp.manager.AppDataCache
 
 class ViewModelFactory private constructor(
@@ -22,7 +22,7 @@ class ViewModelFactory private constructor(
 
             modelClass.isAssignableFrom(SplashViewModel::class.java) -> createSplashVM()
 
-            modelClass.isAssignableFrom(SupplierDetailsViewModel::class.java) -> createSupplierDetailsViewModel()
+            modelClass.isAssignableFrom(PartnerDetailsViewModel::class.java) -> createPartnerDetailsViewModel()
 
             modelClass.isAssignableFrom(PartnerListingViewModel::class.java) -> createPartnerListingViewModel()
 
@@ -46,9 +46,9 @@ class ViewModelFactory private constructor(
         return SplashViewModel(getInitialDataUsecase, appDataCache)
     }
 
-    private fun createSupplierDetailsViewModel(): SupplierDetailsViewModel {
-        val getServicesUsecase = GetServicesListBySupplierUsecase(schedulerFacade, mockRepository)
-        return SupplierDetailsViewModel(getServicesUsecase)
+    private fun createPartnerDetailsViewModel(): PartnerDetailsViewModel {
+        val getServicesUsecase = GetServicesListByPartnerUsecase(schedulerFacade, mockRepository)
+        return PartnerDetailsViewModel(getServicesUsecase)
     }
 
     private fun createPartnerListingViewModel(): PartnerListingViewModel {

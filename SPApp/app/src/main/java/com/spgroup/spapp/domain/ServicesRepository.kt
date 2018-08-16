@@ -11,6 +11,6 @@ interface ServicesRepository {
 
     fun getPartnersListingData(categoryId: String): Single<PartnersListingData>
 
-    fun getSupplierServicesDetails(supplierId: Int): Single<List<ServiceCategory>>
+    fun getPartnerDetailsData(supplierId: Int): Single<List<ServiceCategory>>
 
 }

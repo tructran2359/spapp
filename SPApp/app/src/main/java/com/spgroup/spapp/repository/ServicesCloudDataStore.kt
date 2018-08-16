@@ -31,7 +31,7 @@ class ServicesCloudDataStore(
                         PartnersListingData(partners, promotions)
                     }
 
-    override fun getSupplierServicesDetails(supplierId: Int): Single<List<ServiceCategory>> {
+    override fun getPartnerDetailsData(supplierId: Int): Single<List<ServiceCategory>> {
         // TODO truc
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

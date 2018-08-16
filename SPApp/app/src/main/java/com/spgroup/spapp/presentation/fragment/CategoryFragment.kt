@@ -13,7 +13,7 @@ import com.spgroup.spapp.domain.model.ServiceItemCounter
 import com.spgroup.spapp.domain.model.ServiceCategory
 import com.spgroup.spapp.presentation.activity.CustomiseActivity
 import com.spgroup.spapp.presentation.adapter.ServiceGroupAdapter
-import com.spgroup.spapp.presentation.viewmodel.SupplierDetailsViewModel
+import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_category.*
 
@@ -36,7 +36,7 @@ class CategoryFragment: BaseFragment(), ServiceGroupAdapter.OnItemInteractedList
     ///////////////////////////////////////////////////////////////////////////
 
     lateinit var mServiceAdapter: ServiceGroupAdapter
-    lateinit var mViewModel: SupplierDetailsViewModel
+    lateinit var mViewModel: PartnerDetailsViewModel
     lateinit var mServiceCategory: ServiceCategory
 
     ///////////////////////////////////////////////////////////////////////////
@@ -63,7 +63,7 @@ class CategoryFragment: BaseFragment(), ServiceGroupAdapter.OnItemInteractedList
         super.onViewCreated(view, savedInstanceState)
 
         val factory = ViewModelFactory.getInstance()
-        mViewModel = ViewModelProviders.of(activity!!, factory).get(SupplierDetailsViewModel::class.java)
+        mViewModel = ViewModelProviders.of(activity!!, factory).get(PartnerDetailsViewModel::class.java)
 
         activity?.let {
 

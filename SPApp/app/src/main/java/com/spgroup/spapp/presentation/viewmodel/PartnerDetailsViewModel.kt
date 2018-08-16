@@ -2,15 +2,15 @@ package com.spgroup.spapp.presentation.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import com.spgroup.spapp.domain.model.ServiceCategory
 import com.spgroup.spapp.domain.model.ServiceItemCheckBox
 import com.spgroup.spapp.domain.model.ServiceItemCounter
-import com.spgroup.spapp.domain.model.ServiceCategory
-import com.spgroup.spapp.domain.usecase.GetServicesListBySupplierUsecase
+import com.spgroup.spapp.domain.usecase.GetServicesListByPartnerUsecase
 import com.spgroup.spapp.util.doLogD
 import io.reactivex.disposables.CompositeDisposable
 
-class SupplierDetailsViewModel(
-        private val getServicesListBySupplierUsecase: GetServicesListBySupplierUsecase
+class PartnerDetailsViewModel(
+        private val getServicesListByPartnerUsecase: GetServicesListByPartnerUsecase
 ) : ViewModel() {
 
     private val disposeBag = CompositeDisposable()
@@ -26,7 +26,7 @@ class SupplierDetailsViewModel(
 
 
     fun loadServices(supplierId: Int) {
-        val disposable = getServicesListBySupplierUsecase
+        val disposable = getServicesListByPartnerUsecase
                 .getSupplierServicesList(supplierId)
                 .subscribe(
                         { serviceCategories.value = it },
