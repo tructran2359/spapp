@@ -11,13 +11,16 @@ import android.view.animation.AnimationUtils
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.TopLevelPage
 import com.spgroup.spapp.domain.model.TopLevelPageSectionLink
+import com.spgroup.spapp.domain.model.TopLevelPageSectionList
 import com.spgroup.spapp.domain.model.TopLevelPageSectionLongText
+import com.spgroup.spapp.presentation.view.IndicatorTextView
 import com.spgroup.spapp.presentation.viewmodel.PageViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.extension.inflate
 import com.spgroup.spapp.util.extension.obtainViewModel
 import kotlinx.android.synthetic.main.activity_page.*
 import kotlinx.android.synthetic.main.layout_page_about_us.view.*
+import kotlinx.android.synthetic.main.layout_page_acknowledgement.view.*
 
 class PageActivity: BaseActivity() {
 
@@ -60,7 +63,7 @@ class PageActivity: BaseActivity() {
                     when(it.code) {
                         TYPE_ABOUT -> addAboutViews(it)
 
-                        TYPE_ACK -> addAckViews()
+                        TYPE_ACK -> addAckViews(it)
 
                         TYPE_TNC -> addTncViews()
                     }
@@ -136,35 +139,32 @@ class PageActivity: BaseActivity() {
 //        ll_container.addView(view)
     }
 
-    private fun addAckViews() {
-//        val view = inflate(R.layout.layout_page_acknowledgement)
-//        view.run {
-//            val sectionText = mPage.findSection(SECTION_TEXT)
-//            val sectionLink = mPage.findSection(SECTION_LIST)
-//            if (sectionText == null || sectionLink == null) {
-//                throw IllegalArgumentException("Invalid data")
-//            }
-//
-//            (sectionText as SectionLongText).run {
-//                tv_ack_content.text = this.text
-//            }
-//
-//            (sectionLink as SectionList).run {
-//                tv_ack_title.text = this.title
-//
-//                this.options.forEach {
-//                    val textView = IndicatorTextView(this@PageActivity, it)
-//                    ll_ack_option_container.addView(textView)
-//                }
-//            }
-//        }
-//        ll_container.addView(view)
+    private fun addAckViews(page: TopLevelPage) {
+        val view = inflate(R.layout.layout_page_acknowledgement)
+        view.run {
+            page.sections.forEach {
+                when (it) {
+                    is TopLevelPageSectionLongText -> {
+                        tv_ack_content.text = it.text
+                    }
+                    is TopLevelPageSectionList -> {
+                        tv_ack_title.text = it.title
+
+                        it.options.forEach {
+                            val textView = IndicatorTextView(this@PageActivity, it)
+                            ll_ack_option_container.addView(textView)
+                        }
+                    }
+                }
+            }
+        }
+        ll_container.addView(view)
     }
 
-    private fun addAboutViews(it: TopLevelPage) {
+    private fun addAboutViews(page: TopLevelPage) {
         val view = inflate(R.layout.layout_page_about_us)
         view.run {
-            it.sections.forEach {
+            page.sections.forEach {
                 when (it) {
                     is TopLevelPageSectionLink -> {
                         tv_link_title.text = it.title
