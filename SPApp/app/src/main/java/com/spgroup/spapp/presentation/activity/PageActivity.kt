@@ -197,50 +197,6 @@ class PageActivity: BaseActivity() {
         ll_container.addView(view)
     }
 
-    private fun createDummy(): Page {
-        return when (mType) {
-            TYPE_ABOUT -> createAbout()
-
-            TYPE_ACK -> createAck()
-
-            TYPE_TNC -> createTnc()
-
-            else -> throw IllegalArgumentException("Type $mType is invalid")
-        }
-    }
-
-    private fun createTnc(): Page {
-        val sectionTnC = SectionLongText("PLEASE READ THESE TERMS AND CONDITIONS OF USE (“TERMS AND CONDITIONS”) CAREFULLY. BY ACCESSING THIS WEBSITE AND/OR USING THE ONLINE SERVICES, YOU AGREE TO BE BOUND BY THE FOLLOWING TERMS AND CONDITIONS. IF YOU DO NOT ACCEPT ANY OF THESE TERMS AND CONDITIONS, YOU MUST IMMEDIATELY DISCONTINUE YOUR ACCESS OF THIS WEBSITE AND/OR USE OF THE ONLINE SERVICES.")
-        val sectionCopyright = SectionLongText("Except as otherwise expressly stated herein, the copyright and all other intellectual property in the contents of this Website (including, but not limited to, all design, text, sound recordings, images or links) are the property of Singapore Power Limited and/or its subsidiaries and/or their respective subsidiaries (together the \"SP Group\"). As such, they may not be reproduced, transmitted, published, performed, broadcast, stored, adapted, distributed, displayed, licensed, altered, hyperlinked or otherwise used in whole or in part in any manner without the prior written consent of the SP Group. Save and except with the SP Group's prior written consent, you may not insert a hyperlink to this Website or any part thereof on any other website or \"mirror\" or frame this Website, any part thereof, or any information or materials contained in this Website on any other server, website or webpage.\n" +
-                "\n" +
-                "All trade marks, service marks and logos used in this Website are the property of the SP Group and/or the respective third party proprietors identified in this Website. No licence or right is granted and your access to this Website and/or use of the online services should not be construed as granting, by implication, estoppel or otherwise, any license or right to use any trade marks, service marks or logos appearing on the Website without the prior written consent of the SP Group or the relevant third party proprietor thereof. Save and except with the SP Group's prior written consent, no such trade mark, service mark or logo may be used as a hyperlink or to mark any hyperlink to any SP Group member's site or any other site.",
-                "Copyright and Trademark Notices")
-
-        return Page(title = "Terms & Conditions", code = TYPE_TNC, sections = listOf(sectionTnC, sectionCopyright))
-    }
-
-    private fun createAck(): Page {
-        val section1 = SectionLongText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi imperdiet sed metus at dapibus. Curabitur eget nisl euismod, aliquam felis sed, faucibus tortor. Duis nec ligula sit amet tortor finibus malesuada. Nullam id finibus eros. Sed magna metus, euismod a nisl nec, tincidunt facilisis justo. Etiam pulvinar et enim vel porttitor. Proin bibendum bibendum eros a convallis.")
-
-        val options = listOf(
-                "Ut gravida dictum lorem, id auctor dolor condimentum quis.",
-                "Etiam malesuada eros quam, eu ornare sapien consequat at.",
-                "In hac habitasse platea dictumst.",
-                "Phasellus nec mollis odio.",
-                "Etiam egestas luctus est vel pharetra, Fusce a egestas arcu"
-        )
-
-        val section2 = SectionList("On This App", options)
-        return Page("Acknowledgement", TYPE_ACK, listOf(section1, section2))
-    }
-
-    private fun createAbout(): Page {
-        val section1 = SectionLongText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi imperdiet sed metus at dapibus. Curabitur eget nisl euismod, aliquam felis sed, faucibus tortor. Duis nec ligula sit amet tortor finibus malesuada. Nullam id finibus eros. Sed magna metus, euismod a nisl nec, tincidunt facilisis justo. Etiam pulvinar et enim vel porttitor. Proin bibendum bibendum eros a convallis.\r\n\r\nFusce a egestas arcu. Etiam malesuada eros quam, eu ornare sapien consequat at. Phasellus nec mollis odio. Etiam egestas luctus est vel pharetra. In hac habitasse platea dictumst. Nulla facilisi. Ut gravida dictum lorem, id auctor dolor condimentum quis.")
-        val section2 = SectionLink("Feedback / Enquiries", "info@spgroup.com")
-
-        return Page(title = "About us", code = TYPE_ABOUT, sections = listOf(section1, section2))
-    }
-
     private fun updateCloseIcon(show: Boolean) {
         if (show && iv_close.visibility == View.GONE) {
             iv_close.startAnimation(mAnimAppear)
