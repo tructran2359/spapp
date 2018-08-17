@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/common_vert_medium_sub"
+    >
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/color_ui07"
+        android:lineSpacingExtra="5sp"
+        fontPath="@string/font_book"
+        tools:text="Number of Pax"
+        />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:id="@+id/spinner_options"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rec_rounded_white_solid_grey_stroke"
+            android:layout_marginTop="@dimen/common_vert_xsmall"
+            android:spinnerMode="dropdown"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/common_icon_size_small"
+            android:layout_height="@dimen/common_icon_size_small"
+            android:src="@drawable/arrow_down_grey"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="@dimen/common_spacing_x3"
+            />
+
+    </FrameLayout>
+
+</LinearLayout>

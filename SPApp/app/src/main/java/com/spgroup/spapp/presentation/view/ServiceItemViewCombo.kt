@@ -17,12 +17,14 @@ class ServiceItemViewCombo(
     init {
         inflate(R.layout.layout_service_item_combo, true)
         tv_name.text = service.label
-        if (service.priceText == null) {
-            tv_price.isGone = true
-        } else {
-            tv_price.isGone = false
-            tv_price.text = service.priceText
-        }
+        tv_price.isGone = service.priceText == null
+        tv_price.text = service.priceText?.let { getPriceTextWithUnit(it, service.unit) }
         setOnClickListener { itemListener.onComplexCustomisationItemClick(service) }
+    }
+
+    private fun getPriceTextWithUnit(priceText: String, unit: String?): String {
+        return unit?.let {
+            "$priceText / $unit"
+        } ?: priceText
     }
 }

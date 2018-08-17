@@ -1,8 +1,8 @@
 package com.spgroup.spapp.domain.model
 
-import com.google.gson.JsonElement
+import java.io.Serializable
 
-sealed class AbsServiceItem {
+sealed class AbsServiceItem: Serializable  {
     abstract fun getServiceId(): Int
 }
 
@@ -11,9 +11,10 @@ data class ComplexCustomisationService(
         val id: Int,
         val label: String,
         val serviceDescription: String,
-        val priceText: String?,
-        val customisations: JsonElement //TODO truc, define model later
-) : AbsServiceItem() {
+        var priceText: String?,
+        val unit: String?,
+        val customisations: List<AbsCustomisation>
+) : AbsServiceItem(){
     override fun getServiceId() = id
 }
 

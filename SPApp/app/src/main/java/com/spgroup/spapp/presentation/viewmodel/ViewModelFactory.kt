@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import com.spgroup.spapp.di.Injection
 import com.spgroup.spapp.domain.SchedulerFacade
 import com.spgroup.spapp.domain.ServicesRepository
+import com.spgroup.spapp.domain.usecase.GetCustomisationLowestPrice
 import com.spgroup.spapp.domain.usecase.GetInitialDataUsecase
 import com.spgroup.spapp.domain.usecase.GetPartnerListingUsecase
 import com.spgroup.spapp.domain.usecase.GetServicesListByPartnerUsecase
@@ -34,18 +35,25 @@ class ViewModelFactory private constructor(
 
             modelClass.isAssignableFrom(PageViewModel::class.java) -> createPageViewModel()
 
+            modelClass.isAssignableFrom(CustomiseNewViewModel::class.java) -> createCustomiseNewViewModel()
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         } as T
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // ViewModel creation
+    ///////////////////////////////////////////////////////////////////////////
+
+
+
+    private fun createCustomiseNewViewModel(): CustomiseNewViewModel{
+        return CustomiseNewViewModel()
     }
 
     private fun createPageViewModel(): PageViewModel {
         return PageViewModel(appDataCache)
     }
-
-    ///////////////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////////////
-    // ViewModel creation
 
     private fun createSplashVM(): SplashViewModel {
         val getInitialDataUsecase = GetInitialDataUsecase(schedulerFacade, cloudRepository)
@@ -54,7 +62,8 @@ class ViewModelFactory private constructor(
 
     private fun createPartnerDetailsViewModel(): PartnerDetailsViewModel {
         val getServicesUsecase = GetServicesListByPartnerUsecase(schedulerFacade, cloudRepository)
-        return PartnerDetailsViewModel(getServicesUsecase)
+        val getCustomisationLowestPrice = GetCustomisationLowestPrice()
+        return PartnerDetailsViewModel(getServicesUsecase, getCustomisationLowestPrice)
     }
 
     private fun createPartnerListingViewModel(): PartnerListingViewModel {

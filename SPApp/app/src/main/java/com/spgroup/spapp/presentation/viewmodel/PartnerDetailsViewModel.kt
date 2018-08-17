@@ -2,13 +2,17 @@ package com.spgroup.spapp.presentation.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import com.spgroup.spapp.domain.model.Category
+import com.spgroup.spapp.domain.model.ComplexCustomisationService
 import com.spgroup.spapp.domain.model.PartnerDetails
+import com.spgroup.spapp.domain.usecase.GetCustomisationLowestPrice
 import com.spgroup.spapp.domain.usecase.GetServicesListByPartnerUsecase
 import com.spgroup.spapp.presentation.activity.PartnerInformationActivity
 import com.spgroup.spapp.util.doLogD
+import com.spgroup.spapp.util.extension.formatPrice
 
 class PartnerDetailsViewModel(
-        private val getServicesListByPartnerUsecase: GetServicesListByPartnerUsecase
+        private val getServicesListByPartnerUsecase: GetServicesListByPartnerUsecase,
+        private val getCustomisationLowestPrice: GetCustomisationLowestPrice
 ) : BaseViewModel() {
 
     lateinit var partnerUEN: String
@@ -26,11 +30,30 @@ class PartnerDetailsViewModel(
                 .getPartnerDetails(partnerUEN)
                 .subscribe(
                         {
+                            preProcessCustomisationLowestPrice(it)
                             partnerDetails.value = it
                         },
                         { error.value = it }
                 )
         disposeBag.add(disposable)
+    }
+
+    private fun preProcessCustomisationLowestPrice(partnerDetails: PartnerDetails) {
+        partnerDetails.categories.forEach { cat ->
+            cat.subCategories.forEach { subCat ->
+                subCat.services.forEach { service ->
+                    if (service is ComplexCustomisationService) {
+                        val lowestPrice = getCustomisationLowestPrice.run(service.customisations)
+                        if (lowestPrice == GetCustomisationLowestPrice.NO_PRICE) {
+                            service.priceText = null
+                        } else {
+                            service.priceText = lowestPrice.formatPrice()
+                        }
+
+                    }
+                }
+            }
+        }
     }
 
     fun updateSelectedServiceCategories(count: Int, categoryId: String, serviceId: Int) {

@@ -1,4 +1,4 @@
-package com.spgroup.spapp.repository.json_deserializer
+package com.spgroup.spapp.repository.jsondeserializer
 
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer

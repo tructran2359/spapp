@@ -216,7 +216,7 @@ class OrderSummaryActivity : BaseActivity() {
             onBackPressed()
         }
 
-        val list = listOf("Select Time", "11AM - 12PM", "12PM - 2PM", "2PM - 4PM")
+        val list = mutableListOf("Select Time", "11AM - 12PM", "12PM - 2PM", "2PM - 4PM")
         val adapter = PreferredTimeAdapter(this, R.layout.layout_preferred_time, list)
 
         spinner_preferred_time.adapter = adapter
