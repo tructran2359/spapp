@@ -12,6 +12,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.isGone
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.adapter.CategoryPagerAdapter
 import com.spgroup.spapp.presentation.adapter.PartnerImagesAdapter
@@ -49,6 +50,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     lateinit var mAnimationDisappear: Animation
     private var mActionBarHeight: Int = 0
     private var mInitTextSize = 0f
+    private var mPromotionBarHeight = 0
     private lateinit var mViewModel: PartnerDetailsViewModel
 
     ///////////////////////////////////////////////////////////////////////////
@@ -77,9 +79,15 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         with(mViewModel) {
 
             partnerDetails.observe(this@PartnerDetailsActivity, Observer {
-                mCategoryAdapter.setData(it?.categories)
-                tv_partner_name.text = it?.name ?: ""
-                setUpTabLayout()
+                it?.let {
+
+                    mCategoryAdapter.setData(it?.categories)
+                    tv_partner_name.text = it.name
+                    tv_promotion.text = it.promo
+                    ll_promotion_bar.isGone = it.promo.isEmpty()
+                    mPromotionBarHeight = if (it.promo.isEmpty()) 0 else getDimensionPixelSize(R.dimen.promotion_bar_height)
+                    setUpTabLayout()
+                }
             })
 
             selectedCount.observe(this@PartnerDetailsActivity, Observer {
@@ -115,16 +123,16 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         val percentage = currentScroll.toFloat() / (mMaxScroll).toFloat()
 
         val layoutParam = rl_top_button_container.layoutParams
+        layoutParam.height = max(mActionBarHeight, currentScroll - mPromotionBarHeight)
         if (currentScroll <= mActionBarHeight) {
             v_background_color.alpha = 1f
             fl_info_container.visibility = View.GONE
-            layoutParam.height = mActionBarHeight
         } else {
             v_background_color.alpha = 1f - percentage
             fl_info_container.visibility = View.VISIBLE
             fl_info_container.alpha = percentage
-            layoutParam.height = currentScroll
         }
+
 
         rl_top_button_container.layoutParams = layoutParam
         val scaledTextSize = mInitTextSize * max(percentage, 0.7f)
