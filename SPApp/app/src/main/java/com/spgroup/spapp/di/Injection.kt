@@ -29,7 +29,8 @@ object Injection {
         val topLevelCatMapper = TopLevelCatMapper()
         val topLevelPromoMapper = TopLevelPromotionMapper()
         val toplevelPartnerMapper = TopLevelFeaturedPartnerMapper()
-        val homeDataMapper = HomeDataMapper(topLevelCatMapper, topLevelPromoMapper, toplevelPartnerMapper)
+        val topLevlePageMapper = TopLevelPageMapper(TopLevelPageSectionMapper())
+        val homeDataMapper = HomeDataMapper(topLevelCatMapper, topLevelPromoMapper, toplevelPartnerMapper, topLevlePageMapper)
 
         val partnerMapper = PartnerMapper()
         val promotionMapper = PromotionMapper()

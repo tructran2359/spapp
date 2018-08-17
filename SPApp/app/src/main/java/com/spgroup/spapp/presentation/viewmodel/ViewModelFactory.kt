@@ -32,8 +32,14 @@ class ViewModelFactory private constructor(
 
             modelClass.isAssignableFrom(OrderSummaryViewModel::class.java) -> createOrderSummaryViewModel()
 
+            modelClass.isAssignableFrom(PageViewModel::class.java) -> createPageViewModel()
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         } as T
+    }
+
+    private fun createPageViewModel(): PageViewModel {
+        return PageViewModel(appDataCache)
     }
 
     ///////////////////////////////////////////////////////////////////////////
