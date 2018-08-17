@@ -197,9 +197,9 @@
             android:id="@+id/tv_partner_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="QuiKlean Laundry"
             android:maxLines="1"
             android:layout_centerInParent="true"
+            tools:text="QuiKlean Laundry"
             />
 
     </RelativeLayout>

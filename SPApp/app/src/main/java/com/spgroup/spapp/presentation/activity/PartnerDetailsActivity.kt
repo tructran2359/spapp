@@ -74,6 +74,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
 
             partnerDetails.observe(this@PartnerDetailsActivity, Observer {
                 mCategoryAdapter.setData(it?.categories)
+                tv_partner_name.text = it?.name ?: ""
                 setUpTabLayout()
             })
 
