@@ -195,10 +195,14 @@
         <TextView
             style="@style/textH1.white"
             android:id="@+id/tv_partner_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
+            android:ellipsize="end"
             android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:paddingLeft="@dimen/common_horz_xlarge"
+            android:paddingRight="@dimen/common_horz_xlarge"
             tools:text="QuiKlean Laundry"
             />
 
