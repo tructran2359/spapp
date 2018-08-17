@@ -135,5 +135,7 @@
     <dimen name="splash_image_size">112dp</dimen>
     <dimen name="page_top_img_width">198dp</dimen>
     <dimen name="page_top_img_height">90dp</dimen>
+    <dimen name="promotion_bar_height">60dp</dimen>
+    <dimen name="promotion_bar_icon_size">50dp</dimen>
 
 </resources>

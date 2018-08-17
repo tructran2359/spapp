@@ -23,38 +23,80 @@
             android:layout_height="wrap_content"
             >
 
-            <!--Hero Section-->
-            <RelativeLayout
-                android:id="@+id/rl_hero_section"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@color/color_ui03"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:minHeight="@dimen/action_bar_height"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
                 >
 
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/pager_images"
+                <!--Hero Section-->
+                <RelativeLayout
+                    android:id="@+id/rl_hero_section"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
-
-                <me.relex.circleindicator.CircleIndicator
-                    android:id="@+id/pager_indicator"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="@dimen/common_spacing_x2"
-                    app:ci_animator="@anim/anim_indicator"
-                    app:ci_animator_reverse="@anim/anim_indicator"
-                    app:ci_drawable="@drawable/indicator_active"
-                    app:ci_drawable_unselected="@drawable/indicator_inactive"
-                    app:ci_height="@dimen/indicator_size"
-                    app:ci_width="@dimen/indicator_size"
-                    />
+                    android:background="@color/color_ui03"
+                    >
 
-            </RelativeLayout>
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/pager_images"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+
+                    <me.relex.circleindicator.CircleIndicator
+                        android:id="@+id/pager_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/pager_images"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/common_spacing_x2"
+                        app:ci_animator="@anim/anim_indicator"
+                        app:ci_animator_reverse="@anim/anim_indicator"
+                        app:ci_drawable="@drawable/indicator_active"
+                        app:ci_drawable_unselected="@drawable/indicator_inactive"
+                        app:ci_height="@dimen/indicator_size"
+                        app:ci_width="@dimen/indicator_size"
+                        />
+
+                </RelativeLayout>
+
+                <!--Promotion Bar-->
+                <LinearLayout
+                    android:id="@+id/ll_promotion_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/promotion_bar_height"
+                    android:orientation="horizontal"
+                    android:background="@color/color_ui01"
+                    android:layout_below="@+id/pager_images"
+                    android:paddingLeft="@dimen/common_horz_large"
+                    android:paddingRight="@dimen/common_horz_large"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/promotion_bar_icon_size"
+                        android:layout_height="@dimen/promotion_bar_icon_size"
+                        android:src="@drawable/promo"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_promotion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="6sp"
+                        android:textColor="@color/color_ui06"
+                        android:layout_marginLeft="@dimen/common_horz_medium"
+                        fontPath="@string/font_medium"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </android.support.design.widget.AppBarLayout>
 
