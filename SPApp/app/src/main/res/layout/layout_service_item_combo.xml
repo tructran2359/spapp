@@ -1,48 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
     android:id="@+id/view_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/service_item_space_between_items"
     android:background="@color/color_ui06"
     android:paddingLeft="@dimen/service_item_horz_spacing"
-    tools:ignore="MissingPrefix">
+    android:layout_marginTop="@dimen/service_item_space_between_items"
+    >
 
     <TextView
-        android:id="@+id/tv_name"
         style="@style/textH4"
+        android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="1"
         android:layout_marginTop="@dimen/service_item_vert_spacing"
         android:layout_toLeftOf="@id/fl_check_container"
-        android:maxLines="1"
-        android:text="Day Curtains" />
+        tools:text="Day Curtains"
+        />
 
     <TextView
-        android:id="@+id/tv_price"
-        style="@style/textH6.textServiceItemPrice"
-        android:layout_below="@+id/tv_name"
-        android:layout_marginBottom="@dimen/service_item_vert_spacing"
+        style="@style/textServiceItemFrom"
+        android:id="@+id/tv_from"
         android:layout_marginTop="@dimen/service_item_vert_spacing"
-        tools:text="S$6 / item" />
+        android:layout_marginBottom="@dimen/service_item_vert_spacing"
+        android:layout_below="@+id/tv_name"
+        />
+
+    <TextView
+        style="@style/textH6.textServiceItemPrice"
+        android:id="@+id/tv_price"
+        android:layout_alignBaseline="@+id/tv_from"
+        android:layout_toRightOf="@id/tv_from"
+        android:layout_toLeftOf="@id/fl_check_container"
+        android:layout_marginLeft="@dimen/common_spacing"
+        tools:text="S$6 / item"
+        />
 
     <FrameLayout
         android:id="@+id/fl_check_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:paddingBottom="@dimen/service_item_vert_spacing"
         android:paddingLeft="@dimen/service_item_horz_spacing"
         android:paddingRight="@dimen/service_item_horz_spacing"
-        android:paddingTop="@dimen/service_item_vert_spacing">
+        android:paddingTop="@dimen/service_item_vert_spacing"
+        android:paddingBottom="@dimen/service_item_vert_spacing"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        >
 
         <ImageView
             android:id="@+id/iv_arrow"
             android:layout_width="@dimen/common_icon_size_small"
             android:layout_height="@dimen/common_icon_size_small"
-            android:src="@drawable/arrow_right_blue" />
+            android:src="@drawable/arrow_right_blue"
+            />
     </FrameLayout>
 
 </RelativeLayout>

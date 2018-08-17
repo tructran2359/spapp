@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import com.spgroup.spapp.di.Injection
 import com.spgroup.spapp.domain.SchedulerFacade
 import com.spgroup.spapp.domain.ServicesRepository
+import com.spgroup.spapp.domain.usecase.GetCustomisationLowestPrice
 import com.spgroup.spapp.domain.usecase.GetInitialDataUsecase
 import com.spgroup.spapp.domain.usecase.GetPartnerListingUsecase
 import com.spgroup.spapp.domain.usecase.GetServicesListByPartnerUsecase
@@ -54,7 +55,8 @@ class ViewModelFactory private constructor(
 
     private fun createPartnerDetailsViewModel(): PartnerDetailsViewModel {
         val getServicesUsecase = GetServicesListByPartnerUsecase(schedulerFacade, cloudRepository)
-        return PartnerDetailsViewModel(getServicesUsecase)
+        val getCustomisationLowestPrice = GetCustomisationLowestPrice()
+        return PartnerDetailsViewModel(getServicesUsecase, getCustomisationLowestPrice)
     }
 
     private fun createPartnerListingViewModel(): PartnerListingViewModel {
