@@ -46,6 +46,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     lateinit var mAnimationAppear: Animation
     lateinit var mAnimationDisappear: Animation
     private var mActionBarHeight: Int = 0
+    private lateinit var mViewModel: PartnerDetailsViewModel
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -68,9 +69,9 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         val partnerUEN = intent.getStringExtra(ConstUtils.EXTRA_PARTNER_UEN)
         doLogD("Partner", "onCreate partner: ${partnerUEN ?: "null"}")
         // This is demo for using ViewModel
-        val viewmodel = obtainViewModel(PartnerDetailsViewModel::class.java, ViewModelFactory.getInstance())
+        mViewModel = obtainViewModel(PartnerDetailsViewModel::class.java, ViewModelFactory.getInstance())
                 .apply { this.partnerUEN = partnerUEN }
-        with(viewmodel) {
+        with(mViewModel) {
 
             partnerDetails.observe(this@PartnerDetailsActivity, Observer {
                 mCategoryAdapter.setData(it?.categories)
@@ -218,19 +219,10 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         }
 
         fl_info_container.setOnClickListener {
-            val partnerInfo = PartnerInformationActivity.PartnerInfo(
-                    name = "Tingkat-a-Day",
-                    desc = "Our Tingkat-A-Day meals have been a part of many Singaporeans&#039; daily lives.  We strive to make your meal an enjoyable one with our carefully planned menu that changes every fortnightly.<br />\nSimply choose between our lunch or dinner Tinkat meals and enjoy the flavours of home-cooked food\n",
-                    offerTitle = "Exclusive on the App",
-                    offers = listOf("Lunch / Dinner",
-                            "3 Dishes Plus 1 Soup Meal Set / 4 Dishes Meal Set",
-                            "Good for 1-7 pax",
-                            "Special requests available"),
-                    phone = "634249888",
-                    uen = "987654321A",
-                    nea = "W003455S99"
-            )
-            startActivity(PartnerInformationActivity.getLaunchIntent(this@PartnerDetailsActivity, partnerInfo))
+            val partnerInfo = mViewModel.getPartnerInfoModel()
+            partnerInfo?.let {
+                startActivity(PartnerInformationActivity.getLaunchIntent(this@PartnerDetailsActivity, it))
+            }
         }
 
         rl_hero_section.setOnGlobalLayoutListener {
