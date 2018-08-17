@@ -10,6 +10,7 @@ data class ComplexCustomisationService(
         val label: String,
         val serviceDescription: String,
         var priceText: String?,
+        val unit: String?,
         val customisations: List<AbsCustomisation>
 ) : AbsServiceItem() {
     override fun getServiceId() = id
