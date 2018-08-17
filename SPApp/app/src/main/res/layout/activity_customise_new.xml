@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
 
-                    android:text="S$185.00"
+                    tools:text="S$185.00"
                     />
 
             </RelativeLayout>

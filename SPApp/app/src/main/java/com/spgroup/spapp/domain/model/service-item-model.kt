@@ -1,6 +1,8 @@
 package com.spgroup.spapp.domain.model
 
-sealed class AbsServiceItem {
+import java.io.Serializable
+
+sealed class AbsServiceItem: Serializable  {
     abstract fun getServiceId(): Int
 }
 
@@ -11,7 +13,7 @@ data class ComplexCustomisationService(
         val serviceDescription: String,
         val priceText: String?,
         val customisations: List<AbsCustomisation>
-) : AbsServiceItem() {
+) : AbsServiceItem(){
     override fun getServiceId() = id
 }
 

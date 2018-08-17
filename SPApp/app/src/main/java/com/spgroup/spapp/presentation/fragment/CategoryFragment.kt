@@ -79,7 +79,7 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
 
     override fun onComplexCustomisationItemClick(itemData: ComplexCustomisationService) {
         activity?.let {
-            val intent = CustomiseNewActivity.getLaunchIntent(it)
+            val intent = CustomiseNewActivity.getLaunchIntent(it, itemData)
             it.startActivity(intent)
         }
     }

@@ -34,18 +34,25 @@ class ViewModelFactory private constructor(
 
             modelClass.isAssignableFrom(PageViewModel::class.java) -> createPageViewModel()
 
+            modelClass.isAssignableFrom(CustomiseNewViewModel::class.java) -> createCustomiseNewViewModel()
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         } as T
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // ViewModel creation
+    ///////////////////////////////////////////////////////////////////////////
+
+
+
+    private fun createCustomiseNewViewModel(): CustomiseNewViewModel{
+        return CustomiseNewViewModel()
     }
 
     private fun createPageViewModel(): PageViewModel {
         return PageViewModel(appDataCache)
     }
-
-    ///////////////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////////////
-    // ViewModel creation
 
     private fun createSplashVM(): SplashViewModel {
         val getInitialDataUsecase = GetInitialDataUsecase(schedulerFacade, cloudRepository)
