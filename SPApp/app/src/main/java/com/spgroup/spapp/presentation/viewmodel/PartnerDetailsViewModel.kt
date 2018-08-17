@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import com.spgroup.spapp.domain.model.Category
 import com.spgroup.spapp.domain.model.PartnerDetails
 import com.spgroup.spapp.domain.usecase.GetServicesListByPartnerUsecase
+import com.spgroup.spapp.presentation.activity.PartnerInformationActivity
 import com.spgroup.spapp.util.doLogD
 
 class PartnerDetailsViewModel(
@@ -64,6 +65,22 @@ class PartnerDetailsViewModel(
                 .value
                 ?.categories
                 ?.first { it.id == categoryId }
+    }
+
+    fun getPartnerInfoModel(): PartnerInformationActivity.PartnerInfo? {
+        partnerDetails.value?.run {
+            return PartnerInformationActivity.PartnerInfo(
+                    name = name,
+                    desc = description,
+                    offerTitle = offeringTitle,
+                    offers = offering,
+                    phone = phone,
+                    uen = uen,
+                    nea = nea
+            )
+        }
+
+        return null
     }
 }
 

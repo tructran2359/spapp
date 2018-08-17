@@ -6,11 +6,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.Animation
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.isGone
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.adapter.CategoryPagerAdapter
 import com.spgroup.spapp.presentation.adapter.PartnerImagesAdapter
@@ -21,6 +23,7 @@ import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.doLogE
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_partner_details.*
+import kotlin.math.max
 
 class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
 
@@ -46,6 +49,9 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     lateinit var mAnimationAppear: Animation
     lateinit var mAnimationDisappear: Animation
     private var mActionBarHeight: Int = 0
+    private var mInitTextSize = 0f
+    private var mPromotionBarHeight = 0
+    private lateinit var mViewModel: PartnerDetailsViewModel
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -68,14 +74,20 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         val partnerUEN = intent.getStringExtra(ConstUtils.EXTRA_PARTNER_UEN)
         doLogD("Partner", "onCreate partner: ${partnerUEN ?: "null"}")
         // This is demo for using ViewModel
-        val viewmodel = obtainViewModel(PartnerDetailsViewModel::class.java, ViewModelFactory.getInstance())
+        mViewModel = obtainViewModel(PartnerDetailsViewModel::class.java, ViewModelFactory.getInstance())
                 .apply { this.partnerUEN = partnerUEN }
-        with(viewmodel) {
+        with(mViewModel) {
 
             partnerDetails.observe(this@PartnerDetailsActivity, Observer {
-                mCategoryAdapter.setData(it?.categories)
-                tv_partner_name.text = it?.name ?: ""
-                setUpTabLayout()
+                it?.let {
+
+                    mCategoryAdapter.setData(it?.categories)
+                    tv_partner_name.text = it.name
+                    tv_promotion.text = it.promo
+                    ll_promotion_bar.isGone = it.promo.isEmpty()
+                    mPromotionBarHeight = if (it.promo.isEmpty()) 0 else getDimensionPixelSize(R.dimen.promotion_bar_height)
+                    setUpTabLayout()
+                }
             })
 
             selectedCount.observe(this@PartnerDetailsActivity, Observer {
@@ -111,21 +123,20 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         val percentage = currentScroll.toFloat() / (mMaxScroll).toFloat()
 
         val layoutParam = rl_top_button_container.layoutParams
+        layoutParam.height = max(mActionBarHeight, currentScroll - mPromotionBarHeight)
         if (currentScroll <= mActionBarHeight) {
             v_background_color.alpha = 1f
             fl_info_container.visibility = View.GONE
-            layoutParam.height = mActionBarHeight
         } else {
             v_background_color.alpha = 1f - percentage
             fl_info_container.visibility = View.VISIBLE
             fl_info_container.alpha = percentage
-            layoutParam.height = currentScroll
         }
 
+
         rl_top_button_container.layoutParams = layoutParam
-        val scale = if (percentage <= 0.7f) 0.7f else percentage
-        tv_partner_name.scaleX = scale
-        tv_partner_name.scaleY = scale
+        val scaledTextSize = mInitTextSize * max(percentage, 0.7f)
+        tv_partner_name.setTextSize(TypedValue.COMPLEX_UNIT_PX, scaledTextSize)
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -162,6 +173,8 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     }
 
     private fun setUpViews() {
+        mInitTextSize = tv_partner_name.textSize
+
         setUpHeroSection()
 
         setUpFormSection()
@@ -218,7 +231,10 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         }
 
         fl_info_container.setOnClickListener {
-            startActivity(PartnerInformationActivity.getLaunchIntent(this@PartnerDetailsActivity))
+            val partnerInfo = mViewModel.getPartnerInfoModel()
+            partnerInfo?.let {
+                startActivity(PartnerInformationActivity.getLaunchIntent(this@PartnerDetailsActivity, it))
+            }
         }
 
         rl_hero_section.setOnGlobalLayoutListener {
