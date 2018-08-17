@@ -4,11 +4,13 @@ import com.google.gson.GsonBuilder
 import com.spgroup.spapp.BuildConfig
 import com.spgroup.spapp.domain.SchedulerFacade
 import com.spgroup.spapp.domain.ServicesRepository
+import com.spgroup.spapp.domain.model.AbsServiceItem
 import com.spgroup.spapp.domain.usecase.GetOrderSummaryUsecase
 import com.spgroup.spapp.manager.AppDataMemCache
 import com.spgroup.spapp.repository.ServicesCloudDataStore
 import com.spgroup.spapp.repository.ServicesDataMock
 import com.spgroup.spapp.repository.http.SingaporePowerHttpClient
+import com.spgroup.spapp.repository.json_deserializer.ServiceItemJsonDeserializer
 import com.spgroup.spapp.repository.mapper.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -48,6 +50,7 @@ object Injection {
         //2018-09-01T00:00:00
         val gson = GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                .registerTypeAdapter(AbsServiceItem::class.java, ServiceItemJsonDeserializer())
                 .create()
 
         val loggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {

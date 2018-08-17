@@ -12,7 +12,7 @@ class ConstUtils {
 
         @JvmField val EXTRA_CONTENT = "EXTRA_CONTENT"
 
-        @JvmField val EXTRA_PARTNER = "EXTRA_PARTNER"
+        @JvmField val EXTRA_PARTNER_UEN = "EXTRA_PARTNER_UEN"
 
         @JvmField val EXTRA_IS_EDIT = "EXTRA_IS_EDIT"
 

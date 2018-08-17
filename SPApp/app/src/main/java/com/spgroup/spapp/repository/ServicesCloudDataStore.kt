@@ -2,8 +2,8 @@ package com.spgroup.spapp.repository
 
 import com.spgroup.spapp.domain.ServicesRepository
 import com.spgroup.spapp.domain.model.HomeData
+import com.spgroup.spapp.domain.model.PartnerDetails
 import com.spgroup.spapp.domain.model.PartnersListingData
-import com.spgroup.spapp.domain.model.ServiceCategory
 import com.spgroup.spapp.repository.http.SingaporePowerHttpClient
 import com.spgroup.spapp.repository.mapper.HomeDataMapper
 import com.spgroup.spapp.repository.mapper.PartnerMapper
@@ -16,7 +16,6 @@ class ServicesCloudDataStore(
         private val partnerMapper: PartnerMapper,
         private val promotionMapper: PromotionMapper
 ) : ServicesRepository {
-
     override fun getInitialData(): Single<HomeData> =
             singaporePowerHttpClient
                     .getInitialData()
@@ -31,9 +30,11 @@ class ServicesCloudDataStore(
                         PartnersListingData(partners, promotions)
                     }
 
-    override fun getPartnerDetailsData(supplierId: Int): Single<List<ServiceCategory>> {
-        // TODO truc
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getPartnerDetailsData(partnerId: String): Single<PartnerDetails> =
+            singaporePowerHttpClient
+                    .getPartnerDetails(partnerId)
+                    .filter { it.isNotEmpty() }
+                    .toSingle()
+                    .map { it[0] }
 
 }

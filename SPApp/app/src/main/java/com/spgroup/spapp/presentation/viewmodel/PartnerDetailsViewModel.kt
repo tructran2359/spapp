@@ -1,68 +1,74 @@
 package com.spgroup.spapp.presentation.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
-import com.spgroup.spapp.domain.model.ServiceCategory
-import com.spgroup.spapp.domain.model.ServiceItemCheckBox
-import com.spgroup.spapp.domain.model.ServiceItemCounter
+import com.spgroup.spapp.domain.model.Category
+import com.spgroup.spapp.domain.model.PartnerDetails
 import com.spgroup.spapp.domain.usecase.GetServicesListByPartnerUsecase
 import com.spgroup.spapp.util.doLogD
-import io.reactivex.disposables.CompositeDisposable
 
 class PartnerDetailsViewModel(
         private val getServicesListByPartnerUsecase: GetServicesListByPartnerUsecase
-) : ViewModel() {
+) : BaseViewModel() {
 
-    private val disposeBag = CompositeDisposable()
+    lateinit var partnerUEN: String
+    private val mapSelectedValue = mutableMapOf<String, MutableList<SelectedValueItem>>()
 
-    val serviceCategories = MutableLiveData<List<ServiceCategory>>()
-    var selectedServiceCategories: List<ServiceCategory>? = null
+    val partnerDetails = MutableLiveData<PartnerDetails>()
     val selectedCount = MutableLiveData<Int>()
-    val error = MutableLiveData<Throwable>()
 
     init {
         selectedCount.value = 0
     }
 
-
-    fun loadServices(supplierId: Int) {
+    fun loadServices() {
         val disposable = getServicesListByPartnerUsecase
-                .getSupplierServicesList(supplierId)
+                .getPartnerDetails(partnerUEN)
                 .subscribe(
-                        { serviceCategories.value = it },
+                        {
+                            partnerDetails.value = it
+                        },
                         { error.value = it }
                 )
-        disposeBag.addAll(disposable)
+        disposeBag.add(disposable)
     }
 
-    fun updateSelectedServiceCategories(count: Int, categoryId: Int, servicePos: Int, itemPos: Int) {
-        var totalCount = 0
-
-        selectedServiceCategories?.forEach {
-            if (it.id == categoryId) {
-                val item = it.getServiceItem(servicePos, itemPos)
-                when(item) {
-
-                    is ServiceItemCounter -> item.count = count
-
-                    is ServiceItemCheckBox -> item.selected = (count == 1)
-
+    fun updateSelectedServiceCategories(count: Int, categoryId: String, serviceId: Int) {
+        doLogD(msg = "count:$count catId:$categoryId serId:$serviceId")
+        var selectedValueList = mapSelectedValue[categoryId]
+        if (selectedValueList != null) {
+            var existed = false
+            selectedValueList.forEach { valueItem ->
+                if (valueItem.serviceId == serviceId) {
+                    existed = true
+                    valueItem.count = count
                 }
             }
+            if (!existed) {
+                selectedValueList.add(SelectedValueItem(serviceId, count))
+            }
+        } else {
+            val valueItem = SelectedValueItem(serviceId, count)
+            selectedValueList = mutableListOf(valueItem)
         }
+        mapSelectedValue[categoryId] = selectedValueList
 
-        selectedServiceCategories?.forEach {
-            totalCount += it.getSelectedCount()
-        }
-        doLogD("Test", "updateSelectedServiceCategories Count: $totalCount")
-
-        selectedCount.value = totalCount
-
+        selectedCount.value = mapSelectedValue
+                .map { it.value } // to list map of List<SelectedValueItem>
+                .flatten() // to list of all List<SelectedValueItem>
+                .map { it.count } // to list of SelectedValueItem#count
+                .sum() // sum of SelectedValueItem#count
     }
 
-
-    override fun onCleared() {
-        disposeBag.dispose()
-        super.onCleared()
+    fun getCategory(categoryId: String): Category? {
+        return partnerDetails
+                .value
+                ?.categories
+                ?.first { it.id == categoryId }
     }
 }
+
+data class SelectedValueItem(
+        var serviceId: Int,
+        var count: Int = 0,
+        var subTotal: Float = 0F
+)

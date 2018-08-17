@@ -21,4 +21,6 @@ fun String.toFullImgUrl() =
             this
         }
 
+fun Boolean.toInt() = if (this) 1 else 0
+
 fun Any.getTextOrEmpty(text: String?) = if (text == null) "" else text

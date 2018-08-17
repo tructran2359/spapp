@@ -13,15 +13,5 @@ data class ServiceCategory(
         val TYPE_WEEKLY_MENU = 2
     }
 
-    fun getSelectedCount(): Int {
-        var count = 0
-        services.forEach {
-            it.listItem.forEach {
-                count += it.getItemCount()
-            }
-        }
-        return count
-    }
-
     fun getServiceItem(servicePos: Int, itemPos: Int) = services[servicePos].listItem[itemPos]
 }

@@ -46,6 +46,6 @@ class HomeMerchantAdapter(private var mListener: OnMerchantClickListener): Recyc
     ///////////////////////////////////////////////////////////////////////////
 
     interface OnMerchantClickListener {
-        fun onMerchantClick(position: Int)
+        fun onMerchantClick(topLevelFeaturedPartner: TopLevelFeaturedPartner, position: Int)
     }
 }

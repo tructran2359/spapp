@@ -1,7 +1,6 @@
 package com.spgroup.spapp.presentation.activity
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -13,7 +12,6 @@ import android.view.animation.Animation
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.Partner
 import com.spgroup.spapp.presentation.adapter.CategoryPagerAdapter
 import com.spgroup.spapp.presentation.adapter.PartnerImagesAdapter
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
@@ -32,14 +30,9 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
 
     companion object {
 
-        fun getLaunchIntent(context: Context): Intent {
+        fun getLaunchIntent(context: Context, partnerUEN: String): Intent {
             val intent = Intent(context, PartnerDetailsActivity::class.java)
-            return intent
-        }
-
-        fun getLaunchIntent(context: Context, partner: Partner): Intent {
-            val intent = Intent(context, PartnerDetailsActivity::class.java)
-            intent.putExtra(ConstUtils.EXTRA_PARTNER, partner)
+            intent.putExtra(ConstUtils.EXTRA_PARTNER_UEN, partnerUEN)
             return intent
         }
     }
@@ -52,7 +45,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     lateinit var mCategoryAdapter: CategoryPagerAdapter
     lateinit var mAnimationAppear: Animation
     lateinit var mAnimationDisappear: Animation
-    var mActionBarHeight: Int = 0
+    private var mActionBarHeight: Int = 0
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -62,40 +55,34 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_partner_details)
 
-        val serializable = intent.getSerializableExtra(ConstUtils.EXTRA_PARTNER)
-        if (serializable == null) {
-            doLogD("Partner", "onCreate partner: null")
-        } else {
-            doLogD("Partner", "onCreate partner: ${serializable as Partner}")
-        }
         mActionBarHeight = getDimensionPixelSize(R.dimen.action_bar_height)
 
         initAnimations()
 
         setUpViews()
 
-        subcribeUI()
+        setupViewModel()
     }
 
-    fun subcribeUI() {
+    private fun setupViewModel() {
+        val partnerUEN = intent.getStringExtra(ConstUtils.EXTRA_PARTNER_UEN)
+        doLogD("Partner", "onCreate partner: ${partnerUEN ?: "null"}")
         // This is demo for using ViewModel
-        val factory = ViewModelFactory.getInstance()
-        val viewmodel = ViewModelProviders.of(this, factory).get(PartnerDetailsViewModel::class.java)
+        val viewmodel = obtainViewModel(PartnerDetailsViewModel::class.java, ViewModelFactory.getInstance())
+                .apply { this.partnerUEN = partnerUEN }
         with(viewmodel) {
 
-            serviceCategories.observe(this@PartnerDetailsActivity, Observer {
-                // do something with serviceCategories
-                doLogD(msg = "Size: ${it?.size}")
-                mCategoryAdapter.setData(it)
-                selectedServiceCategories = it?.toList()
+            partnerDetails.observe(this@PartnerDetailsActivity, Observer {
+                mCategoryAdapter.setData(it?.categories)
+                tv_partner_name.text = it?.name ?: ""
                 setUpTabLayout()
             })
 
             selectedCount.observe(this@PartnerDetailsActivity, Observer {
-                doLogD("Test", "Selected $it item")
+                doLogD(msg = "Selected $it item")
                 it?.let {
                     // Temporarily hide this line coz updating total count textview is not in this task
-    //                    btn_summary.setCount(it)
+                    //                    btn_summary.setCount(it)
                     if (it != 0 && ll_summary_section.visibility == View.GONE) {
                         showSummaryButton(true)
                     } else if (it == 0 && ll_summary_section.visibility == View.VISIBLE) {
@@ -109,7 +96,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
                 doLogE(msg = "Error: ${it?.message}")
             })
 
-            loadServices(-1)
+            loadServices()
         }
     }
 
@@ -118,7 +105,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     ///////////////////////////////////////////////////////////////////////////
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout?, offset: Int) {
-        if(appBarLayout == null) return
+        if (appBarLayout == null) return
         val currentScroll = appBarLayout.bottom
         val mMaxScroll = appBarLayout.totalScrollRange
         val percentage = currentScroll.toFloat() / (mMaxScroll).toFloat()
@@ -214,14 +201,14 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         for (i in 0 until tab_layout.tabCount) {
             val customView = LayoutInflater.from(this).inflate(R.layout.view_custom_service_cate_tab, null, false)
             val tvContent = customView.findViewById<TextView>(R.id.tv_content)
-            tvContent.setText(mCategoryAdapter.getPageTitle(i))
+            tvContent.text = mCategoryAdapter.getPageTitle(i)
             if (i == 0) {
                 tvContent.setUpMenuActive()
             } else {
                 tvContent.setUpMenuInactive()
             }
             val tab = tab_layout.getTabAt(i)
-            tab?.setCustomView(customView)
+            tab?.customView = customView
         }
     }
 

@@ -1,81 +1,42 @@
 package com.spgroup.spapp.presentation.view
 
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.ServiceItem
-import com.spgroup.spapp.domain.model.ServiceItemCounter
-import com.spgroup.spapp.presentation.adapter.ServiceGroupAdapter
+import com.spgroup.spapp.domain.model.MultiplierService
+import com.spgroup.spapp.presentation.adapter.ServiceListingAdapter
 import com.spgroup.spapp.util.extension.formatPriceWithUnit
+import com.spgroup.spapp.util.extension.inflate
 import kotlinx.android.synthetic.main.layout_service_item_counter.view.*
 
-class ServiceItemViewCounter: ServiceItemView {
+class ServiceItemViewCounter(
+        context: Context,
+        private val service: MultiplierService,
+        private var count: Int,
+        private val itemListener: ServiceListingAdapter.OnItemInteractedListener
+) : ServiceItemView(context) {
 
-    companion object {
-        @JvmField val ACTION_PLUS = 1
-        @JvmField val ACTION_DELETE = 2
-        @JvmField val MAX_COUNT = 99
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Property
-    ///////////////////////////////////////////////////////////////////////////
-
-    var serviceItem: ServiceItemCounter
-    var itemPosition: Int
-    var servicePosition: Int
-    var listener: ServiceGroupAdapter.OnItemInteractedListener
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Constructor
-    ///////////////////////////////////////////////////////////////////////////
-
-    constructor(
-            context: Context,
-            item: ServiceItem,
-            servicePosition: Int,
-            itemPosition: Int,
-            listener: ServiceGroupAdapter.OnItemInteractedListener
-    ): super(context, item) {
-
-        serviceItem = item as ServiceItemCounter
-        this.itemPosition = itemPosition
-        this.servicePosition = servicePosition
-        this.listener = listener
-        init()
-
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Other
-    ///////////////////////////////////////////////////////////////////////////
-
-    fun init() {
-        LayoutInflater.from(context).inflate(R.layout.layout_service_item_counter, this, true)
-        tv_name.setText(serviceItem.name)
-        tv_price.setText(serviceItem.price.formatPriceWithUnit(serviceItem.unit))
-
+    init {
+        inflate(R.layout.layout_service_item_counter, true)
+        tv_name.text = service.label
+        tv_price.text = service.price.formatPriceWithUnit(service.unit)
         onCountUpdate()
-
         fl_add_btn_container.setOnClickListener {
-            if (serviceItem.count < MAX_COUNT) {
-                serviceItem.count++
+            if (count < service.max) {
+                count++
                 onCountUpdate()
             }
         }
 
         iv_delete.setOnClickListener {
-            serviceItem.count = 0
+            count = 0
             onCountUpdate()
         }
     }
 
-    fun onCountUpdate() {
-
-        listener.onCountChanged(serviceItem.count, servicePosition, itemPosition)
-
-        if (serviceItem.count == 0) {
+    private fun onCountUpdate() {
+        itemListener.onMultiplierItemChanged(service, count)
+        if (count == 0) {
             tv_count.visibility = View.GONE
             iv_delete.visibility = View.GONE
             iv_add.visibility = View.VISIBLE
@@ -83,7 +44,7 @@ class ServiceItemViewCounter: ServiceItemView {
         } else {
             tv_count.visibility = View.VISIBLE
             iv_delete.visibility = View.VISIBLE
-            tv_count.setText(serviceItem.count.toString())
+            tv_count.text = count.toString()
             iv_add.visibility = View.GONE
             view_root.isSelected = true
         }
