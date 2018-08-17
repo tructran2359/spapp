@@ -11,6 +11,7 @@ import com.spgroup.spapp.domain.model.Category
 import com.spgroup.spapp.domain.model.CheckboxService
 import com.spgroup.spapp.domain.model.ComplexCustomisationService
 import com.spgroup.spapp.domain.model.MultiplierService
+import com.spgroup.spapp.presentation.activity.CustomiseNewActivity
 import com.spgroup.spapp.presentation.adapter.ServiceListingAdapter
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
@@ -77,10 +78,10 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
     ///////////////////////////////////////////////////////////////////////////
 
     override fun onComplexCustomisationItemClick(itemData: ComplexCustomisationService) {
-//        activity?.let {
-//            val intent = CustomiseActivity.getLaunchIntent(it, serviceItem)
-//            it.startActivity(intent)
-//        }
+        activity?.let {
+            val intent = CustomiseNewActivity.getLaunchIntent(it)
+            it.startActivity(intent)
+        }
     }
 
     override fun onMultiplierItemChanged(itemData: MultiplierService, count: Int) {

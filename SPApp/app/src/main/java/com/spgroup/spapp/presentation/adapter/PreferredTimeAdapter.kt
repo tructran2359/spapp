@@ -11,7 +11,7 @@ import com.spgroup.spapp.R
 class PreferredTimeAdapter(
         val mContext: Context,
         val layoutId: Int,
-        val data: List<String>
+        val data: MutableList<String>
 ) : ArrayAdapter<String> (mContext, layoutId, data) {
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -23,6 +23,12 @@ class PreferredTimeAdapter(
             (view as TextView).setText(data[position])
         }
         return view
+    }
+
+    fun setData(list: List<String>) {
+        data.clear()
+        data.addAll(list)
+        notifyDataSetChanged()
     }
 
 }
