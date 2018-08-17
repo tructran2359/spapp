@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.Animation
@@ -21,6 +22,7 @@ import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.doLogE
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_partner_details.*
+import kotlin.math.max
 
 class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
 
@@ -46,6 +48,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     lateinit var mAnimationAppear: Animation
     lateinit var mAnimationDisappear: Animation
     private var mActionBarHeight: Int = 0
+    private var mInitTextSize = 0f
     private lateinit var mViewModel: PartnerDetailsViewModel
 
     ///////////////////////////////////////////////////////////////////////////
@@ -124,9 +127,8 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         }
 
         rl_top_button_container.layoutParams = layoutParam
-        val scale = if (percentage <= 0.7f) 0.7f else percentage
-        tv_partner_name.scaleX = scale
-        tv_partner_name.scaleY = scale
+        val scaledTextSize = mInitTextSize * max(percentage, 0.7f)
+        tv_partner_name.setTextSize(TypedValue.COMPLEX_UNIT_PX, scaledTextSize)
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -163,6 +165,8 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     }
 
     private fun setUpViews() {
+        mInitTextSize = tv_partner_name.textSize
+
         setUpHeroSection()
 
         setUpFormSection()
