@@ -240,20 +240,17 @@
         <item name="fontPath">@string/font_light</item>
     </style>
 
-    <style name="textMenuItem">
+    <style name="textMenuItem" parent="h5">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">@dimen/text_size_menu_item</item>
         <item name="android:layout_marginLeft">@dimen/common_horz_medium</item>
         <item name="android:layout_gravity">center_vertical</item>
-        <item name="fontPath">@string/font_medium</item>
     </style>
 
-    <style name="textMenuFooter">
+    <style name="textMenuFooter" parent="footnote">
         <item name="android:textSize">@dimen/text_size_menu_footer</item>
         <item name="android:textColor">@color/color_ui02</item>
-        <item name="fontPath">@string/font_light</item>
     </style>
 
     <!--VMLSINPOW-249 - UI Optimisation-->
