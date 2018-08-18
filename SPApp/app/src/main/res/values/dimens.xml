@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--VMLSINPOW-249 - UI Optimisation-->
+    <dimen name="h1_text">38sp</dimen>
+    <dimen name="h1_line">2sp</dimen>
+
+    <dimen name="h2_text">34sp</dimen>
+    <dimen name="h2_line">6sp</dimen>
+
+    <dimen name="h3_text">30sp</dimen>
+    <dimen name="h3_line">4sp</dimen>
+
+    <dimen name="h4_text">28sp</dimen>
+    <dimen name="h4_line">6sp</dimen>
+
+    <dimen name="h5_text">18sp</dimen>
+    <dimen name="h5_line">6sp</dimen>
+
+    <dimen name="subhead_text">18sp</dimen>
+    <dimen name="subhead_line">3sp</dimen>
+
+    <dimen name="subhead_small_text">16sp</dimen>
+    <dimen name="subhead_small_line">5sp</dimen>
+
+    <dimen name="body_text">16sp</dimen>
+    <dimen name="body_line">8sp</dimen>
+
+    <dimen name="banner_text">15sp</dimen>
+    <dimen name="banner_line">5sp</dimen>
+
+    <dimen name="callout_text">14sp</dimen>
+
+    <dimen name="footnote_text">12sp</dimen>
+    <dimen name="footnote_line">6sp</dimen>
+
+    <dimen name="caption_text">11sp</dimen>
+    <dimen name="caption_line">4sp</dimen>
+
+    <!--Old-->
+
     <dimen name="soft_keyboar_detection_height">200dp</dimen>
 
     <dimen name="common_radius">5dp</dimen>
