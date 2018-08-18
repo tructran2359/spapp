@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/img_featured_promo"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             app:riv_corner_radius_top_left="@dimen/common_radius_large"
             app:riv_corner_radius_top_right="@dimen/common_radius_large"
             />
