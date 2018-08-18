@@ -256,4 +256,92 @@
         <item name="fontPath">@string/font_light</item>
     </style>
 
+    <!--VMLSINPOW-249 - UI Optimisation-->
+    <style name="h1">
+        <item name="android:textSize">@dimen/h1_text</item>
+        <item name="android:lineSpacingExtra">@dimen/h1_line</item>
+        <item name="fontPath">@string/font_medium</item>
+    </style>
+
+    <style name="h2">
+        <item name="android:textSize">@dimen/h2_text</item>
+        <item name="android:lineSpacingExtra">@dimen/h2_line</item>
+        <item name="fontPath">@string/font_medium</item>
+    </style>
+
+    <style name="h3">
+        <item name="android:textSize">@dimen/h3_text</item>
+        <item name="android:lineSpacingExtra">@dimen/h3_line</item>
+        <item name="fontPath">@string/font_light</item>
+    </style>
+
+    <style name="h4">
+        <item name="android:textSize">@dimen/h4_text</item>
+        <item name="android:lineSpacingExtra">@dimen/h4_line</item>
+        <item name="fontPath">@string/font_light</item>
+    </style>
+
+    <style name="h5">
+        <item name="android:textSize">@dimen/h5_text</item>
+        <item name="android:lineSpacingExtra">@dimen/h5_line</item>
+        <item name="fontPath">@string/font_medium</item>
+    </style>
+
+    <style name="subhead">
+        <item name="android:textSize">@dimen/subhead_text</item>
+        <item name="android:lineSpacingExtra">@dimen/subhead_line</item>
+        <item name="fontPath">@string/font_book</item>
+    </style>
+
+    <style name="subhead.small">
+        <item name="android:textSize">@dimen/subhead_small_text</item>
+        <item name="android:lineSpacingExtra">@dimen/subhead_small_line</item>
+    </style>
+
+    <style name="body">
+        <item name="android:textSize">@dimen/body_text</item>
+        <item name="android:lineSpacingExtra">@dimen/body_line</item>
+        <item name="fontPath">@string/font_regular</item>
+    </style>
+
+    <style name="banner">
+        <item name="android:textSize">@dimen/banner_text</item>
+        <item name="android:lineSpacingExtra">@dimen/banner_line</item>
+        <item name="fontPath">@string/font_light</item>
+    </style>
+
+    <style name="callout">
+        <item name="android:textSize">@dimen/callout_text</item>
+        <item name="android:lineSpacingExtra">@dimen/callout_line</item>
+    </style>
+
+    <style name="callout.medium">
+        <item name="fontPath">@string/font_medium</item>
+    </style>
+
+    <style name="callout.regular">
+        <item name="fontPath">@string/font_regular</item>
+    </style>
+
+    <style name="callout.book">
+        <item name="fontPath">@string/font_book</item>
+    </style>
+
+    <style name="callout.noLineSpace">
+        <item name="fontPath">@string/font_medium</item>
+        <item name="android:lineSpacingExtra">1sp</item>
+    </style>
+
+    <style name="footnote">
+        <item name="android:textSize">@dimen/footnote_text</item>
+        <item name="android:lineSpacingExtra">@dimen/footnote_line</item>
+        <item name="fontPath">@string/font_regular</item>
+    </style>
+
+    <style name="caption">
+        <item name="android:textSize">@dimen/caption_text</item>
+        <item name="android:lineSpacingExtra">@dimen/caption_line</item>
+        <item name="fontPath">@string/font_bold</item>
+    </style>
+
 </resources>

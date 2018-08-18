@@ -30,6 +30,7 @@
     <dimen name="banner_line">5sp</dimen>
 
     <dimen name="callout_text">14sp</dimen>
+    <dimen name="callout_line">6sp</dimen>
 
     <dimen name="footnote_text">12sp</dimen>
     <dimen name="footnote_line">6sp</dimen>
