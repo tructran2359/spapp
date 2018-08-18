@@ -4,18 +4,33 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <!--Default colors, can be changed in future-->
-
-    <color name="color_ui01">#4d80ef</color>
-    <color name="color_ui01_on_press">#224d80ef</color>
+    <!--VMLSINPOW-249 - UI Optimisation-->
+    <color name="color_ui01">#fa4d42</color>
     <color name="color_ui02">#4f5a60</color>
-    <color name="color_ui0250">#804f5a60</color>
     <color name="color_ui03">#9ba6aa</color>
     <color name="color_ui04">#cccccc</color>
     <color name="color_ui05">#f3f3f3</color>
     <color name="color_ui06">#ffffff</color>
-    <color name="color_ui0680">#ccffffff</color>
     <color name="color_ui07">#000000</color>
+    <color name="color_alert">#d0021b</color>
+
+    <color name="color_hoverpress1">#ae352e</color>
+    <color name="color_hoverinactive1">#fee4e2</color>
+    <color name="color_hoveractive2">#1471cc</color>
+    <color name="color_hoverpress2">#095fb2</color>
+    <color name="color_hoverinactive2">#dbe1eb</color>
+
+    <color name="color_ui01_on_press">@color/color_hoverinactive1</color>
+    <color name="color_grey">@color/color_ui02</color>
+    <color name="color_light_grey">@color/color_ui03</color>
+    <color name="color_black">@color/color_ui07</color>
+    <color name="color_white">@color/color_ui06</color>
+    <color name="color_peach">@color/color_ui01</color>
+
+    <!--Old-->
+
+    <color name="color_ui0250">#804f5a60</color>
+    <color name="color_ui0680">#ccffffff</color>
 
     <color name="text_hint">#9B9B9B</color>
 
@@ -28,7 +43,6 @@
     <color name="color_primarygradient">#f5515f</color>
     <color name="color_primarygradientbase">#4392f1</color>
 
-    <color name="color_alert">#d0021b</color>
 
     <color name="black">@android:color/black</color>
 
