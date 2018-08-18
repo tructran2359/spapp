@@ -1,5 +1,7 @@
 package com.spgroup.spapp.util.extension
 
+import android.os.Build
+import android.text.Html
 import com.spgroup.spapp.BuildConfig
 
 fun Float.formatPrice() = "S$%.2f".format(this)
@@ -24,3 +26,12 @@ fun String.toFullImgUrl() =
 fun Boolean.toInt() = if (this) 1 else 0
 
 fun Any.getTextOrEmpty(text: String?) = if (text == null) "" else text
+
+fun String.toHtmlUnderlineText() = "<u>$this</u>"
+
+fun String.toHtmlSpanned() =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            Html.fromHtml(this)
+        }

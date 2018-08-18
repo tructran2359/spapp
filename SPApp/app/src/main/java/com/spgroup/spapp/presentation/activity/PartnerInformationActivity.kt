@@ -7,8 +7,11 @@ import android.support.v4.widget.NestedScrollView
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.core.view.isGone
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.view.IndicatorTextView
+import com.spgroup.spapp.util.extension.toHtmlSpanned
+import com.spgroup.spapp.util.extension.toHtmlUnderlineText
 import kotlinx.android.synthetic.main.activity_partner_information.*
 import java.io.Serializable
 
@@ -51,14 +54,26 @@ class PartnerInformationActivity : BaseActivity() {
 
         tv_name.text = mData.name
         tv_description.text = mData.desc
-        tv_phone.text = mData.phone
-        tv_uen.text = mData.uen
-        tv_nea.text = mData.nea
         tv_offer_tittle.text = mData.offerTitle
 
+        tv_phone.text = mData.phone
+        ll_phone_container.isGone = mData.phone.isEmpty()
+
+        tv_uen.text = mData.uen
+        ll_uen_container.isGone = mData.uen.isEmpty()
+
+        tv_nea.text = mData.nea
+        ll_nea_container.isGone = mData.nea.isEmpty()
+
+        val underlineText = getString(R.string.merchant_tnc_underline_text).toHtmlUnderlineText()
+        val formattedMerchantTnc = getString(R.string.merchant_tnc_with_format, underlineText)
+        tv_merchant_tnc.text = formattedMerchantTnc.toHtmlSpanned()
+
         for (str in mData.offers) {
-            val view = IndicatorTextView(this, str)
-            ll_service_container.addView(view)
+            if (!str.isEmpty()) {
+                val view = IndicatorTextView(this, str)
+                ll_service_container.addView(view)
+            }
         }
 
         iv_close.setOnClickListener {

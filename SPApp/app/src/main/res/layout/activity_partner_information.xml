@@ -90,6 +90,7 @@
                 />
 
             <LinearLayout
+                android:id="@+id/ll_phone_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -116,6 +117,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_uen_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -142,11 +144,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_nea_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/partner_info_margin_vert_medium"
-                android:layout_marginBottom="@dimen/partner_info_margin_vert_large"
                 >
 
                 <ImageView
@@ -167,6 +169,18 @@
                     />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_merchant_tnc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_vert_large"
+                android:layout_marginBottom="@dimen/common_vert_xxxlarge"
+                android:textColor="@color/color_ui02"
+                android:textSize="12sp"
+                fontPath="@string/font_regular"
+                tools:text="Merchant’s terms n conditions apply."
+                />
 
         </LinearLayout>
 
