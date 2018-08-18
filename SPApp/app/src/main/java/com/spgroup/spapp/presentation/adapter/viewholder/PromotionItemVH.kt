@@ -18,6 +18,7 @@ class PromotionItemVH(
             Glide.with(context)
                     .load(promotion.imagePath.toFullImgUrl())
                     .into(iv_promotion)
+            tv_partner_name.text = promotion.partnerName
             tv_promotion.text = promotion.promoText
             setOnClickListener {
                 itemClickListener.invoke(view, promotion, adapterPosition)

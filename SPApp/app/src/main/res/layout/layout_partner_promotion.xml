@@ -2,6 +2,7 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/common_vert_medium_sub"
@@ -26,17 +27,36 @@
             app:riv_corner_radius_bottom_left="@dimen/common_radius"
             />
 
-        <TextView
-            style="@style/textH4"
-            android:id="@+id/tv_promotion"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingLeft="@dimen/common_horz_medium"
-            android:paddingRight="@dimen/common_horz_large"
+            android:paddingRight="@dimen/common_horz_medium"
+            android:layout_gravity="center_vertical"
+            >
 
-            android:text="$50 OFF whenyou order from SGHeartyMeals.sg"
-            />
+            <TextView
+                style="@style/caption"
+                android:id="@+id/tv_partner_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_peach"
+                android:layout_marginBottom="@dimen/common_vert_xsmall"
+                tools:text="SGHEARTYMEALS.SG"
+                />
+
+            <TextView
+                style="@style/banner"
+                android:id="@+id/tv_promotion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                tools:text="$50 OFF whenyou order from SGHeartyMeals.sg"
+                />
+
+        </LinearLayout>
 
     </LinearLayout>
 

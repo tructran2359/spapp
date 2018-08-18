@@ -16,7 +16,7 @@
             android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/color_primarygradientbase"
+            android:background="@color/color_ui01"
             >
 
             <ImageView
@@ -26,7 +26,7 @@
                 android:minHeight="@dimen/action_bar_height"
                 android:scaleType="fitXY"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                />
+                tools:ignore="ContentDescription"/>
 
         </android.support.design.widget.AppBarLayout>
 
@@ -50,21 +50,20 @@
             android:id="@+id/v_title_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/color_primarygradientbase"
+            android:background="@color/color_ui01"
             />
 
         <TextView
+            style="@style/h2"
             android:id="@+id/tv_title"
-            fontPath="@string/font_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="26dp"
+            android:layout_marginBottom="@dimen/common_vert_medium"
             android:layout_marginLeft="@dimen/common_vert_large"
             android:gravity="center_horizontal"
-            android:text="Food"
-            android:textColor="@color/color_ui06"
-            android:textSize="34sp"
+            android:textColor="@color/color_white"
+            tools:text="Food"
             />
 
     </FrameLayout>

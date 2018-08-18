@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_ui06"
@@ -15,7 +16,7 @@
         android:layout_marginRight="@dimen/common_horz_xlarge"
         android:layout_marginTop="@dimen/common_vert_medium"
         android:layout_marginBottom="@dimen/common_vert_medium"
-        >
+        tools:ignore="RtlHardcoded">
 
         <ImageView
             android:id="@+id/iv_logo"
@@ -44,23 +45,25 @@
                 />
 
             <TextView
-                style="@style/textH4"
+                style="@style/subhead"
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_spacing"
+                android:textColor="@color/color_black"
 
-                android:text="Tingkat-A-Day"
+                tools:text="Tingkat-A-Day"
                 />
 
 
             <TextView
-                style="@style/textH6"
+                style="@style/callout.book"
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_vert_small"
-                android:text="S$165.00 per month"
+                android:textColor="@color/color_black"
+                tools:text="S$165.00 per month"
                 />
 
         </LinearLayout>
@@ -69,7 +72,7 @@
             android:id="@+id/iv_right_arrow"
             android:layout_width="@dimen/common_icon_size_small"
             android:layout_height="@dimen/common_icon_size_small"
-            android:src="@drawable/arrow_right_blue"
+            android:src="@drawable/arrow_right_grey"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             />
