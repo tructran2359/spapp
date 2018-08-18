@@ -72,6 +72,7 @@
                     android:layout_below="@+id/pager_images"
                     android:paddingLeft="@dimen/common_horz_large"
                     android:paddingRight="@dimen/common_horz_large"
+                    android:visibility="gone"
                     >
 
                     <ImageView
