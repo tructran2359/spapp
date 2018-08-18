@@ -1,7 +1,7 @@
 package com.spgroup.spapp.domain.usecase
 
 import com.spgroup.spapp.domain.model.*
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class GetCustomisationLowestPriceTest {
