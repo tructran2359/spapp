@@ -56,10 +56,10 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
                 .get(PartnerDetailsViewModel::class.java)
 
         arguments?.let {
-            if (it.getString(KEY_CATEGORY_ID) == null) {
+            val categoryId = it.getString(KEY_CATEGORY_ID)
+            if (categoryId == null) {
                 throw IllegalArgumentException("Category must be provided")
             } else {
-                val categoryId = it.getString(KEY_CATEGORY_ID)
                 mCategory = mViewModel.getCategory(categoryId)
             }
         } ?: throw IllegalArgumentException("Category must be provided")

@@ -40,7 +40,7 @@ class SimpleActionBar: RelativeLayout {
     private fun initProperties(context: Context, attributeSet: AttributeSet) {
         val typedArray = context.theme.obtainStyledAttributes(attributeSet, R.styleable.SimpleActionBar, 0, 0)
         try {
-            mTitle = typedArray.getString(R.styleable.SimpleActionBar_title)
+            mTitle = typedArray.getString(R.styleable.SimpleActionBar_title) ?: ""
         } finally {
             typedArray.recycle()
         }

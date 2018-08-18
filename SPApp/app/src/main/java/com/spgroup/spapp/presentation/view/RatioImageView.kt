@@ -37,8 +37,8 @@ class RatioImageView: RoundedImageView {
         if (mRatioHeight == 0 || mRatioWidth == 0) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         } else {
-            var width = 0
-            var height = 0
+            var width: Int
+            var height: Int
             if (mDependOnWidth) {
                 width = widthMeasureSpec
                 height = mRatioHeight * widthMeasureSpec / mRatioWidth

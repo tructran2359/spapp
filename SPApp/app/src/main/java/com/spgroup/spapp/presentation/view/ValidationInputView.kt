@@ -49,7 +49,7 @@ class ValidationInputView: RelativeLayout {
                 0)
 
         try {
-            mLabel = typedArray.getString(R.styleable.ValidationInputView_label)
+            mLabel = typedArray.getString(R.styleable.ValidationInputView_label) ?: ""
         } finally {
             typedArray.recycle()
         }

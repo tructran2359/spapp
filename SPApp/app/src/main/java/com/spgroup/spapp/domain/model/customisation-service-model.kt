@@ -6,7 +6,7 @@ import com.spgroup.spapp.util.extension.formatPrice
 import java.io.Serializable
 
 
-sealed abstract class AbsCustomisation(
+sealed class AbsCustomisation(
         val id: Int,
         val label: String
 ): Serializable {
