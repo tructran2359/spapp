@@ -4,19 +4,21 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.spgroup.spapp.presentation.fragment.PartnerImageFragment
-import com.spgroup.spapp.util.ConstUtils
 
-class PartnerImagesAdapter(fragmentManager: FragmentManager): FragmentStatePagerAdapter(fragmentManager) {
+class PartnerImagesAdapter(
+        fragmentManager: FragmentManager,
+        val urls: List<String>
+): FragmentStatePagerAdapter(fragmentManager) {
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
     ///////////////////////////////////////////////////////////////////////////
 
     override fun getItem(position: Int): Fragment {
-        return PartnerImageFragment.newInstance(position)
+        return PartnerImageFragment.newInstance(urls[position])
     }
 
-    override fun getCount() = ConstUtils.PARTNERS_IMAGE_COUNT
+    override fun getCount() = urls.size
 
 
 }

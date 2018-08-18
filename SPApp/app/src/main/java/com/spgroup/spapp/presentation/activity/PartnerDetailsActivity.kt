@@ -87,6 +87,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
                     ll_promotion_bar.isGone = it.promo.isEmpty()
                     mPromotionBarHeight = if (it.promo.isEmpty()) 0 else getDimensionPixelSize(R.dimen.promotion_bar_height)
                     setUpTabLayout()
+                    setUpBanners(it.banners)
                 }
             })
 
@@ -209,6 +210,14 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
 
     }
 
+    private fun setUpBanners(urls: List<String>) {
+        mImageAdapter = PartnerImagesAdapter(supportFragmentManager, urls)
+        pager_images.offscreenPageLimit = 3
+        pager_images.adapter = mImageAdapter
+
+        pager_indicator.setViewPager(pager_images)
+    }
+
     private fun setUpTabLayout() {
         tab_layout.setupWithViewPager(pager_forms)
         for (i in 0 until tab_layout.tabCount) {
@@ -249,12 +258,6 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         }
 
         appbar.addOnOffsetChangedListener(this)
-
-        mImageAdapter = PartnerImagesAdapter(supportFragmentManager)
-        pager_images.offscreenPageLimit = 3
-        pager_images.adapter = mImageAdapter
-
-        pager_indicator.setViewPager(pager_images)
     }
 
     private fun setUpSummarySection() {

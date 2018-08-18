@@ -5,27 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
+import com.spgroup.spapp.util.extension.loadImage
+import com.spgroup.spapp.util.extension.toFullImgUrl
 import kotlinx.android.synthetic.main.fragment_partner_image.*
 
 class PartnerImageFragment: BaseFragment() {
 
     companion object {
-        @JvmField val EXTRA_POSITION = "PartnerImageFragment.EXTRA_POSITION"
+        const val EXTRA_URL = "PartnerImageFragment.EXTRA_URL"
 
-        fun newInstance(position: Int): PartnerImageFragment {
+        fun newInstance(url: String): PartnerImageFragment {
             val fragment = PartnerImageFragment()
             val bundle = Bundle()
-            bundle.putInt(EXTRA_POSITION, position)
+            bundle.putString(EXTRA_URL, url)
             fragment.arguments = bundle
             return fragment
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////////
-    // Property
-    ///////////////////////////////////////////////////////////////////////////
-
-    var mPosition = 0
+    private lateinit var url: String
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -33,7 +31,7 @@ class PartnerImageFragment: BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mPosition = arguments?.getInt(EXTRA_POSITION, 0) ?: 0
+        url = arguments?.getString(EXTRA_URL, "") ?: ""
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,11 +41,6 @@ class PartnerImageFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        when(mPosition) {
-            0 -> iv_content.setImageResource(R.drawable.laundry01)
-            1 -> iv_content.setImageResource(R.drawable.laundry02)
-            2 -> iv_content.setImageResource(R.drawable.laundry03)
-            3 -> iv_content.setImageResource(R.drawable.laundry04)
-        }
+        iv_content.loadImage(url.toFullImgUrl())
     }
 }
