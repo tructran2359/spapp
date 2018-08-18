@@ -39,7 +39,7 @@ class HomeMenuViewBehavior(
             child.setImageResource(R.drawable.ic_menu_white)
             mIsBlue = false
         } else if (currentScroll >= actionBarHeight && !mIsBlue) {
-            child.setImageResource(R.drawable.ic_menu_blue)
+            child.setImageResource(R.drawable.ic_menu_red)
             mIsBlue = true
         }
         return true
