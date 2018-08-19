@@ -16,14 +16,14 @@
         />
 
     <TextView
-        style="@style/textParagraph.grey"
+        style="@style/partnerBusinessInfo"
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/common_spacing_x4"
         android:layout_marginBottom="@dimen/line_space_paragraph"
 
-        android:text="Dry Cleaning"
+        tools:text="Dry Cleaning \nTest"
         />
 
 </LinearLayout>

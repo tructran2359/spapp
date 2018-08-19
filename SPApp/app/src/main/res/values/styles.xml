@@ -341,4 +341,8 @@
         <item name="fontPath">@string/font_bold</item>
     </style>
 
+    <style name="partnerBusinessInfo" parent="body">
+        <item name="android:textColor">@color/color_grey</item>
+    </style>
+
 </resources>
