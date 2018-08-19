@@ -18,20 +18,20 @@
         >
 
         <TextView
-            style="@style/textH4"
+            style="@style/subhead"
             android:id="@+id/tv_service_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/service_name_margin_left"
-
-            android:text="GARMENTS"
+            android:textColor="@color/color_black"
+            tools:text="GARMENTS"
             />
 
         <ImageView
             android:id="@+id/iv_collapse"
             android:layout_width="@dimen/common_icon_size_small"
             android:layout_height="@dimen/common_icon_size_small"
-            android:src="@drawable/arrow_up_blue"
+            android:src="@drawable/arrow_up_grey"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/service_name_margin_left"
@@ -47,13 +47,15 @@
         >
 
         <TextView
-            style="@style/textParagraph.grey"
+            style="@style/body"
             android:id="@+id/tv_service_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/service_name_margin_left"
             android:layout_marginRight="@dimen/service_name_margin_left"
             android:layout_marginBottom="@dimen/service_item_vert_spacing"
+            android:textColor="@color/color_grey"
+            tools:text="This is a fake description"
             />
 
         <LinearLayout

@@ -267,6 +267,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
             val intent = OrderSummaryActivity.getLaunchIntent(this)
             startActivity(intent)
         }
+        btn_summary.setPrice(0f)
     }
 
     private fun showSummaryButton(show: Boolean) {

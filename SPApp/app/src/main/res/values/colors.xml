@@ -20,7 +20,7 @@
     <color name="color_hoverpress2">#095fb2</color>
     <color name="color_hoverinactive2">#dbe1eb</color>
 
-    <color name="color_ui01_on_press">@color/color_hoverinactive1</color>
+    <color name="color_ui01_on_press">@color/color_hoverpress1</color>
     <color name="color_grey">@color/color_ui02</color>
     <color name="color_light_grey">@color/color_ui03</color>
     <color name="color_black">@color/color_ui07</color>
@@ -36,13 +36,6 @@
 
     <color name="color_brand01">#00b0b2</color>
     <color name="color_brand02">#2d779e</color>
-
-    <color name="color_btnpress">#4d6da7</color>
-    <color name="color_btninactive">#dbe5fb</color>
-
-    <color name="color_primarygradient">#f5515f</color>
-    <color name="color_primarygradientbase">#4392f1</color>
-
 
     <color name="black">@android:color/black</color>
 

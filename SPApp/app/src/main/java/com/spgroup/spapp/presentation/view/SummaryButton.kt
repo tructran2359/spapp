@@ -38,8 +38,8 @@ class SummaryButton: RelativeLayout {
             rl_summary_button.setBackgroundResource(R.drawable.selector_btn_main )
             tv_total_count.setTextColor(getColor(R.color.color_ui01))
         } else {
-            rl_summary_button.setBackgroundResource(R.drawable.bg_rec_rounded_blue_disabled )
-            tv_total_count.setTextColor(getColor(R.color.color_btninactive))
+            rl_summary_button.setBackgroundResource(R.drawable.bg_rec_rounded_main_disabled )
+            tv_total_count.setTextColor(getColor(R.color.color_hoverinactive1))
         }
     }
 

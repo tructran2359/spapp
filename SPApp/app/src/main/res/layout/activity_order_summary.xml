@@ -122,7 +122,7 @@
                     <ImageView
                         android:layout_width="@dimen/common_icon_size_small"
                         android:layout_height="@dimen/common_icon_size_small"
-                        android:src="@drawable/arrow_down_blue"
+                        android:src="@drawable/arrow_down_grey"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginRight="@dimen/common_spacing_x3"
                         />

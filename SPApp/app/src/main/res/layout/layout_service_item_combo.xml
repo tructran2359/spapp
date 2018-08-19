@@ -12,13 +12,14 @@
     >
 
     <TextView
-        style="@style/textH4"
+        style="@style/subhead"
         android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:layout_marginTop="@dimen/service_item_vert_spacing"
         android:layout_toLeftOf="@id/fl_check_container"
+        android:textColor="@color/color_black"
         tools:text="Day Curtains"
         />
 
@@ -31,7 +32,7 @@
         />
 
     <TextView
-        style="@style/textH6.textServiceItemPrice"
+        style="@style/textServiceItemPrice"
         android:id="@+id/tv_price"
         android:layout_alignBaseline="@+id/tv_from"
         android:layout_toRightOf="@id/tv_from"
@@ -56,7 +57,7 @@
             android:id="@+id/iv_arrow"
             android:layout_width="@dimen/common_icon_size_small"
             android:layout_height="@dimen/common_icon_size_small"
-            android:src="@drawable/arrow_right_blue"
+            android:src="@drawable/arrow_right_grey"
             />
     </FrameLayout>
 

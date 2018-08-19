@@ -83,16 +83,14 @@
                         />
 
                     <TextView
+                        style="@style/callout.medium"
                         android:id="@+id/tv_promotion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
                         android:layout_gravity="center_vertical"
-                        android:textSize="14sp"
-                        android:lineSpacingExtra="6sp"
-                        android:textColor="@color/color_ui06"
+                        android:textColor="@color/color_white"
                         android:layout_marginLeft="@dimen/common_horz_medium"
-                        fontPath="@string/font_medium"
                         />
 
                 </LinearLayout>
@@ -188,7 +186,7 @@
             android:id="@+id/v_background_color"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/color_primarygradientbase"
+            android:background="@color/color_ui01"
             />
 
         <RelativeLayout
@@ -236,7 +234,7 @@
         </RelativeLayout>
 
         <TextView
-            style="@style/textH1.white"
+            style="@style/h3"
             android:id="@+id/tv_partner_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -246,6 +244,7 @@
             android:gravity="center_horizontal"
             android:paddingLeft="@dimen/common_horz_xlarge"
             android:paddingRight="@dimen/common_horz_xlarge"
+            android:textColor="@color/color_white"
             tools:text="QuiKlean Laundry"
             />
 
