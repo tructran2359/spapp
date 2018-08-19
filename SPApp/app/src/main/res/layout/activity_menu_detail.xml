@@ -24,6 +24,7 @@
 
 
     <TextView
+        style="@style/callout.medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_chip"
@@ -34,12 +35,8 @@
         android:layout_below="@id/action_bar"
         android:layout_marginLeft="@dimen/common_vert_small"
         android:layout_marginTop="@dimen/common_vert_small"
-
-        android:textSize="@dimen/text_size_caption"
-        android:textColor="@color/color_ui02"
-        fontPath="@string/font_medium"
-
-        android:text="1 of 2"
+        android:textColor="@color/color_grey"
+        tools:text="1 of 2"
         />
 
 </RelativeLayout>
