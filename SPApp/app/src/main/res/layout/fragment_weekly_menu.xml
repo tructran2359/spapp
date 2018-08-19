@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -14,27 +15,27 @@
         >
 
         <TextView
-            style="@style/textH2"
+            style="@style/subhead"
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/common_horz_large"
             android:paddingRight="@dimen/common_horz_large"
             android:paddingTop="@dimen/common_vert_large"
-
-            android:text="Menu That Feels The Soul"
+            android:textColor="@color/color_black"
+            tools:text="Menu That Feels The Soul"
             />
 
         <TextView
-            style="@style/textParagraph.grey"
+            style="@style/body"
             android:id="@+id/tv_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/common_horz_large"
             android:paddingRight="@dimen/common_horz_large"
             android:layout_marginTop="@dimen/common_vert_medium_sub"
-
-            android:text="At Tingkat-A-Day, we design and refresh our meal menu every single week so that you enjoy the widest variety of dishes, every single day."
+            android:textColor="@color/color_grey"
+            tools:text="At Tingkat-A-Day, we design and refresh our meal menu every single week so that you enjoy the widest variety of dishes, every single day."
             />
         
         <LinearLayout
