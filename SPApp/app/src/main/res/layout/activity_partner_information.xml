@@ -186,7 +186,7 @@
         android:id="@+id/iv_close"
         android:layout_width="@dimen/common_icon_size_medium"
         android:layout_height="@dimen/common_icon_size_medium"
-        android:src="@drawable/ic_close_blue"
+        android:src="@drawable/ic_close_red"
         android:layout_marginTop="@dimen/common_vert_medium"
         android:layout_marginRight="@dimen/common_vert_small"
         android:layout_gravity="right"
