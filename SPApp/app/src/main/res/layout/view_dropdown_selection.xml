@@ -10,13 +10,11 @@
     >
 
     <TextView
+        style="@style/subhead.small"
         android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@color/color_ui07"
-        android:lineSpacingExtra="5sp"
-        fontPath="@string/font_book"
+        android:textColor="@color/color_black"
         tools:text="Number of Pax"
         />
 
