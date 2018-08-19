@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/bottom_button_height"
     android:layout_alignParentBottom="true"
-    android:background="@drawable/selector_btn_blue"
+    android:background="@drawable/selector_btn_main"
     android:paddingLeft="@dimen/service_item_horz_spacing"
     android:paddingRight="@dimen/service_item_horz_spacing"
     tools:ignore="MissingPrefix"

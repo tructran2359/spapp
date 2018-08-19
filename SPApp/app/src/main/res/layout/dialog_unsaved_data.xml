@@ -56,7 +56,7 @@
             android:layout_alignLeft="@+id/ll_alert_container"
             android:layout_alignRight="@+id/ll_alert_container"
             android:layout_marginTop="@dimen/common_vert_large"
-            android:background="@drawable/selector_btn_blue"
+            android:background="@drawable/selector_btn_main"
             android:textColor="@color/color_ui06"
             android:text="@string/yes_all_caps"
             android:gravity="center"

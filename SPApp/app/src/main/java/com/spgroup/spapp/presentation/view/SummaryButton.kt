@@ -35,7 +35,7 @@ class SummaryButton: RelativeLayout {
     override fun setEnabled(enabled: Boolean) {
         super.setEnabled(enabled)
         if (enabled) {
-            rl_summary_button.setBackgroundResource(R.drawable.selector_btn_blue )
+            rl_summary_button.setBackgroundResource(R.drawable.selector_btn_main )
             tv_total_count.setTextColor(getColor(R.color.color_ui01))
         } else {
             rl_summary_button.setBackgroundResource(R.drawable.bg_rec_rounded_blue_disabled )

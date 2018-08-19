@@ -209,7 +209,7 @@
     <style name="textH4.blueButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/bottom_button_height</item>
-        <item name="android:background">@drawable/selector_btn_blue</item>
+        <item name="android:background">@drawable/selector_btn_main</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/color_ui06</item>
     </style>
