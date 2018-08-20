@@ -105,18 +105,11 @@
         <item name="android:background">@color/color_ui05</item>
     </style>
 
-    <style name="orderSumLabel" parent="textH5">
+    <style name="orderSumLabel" parent="subhead.small">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/common_vert_medium</item>
-    </style>
-
-    <style name="textParagraph.grey.orderSumInput">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/bg_rec_rounded_white_solid_grey_stroke</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:padding">@dimen/common_spacing_x3</item>
+        <item name="android:textColor">@color/color_black</item>
     </style>
 
     <style name="textCaption">
@@ -346,6 +339,15 @@
     <style name="textCounterIcon.white">
         <item name="android:textColor">@color/color_ui01</item>
         <item name="android:background">@drawable/bg_oval_white</item>
+    </style>
+
+    <style name="orderSumInput" parent="callout.regular">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_rec_rounded_white_solid_grey_stroke</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:padding">@dimen/common_spacing_x3</item>
+        <item name="android:textColor">@color/color_grey</item>
     </style>
 
 </resources>

@@ -6,11 +6,12 @@
     >
 
     <TextView
-        style="@style/textH5"
+        style="@style/subhead.small"
         android:id="@+id/tv_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/name"
+        android:textColor="@color/color_black"
         />
 
     <TextView
@@ -24,7 +25,7 @@
         />
 
     <EditText
-        style="@style/textParagraph.grey.orderSumInput"
+        style="@style/orderSumInput"
         android:id="@+id/et_input"
         android:layout_below="@id/tv_label"
         android:layout_marginTop="@dimen/common_vert_xsmall"

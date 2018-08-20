@@ -21,7 +21,7 @@
             />
         
         <TextView
-            style="@style/textParagraph.grey"
+            style="@style/body"
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
             android:layout_toLeftOf="@+id/counter_view"
             android:layout_marginLeft="@dimen/common_spacing_x4"
             android:layout_centerVertical="true"
-            
+            android:textColor="@color/color_grey"
             android:text="Blouse"
             />
         
@@ -57,21 +57,22 @@
         >
 
         <TextView
-            style="@style/textCaption"
+            style="@style/callout.regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:textColor="@color/color_grey"
             android:text="@string/est_price"
             />
 
         <TextView
-            style="@style/textH6"
+            style="@style/callout.book"
             android:id="@+id/tv_est_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-
+            android:textColor="@color/color_black"
             android:text="S$0.01"
             />
 

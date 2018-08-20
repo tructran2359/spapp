@@ -23,21 +23,21 @@
         >
 
         <TextView
-            style="@style/textH4"
+            style="@style/subhead"
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/common_horz_medium_sub"
-
+            android:textColor="@color/color_black"
             android:text="@string/hardcode_3_dishes"
             />
 
         <TextView
-            style="@style/textParagraph.grey"
+            style="@style/body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_vert_small"
-
+            android:textColor="@color/color_grey"
             android:text="Weekdays only. Island-wide delivery. Packed in microwavable containers only."
             />
         
@@ -52,20 +52,21 @@
         </LinearLayout>
 
         <TextView
-            style="@style/textH6"
+            style="@style/callout.book"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_vert_medium_sub"
             android:text="@string/special_instructions"
+            android:textColor="@color/color_black"
             />
 
         <TextView
-            style="@style/textCaption"
+            style="@style/callout.regular"
             android:id="@+id/tv_instruction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_spacing"
-
+            android:textColor="@color/color_grey"
             android:text="No beef and peanuts. Low salt"
             />
 
