@@ -39,7 +39,7 @@ class PartnerDetailsViewModel(
     }
 
     private fun preProcessCustomisationLowestPrice(partnerDetails: PartnerDetails) {
-        partnerDetails.categories.forEach { cat ->
+        partnerDetails.categories?.forEach { cat ->
             cat.subCategories.forEach { subCat ->
                 subCat.services.forEach { service ->
                     if (service is ComplexCustomisationService) {
@@ -99,7 +99,8 @@ class PartnerDetailsViewModel(
                     offers = offering,
                     phone = phone,
                     uen = uen,
-                    nea = nea
+                    nea = nea,
+                    website = website
             )
         }
 

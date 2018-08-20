@@ -37,8 +37,15 @@ class ViewModelFactory private constructor(
 
             modelClass.isAssignableFrom(CustomiseNewViewModel::class.java) -> createCustomiseNewViewModel()
 
+            modelClass.isAssignableFrom(PartnerInfoViewModel::class.java) -> createPartnerInfoViewModel()
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         } as T
+    }
+
+    private fun createPartnerInfoViewModel(): PartnerInfoViewModel {
+        val getServicesUsecase = GetServicesListByPartnerUsecase(schedulerFacade, cloudRepository)
+        return PartnerInfoViewModel(getServicesUsecase)
     }
 
     ///////////////////////////////////////////////////////////////////////////

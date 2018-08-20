@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingPrefix"
@@ -7,189 +7,217 @@
     android:layout_height="match_parent"
     tools:context=".presentation.activity.PartnerInformationActivity"
     >
-
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/scroll_view"
+    
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="@dimen/common_horz_large"
-        android:paddingRight="@dimen/common_horz_large"
-        android:scrollbars="none"
+        android:layout_above="@+id/rl_bottom_button_container"
         >
 
-        <LinearLayout
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/common_horz_large"
+            android:paddingRight="@dimen/common_horz_large"
+            android:scrollbars="none"
             >
 
-            <ImageView
-                android:layout_width="@dimen/page_top_img_width"
-                android:layout_height="@dimen/page_top_img_height"
-                android:src="@drawable/page_top_img"
-                android:scaleType="fitXY"
-                />
-
-            <TextView
-                style="@style/h2"
-                android:id="@+id/tv_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_vert_xlarge"
-                android:textColor="@color/black"
-                tools:text="QuiKlean Laundry"
-                />
-
-            <TextView
-                style="@style/body"
-                android:id="@+id/tv_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_vert_medium_sub"
-                android:textColor="@color/color_grey"
-                tools:text="As fresh laundry experts, we combine our expertise and passion for service to deliver a delightful laundry experience that leaves you worry-free. We are committed to ensuring that you’re clothed in freshness to soak in life’s joys everyday."
-                />
-
-
-            <TextView
-                style="@style/subhead"
-                android:id="@+id/tv_offer_tittle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_vert_large"
-                android:textColor="@color/black"
-                tools:text="@string/service_desc_header"
-                />
-
             <LinearLayout
-                android:id="@+id/ll_service_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="@dimen/common_vert_medium_sub"
-                >
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_width"
-                android:background="@color/color_ui04"
-                android:layout_marginTop="@dimen/partner_info_margin_vert_large"
-                android:layout_marginBottom="@dimen/partner_info_margin_vert_large"
-                />
-
-            <TextView
-                style="@style/subhead"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="@string/bussiness_info_header"
-                />
-
-            <LinearLayout
-                android:id="@+id/ll_phone_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/partner_info_margin_vert_medium"
-                >
-
-                <ImageView
-                    android:layout_width="@dimen/common_icon_size_medium"
-                    android:layout_height="@dimen/common_icon_size_medium"
-                    android:src="@drawable/icon_phone"
-                    />
-
-                <TextView
-                    style="@style/partnerBusinessInfo"
-                    android:id="@+id/tv_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/partner_info_margin_right"
-                    android:textColor="@color/color_grey"
-                    tools:text="6342 4988"
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_uen_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/partner_info_margin_vert_medium"
-                >
-
-                <ImageView
-                    android:layout_width="@dimen/common_icon_size_medium"
-                    android:layout_height="@dimen/common_icon_size_medium"
-                    android:src="@drawable/uen"
-                    />
-
-                <TextView
-                    style="@style/partnerBusinessInfo"
-                    android:id="@+id/tv_uen"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/partner_info_margin_right"
-                    android:text="987654321A"
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_nea_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/partner_info_margin_vert_medium"
-                >
-
-                <ImageView
-                    android:layout_width="@dimen/common_icon_size_medium"
-                    android:layout_height="@dimen/common_icon_size_medium"
-                    android:src="@drawable/nea"
-                    />
-
-                <TextView
-                    style="@style/partnerBusinessInfo"
-                    android:id="@+id/tv_nea"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/partner_info_margin_right"
-
-                    tools:text="987654321A"
-                    />
-
-            </LinearLayout>
-
-            <TextView
-                style="@style/footnote"
-                android:id="@+id/tv_merchant_tnc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_vert_large"
                 android:layout_marginBottom="@dimen/common_vert_xxxlarge"
-                android:textColor="@color/color_grey"
-                tools:text="Merchant’s terms n conditions apply."
-                />
+                >
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="@dimen/page_top_img_width"
+                    android:layout_height="@dimen/page_top_img_height"
+                    android:src="@drawable/page_top_img"
+                    android:scaleType="fitXY"
+                    />
 
-    </android.support.v4.widget.NestedScrollView>
+                <TextView
+                    style="@style/h2"
+                    android:id="@+id/tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_vert_xlarge"
+                    android:textColor="@color/black"
+                    tools:text="QuiKlean Laundry"
+                    />
 
-    <ImageView
-        android:id="@+id/iv_close"
-        android:layout_width="@dimen/common_icon_size_medium"
-        android:layout_height="@dimen/common_icon_size_medium"
-        android:src="@drawable/ic_close_red"
-        android:layout_marginTop="@dimen/common_vert_medium"
-        android:layout_marginRight="@dimen/common_vert_small"
-        android:layout_gravity="right"
+                <TextView
+                    style="@style/body"
+                    android:id="@+id/tv_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_vert_medium_sub"
+                    android:textColor="@color/color_grey"
+                    tools:text="As fresh laundry experts, we combine our expertise and passion for service to deliver a delightful laundry experience that leaves you worry-free. We are committed to ensuring that you’re clothed in freshness to soak in life’s joys everyday."
+                    />
+
+
+                <TextView
+                    style="@style/subhead"
+                    android:id="@+id/tv_offer_tittle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_vert_large"
+                    android:textColor="@color/black"
+                    tools:text="@string/service_desc_header"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/ll_service_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/common_vert_medium_sub"
+                    >
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_width"
+                    android:background="@color/color_ui04"
+                    android:layout_marginTop="@dimen/partner_info_margin_vert_large"
+                    android:layout_marginBottom="@dimen/partner_info_margin_vert_large"
+                    />
+
+                <TextView
+                    style="@style/subhead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="@string/bussiness_info_header"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/ll_phone_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/partner_info_margin_vert_medium"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/common_icon_size_medium"
+                        android:layout_height="@dimen/common_icon_size_medium"
+                        android:src="@drawable/icon_phone"
+                        />
+
+                    <TextView
+                        style="@style/partnerBusinessInfo"
+                        android:id="@+id/tv_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/partner_info_margin_right"
+                        android:textColor="@color/color_grey"
+                        tools:text="6342 4988"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_uen_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/partner_info_margin_vert_medium"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/common_icon_size_medium"
+                        android:layout_height="@dimen/common_icon_size_medium"
+                        android:src="@drawable/uen"
+                        />
+
+                    <TextView
+                        style="@style/partnerBusinessInfo"
+                        android:id="@+id/tv_uen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/partner_info_margin_right"
+                        android:text="987654321A"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_nea_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/partner_info_margin_vert_medium"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/common_icon_size_medium"
+                        android:layout_height="@dimen/common_icon_size_medium"
+                        android:src="@drawable/nea"
+                        />
+
+                    <TextView
+                        style="@style/partnerBusinessInfo"
+                        android:id="@+id/tv_nea"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/partner_info_margin_right"
+
+                        tools:text="987654321A"
+                        />
+
+                </LinearLayout>
+
+                <TextView
+                    style="@style/footnote"
+                    android:id="@+id/tv_merchant_tnc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_vert_large"
+                    android:textColor="@color/color_grey"
+                    tools:text="Merchant’s terms n conditions apply."
+                    />
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="@dimen/common_icon_size_medium"
+            android:layout_height="@dimen/common_icon_size_medium"
+            android:src="@drawable/ic_close_red"
+            android:layout_marginTop="@dimen/common_vert_medium"
+            android:layout_marginRight="@dimen/common_vert_small"
+            android:layout_gravity="right"
+            />
+        
+    </FrameLayout>
+
+    <View
+        style="@style/buttonShadow"
+        android:id="@+id/v_button_shadow"
+        android:layout_above="@+id/rl_bottom_button_container"
         />
 
-</FrameLayout>
+    <RelativeLayout
+        style="@style/bottomButtonContainer"
+        android:id="@+id/rl_bottom_button_container"
+        android:layout_alignParentBottom="true"
+        >
+        
+        <TextView
+            style="@style/bottomButton"
+            android:id="@+id/tv_visit_website"
+            android:text="@string/visit_website"
+            />
+        
+    </RelativeLayout>
+
+</RelativeLayout>
