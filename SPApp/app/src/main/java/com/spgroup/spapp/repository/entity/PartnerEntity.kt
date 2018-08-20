@@ -5,5 +5,6 @@ data class PartnerEntity(
         val name: String,
         val logo: String,
         val priceDescription: String,
-        val highlight: String
+        val highlight: String,
+        val partnerType: String
 )

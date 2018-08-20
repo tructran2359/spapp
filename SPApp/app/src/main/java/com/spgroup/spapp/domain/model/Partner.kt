@@ -7,5 +7,13 @@ data class Partner(
         val name: String = "",
         val imgUrl: String = "",
         val priceDescription: String = "",
-        val highlight: String = ""
-) : Serializable, PartnersListingItem
+        val highlight: String = "",
+        val partnerType: String = ""
+) : Serializable, PartnersListingItem {
+
+    fun isCart() = partnerType == "cart"
+
+    fun isInfo() = partnerType == "info"
+
+    fun isDetailInfo() = partnerType == "detail_info"
+}
