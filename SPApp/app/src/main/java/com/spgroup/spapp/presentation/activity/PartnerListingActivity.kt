@@ -87,12 +87,8 @@ class PartnerListingActivity : BaseActivity() {
     private fun onPartnerListingItemClick(view: View, itemData: PartnersListingItem, position: Int) {
         when (itemData) {
             is Partner -> {
-                if (itemData.isCart()) {
-                    val intent = PartnerDetailsActivity.getLaunchIntent(this, itemData.uen)
-                    startActivity(intent)
-                } else {
-                    longToast("Partner type: \"${itemData.partnerType}\" 's coming soon")
-                }
+                val intent = PartnerDetailsActivity.getLaunchIntent(this, itemData.uen)
+                startActivity(intent)
             }
 
             is Promotion -> longToast("Promotion 's coming soon")

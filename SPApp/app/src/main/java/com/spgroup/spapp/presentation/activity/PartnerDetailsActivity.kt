@@ -84,8 +84,9 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
                     mCategoryAdapter.setData(it.categories)
                     tv_partner_name.text = it.name
                     tv_promotion.text = it.promo
-                    ll_promotion_bar.isGone = it.promo.isEmpty()
-                    mPromotionBarHeight = if (it.promo.isEmpty()) 0 else getDimensionPixelSize(R.dimen.promotion_bar_height)
+                    val hasPromoBar = it.promo == null || it.promo.isEmpty()
+                    ll_promotion_bar.isGone = hasPromoBar
+                    mPromotionBarHeight = if (hasPromoBar) 0 else getDimensionPixelSize(R.dimen.promotion_bar_height)
                     setUpTabLayout()
                     setUpBanners(it.banners)
                 }
@@ -210,12 +211,14 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
 
     }
 
-    private fun setUpBanners(urls: List<String>) {
-        mImageAdapter = PartnerImagesAdapter(supportFragmentManager, urls)
-        pager_images.offscreenPageLimit = 3
-        pager_images.adapter = mImageAdapter
+    private fun setUpBanners(urls: List<String>?) {
+        urls?.let {
+            mImageAdapter = PartnerImagesAdapter(supportFragmentManager, urls)
+            pager_images.offscreenPageLimit = 3
+            pager_images.adapter = mImageAdapter
 
-        pager_indicator.setViewPager(pager_images)
+            pager_indicator.setViewPager(pager_images)
+        }
     }
 
     private fun setUpTabLayout() {
