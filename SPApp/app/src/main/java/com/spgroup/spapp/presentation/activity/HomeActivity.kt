@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import androidx.core.view.isGone
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu
 import com.spgroup.spapp.BuildConfig
 import com.spgroup.spapp.R
@@ -135,6 +136,15 @@ open class HomeActivity :
 
     private fun subscribeUI() {
         with(mViewModel) {
+            topLevelVariabes.observe(this@HomeActivity, Observer {
+                it?.let {
+                    tv_home_header.text = it.headerLine1 + if (it.headerLine2.isEmpty()) "" else "\n${it.headerLine2}"
+                    tv_home_subheader.text = it.subHeader
+                    tv_notification.text = it.alert
+                    rl_noti_container.isGone = it.alert.isEmpty()
+                }
+            })
+
             listTopLevelCate.observe(this@HomeActivity, Observer {
                 it?.let {
                     cate_group_view.setListCategory(it)

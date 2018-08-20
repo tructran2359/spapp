@@ -7,7 +7,8 @@ class HomeDataMapper(
         private val topLevelCatMapper: TopLevelCatMapper,
         private val topLevelPromoMapper: TopLevelPromotionMapper,
         private val topLevelPartnerMapper: TopLevelFeaturedPartnerMapper,
-        private val topLevelPageMapper: TopLevelPageMapper
+        private val topLevelPageMapper: TopLevelPageMapper,
+        private val topLevelVariableMapper: TopLevelVariableMapper
 ) : IMapper<HomeDataEntity, HomeData> {
 
     override fun transform(entity: HomeDataEntity): HomeData {
@@ -16,7 +17,8 @@ class HomeDataMapper(
             val promotions = topLevelPromoMapper.transform(entity.promotions)
             val partners = topLevelPartnerMapper.transform(entity.featuredPartners)
             val pages = topLevelPageMapper.transform(entity.pages)
-            HomeData(categories, promotions, partners, pages)
+            val variables = topLevelVariableMapper.transform(entity.variables)
+            HomeData(categories, promotions, partners, pages, variables)
         }
     }
 

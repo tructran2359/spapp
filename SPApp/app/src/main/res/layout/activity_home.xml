@@ -49,6 +49,7 @@
 
                 <TextView
                     style="@style/callout.regular"
+                    android:id="@+id/tv_notification"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -56,9 +57,9 @@
                     android:layout_toLeftOf="@id/iv_close"
                     android:layout_toRightOf="@+id/iv_notification"
                     android:maxLines="2"
-                    android:text="Alert to the user with maximum 2 lines of text with option to dismiss."
                     android:textColor="@color/color_ui02"
                     android:lineSpacingExtra="4sp"
+                    tools:text="Alert to the user with maximum 2 lines of text with option to dismiss."
                     />
 
                 <ImageView
@@ -98,6 +99,7 @@
 
             <TextView
                 style="@style/body"
+                android:id="@+id/tv_home_subheader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_home_header"

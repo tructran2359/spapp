@@ -6,5 +6,6 @@ data class HomeData(
         val categories: List<TopLevelCategory>,
         val promotions: List<TopLevelPromotion>,
         val featuredPartners: List<TopLevelFeaturedPartner>,
-        val pages: List<TopLevelPage>
+        val pages: List<TopLevelPage>,
+        val variables: TopLevelVariable
 ) : Serializable
