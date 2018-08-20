@@ -11,6 +11,8 @@ class CustomiseNewViewModel: BaseViewModel() {
 
     val listData = MutableLiveData<List<CustomiseData>>()
     val totalPriceData = MutableLiveData<Float>()
+    val serviceName = MutableLiveData<String>()
+    val serviceDescription = MutableLiveData<String>()
 
     fun initData(serviceItem: ComplexCustomisationService) {
         this.serviceItem = serviceItem
@@ -19,6 +21,8 @@ class CustomiseNewViewModel: BaseViewModel() {
             listCustomiseData.add(it.toCustomiseData())
         }
         listData.value = listCustomiseData
+        serviceName.value = serviceItem.label
+        serviceDescription.value = serviceItem.serviceDescription
     }
 
     fun notifyDataChanged(optionIndex: Int, selectedPos: Int) {

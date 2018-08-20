@@ -12,27 +12,27 @@
     >
 
     <TextView
-        style="@style/textH5"
+        style="@style/subhead"
         android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:layout_marginTop="@dimen/service_item_vert_spacing"
         android:layout_toLeftOf="@id/fl_check_container"
-
-        android:text="Day Curtains"
+        android:textColor="@color/color_black"
+        tools:text="Day Curtains"
         />
 
     <TextView
-        style="@style/textParagraph.grey"
+        style="@style/body"
         android:id="@+id/tv_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_name"
         android:layout_marginTop="@dimen/service_item_vert_spacing"
         android:layout_toLeftOf="@id/fl_check_container"
-
-        android:text="Also known as sheers, made of light coloured materials to allow light in from outside."
+        android:textColor="@color/color_grey"
+        tools:text="Also known as sheers, made of light coloured materials to allow light in from outside."
         />
 
     <TextView
@@ -44,7 +44,7 @@
         />
 
     <TextView
-        style="@style/textH6.textServiceItemPrice"
+        style="@style/textServiceItemPrice"
         android:id="@+id/tv_price"
         android:layout_alignBaseline="@+id/tv_from"
         android:layout_toRightOf="@id/tv_from"

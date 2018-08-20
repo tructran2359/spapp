@@ -13,12 +13,12 @@
     >
 
     <TextView
-        style="@style/textH4"
+        style="@style/subhead.small"
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:text="Menu for 2 Jul - 6 Jul"
+        android:textColor="@color/color_black"
+        tools:text="Menu for 2 Jul - 6 Jul"
         />
 
     <LinearLayout

@@ -24,7 +24,7 @@ class ServiceItemViewCheckBox(
         isChecked = (count == 1)
         onCheckUpdated()
 
-        fl_check_container.setOnClickListener {
+        setOnClickListener {
             isChecked = isChecked.not()
             onCheckUpdated()
         }

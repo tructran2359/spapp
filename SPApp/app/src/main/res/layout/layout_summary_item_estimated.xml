@@ -22,20 +22,21 @@
             />
         
         <TextView
-            style="@style/textParagraph.grey"
+            style="@style/body"
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/iv_delete"
             android:layout_marginLeft="@dimen/common_spacing_x4"
             android:layout_centerVertical="true"
-            
+            android:textColor="@color/color_grey"
             android:text="Day Curtains Cleaning"
             />
 
     </RelativeLayout>
 
     <TextView
+        style="@style/callout.regular"
         android:id="@+id/tv_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,7 +49,7 @@
         android:paddingRight="@dimen/common_spacing_x3"
         android:paddingTop="@dimen/common_spacing_x2"
         android:paddingBottom="@dimen/common_spacing_x2"
-
+        android:textColor="@color/color_grey"
         android:text="Price estimate excludes curtains &amp; carpets"
         />
 

@@ -30,15 +30,14 @@
                 />
 
             <TextView
+                style="@style/h2"
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="About Us"
-                android:textSize="34sp"
-                android:textColor="@color/color_ui07"
+                android:textColor="@color/black"
                 android:layout_marginTop="@dimen/common_vert_xlarge"
                 android:layout_marginBottom="@dimen/common_vert_medium_sub"
-                fontPath="@string/font_medium"
+                tools:text="About Us"
                 />
             
         </LinearLayout>
@@ -49,7 +48,7 @@
         android:id="@+id/iv_close"
         android:layout_width="@dimen/common_icon_size_medium"
         android:layout_height="@dimen/common_icon_size_medium"
-        android:src="@drawable/ic_close_blue"
+        android:src="@drawable/ic_close_red"
         android:layout_marginTop="@dimen/common_vert_medium"
         android:layout_marginRight="@dimen/common_vert_small"
         android:layout_gravity="right"

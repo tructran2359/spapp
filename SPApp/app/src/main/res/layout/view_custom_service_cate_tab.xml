@@ -8,6 +8,7 @@
     >
 
     <TextView
+        style="@style/h5"
         android:id="@+id/tv_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,6 +16,8 @@
         android:textSize="@dimen/text_size_menu"
         android:layout_centerInParent="true"
         fontPath="@string/font_medium"
+        tools:text="Tab"
+        android:textColor="@color/color_grey"
         />
 
 </RelativeLayout>

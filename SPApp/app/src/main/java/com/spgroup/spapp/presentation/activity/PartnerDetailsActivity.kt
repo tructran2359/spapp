@@ -81,7 +81,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
             partnerDetails.observe(this@PartnerDetailsActivity, Observer {
                 it?.let {
 
-                    mCategoryAdapter.setData(it?.categories)
+                    mCategoryAdapter.setData(it.categories)
                     tv_partner_name.text = it.name
                     tv_promotion.text = it.promo
                     ll_promotion_bar.isGone = it.promo.isEmpty()
@@ -267,6 +267,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
             val intent = OrderSummaryActivity.getLaunchIntent(this)
             startActivity(intent)
         }
+        btn_summary.setPrice(0f)
     }
 
     private fun showSummaryButton(show: Boolean) {

@@ -21,7 +21,7 @@ class ServiceItemViewCounter(
         tv_name.text = service.label
         tv_price.text = service.price.formatPriceWithUnit(service.unit)
         onCountUpdate()
-        fl_add_btn_container.setOnClickListener {
+        setOnClickListener {
             if (count < service.max) {
                 count++
                 onCountUpdate()

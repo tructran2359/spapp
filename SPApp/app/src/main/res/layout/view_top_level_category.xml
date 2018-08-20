@@ -16,13 +16,14 @@
         />
 
     <TextView
-        style="@style/textCounter"
+        style="@style/callout.noLineSpace"
         android:id="@+id/tv_cate_name"
         android:layout_width="@dimen/home_category_icon_size"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/common_vert_small"
         android:gravity="center_horizontal"
+        android:textColor="@color/black"
 
         android:text="Food"
         />

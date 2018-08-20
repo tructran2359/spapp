@@ -5,7 +5,7 @@
     >
 
     <solid
-        android:color="@color/color_btnpress"/>
+        android:color="@color/color_ui01_on_press"/>
 
     <corners
         android:radius="@dimen/common_radius"/>

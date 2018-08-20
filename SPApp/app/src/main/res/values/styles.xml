@@ -93,37 +93,6 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="textServiceItemFrom">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:text">@string/from</item>
-        <item name="android:textSize">@dimen/text_size_caption</item>
-        <item name="android:textColor">@color/color_ui02</item>
-        <item name="fontPath">@string/font_regular</item>
-    </style>
-
-    <style name="textH6.textServiceItemPrice">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">@dimen/text_size_h6</item>
-        <item name="fontPath">@string/font_book</item>
-    </style>
-
-    <style name="textCounterIcon">
-        <item name="android:layout_width">@dimen/common_icon_size</item>
-        <item name="android:layout_height">@dimen/common_icon_size</item>
-        <item name="android:textColor">@color/color_ui06</item>
-        <item name="android:background">@drawable/bg_oval_blue</item>
-        <item name="android:textSize">@dimen/text_size_h6</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="textCounterIcon.white">
-        <item name="android:textColor">@color/color_ui01</item>
-        <item name="android:background">@drawable/bg_oval_white</item>
-    </style>
-
     <style name="lineDividerDark">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/line_width</item>
@@ -136,18 +105,11 @@
         <item name="android:background">@color/color_ui05</item>
     </style>
 
-    <style name="orderSumLabel" parent="textH5">
+    <style name="orderSumLabel" parent="subhead.small">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/common_vert_medium</item>
-    </style>
-
-    <style name="textParagraph.grey.orderSumInput">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/bg_rec_rounded_white_solid_grey_stroke</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:padding">@dimen/common_spacing_x3</item>
+        <item name="android:textColor">@color/color_black</item>
     </style>
 
     <style name="textCaption">
@@ -209,7 +171,7 @@
     <style name="textH4.blueButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/bottom_button_height</item>
-        <item name="android:background">@drawable/selector_btn_blue</item>
+        <item name="android:background">@drawable/selector_btn_main</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/color_ui06</item>
     </style>
@@ -217,7 +179,7 @@
     <style name="actionBar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/action_bar_height</item>
-        <item name="android:background">@color/color_primarygradientbase</item>
+        <item name="android:background">@color/color_ui01</item>
     </style>
 
     <style name="validationInputField">
@@ -240,20 +202,152 @@
         <item name="fontPath">@string/font_light</item>
     </style>
 
-    <style name="textMenuItem">
+    <style name="textMenuItem" parent="h5">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">@dimen/text_size_menu_item</item>
         <item name="android:layout_marginLeft">@dimen/common_horz_medium</item>
         <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="textMenuFooter" parent="footnote">
+        <item name="android:textSize">@dimen/text_size_menu_footer</item>
+        <item name="android:textColor">@color/color_ui02</item>
+    </style>
+
+    <!--VMLSINPOW-249 - UI Optimisation-->
+    <style name="h1">
+        <item name="android:textSize">@dimen/h1_text</item>
+        <item name="android:lineSpacingExtra">@dimen/h1_line</item>
         <item name="fontPath">@string/font_medium</item>
     </style>
 
-    <style name="textMenuFooter">
-        <item name="android:textSize">@dimen/text_size_menu_footer</item>
-        <item name="android:textColor">@color/color_ui02</item>
+    <style name="h2">
+        <item name="android:textSize">@dimen/h2_text</item>
+        <item name="android:lineSpacingExtra">@dimen/h2_line</item>
+        <item name="fontPath">@string/font_medium</item>
+    </style>
+
+    <style name="h3">
+        <item name="android:textSize">@dimen/h3_text</item>
+        <item name="android:lineSpacingExtra">@dimen/h3_line</item>
         <item name="fontPath">@string/font_light</item>
+    </style>
+
+    <style name="h4">
+        <item name="android:textSize">@dimen/h4_text</item>
+        <item name="android:lineSpacingExtra">@dimen/h4_line</item>
+        <item name="fontPath">@string/font_light</item>
+    </style>
+
+    <style name="h5">
+        <item name="android:textSize">@dimen/h5_text</item>
+        <item name="android:lineSpacingExtra">@dimen/h5_line</item>
+        <item name="fontPath">@string/font_medium</item>
+    </style>
+
+    <style name="subhead">
+        <item name="android:textSize">@dimen/subhead_text</item>
+        <item name="android:lineSpacingExtra">@dimen/subhead_line</item>
+        <item name="fontPath">@string/font_book</item>
+    </style>
+
+    <style name="subhead.small">
+        <item name="android:textSize">@dimen/subhead_small_text</item>
+        <item name="android:lineSpacingExtra">@dimen/subhead_small_line</item>
+    </style>
+
+    <style name="body">
+        <item name="android:textSize">@dimen/body_text</item>
+        <item name="android:lineSpacingExtra">@dimen/body_line</item>
+        <item name="fontPath">@string/font_regular</item>
+    </style>
+
+    <style name="banner">
+        <item name="android:textSize">@dimen/banner_text</item>
+        <item name="android:lineSpacingExtra">@dimen/banner_line</item>
+        <item name="fontPath">@string/font_light</item>
+    </style>
+
+    <style name="callout">
+        <item name="android:textSize">@dimen/callout_text</item>
+        <item name="android:lineSpacingExtra">@dimen/callout_line</item>
+    </style>
+
+    <style name="callout.medium">
+        <item name="fontPath">@string/font_medium</item>
+    </style>
+
+    <style name="callout.regular">
+        <item name="fontPath">@string/font_regular</item>
+    </style>
+
+    <style name="callout.book">
+        <item name="fontPath">@string/font_book</item>
+    </style>
+
+    <style name="callout.noLineSpace">
+        <item name="fontPath">@string/font_medium</item>
+        <item name="android:lineSpacingExtra">1sp</item>
+    </style>
+
+    <style name="footnote">
+        <item name="android:textSize">@dimen/footnote_text</item>
+        <item name="android:lineSpacingExtra">@dimen/footnote_line</item>
+        <item name="fontPath">@string/font_regular</item>
+    </style>
+
+    <style name="caption">
+        <item name="android:textSize">@dimen/caption_text</item>
+        <item name="android:lineSpacingExtra">@dimen/caption_line</item>
+        <item name="fontPath">@string/font_bold</item>
+    </style>
+
+    <style name="partnerBusinessInfo" parent="body">
+        <item name="android:textColor">@color/color_grey</item>
+    </style>
+
+    <style name="bottomButton" parent="h5">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/bottom_button_height</item>
+        <item name="android:background">@drawable/selector_btn_main</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="textServiceItemFrom" parent="callout.book">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/from</item>
+        <item name="android:textColor">@color/color_ui02</item>
+    </style>
+
+    <style name="textServiceItemPrice" parent="callout.book">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="textCounterIcon" parent="callout.noLineSpace">
+        <item name="android:layout_width">@dimen/common_icon_size</item>
+        <item name="android:layout_height">@dimen/common_icon_size</item>
+        <item name="android:textColor">@color/color_ui06</item>
+        <item name="android:background">@drawable/bg_oval_main</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="textCounterIcon.white">
+        <item name="android:textColor">@color/color_ui01</item>
+        <item name="android:background">@drawable/bg_oval_white</item>
+    </style>
+
+    <style name="orderSumInput" parent="callout.regular">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_rec_rounded_white_solid_grey_stroke</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:padding">@dimen/common_spacing_x3</item>
+        <item name="android:textColor">@color/color_grey</item>
     </style>
 
 </resources>

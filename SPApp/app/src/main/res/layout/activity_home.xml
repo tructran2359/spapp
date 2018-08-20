@@ -48,7 +48,7 @@
                     />
 
                 <TextView
-                    fontPath="@string/font_regular"
+                    style="@style/callout.regular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -58,8 +58,7 @@
                     android:maxLines="2"
                     android:text="Alert to the user with maximum 2 lines of text with option to dismiss."
                     android:textColor="@color/color_ui02"
-
-                    android:textSize="@dimen/text_size_caption"
+                    android:lineSpacingExtra="4sp"
                     />
 
                 <ImageView
@@ -87,16 +86,18 @@
 
             <TextView
                 android:id="@+id/tv_home_header"
-                style="@style/textH1"
+                style="@style/h1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rl_noti_container"
                 android:layout_marginLeft="@dimen/common_horz_large"
                 android:layout_marginTop="90dp"
+                android:textColor="@color/black"
                 android:text="@string/home_header"
                 />
 
             <TextView
+                style="@style/body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_home_header"
@@ -105,6 +106,7 @@
                 android:layout_marginTop="@dimen/common_vert_medium_sub"
                 android:text="@string/home_short_desc"
                 android:layout_marginBottom="@dimen/common_vert_medium_sub"
+                android:textColor="@color/color_grey"
                 />
 
         </RelativeLayout>
@@ -139,13 +141,14 @@
                 />
 
             <TextView
-                style="@style/textH3"
+                style="@style/subhead"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/featured_promotions"
                 android:layout_marginTop="@dimen/common_vert_xxxlarge"
                 android:layout_marginLeft="@dimen/common_horz_large"
                 android:layout_marginRight="@dimen/common_horz_large"
+                android:textColor="@color/black"
                 />
             
             <android.support.v7.widget.RecyclerView
@@ -169,12 +172,13 @@
                 >
 
                 <TextView
-                    style="@style/textH3"
+                    style="@style/subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/featured_merchants"
                     android:layout_marginLeft="@dimen/common_horz_large"
                     android:layout_marginRight="@dimen/common_horz_large"
+                    android:textColor="@color/black"
                     />
 
                 <android.support.v7.widget.RecyclerView
@@ -193,13 +197,14 @@
     <!--Hidden action bar and menu button-->
 
     <TextView
-        style="@style/textH3.white"
+        style="@style/h5"
         android:layout_width="match_parent"
         android:layout_height="@dimen/action_bar_height"
-        android:background="@color/color_primarygradientbase"
+        android:background="@color/color_ui01"
         android:paddingTop="@dimen/common_horz_large"
         android:gravity="center_horizontal"
         android:text="@string/home"
+        android:textColor="@color/color_white"
         app:layout_behavior="@string/behavior_home_text_view"
         />
 
@@ -208,7 +213,7 @@
         android:layout_width="@dimen/home_menu_icon_size"
         android:layout_height="@dimen/home_menu_icon_size"
         android:padding="@dimen/common_horz_large"
-        android:src="@drawable/ic_menu_blue"
+        android:src="@drawable/ic_menu_red"
         app:layout_behavior="@string/behavior_home_menu_view"
         />
 

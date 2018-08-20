@@ -39,6 +39,18 @@ class CustomiseNewActivity: BaseActivity() {
         mViewModel = obtainViewModel(CustomiseNewViewModel::class.java, ViewModelFactory.getInstance())
         mViewModel.run {
 
+            serviceName.observe(this@CustomiseNewActivity, Observer {
+                it?.let {
+                    tv_name.text = it
+                }
+            })
+
+            serviceDescription.observe(this@CustomiseNewActivity, Observer {
+                it?.let {
+                    tv_description.text = it
+                }
+            })
+
             listData.observe(this@CustomiseNewActivity, Observer {
                 it?.let {
                     setUpData(it)

@@ -8,14 +8,12 @@
     android:orientation="vertical">
 
     <TextView
+        style="@style/body"
         android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@color/color_ui07"
-        android:lineSpacingExtra="8sp"
-        fontPath="@string/font_regular"
-        android:text="123asdf"
+        android:textColor="@color/color_grey"
+        tools:text="123asdf"
         />
 
     <View
@@ -25,26 +23,25 @@
         />
 
     <TextView
+        style="@style/subhead"
         android:id="@+id/tv_link_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@color/color_ui07"
-        fontPath="@string/font_book"
-        android:text="Feedback"
+        android:textColor="@color/black"
+        tools:text="Feedback"
         />
 
     <TextView
+        style="@style/body"
         android:id="@+id/tv_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/email"
         android:drawablePadding="@dimen/common_horz_small"
-        android:textSize="16sp"
         android:textColor="@color/color_ui01"
         android:layout_marginTop="@dimen/common_vert_medium"
-        android:text="email@email.com"
         android:layout_marginBottom="@dimen/common_vert_xxxlarge"
+        tools:text="email@email.com"
         />
 
 </LinearLayout>

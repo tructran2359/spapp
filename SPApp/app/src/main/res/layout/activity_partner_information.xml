@@ -31,36 +31,33 @@
                 />
 
             <TextView
+                style="@style/h2"
                 android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_vert_xlarge"
-                android:textSize="34sp"
-                android:textColor="@color/color_ui07"
-                android:lineSpacingExtra="6sp"
-                fontPath="@string/font_medium"
+                android:textColor="@color/black"
                 tools:text="QuiKlean Laundry"
                 />
 
             <TextView
+                style="@style/body"
                 android:id="@+id/tv_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_vert_medium_sub"
-                android:textSize="16sp"
-                android:textColor="@color/color_ui02"
-                android:lineSpacingExtra="8sp"
-                fontPath="@string/font_regular"
+                android:textColor="@color/color_grey"
                 tools:text="As fresh laundry experts, we combine our expertise and passion for service to deliver a delightful laundry experience that leaves you worry-free. We are committed to ensuring that you’re clothed in freshness to soak in life’s joys everyday."
                 />
 
 
             <TextView
-                style="@style/textH4"
+                style="@style/subhead"
                 android:id="@+id/tv_offer_tittle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_vert_large"
+                android:textColor="@color/black"
                 tools:text="@string/service_desc_header"
                 />
 
@@ -83,9 +80,10 @@
                 />
 
             <TextView
-                style="@style/textH4"
+                style="@style/subhead"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:text="@string/bussiness_info_header"
                 />
 
@@ -104,13 +102,13 @@
                     />
 
                 <TextView
-                    style="@style/textParagraph.grey"
+                    style="@style/partnerBusinessInfo"
                     android:id="@+id/tv_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/partner_info_margin_right"
-
+                    android:textColor="@color/color_grey"
                     tools:text="6342 4988"
                     />
 
@@ -131,13 +129,12 @@
                     />
 
                 <TextView
-                    style="@style/textParagraph.grey"
+                    style="@style/partnerBusinessInfo"
                     android:id="@+id/tv_uen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/partner_info_margin_right"
-
                     android:text="987654321A"
                     />
 
@@ -158,7 +155,7 @@
                     />
 
                 <TextView
-                    style="@style/textParagraph.grey"
+                    style="@style/partnerBusinessInfo"
                     android:id="@+id/tv_nea"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -171,14 +168,13 @@
             </LinearLayout>
 
             <TextView
+                style="@style/footnote"
                 android:id="@+id/tv_merchant_tnc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_vert_large"
                 android:layout_marginBottom="@dimen/common_vert_xxxlarge"
-                android:textColor="@color/color_ui02"
-                android:textSize="12sp"
-                fontPath="@string/font_regular"
+                android:textColor="@color/color_grey"
                 tools:text="Merchant’s terms n conditions apply."
                 />
 
@@ -190,7 +186,7 @@
         android:id="@+id/iv_close"
         android:layout_width="@dimen/common_icon_size_medium"
         android:layout_height="@dimen/common_icon_size_medium"
-        android:src="@drawable/ic_close_blue"
+        android:src="@drawable/ic_close_red"
         android:layout_marginTop="@dimen/common_vert_medium"
         android:layout_marginRight="@dimen/common_vert_small"
         android:layout_gravity="right"

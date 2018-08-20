@@ -15,22 +15,23 @@
     >
 
     <TextView
-        style="@style/textCaption"
+        style="@style/callout.regular"
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:text="@string/est_price"
+        android:textColor="@color/color_grey"
         />
 
     <TextView
-        style="@style/textH6"
+        style="@style/callout.book"
         android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-
+        android:textColor="@color/color_black"
         android:text="S$0.001"
         />
 

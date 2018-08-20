@@ -5,7 +5,7 @@
     >
 
     <solid
-        android:color="@color/color_btninactive"/>
+        android:color="@color/color_hoverinactive1"/>
 
     <corners
         android:radius="@dimen/common_radius"/>

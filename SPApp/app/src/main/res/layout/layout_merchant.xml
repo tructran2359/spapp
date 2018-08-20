@@ -27,19 +27,21 @@
         >
 
         <TextView
-            style="@style/textBannerTitle"
+            style="@style/caption"
             android:id="@+id/tv_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Laundry"
+            android:textColor="@color/color_peach"
+            tools:text="Laundry"
             />
 
         <TextView
-            style="@style/textBannerDesc"
+            style="@style/banner"
             android:id="@+id/tv_partner_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Presto Drycleaners"
+            android:textColor="@color/black"
+            tools:text="Presto Drycleaners"
             />
 
     </LinearLayout>

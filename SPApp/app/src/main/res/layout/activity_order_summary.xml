@@ -33,7 +33,7 @@
             >
 
             <TextView
-                style="@style/textH1"
+                style="@style/h4"
                 android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,8 +41,7 @@
                 android:paddingRight="@dimen/common_horz_large"
                 android:paddingTop="@dimen/common_vert_medium"
                 android:paddingBottom="@dimen/common_vert_medium"
-                android:background="@color/color_ui05"
-
+                android:textColor="@color/color_black"
                 android:text="QuiKlean Laundry"
                 />
 
@@ -69,10 +68,11 @@
                 android:paddingTop="@dimen/common_vert_xxlarge">
 
                 <TextView
-                    style="@style/textH4"
+                    style="@style/subhead"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/your_contact_info"
+                    android:textColor="@color/color_black"
                     />
 
                 <!--Name-->
@@ -122,7 +122,7 @@
                     <ImageView
                         android:layout_width="@dimen/common_icon_size_small"
                         android:layout_height="@dimen/common_icon_size_small"
-                        android:src="@drawable/arrow_down_blue"
+                        android:src="@drawable/arrow_down_grey"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginRight="@dimen/common_spacing_x3"
                         />
@@ -141,7 +141,7 @@
 
                 <EditText
                     android:id="@+id/et_address_2"
-                    style="@style/textParagraph.grey.orderSumInput"
+                    style="@style/orderSumInput"
                     />
 
                 <!--Postal Code-->
@@ -167,20 +167,21 @@
                         />
 
                     <TextView
-                        style="@style/textCaption"
+                        style="@style/callout.regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/optional_with_symbol"
                         android:layout_toRightOf="@+id/tv_notes"
                         android:layout_alignBaseline="@id/tv_notes"
                         android:layout_marginLeft="@dimen/common_spacing"
+                        android:textColor="@color/color_grey"
                         />
 
                 </RelativeLayout>
 
                 <EditText
                     android:id="@+id/et_notes"
-                    style="@style/textParagraph.grey.orderSumInput"
+                    style="@style/orderSumInput"
                     android:layout_height="@dimen/common_text_area_height"
                     android:gravity="top|left"
                     android:hint="@string/summary_notes_hint"
@@ -188,6 +189,7 @@
                     android:inputType="textMultiLine"
                     android:scrollbars="vertical"
                     android:lines="10"
+                    android:layout_marginTop="@dimen/common_vert_xsmall"
                     />
 
                 <LinearLayout
@@ -205,22 +207,24 @@
                         />
 
                     <TextView
-                        style="@style/textParagraph.grey"
+                        style="@style/body"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/remember_me"
                         android:layout_marginLeft="@dimen/common_spacing_x3"
+                        android:textColor="@color/color_grey"
                         />
 
                 </LinearLayout>
 
                 <TextView
-                    style="@style/textCaption"
+                    style="@style/callout.regular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sum_order_agreement"
                     android:layout_marginTop="@dimen/common_vert_medium"
                     android:layout_marginBottom="@dimen/common_vert_large"
+                    android:textColor="@color/color_grey"
                     />
 
             </LinearLayout>

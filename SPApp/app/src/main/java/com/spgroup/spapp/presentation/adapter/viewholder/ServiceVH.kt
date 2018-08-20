@@ -56,12 +56,12 @@ class ServiceVH(
                     ll_item_container.addView(view)
                 }
 
-                iv_collapse.setImageResource(R.drawable.arrow_up_blue)
+                iv_collapse.setImageResource(R.drawable.arrow_up_grey)
                 ll_collapsed_container.visibility = View.VISIBLE
 
             } else {
 
-                iv_collapse.setImageResource(R.drawable.arrow_down_blue)
+                iv_collapse.setImageResource(R.drawable.arrow_down_grey)
                 ll_collapsed_container.visibility = View.GONE
 
             }

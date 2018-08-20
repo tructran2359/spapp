@@ -8,14 +8,13 @@
     >
 
     <TextView
+        style="@style/h5"
         android:layout_width="match_parent"
         android:layout_height="@dimen/action_bar_height"
-        android:background="@color/color_primarygradientbase"
+        android:background="@color/color_ui01"
         android:text="@string/summary"
         android:gravity="center"
-        android:textSize="18sp"
-        android:textColor="@color/color_ui06"
-        fontPath="@string/font_medium"
+        android:textColor="@color/color_white"
         />
     
     <ImageView
@@ -29,48 +28,43 @@
         />
 
     <TextView
+        style="@style/h3"
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="@string/empty_request_summary"
-        android:textSize="30sp"
-        android:textColor="@color/color_ui07"
-        android:lineSpacingExtra="4sp"
-        fontPath="@string/font_light"
+        android:textColor="@color/color_black"
         android:gravity="center_horizontal"
         />
 
     <TextView
+        style="@style/body"
         android:id="@+id/tv_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_service_request"
-        android:textSize="16sp"
-        android:lineSpacingExtra="8sp"
-        android:textColor="@color/color_ui02"
+        android:textColor="@color/color_grey"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tv_title"
         android:layout_marginTop="@dimen/common_vert_small"
         />
 
     <TextView
+        style="@style/h5"
         android:id="@+id/tv_see_services"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/common_vert_xxlarge"
         android:layout_marginRight="@dimen/common_vert_xxlarge"
-        android:background="@drawable/selector_btn_blue"
+        android:background="@drawable/selector_btn_main"
         android:paddingTop="@dimen/common_vert_medium"
         android:paddingBottom="@dimen/common_vert_medium"
         android:gravity="center_horizontal"
         android:layout_below="@+id/tv_description"
         android:layout_marginTop="@dimen/common_vert_xxlarge"
         android:text="@string/see_services"
-        android:textSize="18sp"
-        android:lineSpacingExtra="6sp"
-        android:textColor="@color/color_ui06"
-        fontPath="@string/font_medium"
+        android:textColor="@color/color_white"
         />
 
 </RelativeLayout>
