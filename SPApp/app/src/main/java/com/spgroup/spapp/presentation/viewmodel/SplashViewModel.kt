@@ -18,7 +18,8 @@ class SplashViewModel(private val getInitialDataUsecase: GetInitialDataUsecase,
                             it.categories,
                             it.promotions,
                             it.featuredPartners,
-                            it.pages)
+                            it.pages,
+                            it.variables)
                 }
                 .subscribe(
                         { isSuccess.value = true },

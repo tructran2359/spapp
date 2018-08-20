@@ -1,9 +1,6 @@
 package com.spgroup.spapp.manager
 
-import com.spgroup.spapp.domain.model.TopLevelCategory
-import com.spgroup.spapp.domain.model.TopLevelFeaturedPartner
-import com.spgroup.spapp.domain.model.TopLevelPage
-import com.spgroup.spapp.domain.model.TopLevelPromotion
+import com.spgroup.spapp.domain.model.*
 
 class AppDataMemCache : AppDataCache {
 
@@ -11,17 +8,20 @@ class AppDataMemCache : AppDataCache {
     private lateinit var topLevelPromotions: List<TopLevelPromotion>
     private lateinit var topLevelPartners: List<TopLevelFeaturedPartner>
     private lateinit var topLevelPages: List<TopLevelPage>
+    private lateinit var topLevelVariables: TopLevelVariable
 
     override fun saveInitData(
             topCategories: List<TopLevelCategory>,
             promotions: List<TopLevelPromotion>,
             partners: List<TopLevelFeaturedPartner>,
-            pages: List<TopLevelPage>
+            pages: List<TopLevelPage>,
+            variables: TopLevelVariable
     ) {
         saveTopLevelCategories(topCategories)
         saveTopLevelPromotions(promotions)
         saveTopLevelPartners(partners)
         saveTopLevelPages(pages)
+        saveTopLevelVariables(variables)
     }
 
     override fun saveTopLevelCategories(categories: List<TopLevelCategory>) {
@@ -54,5 +54,13 @@ class AppDataMemCache : AppDataCache {
 
     override fun getTopLevelPages(): List<TopLevelPage> {
         return topLevelPages
+    }
+
+    override fun saveTopLevelVariables(variables: TopLevelVariable) {
+        topLevelVariables = variables
+    }
+
+    override fun getTopLevelVariables(): TopLevelVariable {
+        return topLevelVariables
     }
 }
