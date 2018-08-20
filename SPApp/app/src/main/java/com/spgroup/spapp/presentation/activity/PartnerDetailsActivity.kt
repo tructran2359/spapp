@@ -245,7 +245,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         fl_info_container.setOnClickListener {
             val partnerInfo = mViewModel.getPartnerInfoModel()
             partnerInfo?.let {
-                startActivity(PartnerInformationActivity.getLaunchIntent(this@PartnerDetailsActivity, it))
+                startActivity(PartnerInformationActivity.getLaunchIntentForAvailableData(this@PartnerDetailsActivity, it))
             }
         }
 

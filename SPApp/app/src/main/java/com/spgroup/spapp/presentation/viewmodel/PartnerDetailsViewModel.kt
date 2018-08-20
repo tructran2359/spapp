@@ -99,7 +99,8 @@ class PartnerDetailsViewModel(
                     offers = offering,
                     phone = phone,
                     uen = uen,
-                    nea = nea
+                    nea = nea,
+                    website = website
             )
         }
 

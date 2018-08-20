@@ -1,5 +1,6 @@
 package com.spgroup.spapp.presentation.activity
 
+import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +11,9 @@ import android.view.animation.AnimationUtils
 import androidx.core.view.isGone
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.view.IndicatorTextView
+import com.spgroup.spapp.presentation.viewmodel.PartnerInfoViewModel
+import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.extension.obtainViewModel
 import com.spgroup.spapp.util.extension.toHtmlSpanned
 import com.spgroup.spapp.util.extension.toHtmlUnderlineText
 import kotlinx.android.synthetic.main.activity_partner_information.*
@@ -20,16 +24,27 @@ class PartnerInformationActivity : BaseActivity() {
     companion object {
 
         const val EXTRA_PARTNER_INFO = "EXTRA_PARTNER_INFO"
-        fun getLaunchIntent(context: Context, partnerInfo: PartnerInfo): Intent {
+        const val EXTRA_DATA_AVAILABLE = "EXTRA_DATA_AVAILABLE"
+        const val EXTRA_UEN = "EXTRA_UEN"
+        fun getLaunchIntentForAvailableData(context: Context, partnerInfo: PartnerInfo): Intent {
             val intent = Intent(context, PartnerInformationActivity::class.java)
             intent.putExtra(EXTRA_PARTNER_INFO, partnerInfo)
+            intent.putExtra(EXTRA_DATA_AVAILABLE, true)
+            return intent
+        }
+
+        fun getLaunchIntentForUnavailableData(context: Context, uen: String): Intent {
+            val intent = Intent(context, PartnerInformationActivity::class.java)
+            intent.putExtra(EXTRA_UEN, uen)
+            intent.putExtra(EXTRA_DATA_AVAILABLE, false)
             return intent
         }
     }
 
-    private lateinit var mData: PartnerInfo
+//    private lateinit var mData: PartnerInfo
     private lateinit var mAnimAppear: Animation
     private lateinit var mAnimDisappear: Animation
+    private lateinit var mViewModel: PartnerInfoViewModel
     private var mAnimIsRunning = false
 
     ///////////////////////////////////////////////////////////////////////////
@@ -40,7 +55,20 @@ class PartnerInformationActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_partner_information)
 
-        mData = intent.getSerializableExtra(EXTRA_PARTNER_INFO) as PartnerInfo
+        mViewModel = obtainViewModel(PartnerInfoViewModel::class.java, ViewModelFactory.getInstance())
+        mViewModel.mPartnerInfo.observe(this, Observer {
+            it?.let {
+                showData(it)
+            }
+        })
+        val dataAvailable = intent.getBooleanExtra(EXTRA_DATA_AVAILABLE, false)
+        if (dataAvailable) {
+            val data = intent.getSerializableExtra(EXTRA_PARTNER_INFO) as PartnerInfo
+            mViewModel.showData(data)
+        } else {
+            val uen = intent.getStringExtra(EXTRA_UEN)
+            mViewModel.loadData(uen)
+        }
 
         initAnimation()
         initViews()
@@ -52,35 +80,9 @@ class PartnerInformationActivity : BaseActivity() {
 
     private fun initViews() {
 
-        tv_name.text = mData.name
-        tv_description.text = mData.desc
-        tv_offer_tittle.text = mData.offerTitle
-
-        tv_phone.text = mData.phone
-        ll_phone_container.isGone = mData.phone.isEmpty()
-
-        tv_uen.text = mData.uen
-        ll_uen_container.isGone = mData.uen.isEmpty()
-
-        tv_nea.text = mData.nea
-        ll_nea_container.isGone = mData.nea.isEmpty()
-
-        val underlineText = getString(R.string.merchant_tnc_underline_text).toHtmlUnderlineText()
-        val formattedMerchantTnc = getString(R.string.merchant_tnc_with_format, underlineText)
-        tv_merchant_tnc.text = formattedMerchantTnc.toHtmlSpanned()
-
-        for (str in mData.offers) {
-            if (!str.isEmpty()) {
-                val view = IndicatorTextView(this, str)
-                ll_service_container.addView(view)
-            }
-        }
-
         iv_close.setOnClickListener {
             onBackPressed()
         }
-
-
 
         scroll_view.setOnScrollChangeListener(object : NestedScrollView.OnScrollChangeListener {
             override fun onScrollChange(view: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
@@ -95,6 +97,35 @@ class PartnerInformationActivity : BaseActivity() {
                 }
             }
         })
+    }
+
+    private fun showData(data: PartnerInfo) {
+        data.run {
+            tv_name.text = name
+            tv_description.text = desc
+            tv_offer_tittle.text = offerTitle
+
+            tv_phone.text = phone
+            ll_phone_container.isGone = phone.isEmpty()
+
+            tv_uen.text = uen
+            ll_uen_container.isGone = uen.isEmpty()
+
+            tv_nea.text = nea
+            ll_nea_container.isGone = nea.isEmpty()
+
+            val underlineText = getString(R.string.merchant_tnc_underline_text).toHtmlUnderlineText()
+            val formattedMerchantTnc = getString(R.string.merchant_tnc_with_format, underlineText)
+            tv_merchant_tnc.text = formattedMerchantTnc.toHtmlSpanned()
+
+            for (str in offers) {
+                if (!str.isEmpty()) {
+                    val view = IndicatorTextView(this@PartnerInformationActivity, str)
+                    ll_service_container.addView(view)
+                }
+            }
+        }
+
     }
 
     private fun initAnimation() {
@@ -141,6 +172,7 @@ class PartnerInformationActivity : BaseActivity() {
             val offers: List<String>,
             val phone: String,
             val uen: String,
-            val nea: String
+            val nea: String,
+            val website: String
     ): Serializable
 }
