@@ -3,6 +3,7 @@ package com.spgroup.spapp.presentation.activity
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.widget.NestedScrollView
 import android.view.View
@@ -62,6 +63,10 @@ class PartnerInformationActivity : BaseActivity() {
             }
         })
         val dataAvailable = intent.getBooleanExtra(EXTRA_DATA_AVAILABLE, false)
+        rl_bottom_button_container.isGone = dataAvailable
+        v_button_shadow.isGone = dataAvailable
+        tv_merchant_tnc.isGone = !dataAvailable
+
         if (dataAvailable) {
             val data = intent.getSerializableExtra(EXTRA_PARTNER_INFO) as PartnerInfo
             mViewModel.showData(data)
@@ -123,6 +128,15 @@ class PartnerInformationActivity : BaseActivity() {
                     val view = IndicatorTextView(this@PartnerInformationActivity, str)
                     ll_service_container.addView(view)
                 }
+            }
+
+            tv_visit_website.setOnClickListener {
+                var url = website
+                if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                    url = "http://" + url
+                }
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(browserIntent)
             }
         }
 

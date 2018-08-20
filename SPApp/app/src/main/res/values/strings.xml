@@ -74,5 +74,6 @@
     <string name="see_services">SEE SERVICES</string>
     <string name="merchant_tnc_with_format">Merchant’s %s apply.</string>
     <string name="merchant_tnc_underline_text">terms &amp; conditions</string>
+    <string name="visit_website">VISIT WEBSITE</string>
 
 </resources>
