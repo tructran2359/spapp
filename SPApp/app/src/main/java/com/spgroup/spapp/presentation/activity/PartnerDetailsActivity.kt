@@ -95,8 +95,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
                 selectedCount.observe(this@PartnerDetailsActivity, Observer {
                     doLogD(msg = "Selected $it item")
                     it?.let {
-                        // Temporarily hide this line coz updating total count textview is not in this task
-                        //                    btn_summary.setCount(it)
+                        btn_summary.setCount(it)
                         if (it != 0 && ll_summary_section.visibility == View.GONE) {
                             showSummaryButton(true)
                         } else if (it == 0 && ll_summary_section.visibility == View.VISIBLE) {
