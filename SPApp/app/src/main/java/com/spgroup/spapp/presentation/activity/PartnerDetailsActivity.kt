@@ -13,15 +13,13 @@ import androidx.core.view.isGone
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.adapter.PartnerImagesAdapter
 import com.spgroup.spapp.presentation.fragment.CartPartnerDetailFragment
+import com.spgroup.spapp.presentation.fragment.DetailInfoPartnerDetailFragment
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.doLogE
-import com.spgroup.spapp.util.extension.getDimensionPixelSize
-import com.spgroup.spapp.util.extension.loadAnimation
-import com.spgroup.spapp.util.extension.obtainViewModel
-import com.spgroup.spapp.util.extension.setOnGlobalLayoutListener
+import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_partner_details.*
 import kotlin.math.max
 
@@ -33,9 +31,10 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
 
     companion object {
 
-        fun getLaunchIntent(context: Context, partnerUEN: String): Intent {
+        fun getLaunchIntent(context: Context, partnerUEN: String, isCart: Boolean): Intent {
             val intent = Intent(context, PartnerDetailsActivity::class.java)
             intent.putExtra(ConstUtils.EXTRA_PARTNER_UEN, partnerUEN)
+            intent.putExtra(ConstUtils.EXTRA_IS_CART, isCart)
             return intent
         }
     }
@@ -52,6 +51,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     private var mInitTextSize = 0f
     private var mPromotionBarHeight = 0
     private lateinit var mViewModel: PartnerDetailsViewModel
+    private var mIsCart = true
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -62,6 +62,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         setContentView(R.layout.activity_partner_details)
 
         mActionBarHeight = getDimensionPixelSize(R.dimen.action_bar_height)
+        mIsCart = intent.getBooleanExtra(ConstUtils.EXTRA_IS_CART, true)
 
         initAnimations()
 
@@ -90,18 +91,20 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
                 }
             })
 
-            selectedCount.observe(this@PartnerDetailsActivity, Observer {
-                doLogD(msg = "Selected $it item")
-                it?.let {
-                    // Temporarily hide this line coz updating total count textview is not in this task
-                    //                    btn_summary.setCount(it)
-                    if (it != 0 && ll_summary_section.visibility == View.GONE) {
-                        showSummaryButton(true)
-                    } else if (it == 0 && ll_summary_section.visibility == View.VISIBLE) {
-                        showSummaryButton(false)
+            if (mIsCart) {
+                selectedCount.observe(this@PartnerDetailsActivity, Observer {
+                    doLogD(msg = "Selected $it item")
+                    it?.let {
+                        // Temporarily hide this line coz updating total count textview is not in this task
+                        //                    btn_summary.setCount(it)
+                        if (it != 0 && ll_summary_section.visibility == View.GONE) {
+                            showSummaryButton(true)
+                        } else if (it == 0 && ll_summary_section.visibility == View.VISIBLE) {
+                            showSummaryButton(false)
+                        }
                     }
-                }
-            })
+                })
+            }
 
             error.observe(this@PartnerDetailsActivity, Observer {
                 // do something with error
@@ -183,7 +186,13 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     }
 
     private fun setUpFormSection() {
-        supportFragmentManager.beginTransaction().add(R.id.fl_forms_section, CartPartnerDetailFragment()).commit()
+        val fragment = if (mIsCart) {
+            CartPartnerDetailFragment()
+        } else {
+            DetailInfoPartnerDetailFragment()
+        }
+
+        supportFragmentManager.beginTransaction().add(R.id.fl_forms_section, fragment).commit()
     }
 
     private fun setUpBanners(urls: List<String>?) {
@@ -223,13 +232,20 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     }
 
     private fun setUpSummarySection() {
-        ll_summary_section.visibility = View.GONE
+        ll_summary_section.isGone = mIsCart
+        btn_summary.isGone = !mIsCart
+        tv_visit_website.isGone = mIsCart
 
         btn_summary.setOnClickListener {
             val intent = OrderSummaryActivity.getLaunchIntent(this)
             startActivity(intent)
         }
         btn_summary.setPrice(0f)
+
+        tv_visit_website.setOnClickListener {
+            val url = mViewModel.partnerDetails.value?.website
+            openBrowser(url)
+        }
     }
 
     private fun showSummaryButton(show: Boolean) {

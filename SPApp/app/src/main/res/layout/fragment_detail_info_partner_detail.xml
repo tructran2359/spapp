@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/common_vert_xlarge"
+    android:paddingLeft="@dimen/common_horz_large"
+    android:paddingRight="@dimen/common_horz_large"
+    android:paddingTop="@dimen/common_vert_large"
+    tools:ignore="MissingPrefix"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/tv_offering_title"
+            style="@style/subhead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_black"
+            tools:text="Exclusive For Check Customers"
+            />
+
+        <TextView
+            android:id="@+id/tv_promotion"
+            style="@style/body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_vert_medium_sub"
+            android:textColor="@color/color_grey"
+            tools:text="Enjoy $50 off at checkout using code ORGANIC$50."
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_offering"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
