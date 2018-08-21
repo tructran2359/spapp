@@ -11,3 +11,8 @@ inline fun <T : ViewModel> FragmentActivity.obtainViewModel(viewModelClass: Clas
 
 inline fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>, viewModelFactory: ViewModelProvider.Factory?) =
         ViewModelProviders.of(this, viewModelFactory).get(viewModelClass)
+
+
+
+inline fun <T : ViewModel> Fragment.obtainViewModelOfActivity(viewModelClass: Class<T>, viewModelFactory: ViewModelProvider.Factory?) =
+        ViewModelProviders.of(this.activity!!, viewModelFactory).get(viewModelClass)

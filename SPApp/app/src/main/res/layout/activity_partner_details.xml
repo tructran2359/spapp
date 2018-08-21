@@ -104,35 +104,44 @@
         <!--Scroll View ========================================================-->
 
         <!--Form Section-->
-        <LinearLayout
-            android:id="@+id/ll_forms_section"
+        <FrameLayout
+            android:id="@+id/fl_forms_section"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/rl_hero_section"
             android:layout_above="@+id/ll_summary_section"
-            android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            >
+            />
 
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tab_layout"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/action_bar_height"
-                app:tabMode="scrollable"
-                app:tabIndicatorColor="@color/color_ui01"
-                app:tabIndicatorHeight="@dimen/common_spacing"
-                app:tabPaddingStart="@dimen/common_horz_large"
-                app:tabPaddingEnd="@dimen/common_horz_large"
-                />
+        <!--<LinearLayout-->
+            <!--android:id="@+id/ll_forms_section"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_below="@+id/rl_hero_section"-->
+            <!--android:layout_above="@+id/ll_summary_section"-->
+            <!--android:orientation="vertical"-->
+            <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+            <!--&gt;-->
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/pager_forms"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                />
+            <!--<android.support.design.widget.TabLayout-->
+                <!--android:id="@+id/tab_layout"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/action_bar_height"-->
+                <!--app:tabMode="scrollable"-->
+                <!--app:tabIndicatorColor="@color/color_ui01"-->
+                <!--app:tabIndicatorHeight="@dimen/common_spacing"-->
+                <!--app:tabPaddingStart="@dimen/common_horz_large"-->
+                <!--app:tabPaddingEnd="@dimen/common_horz_large"-->
+                <!--/>-->
 
-        </LinearLayout>
+            <!--<android.support.v4.view.ViewPager-->
+                <!--android:id="@+id/pager_forms"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--/>-->
+
+        <!--</LinearLayout>-->
 
         <!--Scroll View ========================================================-->
 

@@ -5,23 +5,23 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
-import android.support.design.widget.TabLayout
+import android.support.design.widget.CoordinatorLayout
 import android.util.TypedValue
-import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.Animation
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.core.view.isGone
 import com.spgroup.spapp.R
-import com.spgroup.spapp.presentation.adapter.CategoryPagerAdapter
 import com.spgroup.spapp.presentation.adapter.PartnerImagesAdapter
+import com.spgroup.spapp.presentation.fragment.CartPartnerDetailFragment
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.doLogE
-import com.spgroup.spapp.util.extension.*
+import com.spgroup.spapp.util.extension.getDimensionPixelSize
+import com.spgroup.spapp.util.extension.loadAnimation
+import com.spgroup.spapp.util.extension.obtainViewModel
+import com.spgroup.spapp.util.extension.setOnGlobalLayoutListener
 import kotlinx.android.synthetic.main.activity_partner_details.*
 import kotlin.math.max
 
@@ -45,7 +45,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     ///////////////////////////////////////////////////////////////////////////
 
     lateinit var mImageAdapter: PartnerImagesAdapter
-    lateinit var mCategoryAdapter: CategoryPagerAdapter
+//    lateinit var mCategoryAdapter: CategoryPagerAdapter
     lateinit var mAnimationAppear: Animation
     lateinit var mAnimationDisappear: Animation
     private var mActionBarHeight: Int = 0
@@ -81,13 +81,11 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
             partnerDetails.observe(this@PartnerDetailsActivity, Observer {
                 it?.let {
 
-                    mCategoryAdapter.setData(it.categories)
                     tv_partner_name.text = it.name
                     tv_promotion.text = it.promo
                     val hasPromoBar = it.promo == null || it.promo.isEmpty()
                     ll_promotion_bar.isGone = hasPromoBar
                     mPromotionBarHeight = if (hasPromoBar) 0 else getDimensionPixelSize(R.dimen.promotion_bar_height)
-                    setUpTabLayout()
                     setUpBanners(it.banners)
                 }
             })
@@ -185,30 +183,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     }
 
     private fun setUpFormSection() {
-        mCategoryAdapter = CategoryPagerAdapter(supportFragmentManager)
-
-        pager_forms.offscreenPageLimit = 3
-        pager_forms.adapter = mCategoryAdapter
-
-        tab_layout.addOnTabSelectedListener(object : TabLayout.BaseOnTabSelectedListener<TabLayout.Tab> {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-                //Do nothing
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                val customView = tab?.customView
-                val textView = customView?.findViewById<TextView>(R.id.tv_content)
-                textView?.setUpMenuInactive()
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                val customView = tab?.customView
-                val textView = customView?.findViewById<TextView>(R.id.tv_content)
-                textView?.setUpMenuActive()
-            }
-
-        })
-
+        supportFragmentManager.beginTransaction().add(R.id.fl_forms_section, CartPartnerDetailFragment()).commit()
     }
 
     private fun setUpBanners(urls: List<String>?) {
@@ -218,22 +193,6 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
             pager_images.adapter = mImageAdapter
 
             pager_indicator.setViewPager(pager_images)
-        }
-    }
-
-    private fun setUpTabLayout() {
-        tab_layout.setupWithViewPager(pager_forms)
-        for (i in 0 until tab_layout.tabCount) {
-            val customView = LayoutInflater.from(this).inflate(R.layout.view_custom_service_cate_tab, null, false)
-            val tvContent = customView.findViewById<TextView>(R.id.tv_content)
-            tvContent.text = mCategoryAdapter.getPageTitle(i)
-            if (i == 0) {
-                tvContent.setUpMenuActive()
-            } else {
-                tvContent.setUpMenuInactive()
-            }
-            val tab = tab_layout.getTabAt(i)
-            tab?.customView = customView
         }
     }
 
@@ -281,9 +240,10 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     private fun updateVisibility(show: Boolean) {
         val visibility = if (show) View.VISIBLE else View.GONE
         ll_summary_section.visibility = visibility
-        val params = pager_forms.layoutParams as LinearLayout.LayoutParams
+
+        val params = fl_forms_section.layoutParams as CoordinatorLayout.LayoutParams
         params.bottomMargin = if (show) getDimensionPixelSize(R.dimen.bottom_button_total_height) else 0
-        pager_forms.layoutParams = params
+        fl_forms_section.layoutParams = params
     }
 
 }
