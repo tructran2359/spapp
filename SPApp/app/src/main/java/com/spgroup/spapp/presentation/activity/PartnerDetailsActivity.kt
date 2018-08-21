@@ -103,6 +103,12 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
                         }
                     }
                 })
+
+                estimatedPrice.observe(this@PartnerDetailsActivity, Observer {
+                    it?.let {
+                        btn_summary.setEstPrice(it)
+                    }
+                })
             }
 
             error.observe(this@PartnerDetailsActivity, Observer {

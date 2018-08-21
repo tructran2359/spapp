@@ -86,17 +86,19 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
 
     override fun onMultiplierItemChanged(itemData: MultiplierService, count: Int) {
         mViewModel.updateSelectedServiceCategories(
-                count,
-                mCategory!!.id,
-                itemData.id
+                count = count,
+                pricePerUnit = itemData.price,
+                categoryId = mCategory!!.id,
+                serviceId = itemData.id
         )
     }
 
     override fun onCheckboxItemChanged(itemData: CheckboxService, checked: Boolean) {
         mViewModel.updateSelectedServiceCategories(
-                checked.toInt(),
-                mCategory!!.id,
-                itemData.id
+                count = checked.toInt(),
+                pricePerUnit = 0f,
+                categoryId = mCategory!!.id,
+                serviceId = itemData.id
         )
     }
 

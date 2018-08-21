@@ -20,6 +20,7 @@ class PartnerDetailsViewModel(
 
     val partnerDetails = MutableLiveData<PartnerDetails>()
     val selectedCount = MutableLiveData<Int>()
+    val estimatedPrice = MutableLiveData<Float>()
 
     init {
         selectedCount.value = 0
@@ -56,22 +57,24 @@ class PartnerDetailsViewModel(
         }
     }
 
-    fun updateSelectedServiceCategories(count: Int, categoryId: String, serviceId: Int) {
+    fun updateSelectedServiceCategories(count: Int, pricePerUnit: Float, categoryId: String, serviceId: Int) {
         doLogD(msg = "count:$count catId:$categoryId serId:$serviceId")
         var selectedValueList = mapSelectedValue[categoryId]
+        val subTotal = count * pricePerUnit
         if (selectedValueList != null) {
             var existed = false
             selectedValueList.forEach { valueItem ->
                 if (valueItem.serviceId == serviceId) {
                     existed = true
                     valueItem.count = count
+                    valueItem.subTotal = subTotal
                 }
             }
             if (!existed) {
-                selectedValueList.add(SelectedValueItem(serviceId, count))
+                selectedValueList.add(SelectedValueItem(serviceId, count, subTotal))
             }
         } else {
-            val valueItem = SelectedValueItem(serviceId, count)
+            val valueItem = SelectedValueItem(serviceId, count, subTotal)
             selectedValueList = mutableListOf(valueItem)
         }
         mapSelectedValue[categoryId] = selectedValueList
@@ -81,6 +84,12 @@ class PartnerDetailsViewModel(
                 .flatten() // to list of all List<SelectedValueItem>
                 .map { it.count } // to list of SelectedValueItem#count
                 .sum() // sum of SelectedValueItem#count
+
+        estimatedPrice.value = mapSelectedValue
+                .map { it.value }
+                .flatten()
+                .map { it.subTotal }
+                .sum()
     }
 
     fun getCategory(categoryId: String): Category? {
