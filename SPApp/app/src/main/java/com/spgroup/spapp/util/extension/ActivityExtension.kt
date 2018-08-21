@@ -9,6 +9,9 @@ import android.net.Uri
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import com.spgroup.spapp.R
+import com.spgroup.spapp.presentation.activity.PartnerDetailsActivity
+import com.spgroup.spapp.presentation.activity.PartnerInformationActivity
+import com.spgroup.spapp.util.ConstUtils
 import org.jetbrains.anko.longToast
 
 inline fun <T : ViewModel> FragmentActivity.obtainViewModel(viewModelClass: Class<T>, viewModelFactory: ViewModelProvider.Factory?) =
@@ -34,4 +37,18 @@ inline fun Context.openBrowser(url: String?) {
     }
     val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(fullUrl))
     startActivity(browserIntent)
+}
+
+inline fun Context.getPartnerDetailIntent(uen: String, partnerType: String): Intent {
+    return when(partnerType) {
+
+        ConstUtils.PARTNER_TYPE_CART -> PartnerDetailsActivity.getLaunchIntent(this, uen, true)
+
+        ConstUtils.PARTNER_TYPE_INFO -> PartnerInformationActivity.getLaunchIntentForUnavailableData(this, uen)
+
+        ConstUtils.PARTNER_TYPE_DETAIL_INFO -> PartnerDetailsActivity.getLaunchIntent(this, uen, false)
+
+        else -> throw IllegalArgumentException("Invalid partner type: $partnerType with uen: $uen")
+
+    }
 }

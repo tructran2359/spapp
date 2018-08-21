@@ -87,15 +87,7 @@ class PartnerListingActivity : BaseActivity() {
     private fun onPartnerListingItemClick(view: View, itemData: PartnersListingItem, position: Int) {
         when (itemData) {
             is Partner -> {
-                val intent = if (itemData.isInfo()) {
-                    PartnerInformationActivity.getLaunchIntentForUnavailableData(this, itemData.uen)
-                } else if (itemData.isCart()){
-                    PartnerDetailsActivity.getLaunchIntent(this, itemData.uen, true)
-                } else if (itemData.isDetailInfo()) {
-                    PartnerDetailsActivity.getLaunchIntent(this, itemData.uen, false)
-                } else {
-                    throw IllegalArgumentException("Invalid type: ${itemData.partnerType}")
-                }
+                val intent = getPartnerDetailIntent(itemData.uen, itemData.partnerType)
                 startActivity(intent)
             }
 

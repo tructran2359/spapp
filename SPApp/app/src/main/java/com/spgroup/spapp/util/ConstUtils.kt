@@ -23,5 +23,9 @@ class ConstUtils {
         const val EXTRA_SERVICE_ID = "EXTRA_SERVICE_ID"
 
         const val TAG_DIALOG = "TAG_DIALOG"
+
+        const val PARTNER_TYPE_CART = "cart"
+        const val PARTNER_TYPE_INFO = "info"
+        const val PARTNER_TYPE_DETAIL_INFO = "detail_info"
     }
 }

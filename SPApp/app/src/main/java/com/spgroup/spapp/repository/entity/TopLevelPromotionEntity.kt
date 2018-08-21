@@ -7,6 +7,7 @@ data class TopLevelPromotionEntity(
         val promoText: String,
         val partnerName: String,
         val partnerId: String,
+        val partnerType: String,
         val start: Date,
         val end: Date
 )

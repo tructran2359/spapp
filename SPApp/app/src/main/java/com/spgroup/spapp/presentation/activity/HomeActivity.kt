@@ -25,6 +25,7 @@ import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.extension.getDimensionPixelSize
 import com.spgroup.spapp.util.extension.getDisplayMetrics
+import com.spgroup.spapp.util.extension.getPartnerDetailIntent
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.menu_home.*
 import org.jetbrains.anko.longToast
@@ -73,7 +74,7 @@ open class HomeActivity :
     ///////////////////////////////////////////////////////////////////////////
 
     override fun onPromotionClick(promotion: TopLevelPromotion, position: Int) {
-        startActivity(PartnerDetailsActivity.getLaunchIntent(this, promotion.partnerId))
+        startActivity(getPartnerDetailIntent(promotion.partnerId, promotion.partnerType))
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -81,7 +82,7 @@ open class HomeActivity :
     ///////////////////////////////////////////////////////////////////////////
 
     override fun onMerchantClick(topLevelFeaturedPartner: TopLevelFeaturedPartner, position: Int) {
-        startActivity(PartnerDetailsActivity.getLaunchIntent(this, topLevelFeaturedPartner.id))
+        startActivity(getPartnerDetailIntent(topLevelFeaturedPartner.id, topLevelFeaturedPartner.partnerType))
     }
 
     ///////////////////////////////////////////////////////////////////////////

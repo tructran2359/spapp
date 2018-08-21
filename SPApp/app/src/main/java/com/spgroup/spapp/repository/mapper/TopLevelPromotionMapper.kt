@@ -9,6 +9,7 @@ class TopLevelPromotionMapper: IMapper<TopLevelPromotionEntity, TopLevelPromotio
                 imageUrl = entity.image,
                 promoText = entity.promoText,
                 partnerName = entity.partnerName,
+                partnerType = entity.partnerType,
                 partnerId = entity.partnerId,
                 start = entity.start,
                 end = entity.end)

@@ -6,5 +6,6 @@ data class TopLevelFeaturedPartner(
         val id: String,
         val name: String,
         val category: String,
-        val logoUrl: String
+        val logoUrl: String,
+        val partnerType: String
 ) : Serializable
