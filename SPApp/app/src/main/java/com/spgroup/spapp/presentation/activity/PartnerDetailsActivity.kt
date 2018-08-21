@@ -5,17 +5,15 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
-import android.support.design.widget.TabLayout
+import android.support.design.widget.CoordinatorLayout
 import android.util.TypedValue
-import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.Animation
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.core.view.isGone
 import com.spgroup.spapp.R
-import com.spgroup.spapp.presentation.adapter.CategoryPagerAdapter
 import com.spgroup.spapp.presentation.adapter.PartnerImagesAdapter
+import com.spgroup.spapp.presentation.fragment.CartPartnerDetailFragment
+import com.spgroup.spapp.presentation.fragment.DetailInfoPartnerDetailFragment
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
@@ -33,9 +31,10 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
 
     companion object {
 
-        fun getLaunchIntent(context: Context, partnerUEN: String): Intent {
+        fun getLaunchIntent(context: Context, partnerUEN: String, isCart: Boolean): Intent {
             val intent = Intent(context, PartnerDetailsActivity::class.java)
             intent.putExtra(ConstUtils.EXTRA_PARTNER_UEN, partnerUEN)
+            intent.putExtra(ConstUtils.EXTRA_IS_CART, isCart)
             return intent
         }
     }
@@ -45,13 +44,14 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     ///////////////////////////////////////////////////////////////////////////
 
     lateinit var mImageAdapter: PartnerImagesAdapter
-    lateinit var mCategoryAdapter: CategoryPagerAdapter
+//    lateinit var mCategoryAdapter: CategoryPagerAdapter
     lateinit var mAnimationAppear: Animation
     lateinit var mAnimationDisappear: Animation
     private var mActionBarHeight: Int = 0
     private var mInitTextSize = 0f
     private var mPromotionBarHeight = 0
     private lateinit var mViewModel: PartnerDetailsViewModel
+    private var mIsCart = true
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -62,6 +62,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         setContentView(R.layout.activity_partner_details)
 
         mActionBarHeight = getDimensionPixelSize(R.dimen.action_bar_height)
+        mIsCart = intent.getBooleanExtra(ConstUtils.EXTRA_IS_CART, true)
 
         initAnimations()
 
@@ -81,29 +82,29 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
             partnerDetails.observe(this@PartnerDetailsActivity, Observer {
                 it?.let {
 
-                    mCategoryAdapter.setData(it.categories)
                     tv_partner_name.text = it.name
                     tv_promotion.text = it.promo
                     val hasPromoBar = it.promo == null || it.promo.isEmpty()
                     ll_promotion_bar.isGone = hasPromoBar
                     mPromotionBarHeight = if (hasPromoBar) 0 else getDimensionPixelSize(R.dimen.promotion_bar_height)
-                    setUpTabLayout()
                     setUpBanners(it.banners)
                 }
             })
 
-            selectedCount.observe(this@PartnerDetailsActivity, Observer {
-                doLogD(msg = "Selected $it item")
-                it?.let {
-                    // Temporarily hide this line coz updating total count textview is not in this task
-                    //                    btn_summary.setCount(it)
-                    if (it != 0 && ll_summary_section.visibility == View.GONE) {
-                        showSummaryButton(true)
-                    } else if (it == 0 && ll_summary_section.visibility == View.VISIBLE) {
-                        showSummaryButton(false)
+            if (mIsCart) {
+                selectedCount.observe(this@PartnerDetailsActivity, Observer {
+                    doLogD(msg = "Selected $it item")
+                    it?.let {
+                        // Temporarily hide this line coz updating total count textview is not in this task
+                        //                    btn_summary.setCount(it)
+                        if (it != 0 && ll_summary_section.visibility == View.GONE) {
+                            showSummaryButton(true)
+                        } else if (it == 0 && ll_summary_section.visibility == View.VISIBLE) {
+                            showSummaryButton(false)
+                        }
                     }
-                }
-            })
+                })
+            }
 
             error.observe(this@PartnerDetailsActivity, Observer {
                 // do something with error
@@ -185,30 +186,13 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     }
 
     private fun setUpFormSection() {
-        mCategoryAdapter = CategoryPagerAdapter(supportFragmentManager)
+        val fragment = if (mIsCart) {
+            CartPartnerDetailFragment()
+        } else {
+            DetailInfoPartnerDetailFragment()
+        }
 
-        pager_forms.offscreenPageLimit = 3
-        pager_forms.adapter = mCategoryAdapter
-
-        tab_layout.addOnTabSelectedListener(object : TabLayout.BaseOnTabSelectedListener<TabLayout.Tab> {
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-                //Do nothing
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                val customView = tab?.customView
-                val textView = customView?.findViewById<TextView>(R.id.tv_content)
-                textView?.setUpMenuInactive()
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                val customView = tab?.customView
-                val textView = customView?.findViewById<TextView>(R.id.tv_content)
-                textView?.setUpMenuActive()
-            }
-
-        })
-
+        supportFragmentManager.beginTransaction().add(R.id.fl_forms_section, fragment).commit()
     }
 
     private fun setUpBanners(urls: List<String>?) {
@@ -218,22 +202,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
             pager_images.adapter = mImageAdapter
 
             pager_indicator.setViewPager(pager_images)
-        }
-    }
-
-    private fun setUpTabLayout() {
-        tab_layout.setupWithViewPager(pager_forms)
-        for (i in 0 until tab_layout.tabCount) {
-            val customView = LayoutInflater.from(this).inflate(R.layout.view_custom_service_cate_tab, null, false)
-            val tvContent = customView.findViewById<TextView>(R.id.tv_content)
-            tvContent.text = mCategoryAdapter.getPageTitle(i)
-            if (i == 0) {
-                tvContent.setUpMenuActive()
-            } else {
-                tvContent.setUpMenuInactive()
-            }
-            val tab = tab_layout.getTabAt(i)
-            tab?.customView = customView
+            pager_indicator.isGone = urls.size < 2
         }
     }
 
@@ -264,13 +233,20 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     }
 
     private fun setUpSummarySection() {
-        ll_summary_section.visibility = View.GONE
+        ll_summary_section.isGone = mIsCart
+        btn_summary.isGone = !mIsCart
+        tv_visit_website.isGone = mIsCart
 
         btn_summary.setOnClickListener {
             val intent = OrderSummaryActivity.getLaunchIntent(this)
             startActivity(intent)
         }
         btn_summary.setPrice(0f)
+
+        tv_visit_website.setOnClickListener {
+            val url = mViewModel.partnerDetails.value?.website
+            openBrowser(url)
+        }
     }
 
     private fun showSummaryButton(show: Boolean) {
@@ -281,9 +257,10 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     private fun updateVisibility(show: Boolean) {
         val visibility = if (show) View.VISIBLE else View.GONE
         ll_summary_section.visibility = visibility
-        val params = pager_forms.layoutParams as LinearLayout.LayoutParams
+
+        val params = fl_forms_section.layoutParams as CoordinatorLayout.LayoutParams
         params.bottomMargin = if (show) getDimensionPixelSize(R.dimen.bottom_button_total_height) else 0
-        pager_forms.layoutParams = params
+        fl_forms_section.layoutParams = params
     }
 
 }

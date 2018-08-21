@@ -54,10 +54,12 @@ class TopLeverCateGroupView: LinearLayout {
     fun setListCategory(list: List<TopLevelCategory>) {
         mList = list
         mList.forEachIndexed { index, cat ->
-            with(mListCateView[index]) {
-                setData(cat.name, cat.homeThumbnail.toFullImgUrl())
-                setOnClickListener {
-                    mListener?.onCategoryClick(index)
+            if (index < mListCateView.size) {
+                with(mListCateView[index]) {
+                    setData(cat.name, cat.homeThumbnail.toFullImgUrl())
+                    setOnClickListener {
+                        mListener?.onCategoryClick(index)
+                    }
                 }
             }
         }

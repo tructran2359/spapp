@@ -3,7 +3,6 @@ package com.spgroup.spapp.presentation.activity
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.widget.NestedScrollView
 import android.view.View
@@ -15,6 +14,7 @@ import com.spgroup.spapp.presentation.view.IndicatorTextView
 import com.spgroup.spapp.presentation.viewmodel.PartnerInfoViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.extension.obtainViewModel
+import com.spgroup.spapp.util.extension.openBrowser
 import com.spgroup.spapp.util.extension.toHtmlSpanned
 import com.spgroup.spapp.util.extension.toHtmlUnderlineText
 import kotlinx.android.synthetic.main.activity_partner_information.*
@@ -131,12 +131,7 @@ class PartnerInformationActivity : BaseActivity() {
             }
 
             tv_visit_website.setOnClickListener {
-                var url = website
-                if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                    url = "http://" + url
-                }
-                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                startActivity(browserIntent)
+                openBrowser(website)
             }
         }
 
