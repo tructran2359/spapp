@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
-import com.spgroup.spapp.presentation.activity.MenuDetailActivity
 import com.spgroup.spapp.presentation.view.MenuView
 import kotlinx.android.synthetic.main.fragment_weekly_menu.*
 
@@ -44,9 +43,10 @@ class WeeklyMenuFragment: BaseFragment(), MenuView.OnMenuItemClickListener {
     ///////////////////////////////////////////////////////////////////////////
 
     override fun onMenuItemClick(menuItem: String) {
-        activity?.let {
-            val intent = MenuDetailActivity.getLaunchIntent(it)
-            it.startActivity(intent)
-        }
+        //TODO: Implement later
+//        activity?.let {
+//            val intent = PdfActivity.getLaunchIntent(it)
+//            it.startActivity(intent)
+//        }
     }
 }

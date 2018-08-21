@@ -72,7 +72,7 @@
         </activity>
 
         <activity
-            android:name=".presentation.activity.MenuDetailActivity"
+            android:name=".presentation.activity.PdfActivity"
             android:screenOrientation="portrait"
             />
 

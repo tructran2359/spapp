@@ -9,7 +9,7 @@ data class PartnerDetails(
         val description: String,                        //6
         val phone: String,                              //7
         val website: String,                            //8
-        val tnc: String,                                //9
+        val tnc: String?,                               //9  Nullable
         val promo: String?,                             //10 Nullable
         val discount: String,                           //11
         val offeringTitle: String,                      //12

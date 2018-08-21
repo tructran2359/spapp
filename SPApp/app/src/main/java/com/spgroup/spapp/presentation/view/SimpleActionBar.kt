@@ -63,4 +63,8 @@ class SimpleActionBar: RelativeLayout {
         tv_title.setText(resId)
     }
 
+    fun setTitle(title: String) {
+        tv_title.text = title
+    }
+
 }

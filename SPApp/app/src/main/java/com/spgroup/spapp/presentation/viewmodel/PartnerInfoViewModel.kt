@@ -28,7 +28,8 @@ class PartnerInfoViewModel(
                                         phone = phone,
                                         uen = uen,
                                         nea = nea,
-                                        website = website
+                                        website = website,
+                                        tnc = tnc
                                 )
                             }
                         },
