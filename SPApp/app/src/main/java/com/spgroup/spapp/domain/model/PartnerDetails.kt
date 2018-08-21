@@ -19,4 +19,22 @@ data class PartnerDetails(
         val menus: List<FoodMenu>?,                     //16 Nullable
         val serviceInfo: PartnerDetailServiceInfo?      //17 Nullable
 
-)
+) {
+    fun findService(categoryId: String, serviceId: Int): AbsServiceItem? {
+        if (categories != null) {
+            categories.forEach { category ->
+                if (category.id == categoryId) {
+                    category.subCategories.forEach { subCategory: SubCategory ->
+                        subCategory.services.forEach { absServiceItem: AbsServiceItem ->
+                            if (absServiceItem.getServiceId() == serviceId) {
+                                return absServiceItem
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return null
+    }
+}
