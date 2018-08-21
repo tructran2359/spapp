@@ -202,6 +202,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
             pager_images.adapter = mImageAdapter
 
             pager_indicator.setViewPager(pager_images)
+            pager_indicator.isGone = urls.size < 2
         }
     }
 
