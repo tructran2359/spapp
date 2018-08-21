@@ -5,18 +5,21 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.widget.NestedScrollView
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.core.view.isGone
 import com.spgroup.spapp.R
-import com.spgroup.spapp.presentation.view.IndicatorTextView
 import com.spgroup.spapp.presentation.viewmodel.PartnerInfoViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.extension.getColorFromRes
 import com.spgroup.spapp.util.extension.obtainViewModel
 import com.spgroup.spapp.util.extension.openBrowser
-import com.spgroup.spapp.util.extension.toHtmlSpanned
-import com.spgroup.spapp.util.extension.toHtmlUnderlineText
 import kotlinx.android.synthetic.main.activity_partner_information.*
 import java.io.Serializable
 
@@ -119,16 +122,30 @@ class PartnerInformationActivity : BaseActivity() {
             tv_nea.text = nea
             ll_nea_container.isGone = nea.isEmpty()
 
-            val underlineText = getString(R.string.merchant_tnc_underline_text).toHtmlUnderlineText()
-            val formattedMerchantTnc = getString(R.string.merchant_tnc_with_format, underlineText)
-            tv_merchant_tnc.text = formattedMerchantTnc.toHtmlSpanned()
 
-            for (str in offers) {
-                if (!str.isEmpty()) {
-                    val view = IndicatorTextView(this@PartnerInformationActivity, str)
-                    ll_service_container.addView(view)
+            // Setup TnC link from server
+            val tncText = getString(R.string.merchant_tnc_underline_text)
+            val formattedText = getString(R.string.merchant_tnc_with_format, tncText)
+            val ss = SpannableString(formattedText)
+            val clickableSpan = object :ClickableSpan() {
+                override fun onClick(view: View?) {
+                    val intent = PdfActivity.getLaunchIntent(
+                            this@PartnerInformationActivity,
+                            data.name,
+                            data.tnc)
+                    startActivity(intent)
+                }
+
+                override fun updateDrawState(ds: TextPaint?) {
+                    super.updateDrawState(ds)
+                    ds?.isUnderlineText = true
+                    ds?.color = getColorFromRes(R.color.color_grey)
                 }
             }
+            val tncIndex = formattedText.indexOf(tncText)
+            ss.setSpan(clickableSpan, tncIndex, tncIndex + tncText.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            tv_merchant_tnc.text = ss
+            tv_merchant_tnc.movementMethod = LinkMovementMethod.getInstance()
 
             tv_visit_website.setOnClickListener {
                 openBrowser(website)
@@ -182,6 +199,7 @@ class PartnerInformationActivity : BaseActivity() {
             val phone: String,
             val uen: String,
             val nea: String,
-            val website: String
+            val website: String,
+            val tnc: String?
     ): Serializable
 }
