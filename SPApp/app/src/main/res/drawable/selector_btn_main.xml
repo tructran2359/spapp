@@ -3,5 +3,6 @@
 
     <item android:state_pressed="true" android:drawable="@drawable/bg_rec_rounded_main_on_press"/>
     <item android:state_pressed="false" android:drawable="@drawable/bg_rec_rounded_main"/>
+    <item android:state_enabled="false" android:drawable="@drawable/bg_rec_rounded_main_disabled"/>
 
 </selector>

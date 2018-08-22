@@ -132,6 +132,7 @@ class OrderSummaryActivity : BaseActivity() {
             mTotalCount.observe(this@OrderSummaryActivity, Observer {
                 it?.let {
                     btn_summary.setCount(it)
+                    btn_summary.isEnabled = it != 0
                 }
             })
 
