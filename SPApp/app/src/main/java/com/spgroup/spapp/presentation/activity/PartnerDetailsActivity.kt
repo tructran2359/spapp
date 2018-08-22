@@ -1,5 +1,6 @@
 package com.spgroup.spapp.presentation.activity
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
@@ -30,6 +31,8 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     ///////////////////////////////////////////////////////////////////////////
 
     companion object {
+
+        const val RC_CUSTOMISE = 1
 
         fun getLaunchIntent(context: Context, partnerUEN: String, isCart: Boolean): Intent {
             val intent = Intent(context, PartnerDetailsActivity::class.java)
@@ -69,6 +72,16 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         setUpViews()
 
         setupViewModel()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_CUSTOMISE && resultCode == Activity.RESULT_OK) {
+            data?.run {
+                val customiseDisplayData = data.getSerializableExtra(CustomiseNewActivity.EXTRA_DISPLAY_DATA) as CustomiseDisplayData
+                mViewModel.updateComplexSelectedServiceItem(customiseDisplayData)
+            }
+        }
     }
 
     private fun setupViewModel() {
