@@ -22,6 +22,7 @@ import com.spgroup.spapp.presentation.viewmodel.*
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_order_summary.*
+import kotlinx.android.synthetic.main.layout_summary_estimated.*
 
 class OrderSummaryActivity : BaseActivity() {
 
@@ -125,6 +126,19 @@ class OrderSummaryActivity : BaseActivity() {
                         startActivity(EmptyRequestActivity.getLaunchIntent(this@OrderSummaryActivity))
                         this@OrderSummaryActivity.finish()
                     }
+                }
+            })
+
+            mTotalCount.observe(this@OrderSummaryActivity, Observer {
+                it?.let {
+                    btn_summary.setCount(it)
+                }
+            })
+
+            mEstPrice.observe(this@OrderSummaryActivity, Observer {
+                it?.let {
+                    tv_total_value.text = it.formatPrice()
+                    btn_summary.setEstPrice(it)
                 }
             })
         }
