@@ -324,13 +324,14 @@ class OrderSummaryActivity : BaseActivity() {
         view.run {
             setLayoutParams(layoutParams)
             setName(service.label)
-            setPrice(service.price)
+            setPrice(service.price * item.count)
             initData(service.min, service.max, item.count)
             setTag(tag)
             setOnCountChangedListener(object : CounterView.OnCountChangeListener {
                 override fun onPlus() {
                     val count = getCount() + 1
                     setCount(count)
+                    setPrice(service.price * count)
                     mViewModel.updateNormalSelectedServiceItem(
                             service,
                             count,
@@ -341,6 +342,7 @@ class OrderSummaryActivity : BaseActivity() {
                 override fun onMinus() {
                     val count = getCount() - 1
                     setCount(count)
+                    setPrice(service.price * count)
                     mViewModel.updateNormalSelectedServiceItem(
                             service,
                             count,
