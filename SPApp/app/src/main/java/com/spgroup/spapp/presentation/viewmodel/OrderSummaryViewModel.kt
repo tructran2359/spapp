@@ -2,55 +2,58 @@ package com.spgroup.spapp.presentation.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.spgroup.spapp.domain.model.NormalizedSummaryData
-import com.spgroup.spapp.domain.model.ServiceCategory
-import com.spgroup.spapp.domain.model.ServiceItem
-import com.spgroup.spapp.domain.usecase.GetOrderSummaryUsecase
 
-class OrderSummaryViewModel(val usecase: GetOrderSummaryUsecase): ViewModel() {
+class OrderSummaryViewModel(): ViewModel() {
 
-    val mListNormalizedData = MutableLiveData<MutableList<NormalizedSummaryData>>()
-    val mDeletedCateId = MutableLiveData<Int>()
+    val mDeletedCateId = MutableLiveData<String>()
     val mDeletedServiceId = MutableLiveData<Int>()
     val mEmpty = MutableLiveData<Boolean>()
+//    val mListNormalizedData = MutableLiveData<MutableList<NormalizedSummaryData>>()
 
-    fun initData(listCate: List<ServiceCategory>) {
-        mListNormalizedData.value = usecase.normalizeSummaryData(listCate).toMutableList()
+
+    private lateinit var mMapCateInfo: HashMap<String, String>
+    var mMapSelectedServices = MutableLiveData<HashMap<String, MutableList<ISelectedService>>>()
+
+    fun initData(mapCateInfo: HashMap<String, String>, mapSelectedServices: HashMap<String, MutableList<ISelectedService>>) {
+        mMapCateInfo = mapCateInfo
+        mMapSelectedServices.value = mapSelectedServices
     }
 
-    fun getServiceById(id: Int): ServiceItem? {
-        mListNormalizedData.value?.run {
-            for (data in this) {
-                for (service in data.listService) {
-                    if (service.id == id) {
-                        return service
-                    }
-                }
-            }
-        }
-        return null
-    }
+//    fun getServiceById(id: Int): ISelectedService? {
+//        mListNormalizedData.value?.run {
+//            for (data in this) {
+//                for (selectedService in data.listSelectedService) {
+//                    if (selectedService.getId() == id) {
+//                        return selectedService
+//                    }
+//                }
+//            }
+//        }
+//        return null
+//    }
 
     fun deleteService(id: Int) {
-        mListNormalizedData.value?.run {
-            for (data in this) {
-                for (service in data.listService) {
-                    if (service.id == id) {
-                        data.listService.remove(service)
-                        mDeletedServiceId.value = service.id
-                        if (data.listService.isEmpty()) {
-                            this.remove(data)
-                            mDeletedCateId.value = data.cateId
-                        }
-
-                        if (this.isEmpty()) {
-                            mEmpty.value = true
-                        }
-                        return
-                    }
-                }
-            }
-        }
+//        mListNormalizedData.value?.run {
+//            for (data in this) {
+//                for (selectedService in data.listSelectedService) {
+//                    if (selectedService.getId() == id) {
+//                        data.listSelectedService.remove(selectedService)
+//                        mDeletedServiceId.value = selectedService.getId()
+//                        if (data.listSelectedService.isEmpty()) {
+//                            this.remove(data)
+//                            mDeletedCateId.value = data.cateId
+//                        }
+//
+//                        if (this.isEmpty()) {
+//                            mEmpty.value = true
+//                        }
+//                        return
+//                    }
+//                }
+//            }
+//        }
     }
+
+    fun getCateName(cateId: String) = mMapCateInfo[cateId]
 
 }

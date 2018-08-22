@@ -1,7 +1,6 @@
 package com.spgroup.spapp.presentation.activity
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -19,25 +18,26 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.*
 import com.spgroup.spapp.presentation.adapter.PreferredTimeAdapter
 import com.spgroup.spapp.presentation.view.*
-import com.spgroup.spapp.presentation.viewmodel.CustomiseViewModel
-import com.spgroup.spapp.presentation.viewmodel.OrderSummaryViewModel
-import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
-import com.spgroup.spapp.util.ConstUtils
+import com.spgroup.spapp.presentation.viewmodel.*
 import com.spgroup.spapp.util.doLogD
-import com.spgroup.spapp.util.extension.getDimensionPixelSize
-import com.spgroup.spapp.util.extension.isNumberOnly
-import com.spgroup.spapp.util.extension.isValidEmail
-import com.spgroup.spapp.util.extension.updateVisibility
+import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_order_summary.*
 
 class OrderSummaryActivity : BaseActivity() {
 
     companion object {
 
-        @JvmField val RC_EDIT = 11
+        const val RC_EDIT = 11
+        const val EXTRA_CATE_INFO_MAP = "EXTRA_CATE_INFO_MAP"
+        const val EXTRA_SERVICE_MAP = "EXTRA_SERVICE_MAP"
 
-        fun getLaunchIntent(context: Context): Intent {
+        fun getLaunchIntent(
+                context: Context,
+                mapCateInfo: HashMap<String, String>,
+                mapSelectedServices: HashMap<String, MutableList<ISelectedService>>): Intent {
             val intent = Intent(context, OrderSummaryActivity::class.java)
+            intent.putExtra(EXTRA_CATE_INFO_MAP, mapCateInfo)
+            intent.putExtra(EXTRA_SERVICE_MAP, mapSelectedServices)
             return intent
         }
     }
@@ -62,26 +62,30 @@ class OrderSummaryActivity : BaseActivity() {
         initAnimations()
         initViews()
 
+        mViewModel = obtainViewModel(OrderSummaryViewModel::class.java, ViewModelFactory.getInstance())
         subscribeUI()
+        val mapCateInfo = intent.getSerializableExtra(EXTRA_CATE_INFO_MAP) as HashMap<String, String>
+        val mapSelectedServices = intent.getSerializableExtra(EXTRA_SERVICE_MAP) as HashMap<String, MutableList<ISelectedService>>
+        mViewModel.initData(mapCateInfo, mapSelectedServices)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_EDIT && resultCode == RESULT_OK) {
-            data?.let {
-                val content = data.getSerializableExtra(ConstUtils.EXTRA_CONTENT) as CustomiseViewModel.Content
-                val serviceId = data.getIntExtra(ConstUtils.EXTRA_SERVICE_ID, -1)
-                if (serviceId != -1) {
-                    val service = mViewModel.getServiceById(serviceId)
-                    if (service != null) {
-                        val view = ll_item_container.findViewWithTag<SummaryItemViewCombo>(createServiceTag(serviceId))
-                        (service as ServiceItemComboDummy).run {
-                            this.dummyContent = content
-                            view.setDummyData(this.dummyContent)
-                        }
-                    }
-                }
-            }
+//            data?.let {
+//                val content = data.getSerializableExtra(ConstUtils.EXTRA_CONTENT) as CustomiseViewModel.Content
+//                val serviceId = data.getIntExtra(ConstUtils.EXTRA_SERVICE_ID, -1)
+//                if (serviceId != -1) {
+//                    val service = mViewModel.getServiceById(serviceId)
+//                    if (service != null) {
+//                        val view = ll_item_container.findViewWithTag<SummaryItemViewCombo>(createServiceTag(serviceId))
+//                        (service as ServiceItemComboDummy).run {
+//                            this.dummyContent = content
+//                            view.setDummyData(this.dummyContent)
+//                        }
+//                    }
+//                }
+//            }
         }
 
     }
@@ -91,12 +95,10 @@ class OrderSummaryActivity : BaseActivity() {
     ///////////////////////////////////////////////////////////////////////////
 
     private fun subscribeUI() {
-        val factory = ViewModelFactory.getInstance()
-        mViewModel = ViewModelProviders.of(this, factory).get(OrderSummaryViewModel::class.java)
 
         mViewModel.run {
 
-            mListNormalizedData.observe(this@OrderSummaryActivity, Observer {
+            mMapSelectedServices.observe(this@OrderSummaryActivity, Observer {
                 it?.let {
                     doLogD("Dummy", it.toString())
                     addView(it)
@@ -125,8 +127,6 @@ class OrderSummaryActivity : BaseActivity() {
                     }
                 }
             })
-
-            initData(createDummyData())
         }
     }
 
@@ -250,37 +250,33 @@ class OrderSummaryActivity : BaseActivity() {
         v_shadow.updateVisibility(show)
     }
 
-    private fun addView(list: List<NormalizedSummaryData>?) {
+    private fun addView(mapSelectedServices: HashMap<String, MutableList<ISelectedService>>) {
         ll_item_container.removeAllViews()
-        if (list == null || list.isEmpty()) return
 
         val inflater = LayoutInflater.from(this)
 
-        for (data in list) {
-                addHeader(inflater, data.cateName, data.cateId, data.needHeader())
+        for ((cateId, listSelectedServce) in mapSelectedServices) {
+                addHeader(inflater, mViewModel.getCateName(cateId) ?: "", cateId )
 
-            for (item in data.listService) {
-                when (item) {
-                    is ServiceItemCounter -> addItemCounter(item)
+            for (selectedService in listSelectedServce) {
+                when (selectedService) {
 
-                    is ServiceItemCheckBox -> addItemCheckbox(item)
+                    is SelectedService -> {
+                        if (selectedService.service is MultiplierService) {
+                            addItemCounter(selectedService)
+                        } else if (selectedService.service is CheckboxService) {
+                            addItemCheckbox(selectedService)
+                        }
+                    }
 
-                    is ServiceItemComboDummy -> addItemCombo(item)
+                    is ComplexSelectedService -> addItemCombo(selectedService)
                 }
             }
         }
     }
 
-    private fun addHeader(inflater: LayoutInflater, cateName: String, cateId: Int, needHeader: Boolean) {
+    private fun addHeader(inflater: LayoutInflater, cateName: String, cateId: String) {
         val tag = createCateTag(cateId)
-        if (!needHeader) {
-            val view = View(this)
-            view.setTag(tag)
-            view.visibility = View.GONE
-            ll_item_container.addView(view)
-            ll_item_container.setPadding(0, getDimensionPixelSize(R.dimen.common_horz_large), 0, 0)
-            return
-        }
 
         val tvHeader = inflater.inflate(R.layout.item_summary_header, null, false) as TextView
         val layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT)
@@ -299,8 +295,9 @@ class OrderSummaryActivity : BaseActivity() {
         ll_item_container.addView(tvHeader)
     }
 
-    private fun addItemCounter(item: ServiceItemCounter) {
-        val tag = createServiceTag(item.id)
+    private fun addItemCounter(item: SelectedService) {
+        val service = item.service as MultiplierService
+        val tag = createServiceTag(service.id)
         val view = SummaryItemView(this)
         val layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
 
@@ -311,30 +308,31 @@ class OrderSummaryActivity : BaseActivity() {
 
         view.run {
             setLayoutParams(layoutParams)
-            setName(item.name)
-            initData(item.minCount, item.maxCount, item.count)
+            setName(service.label)
+            initData(service.min, service.max, item.count)
             setTag(tag)
             setOnCountChangedListener(object : CounterView.OnCountChangeListener {
                 override fun onPlus() {
-                    item.count++
-                    setCount(item.count)
+//                    item.count++
+//                    setCount(item.count)
                 }
 
                 override fun onMinus() {
-                    item.count--
-                    setCount(item.count)
+//                    item.count--
+//                    setCount(item.count)
                 }
             })
             setOnDeleteListener {
-                mViewModel.deleteService(item.id)
+                mViewModel.deleteService(service.id)
             }
         }
 
         ll_item_container.addView(view)
     }
 
-    private fun addItemCheckbox(item: ServiceItemCheckBox) {
-        val tag = createServiceTag(item.id)
+    private fun addItemCheckbox(item: SelectedService) {
+        val service = item.service as CheckboxService
+        val tag = createServiceTag(service.id)
         val view = SummaryItemViewEstimated(this)
         val layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
 
@@ -345,19 +343,19 @@ class OrderSummaryActivity : BaseActivity() {
 
         view.run {
             setLayoutParams(layoutParams)
-            setName(item.name)
-            setDescription(item.description)
+            setName(service.label)
+            setDescription(service.serviceDescription)
             setTag(tag)
             setOnDeleteListener {
-                mViewModel.deleteService(item.id)
+                mViewModel.deleteService(service.id)
             }
         }
 
         ll_item_container.addView(view)
     }
 
-    private fun addItemCombo(item: ServiceItemComboDummy) {
-        val tag = createServiceTag(item.id)
+    private fun addItemCombo(item: ComplexSelectedService) {
+        val tag = createServiceTag(item.service.getServiceId())
         val view = SummaryItemViewCombo(this)
         val layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
 
@@ -366,23 +364,49 @@ class OrderSummaryActivity : BaseActivity() {
             bottomMargin = getDimensionPixelSize(R.dimen.common_vert_medium)
         }
 
-        view.run {
-            setLayoutParams(layoutParams)
-            setDummyData(item.dummyContent)
-            setOnEditClickListener {
-                val dummy = item.dummyContent
-                val intent = CustomiseActivity.getLaunchIntent(
-                        this@OrderSummaryActivity,
-                        item.toServiceItemCombo(),
-                        dummy,
-                        true)
-                startActivityForResult(intent, RC_EDIT)
-            }
-            setTag(tag)
-            setOnDeleteListener {
-                mViewModel.deleteService(item.id)
+        view.setLayoutParams(layoutParams)
+        view.setOnEditClickListener {
+            //TODO: Later
+        }
+        view.setTag(tag)
+        view.setOnDeleteListener {
+            mViewModel.deleteService(item.service.id)
+        }
+
+        view.setInstruction(item.specialInstruction ?: "")
+
+        item.selectedCustomisation?.let { hashMap ->
+            for ((index, selectedPos) in hashMap) {
+                val customisation = item.service.customisations[index]
+                when (customisation) {
+                    is BooleanCustomisation -> {
+                        if (selectedPos == 0) {
+                            //Yes
+                            view.addOption("Yes", customisation.price)
+                        } else if (selectedPos == 1) {
+                            //No
+                            view.addOption("No", 0f)
+                        }
+                    }
+
+                    is MatrixCustomisation -> {
+                        val matrixOptionItem = customisation.matrixOptions[selectedPos]
+                        view.addOption(matrixOptionItem.value.toString(), matrixOptionItem.price)
+                    }
+
+                    is DropdownCustomisation -> {
+                        val dropdownOptionItem = customisation.dropdownOptions[selectedPos]
+                        view.addOption(dropdownOptionItem.label, dropdownOptionItem.price)
+                    }
+
+                    is NumberCustomisation -> {
+                        val count = selectedPos + customisation.min
+                        view.addOption((count).toString(), count * customisation.price)
+                    }
+                }
             }
         }
+
 
         ll_item_container.addView(view)
     }
@@ -414,7 +438,7 @@ class OrderSummaryActivity : BaseActivity() {
 
     }
 
-    private fun createCateTag(cateId: Int) = "Cate" + cateId
+    private fun createCateTag(cateId: String) = "Cate" + cateId
 
     private fun createServiceTag(serviceId: Int) = "ServiceID${serviceId}"
 }

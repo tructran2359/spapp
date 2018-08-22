@@ -9,6 +9,7 @@ import com.spgroup.spapp.presentation.activity.PartnerInformationActivity
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.extension.formatPrice
 import com.spgroup.spapp.util.extension.toInt
+import java.io.Serializable
 
 class PartnerDetailsViewModel(
         private val getServicesListByPartnerUsecase: GetServicesListByPartnerUsecase,
@@ -16,7 +17,7 @@ class PartnerDetailsViewModel(
 ) : BaseViewModel() {
 
     lateinit var partnerUEN: String
-    private val mapSelectedServices = mutableMapOf<String, MutableList<ISelectedService>>()
+    val mapSelectedServices = HashMap<String, MutableList<ISelectedService>>()
 
     val partnerDetails = MutableLiveData<PartnerDetails>()
     val selectedCount = MutableLiveData<Int>()
@@ -50,7 +51,6 @@ class PartnerDetailsViewModel(
                         } else {
                             service.priceText = lowestPrice.formatPrice()
                         }
-
                     }
                 }
             }
@@ -92,7 +92,7 @@ class PartnerDetailsViewModel(
             var existed = false
             calculatingList.forEach { valueItem ->
                 (valueItem as SelectedService).run {
-                    if (serviceId == absServiceItem.getServiceId()) {
+                    if (service.getServiceId() == absServiceItem.getServiceId()) {
                         existed = true
                         this.count = count
                         this.subTotal = subTotal
@@ -100,10 +100,10 @@ class PartnerDetailsViewModel(
                 }
             }
             if (!existed) {
-                calculatingList.add(SelectedService(absServiceItem.getServiceId(), count, subTotal))
+                calculatingList.add(SelectedService(absServiceItem, count, subTotal))
             }
         } else {
-            val valueItem = SelectedService(absServiceItem.getServiceId(), count, subTotal)
+            val valueItem = SelectedService(absServiceItem, count, subTotal)
             calculatingList = mutableListOf(valueItem)
         }
         mapSelectedServices[categoryId] = calculatingList
@@ -182,12 +182,12 @@ class PartnerDetailsViewModel(
     fun updateComplexSelectedServiceItem(customiseDisplayData: CustomiseDisplayData) {
         customiseDisplayData.run {
             val listSelectedService = mapSelectedServices[categoryId]
-            if (mapSelectedOption == null || mapSelectedOption.isEmpty()) {
+            if (mapSelectedOption.isEmpty()) {
                 removeSelectedItem(listSelectedService, serviceItem.getServiceId())
             } else {
                 addComplexSelectedService(
                         categoryId,
-                        serviceItem.getServiceId(),
+                        serviceItem,
                         mapSelectedOption,
                         estPrice,
                         specialInstruction)
@@ -199,7 +199,7 @@ class PartnerDetailsViewModel(
 
     private fun addComplexSelectedService(
             categoryId: String,
-            serviceId: Int,
+            service: ComplexCustomisationService,
             mapSelectedOption: HashMap<Int, Int>,
             estPrice: Float,
             specialInstruction: String?) {
@@ -207,7 +207,7 @@ class PartnerDetailsViewModel(
         if (selectedServices != null) {
             var existed = false
             selectedServices.forEach { selectedService ->
-                if (selectedService.getId() == serviceId) {
+                if (selectedService.getId() == service.getServiceId()) {
                     existed = true
                     (selectedService as ComplexSelectedService).run {
                         this.selectedCustomisation = mapSelectedOption
@@ -218,7 +218,7 @@ class PartnerDetailsViewModel(
             }
             if (!existed) {
                 selectedServices.add(ComplexSelectedService(
-                        serviceId = serviceId,
+                        service = service,
                         selectedCustomisation = mapSelectedOption,
                         subTotal = estPrice,
                         specialInstruction = specialInstruction)
@@ -226,13 +226,27 @@ class PartnerDetailsViewModel(
             }
         } else {
             val selectedService = ComplexSelectedService(
-                    serviceId = serviceId,
+                    service = service,
                     selectedCustomisation = mapSelectedOption,
                     subTotal = estPrice,
                     specialInstruction = specialInstruction)
             selectedServices = mutableListOf(selectedService)
         }
         mapSelectedServices[categoryId] = selectedServices
+    }
+
+    /**
+     * Create map of <CategoryId, CategoryName>
+     */
+    fun getMapSelectedCategories(): HashMap<String, String> {
+        val hashMap = HashMap<String, String>()
+        val categories = partnerDetails.value?.categories
+        categories?.run {
+            for ((cateId, _) in mapSelectedServices) {
+                hashMap[cateId] = categories.first { it.id == cateId }.label
+            }
+        }
+        return hashMap
     }
 }
 
@@ -243,26 +257,26 @@ interface ISelectedService {
 }
 
 data class SelectedService(
-        var serviceId: Int,
+        var service: AbsServiceItem,
         var count: Int = 0,
         var subTotal: Float = 0F
-): ISelectedService {
+): ISelectedService, Serializable {
     override fun getSelectedCount() = count
 
     override fun getEstPrice() = subTotal
 
-    override fun getId() = serviceId
+    override fun getId() = service.getServiceId()
 }
 
 data class ComplexSelectedService(
-        var serviceId: Int,
+        var service: ComplexCustomisationService,
         var selectedCustomisation: HashMap<Int, Int>?, //<Option Index, Selected Position>
         var subTotal: Float,
         var specialInstruction: String?
-): ISelectedService {
+): ISelectedService, Serializable {
     override fun getSelectedCount() = (selectedCustomisation != null && !selectedCustomisation!!.isEmpty()).toInt()
 
     override fun getEstPrice() = subTotal
 
-    override fun getId() = serviceId
+    override fun getId() = service.getServiceId()
 }

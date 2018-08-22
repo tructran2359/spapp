@@ -87,7 +87,7 @@ class ViewModelFactory private constructor(
     }
 
     private fun createOrderSummaryViewModel(): OrderSummaryViewModel {
-        return OrderSummaryViewModel(Injection.provideGetOrderSummaryUsecase())
+        return OrderSummaryViewModel()
     }
 
     companion object {
