@@ -263,13 +263,13 @@ class OrderSummaryActivity : BaseActivity() {
 
                     is SelectedService -> {
                         if (selectedService.service is MultiplierService) {
-                            addItemCounter(selectedService)
+                            addItemCounter(cateId, selectedService)
                         } else if (selectedService.service is CheckboxService) {
-                            addItemCheckbox(selectedService)
+                            addItemCheckbox(cateId, selectedService)
                         }
                     }
 
-                    is ComplexSelectedService -> addItemCombo(selectedService)
+                    is ComplexSelectedService -> addItemCombo(cateId, selectedService)
                 }
             }
         }
@@ -295,7 +295,7 @@ class OrderSummaryActivity : BaseActivity() {
         ll_item_container.addView(tvHeader)
     }
 
-    private fun addItemCounter(item: SelectedService) {
+    private fun addItemCounter(cateId: String, item: SelectedService) {
         val service = item.service as MultiplierService
         val tag = createServiceTag(service.id)
         val view = SummaryItemView(this)
@@ -309,28 +309,39 @@ class OrderSummaryActivity : BaseActivity() {
         view.run {
             setLayoutParams(layoutParams)
             setName(service.label)
+            setPrice(service.price)
             initData(service.min, service.max, item.count)
             setTag(tag)
             setOnCountChangedListener(object : CounterView.OnCountChangeListener {
                 override fun onPlus() {
-//                    item.count++
-//                    setCount(item.count)
+                    val count = getCount() + 1
+                    setCount(count)
+                    mViewModel.updateNormalSelectedServiceItem(
+                            service,
+                            count,
+                            cateId
+                    )
                 }
 
                 override fun onMinus() {
-//                    item.count--
-//                    setCount(item.count)
+                    val count = getCount() - 1
+                    setCount(count)
+                    mViewModel.updateNormalSelectedServiceItem(
+                            service,
+                            count,
+                            cateId
+                    )
                 }
             })
             setOnDeleteListener {
-                mViewModel.deleteService(service.id)
+                mViewModel.deleteService(cateId, service.id)
             }
         }
 
         ll_item_container.addView(view)
     }
 
-    private fun addItemCheckbox(item: SelectedService) {
+    private fun addItemCheckbox(cateId: String, item: SelectedService) {
         val service = item.service as CheckboxService
         val tag = createServiceTag(service.id)
         val view = SummaryItemViewEstimated(this)
@@ -347,14 +358,14 @@ class OrderSummaryActivity : BaseActivity() {
             setDescription(service.serviceDescription)
             setTag(tag)
             setOnDeleteListener {
-                mViewModel.deleteService(service.id)
+                mViewModel.deleteService(cateId, service.id)
             }
         }
 
         ll_item_container.addView(view)
     }
 
-    private fun addItemCombo(item: ComplexSelectedService) {
+    private fun addItemCombo(cateId: String, item: ComplexSelectedService) {
         val tag = createServiceTag(item.service.getServiceId())
         val view = SummaryItemViewCombo(this)
         val layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
@@ -370,7 +381,7 @@ class OrderSummaryActivity : BaseActivity() {
         }
         view.setTag(tag)
         view.setOnDeleteListener {
-            mViewModel.deleteService(item.service.id)
+            mViewModel.deleteService(cateId, item.service.id)
         }
 
         view.setInstruction(item.specialInstruction ?: "")

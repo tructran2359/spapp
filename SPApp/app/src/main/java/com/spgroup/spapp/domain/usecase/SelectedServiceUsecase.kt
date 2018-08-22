@@ -12,25 +12,27 @@ import com.spgroup.spapp.util.doLogD
 
 class SelectedServiceUsecase: SynchronousUsecase() {
 
-    val mapSelectedServices = HashMap<String, MutableList<ISelectedService>>()
+    var mapSelectedServices = HashMap<String, MutableList<ISelectedService>>()
 
-    fun updateNormalSelectedServiceItem(absServiceItem: AbsServiceItem, count: Int, categoryId: String) {
+    fun updateNormalSelectedServiceItem(
+            absServiceItem: AbsServiceItem,
+            count: Int,
+            categoryId: String
+    ) {
         doLogD(msg = "count:$count catId:$categoryId serId:${absServiceItem.getServiceId()}")
 
-        var selectedValueList = mapSelectedServices[categoryId]
         if (count == 0) {
-            removeSelectedItem(selectedValueList, absServiceItem.getServiceId())
+            removeSelectedItem(categoryId, absServiceItem.getServiceId())
         } else {
-            addNormalSelectedItem(absServiceItem, count, selectedValueList, categoryId)
+            addNormalSelectedItem(absServiceItem, count, categoryId)
         }
     }
 
     private fun addNormalSelectedItem(
             absServiceItem: AbsServiceItem,
             count: Int,
-            selectedValueList: MutableList<ISelectedService>?,
             categoryId: String) {
-        var calculatingList = selectedValueList
+        var calculatingList =  mapSelectedServices[categoryId]
         val subTotal = when (absServiceItem) {
 
             is MultiplierService -> count * absServiceItem.price
@@ -61,24 +63,25 @@ class SelectedServiceUsecase: SynchronousUsecase() {
         mapSelectedServices[categoryId] = calculatingList
     }
 
-    private fun removeSelectedItem(selectedValueList: MutableList<ISelectedService>?, serviceId: Int) {
+    fun removeSelectedItem(categoryId: String, serviceId: Int) {
+        val listSelectedService = mapSelectedServices[categoryId]
         var deletedPos = -1
-        selectedValueList?.forEachIndexed { index, item ->
+        listSelectedService?.forEachIndexed { index, item ->
             if (item.getId() == serviceId) {
                 deletedPos = index
                 return@forEachIndexed
             }
         }
         if (deletedPos != -1) {
-            selectedValueList?.removeAt(deletedPos)
+            listSelectedService?.removeAt(deletedPos)
         }
     }
 
     fun updateComplexSelectedServiceItem(customiseDisplayData: CustomiseDisplayData) {
         customiseDisplayData.run {
-            val listSelectedService = mapSelectedServices[categoryId]
+
             if (mapSelectedOption.isEmpty()) {
-                removeSelectedItem(listSelectedService, serviceItem.getServiceId())
+                removeSelectedItem(categoryId, serviceItem.getServiceId())
             } else {
                 addComplexSelectedService(
                         categoryId,
@@ -154,5 +157,11 @@ class SelectedServiceUsecase: SynchronousUsecase() {
         return getSelectedService(categoryId, serviceId)?.let {
             (it as ComplexSelectedService).specialInstruction
         }
+    }
+
+    fun getListSelectedService(categoryId: String) = mapSelectedServices[categoryId]
+
+    fun removeCategory(categoryId: String) {
+        mapSelectedServices.remove(categoryId)
     }
 }
