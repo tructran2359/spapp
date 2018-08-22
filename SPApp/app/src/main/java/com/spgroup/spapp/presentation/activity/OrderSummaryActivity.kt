@@ -419,25 +419,6 @@ class OrderSummaryActivity : BaseActivity() {
         }
     }
 
-    private fun createDummyData(): List<ServiceCategory> {
-
-        val serviceCounter1 = ServiceItemCounter(id = 1, name = "Counter 1", price = 1f, minCount = 1, maxCount = 10, unit = "item", count = 1)
-        val serviceCounter2 = ServiceItemCounter(id = 2, name = "Counter 2", price = 2f, minCount = 1, maxCount = 10, unit = "item", count = 2)
-        val serviceCheckbox3 = ServiceItemCheckBox(id = 3, name = "Checkbox 3", price = 3f, unit = "item", description = "Description 3", selected = true)
-
-        val dummy = CustomiseViewModel.Content(paxCount = 1, riceCount = 1, instruction = "No beef and peanut. Low salt.")
-        val serviceItemCombo4 = ServiceItemComboDummy(id = 4, name = "Customise 4", price = 4f, unit = "item", description = "Description 4", selected = true, dummyContent = dummy)
-
-        val subCate1 = ServiceGroup(id = 1, name = "SubCate 1", description = "Sub description 1", listItem = mutableListOf(serviceItemCombo4), expanded = true)
-        val subCate2 = ServiceGroup(id = 2, name = "SubCate 2", description = "Sub description 2", listItem = mutableListOf(serviceCounter1, serviceCounter2, serviceCheckbox3), expanded = true)
-
-        val cate1 = ServiceCategory(id = 1, title = "Category 1", services = listOf(subCate1))
-        val cate2 = ServiceCategory(id = 2, title = "Category 2", services = listOf(subCate2))
-
-        return listOf(cate1, cate2)
-
-    }
-
     private fun createCateTag(cateId: String) = "Cate" + cateId
 
     private fun createServiceTag(serviceId: Int) = "ServiceID${serviceId}"
