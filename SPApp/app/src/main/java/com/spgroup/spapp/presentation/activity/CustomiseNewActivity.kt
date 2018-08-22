@@ -9,10 +9,12 @@ import android.text.Editable
 import android.text.TextWatcher
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ComplexCustomisationService
+import com.spgroup.spapp.presentation.fragment.UnsavedDataDialog
 import com.spgroup.spapp.presentation.view.DropdownSelectionView
 import com.spgroup.spapp.presentation.viewmodel.CustomiseData
 import com.spgroup.spapp.presentation.viewmodel.CustomiseNewViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_customise_new.*
 import java.io.Serializable
@@ -90,6 +92,20 @@ class CustomiseNewActivity: BaseActivity() {
         setUpViews()
     }
 
+    override fun onBackPressed() {
+        if (!mIsEdit) {
+            super.onBackPressed()
+        } else {
+            mViewModel.isDataChanged.value?.let { changed ->
+                if (changed) {
+                    showConfirmDialog()
+                } else {
+                    super.onBackPressed()
+                }
+            }
+        }
+    }
+
     private fun setUpData(listData: List<CustomiseData>) {
         listData.forEachIndexed { index, data ->
             val view = DropdownSelectionView(this@CustomiseNewActivity).apply {
@@ -159,6 +175,25 @@ class CustomiseNewActivity: BaseActivity() {
     private fun updateBottomButtonVisibility(show: Boolean) {
         bottom_button_container.updateVisibility(show)
         v_shadow.updateVisibility(show)
+    }
+
+
+
+    private fun showConfirmDialog() {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val prevDialog = supportFragmentManager.findFragmentByTag(ConstUtils.TAG_DIALOG)
+        if (prevDialog != null) {
+            fragmentTransaction.remove(prevDialog)
+        }
+
+        val newDialog = UnsavedDataDialog()
+        with(newDialog) {
+            setActions(
+                    { super.onBackPressed() },
+                    null
+            )
+            show(fragmentTransaction, ConstUtils.TAG_DIALOG)
+        }
     }
 }
 

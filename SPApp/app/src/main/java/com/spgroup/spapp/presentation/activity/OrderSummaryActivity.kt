@@ -77,20 +77,6 @@ class OrderSummaryActivity : BaseActivity() {
                 val customiseDisplayData = data.getSerializableExtra(CustomiseNewActivity.EXTRA_DISPLAY_DATA) as CustomiseDisplayData
                 mViewModel.updateComplexSelectedServiceItem(customiseDisplayData)
             }
-//            data?.let {
-//                val content = data.getSerializableExtra(ConstUtils.EXTRA_CONTENT) as CustomiseViewModel.Content
-//                val serviceId = data.getIntExtra(ConstUtils.EXTRA_SERVICE_ID, -1)
-//                if (serviceId != -1) {
-//                    val service = mViewModel.getServiceById(serviceId)
-//                    if (service != null) {
-//                        val view = ll_item_container.findViewWithTag<SummaryItemViewCombo>(createServiceTag(serviceId))
-//                        (service as ServiceItemComboDummy).run {
-//                            this.dummyContent = content
-//                            view.setDummyData(this.dummyContent)
-//                        }
-//                    }
-//                }
-//            }
         }
 
     }
