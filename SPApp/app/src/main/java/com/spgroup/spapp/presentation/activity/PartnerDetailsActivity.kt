@@ -256,7 +256,11 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         tv_visit_website.isGone = mIsCart
 
         btn_summary.setOnClickListener {
-            val intent = OrderSummaryActivity.getLaunchIntent(this)
+            val intent = OrderSummaryActivity.getLaunchIntent(
+                    context = this,
+                    mapCateInfo = mViewModel.getMapSelectedCategories(),
+                    mapSelectedServices = mViewModel.getMapSelectedService()
+            )
             startActivity(intent)
         }
         btn_summary.setPrice(0f)

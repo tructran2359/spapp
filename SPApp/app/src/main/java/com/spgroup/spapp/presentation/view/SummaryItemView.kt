@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import com.spgroup.spapp.R
+import com.spgroup.spapp.util.extension.formatPrice
 import kotlinx.android.synthetic.main.layout_summary_item.view.*
 
 class SummaryItemView: RelativeLayout {
@@ -49,6 +50,10 @@ class SummaryItemView: RelativeLayout {
         tv_name.setText(name)
     }
 
+    fun setPrice(price: Float) {
+        tv_est_price.text = price.formatPrice()
+    }
+
     fun setLimit(min: Int, max: Int) {
         counter_view.setLimit(min, max)
     }
@@ -56,6 +61,8 @@ class SummaryItemView: RelativeLayout {
     fun setCount(count: Int) {
         counter_view.setCount(count)
     }
+
+    fun getCount() = counter_view.getCount()
 
     fun initData(min: Int, max: Int, count: Int) {
         with(counter_view) {

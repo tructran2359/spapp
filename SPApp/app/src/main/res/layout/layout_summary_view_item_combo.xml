@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/common_horz_large_for_icon"
@@ -24,21 +25,22 @@
 
         <TextView
             style="@style/subhead"
-            android:id="@+id/tv_name"
+            android:id="@+id/tv_service_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/common_horz_medium_sub"
             android:textColor="@color/color_black"
-            android:text="@string/hardcode_3_dishes"
+            tools:text="@string/hardcode_3_dishes"
             />
 
         <TextView
             style="@style/body"
+            android:id="@+id/tv_service_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_vert_small"
             android:textColor="@color/color_grey"
-            android:text="Weekdays only. Island-wide delivery. Packed in microwavable containers only."
+            tools:text="Weekdays only. Island-wide delivery. Packed in microwavable containers only."
             />
         
         <LinearLayout
@@ -67,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_spacing"
             android:textColor="@color/color_grey"
-            android:text="No beef and peanuts. Low salt"
+            tools:text="No beef and peanuts. Low salt"
             />
 
     </LinearLayout>

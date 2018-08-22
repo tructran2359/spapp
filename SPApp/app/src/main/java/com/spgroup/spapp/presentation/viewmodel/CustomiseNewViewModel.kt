@@ -6,14 +6,19 @@ import com.spgroup.spapp.presentation.activity.CustomiseDisplayData
 class CustomiseNewViewModel: BaseViewModel() {
 
     private lateinit var mDisplayData: CustomiseDisplayData
+    private var mIsEdit = false
+    private lateinit var mOriginalDisplayData: CustomiseDisplayData
 
     val listData = MutableLiveData<List<CustomiseData>>()
     val totalPriceData = MutableLiveData<Float>()
     val serviceName = MutableLiveData<String>()
     val serviceDescription = MutableLiveData<String>()
+    val isDataChanged = MutableLiveData<Boolean>()
 
-    fun initData(displayData: CustomiseDisplayData) {
+    fun initData(isEdit: Boolean, displayData: CustomiseDisplayData) {
+        mIsEdit = isEdit
         mDisplayData = displayData
+        mOriginalDisplayData = mDisplayData.clone()
 
         val listCustomiseData = mutableListOf<CustomiseData>()
         mDisplayData.serviceItem.customisations.forEach {
@@ -25,8 +30,18 @@ class CustomiseNewViewModel: BaseViewModel() {
     }
 
     fun notifyDataChanged(optionIndex: Int, selectedPos: Int) {
-        mDisplayData.mapSelectedOption.set(optionIndex, selectedPos)
+        mDisplayData.mapSelectedOption[optionIndex] = selectedPos
         calculateTotalPrice()
+        checkIfDataChanged()
+    }
+
+    fun notifyInstructionChanged(newInstruction: String) {
+        mDisplayData.specialInstruction = newInstruction
+        checkIfDataChanged()
+    }
+
+    private fun checkIfDataChanged() {
+        isDataChanged.value = !mDisplayData.isSameSelectedOptionData(mOriginalDisplayData)
     }
 
     private fun calculateTotalPrice() {
@@ -36,6 +51,7 @@ class CustomiseNewViewModel: BaseViewModel() {
                 totalPrice += customiseData[index].options[selectedPos].price
             }
 
+            mDisplayData.estPrice = totalPrice
             totalPriceData.value = totalPrice
         }
     }

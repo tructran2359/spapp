@@ -89,7 +89,8 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
             )
             val intent = CustomiseNewActivity.getLaunchIntent(
                     context = it,
-                    displayData = displayData)
+                    displayData = displayData,
+                    isEdit = false)
             it.startActivityForResult(intent, PartnerDetailsActivity.RC_CUSTOMISE)
         }
     }

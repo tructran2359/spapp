@@ -5,17 +5,17 @@ import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.ComplexCustomisationService
+import com.spgroup.spapp.presentation.fragment.UnsavedDataDialog
 import com.spgroup.spapp.presentation.view.DropdownSelectionView
 import com.spgroup.spapp.presentation.viewmodel.CustomiseData
 import com.spgroup.spapp.presentation.viewmodel.CustomiseNewViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
-import com.spgroup.spapp.util.doLogD
-import com.spgroup.spapp.util.extension.formatPrice
-import com.spgroup.spapp.util.extension.getDimensionPixelSize
-import com.spgroup.spapp.util.extension.obtainViewModel
-import com.spgroup.spapp.util.extension.updateVisibility
+import com.spgroup.spapp.util.ConstUtils
+import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_customise_new.*
 import java.io.Serializable
 
@@ -23,56 +23,87 @@ class CustomiseNewActivity: BaseActivity() {
 
     companion object {
         const val EXTRA_DISPLAY_DATA = "EXTRA_DISPLAY_DATA"
+        const val EXTRA_IS_EDIT = "EXTRA_IS_EDIT"
 
         fun getLaunchIntent(
                 context: Context,
-                displayData: CustomiseDisplayData
+                displayData: CustomiseDisplayData,
+                isEdit: Boolean
         ): Intent {
             val intent = Intent(context, CustomiseNewActivity::class.java)
             intent.putExtra(EXTRA_DISPLAY_DATA, displayData)
+            intent.putExtra(EXTRA_IS_EDIT, isEdit)
             return intent
         }
     }
 
     private lateinit var mViewModel: CustomiseNewViewModel
     private val listDropdownViews = mutableListOf<DropdownSelectionView>()
+    private var mIsEdit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_customise_new)
 
+        mIsEdit = intent.getBooleanExtra(EXTRA_IS_EDIT, false)
+
         mViewModel = obtainViewModel(CustomiseNewViewModel::class.java, ViewModelFactory.getInstance())
         mViewModel.run {
 
             serviceName.observe(this@CustomiseNewActivity, Observer {
-                it?.let {
-                    tv_name.text = it
+                it?.run {
+                    tv_name.text = this
                 }
             })
 
             serviceDescription.observe(this@CustomiseNewActivity, Observer {
-                it?.let {
+                it?.run {
                     tv_description.text = it
                 }
             })
 
             listData.observe(this@CustomiseNewActivity, Observer {
-                it?.let {
-                    setUpData(it)
+                it?.run {
+                    setUpData(this)
                 }
             })
 
             totalPriceData.observe(this@CustomiseNewActivity, Observer {
-                it?.let {
-                    tv_est_price.text = it.formatPrice()
+                it?.run {
+                    tv_est_price.text = this.formatPrice()
                 }
             })
 
-            initData(intent.getSerializableExtra(EXTRA_DISPLAY_DATA) as CustomiseDisplayData )
+            if (mIsEdit) {
+                isDataChanged.observe(this@CustomiseNewActivity, Observer {
+                    it?.run {
+                        tv_add_to_request.setText(if (this) R.string.update_and_view_summary else R.string.back_to_view_summary)
+                    }
+                })
+            }
+
+            initData(
+                    mIsEdit,
+                    intent.getSerializableExtra(EXTRA_DISPLAY_DATA) as CustomiseDisplayData
+            )
         }
 
         setUpViews()
+    }
+
+    override fun onBackPressed() {
+        if (!mIsEdit) {
+            super.onBackPressed()
+        } else {
+            mViewModel.isDataChanged.value?.let { changed ->
+                if (changed) {
+                    showConfirmDialog()
+                } else {
+                    super.onBackPressed()
+                }
+            }
+        }
     }
 
     private fun setUpData(listData: List<CustomiseData>) {
@@ -94,12 +125,30 @@ class CustomiseNewActivity: BaseActivity() {
 
     private fun setUpViews() {
         setUpKeyboardDetection()
+        if (mIsEdit) {
+            action_bar.setTitle(R.string.edit)
+            tv_add_to_request.setText(R.string.back_to_view_summary)
+            et_instruction.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(editable: Editable?) {
+                    var text = editable?.toString() ?: ""
+                    mViewModel.notifyInstructionChanged(text)
+                }
+
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+            })
+        }
+
         action_bar.setOnBackPress {
             this@CustomiseNewActivity.onBackPressed()
         }
         et_instruction.setText(mViewModel.getDisplayData().specialInstruction)
         tv_add_to_request.setOnClickListener {
-            doLogD("Spinner", mViewModel.getSelectedOptionMap().toString())
+            et_instruction.hideKeyboard()
             val intent = Intent()
 
             val newDisplayData = mViewModel.getDisplayData().apply {
@@ -127,6 +176,25 @@ class CustomiseNewActivity: BaseActivity() {
         bottom_button_container.updateVisibility(show)
         v_shadow.updateVisibility(show)
     }
+
+
+
+    private fun showConfirmDialog() {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val prevDialog = supportFragmentManager.findFragmentByTag(ConstUtils.TAG_DIALOG)
+        if (prevDialog != null) {
+            fragmentTransaction.remove(prevDialog)
+        }
+
+        val newDialog = UnsavedDataDialog()
+        with(newDialog) {
+            setActions(
+                    { super.onBackPressed() },
+                    null
+            )
+            show(fragmentTransaction, ConstUtils.TAG_DIALOG)
+        }
+    }
 }
 
 data class CustomiseDisplayData (
@@ -135,4 +203,21 @@ data class CustomiseDisplayData (
         var mapSelectedOption: HashMap<Int, Int>,
         var specialInstruction: String?,
         var estPrice: Float = 0f
-): Serializable
+): Serializable {
+    fun isSameSelectedOptionData(newObj: CustomiseDisplayData): Boolean {
+        if (mapSelectedOption.size != newObj.mapSelectedOption.size) return false
+        for ((key, value) in mapSelectedOption) {
+            if (mapSelectedOption[key] != newObj.mapSelectedOption[key]) return false
+        }
+        if (specialInstruction != newObj.specialInstruction) return false
+        return true
+    }
+
+    fun clone(): CustomiseDisplayData {
+        val hashMap = HashMap<Int, Int>()
+        for ((key, value) in mapSelectedOption) {
+            hashMap[key] = value
+        }
+        return CustomiseDisplayData(categoryId, serviceItem, hashMap, specialInstruction, estPrice)
+    }
+}

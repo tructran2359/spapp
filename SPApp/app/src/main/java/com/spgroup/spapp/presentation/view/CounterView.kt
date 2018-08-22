@@ -74,6 +74,8 @@ class CounterView: LinearLayout {
         updateCount()
     }
 
+    fun getCount() = mCount
+
     fun setLimit(min: Int, max: Int) {
         mMin = min
         mMax = max

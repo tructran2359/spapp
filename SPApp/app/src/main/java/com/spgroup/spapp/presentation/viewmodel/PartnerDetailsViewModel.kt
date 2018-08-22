@@ -1,14 +1,18 @@
 package com.spgroup.spapp.presentation.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
-import com.spgroup.spapp.domain.model.*
+import com.spgroup.spapp.domain.model.AbsServiceItem
+import com.spgroup.spapp.domain.model.Category
+import com.spgroup.spapp.domain.model.ComplexCustomisationService
+import com.spgroup.spapp.domain.model.PartnerDetails
 import com.spgroup.spapp.domain.usecase.GetCustomisationLowestPrice
 import com.spgroup.spapp.domain.usecase.GetServicesListByPartnerUsecase
+import com.spgroup.spapp.domain.usecase.SelectedServiceUsecase
 import com.spgroup.spapp.presentation.activity.CustomiseDisplayData
 import com.spgroup.spapp.presentation.activity.PartnerInformationActivity
-import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.extension.formatPrice
 import com.spgroup.spapp.util.extension.toInt
+import java.io.Serializable
 
 class PartnerDetailsViewModel(
         private val getServicesListByPartnerUsecase: GetServicesListByPartnerUsecase,
@@ -16,7 +20,8 @@ class PartnerDetailsViewModel(
 ) : BaseViewModel() {
 
     lateinit var partnerUEN: String
-    private val mapSelectedServices = mutableMapOf<String, MutableList<ISelectedService>>()
+//    val mapSelectedServices = HashMap<String, MutableList<ISelectedService>>()
+    private val mSelectedServiceUsecase = SelectedServiceUsecase()
 
     val partnerDetails = MutableLiveData<PartnerDetails>()
     val selectedCount = MutableLiveData<Int>()
@@ -50,7 +55,6 @@ class PartnerDetailsViewModel(
                         } else {
                             service.priceText = lowestPrice.formatPrice()
                         }
-
                     }
                 }
             }
@@ -62,78 +66,15 @@ class PartnerDetailsViewModel(
      * Throw exception when called with Complex card
      */
     fun updateNormalSelectedServiceItem(absServiceItem: AbsServiceItem, count: Int, categoryId: String) {
-        doLogD(msg = "count:$count catId:$categoryId serId:${absServiceItem.getServiceId()}")
-
-        var selectedValueList = mapSelectedServices[categoryId]
-        if (count == 0) {
-            removeSelectedItem(selectedValueList, absServiceItem.getServiceId())
-        } else {
-            addNormalSelectedItem(absServiceItem, count, selectedValueList, categoryId)
-        }
+        mSelectedServiceUsecase.updateNormalSelectedServiceItem(absServiceItem, count, categoryId)
         updateCountAndPrice()
     }
 
-    private fun addNormalSelectedItem(
-            absServiceItem: AbsServiceItem,
-            count: Int,
-            selectedValueList: MutableList<ISelectedService>?,
-            categoryId: String) {
-        var calculatingList = selectedValueList
-        val subTotal = when (absServiceItem) {
-
-            is MultiplierService -> count * absServiceItem.price
-
-            is CheckboxService -> 0f
-
-            is ComplexCustomisationService -> throw IllegalArgumentException("Should not call with Complex card")
-        }
-
-        if (calculatingList != null) {
-            var existed = false
-            calculatingList.forEach { valueItem ->
-                (valueItem as SelectedService).run {
-                    if (serviceId == absServiceItem.getServiceId()) {
-                        existed = true
-                        this.count = count
-                        this.subTotal = subTotal
-                    }
-                }
-            }
-            if (!existed) {
-                calculatingList.add(SelectedService(absServiceItem.getServiceId(), count, subTotal))
-            }
-        } else {
-            val valueItem = SelectedService(absServiceItem.getServiceId(), count, subTotal)
-            calculatingList = mutableListOf(valueItem)
-        }
-        mapSelectedServices[categoryId] = calculatingList
-    }
-
-    private fun removeSelectedItem(selectedValueList: MutableList<ISelectedService>?, serviceId: Int) {
-        var deletedPos = -1
-        selectedValueList?.forEachIndexed { index, item ->
-            if (item.getId() == serviceId) {
-                deletedPos = index
-                return@forEachIndexed
-            }
-        }
-        if (deletedPos != -1) {
-            selectedValueList?.removeAt(deletedPos)
-        }
-    }
 
     private fun updateCountAndPrice() {
-        selectedCount.value = mapSelectedServices
-                .map { it.value } // to list map of List<ISelectedValueItem>
-                .flatten() // to list of all List<ISelectedValueItem>
-                .map { it.getSelectedCount() } // to list of SelectedValueItem#count
-                .sum() // sum of SelectedValueItem#count
+        selectedCount.value = mSelectedServiceUsecase.calculateTotalCount()
 
-        estimatedPrice.value = mapSelectedServices
-                .map { it.value }
-                .flatten()
-                .map { it.getEstPrice() }
-                .sum()
+        estimatedPrice.value = mSelectedServiceUsecase.calculateEstPrice()
     }
 
     fun getCategory(categoryId: String): Category? {
@@ -168,72 +109,36 @@ class PartnerDetailsViewModel(
     }
 
     fun getSelectedInstruction(categoryId: String, serviceId: Int): String? {
-        return getSelectedService(categoryId, serviceId)?.let {
-            (it as ComplexSelectedService).specialInstruction
-        }
+        return mSelectedServiceUsecase.getSelectedInstruction(categoryId, serviceId)
     }
 
     fun getSelectedService(categoryId: String, serviceId: Int): ISelectedService? {
-        val listSelectedValueItem = mapSelectedServices[categoryId]
-        return listSelectedValueItem
-                ?.first { it.getId() == serviceId }
+        return mSelectedServiceUsecase.getSelectedService(categoryId, serviceId)
     }
 
     fun updateComplexSelectedServiceItem(customiseDisplayData: CustomiseDisplayData) {
-        customiseDisplayData.run {
-            val listSelectedService = mapSelectedServices[categoryId]
-            if (mapSelectedOption == null || mapSelectedOption.isEmpty()) {
-                removeSelectedItem(listSelectedService, serviceItem.getServiceId())
-            } else {
-                addComplexSelectedService(
-                        categoryId,
-                        serviceItem.getServiceId(),
-                        mapSelectedOption,
-                        estPrice,
-                        specialInstruction)
-            }
-        }
-
+        mSelectedServiceUsecase.updateComplexSelectedServiceItem(customiseDisplayData)
         updateCountAndPrice()
     }
 
-    private fun addComplexSelectedService(
-            categoryId: String,
-            serviceId: Int,
-            mapSelectedOption: HashMap<Int, Int>,
-            estPrice: Float,
-            specialInstruction: String?) {
-        var selectedServices = mapSelectedServices[categoryId]
-        if (selectedServices != null) {
-            var existed = false
-            selectedServices.forEach { selectedService ->
-                if (selectedService.getId() == serviceId) {
-                    existed = true
-                    (selectedService as ComplexSelectedService).run {
-                        this.selectedCustomisation = mapSelectedOption
-                        this.subTotal = estPrice
-                        this.specialInstruction = specialInstruction
-                    }
-                }
+
+
+    /**
+     * Create map of <CategoryId, CategoryName>
+     */
+    fun getMapSelectedCategories(): HashMap<String, String> {
+        val hashMap = HashMap<String, String>()
+        val categories = partnerDetails.value?.categories
+        categories?.run {
+            val mapSelectedServices = mSelectedServiceUsecase.mapSelectedServices
+            for ((cateId, _) in mapSelectedServices) {
+                hashMap[cateId] = categories.first { it.id == cateId }.label
             }
-            if (!existed) {
-                selectedServices.add(ComplexSelectedService(
-                        serviceId = serviceId,
-                        selectedCustomisation = mapSelectedOption,
-                        subTotal = estPrice,
-                        specialInstruction = specialInstruction)
-                )
-            }
-        } else {
-            val selectedService = ComplexSelectedService(
-                    serviceId = serviceId,
-                    selectedCustomisation = mapSelectedOption,
-                    subTotal = estPrice,
-                    specialInstruction = specialInstruction)
-            selectedServices = mutableListOf(selectedService)
         }
-        mapSelectedServices[categoryId] = selectedServices
+        return hashMap
     }
+
+    fun getMapSelectedService() = mSelectedServiceUsecase.mapSelectedServices
 }
 
 interface ISelectedService {
@@ -243,26 +148,26 @@ interface ISelectedService {
 }
 
 data class SelectedService(
-        var serviceId: Int,
+        var service: AbsServiceItem,
         var count: Int = 0,
         var subTotal: Float = 0F
-): ISelectedService {
+): ISelectedService, Serializable {
     override fun getSelectedCount() = count
 
     override fun getEstPrice() = subTotal
 
-    override fun getId() = serviceId
+    override fun getId() = service.getServiceId()
 }
 
 data class ComplexSelectedService(
-        var serviceId: Int,
+        var service: ComplexCustomisationService,
         var selectedCustomisation: HashMap<Int, Int>?, //<Option Index, Selected Position>
         var subTotal: Float,
         var specialInstruction: String?
-): ISelectedService {
+): ISelectedService, Serializable {
     override fun getSelectedCount() = (selectedCustomisation != null && !selectedCustomisation!!.isEmpty()).toInt()
 
     override fun getEstPrice() = subTotal
 
-    override fun getId() = serviceId
+    override fun getId() = service.getServiceId()
 }
