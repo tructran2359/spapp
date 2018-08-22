@@ -24,6 +24,7 @@ class OrderSummaryViewModel(): ViewModel() {
         mMapCateInfo = mapCateInfo
         mMapSelectedServices.value = mapSelectedServices
         mSelectedServiceUsecase.mapSelectedServices = mapSelectedServices
+        updateCountAndPrice()
     }
 
     fun updateNormalSelectedServiceItem(

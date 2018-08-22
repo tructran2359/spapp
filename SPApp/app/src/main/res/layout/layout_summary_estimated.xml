@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_ui05"
@@ -36,7 +37,7 @@
             android:textColor="@color/color_alert"
             android:layout_marginRight="@dimen/common_horz_large"
 
-            android:text="-S$5.90"
+            tools:text="-S$5.90"
             />
 
     </RelativeLayout>
@@ -68,7 +69,7 @@
             android:layout_alignParentRight="true"
             android:includeFontPadding="false"
             android:textColor="@color/color_black"
-            android:text="S$185.00"
+            tools:text="S$185.00"
             />
 
     </RelativeLayout>
