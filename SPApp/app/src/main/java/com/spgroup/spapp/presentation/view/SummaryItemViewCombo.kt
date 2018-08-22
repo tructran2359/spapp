@@ -56,6 +56,14 @@ class SummaryItemViewCombo: RelativeLayout {
         tv_instruction.text = instruction
     }
 
+    fun setServiceName(name: String) {
+        tv_service_name.text = name
+    }
+
+    fun setServiceDescription(description: String) {
+        tv_service_description.text = description
+    }
+
     fun setOnEditClickListener(action: () -> Unit) {
         iv_edit.setOnClickListener {
             action()

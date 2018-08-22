@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.spgroup.spapp.domain.model.AbsServiceItem
 import com.spgroup.spapp.domain.usecase.SelectedServiceUsecase
+import com.spgroup.spapp.presentation.activity.CustomiseDisplayData
 
 class OrderSummaryViewModel(): ViewModel() {
 
@@ -12,6 +13,7 @@ class OrderSummaryViewModel(): ViewModel() {
     val mEmpty = MutableLiveData<Boolean>()
     val mTotalCount = MutableLiveData<Int>()
     val mEstPrice = MutableLiveData<Float>()
+    val mUpdatedComplexService = MutableLiveData<ComplexSelectedService>()
 
 
     private lateinit var mMapCateInfo: HashMap<String, String>
@@ -60,5 +62,16 @@ class OrderSummaryViewModel(): ViewModel() {
     }
 
     fun getCateName(cateId: String) = mMapCateInfo[cateId]
+
+    fun updateComplexSelectedServiceItem(customiseDisplayData: CustomiseDisplayData) {
+        mSelectedServiceUsecase.updateComplexSelectedServiceItem(customiseDisplayData)
+        val updatedService = mSelectedServiceUsecase.getSelectedService(
+                customiseDisplayData.categoryId,
+                customiseDisplayData.serviceItem.id)
+        if (updatedService != null && updatedService is ComplexSelectedService) {
+            mUpdatedComplexService.value = updatedService
+        }
+        updateCountAndPrice()
+    }
 
 }

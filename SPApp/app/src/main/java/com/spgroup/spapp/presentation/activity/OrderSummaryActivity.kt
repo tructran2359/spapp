@@ -73,6 +73,10 @@ class OrderSummaryActivity : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_EDIT && resultCode == RESULT_OK) {
+            data?.run {
+                val customiseDisplayData = data.getSerializableExtra(CustomiseNewActivity.EXTRA_DISPLAY_DATA) as CustomiseDisplayData
+                mViewModel.updateComplexSelectedServiceItem(customiseDisplayData)
+            }
 //            data?.let {
 //                val content = data.getSerializableExtra(ConstUtils.EXTRA_CONTENT) as CustomiseViewModel.Content
 //                val serviceId = data.getIntExtra(ConstUtils.EXTRA_SERVICE_ID, -1)
@@ -140,6 +144,16 @@ class OrderSummaryActivity : BaseActivity() {
                 it?.let {
                     tv_total_value.text = it.formatPrice()
                     btn_summary.setEstPrice(it)
+                }
+            })
+
+            mUpdatedComplexService.observe(this@OrderSummaryActivity, Observer {
+                it?.let {
+                    val serviceTag = createServiceTag(it.service.id)
+                    val view = ll_item_container.findViewWithTag<SummaryItemViewCombo>(serviceTag)
+                    if (view != null) {
+                        setUpComplexData(view, it)
+                    }
                 }
             })
         }
@@ -382,6 +396,7 @@ class OrderSummaryActivity : BaseActivity() {
 
     private fun addItemCombo(cateId: String, item: ComplexSelectedService) {
         val tag = createServiceTag(item.service.getServiceId())
+        val service = item.service
         val view = SummaryItemViewCombo(this)
         val layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
 
@@ -389,17 +404,40 @@ class OrderSummaryActivity : BaseActivity() {
             topMargin = getDimensionPixelSize(R.dimen.common_vert_small)
             bottomMargin = getDimensionPixelSize(R.dimen.common_vert_medium)
         }
-
         view.setLayoutParams(layoutParams)
-        view.setOnEditClickListener {
-            //TODO: Later
-        }
         view.setTag(tag)
+        view.setOnEditClickListener {
+            val displayData = CustomiseDisplayData(
+                    categoryId = cateId,
+                    serviceItem = service,
+                    mapSelectedOption = item.selectedCustomisation ?: HashMap(),
+                    specialInstruction = item.specialInstruction
+            )
+            val intent = CustomiseNewActivity.getLaunchIntent(
+                    context = this@OrderSummaryActivity,
+                    displayData = displayData)
+            startActivityForResult(intent, RC_EDIT)
+
+        }
         view.setOnDeleteListener {
             mViewModel.deleteService(cateId, item.service.id)
         }
 
+        setUpComplexData(view, item)
+
+
+        ll_item_container.addView(view)
+    }
+
+    private fun setUpComplexData(
+            view: SummaryItemViewCombo,
+            item: ComplexSelectedService) {
+
+        val service = item.service
+        view.setServiceName(service.label)
+        view.setServiceDescription(service.serviceDescription)
         view.setInstruction(item.specialInstruction ?: "")
+        view.clearOption()
 
         item.selectedCustomisation?.let { hashMap ->
             for ((index, selectedPos) in hashMap) {
@@ -432,9 +470,6 @@ class OrderSummaryActivity : BaseActivity() {
                 }
             }
         }
-
-
-        ll_item_container.addView(view)
     }
 
     private fun showErrorView(show: Boolean) {
