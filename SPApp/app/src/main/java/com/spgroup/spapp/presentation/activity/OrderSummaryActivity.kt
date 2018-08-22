@@ -415,7 +415,8 @@ class OrderSummaryActivity : BaseActivity() {
             )
             val intent = CustomiseNewActivity.getLaunchIntent(
                     context = this@OrderSummaryActivity,
-                    displayData = displayData)
+                    displayData = displayData,
+                    isEdit = true)
             startActivityForResult(intent, RC_EDIT)
 
         }
