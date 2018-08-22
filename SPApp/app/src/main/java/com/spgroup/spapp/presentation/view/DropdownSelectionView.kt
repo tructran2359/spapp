@@ -52,6 +52,10 @@ class DropdownSelectionView: LinearLayout {
 
     fun getSelectedPosition() = spinner_options.selectedItemPosition
 
+    fun setSelectedPosition(selectedPosition: Int) {
+        spinner_options.setSelection(selectedPosition)
+    }
+
     fun setOnItemSelectedListener(action: (Int) -> Unit) {
         listener = action
     }

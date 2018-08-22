@@ -11,7 +11,9 @@ import com.spgroup.spapp.domain.model.Category
 import com.spgroup.spapp.domain.model.CheckboxService
 import com.spgroup.spapp.domain.model.ComplexCustomisationService
 import com.spgroup.spapp.domain.model.MultiplierService
+import com.spgroup.spapp.presentation.activity.CustomiseDisplayData
 import com.spgroup.spapp.presentation.activity.CustomiseNewActivity
+import com.spgroup.spapp.presentation.activity.PartnerDetailsActivity
 import com.spgroup.spapp.presentation.adapter.ServiceListingAdapter
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
@@ -79,26 +81,32 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
 
     override fun onComplexCustomisationItemClick(itemData: ComplexCustomisationService) {
         activity?.let {
-            val intent = CustomiseNewActivity.getLaunchIntent(it, itemData)
-            it.startActivity(intent)
+            val displayData = CustomiseDisplayData(
+                    categoryId = mCategory!!.id,
+                    serviceItem = itemData,
+                    mapSelectedOption = mViewModel.getSelectedOptionMap(mCategory!!.id, itemData.getServiceId()) ?: HashMap(),
+                    specialInstruction = mViewModel.getSelectedInstruction(mCategory!!.id, itemData.getServiceId())
+            )
+            val intent = CustomiseNewActivity.getLaunchIntent(
+                    context = it,
+                    displayData = displayData)
+            it.startActivityForResult(intent, PartnerDetailsActivity.RC_CUSTOMISE)
         }
     }
 
     override fun onMultiplierItemChanged(itemData: MultiplierService, count: Int) {
-        mViewModel.updateSelectedServiceCategories(
+        mViewModel.updateNormalSelectedServiceItem(
+                absServiceItem = itemData,
                 count = count,
-                pricePerUnit = itemData.price,
-                categoryId = mCategory!!.id,
-                serviceId = itemData.id
+                categoryId = mCategory!!.id
         )
     }
 
     override fun onCheckboxItemChanged(itemData: CheckboxService, checked: Boolean) {
-        mViewModel.updateSelectedServiceCategories(
+        mViewModel.updateNormalSelectedServiceItem(
+                absServiceItem = itemData,
                 count = checked.toInt(),
-                pricePerUnit = 0f,
-                categoryId = mCategory!!.id,
-                serviceId = itemData.id
+                categoryId = mCategory!!.id
         )
     }
 
