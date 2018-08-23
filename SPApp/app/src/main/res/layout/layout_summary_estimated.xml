@@ -5,17 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_ui05"
-    android:layout_marginTop="@dimen/common_vert_medium"
     android:orientation="vertical"
+    android:layout_marginTop="@dimen/common_vert_medium"
     >
 
-    <View style="@style/lineDividerDark"/>
+    <View style="@style/lineDividerDark"
+        android:layout_marginBottom="@dimen/common_vert_medium"/>
 
     <RelativeLayout
+        android:id="@+id/rl_discount_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/common_vert_medium"
+        android:layout_marginBottom="@dimen/common_vert_medium_sub"
         >
 
         <TextView
@@ -25,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/common_horz_large"
             android:textColor="@color/color_black"
-            android:text="Discount (10%)"
+            tools:text="Discount (10%)"
             />
 
         <TextView
@@ -45,7 +47,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/common_vert_medium_sub"
         >
 
         <TextView

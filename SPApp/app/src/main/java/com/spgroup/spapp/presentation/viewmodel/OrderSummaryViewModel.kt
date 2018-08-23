@@ -12,18 +12,23 @@ class OrderSummaryViewModel(): ViewModel() {
     val mDeletedServiceId = MutableLiveData<Int>()
     val mEmpty = MutableLiveData<Boolean>()
     val mTotalCount = MutableLiveData<Int>()
-    val mEstPrice = MutableLiveData<Float>()
+    val mEstPrice = MutableLiveData<EstPriceData>()
     val mUpdatedComplexService = MutableLiveData<ComplexSelectedService>()
 
 
     private lateinit var mMapCateInfo: HashMap<String, String>
     var mMapSelectedServices = MutableLiveData<HashMap<String, MutableList<ISelectedService>>>()
     private val mSelectedServiceUsecase = SelectedServiceUsecase()
+    private var mDiscount = 0f
 
-    fun initData(mapCateInfo: HashMap<String, String>, mapSelectedServices: HashMap<String, MutableList<ISelectedService>>) {
+    fun initData(
+            mapCateInfo: HashMap<String, String>,
+            mapSelectedServices: HashMap<String, MutableList<ISelectedService>>,
+            discount: String) {
         mMapCateInfo = mapCateInfo
         mMapSelectedServices.value = mapSelectedServices
         mSelectedServiceUsecase.mapSelectedServices = mapSelectedServices
+        mDiscount = if (discount.isEmpty()) 0f else discount.toFloat()
         updateCountAndPrice()
     }
 
@@ -43,7 +48,7 @@ class OrderSummaryViewModel(): ViewModel() {
 
     private fun updateCountAndPrice() {
         mTotalCount.value = mSelectedServiceUsecase.calculateTotalCount()
-        mEstPrice.value = mSelectedServiceUsecase.calculateEstPrice()
+        mEstPrice.value = EstPriceData(mDiscount, mSelectedServiceUsecase.calculateEstPrice())
     }
 
 
@@ -76,3 +81,8 @@ class OrderSummaryViewModel(): ViewModel() {
     }
 
 }
+
+data class EstPriceData(
+        val discount: Float,
+        val originalPrice: Float
+)

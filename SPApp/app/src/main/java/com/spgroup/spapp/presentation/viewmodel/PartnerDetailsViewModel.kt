@@ -139,6 +139,8 @@ class PartnerDetailsViewModel(
     }
 
     fun getMapSelectedService() = mSelectedServiceUsecase.mapSelectedServices
+
+    fun getDiscount() = partnerDetails.value?.discount ?: ""
 }
 
 interface ISelectedService {

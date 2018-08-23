@@ -14,6 +14,7 @@ import android.widget.LinearLayout.LayoutParams
 import android.widget.LinearLayout.LayoutParams.MATCH_PARENT
 import android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
 import android.widget.TextView
+import androidx.core.view.isGone
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.*
 import com.spgroup.spapp.presentation.adapter.PreferredTimeAdapter
@@ -31,14 +32,17 @@ class OrderSummaryActivity : BaseActivity() {
         const val RC_EDIT = 11
         const val EXTRA_CATE_INFO_MAP = "EXTRA_CATE_INFO_MAP"
         const val EXTRA_SERVICE_MAP = "EXTRA_SERVICE_MAP"
+        const val EXTRA_DISCOUNT = "EXTRA_DISCOUNT"
 
         fun getLaunchIntent(
                 context: Context,
                 mapCateInfo: HashMap<String, String>,
-                mapSelectedServices: HashMap<String, MutableList<ISelectedService>>): Intent {
+                mapSelectedServices: HashMap<String, MutableList<ISelectedService>>,
+                discount: String): Intent {
             val intent = Intent(context, OrderSummaryActivity::class.java)
             intent.putExtra(EXTRA_CATE_INFO_MAP, mapCateInfo)
             intent.putExtra(EXTRA_SERVICE_MAP, mapSelectedServices)
+            intent.putExtra(EXTRA_DISCOUNT, discount)
             return intent
         }
     }
@@ -67,7 +71,9 @@ class OrderSummaryActivity : BaseActivity() {
         subscribeUI()
         val mapCateInfo = intent.getSerializableExtra(EXTRA_CATE_INFO_MAP) as HashMap<String, String>
         val mapSelectedServices = intent.getSerializableExtra(EXTRA_SERVICE_MAP) as HashMap<String, MutableList<ISelectedService>>
-        mViewModel.initData(mapCateInfo, mapSelectedServices)
+        var discount = intent.getStringExtra(EXTRA_DISCOUNT)
+        if (discount == null) discount = ""
+        mViewModel.initData(mapCateInfo, mapSelectedServices, discount)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -128,8 +134,12 @@ class OrderSummaryActivity : BaseActivity() {
 
             mEstPrice.observe(this@OrderSummaryActivity, Observer {
                 it?.let {
-                    tv_total_value.text = it.formatPrice()
-                    btn_summary.setEstPrice(it)
+                    tv_total_value.text = it.originalPrice.formatPrice()
+                    tv_discount.text = getString(R.string.discount_formatted, it.discount.toPercentageText())
+                    val discountValue = it.originalPrice * it.discount / 100
+                    tv_discount_value.text = discountValue.toDiscountText()
+                    btn_summary.setEstPrice(it.originalPrice - discountValue)
+                    rl_discount_container.isGone = it.discount == 0f
                 }
             })
 
