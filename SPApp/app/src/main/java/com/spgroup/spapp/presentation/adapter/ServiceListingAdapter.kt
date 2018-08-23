@@ -12,6 +12,7 @@ import com.spgroup.spapp.presentation.adapter.viewholder.ServiceVH
 import com.spgroup.spapp.util.extension.inflate
 import com.spgroup.spapp.util.extension.toInt
 import kotlinx.android.synthetic.main.layout_service.view.*
+import org.jetbrains.anko.collections.forEachWithIndex
 
 class ServiceListingAdapter(
         private val mItemDelegate: OnItemInteractedListener
@@ -33,6 +34,11 @@ class ServiceListingAdapter(
     private val internalItemListener = object : OnItemInteractedListener {
         override fun onComplexCustomisationItemClick(itemData: ComplexCustomisationService) {
             mItemDelegate.onComplexCustomisationItemClick(itemData)
+        }
+
+        override fun onComplexCustomisationItemDelete(itemData: ComplexCustomisationService) {
+            mMapSelectedValue[itemData.id] = 0
+            mItemDelegate.onComplexCustomisationItemDelete(itemData)
         }
 
         override fun onMultiplierItemChanged(itemData: MultiplierService, count: Int) {
@@ -89,12 +95,25 @@ class ServiceListingAdapter(
         return mMapExpandedItem[subCatId] ?: false
     }
 
+    fun addSelectedItem(serviceId: Int, count: Int) {
+        mMapSelectedValue[serviceId] = count
+        mData.forEachWithIndex { index, subCate ->
+            val service = subCate.services.firstOrNull { it.getServiceId() == serviceId }
+            if (service != null) {
+                notifyItemChanged(index)
+                return
+            }
+        }
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // Listener
     ///////////////////////////////////////////////////////////////////////////
 
     interface OnItemInteractedListener {
         fun onComplexCustomisationItemClick(itemData: ComplexCustomisationService)
+
+        fun onComplexCustomisationItemDelete(itemData: ComplexCustomisationService)
 
         fun onMultiplierItemChanged(itemData: MultiplierService, count: Int)
 

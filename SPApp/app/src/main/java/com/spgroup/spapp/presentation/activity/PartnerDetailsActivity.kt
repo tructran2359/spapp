@@ -79,7 +79,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         if (requestCode == RC_CUSTOMISE && resultCode == Activity.RESULT_OK) {
             data?.run {
                 val customiseDisplayData = data.getSerializableExtra(CustomiseNewActivity.EXTRA_DISPLAY_DATA) as CustomiseDisplayData
-                mViewModel.updateComplexSelectedServiceItem(customiseDisplayData)
+                mViewModel.addComplexSelectedServiceItem(customiseDisplayData)
             }
         }
     }

@@ -14,7 +14,6 @@ import com.spgroup.spapp.presentation.view.ServiceItemViewCombo
 import com.spgroup.spapp.presentation.view.ServiceItemViewCounter
 import com.spgroup.spapp.util.doLogD
 import kotlinx.android.synthetic.main.layout_service.view.*
-import kotlinx.android.synthetic.main.layout_service_item_combo.view.*
 import org.jetbrains.anko.collections.forEachWithIndex
 
 class ServiceVH(
@@ -47,9 +46,7 @@ class ServiceVH(
                         is CheckboxService -> ServiceItemViewCheckBox(itemView.context, absServiceItem, initCount, itemListener)
 
                         is ComplexCustomisationService -> {
-                            ServiceItemViewCombo(itemView.context, absServiceItem, itemListener).apply {
-                                v_devider.isGone = (index == subCat.services.size - 1)
-                            }
+                            ServiceItemViewCombo(itemView.context, absServiceItem, initCount == 1 ,itemListener)
                         }
                     }
 

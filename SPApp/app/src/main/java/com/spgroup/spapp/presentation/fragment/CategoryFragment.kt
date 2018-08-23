@@ -1,5 +1,6 @@
 package com.spgroup.spapp.presentation.fragment
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -57,6 +58,14 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
                 .of(activity!!, ViewModelFactory.getInstance())
                 .get(PartnerDetailsViewModel::class.java)
 
+        mViewModel.newSelectedComplexServiceWithCateId.observe(this, Observer { pair ->
+            pair?.run {
+                if (mCategory!!.id == first) {
+                    mServiceListingAdapter.addSelectedItem(second, 1)
+                }
+            }
+        })
+
         arguments?.let {
             val categoryId = it.getString(KEY_CATEGORY_ID)
             if (categoryId == null) {
@@ -93,6 +102,10 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
                     isEdit = false)
             it.startActivityForResult(intent, PartnerDetailsActivity.RC_CUSTOMISE)
         }
+    }
+
+    override fun onComplexCustomisationItemDelete(itemData: ComplexCustomisationService) {
+        mViewModel.removeSelectedService(mCategory!!.id, itemData.id)
     }
 
     override fun onMultiplierItemChanged(itemData: MultiplierService, count: Int) {

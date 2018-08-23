@@ -6,10 +6,20 @@
     android:id="@+id/view_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_ui06"
+    android:background="@drawable/selector_service_item"
     android:paddingLeft="@dimen/service_item_horz_spacing"
     android:layout_marginTop="@dimen/service_item_space_between_items"
     >
+
+
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/delete"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/service_item_horz_spacing"
+        />
 
     <TextView
         style="@style/subhead"
@@ -19,6 +29,7 @@
         android:maxLines="1"
         android:layout_marginTop="@dimen/service_item_vert_spacing"
         android:layout_toLeftOf="@id/fl_check_container"
+        android:layout_toRightOf="@+id/iv_delete"
         android:textColor="@color/color_black"
         tools:text="Day Curtains"
         />
@@ -29,6 +40,7 @@
         android:layout_marginTop="@dimen/service_item_vert_spacing"
         android:layout_marginBottom="@dimen/common_vert_medium"
         android:layout_below="@+id/tv_name"
+        android:layout_toRightOf="@+id/iv_delete"
         />
 
     <TextView
@@ -60,14 +72,5 @@
             android:src="@drawable/arrow_right_grey"
             />
     </FrameLayout>
-
-    <View
-        android:id="@+id/v_devider"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/line_width"
-        android:background="@color/color_ui04"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="@dimen/common_horz_medium_sub"
-        />
 
 </RelativeLayout>
