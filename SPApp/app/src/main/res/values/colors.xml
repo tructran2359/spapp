@@ -45,4 +45,7 @@
     <color name="button_gradient_bottom">@color/color_ui04</color>
     <color name="button_gradient_top">#00000000</color>
 
+
+    <color name="dim_background">#32000000</color>
+
 </resources>

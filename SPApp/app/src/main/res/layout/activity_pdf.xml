@@ -1,23 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingPrefix"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <com.spgroup.spapp.presentation.view.SimpleActionBar
         style="@style/actionBar"
         android:id="@+id/action_bar"
         />
 
-    <WebView
-        android:id="@+id/webview"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/action_bar"
-        />
+        >
+
+        <com.joanzapata.pdfview.PDFView
+            android:id="@+id/pdf_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <TextView
+            style="@style/callout.medium"
+            android:id="@+id/tv_page_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_chip"
+            android:paddingLeft="@dimen/chip_horz_padding"
+            android:paddingRight="@dimen/chip_horz_padding"
+            android:paddingTop="@dimen/chip_vert_padding"
+            android:paddingBottom="@dimen/chip_vert_padding"
+            android:layout_marginLeft="@dimen/common_vert_small"
+            android:layout_marginTop="@dimen/common_vert_small"
+            android:textColor="@color/color_grey"
+            android:visibility="gone"
+            tools:text="1 of 2"
+            />
 
 
-</RelativeLayout>
+        <FrameLayout
+            android:id="@+id/fl_loading_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/dim_background"
+            android:visibility="gone"
+            >
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+
+</LinearLayout>

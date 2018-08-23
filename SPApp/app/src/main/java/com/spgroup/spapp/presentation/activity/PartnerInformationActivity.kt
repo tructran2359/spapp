@@ -114,13 +114,13 @@ class PartnerInformationActivity : BaseActivity() {
             tv_offer_tittle.text = offerTitle
 
             tv_phone.text = phone
-            ll_phone_container.isGone = phone.isEmpty()
+            ll_phone_container.isGone = phone == null || phone.isEmpty()
 
             tv_uen.text = uen
-            ll_uen_container.isGone = uen.isEmpty()
+            ll_uen_container.isGone = uen == null || uen.isEmpty()
 
             tv_nea.text = nea
-            ll_nea_container.isGone = nea.isEmpty()
+            ll_nea_container.isGone = nea == null || nea.isEmpty()
 
 
             // Setup TnC link from server
@@ -193,13 +193,13 @@ class PartnerInformationActivity : BaseActivity() {
 
     data class PartnerInfo(
             val name: String,
-            val desc: String,
-            val offerTitle: String,
-            val offers: List<String>,
-            val phone: String,
-            val uen: String,
-            val nea: String,
-            val website: String,
+            val desc: String?,
+            val offerTitle: String?,
+            val offers: List<String>?,
+            val phone: String?,
+            val uen: String?,
+            val nea: String?,
+            val website: String?,
             val tnc: String?
     ): Serializable
 }

@@ -39,8 +39,14 @@ class ViewModelFactory private constructor(
 
             modelClass.isAssignableFrom(PartnerInfoViewModel::class.java) -> createPartnerInfoViewModel()
 
+            modelClass.isAssignableFrom(PdfViewModel::class.java) -> createPdfViewModel()
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         } as T
+    }
+
+    private fun createPdfViewModel(): PdfViewModel {
+        return PdfViewModel()
     }
 
     private fun createPartnerInfoViewModel(): PartnerInfoViewModel {
