@@ -259,7 +259,8 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
             val intent = OrderSummaryActivity.getLaunchIntent(
                     context = this,
                     mapCateInfo = mViewModel.getMapSelectedCategories(),
-                    mapSelectedServices = mViewModel.getMapSelectedService()
+                    mapSelectedServices = mViewModel.getMapSelectedService(),
+                    discount = mViewModel.getDiscount()
             )
             startActivity(intent)
         }
