@@ -11,7 +11,9 @@ import kotlinx.android.synthetic.main.layout_service_item_combo.view.*
 class ServiceItemViewCombo(
         context: Context,
         private val service: ComplexCustomisationService,
-        private val itemListener: ServiceListingAdapter.OnItemInteractedListener)
+        private val initSelected: Boolean,
+        private val itemListener: ServiceListingAdapter.OnItemInteractedListener
+)
     : ServiceItemView(context) {
 
     init {
@@ -19,7 +21,14 @@ class ServiceItemViewCombo(
         tv_name.text = service.label
         tv_price.isGone = service.priceText == null
         tv_price.text = service.priceText?.let { getPriceTextWithUnit(it, service.unit) }
+        view_root.isSelected = initSelected
+        iv_delete.isGone = !initSelected
         setOnClickListener { itemListener.onComplexCustomisationItemClick(service) }
+        iv_delete.setOnClickListener {
+            itemListener.onComplexCustomisationItemDelete(service)
+            view_root.isSelected = false
+            iv_delete.isGone = true
+        }
     }
 
     private fun getPriceTextWithUnit(priceText: String, unit: String?): String {

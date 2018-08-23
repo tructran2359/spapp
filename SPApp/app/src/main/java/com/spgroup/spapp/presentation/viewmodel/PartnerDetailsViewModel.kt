@@ -26,6 +26,7 @@ class PartnerDetailsViewModel(
     val partnerDetails = MutableLiveData<PartnerDetails>()
     val selectedCount = MutableLiveData<Int>()
     val estimatedPrice = MutableLiveData<Float>()
+    val newSelectedComplexServiceWithCateId = MutableLiveData<Pair<String, Int>>()
 
     init {
         selectedCount.value = 0
@@ -67,6 +68,11 @@ class PartnerDetailsViewModel(
      */
     fun updateNormalSelectedServiceItem(absServiceItem: AbsServiceItem, count: Int, categoryId: String) {
         mSelectedServiceUsecase.updateNormalSelectedServiceItem(absServiceItem, count, categoryId)
+        updateCountAndPrice()
+    }
+
+    fun removeSelectedService(categoryId: String, serviceId: Int) {
+        mSelectedServiceUsecase.removeSelectedItem(categoryId, serviceId)
         updateCountAndPrice()
     }
 
@@ -116,8 +122,9 @@ class PartnerDetailsViewModel(
         return mSelectedServiceUsecase.getSelectedService(categoryId, serviceId)
     }
 
-    fun updateComplexSelectedServiceItem(customiseDisplayData: CustomiseDisplayData) {
+    fun addComplexSelectedServiceItem(customiseDisplayData: CustomiseDisplayData) {
         mSelectedServiceUsecase.updateComplexSelectedServiceItem(customiseDisplayData)
+        newSelectedComplexServiceWithCateId.value = Pair(customiseDisplayData.categoryId, customiseDisplayData.serviceItem.id)
         updateCountAndPrice()
     }
 
