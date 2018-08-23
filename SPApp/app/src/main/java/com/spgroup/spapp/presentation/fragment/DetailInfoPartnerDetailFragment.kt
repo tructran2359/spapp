@@ -40,7 +40,7 @@ class DetailInfoPartnerDetailFragment: BaseFragment() {
                     tv_promotion.text = it.promo
 
                     activity?.let { activity ->
-                        it.offering.forEach { offer ->
+                        it.offering?.forEach { offer ->
                             if (!offer.isEmpty()) {
                                 val indicatorTextView = IndicatorTextView(activity, offer)
                                 val layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)

@@ -6,8 +6,13 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
 class SPApplication: Application() {
 
+    companion object {
+        lateinit var mAppInstance: SPApplication
+    }
+
     override fun onCreate() {
         super.onCreate()
+        mAppInstance = this
         initCalligraphy()
     }
 
