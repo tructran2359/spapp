@@ -260,7 +260,8 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
                     context = this,
                     mapCateInfo = mViewModel.getMapSelectedCategories(),
                     mapSelectedServices = mViewModel.getMapSelectedService(),
-                    discount = mViewModel.getDiscount()
+                    discount = mViewModel.getDiscount(),
+                    partnerName = mViewModel.getPartnerName()
             )
             startActivity(intent)
         }

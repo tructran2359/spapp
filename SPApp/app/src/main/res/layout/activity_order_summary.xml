@@ -33,17 +33,54 @@
             >
 
             <TextView
-                style="@style/h4"
                 android:id="@+id/tv_name"
+                style="@style/h4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/common_vert_medium"
                 android:paddingLeft="@dimen/common_horz_large"
                 android:paddingRight="@dimen/common_horz_large"
                 android:paddingTop="@dimen/common_vert_medium"
-                android:paddingBottom="@dimen/common_vert_medium"
+                tools:text="QuiKlean Laundry"
                 android:textColor="@color/color_black"
-                android:text="QuiKlean Laundry"
                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/common_horz_large"
+                android:layout_marginRight="@dimen/common_horz_large"
+                android:background="@drawable/bg_rec_rounded_grey"
+                android:padding="@dimen/common_vert_small"
+                >
+
+                <TextView
+                    style="@style/callout.regular"
+                    android:id="@+id/tv_go_back_instruction"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:lineSpacingExtra="4sp"
+                    android:textColor="@color/color_grey"
+                    tools:text="Add another item from Tingkat-A-Day? "
+                    android:layout_marginRight="@dimen/common_horz_small"
+                    />
+
+                <TextView
+                    style="@style/caption"
+                    android:id="@+id/tv_go_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/back_to_listing"
+                    android:textColor="@color/color_white"
+                    android:background="@drawable/selector_btn_main"
+                    android:padding="@dimen/common_vert_small"
+                    android:layout_gravity="center_vertical"
+                    />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_item_container"

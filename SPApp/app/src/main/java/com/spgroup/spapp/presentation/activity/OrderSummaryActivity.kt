@@ -33,16 +33,19 @@ class OrderSummaryActivity : BaseActivity() {
         const val EXTRA_CATE_INFO_MAP = "EXTRA_CATE_INFO_MAP"
         const val EXTRA_SERVICE_MAP = "EXTRA_SERVICE_MAP"
         const val EXTRA_DISCOUNT = "EXTRA_DISCOUNT"
+        const val EXTRA_PARNER_NAME = "EXTRA_PARNER_NAME"
 
         fun getLaunchIntent(
                 context: Context,
                 mapCateInfo: HashMap<String, String>,
                 mapSelectedServices: HashMap<String, MutableList<ISelectedService>>,
-                discount: String): Intent {
+                discount: String,
+                partnerName: String): Intent {
             val intent = Intent(context, OrderSummaryActivity::class.java)
             intent.putExtra(EXTRA_CATE_INFO_MAP, mapCateInfo)
             intent.putExtra(EXTRA_SERVICE_MAP, mapSelectedServices)
             intent.putExtra(EXTRA_DISCOUNT, discount)
+            intent.putExtra(EXTRA_PARNER_NAME, partnerName)
             return intent
         }
     }
@@ -55,6 +58,7 @@ class OrderSummaryActivity : BaseActivity() {
     private lateinit var mAnimDisappear: Animation
     private var mFirstInvalidView: ValidationInputView? = null
     private lateinit var mViewModel: OrderSummaryViewModel
+    private lateinit var mName: String
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -63,6 +67,8 @@ class OrderSummaryActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_summary)
+
+        mName = intent.getStringExtra(EXTRA_PARNER_NAME)
 
         initAnimations()
         initViews()
@@ -187,6 +193,11 @@ class OrderSummaryActivity : BaseActivity() {
     private fun initViews() {
 
         action_bar.setTitle(R.string.summary)
+        tv_name.text = mName
+        tv_go_back_instruction.text = getString(R.string.summary_go_back_instruction, mName)
+        tv_go_back.setOnClickListener {
+            onBackPressed()
+        }
 
         validation_name.setValidation { name: String -> name.length > 1 }
 
