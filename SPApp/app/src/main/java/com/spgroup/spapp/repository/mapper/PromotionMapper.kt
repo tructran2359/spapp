@@ -6,7 +6,7 @@ import com.spgroup.spapp.repository.entity.PromotionEntity
 class PromotionMapper : IMapper<PromotionEntity, Promotion> {
     override fun transform(entity: PromotionEntity): Promotion {
         return entity.run {
-            Promotion(image, promoText, partnerName)
+            Promotion(image, promoText, partnerName, start, end, partnerId, partnerType)
         }
     }
 }

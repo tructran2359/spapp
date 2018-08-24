@@ -21,7 +21,6 @@ import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_partner_listing.*
-import org.jetbrains.anko.longToast
 import kotlin.math.max
 
 class PartnerListingActivity : BaseActivity() {
@@ -91,7 +90,10 @@ class PartnerListingActivity : BaseActivity() {
                 startActivity(intent)
             }
 
-            is Promotion -> longToast("Promotion 's coming soon")
+            is Promotion -> {
+                val intent = getPartnerDetailIntent(itemData.partnerId, itemData.partnerType)
+                startActivity(intent)
+            }
         }
     }
 
