@@ -18,7 +18,7 @@
         >
 
         <TextView
-            android:id="@+id/tv_offering_title"
+            android:id="@+id/tv_title"
             style="@style/subhead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             />
 
         <TextView
-            android:id="@+id/tv_promotion"
+            android:id="@+id/tv_description"
             style="@style/body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             />
 
         <LinearLayout
-            android:id="@+id/ll_offering"
+            android:id="@+id/ll_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

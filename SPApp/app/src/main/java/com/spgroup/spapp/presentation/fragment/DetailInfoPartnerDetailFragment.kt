@@ -36,17 +36,17 @@ class DetailInfoPartnerDetailFragment: BaseFragment() {
         mViewModel.run {
             partnerDetails.observe(this@DetailInfoPartnerDetailFragment, Observer {
                 it?.let {
-                    tv_offering_title.text = it.offeringTitle
-                    tv_promotion.text = it.promo
+                    tv_title.text = it.serviceInfo?.title ?: ""
+                    tv_description.text = it.serviceInfo?.description ?: ""
 
                     activity?.let { activity ->
-                        it.offering?.forEach { offer ->
+                        it.serviceInfo?.list?.forEach { offer ->
                             if (!offer.isEmpty()) {
                                 val indicatorTextView = IndicatorTextView(activity, offer)
                                 val layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
                                 layoutParams.topMargin = activity.getDimensionPixelSize(R.dimen.common_vert_medium_sub)
                                 indicatorTextView.layoutParams = layoutParams
-                                ll_offering.addView(indicatorTextView)
+                                ll_list.addView(indicatorTextView)
                             }
                         }
                     }
