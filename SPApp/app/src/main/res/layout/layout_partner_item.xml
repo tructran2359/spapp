@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_ui06"
@@ -36,12 +37,18 @@
             android:layout_centerVertical="true"
             >
 
-            <ImageView
-                android:id="@+id/iv_sponsored"
-                android:layout_width="@dimen/sponsored_width"
-                android:layout_height="@dimen/sponsored_height"
-                android:src="@drawable/sponsored"
-                android:scaleType="fitXY"
+            <TextView
+                android:id="@+id/tv_highlight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_highlight"
+                android:textSize="@dimen/partner_highlight_text_size"
+                android:textColor="@color/color_grey"
+                android:paddingLeft="@dimen/common_radius"
+                android:paddingRight="@dimen/common_radius"
+                android:textAllCaps="true"
+                fontPath="@string/font_medium"
+                tools:text="Sponsored"
                 />
 
             <TextView

@@ -2,6 +2,7 @@ package com.spgroup.spapp.presentation.adapter.viewholder
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.core.view.isGone
 import com.bumptech.glide.Glide
 import com.spgroup.spapp.domain.model.Partner
 import com.spgroup.spapp.domain.model.PartnersListingItem
@@ -15,7 +16,8 @@ class PartnerItemVH(
 
     fun bind(partner: Partner) {
         view.run {
-            iv_sponsored.visibility = if (partner.highlight.isEmpty()) View.GONE else View.VISIBLE
+            tv_highlight.isGone = partner.highlight.isEmpty()
+            tv_highlight.text = partner.highlight
             tv_name.text = partner.name
             tv_price.text = partner.priceDescription
             Glide.with(context)
