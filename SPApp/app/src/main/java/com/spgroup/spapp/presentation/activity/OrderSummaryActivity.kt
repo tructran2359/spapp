@@ -140,11 +140,15 @@ class OrderSummaryActivity : BaseActivity() {
 
             mEstPrice.observe(this@OrderSummaryActivity, Observer {
                 it?.let {
-                    tv_total_value.text = it.originalPrice.formatPrice()
                     tv_discount.text = getString(R.string.discount_formatted, it.discount.toPercentageText())
+
                     val discountValue = it.originalPrice * it.discount / 100
                     tv_discount_value.text = discountValue.toDiscountText()
-                    btn_summary.setEstPrice(it.originalPrice - discountValue)
+
+                    val finalPrice = it.originalPrice - discountValue
+                    tv_total_value.text = finalPrice.formatPrice()
+                    btn_summary.setEstPrice(finalPrice)
+
                     rl_discount_container.isGone = it.discount == 0f
                 }
             })
