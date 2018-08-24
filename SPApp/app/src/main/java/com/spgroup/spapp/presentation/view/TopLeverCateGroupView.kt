@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.TopLevelCategory
-import com.spgroup.spapp.util.extension.toFullImgUrl
+import com.spgroup.spapp.util.extension.toFullUrl
 import kotlinx.android.synthetic.main.view_top_level_category_group.view.*
 
 class TopLeverCateGroupView: LinearLayout {
@@ -56,7 +56,7 @@ class TopLeverCateGroupView: LinearLayout {
         mList.forEachIndexed { index, cat ->
             if (index < mListCateView.size) {
                 with(mListCateView[index]) {
-                    setData(cat.name, cat.homeThumbnail.toFullImgUrl())
+                    setData(cat.name, cat.homeThumbnail.toFullUrl())
                     setOnClickListener {
                         mListener?.onCategoryClick(index)
                     }

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
 import com.spgroup.spapp.util.extension.loadImage
-import com.spgroup.spapp.util.extension.toFullImgUrl
+import com.spgroup.spapp.util.extension.toFullUrl
 import kotlinx.android.synthetic.main.fragment_partner_image.*
 
 class PartnerImageFragment: BaseFragment() {
@@ -41,6 +41,6 @@ class PartnerImageFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        iv_content.loadImage(url.toFullImgUrl())
+        iv_content.loadImage(url.toFullUrl())
     }
 }

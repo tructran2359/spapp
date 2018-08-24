@@ -12,10 +12,13 @@ import android.view.ViewTreeObserver
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.isGone
 import com.bumptech.glide.Glide
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.activity.BaseActivity
+import com.spgroup.spapp.presentation.view.IndicatorTextView
 
 fun View.setOnGlobalLayoutListener(action: () -> Unit) {
     this.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener{
@@ -90,4 +93,20 @@ fun ImageView.loadImage(url: String) {
             .with(this)
             .load(url)
             .into(this)
+}
+
+fun LinearLayout.addIndicatorText(listString: List<String>?) {
+    if (listString == null || listString.isEmpty()) {
+        isGone = true
+    } else {
+        listString.forEach { offer ->
+            if (!listString.isEmpty()) {
+                val indicatorTextView = IndicatorTextView(context, offer)
+                val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                layoutParams.topMargin = context.getDimensionPixelSize(R.dimen.common_vert_medium_sub)
+                indicatorTextView.layoutParams = layoutParams
+                addView(indicatorTextView)
+            }
+        }
+    }
 }

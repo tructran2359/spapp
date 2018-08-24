@@ -17,6 +17,9 @@ class PdfViewModel: BaseViewModel(), DownloadFileAsyncTask.OnDownloadListener {
     }
 
     private fun loadPdfFile() {
+        if (mUrl.isEmpty()) {
+            mErrorMessage.value = "Empty URL"
+        }
         mDownloadTask = DownloadFileAsyncTask()
         mDownloadTask?.setOnDownloadLisener(this)
         mDownloadTask?.execute(mUrl)

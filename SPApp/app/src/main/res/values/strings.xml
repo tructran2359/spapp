@@ -81,5 +81,6 @@
     <string name="back_to_listing">BACK TO LISTING</string>
 
     <string name="error_loading_pdf">Somethings went wrong. Can not load PDF</string>
+    <string name="not_available">Not Available</string>
 
 </resources>

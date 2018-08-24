@@ -76,7 +76,7 @@ class PartnerListingActivity : BaseActivity() {
     private fun updateBanner(topLevelCategory: TopLevelCategory) {
         tv_title.text = topLevelCategory.name
         Glide.with(this@PartnerListingActivity)
-                .load(topLevelCategory.banner.toFullImgUrl())
+                .load(topLevelCategory.banner.toFullUrl())
                 .into(iv_banner)
     }
 

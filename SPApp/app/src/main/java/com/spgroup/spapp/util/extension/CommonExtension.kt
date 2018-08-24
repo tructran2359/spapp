@@ -16,7 +16,7 @@ fun String.isValidPhoneNumber() = android.util.Patterns.PHONE.matcher(this).matc
 
 fun String.isNumberOnly() = this.matches(Regex("[0-9]+"))
 
-fun String.toFullImgUrl() =
+fun String.toFullUrl() =
         if (!this.startsWith("http")) {
             BuildConfig.BASE_API + this
         } else {

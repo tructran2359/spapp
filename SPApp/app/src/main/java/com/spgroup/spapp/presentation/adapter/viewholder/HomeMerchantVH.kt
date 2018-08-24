@@ -5,7 +5,7 @@ import android.view.View
 import com.spgroup.spapp.domain.model.TopLevelFeaturedPartner
 import com.spgroup.spapp.presentation.adapter.HomeMerchantAdapter
 import com.spgroup.spapp.util.extension.loadImage
-import com.spgroup.spapp.util.extension.toFullImgUrl
+import com.spgroup.spapp.util.extension.toFullUrl
 import kotlinx.android.synthetic.main.layout_merchant.view.*
 
 class HomeMerchantVH(itemView: View, private val listener: HomeMerchantAdapter.OnMerchantClickListener): RecyclerView.ViewHolder(itemView) {
@@ -14,7 +14,7 @@ class HomeMerchantVH(itemView: View, private val listener: HomeMerchantAdapter.O
         itemView.run {
             tv_category.text = partner.category
             tv_partner_name.text = partner.name
-            iv_logo.loadImage(partner.logoUrl.toFullImgUrl())
+            iv_logo.loadImage(partner.logoUrl.toFullUrl())
             setOnClickListener {
                 listener.onMerchantClick(partner, adapterPosition)
             }

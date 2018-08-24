@@ -12,6 +12,7 @@ import com.spgroup.spapp.presentation.viewmodel.PdfViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.doLogE
 import com.spgroup.spapp.util.extension.obtainViewModel
+import com.spgroup.spapp.util.extension.toFullUrl
 import kotlinx.android.synthetic.main.activity_pdf.*
 import org.jetbrains.anko.longToast
 import java.io.File
@@ -22,10 +23,10 @@ class PdfActivity: BaseActivity() {
         const val EXTRA_TITLE = "EXTRA_TITLE"
         const val EXTRA_URL = "EXTRA_URL"
 
-        fun getLaunchIntent(context: Context, title: String, url: String?): Intent {
+        fun getLaunchIntent(context: Context, title: String, url: String): Intent {
             val intent = Intent(context, PdfActivity::class.java)
             intent.putExtra(EXTRA_TITLE, title)
-            val loadUrl = if (url == null) "" else url
+            val loadUrl = if (url.isEmpty()) "" else url.toFullUrl()
             intent.putExtra(EXTRA_URL, loadUrl)
             return intent
         }
@@ -58,7 +59,7 @@ class PdfActivity: BaseActivity() {
         }
 
 
-        mViewModel.setUpData("http://gahp.net/wp-content/uploads/2017/09/sample.pdf")
+        mViewModel.setUpData(mUrl)
 
 //        webview.loadUrl("http://www.pdf995.com/samples/pdf.pdf")
 
@@ -97,15 +98,21 @@ class PdfActivity: BaseActivity() {
     }
 
     private fun loadPdf(filePath: String) {
-        val file = File(filePath)
-        pdf_view.fromFile(file)
-                .swipeVertical(true)
-                .onPageChange { pageIndex, pageCount ->
-                    tv_page_indicator.text = "$pageIndex of $pageCount"
-                    if (tv_page_indicator.visibility == View.GONE) {
-                        tv_page_indicator.visibility = View.VISIBLE
+        try {
+            val file = File(filePath)
+            pdf_view.fromFile(file)
+                    .swipeVertical(true)
+                    .onPageChange { pageIndex, pageCount ->
+                        tv_page_indicator.text = "$pageIndex of $pageCount"
+                        if (tv_page_indicator.visibility == View.GONE) {
+                            tv_page_indicator.visibility = View.VISIBLE
+                        }
                     }
-                }
-                .load()
+                    .load()
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            doLogE("Pdf", "Ex: ${ex.toString()} with message: ${ex.message}")
+            longToast(R.string.error_loading_pdf)
+        }
     }
 }

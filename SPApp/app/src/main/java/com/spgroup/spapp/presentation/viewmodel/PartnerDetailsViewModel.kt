@@ -95,8 +95,8 @@ class PartnerDetailsViewModel(
             return PartnerInformationActivity.PartnerInfo(
                     name = name,
                     desc = description,
-                    offerTitle = offeringTitle,
-                    offers = offering,
+                    offeringTitle = offeringTitle,
+                    offering = offering,
                     phone = phone,
                     uen = uen,
                     nea = nea,
