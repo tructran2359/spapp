@@ -30,22 +30,17 @@ class OrderSummaryActivity : BaseActivity() {
     companion object {
 
         const val RC_EDIT = 11
-        const val EXTRA_CATE_INFO_MAP = "EXTRA_CATE_INFO_MAP"
         const val EXTRA_SERVICE_MAP = "EXTRA_SERVICE_MAP"
-        const val EXTRA_DISCOUNT = "EXTRA_DISCOUNT"
-        const val EXTRA_PARNER_NAME = "EXTRA_PARNER_NAME"
+        const val EXTRA_PARTNER_DETAIL = "EXTRA_PARTNER_DETAIL"
 
         fun getLaunchIntent(
                 context: Context,
-                mapCateInfo: HashMap<String, String>,
                 mapSelectedServices: HashMap<String, MutableList<ISelectedService>>,
-                discount: String,
-                partnerName: String): Intent {
+                partnerDetails: PartnerDetails
+        ): Intent {
             val intent = Intent(context, OrderSummaryActivity::class.java)
-            intent.putExtra(EXTRA_CATE_INFO_MAP, mapCateInfo)
             intent.putExtra(EXTRA_SERVICE_MAP, mapSelectedServices)
-            intent.putExtra(EXTRA_DISCOUNT, discount)
-            intent.putExtra(EXTRA_PARNER_NAME, partnerName)
+            intent.putExtra(EXTRA_PARTNER_DETAIL, partnerDetails)
             return intent
         }
     }
@@ -58,7 +53,6 @@ class OrderSummaryActivity : BaseActivity() {
     private lateinit var mAnimDisappear: Animation
     private var mFirstInvalidView: ValidationInputView? = null
     private lateinit var mViewModel: OrderSummaryViewModel
-    private lateinit var mName: String
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -68,18 +62,14 @@ class OrderSummaryActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_summary)
 
-        mName = intent.getStringExtra(EXTRA_PARNER_NAME)
-
-        initAnimations()
-        initViews()
-
         mViewModel = obtainViewModel(OrderSummaryViewModel::class.java, ViewModelFactory.getInstance())
         subscribeUI()
-        val mapCateInfo = intent.getSerializableExtra(EXTRA_CATE_INFO_MAP) as HashMap<String, String>
         val mapSelectedServices = intent.getSerializableExtra(EXTRA_SERVICE_MAP) as HashMap<String, MutableList<ISelectedService>>
-        var discount = intent.getStringExtra(EXTRA_DISCOUNT)
-        if (discount == null) discount = ""
-        mViewModel.initData(mapCateInfo, mapSelectedServices, discount)
+        val partnerDetails = intent.getSerializableExtra(EXTRA_PARTNER_DETAIL) as PartnerDetails
+        mViewModel.initData(partnerDetails, mapSelectedServices)
+        
+        initAnimations()
+        initViews()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -197,8 +187,11 @@ class OrderSummaryActivity : BaseActivity() {
     private fun initViews() {
 
         action_bar.setTitle(R.string.summary)
-        tv_name.text = mName
-        tv_go_back_instruction.text = getString(R.string.summary_go_back_instruction, mName)
+        val partnerName = mViewModel.getPartnerName()
+
+        tv_name.text = partnerName
+        tv_go_back_instruction.text = getString(R.string.summary_go_back_instruction, partnerName)
+
         tv_go_back.setOnClickListener {
             onBackPressed()
         }
