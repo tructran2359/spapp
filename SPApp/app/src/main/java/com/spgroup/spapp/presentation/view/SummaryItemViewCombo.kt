@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
+import androidx.core.view.isGone
 import com.spgroup.spapp.R
 import kotlinx.android.synthetic.main.layout_summary_view_item_combo.view.*
 
@@ -60,8 +61,9 @@ class SummaryItemViewCombo: RelativeLayout {
         tv_service_name.text = name
     }
 
-    fun setServiceDescription(description: String) {
+    fun setServiceDescription(description: String?) {
         tv_service_description.text = description
+        tv_service_description.isGone = description == null || description.isEmpty()
     }
 
     fun setOnEditClickListener(action: () -> Unit) {

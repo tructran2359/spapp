@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
+import androidx.core.view.isGone
 import com.spgroup.spapp.R
 import kotlinx.android.synthetic.main.layout_summary_item_estimated.view.*
 
@@ -45,8 +46,9 @@ class SummaryItemViewEstimated: RelativeLayout {
         }
     }
 
-    fun setDescription(text: String) {
+    fun setDescription(text: String?) {
         tv_text.setText(text)
+        tv_text.isGone = text == null || text.isEmpty()
     }
 
     fun setName(name: String) {

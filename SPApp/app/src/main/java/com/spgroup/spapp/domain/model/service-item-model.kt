@@ -10,7 +10,7 @@ sealed class AbsServiceItem: Serializable  {
 data class ComplexCustomisationService(
         val id: Int,
         val label: String,
-        val serviceDescription: String,
+        val serviceDescription: String?,
         var priceText: String?,
         val unit: String?,
         val customisations: List<AbsCustomisation>
@@ -22,7 +22,7 @@ data class ComplexCustomisationService(
 data class CheckboxService(
         val id: Int,
         val label: String,
-        val serviceDescription: String,
+        val serviceDescription: String?,
         val priceText: String
 ) : AbsServiceItem() {
     override fun getServiceId() = id
