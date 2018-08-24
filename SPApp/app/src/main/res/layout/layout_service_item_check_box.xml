@@ -36,22 +36,15 @@
         />
 
     <TextView
-        style="@style/textServiceItemFrom"
-        android:id="@+id/tv_from"
-        android:layout_marginTop="@dimen/service_item_vert_spacing"
-        android:layout_marginBottom="@dimen/service_item_vert_spacing"
-        android:layout_below="@+id/tv_description"
-        />
-
-    <TextView
         style="@style/textServiceItemPrice"
         android:id="@+id/tv_price"
-        android:layout_alignBaseline="@+id/tv_from"
-        android:layout_toRightOf="@id/tv_from"
+        android:layout_width="match_parent"
         android:layout_toLeftOf="@id/fl_check_container"
-        android:layout_marginLeft="@dimen/common_spacing"
+        android:layout_below="@+id/tv_description"
+        android:layout_marginTop="@dimen/service_item_vert_spacing"
+        android:layout_marginBottom="@dimen/service_item_vert_spacing"
 
-        android:text="S$6 / item"
+        tools:text="S$6 / item"
         />
 
     <FrameLayout
