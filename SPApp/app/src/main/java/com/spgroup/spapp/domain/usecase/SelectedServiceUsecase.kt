@@ -150,7 +150,7 @@ class SelectedServiceUsecase: SynchronousUsecase() {
     fun getSelectedService(categoryId: String, serviceId: Int): ISelectedService? {
         val listSelectedValueItem = mapSelectedServices[categoryId]
         return listSelectedValueItem
-                ?.first { it.getId() == serviceId }
+                ?.firstOrNull { it.getId() == serviceId }
     }
 
     fun getSelectedInstruction(categoryId: String, serviceId: Int): String? {
