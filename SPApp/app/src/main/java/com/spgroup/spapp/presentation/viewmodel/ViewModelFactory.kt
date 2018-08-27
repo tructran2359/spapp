@@ -5,10 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import com.spgroup.spapp.di.Injection
 import com.spgroup.spapp.domain.SchedulerFacade
 import com.spgroup.spapp.domain.ServicesRepository
-import com.spgroup.spapp.domain.usecase.GetCustomisationLowestPrice
-import com.spgroup.spapp.domain.usecase.GetInitialDataUsecase
-import com.spgroup.spapp.domain.usecase.GetPartnerListingUsecase
-import com.spgroup.spapp.domain.usecase.GetServicesListByPartnerUsecase
+import com.spgroup.spapp.domain.usecase.*
 import com.spgroup.spapp.manager.AppDataCache
 
 class ViewModelFactory private constructor(
@@ -93,7 +90,9 @@ class ViewModelFactory private constructor(
     }
 
     private fun createOrderSummaryViewModel(): OrderSummaryViewModel {
-        return OrderSummaryViewModel()
+        val selectedServiceUsecase = SelectedServiceUsecase()
+        val getOrderSummaryUsecase = GetOrderSummaryUsecase()
+        return OrderSummaryViewModel(selectedServiceUsecase, getOrderSummaryUsecase)
     }
 
     companion object {

@@ -3,11 +3,16 @@ package com.spgroup.spapp.presentation.viewmodel
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.spgroup.spapp.domain.model.AbsServiceItem
+import com.spgroup.spapp.domain.model.ContactInfo
 import com.spgroup.spapp.domain.model.PartnerDetails
+import com.spgroup.spapp.domain.usecase.GetOrderSummaryUsecase
 import com.spgroup.spapp.domain.usecase.SelectedServiceUsecase
 import com.spgroup.spapp.presentation.activity.CustomiseDisplayData
 
-class OrderSummaryViewModel(): ViewModel() {
+class OrderSummaryViewModel(
+        private val mSelectedServiceUsecase: SelectedServiceUsecase,
+        private val mGetOrderSummaryUsecase: GetOrderSummaryUsecase
+): ViewModel() {
 
     val mDeletedCateId = MutableLiveData<String>()
     val mDeletedServiceId = MutableLiveData<Int>()
@@ -16,8 +21,6 @@ class OrderSummaryViewModel(): ViewModel() {
     val mEstPrice = MutableLiveData<EstPriceData>()
     val mUpdatedComplexService = MutableLiveData<ComplexSelectedService>()
 
-
-    private val mSelectedServiceUsecase = SelectedServiceUsecase()
     var mMapSelectedServices = MutableLiveData<HashMap<String, MutableList<ISelectedService>>>()
     private lateinit var mPartnerDetails: PartnerDetails
 
@@ -79,6 +82,13 @@ class OrderSummaryViewModel(): ViewModel() {
     }
 
     fun getPartnerName() = mPartnerDetails.name
+
+    fun getOrderSummaryModel(contactInfo: ContactInfo) = mGetOrderSummaryUsecase.getOrderSummaryModel(
+            mPartnerDetails,
+            mSelectedServiceUsecase.mapSelectedServices,
+            contactInfo,
+            mSelectedServiceUsecase.calculateEstPrice()
+    )
 
 }
 

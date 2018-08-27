@@ -39,4 +39,16 @@ data class PartnerDetails(
 
         return null
     }
+
+    fun getSubCateByCateIdAndServiceId(cateId: String, serviceId: Int): SubCategory? {
+        categories
+                ?.firstOrNull { category -> cateId == category.id }
+                ?.subCategories?.forEach { subCate ->
+                    val service = subCate.services.firstOrNull { service -> serviceId == service.getServiceId() }
+                    if (service != null) {
+                        return subCate
+                    }
+                }
+        return null
+    }
 }

@@ -12,6 +12,7 @@ sealed class AbsCustomisation(
 ): Serializable {
 
     abstract fun toCustomiseData(): CustomiseData
+    abstract fun getSelectedOptionLabel(selectedIndex: Int): String
 
 }
 
@@ -27,6 +28,8 @@ class BooleanCustomisation(
                 CustomiseOption("No - ${0f.formatPrice()}", 0f))
         return CustomiseData(label, options)
     }
+
+    override fun getSelectedOptionLabel(selectedIndex: Int) = if (selectedIndex == 0) "Yes" else "No"
 }
 
 
@@ -43,6 +46,7 @@ class MatrixCustomisation(
         return CustomiseData(label, options)
     }
 
+    override fun getSelectedOptionLabel(selectedIndex: Int) = matrixOptions[selectedIndex].value.toString()
 }
 
 
@@ -56,6 +60,8 @@ class DropdownCustomisation(
         val options = dropdownOptions.map { it.toCustomiseOption() }
         return CustomiseData(label, options)
     }
+
+    override fun getSelectedOptionLabel(selectedIndex: Int) = dropdownOptions[selectedIndex].label
 
 }
 
@@ -75,6 +81,8 @@ class NumberCustomisation(
         }
         return CustomiseData(label, options)
     }
+
+    override fun getSelectedOptionLabel(selectedIndex: Int) = (min + selectedIndex).toString()
 
 }
 

@@ -5,7 +5,7 @@ data class ContactInfo(
         val email: String,
         val contactNo: String,
         val address: List<String>,
-        val prefContactTime: String,
+        val prefContactTime: String?,
         val postalCode: String,
-        val notes: String
+        val notes: String?
 )

@@ -156,6 +156,10 @@ interface ISelectedService {
     fun getSelectedCount(): Int
     fun getEstPrice(): Float
     fun getId() : Int
+    fun getServiceType(): String
+    fun getServiceName(): String
+    fun getSelectedCustomisationLabel(): String?
+    fun getSpectialInstructions(): String?
 }
 
 data class SelectedService(
@@ -168,6 +172,14 @@ data class SelectedService(
     override fun getEstPrice() = subTotal
 
     override fun getId() = service.getServiceId()
+
+    override fun getServiceType() = service.getServiceType()
+
+    override fun getServiceName() = service.getServiceName()
+
+    override fun getSelectedCustomisationLabel() = null
+
+    override fun getSpectialInstructions() = null
 }
 
 data class ComplexSelectedService(
@@ -181,4 +193,22 @@ data class ComplexSelectedService(
     override fun getEstPrice() = subTotal
 
     override fun getId() = service.getServiceId()
+
+    override fun getServiceType() = service.getServiceType()
+
+    override fun getServiceName() = service.getServiceName()
+
+    override fun getSelectedCustomisationLabel(): String? {
+        selectedCustomisation?.run {
+            val firstKey = keys.first()
+            val firstValue = this[firstKey]
+            if (firstValue != null) {
+                return service.getSelectedCustomisationLabel(firstKey, firstValue)
+            }
+        }
+
+        return null
+    }
+
+    override fun getSpectialInstructions() = specialInstruction
 }
