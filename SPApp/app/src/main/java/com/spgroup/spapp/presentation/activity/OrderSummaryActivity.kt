@@ -15,15 +15,18 @@ import android.widget.LinearLayout.LayoutParams.MATCH_PARENT
 import android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
 import android.widget.TextView
 import androidx.core.view.isGone
+import com.google.gson.Gson
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.*
 import com.spgroup.spapp.presentation.adapter.PreferredTimeAdapter
 import com.spgroup.spapp.presentation.view.*
 import com.spgroup.spapp.presentation.viewmodel.*
+import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_order_summary.*
 import kotlinx.android.synthetic.main.layout_summary_estimated.*
+import org.jetbrains.anko.longToast
 
 class OrderSummaryActivity : BaseActivity() {
 
@@ -232,7 +235,10 @@ class OrderSummaryActivity : BaseActivity() {
                 }
                 if (invalidCount == 0) {
                     rl_error_cointainer.visibility = View.GONE
-                    startActivity(AcknowledgementActivity.getLaunchIntent(this@OrderSummaryActivity))
+//                    startActivity(AcknowledgementActivity.getLaunchIntent(this@OrderSummaryActivity))
+                    val orderSummary = mViewModel.getOrderSummaryModel(createContactInfo())
+                    doLogD("OrderSum", Gson().toJson(orderSummary))
+                    longToast("Check Logcat")
                 } else {
                     var errorMsg = if(invalidCount == 1) {
                         this@OrderSummaryActivity.getString(R.string.error_detected_1)
@@ -249,7 +255,7 @@ class OrderSummaryActivity : BaseActivity() {
             onBackPressed()
         }
 
-        val list = mutableListOf("Select Time", "11AM - 12PM", "12PM - 2PM", "2PM - 4PM")
+        val list = ConstUtils.LIST_PREFERRED_TIME.toMutableList()
         val adapter = PreferredTimeAdapter(this, R.layout.layout_preferred_time, list)
 
         spinner_preferred_time.adapter = adapter
@@ -259,7 +265,7 @@ class OrderSummaryActivity : BaseActivity() {
                 scroll_content.scrollTo(0, 0)
                 val location = IntArray(2)
                 it.getLocationOnScreen(location)
-                doLogD("Scroll", "Pos on screen: ${location[0]} , ${location[1]}")
+//                doLogD("Scroll", "Pos on screen: ${location[0]} , ${location[1]}")
                 val position = location[1] - getDimensionPixelSize(R.dimen.action_bar_height) - getDimensionPixelSize(R.dimen.common_vert_large)
                 scroll_content.scrollTo(0, position)
                 it.requestFocus()
@@ -490,4 +496,19 @@ class OrderSummaryActivity : BaseActivity() {
     private fun createCateTag(cateId: String) = "Cate" + cateId
 
     private fun createServiceTag(serviceId: Int) = "ServiceID${serviceId}"
+
+    private fun createContactInfo(): ContactInfo {
+        val name = validation_name.getInputedText()
+        val email = validation_email.getInputedText()
+        val contactNo = validation_contact_no.getInputedText()
+        val address1 = validation_address.getInputedText()
+        val address2 = et_address_2.text?.toString() ?: ""
+        val address = listOf(address1, address2)
+        val selectedPreferredTime = spinner_preferred_time.selectedItemPosition
+        val preferredTime = if (selectedPreferredTime == 0) "" else ConstUtils.LIST_PREFERRED_TIME[selectedPreferredTime]
+        val postalCode = validation_postal_code.getInputedText()
+        val notes = et_notes.text?.toString() ?: ""
+
+        return ContactInfo(name, email, contactNo, address, preferredTime, postalCode, notes)
+    }
 }

@@ -23,8 +23,8 @@ class GetOrderSummaryUsecase: SynchronousUsecase() {
 
         val listOrder = mutableListOf<Order>()
 
-        mapSelectedServices.forEach { cateId, listSelectedServices ->
-            listSelectedServices.forEach { selectedService ->
+        mapSelectedServices.forEach { (cateId: String, listSelectedServices: MutableList<ISelectedService>) ->
+            listSelectedServices.forEach { selectedService: ISelectedService ->
                 val serviceType = selectedService.getServiceType()
                 val serviceId = selectedService.getId()
                 val serviceCateName = partnerDetails.getCategoryById(cateId)?.label ?: ""
