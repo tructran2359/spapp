@@ -86,7 +86,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
 
     private fun setupViewModel() {
         val partnerUEN = intent.getStringExtra(ConstUtils.EXTRA_PARTNER_UEN)
-        doLogD("Partner", "onCreate partner: ${partnerUEN ?: "null"}")
+//        doLogD("Partner", "onCreate partner: ${partnerUEN ?: "null"}")
         // This is demo for using ViewModel
         mViewModel = obtainViewModel(PartnerDetailsViewModel::class.java, ViewModelFactory.getInstance())
                 .apply { this.partnerUEN = partnerUEN }
@@ -96,6 +96,9 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
                 it?.let {
 
                     tv_partner_name.text = it.name
+                    tv_partner_name.requestLayout()
+//                    doLogD("PartnerName", "Set name: ${it.name} textSize: ${tv_partner_name.textSize} visi: ${tv_partner_name.visibility} height ${tv_partner_name.height}")
+
                     tv_promotion.text = it.promo
                     val hasPromoBar = it.promo == null || it.promo.isEmpty()
                     ll_promotion_bar.isGone = hasPromoBar
@@ -141,7 +144,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         if (appBarLayout == null) return
         val currentScroll = appBarLayout.bottom
         val mMaxScroll = appBarLayout.totalScrollRange
-        val percentage = currentScroll.toFloat() / (mMaxScroll).toFloat()
+        val percentage = (currentScroll - mActionBarHeight).toFloat() / (mMaxScroll).toFloat()
 
         val layoutParam = rl_top_button_container.layoutParams
         layoutParam.height = max(mActionBarHeight, currentScroll - mPromotionBarHeight)
@@ -158,6 +161,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         rl_top_button_container.layoutParams = layoutParam
         val scaledTextSize = mInitTextSize * max(percentage, 0.7f)
         tv_partner_name.setTextSize(TypedValue.COMPLEX_UNIT_PX, scaledTextSize)
+//        doLogD("Partner", "Offset change height: ${tv_partner_name.height}")
     }
 
     ///////////////////////////////////////////////////////////////////////////
