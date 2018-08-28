@@ -6,7 +6,7 @@ data class FoodMenu(
         val title: String?,
         val summary: String?,
         val items: List<FoodMenuItem>?
-)
+): Serializable
 
 data class FoodMenuItem(
         val label: String,

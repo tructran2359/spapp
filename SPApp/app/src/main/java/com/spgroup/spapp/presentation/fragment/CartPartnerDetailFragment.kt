@@ -35,7 +35,7 @@ class CartPartnerDetailFragment: BaseFragment() {
         mViewModel.run {
             partnerDetails.observe(this@CartPartnerDetailFragment, Observer {
                 it?.let {
-                    mAdapter.setData(it.categories)
+                    mAdapter.setData(it.categories, it.menu)
                     setUpTabLayout()
                 }
             })

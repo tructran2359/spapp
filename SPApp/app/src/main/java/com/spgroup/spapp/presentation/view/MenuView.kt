@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.spgroup.spapp.R
+import com.spgroup.spapp.domain.model.Pdf
 import kotlinx.android.synthetic.main.layout_menu_view.view.*
 
 class MenuView: LinearLayout {
@@ -35,11 +36,11 @@ class MenuView: LinearLayout {
     // Other
     ///////////////////////////////////////////////////////////////////////////
 
-    fun addMenuItem(menuItem: String) {
+    fun addPdf(pdf: Pdf) {
         val view = MenuTextView(context)
-        view.setText(menuItem)
+        view.setText(pdf.title)
         view.setOnClickListener {
-            mListener?.onMenuItemClick(menuItem)
+            mListener?.onMenuItemClick(pdf.title, pdf.uri)
         }
         ll_menu_container.addView(view)
     }
@@ -57,6 +58,6 @@ class MenuView: LinearLayout {
     ///////////////////////////////////////////////////////////////////////////
 
     interface OnMenuItemClickListener {
-        fun onMenuItemClick(menuItem: String)
+        fun onMenuItemClick(title: String, uri: String)
     }
 }
