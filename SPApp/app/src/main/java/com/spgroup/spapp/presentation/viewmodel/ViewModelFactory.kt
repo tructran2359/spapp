@@ -92,7 +92,8 @@ class ViewModelFactory private constructor(
     private fun createOrderSummaryViewModel(): OrderSummaryViewModel {
         val selectedServiceUsecase = SelectedServiceUsecase()
         val getOrderSummaryUsecase = GetOrderSummaryUsecase()
-        return OrderSummaryViewModel(selectedServiceUsecase, getOrderSummaryUsecase)
+        val submitRequestUsecase = SubmitRequestUsecase(schedulerFacade, cloudRepository)
+        return OrderSummaryViewModel(submitRequestUsecase, selectedServiceUsecase, getOrderSummaryUsecase)
     }
 
     companion object {

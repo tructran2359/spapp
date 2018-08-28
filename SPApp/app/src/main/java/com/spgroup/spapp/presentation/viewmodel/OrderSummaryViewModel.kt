@@ -1,18 +1,20 @@
 package com.spgroup.spapp.presentation.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
 import com.spgroup.spapp.domain.model.AbsServiceItem
 import com.spgroup.spapp.domain.model.ContactInfo
 import com.spgroup.spapp.domain.model.PartnerDetails
+import com.spgroup.spapp.domain.model.RequestAck
 import com.spgroup.spapp.domain.usecase.GetOrderSummaryUsecase
 import com.spgroup.spapp.domain.usecase.SelectedServiceUsecase
+import com.spgroup.spapp.domain.usecase.SubmitRequestUsecase
 import com.spgroup.spapp.presentation.activity.CustomiseDisplayData
 
 class OrderSummaryViewModel(
+        private val mSubmitRequestUsecase: SubmitRequestUsecase,
         private val mSelectedServiceUsecase: SelectedServiceUsecase,
         private val mGetOrderSummaryUsecase: GetOrderSummaryUsecase
-): ViewModel() {
+): BaseViewModel() {
 
     val mDeletedCateId = MutableLiveData<String>()
     val mDeletedServiceId = MutableLiveData<Int>()
@@ -20,6 +22,8 @@ class OrderSummaryViewModel(
     val mTotalCount = MutableLiveData<Int>()
     val mEstPrice = MutableLiveData<EstPriceData>()
     val mUpdatedComplexService = MutableLiveData<ComplexSelectedService>()
+    val mIsLoading = MutableLiveData<Boolean>()
+    val mRequestAck = MutableLiveData<RequestAck>()
 
     var mMapSelectedServices = MutableLiveData<HashMap<String, MutableList<ISelectedService>>>()
     private lateinit var mPartnerDetails: PartnerDetails
@@ -89,6 +93,24 @@ class OrderSummaryViewModel(
             contactInfo,
             mSelectedServiceUsecase.calculateEstPrice()
     )
+
+    fun submitRequest(contactInfo: ContactInfo) {
+        val orderSummary = getOrderSummaryModel(contactInfo)
+        val disposable = mSubmitRequestUsecase
+                .submitRequest(orderSummary)
+                .doOnSubscribe { mIsLoading.value = true  }
+                .subscribe(
+                        { requestAck ->
+                            mIsLoading.value = false
+                            mRequestAck.value = requestAck
+                        },
+                        { throwable ->
+                            mIsLoading.value = false
+                            error.value = throwable
+                        }
+                )
+        disposeBag.addAll(disposable)
+    }
 
 }
 

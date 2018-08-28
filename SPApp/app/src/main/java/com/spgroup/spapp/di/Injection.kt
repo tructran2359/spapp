@@ -41,7 +41,8 @@ object Injection {
 
         val partnerMapper = PartnerMapper()
         val promotionMapper = PromotionMapper()
-        return ServicesCloudDataStore(provideSingaporePowerHttpClient(), homeDataMapper, partnerMapper, promotionMapper)
+        val requestAckMapper = RequestAckMapper()
+        return ServicesCloudDataStore(provideSingaporePowerHttpClient(), homeDataMapper, partnerMapper, promotionMapper, requestAckMapper)
     }
 
     fun provideSchedulerFacade(): SchedulerFacade = SchedulerFacade()

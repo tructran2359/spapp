@@ -12,6 +12,10 @@
         <!--Customize here-->
     </style>
 
+    <style name="AppTheme.ProgressBar">
+        <item name="colorAccent">@color/color_ui01</item>
+    </style>
+
     <!--Text style-->
 
     <style name="textH1">

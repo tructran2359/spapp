@@ -178,5 +178,6 @@
     <dimen name="page_top_img_height">90dp</dimen>
     <dimen name="promotion_bar_height">60dp</dimen>
     <dimen name="promotion_bar_icon_size">50dp</dimen>
+    <dimen name="acknowledgement_act_horz_spacing">50dp</dimen>
 
 </resources>

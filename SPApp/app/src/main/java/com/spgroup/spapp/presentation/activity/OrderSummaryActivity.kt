@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.DialogFragment
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
@@ -15,14 +16,15 @@ import android.widget.LinearLayout.LayoutParams.MATCH_PARENT
 import android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
 import android.widget.TextView
 import androidx.core.view.isGone
-import com.google.gson.Gson
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.*
 import com.spgroup.spapp.presentation.adapter.PreferredTimeAdapter
+import com.spgroup.spapp.presentation.fragment.LoadingDialog
 import com.spgroup.spapp.presentation.view.*
 import com.spgroup.spapp.presentation.viewmodel.*
 import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.doLogD
+import com.spgroup.spapp.util.doLogE
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_order_summary.*
 import kotlinx.android.synthetic.main.layout_summary_estimated.*
@@ -155,6 +157,29 @@ class OrderSummaryActivity : BaseActivity() {
                     }
                 }
             })
+
+            mIsLoading.observe(this@OrderSummaryActivity, Observer {
+                it?.let { isLoading ->
+                    showLoadingDialog(isLoading)
+                }
+            })
+
+            error.observe(this@OrderSummaryActivity, Observer {
+                it?.let { throwable ->
+                    longToast(R.string.error_submit_request)
+                    throwable.printStackTrace()
+                    doLogE("SubmitRequest", "Error: ${throwable.toString()} with message: ${throwable.message}")
+                }
+            })
+
+            mRequestAck.observe(this@OrderSummaryActivity, Observer {
+                it?.let { requestAck ->
+                    doLogD("SubmitRequest", "Ack: ${requestAck}")
+                    val intent = AcknowledgementActivity.getLaunchIntent(this@OrderSummaryActivity, requestAck)
+                    startActivity(intent)
+                    finish()
+                }
+            })
         }
     }
 
@@ -235,10 +260,9 @@ class OrderSummaryActivity : BaseActivity() {
                 }
                 if (invalidCount == 0) {
                     rl_error_cointainer.visibility = View.GONE
-//                    startActivity(AcknowledgementActivity.getLaunchIntent(this@OrderSummaryActivity))
-                    val orderSummary = mViewModel.getOrderSummaryModel(createContactInfo())
-                    doLogD("OrderSum", Gson().toJson(orderSummary))
-                    longToast("Check Logcat")
+                    val contactInfo = createContactInfo()
+                    mViewModel.submitRequest(contactInfo)
+//                    longToast("Check Logcat")
                 } else {
                     var errorMsg = if(invalidCount == 1) {
                         this@OrderSummaryActivity.getString(R.string.error_detected_1)
@@ -510,5 +534,26 @@ class OrderSummaryActivity : BaseActivity() {
         val notes = et_notes.text?.toString() ?: ""
 
         return ContactInfo(name, email, contactNo, address, preferredTime, postalCode, notes)
+    }
+
+    private fun showLoadingDialog(show: Boolean) {
+        doLogD("Loading", "Show: $show")
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val prevDialog = supportFragmentManager.findFragmentByTag(ConstUtils.TAG_DIALOG)
+        if (show) {
+            if (prevDialog != null) {
+                fragmentTransaction.remove(prevDialog)
+            }
+
+            val newDialog = LoadingDialog()
+            newDialog.show(fragmentTransaction, ConstUtils.TAG_DIALOG)
+
+            doLogD("Loading", "Show done")
+        } else {
+            if (prevDialog != null) {
+                (prevDialog as DialogFragment).dismiss()
+                doLogD("Loading", "Hide done")
+            }
+        }
     }
 }
