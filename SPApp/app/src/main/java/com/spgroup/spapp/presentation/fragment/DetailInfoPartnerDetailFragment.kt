@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
@@ -32,8 +33,13 @@ class DetailInfoPartnerDetailFragment: BaseFragment() {
         mViewModel.run {
             partnerDetails.observe(this@DetailInfoPartnerDetailFragment, Observer {
                 it?.let {
-                    tv_title.text = it.serviceInfo?.title ?: ""
-                    tv_description.text = it.serviceInfo?.description ?: ""
+                    val title = it.serviceInfo?.title ?: ""
+                    tv_title.text = title
+                    tv_title.isGone = title.isEmpty()
+
+                    val description = it.serviceInfo?.description ?: ""
+                    tv_description.text = description
+                    tv_description.isGone = description.isEmpty()
 
                     activity?.let { activity ->
                         ll_list.addIndicatorText(it.serviceInfo?.list)
