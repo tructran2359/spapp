@@ -112,7 +112,6 @@ class PartnerInformationActivity : BaseActivity() {
         data.run {
             tv_name.text = name
             tv_description.text = desc
-            tv_offer_tittle.text = offeringTitle
 
             tv_phone.text = phone
             ll_phone_container.isGone = phone == null || phone.isEmpty()
@@ -126,7 +125,19 @@ class PartnerInformationActivity : BaseActivity() {
             // hide `Business Information` title if all info are not available
             tv_business_info.isGone = (ll_phone_container.isGone && ll_uen_container.isGone && ll_nea_container.isGone)
 
+
+            tv_offer_tittle.text = offeringTitle
             ll_offering.addIndicatorText(data.offering)
+            // check if empty list or all member of list is empty to hide view
+            var needToHideOfferingViews = true
+            data.offering?.forEach {
+                if (!it.isEmpty()) {
+                    needToHideOfferingViews = false
+                    return@forEach
+                }
+            }
+            tv_offer_tittle.isGone = needToHideOfferingViews
+            ll_offering.isGone = needToHideOfferingViews
 
             // Hide TnC if data is not available
             if (tnc == null || tnc.isEmpty()) {
