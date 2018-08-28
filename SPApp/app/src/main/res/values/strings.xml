@@ -84,5 +84,6 @@
     <string name="not_available">Not Available</string>
     <string name="loading">Loading…</string>
     <string name="error_submit_request">Somethings went wrong. Can not submit request!</string>
+    <string name="this_week_menu">This Week\'s Menu</string>
 
 </resources>

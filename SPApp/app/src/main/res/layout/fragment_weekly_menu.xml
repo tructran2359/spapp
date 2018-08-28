@@ -39,30 +39,12 @@
             />
         
         <LinearLayout
+            android:id="@+id/ll_menu_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            >
+            />
 
-            <com.spgroup.spapp.presentation.view.MenuView
-                android:id="@+id/menu_view_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-
-            <View
-                style="@style/lineDividerDark"
-                android:layout_marginLeft="@dimen/common_horz_medium"
-                android:layout_marginRight="@dimen/common_horz_medium"
-                />
-
-            <com.spgroup.spapp.presentation.view.MenuView
-                android:id="@+id/menu_view_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-
-        </LinearLayout>
     </LinearLayout>
 
 

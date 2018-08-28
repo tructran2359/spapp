@@ -14,9 +14,11 @@
         android:id="@+id/tv_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/selector_btn_white"
+        android:background="@drawable/selector_food_menu_click"
         android:textColor="@color/color_peach"
         tools:text="3 Dishes Plus 1 Soup Meal Set\nhello"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
         />
 
 </LinearLayout>

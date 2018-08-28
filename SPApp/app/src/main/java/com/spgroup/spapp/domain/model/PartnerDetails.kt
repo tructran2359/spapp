@@ -18,7 +18,7 @@ data class PartnerDetails(
         val offering: List<String>?,                     //13
         val banners: List<String>?,                     //14 Nullable
         val categories: List<Category>?,                //15 Nullable
-        val menus: List<FoodMenu>?,                     //16 Nullable
+        val menu: FoodMenu?,                           //16 Nullable
         val serviceInfo: PartnerDetailServiceInfo?      //17 Nullable
 
 ): Serializable {
