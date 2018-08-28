@@ -82,5 +82,7 @@
 
     <string name="error_loading_pdf">Somethings went wrong. Can not load PDF</string>
     <string name="not_available">Not Available</string>
+    <string name="loading">Loading…</string>
+    <string name="error_submit_request">Somethings went wrong. Can not submit request!</string>
 
 </resources>

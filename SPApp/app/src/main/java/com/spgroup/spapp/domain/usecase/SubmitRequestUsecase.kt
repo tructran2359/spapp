@@ -13,8 +13,8 @@ class SubmitRequestUsecase(
 
     fun submitRequest(orderSummary: OrderSummary): Single<RequestAck> {
         return servicesRepository.submitRequest(orderSummary)
-                .subscribeOn(schedulerFacade.callbackScheduler())
-                .observeOn(schedulerFacade.workerScheduler())
+                .subscribeOn(schedulerFacade.workerScheduler())
+                .observeOn(schedulerFacade.callbackScheduler())
     }
 
 }
