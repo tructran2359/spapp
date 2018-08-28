@@ -123,6 +123,9 @@ class PartnerInformationActivity : BaseActivity() {
             tv_nea.text = nea
             ll_nea_container.isGone = nea == null || nea.isEmpty()
 
+            // hide `Business Information` title if all info are not available
+            tv_business_info.isGone = (ll_phone_container.isGone && ll_uen_container.isGone && ll_nea_container.isGone)
+
             ll_offering.addIndicatorText(data.offering)
 
             // Hide TnC if data is not available
