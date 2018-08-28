@@ -5,6 +5,10 @@ import com.spgroup.spapp.domain.model.*
 import io.reactivex.Single
 
 class ServicesDataMock : ServicesRepository {
+    override fun submitRequest(orderSummary: OrderSummary): Single<RequestAck> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun getInitialData(): Single<HomeData> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
