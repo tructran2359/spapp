@@ -24,6 +24,9 @@ class ServiceItemViewCounter(
         setOnClickListener {
             if (count < service.max) {
                 count++
+                if (count < service.min) {
+                    count = service.min
+                }
                 onCountUpdate()
             }
         }
