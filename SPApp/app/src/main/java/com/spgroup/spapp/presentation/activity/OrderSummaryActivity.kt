@@ -175,7 +175,9 @@ class OrderSummaryActivity : BaseActivity() {
             mRequestAck.observe(this@OrderSummaryActivity, Observer {
                 it?.let { requestAck ->
                     doLogD("SubmitRequest", "Ack: ${requestAck}")
-                    longToast("Check Logcat")
+                    val intent = AcknowledgementActivity.getLaunchIntent(this@OrderSummaryActivity, requestAck)
+                    startActivity(intent)
+                    finish()
                 }
             })
         }
