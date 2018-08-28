@@ -33,10 +33,14 @@ class AcknowledgementActivity : BaseActivity() {
         tv_detail.text = requestAck.summary
 
         tv_see_more.setOnClickListener {
-            val intent = HomeActivity.getLaunchIntent(this)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
-            finish()
+            onBackPressed()
         }
+    }
+
+    override fun onBackPressed() {
+        val intent = HomeActivity.getLaunchIntent(this)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+        finish()
     }
 }
