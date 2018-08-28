@@ -179,5 +179,7 @@
     <dimen name="promotion_bar_height">60dp</dimen>
     <dimen name="promotion_bar_icon_size">50dp</dimen>
     <dimen name="acknowledgement_act_horz_spacing">50dp</dimen>
+    <dimen name="summitted_icon_width">230dp</dimen>
+    <dimen name="submitted_icon_height">188dp</dimen>
 
 </resources>
