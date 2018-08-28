@@ -15,37 +15,35 @@ import android.widget.LinearLayout.LayoutParams.MATCH_PARENT
 import android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
 import android.widget.TextView
 import androidx.core.view.isGone
+import com.google.gson.Gson
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.*
 import com.spgroup.spapp.presentation.adapter.PreferredTimeAdapter
 import com.spgroup.spapp.presentation.view.*
 import com.spgroup.spapp.presentation.viewmodel.*
+import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_order_summary.*
 import kotlinx.android.synthetic.main.layout_summary_estimated.*
+import org.jetbrains.anko.longToast
 
 class OrderSummaryActivity : BaseActivity() {
 
     companion object {
 
         const val RC_EDIT = 11
-        const val EXTRA_CATE_INFO_MAP = "EXTRA_CATE_INFO_MAP"
         const val EXTRA_SERVICE_MAP = "EXTRA_SERVICE_MAP"
-        const val EXTRA_DISCOUNT = "EXTRA_DISCOUNT"
-        const val EXTRA_PARNER_NAME = "EXTRA_PARNER_NAME"
+        const val EXTRA_PARTNER_DETAIL = "EXTRA_PARTNER_DETAIL"
 
         fun getLaunchIntent(
                 context: Context,
-                mapCateInfo: HashMap<String, String>,
                 mapSelectedServices: HashMap<String, MutableList<ISelectedService>>,
-                discount: String,
-                partnerName: String): Intent {
+                partnerDetails: PartnerDetails
+        ): Intent {
             val intent = Intent(context, OrderSummaryActivity::class.java)
-            intent.putExtra(EXTRA_CATE_INFO_MAP, mapCateInfo)
             intent.putExtra(EXTRA_SERVICE_MAP, mapSelectedServices)
-            intent.putExtra(EXTRA_DISCOUNT, discount)
-            intent.putExtra(EXTRA_PARNER_NAME, partnerName)
+            intent.putExtra(EXTRA_PARTNER_DETAIL, partnerDetails)
             return intent
         }
     }
@@ -58,7 +56,6 @@ class OrderSummaryActivity : BaseActivity() {
     private lateinit var mAnimDisappear: Animation
     private var mFirstInvalidView: ValidationInputView? = null
     private lateinit var mViewModel: OrderSummaryViewModel
-    private lateinit var mName: String
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -68,18 +65,14 @@ class OrderSummaryActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_summary)
 
-        mName = intent.getStringExtra(EXTRA_PARNER_NAME)
-
-        initAnimations()
-        initViews()
-
         mViewModel = obtainViewModel(OrderSummaryViewModel::class.java, ViewModelFactory.getInstance())
         subscribeUI()
-        val mapCateInfo = intent.getSerializableExtra(EXTRA_CATE_INFO_MAP) as HashMap<String, String>
         val mapSelectedServices = intent.getSerializableExtra(EXTRA_SERVICE_MAP) as HashMap<String, MutableList<ISelectedService>>
-        var discount = intent.getStringExtra(EXTRA_DISCOUNT)
-        if (discount == null) discount = ""
-        mViewModel.initData(mapCateInfo, mapSelectedServices, discount)
+        val partnerDetails = intent.getSerializableExtra(EXTRA_PARTNER_DETAIL) as PartnerDetails
+        mViewModel.initData(partnerDetails, mapSelectedServices)
+        
+        initAnimations()
+        initViews()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -197,8 +190,11 @@ class OrderSummaryActivity : BaseActivity() {
     private fun initViews() {
 
         action_bar.setTitle(R.string.summary)
-        tv_name.text = mName
-        tv_go_back_instruction.text = getString(R.string.summary_go_back_instruction, mName)
+        val partnerName = mViewModel.getPartnerName()
+
+        tv_name.text = partnerName
+        tv_go_back_instruction.text = getString(R.string.summary_go_back_instruction, partnerName)
+
         tv_go_back.setOnClickListener {
             onBackPressed()
         }
@@ -239,7 +235,10 @@ class OrderSummaryActivity : BaseActivity() {
                 }
                 if (invalidCount == 0) {
                     rl_error_cointainer.visibility = View.GONE
-                    startActivity(AcknowledgementActivity.getLaunchIntent(this@OrderSummaryActivity))
+//                    startActivity(AcknowledgementActivity.getLaunchIntent(this@OrderSummaryActivity))
+                    val orderSummary = mViewModel.getOrderSummaryModel(createContactInfo())
+                    doLogD("OrderSum", Gson().toJson(orderSummary))
+                    longToast("Check Logcat")
                 } else {
                     var errorMsg = if(invalidCount == 1) {
                         this@OrderSummaryActivity.getString(R.string.error_detected_1)
@@ -256,7 +255,7 @@ class OrderSummaryActivity : BaseActivity() {
             onBackPressed()
         }
 
-        val list = mutableListOf("Select Time", "11AM - 12PM", "12PM - 2PM", "2PM - 4PM")
+        val list = ConstUtils.LIST_PREFERRED_TIME.toMutableList()
         val adapter = PreferredTimeAdapter(this, R.layout.layout_preferred_time, list)
 
         spinner_preferred_time.adapter = adapter
@@ -266,7 +265,7 @@ class OrderSummaryActivity : BaseActivity() {
                 scroll_content.scrollTo(0, 0)
                 val location = IntArray(2)
                 it.getLocationOnScreen(location)
-                doLogD("Scroll", "Pos on screen: ${location[0]} , ${location[1]}")
+//                doLogD("Scroll", "Pos on screen: ${location[0]} , ${location[1]}")
                 val position = location[1] - getDimensionPixelSize(R.dimen.action_bar_height) - getDimensionPixelSize(R.dimen.common_vert_large)
                 scroll_content.scrollTo(0, position)
                 it.requestFocus()
@@ -497,4 +496,19 @@ class OrderSummaryActivity : BaseActivity() {
     private fun createCateTag(cateId: String) = "Cate" + cateId
 
     private fun createServiceTag(serviceId: Int) = "ServiceID${serviceId}"
+
+    private fun createContactInfo(): ContactInfo {
+        val name = validation_name.getInputedText()
+        val email = validation_email.getInputedText()
+        val contactNo = validation_contact_no.getInputedText()
+        val address1 = validation_address.getInputedText()
+        val address2 = et_address_2.text?.toString() ?: ""
+        val address = listOf(address1, address2)
+        val selectedPreferredTime = spinner_preferred_time.selectedItemPosition
+        val preferredTime = if (selectedPreferredTime == 0) "" else ConstUtils.LIST_PREFERRED_TIME[selectedPreferredTime]
+        val postalCode = validation_postal_code.getInputedText()
+        val notes = et_notes.text?.toString() ?: ""
+
+        return ContactInfo(name, email, contactNo, address, preferredTime, postalCode, notes)
+    }
 }

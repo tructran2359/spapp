@@ -3,10 +3,16 @@ package com.spgroup.spapp.presentation.viewmodel
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.spgroup.spapp.domain.model.AbsServiceItem
+import com.spgroup.spapp.domain.model.ContactInfo
+import com.spgroup.spapp.domain.model.PartnerDetails
+import com.spgroup.spapp.domain.usecase.GetOrderSummaryUsecase
 import com.spgroup.spapp.domain.usecase.SelectedServiceUsecase
 import com.spgroup.spapp.presentation.activity.CustomiseDisplayData
 
-class OrderSummaryViewModel(): ViewModel() {
+class OrderSummaryViewModel(
+        private val mSelectedServiceUsecase: SelectedServiceUsecase,
+        private val mGetOrderSummaryUsecase: GetOrderSummaryUsecase
+): ViewModel() {
 
     val mDeletedCateId = MutableLiveData<String>()
     val mDeletedServiceId = MutableLiveData<Int>()
@@ -15,20 +21,15 @@ class OrderSummaryViewModel(): ViewModel() {
     val mEstPrice = MutableLiveData<EstPriceData>()
     val mUpdatedComplexService = MutableLiveData<ComplexSelectedService>()
 
-
-    private lateinit var mMapCateInfo: HashMap<String, String>
     var mMapSelectedServices = MutableLiveData<HashMap<String, MutableList<ISelectedService>>>()
-    private val mSelectedServiceUsecase = SelectedServiceUsecase()
-    private var mDiscount = 0f
+    private lateinit var mPartnerDetails: PartnerDetails
 
     fun initData(
-            mapCateInfo: HashMap<String, String>,
-            mapSelectedServices: HashMap<String, MutableList<ISelectedService>>,
-            discount: String) {
-        mMapCateInfo = mapCateInfo
+            partnerDetails: PartnerDetails,
+            mapSelectedServices: HashMap<String, MutableList<ISelectedService>>) {
+        mPartnerDetails = partnerDetails
         mMapSelectedServices.value = mapSelectedServices
         mSelectedServiceUsecase.mapSelectedServices = mapSelectedServices
-        mDiscount = if (discount.isEmpty()) 0f else discount.toFloat()
         updateCountAndPrice()
     }
 
@@ -48,7 +49,7 @@ class OrderSummaryViewModel(): ViewModel() {
 
     private fun updateCountAndPrice() {
         mTotalCount.value = mSelectedServiceUsecase.calculateTotalCount()
-        mEstPrice.value = EstPriceData(mDiscount, mSelectedServiceUsecase.calculateEstPrice())
+        mEstPrice.value = EstPriceData(mPartnerDetails.getDiscountValue(), mSelectedServiceUsecase.calculateEstPrice())
     }
 
 
@@ -67,7 +68,7 @@ class OrderSummaryViewModel(): ViewModel() {
         updateCountAndPrice()
     }
 
-    fun getCateName(cateId: String) = mMapCateInfo[cateId]
+    fun getCateName(cateId: String) = mPartnerDetails.getCategoryById(cateId)?.label
 
     fun updateComplexSelectedServiceItem(customiseDisplayData: CustomiseDisplayData) {
         mSelectedServiceUsecase.updateComplexSelectedServiceItem(customiseDisplayData)
@@ -79,6 +80,15 @@ class OrderSummaryViewModel(): ViewModel() {
         }
         updateCountAndPrice()
     }
+
+    fun getPartnerName() = mPartnerDetails.name
+
+    fun getOrderSummaryModel(contactInfo: ContactInfo) = mGetOrderSummaryUsecase.getOrderSummaryModel(
+            mPartnerDetails,
+            mSelectedServiceUsecase.mapSelectedServices,
+            contactInfo,
+            mSelectedServiceUsecase.calculateEstPrice()
+    )
 
 }
 

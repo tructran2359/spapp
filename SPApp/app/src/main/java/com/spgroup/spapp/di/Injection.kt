@@ -6,7 +6,6 @@ import com.spgroup.spapp.domain.SchedulerFacade
 import com.spgroup.spapp.domain.ServicesRepository
 import com.spgroup.spapp.domain.model.AbsCustomisation
 import com.spgroup.spapp.domain.model.AbsServiceItem
-import com.spgroup.spapp.domain.usecase.GetOrderSummaryUsecase
 import com.spgroup.spapp.manager.AppDataMemCache
 import com.spgroup.spapp.repository.ServicesCloudDataStore
 import com.spgroup.spapp.repository.ServicesDataMock
@@ -46,8 +45,6 @@ object Injection {
     }
 
     fun provideSchedulerFacade(): SchedulerFacade = SchedulerFacade()
-
-    fun provideGetOrderSummaryUsecase(): GetOrderSummaryUsecase = GetOrderSummaryUsecase()
 
     fun provideAppDataCache() = MEM_CACHE_INSTANCE
 

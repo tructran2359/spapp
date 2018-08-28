@@ -4,6 +4,12 @@ import java.io.Serializable
 
 sealed class AbsServiceItem: Serializable  {
     abstract fun getServiceId(): Int
+    abstract fun getServiceType(): String
+    abstract fun getServiceName(): String
+    open fun getSelectedCustomisationLabel(
+            customisationIndex: Int,
+            selectedOptionIndex: Int
+    ): String? = null
 }
 
 
@@ -16,6 +22,11 @@ data class ComplexCustomisationService(
         val customisations: List<AbsCustomisation>
 ) : AbsServiceItem(){
     override fun getServiceId() = id
+    override fun getServiceType() = "complex"
+    override fun getServiceName() = label
+    override fun getSelectedCustomisationLabel(customisationIndex: Int, selectedOptionIndex: Int): String? {
+        return customisations[customisationIndex].getSelectedOptionLabel(selectedOptionIndex)
+    }
 }
 
 
@@ -26,6 +37,8 @@ data class CheckboxService(
         val priceText: String
 ) : AbsServiceItem() {
     override fun getServiceId() = id
+    override fun getServiceType() = "checkbox"
+    override fun getServiceName() = label
 }
 
 
@@ -38,4 +51,6 @@ data class MultiplierService(
         val unit: String
 ) : AbsServiceItem() {
     override fun getServiceId() = id
+    override fun getServiceType() = "multiplier"
+    override fun getServiceName() = label
 }

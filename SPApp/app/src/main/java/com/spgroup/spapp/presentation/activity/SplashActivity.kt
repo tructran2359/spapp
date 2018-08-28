@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import com.spgroup.spapp.R
-import com.spgroup.spapp.domain.model.HomeData
 import com.spgroup.spapp.presentation.viewmodel.SplashViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import org.jetbrains.anko.longToast

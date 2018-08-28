@@ -85,5 +85,5 @@ class ValidationInputView: RelativeLayout {
         return valid
     }
 
-    fun getDebugText() = tv_label.text.toString()
+    fun getInputedText() = et_input.text?.toString() ?: ""
 }

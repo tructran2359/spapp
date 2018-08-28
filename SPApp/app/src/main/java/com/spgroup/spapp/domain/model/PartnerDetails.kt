@@ -1,5 +1,7 @@
 package com.spgroup.spapp.domain.model
 
+import java.io.Serializable
+
 data class PartnerDetails(
         val uen: String,                                //1
         val name: String,                               //2
@@ -11,7 +13,7 @@ data class PartnerDetails(
         val website: String?,                            //8
         val tnc: String?,                               //9  Nullable
         val promo: String?,                             //10 Nullable
-        val discount: String,                           //11
+        val discount: String?,                           //11
         val offeringTitle: String?,                      //12
         val offering: List<String>?,                     //13
         val banners: List<String>?,                     //14 Nullable
@@ -19,22 +21,34 @@ data class PartnerDetails(
         val menus: List<FoodMenu>?,                     //16 Nullable
         val serviceInfo: PartnerDetailServiceInfo?      //17 Nullable
 
-) {
-    fun findService(categoryId: String, serviceId: Int): AbsServiceItem? {
-        if (categories != null) {
-            categories.forEach { category ->
-                if (category.id == categoryId) {
-                    category.subCategories.forEach { subCategory: SubCategory ->
-                        subCategory.services.forEach { absServiceItem: AbsServiceItem ->
-                            if (absServiceItem.getServiceId() == serviceId) {
-                                return absServiceItem
-                            }
-                        }
-                    }
+): Serializable {
+
+    fun getDiscountValue() = if (discount == null || discount.isEmpty()) 0f else discount.toFloat()
+
+    fun getCategoryById(cateId: String) = categories?.firstOrNull { cateId == it.id }
+
+    fun getSubCateByServiceId(serviceId: Int): SubCategory? {
+        categories?.forEach { category ->
+            category.subCategories.forEach { subCate ->
+                val service = subCate.services.firstOrNull { serviceId == it.getServiceId() }
+                if (service != null) {
+                    return subCate
                 }
             }
         }
 
+        return null
+    }
+
+    fun getSubCateByCateIdAndServiceId(cateId: String, serviceId: Int): SubCategory? {
+        categories
+                ?.firstOrNull { category -> cateId == category.id }
+                ?.subCategories?.forEach { subCate ->
+                    val service = subCate.services.firstOrNull { service -> serviceId == service.getServiceId() }
+                    if (service != null) {
+                        return subCate
+                    }
+                }
         return null
     }
 }
