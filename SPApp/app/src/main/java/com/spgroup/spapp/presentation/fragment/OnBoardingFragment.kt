@@ -1,11 +1,16 @@
 package com.spgroup.spapp.presentation.fragment
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
+import com.spgroup.spapp.presentation.viewmodel.OnBoardingViewModel
+import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.extension.inflate
+import com.spgroup.spapp.util.extension.obtainViewModelOfActivity
 import kotlinx.android.synthetic.main.fragment_on_boarding.*
 
 class OnBoardingFragment: BaseFragment() {
@@ -22,6 +27,7 @@ class OnBoardingFragment: BaseFragment() {
     }
 
     private var mPosition = -1
+    private lateinit var mViewModel: OnBoardingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +40,9 @@ class OnBoardingFragment: BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mViewModel = obtainViewModelOfActivity(OnBoardingViewModel::class.java, ViewModelFactory.getInstance())
+
         when(mPosition) {
             0 -> {
                 tv_content.setText(R.string.onboarding_text_0)
@@ -51,5 +60,35 @@ class OnBoardingFragment: BaseFragment() {
                 tv_content.setText(R.string.onboarding_text_3)
             }
         }
+
+        subscribeUI()
+    }
+
+    private fun subscribeUI() {
+        mViewModel.mPageAnimationState.observe(this, Observer {
+            it?.let { pair ->
+                doLogD("Page", "Page: ${mPosition} UI Pair: $pair")
+                val position = pair.first
+                val completed = pair.second
+                if (position == mPosition) {
+                    if (!completed) {
+                        iv_gif.setImageResource(getImageResource())
+                        mViewModel.setAnimationCompleted(mPosition)
+                    }
+                }
+            }
+        })
+    }
+
+    private fun getImageResource() = when(mPosition) {
+        0 -> R.drawable.onboarding_ani_scene01
+
+        1 -> R.drawable.onboarding_ani_scene01
+
+        2 -> R.drawable.onboarding_ani_scene01
+
+        3 -> R.drawable.onboarding_ani_scene01
+
+        else -> -1
     }
 }

@@ -9,6 +9,8 @@ import android.view.animation.AnimationUtils
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.SPApplication
 import com.spgroup.spapp.presentation.adapter.OnBoardingAdapter
+import com.spgroup.spapp.presentation.viewmodel.OnBoardingViewModel
+import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_on_boarding.*
 
@@ -31,9 +33,13 @@ class OnBoardingActivity : BaseActivity() {
 
     private lateinit var mAdapter: OnBoardingAdapter
 
+    private lateinit var mViewModel: OnBoardingViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_on_boarding)
+
+        mViewModel = obtainViewModel(OnBoardingViewModel::class.java, ViewModelFactory.getInstance())
 
         setUpAnimation()
         setUpViews()
@@ -80,6 +86,7 @@ class OnBoardingActivity : BaseActivity() {
     private fun setUpViewPager() {
         mAdapter = OnBoardingAdapter(supportFragmentManager)
         view_pager.adapter = mAdapter
+        view_pager.offscreenPageLimit = mAdapter.count
 
         pager_indicator.setViewPager(view_pager)
         view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -99,8 +106,11 @@ class OnBoardingActivity : BaseActivity() {
                     tv_get_started.hideWithAnimation(mGetStartedAnimDisappear)
                     tv_next.showWithAnimation(mNextAnimAppear)
                 }
+
+                mViewModel.notifyPageChanged(position)
             }
         })
+        mViewModel.notifyPageChanged(0)
 
         tv_next.setOnClickListener {
             val currentPos = view_pager.currentItem
