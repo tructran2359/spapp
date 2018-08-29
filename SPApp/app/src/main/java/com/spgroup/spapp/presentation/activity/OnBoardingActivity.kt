@@ -38,6 +38,15 @@ class OnBoardingActivity : BaseActivity() {
         setUpViews()
     }
 
+    override fun onBackPressed() {
+        val currentPosition = view_pager.currentItem
+        if (currentPosition == 0) {
+            super.onBackPressed()
+        } else {
+            view_pager.setCurrentItem(currentPosition - 1, true)
+        }
+    }
+
     private fun setUpViews() {
 
         setUpViewPager()
@@ -91,5 +100,10 @@ class OnBoardingActivity : BaseActivity() {
                 }
             }
         })
+
+        tv_next.setOnClickListener {
+            val currentPos = view_pager.currentItem
+            view_pager.setCurrentItem(currentPos + 1, true)
+        }
     }
 }
