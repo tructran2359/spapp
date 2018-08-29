@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.spgroup.spapp.R
+import com.spgroup.spapp.presentation.SPApplication
 import com.spgroup.spapp.presentation.adapter.OnBoardingAdapter
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_on_boarding.*
@@ -104,6 +105,12 @@ class OnBoardingActivity : BaseActivity() {
         tv_next.setOnClickListener {
             val currentPos = view_pager.currentItem
             view_pager.setCurrentItem(currentPos + 1, true)
+        }
+
+        tv_get_started.setOnClickListener {
+            SPApplication.mAppConfig.setOnBoadingShown(true)
+            startActivity(HomeActivity.getLaunchIntent(this@OnBoardingActivity))
+            finish()
         }
     }
 }
