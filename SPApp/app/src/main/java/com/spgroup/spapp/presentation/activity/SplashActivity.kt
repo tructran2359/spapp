@@ -3,6 +3,7 @@ package com.spgroup.spapp.presentation.activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import com.spgroup.spapp.BuildConfig
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.viewmodel.SplashViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
@@ -31,7 +32,14 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun onDownloadDataSuccess() {
-        startActivity(HomeActivity.getLaunchIntent(this))
+        val localAppVersion = BuildConfig.VERSION_NAME
+        val backendAppVersion = splashViewModel.getAppVersion()
+        val intent = if (localAppVersion != backendAppVersion) {
+            UpdateActivity.getLaunchIntent(this)
+        } else {
+            HomeActivity.getLaunchIntent(this)
+        }
+        startActivity(intent)
         finish()
     }
 

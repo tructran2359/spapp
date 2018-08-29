@@ -26,6 +26,7 @@
     <color name="color_black">@color/color_ui07</color>
     <color name="color_white">@color/color_ui06</color>
     <color name="color_peach">@color/color_ui01</color>
+    <color name="color_white_on_press">@color/color_hoverinactive1</color>
 
     <!--Old-->
 

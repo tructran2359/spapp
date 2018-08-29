@@ -182,4 +182,7 @@
     <dimen name="summitted_icon_width">230dp</dimen>
     <dimen name="submitted_icon_height">188dp</dimen>
 
+    <dimen name="update_btn_horz_margin">50dp</dimen>
+    <dimen name="update_icon_size">100dp</dimen>
+
 </resources>
