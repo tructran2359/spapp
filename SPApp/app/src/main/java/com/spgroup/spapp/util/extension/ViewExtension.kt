@@ -4,6 +4,11 @@ import android.app.Activity
 import android.content.Context
 import android.support.annotation.LayoutRes
 import android.support.v4.content.ContextCompat
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
@@ -109,4 +114,28 @@ fun LinearLayout.addIndicatorText(listString: List<String>?) {
             }
         }
     }
+}
+
+fun TextView.setUpClickableUnderlineSpan(
+        textWithPlaceHolderResId: Int,
+        clickableTextResId: Int,
+        action: (() -> Unit)) {
+    val clickableText = context.getString(clickableTextResId)
+    val formattedText = context.getString(textWithPlaceHolderResId, clickableText)
+    val ss = SpannableString(formattedText)
+    val clickableSpan = object : ClickableSpan() {
+        override fun onClick(view: View?) {
+            action.invoke()
+        }
+
+        override fun updateDrawState(ds: TextPaint?) {
+            super.updateDrawState(ds)
+            ds?.isUnderlineText = true
+            ds?.color = context.getColorFromRes(R.color.color_grey)
+        }
+    }
+    val clickableIndex = formattedText.indexOf(clickableText)
+    ss.setSpan(clickableSpan, clickableIndex, clickableIndex + clickableText.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+    text = ss
+    movementMethod = LinkMovementMethod.getInstance()
 }

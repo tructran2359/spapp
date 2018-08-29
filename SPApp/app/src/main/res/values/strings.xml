@@ -96,4 +96,6 @@
     <string name="onboarding_text_2">Submit A Request\nVia The App</string>
     <string name="onboarding_text_3">Liaise With Merchants\nAt Your Convenience</string>
 
+    <string name="onboarding_tnc_with_placeholder">By starting, you agree to our %s.</string>
+
 </resources>
