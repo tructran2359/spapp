@@ -110,6 +110,11 @@
             android:windowSoftInputMode="stateHidden"
             />
 
+        <activity
+            android:name=".presentation.activity.UpdateActivity"
+            android:screenOrientation="portrait"
+            />
+
     </application>
 
 </manifest>

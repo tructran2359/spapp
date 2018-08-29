@@ -26,4 +26,6 @@ class SplashViewModel(private val getInitialDataUsecase: GetInitialDataUsecase,
                         { error.value = it })
         disposeBag.add(disposable)
     }
+
+    fun getAppVersion() = appDataCache.getTopLevelVariables().minVersionAndroid
 }
