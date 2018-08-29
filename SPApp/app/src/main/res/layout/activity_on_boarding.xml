@@ -23,6 +23,7 @@
         android:textColor="@color/color_grey"
         android:gravity="center_horizontal"
         android:layout_marginBottom="@dimen/common_vert_medium"
+        android:visibility="gone"
         />
 
 
@@ -51,6 +52,7 @@
     
     <TextView
         style="@style/onBoardingBottomButton"
+        android:id="@+id/tv_get_started"
         android:background="@drawable/selector_btn_main"
         android:textColor="@color/color_white"
         android:text="@string/get_started"

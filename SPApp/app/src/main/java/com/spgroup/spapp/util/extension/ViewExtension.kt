@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -138,4 +139,44 @@ fun TextView.setUpClickableUnderlineSpan(
     ss.setSpan(clickableSpan, clickableIndex, clickableIndex + clickableText.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
     text = ss
     movementMethod = LinkMovementMethod.getInstance()
+}
+
+fun Animation.setUpAppear(view: View) {
+    setAnimationListener(object : Animation.AnimationListener {
+        override fun onAnimationRepeat(p0: Animation?) {
+        }
+
+        override fun onAnimationEnd(p0: Animation?) {
+            view.isGone = false
+        }
+
+        override fun onAnimationStart(p0: Animation?) {
+        }
+    })
+}
+
+fun Animation.setUpDisappear(view: View) {
+    setAnimationListener(object : Animation.AnimationListener {
+        override fun onAnimationRepeat(p0: Animation?) {
+        }
+
+        override fun onAnimationEnd(p0: Animation?) {
+            view.isGone = true
+        }
+
+        override fun onAnimationStart(p0: Animation?) {
+        }
+    })
+}
+
+fun View.showWithAnimation(anim: Animation) {
+    if (visibility == View.GONE || visibility == View.INVISIBLE) {
+        startAnimation(anim)
+    }
+}
+
+fun View.hideWithAnimation(anim: Animation) {
+    if (visibility == View.VISIBLE) {
+        startAnimation(anim)
+    }
 }
