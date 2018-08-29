@@ -88,5 +88,12 @@
     <string name="new_version_available">New Version\nAvailable</string>
     <string name="update_description">We’ve made our app even better!\nPlease update to continue to use it.</string>
     <string name="update">UPDATE</string>
+    <string name="on_boarding_tnc_formatted">By starting, you agree to our %s.</string>
+    <string name="get_started">GET STARTED</string>
+    <string name="next">NEXT</string>
+    <string name="onboarding_text_0">Check Out Our\nMerchants</string>
+    <string name="onboarding_text_1">Find Services For\nYour Everyday Needs</string>
+    <string name="onboarding_text_2">Submit A Request\nVia The App</string>
+    <string name="onboarding_text_3">Liaise With Merchants\nAt Your Convenience</string>
 
 </resources>
