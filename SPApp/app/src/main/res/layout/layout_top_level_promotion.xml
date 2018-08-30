@@ -24,7 +24,6 @@
             android:id="@+id/iv_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/img_featured_promo"
             android:scaleType="fitXY"
             app:riv_corner_radius_top_left="@dimen/common_radius_large"
             app:riv_corner_radius_top_right="@dimen/common_radius_large"
@@ -50,8 +49,9 @@
             android:layout_marginLeft="@dimen/common_vert_medium_sub"
             android:layout_marginBottom="@dimen/common_vert_medium_sub"
             android:textColor="@color/black"
-
-            android:text="Get 2 free meals with first booking"
+            android:maxLines="1"
+            android:ellipsize="end"
+            tools:text="Get 2 free meals with first booking"
             />
 
     </LinearLayout>
