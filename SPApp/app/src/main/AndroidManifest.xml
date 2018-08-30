@@ -115,6 +115,11 @@
             android:screenOrientation="portrait"
             />
 
+        <activity
+            android:name=".presentation.activity.OnBoardingActivity"
+            android:screenOrientation="portrait"
+            />
+
     </application>
 
 </manifest>

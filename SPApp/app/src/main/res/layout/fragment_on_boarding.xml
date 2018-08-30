@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/iv_gif"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/tv_content"
+        />
+
+    <TextView
+        style="@style/h3"
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="6sp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/color_black"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/onboarding_pager_content_margin_bot"
+        />
+
+</RelativeLayout>

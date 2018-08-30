@@ -184,5 +184,8 @@
 
     <dimen name="update_btn_horz_margin">50dp</dimen>
     <dimen name="update_icon_size">100dp</dimen>
+    <dimen name="onboarding_indicator_margin_bot">74dp</dimen>
+    <dimen name="onboarding_horz_margin">50dp</dimen>
+    <dimen name="onboarding_pager_content_margin_bot">210dp</dimen>
 
 </resources>

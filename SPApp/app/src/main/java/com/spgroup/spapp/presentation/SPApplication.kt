@@ -2,17 +2,20 @@ package com.spgroup.spapp.presentation
 
 import android.app.Application
 import com.spgroup.spapp.R
+import com.spgroup.spapp.manager.AppConfigManager
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
 class SPApplication: Application() {
 
     companion object {
         lateinit var mAppInstance: SPApplication
+        lateinit var mAppConfig: AppConfigManager
     }
 
     override fun onCreate() {
         super.onCreate()
         mAppInstance = this
+        mAppConfig = AppConfigManager(this)
         initCalligraphy()
     }
 

@@ -4,11 +4,17 @@ import android.app.Activity
 import android.content.Context
 import android.support.annotation.LayoutRes
 import android.support.v4.content.ContextCompat
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -108,5 +114,69 @@ fun LinearLayout.addIndicatorText(listString: List<String>?) {
                 addView(indicatorTextView)
             }
         }
+    }
+}
+
+fun TextView.setUpClickableUnderlineSpan(
+        textWithPlaceHolderResId: Int,
+        clickableTextResId: Int,
+        action: (() -> Unit)) {
+    val clickableText = context.getString(clickableTextResId)
+    val formattedText = context.getString(textWithPlaceHolderResId, clickableText)
+    val ss = SpannableString(formattedText)
+    val clickableSpan = object : ClickableSpan() {
+        override fun onClick(view: View?) {
+            action.invoke()
+        }
+
+        override fun updateDrawState(ds: TextPaint?) {
+            super.updateDrawState(ds)
+            ds?.isUnderlineText = true
+            ds?.color = context.getColorFromRes(R.color.color_grey)
+        }
+    }
+    val clickableIndex = formattedText.indexOf(clickableText)
+    ss.setSpan(clickableSpan, clickableIndex, clickableIndex + clickableText.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+    text = ss
+    movementMethod = LinkMovementMethod.getInstance()
+}
+
+fun Animation.setUpAppear(view: View) {
+    setAnimationListener(object : Animation.AnimationListener {
+        override fun onAnimationRepeat(p0: Animation?) {
+        }
+
+        override fun onAnimationEnd(p0: Animation?) {
+            view.isGone = false
+        }
+
+        override fun onAnimationStart(p0: Animation?) {
+        }
+    })
+}
+
+fun Animation.setUpDisappear(view: View) {
+    setAnimationListener(object : Animation.AnimationListener {
+        override fun onAnimationRepeat(p0: Animation?) {
+        }
+
+        override fun onAnimationEnd(p0: Animation?) {
+            view.isGone = true
+        }
+
+        override fun onAnimationStart(p0: Animation?) {
+        }
+    })
+}
+
+fun View.showWithAnimation(anim: Animation) {
+    if (visibility == View.GONE || visibility == View.INVISIBLE) {
+        startAnimation(anim)
+    }
+}
+
+fun View.hideWithAnimation(anim: Animation) {
+    if (visibility == View.VISIBLE) {
+        startAnimation(anim)
     }
 }

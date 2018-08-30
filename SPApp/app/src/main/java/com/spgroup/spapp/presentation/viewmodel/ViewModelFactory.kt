@@ -38,8 +38,14 @@ class ViewModelFactory private constructor(
 
             modelClass.isAssignableFrom(PdfViewModel::class.java) -> createPdfViewModel()
 
+            modelClass.isAssignableFrom(OnBoardingViewModel::class.java) -> createOnBoardingViewModel()
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         } as T
+    }
+
+    private fun createOnBoardingViewModel(): OnBoardingViewModel {
+        return OnBoardingViewModel()
     }
 
     private fun createPdfViewModel(): PdfViewModel {
