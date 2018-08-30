@@ -8,7 +8,6 @@ import android.support.design.widget.AppBarLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.util.TypedValue
 import android.view.View
-import com.bumptech.glide.Glide
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.Partner
 import com.spgroup.spapp.domain.model.PartnersListingItem
@@ -74,9 +73,7 @@ class PartnerListingActivity : BaseActivity() {
 
     private fun updateBanner(topLevelCategory: TopLevelCategory) {
         tv_title.text = topLevelCategory.name
-        Glide.with(this@PartnerListingActivity)
-                .load(topLevelCategory.banner.toFullUrl())
-                .into(iv_banner)
+        iv_banner.loadImage(topLevelCategory.banner.toFullUrl())
     }
 
     ///////////////////////////////////////////////////////////////////////////
