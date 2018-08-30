@@ -9,9 +9,9 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.viewmodel.OnBoardingViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.doLogD
-import com.spgroup.spapp.util.extension.inflate
-import com.spgroup.spapp.util.extension.obtainViewModelOfActivity
+import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.fragment_on_boarding.*
+import kotlin.math.min
 
 class OnBoardingFragment: BaseFragment() {
 
@@ -59,6 +59,14 @@ class OnBoardingFragment: BaseFragment() {
             3 -> {
                 tv_content.setText(R.string.onboarding_text_3)
             }
+        }
+
+        view.setOnGlobalLayoutListener {
+            val width = iv_gif.width
+            val height = iv_gif.height
+            val selected = min(width, height)
+            iv_gif.setLayoutParamsWidth(selected)
+            iv_gif.setLayoutParamsHeight(selected)
         }
 
         subscribeUI()

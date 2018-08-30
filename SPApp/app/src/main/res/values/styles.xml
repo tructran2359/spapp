@@ -363,7 +363,6 @@
         <item name="android:layout_marginLeft">@dimen/onboarding_horz_margin</item>
         <item name="android:layout_marginRight">@dimen/onboarding_horz_margin</item>
         <item name="android:layout_marginBottom">@dimen/common_vert_medium</item>
-        <item name="android:layout_above">@+id/pager_indicator</item>
     </style>
 
 </resources>
