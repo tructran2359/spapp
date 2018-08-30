@@ -101,6 +101,15 @@ fun ImageView.loadImage(url: String) {
             .into(this)
 }
 
+fun ImageView.loadImageWithDefaultPlaceholder(url: String) {
+    GlideApp
+            .with(this)
+            .load(url)
+            .placeholder(R.drawable.bg_rec_rounded_grey)
+            .error(R.drawable.bg_rec_rounded_grey)
+            .into(this)
+}
+
 fun ImageView.loadImageWithPlaceholder(
         url: String,
         placeholderResId: Int,

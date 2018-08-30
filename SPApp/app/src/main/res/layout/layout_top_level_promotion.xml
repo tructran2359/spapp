@@ -20,7 +20,7 @@
         android:orientation="vertical"
         >
 
-        <com.spgroup.spapp.presentation.view.RatioImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/iv_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
