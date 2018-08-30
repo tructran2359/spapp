@@ -11,7 +11,7 @@
         android:layout_width="@dimen/home_category_icon_size"
         android:layout_height="@dimen/home_category_icon_size"
         android:layout_gravity="center_horizontal"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:src="@drawable/cate_food"
         />
 

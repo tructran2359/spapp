@@ -21,10 +21,10 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isGone
-import com.bumptech.glide.Glide
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.activity.BaseActivity
 import com.spgroup.spapp.presentation.view.IndicatorTextView
+import com.spgroup.spapp.util.GlideApp
 
 fun View.setOnGlobalLayoutListener(action: () -> Unit) {
     this.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener{
@@ -95,9 +95,30 @@ fun View.updateVisibility(show: Boolean) {
 }
 
 fun ImageView.loadImage(url: String) {
-    Glide
+    GlideApp
             .with(this)
             .load(url)
+            .into(this)
+}
+
+fun ImageView.loadImageWithDefaultPlaceholder(url: String) {
+    GlideApp
+            .with(this)
+            .load(url)
+            .placeholder(R.drawable.bg_rec_rounded_grey)
+            .error(R.drawable.bg_rec_rounded_grey)
+            .into(this)
+}
+
+fun ImageView.loadImageWithPlaceholder(
+        url: String,
+        placeholderResId: Int,
+        errorPlaceHolderResId: Int) {
+    GlideApp
+            .with(this)
+            .load(url)
+            .placeholder(placeholderResId)
+            .error(errorPlaceHolderResId)
             .into(this)
 }
 

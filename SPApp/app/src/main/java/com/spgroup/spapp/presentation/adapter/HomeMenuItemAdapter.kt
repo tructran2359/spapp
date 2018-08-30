@@ -4,11 +4,11 @@ import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.TopLevelCategory
 import com.spgroup.spapp.presentation.adapter.diff_utils.HomeMenuDiffCallback
 import com.spgroup.spapp.util.extension.inflate
+import com.spgroup.spapp.util.extension.loadImageWithPlaceholder
 import com.spgroup.spapp.util.extension.toFullUrl
 import kotlinx.android.synthetic.main.menu_item.view.*
 
@@ -66,9 +66,11 @@ class HomeMenuItemAdapter : RecyclerView.Adapter<HomeMenuItemAdapter.HomeMenuVH>
 
         fun bind(item: TopLevelCategory) {
             with(itemView) {
-                Glide.with(context)
-                        .load(item.menuIcon.toFullUrl())
-                        .into(iv_logo)
+                iv_logo.loadImageWithPlaceholder(
+                        item.menuIcon.toFullUrl(),
+                        R.drawable.placeholder_icon,
+                        R.drawable.placeholder_icon
+                )
                 tv_name.text = item.name
             }
         }

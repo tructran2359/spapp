@@ -7,6 +7,8 @@ import com.spgroup.spapp.domain.model.TopLevelPromotion
 import com.spgroup.spapp.presentation.adapter.viewholder.HomePromotionVH
 import com.spgroup.spapp.util.extension.getDimensionPixelSize
 import com.spgroup.spapp.util.extension.inflate
+import com.spgroup.spapp.util.extension.setLayoutParamsHeight
+import com.spgroup.spapp.util.extension.setLayoutParamsWidth
 import kotlinx.android.synthetic.main.layout_top_level_promotion.view.*
 
 class HomePromotionAdapter(
@@ -27,12 +29,12 @@ class HomePromotionAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomePromotionVH {
         val view = parent.inflate(R.layout.layout_top_level_promotion, false)
         with(view) {
-            iv_image.setRatio(16, 9, true)
-            val layoutParams = view_root.layoutParams
             val padding = context.getDimensionPixelSize(R.dimen.common_horz_large)
             val shadow = context.getDimensionPixelSize(R.dimen.card_view_shadow_width)
-            layoutParams.width = screenWidth - (2 * padding) + (2 * shadow)
-            view_root.layoutParams = layoutParams
+            val calculatedWidth = screenWidth - (2 * padding) + (2 * shadow)
+            view_root.setLayoutParamsWidth(calculatedWidth)
+            iv_image.setLayoutParamsWidth(calculatedWidth)
+            iv_image.setLayoutParamsHeight(calculatedWidth * 9 / 16)
         }
         return HomePromotionVH(view, mListener)
     }
