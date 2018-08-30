@@ -35,11 +35,11 @@ class SplashActivity : BaseActivity() {
     private fun onDownloadDataSuccess() {
         val localAppVersion = BuildConfig.VERSION_NAME
         val backendAppVersion = splashViewModel.getAppVersion()
-        val intent = /*if (localAppVersion != backendAppVersion) {
+        val intent = if (localAppVersion != backendAppVersion) {
 
                                 UpdateActivity.getLaunchIntent(this)
 
-                            } else*/ if (!SPApplication.mAppConfig.isOnBoadingShown()) {
+                            } else if (!SPApplication.mAppConfig.isOnBoadingShown()) {
 
                                 OnBoardingActivity.getLaunchIntent(this)
 
