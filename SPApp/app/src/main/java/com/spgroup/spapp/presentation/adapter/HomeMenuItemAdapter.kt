@@ -8,7 +8,7 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.TopLevelCategory
 import com.spgroup.spapp.presentation.adapter.diff_utils.HomeMenuDiffCallback
 import com.spgroup.spapp.util.extension.inflate
-import com.spgroup.spapp.util.extension.loadImage
+import com.spgroup.spapp.util.extension.loadImageWithPlaceholder
 import com.spgroup.spapp.util.extension.toFullUrl
 import kotlinx.android.synthetic.main.menu_item.view.*
 
@@ -66,7 +66,11 @@ class HomeMenuItemAdapter : RecyclerView.Adapter<HomeMenuItemAdapter.HomeMenuVH>
 
         fun bind(item: TopLevelCategory) {
             with(itemView) {
-                iv_logo.loadImage(item.menuIcon.toFullUrl())
+                iv_logo.loadImageWithPlaceholder(
+                        item.menuIcon.toFullUrl(),
+                        R.drawable.placeholder_icon,
+                        R.drawable.placeholder_icon
+                )
                 tv_name.text = item.name
             }
         }

@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.spgroup.spapp.R
-import com.spgroup.spapp.util.extension.loadImage
+import com.spgroup.spapp.util.extension.loadImageWithPlaceholder
 import kotlinx.android.synthetic.main.view_top_level_category.view.*
 
 class TopLevelCateView: LinearLayout {
@@ -42,6 +42,9 @@ class TopLevelCateView: LinearLayout {
      */
     fun setData(cateName: String, cateImage: String) {
         tv_cate_name.setText(cateName)
-        iv_cate_image.loadImage(cateImage)
+        iv_cate_image.loadImageWithPlaceholder(cateImage,
+                R.drawable.placeholder_icon,
+                R.drawable.placeholder_icon
+        )
     }
 }
