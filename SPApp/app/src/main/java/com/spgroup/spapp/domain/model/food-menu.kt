@@ -9,11 +9,11 @@ data class FoodMenu(
 ): Serializable
 
 data class FoodMenuItem(
-        val label: String,
-        val pdfs: List<Pdf>
+        val label: String?,
+        val pdfs: List<Pdf>?
 ): Serializable
 
 data class Pdf(
-        val title: String,
-        val uri: String
+        val title: String?,
+        val uri: String?
 ): Serializable

@@ -37,6 +37,10 @@ class MenuView: LinearLayout {
     ///////////////////////////////////////////////////////////////////////////
 
     fun addPdf(pdf: Pdf) {
+        if ((pdf.title == null || pdf.title.isEmpty()) || (pdf.uri == null || pdf.uri.isEmpty())) {
+            return
+        }
+
         val view = MenuTextView(context)
         view.setText(pdf.title)
         view.setOnClickListener {

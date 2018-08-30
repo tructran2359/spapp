@@ -13,6 +13,8 @@ class PartnerImageFragment: BaseFragment() {
 
     companion object {
         const val EXTRA_URL = "PartnerImageFragment.EXTRA_URL"
+        const val PLACEHOLDER_PREFIX = "PLACEHOLDER_PREFIX"
+        const val PLACEHOLDER_DIVIDER = "-"
 
         fun newInstance(url: String): PartnerImageFragment {
             val fragment = PartnerImageFragment()
@@ -21,6 +23,8 @@ class PartnerImageFragment: BaseFragment() {
             fragment.arguments = bundle
             return fragment
         }
+
+        fun createPlaceholderUrl(cateId: String) = PLACEHOLDER_PREFIX + PLACEHOLDER_DIVIDER + cateId
     }
 
     private lateinit var url: String
@@ -41,6 +45,29 @@ class PartnerImageFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        iv_content.loadImage(url.toFullUrl())
+        if (url.startsWith(PLACEHOLDER_PREFIX)) {
+            val list = url.split(PLACEHOLDER_DIVIDER)
+            if (list.size == 2) {
+                val cateId = list[1]
+                val placeholderResId = getPlaceholderResId(cateId)
+                if (placeholderResId != -1) {
+                    iv_content.setImageResource(placeholderResId)
+                }
+            }
+        } else {
+            iv_content.loadImage(url.toFullUrl())
+        }
+    }
+
+    private fun getPlaceholderResId(cateId: String): Int {
+        return when (cateId) {
+            "food" -> R.drawable.placeholder_food
+            "housekeeping" -> R.drawable.placeholder_housekeeping
+            "groceries" -> R.drawable.placeholder_grocery
+            "education" -> R.drawable.placeholder_education
+            "laundry" -> R.drawable.placeholder_laundry
+            "aircon" -> R.drawable.placeholder_aircon
+            else -> -1
+        }
     }
 }

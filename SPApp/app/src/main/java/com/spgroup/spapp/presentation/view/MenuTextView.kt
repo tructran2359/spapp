@@ -2,7 +2,6 @@ package com.spgroup.spapp.presentation.view
 
 import android.content.Context
 import android.text.Spannable
-import android.text.style.ImageSpan
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
