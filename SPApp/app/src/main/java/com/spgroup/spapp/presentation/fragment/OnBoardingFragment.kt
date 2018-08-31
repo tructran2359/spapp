@@ -91,11 +91,11 @@ class OnBoardingFragment: BaseFragment() {
     private fun getImageResource() = when(mPosition) {
         0 -> R.drawable.onboarding_ani_scene01
 
-        1 -> R.drawable.onboarding_ani_scene01
+        1 -> R.drawable.onboarding_ani_scene02
 
-        2 -> R.drawable.onboarding_ani_scene01
+        2 -> R.drawable.onboarding_ani_scene03
 
-        3 -> R.drawable.onboarding_ani_scene01
+        3 -> R.drawable.onboarding_ani_scene04
 
         else -> -1
     }
