@@ -6,5 +6,7 @@ data class TopLevelVariable(
         val subHeader: String,
         val minVersionAndroid: String,
         val minVersionIos: String,
-        val alert: String
+        val alert: String,
+        val appLinkAndroid: String,
+        val appLinkIos: String
 )

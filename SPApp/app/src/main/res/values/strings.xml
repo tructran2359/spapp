@@ -98,4 +98,7 @@
 
     <string name="onboarding_tnc_with_placeholder">By starting, you agree to our %s.</string>
 
+    <string name="error_update_app_empty_url">Something went wrong. Can not find url to update Application</string>
+    <string name="error_update_app_activity_not_found">Something went wrong. Can not open url to update Application</string>
+
 </resources>
