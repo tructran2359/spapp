@@ -7,7 +7,8 @@ import com.spgroup.spapp.presentation.fragment.PartnerImageFragment
 
 class PartnerImagesAdapter(
         fragmentManager: FragmentManager,
-        val urls: List<String>
+        val urls: List<String>,
+        val cateId: String
 ): FragmentStatePagerAdapter(fragmentManager) {
 
     ///////////////////////////////////////////////////////////////////////////
@@ -15,7 +16,7 @@ class PartnerImagesAdapter(
     ///////////////////////////////////////////////////////////////////////////
 
     override fun getItem(position: Int): Fragment {
-        return PartnerImageFragment.newInstance(urls[position])
+        return PartnerImageFragment.newInstance(urls[position], cateId)
     }
 
     override fun getCount() = urls.size

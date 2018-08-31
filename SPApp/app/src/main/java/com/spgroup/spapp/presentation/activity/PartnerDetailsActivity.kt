@@ -15,6 +15,7 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.adapter.PartnerImagesAdapter
 import com.spgroup.spapp.presentation.fragment.CartPartnerDetailFragment
 import com.spgroup.spapp.presentation.fragment.DetailInfoPartnerDetailFragment
+import com.spgroup.spapp.presentation.fragment.PartnerImageFragment
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
@@ -103,7 +104,9 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
                     val hasPromoBar = it.promo == null || it.promo.isEmpty()
                     ll_promotion_bar.isGone = hasPromoBar
                     mPromotionBarHeight = if (hasPromoBar) 0 else getDimensionPixelSize(R.dimen.promotion_bar_height)
-                    setUpBanners(it.banners)
+                    setUpBanners(it.banners, it.categoryId)
+//                    setUpBanners(listOf("123","234","345"), it.categoryId) // simulate all wrong url
+//                    setUpBanners(listOf(), it.categoryId) // simulate empty list
                 }
             })
 
@@ -217,15 +220,24 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         supportFragmentManager.beginTransaction().add(R.id.fl_forms_section, fragment).commit()
     }
 
-    private fun setUpBanners(urls: List<String>?) {
-        urls?.let {
-            mImageAdapter = PartnerImagesAdapter(supportFragmentManager, urls)
-            pager_images.offscreenPageLimit = 3
+    private fun setUpBanners(urls: List<String>?, cateId: String) {
+        if (urls == null || urls.isEmpty()) {
+            mImageAdapter = PartnerImagesAdapter(
+                    supportFragmentManager,
+                    listOf(PartnerImageFragment.PLACEHOLDER),
+                    cateId
+            )
             pager_images.adapter = mImageAdapter
-
-            pager_indicator.setViewPager(pager_images)
-            pager_indicator.isGone = urls.size < 2
+            pager_indicator.isGone = true
+            return
         }
+
+        mImageAdapter = PartnerImagesAdapter(supportFragmentManager, urls, cateId)
+        pager_images.offscreenPageLimit = 3
+        pager_images.adapter = mImageAdapter
+
+        pager_indicator.setViewPager(pager_images)
+        pager_indicator.isGone = urls.size < 2
     }
 
     private fun setUpHeroSection() {

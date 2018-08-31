@@ -60,11 +60,12 @@ class WeeklyMenuFragment: BaseFragment(), MenuView.OnMenuItemClickListener {
     }
 
     private fun addMenuItem(foodMenuItem: FoodMenuItem) {
+        if (foodMenuItem.label == null) return
         activity?.run {
             val menuView = MenuView(this)
             menuView.run {
                 setMenuName(foodMenuItem.label)
-                foodMenuItem.pdfs.forEach { pdf ->
+                foodMenuItem.pdfs?.forEach { pdf ->
                     this.addPdf(pdf)
                 }
                 setOnMenuItemClickListener(this@WeeklyMenuFragment)
