@@ -20,7 +20,7 @@
     <color name="color_hoverpress2">#095fb2</color>
     <color name="color_hoverinactive2">#dbe1eb</color>
 
-    <color name="color_ui01_on_press">@color/color_hoverpress1</color>
+    <color name="color_main_on_press">@color/color_hoverpress1</color>
     <color name="color_grey">@color/color_ui02</color>
     <color name="color_light_grey">@color/color_ui03</color>
     <color name="color_black">@color/color_ui07</color>
