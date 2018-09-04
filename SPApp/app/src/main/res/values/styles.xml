@@ -309,6 +309,10 @@
 
     <style name="partnerBusinessInfo" parent="body">
         <item name="android:textColor">@color/color_grey</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/partner_info_margin_right</item>
     </style>
 
     <style name="bottomButton" parent="h5">
@@ -373,6 +377,18 @@
         <item name="android:paddingBottom">@dimen/common_vert_medium</item>
         <item name="android:layout_marginLeft">@dimen/common_horz_xlarge</item>
         <item name="android:layout_marginRight">@dimen/common_horz_xlarge</item>
+    </style>
+
+    <style name="PartnerInfoLineContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_marginTop">@dimen/partner_info_margin_vert_medium</item>
+    </style>
+
+    <style name="PartnerInfoLineIcon">
+        <item name="android:layout_width">@dimen/common_icon_size_medium</item>
+        <item name="android:layout_height">@dimen/common_icon_size_medium</item>
     </style>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.spgroup.spapp.domain.model
 
+import com.spgroup.spapp.presentation.activity.PartnerInformationActivity
 import java.io.Serializable
 
 data class PartnerDetails(
@@ -19,7 +20,8 @@ data class PartnerDetails(
         val banners: List<String>?,                     //14 Nullable
         val categories: List<Category>?,                //15 Nullable
         val menu: FoodMenu?,                           //16 Nullable
-        val serviceInfo: PartnerDetailServiceInfo?      //17 Nullable
+        val serviceInfo: PartnerDetailServiceInfo?,      //17 Nullable
+        val email: String?
 
 ): Serializable {
 
@@ -51,4 +53,17 @@ data class PartnerDetails(
                 }
         return null
     }
+
+    fun getPartnerInfoModel() = PartnerInformationActivity.PartnerInfo(
+            name = name,
+            desc = description,
+            offeringTitle = offeringTitle,
+            offering = offering,
+            phone = phone,
+            uen = uen,
+            nea = nea,
+            website = website,
+            tnc = tnc,
+            email = email
+    )
 }
