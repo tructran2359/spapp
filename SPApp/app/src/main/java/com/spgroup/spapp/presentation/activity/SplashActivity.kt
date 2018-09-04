@@ -8,6 +8,8 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.SPApplication
 import com.spgroup.spapp.presentation.viewmodel.SplashViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.doLogD
+import com.spgroup.spapp.util.extension.toVersionInteger
 import org.jetbrains.anko.longToast
 
 class SplashActivity : BaseActivity() {
@@ -33,9 +35,11 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun onDownloadDataSuccess() {
-        val localAppVersion = BuildConfig.VERSION_NAME
-        val backendAppVersion = splashViewModel.getAppVersion()
-        val intent = if (localAppVersion != backendAppVersion) {
+        val localAppVersionInteger = BuildConfig.VERSION_NAME.toVersionInteger()
+        val backendAppVersionInteger = splashViewModel.getAppVersion().toVersionInteger()
+        val needToUpdate = (localAppVersionInteger != -1 && backendAppVersionInteger != -1 && localAppVersionInteger < backendAppVersionInteger)
+        doLogD("Version", "Local: $localAppVersionInteger | Backend: $backendAppVersionInteger | Need: $needToUpdate")
+        val intent = if (needToUpdate) {
 
                                 UpdateActivity.getLaunchIntent(this)
 

@@ -3,6 +3,7 @@ package com.spgroup.spapp.util.extension
 import android.os.Build
 import android.text.Html
 import com.spgroup.spapp.BuildConfig
+import com.spgroup.spapp.util.doLogE
 
 fun Float.formatPrice() = "S$%.2f".format(this)
 
@@ -39,3 +40,22 @@ fun String.toHtmlSpanned() =
 fun Float.toPercentageText() = "${this.toInt()}%"
 
 fun Float.toDiscountText() = "-${this.formatPrice()}"
+
+fun String.toVersionInteger(): Int {
+    val list = split(".")
+    return if (list.size == 3) {
+        try {
+            var value = 0
+            value += list[0].toInt() * 1000000
+            value += list[1].toInt() * 1000
+            value += list[2].toInt()
+            value
+        } catch (ex: Exception) {
+            doLogE("Cast", "Can not cast to Int: ${ex.message}")
+            -1
+        }
+    } else {
+        doLogE("Cast", "Invalid version format: $this")
+        -1
+    }
+}
