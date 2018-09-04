@@ -14,10 +14,12 @@ open class BaseActivity: AppCompatActivity() {
 
     companion object {
         const val RC_NO_INTERNET = 1001
+        const val RC_NO_INTERNET_FOR_SPLASH = 1002
         const val RC_CUSTOMISE = 1
         const val RC_EDIT = 11
         const val EXTRA_PENDING_INTENT = "EXTRA_PENDING_INTENT"
         const val EXTRA_REQUEST_CODE = "EXTRA_REQUEST_CODE"
+        const val EXTRA_FOR_SPLASH = "EXTRA_FOR_SPLASH"
 
         const val NO_REQUEST_CODE = -1
     }
@@ -58,7 +60,11 @@ open class BaseActivity: AppCompatActivity() {
         }
     }
 
-    fun startActivityWithoutInternetChecking(intent: Intent) {
+    fun startActivityWithoutCheckingInternet(intent: Intent) {
         super.startActivity(intent)
+    }
+
+    fun startActivityForResultWithoutCheckingInternet(intent: Intent, requestCode: Int) {
+        super.startActivityForResult(intent, requestCode)
     }
 }
