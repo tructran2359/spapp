@@ -32,7 +32,9 @@ class ServiceVH(
                 tv_service_description.text = subCat.description
             }
 
-            if (isExpanded) {
+            val isSingleService = subCat.services.size == 1
+
+            if (isSingleService || isExpanded) {
                 doLogD("Test", "expanded")
 
                 ll_item_container.removeAllViews()
@@ -54,6 +56,7 @@ class ServiceVH(
                 }
 
                 iv_collapse.setImageResource(R.drawable.arrow_up_grey)
+                iv_collapse.isGone = isSingleService
                 ll_collapsed_container.visibility = View.VISIBLE
 
             } else {
@@ -63,8 +66,10 @@ class ServiceVH(
 
             }
 
-            rl_service_info_container.setOnClickListener {
-                onCollapseAction.invoke(adapterPosition)
+            if (!isSingleService) {
+                rl_service_info_container.setOnClickListener {
+                    onCollapseAction.invoke(adapterPosition)
+                }
             }
         }
     }
