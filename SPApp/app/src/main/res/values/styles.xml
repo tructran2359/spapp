@@ -365,4 +365,14 @@
         <item name="android:layout_marginBottom">@dimen/common_vert_medium</item>
     </style>
 
+    <style name="noInternetButton" parent="h5">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingTop">@dimen/common_vert_medium</item>
+        <item name="android:paddingBottom">@dimen/common_vert_medium</item>
+        <item name="android:layout_marginLeft">@dimen/common_horz_xlarge</item>
+        <item name="android:layout_marginRight">@dimen/common_horz_xlarge</item>
+    </style>
+
 </resources>
