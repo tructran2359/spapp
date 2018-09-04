@@ -92,17 +92,7 @@ class PartnerDetailsViewModel(
 
     fun getPartnerInfoModel(): PartnerInformationActivity.PartnerInfo? {
         partnerDetails.value?.run {
-            return PartnerInformationActivity.PartnerInfo(
-                    name = name,
-                    desc = description,
-                    offeringTitle = offeringTitle,
-                    offering = offering,
-                    phone = phone,
-                    uen = uen,
-                    nea = nea,
-                    website = website,
-                    tnc = tnc
-            )
+            return getPartnerInfoModel()
         }
 
         return null

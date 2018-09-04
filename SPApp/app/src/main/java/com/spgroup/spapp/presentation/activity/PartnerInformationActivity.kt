@@ -12,10 +12,7 @@ import androidx.core.view.isGone
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.viewmodel.PartnerInfoViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
-import com.spgroup.spapp.util.extension.addIndicatorText
-import com.spgroup.spapp.util.extension.obtainViewModel
-import com.spgroup.spapp.util.extension.openBrowser
-import com.spgroup.spapp.util.extension.setUpClickableUnderlineSpan
+import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_partner_information.*
 import org.jetbrains.anko.longToast
 import java.io.Serializable
@@ -109,13 +106,16 @@ class PartnerInformationActivity : BaseActivity() {
             tv_description.text = desc
 
             tv_phone.text = phone
-            ll_phone_container.isGone = phone == null || phone.isEmpty()
+            ll_phone_container.isGoneWithText(phone)
 
             tv_uen.text = uen
-            ll_uen_container.isGone = uen == null || uen.isEmpty()
+            ll_uen_container.isGoneWithText(uen)
 
             tv_nea.text = nea
-            ll_nea_container.isGone = nea == null || nea.isEmpty()
+            ll_nea_container.isGoneWithText(nea)
+
+            tv_email.text = email
+            ll_email_container.isGoneWithText(email)
 
             // hide `Business Information` title if all info are not available
             tv_business_info.isGone = (ll_phone_container.isGone && ll_uen_container.isGone && ll_nea_container.isGone)
@@ -206,6 +206,7 @@ class PartnerInformationActivity : BaseActivity() {
             val uen: String?,
             val nea: String?,
             val website: String?,
-            val tnc: String?
+            val tnc: String?,
+            val email: String?
     ): Serializable
 }

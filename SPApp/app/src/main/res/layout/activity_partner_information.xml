@@ -96,81 +96,73 @@
                     />
 
                 <LinearLayout
+                    style="@style/PartnerInfoLineContainer"
                     android:id="@+id/ll_phone_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/partner_info_margin_vert_medium"
                     >
 
                     <ImageView
-                        android:layout_width="@dimen/common_icon_size_medium"
-                        android:layout_height="@dimen/common_icon_size_medium"
+                        style="@style/PartnerInfoLineIcon"
                         android:src="@drawable/icon_phone"
                         />
 
                     <TextView
                         style="@style/partnerBusinessInfo"
                         android:id="@+id/tv_phone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/partner_info_margin_right"
-                        android:textColor="@color/color_grey"
                         tools:text="6342 4988"
                         />
 
                 </LinearLayout>
 
                 <LinearLayout
+                    style="@style/PartnerInfoLineContainer"
                     android:id="@+id/ll_uen_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/partner_info_margin_vert_medium"
                     >
 
                     <ImageView
-                        android:layout_width="@dimen/common_icon_size_medium"
-                        android:layout_height="@dimen/common_icon_size_medium"
+                        style="@style/PartnerInfoLineIcon"
                         android:src="@drawable/uen"
                         />
 
                     <TextView
                         style="@style/partnerBusinessInfo"
                         android:id="@+id/tv_uen"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/partner_info_margin_right"
-                        android:text="987654321A"
+                        tools:text="987654321A"
                         />
 
                 </LinearLayout>
 
                 <LinearLayout
+                    style="@style/PartnerInfoLineContainer"
                     android:id="@+id/ll_nea_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/partner_info_margin_vert_medium"
                     >
 
                     <ImageView
-                        android:layout_width="@dimen/common_icon_size_medium"
-                        android:layout_height="@dimen/common_icon_size_medium"
+                        style="@style/PartnerInfoLineIcon"
                         android:src="@drawable/nea"
                         />
 
                     <TextView
                         style="@style/partnerBusinessInfo"
                         android:id="@+id/tv_nea"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/partner_info_margin_right"
-
                         tools:text="987654321A"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/PartnerInfoLineContainer"
+                    android:id="@+id/ll_email_container"
+                    >
+
+                    <ImageView
+                        style="@style/PartnerInfoLineIcon"
+                        android:src="@drawable/email"
+                        />
+
+                    <TextView
+                        style="@style/partnerBusinessInfo"
+                        android:id="@+id/tv_email"
+                        tools:text="vml@gmail.com"
                         />
 
                 </LinearLayout>

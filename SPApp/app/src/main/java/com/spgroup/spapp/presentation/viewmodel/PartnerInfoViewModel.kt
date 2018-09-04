@@ -20,17 +20,7 @@ class PartnerInfoViewModel(
                 .subscribe(
                         {
                             it?.run {
-                                mPartnerInfo.value = PartnerInfo(
-                                        name = name,
-                                        desc = description,
-                                        offeringTitle = offeringTitle,
-                                        offering = offering,
-                                        phone = phone,
-                                        uen = uen,
-                                        nea = nea,
-                                        website = website,
-                                        tnc = tnc
-                                )
+                                mPartnerInfo.value = getPartnerInfoModel()
                             }
                         },
                         { error.value = it}

@@ -201,3 +201,7 @@ fun View.hideWithAnimation(anim: Animation) {
         startAnimation(anim)
     }
 }
+
+fun View.isGoneWithText(string: String?) {
+    isGone = string == null || string.isEmpty()
+}
