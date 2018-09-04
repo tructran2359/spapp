@@ -10,11 +10,11 @@
     >
 
     <ImageView
-        android:layout_width="@dimen/no_internet_icon_size"
-        android:layout_height="@dimen/no_internet_icon_size"
+        android:layout_width="@dimen/error_screen_icon_size"
+        android:layout_height="@dimen/error_screen_icon_size"
         android:src="@drawable/error_no_connection"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/no_internet_icon_margin_top"
+        android:layout_marginTop="@dimen/error_screen_icon_margin_top"
         android:layout_marginBottom="@dimen/common_vert_large"/>
 
     <TextView
