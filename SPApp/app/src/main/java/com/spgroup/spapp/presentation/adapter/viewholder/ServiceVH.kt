@@ -22,7 +22,7 @@ class ServiceVH(
         private val onCollapseAction: (Int) -> Unit
 ) : RecyclerView.ViewHolder(view) {
 
-    fun bind(subCat: SubCategory, mapSelectedValue: Map<Int, Int>, isExpanded: Boolean) {
+    fun bind(subCat: SubCategory, mapSelectedValue: Map<Int, Int>, isExpanded: Boolean, isSingleSubCate: Boolean) {
         with(itemView) {
             tv_service_name.text = subCat.label
             if (subCat.description.isEmpty()) {
@@ -32,9 +32,7 @@ class ServiceVH(
                 tv_service_description.text = subCat.description
             }
 
-            val isSingleService = subCat.services.size == 1
-
-            if (isSingleService || isExpanded) {
+            if (isSingleSubCate || isExpanded) {
                 doLogD("Test", "expanded")
 
                 ll_item_container.removeAllViews()
@@ -56,7 +54,7 @@ class ServiceVH(
                 }
 
                 iv_collapse.setImageResource(R.drawable.arrow_up_grey)
-                iv_collapse.isGone = isSingleService
+                iv_collapse.isGone = isSingleSubCate
                 ll_collapsed_container.visibility = View.VISIBLE
 
             } else {
@@ -66,7 +64,7 @@ class ServiceVH(
 
             }
 
-            if (!isSingleService) {
+            if (!isSingleSubCate) {
                 rl_service_info_container.setOnClickListener {
                     onCollapseAction.invoke(adapterPosition)
                 }

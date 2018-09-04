@@ -63,7 +63,7 @@ class ServiceListingAdapter(
     }
 
     override fun onBindViewHolder(vh: ServiceVH, position: Int) {
-        vh.bind(mData[position], mMapSelectedValue, isItemExpanded(position))
+        vh.bind(mData[position], mMapSelectedValue, isItemExpanded(position), mData.size == 1)
     }
 
     override fun getItemCount() = mData.size
