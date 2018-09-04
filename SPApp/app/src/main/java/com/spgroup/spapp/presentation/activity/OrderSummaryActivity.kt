@@ -235,45 +235,7 @@ class OrderSummaryActivity : BaseActivity() {
         validation_postal_code.setInputType(InputType.TYPE_CLASS_NUMBER)
         validation_postal_code.setValidation { postalCode: String -> postalCode.isNumberOnly() }
 
-        with(btn_summary) {
-            isEnabled = true
-            setText(getString(R.string.submit_request))
-            setCount(1)
-            setEstPrice(0.01f)
-            setOnClickListener {
-                var invalidCount = 0
-                mFirstInvalidView = null
-
-                val listValidationField = listOf(
-                        validation_postal_code,
-                        validation_address,
-                        validation_contact_no,
-                        validation_email,
-                        validation_name)
-
-                listValidationField.forEach {
-                    val valid = it.validate()
-                    if (!valid) {
-                        invalidCount++
-                        mFirstInvalidView = it
-                    }
-                }
-                if (invalidCount == 0) {
-                    rl_error_cointainer.visibility = View.GONE
-                    val contactInfo = createContactInfo()
-                    mViewModel.submitRequest(contactInfo)
-//                    longToast("Check Logcat")
-                } else {
-                    var errorMsg = if(invalidCount == 1) {
-                        this@OrderSummaryActivity.getString(R.string.error_detected_1)
-                    } else {
-                        this@OrderSummaryActivity.getString(R.string.error_detected_format, invalidCount)
-                    }
-                    tv_error_counter.setText(errorMsg)
-                    showErrorView(true)
-                }
-            }
-        }
+        setUpSubmitButton()
 
         action_bar.setOnBackPress {
             onBackPressed()
@@ -298,6 +260,91 @@ class OrderSummaryActivity : BaseActivity() {
         }
 
         setUpKeyboardDetection()
+        fillSavedContactInfoIfNeed()
+    }
+
+    private fun fillSavedContactInfoIfNeed() {
+        val remembered = mViewModel.isRemembered()
+        cb_remember.isChecked = remembered
+        if (remembered) {
+            val contactInfo = mViewModel.getSavedContactInfo()
+            contactInfo?.run {
+                validation_name.setText(name)
+                validation_email.setText(email)
+                validation_contact_no.setText(contactNo)
+
+                if (address.size == 2) {
+                    validation_address.setText(address[0])
+                    et_address_2.setText(address[1])
+                } else if (!address.isEmpty()) {
+                    validation_address.setText(address[0])
+                }
+
+                var selectedIndex = 0
+                prefContactTime?.run {
+                    ConstUtils.LIST_PREFERRED_TIME.forEachIndexed { index, time ->
+                        if (time == this) {
+                            selectedIndex = index
+                            return@forEachIndexed
+                        }
+                    }
+                }
+                spinner_preferred_time.setSelection(selectedIndex)
+
+                validation_postal_code.setText(postalCode)
+                et_notes.setText(notes)
+            }
+        }
+    }
+
+    private fun setUpSubmitButton() {
+        with(btn_summary) {
+            isEnabled = true
+            setText(getString(R.string.submit_request))
+            setCount(1)
+            setEstPrice(0.01f)
+            setOnClickListener {
+                var invalidCount = 0
+                mFirstInvalidView = null
+
+                val listValidationField = listOf(
+                        validation_postal_code,
+                        validation_address,
+                        validation_contact_no,
+                        validation_email,
+                        validation_name)
+
+                listValidationField.forEach {
+                    val valid = it.validate()
+                    if (!valid) {
+                        invalidCount++
+                        mFirstInvalidView = it
+                    }
+                }
+                if (invalidCount == 0) {
+                    // All fields are valid
+                    rl_error_cointainer.visibility = View.GONE
+                    val contactInfo = createContactInfo()
+
+                    // Check to save contact info
+                    if (cb_remember.isChecked) {
+                        // Remember Me Enabled -> Save to Share Pref
+                        mViewModel.saveContactInfo(contactInfo)
+                    } else {
+                        mViewModel.removeSavedContactInfo()
+                    }
+                    mViewModel.submitRequest(contactInfo)
+                } else {
+                    var errorMsg = if (invalidCount == 1) {
+                        this@OrderSummaryActivity.getString(R.string.error_detected_1)
+                    } else {
+                        this@OrderSummaryActivity.getString(R.string.error_detected_format, invalidCount)
+                    }
+                    tv_error_counter.setText(errorMsg)
+                    showErrorView(true)
+                }
+            }
+        }
     }
 
     private fun setUpKeyboardDetection() {

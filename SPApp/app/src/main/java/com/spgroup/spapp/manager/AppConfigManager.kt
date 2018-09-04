@@ -2,12 +2,16 @@ package com.spgroup.spapp.manager
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.gson.Gson
+import com.spgroup.spapp.domain.model.ContactInfo
 
-class AppConfigManager(context: Context) {
+class AppConfigManager(context: Context, val mGson: Gson) {
 
     companion object {
         const val PREF_NAME = "SPApp_Pref"
         const val KEY_ON_BOADING_SHOWN = "KEY_ON_BOADING_SHOWN"
+        const val KEY_REMEMBER_ME = "KEY_REMEMBER_ME"
+        const val KEY_CONTACT_INFO = "KEY_CONTACT_INFO"
     }
 
     private val mSharedPreferences: SharedPreferences
@@ -34,6 +38,10 @@ class AppConfigManager(context: Context) {
 
     private fun getString(key: String, defaultValue: String) = mSharedPreferences.getString(key, defaultValue)
 
+    private fun clearKey(key: String) {
+        mSharedPreferences.edit().remove(key).apply()
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // Public Function
     ///////////////////////////////////////////////////////////////////////////
@@ -42,5 +50,27 @@ class AppConfigManager(context: Context) {
 
     fun setOnBoadingShown(shown: Boolean) {
         putBoolean(KEY_ON_BOADING_SHOWN, shown)
+    }
+
+    fun setRememberMe(contactInfo: ContactInfo) {
+        putBoolean(KEY_REMEMBER_ME, true)
+        val jsonString = mGson.toJson(contactInfo) ?: ""
+        putString(KEY_CONTACT_INFO, jsonString)
+    }
+
+    fun clearRememberMe() {
+        putBoolean(KEY_REMEMBER_ME, false)
+        clearKey(KEY_CONTACT_INFO)
+    }
+
+    fun isRemembered() = getBoolean(KEY_REMEMBER_ME, false)
+
+    fun getSavedContactInfo(): ContactInfo? {
+        val jsonString = getString(KEY_CONTACT_INFO, "")
+        if (jsonString == null || jsonString.isEmpty()) {
+            return null
+        }
+
+        return mGson.fromJson(jsonString, ContactInfo::class.java)
     }
 }

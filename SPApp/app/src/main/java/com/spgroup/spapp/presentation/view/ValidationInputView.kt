@@ -86,4 +86,8 @@ class ValidationInputView: RelativeLayout {
     }
 
     fun getInputedText() = et_input.text?.toString() ?: ""
+
+    fun setText(string: String) {
+        et_input.setText(string)
+    }
 }

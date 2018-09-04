@@ -8,12 +8,14 @@ import com.spgroup.spapp.domain.model.RequestAck
 import com.spgroup.spapp.domain.usecase.GetOrderSummaryUsecase
 import com.spgroup.spapp.domain.usecase.SelectedServiceUsecase
 import com.spgroup.spapp.domain.usecase.SubmitRequestUsecase
+import com.spgroup.spapp.manager.AppConfigManager
 import com.spgroup.spapp.presentation.activity.CustomiseDisplayData
 
 class OrderSummaryViewModel(
         private val mSubmitRequestUsecase: SubmitRequestUsecase,
         private val mSelectedServiceUsecase: SelectedServiceUsecase,
-        private val mGetOrderSummaryUsecase: GetOrderSummaryUsecase
+        private val mGetOrderSummaryUsecase: GetOrderSummaryUsecase,
+        private val mAppConfigmanager: AppConfigManager
 ): BaseViewModel() {
 
     val mDeletedCateId = MutableLiveData<String>()
@@ -111,6 +113,18 @@ class OrderSummaryViewModel(
                 )
         disposeBag.addAll(disposable)
     }
+
+    fun saveContactInfo(contactInfo: ContactInfo) {
+        mAppConfigmanager.setRememberMe(contactInfo)
+    }
+
+    fun removeSavedContactInfo() {
+        mAppConfigmanager.clearRememberMe()
+    }
+
+    fun getSavedContactInfo() = mAppConfigmanager.getSavedContactInfo()
+
+    fun isRemembered() = mAppConfigmanager.isRemembered()
 
 }
 

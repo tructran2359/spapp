@@ -1,5 +1,6 @@
 package com.spgroup.spapp.di
 
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.spgroup.spapp.BuildConfig
 import com.spgroup.spapp.domain.SchedulerFacade
@@ -7,6 +8,7 @@ import com.spgroup.spapp.domain.ServicesRepository
 import com.spgroup.spapp.domain.model.AbsCustomisation
 import com.spgroup.spapp.domain.model.AbsServiceItem
 import com.spgroup.spapp.manager.AppDataMemCache
+import com.spgroup.spapp.presentation.SPApplication
 import com.spgroup.spapp.repository.ServicesCloudDataStore
 import com.spgroup.spapp.repository.ServicesDataMock
 import com.spgroup.spapp.repository.http.SingaporePowerHttpClient
@@ -81,5 +83,9 @@ object Injection {
 
         return retrofit.create(SingaporePowerHttpClient::class.java)
     }
+
+    fun provideGson() = Gson()
+
+    fun provideAppConfigManager() = SPApplication.mAppConfig
 
 }
