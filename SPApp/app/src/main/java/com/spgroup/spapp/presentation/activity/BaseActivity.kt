@@ -57,4 +57,8 @@ open class BaseActivity: AppCompatActivity() {
             super.startActivityForResult(NoInternetActivity.getLaunchIntent(this, intent, requestCode), RC_NO_INTERNET)
         }
     }
+
+    fun startActivityWithoutInternetChecking(intent: Intent) {
+        super.startActivity(intent)
+    }
 }

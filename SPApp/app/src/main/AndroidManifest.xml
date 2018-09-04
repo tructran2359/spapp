@@ -125,6 +125,10 @@
             android:name=".presentation.activity.NoInternetActivity"
             android:screenOrientation="portrait"
             />
+        <activity
+            android:name=".presentation.activity.FileNotFoundActivity"
+            android:screenOrientation="portrait"
+            />
 
     </application>
 
