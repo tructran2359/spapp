@@ -2,9 +2,10 @@ package com.spgroup.spapp.presentation.adapter.viewholder
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.bumptech.glide.Glide
+import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.PartnersListingItem
 import com.spgroup.spapp.domain.model.Promotion
+import com.spgroup.spapp.util.extension.loadImageWithPlaceholder
 import com.spgroup.spapp.util.extension.toFullUrl
 import kotlinx.android.synthetic.main.layout_partner_promotion.view.*
 
@@ -15,9 +16,11 @@ class PromotionItemVH(
 
     fun bind(promotion: Promotion) {
         view.run {
-            Glide.with(context)
-                    .load(promotion.imagePath.toFullUrl())
-                    .into(iv_promotion)
+            iv_promotion.loadImageWithPlaceholder(
+                    promotion.imagePath.toFullUrl(),
+                    R.drawable.placeholder_icon,
+                    R.drawable.placeholder_icon
+            )
             tv_partner_name.text = promotion.partnerName
             tv_promotion.text = promotion.promoText
             setOnClickListener {
