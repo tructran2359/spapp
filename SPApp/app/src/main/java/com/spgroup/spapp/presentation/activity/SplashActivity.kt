@@ -1,7 +1,9 @@
 package com.spgroup.spapp.presentation.activity
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import com.spgroup.spapp.BuildConfig
 import com.spgroup.spapp.R
@@ -9,6 +11,7 @@ import com.spgroup.spapp.presentation.SPApplication
 import com.spgroup.spapp.presentation.viewmodel.SplashViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.doLogD
+import com.spgroup.spapp.util.extension.isOnline
 import com.spgroup.spapp.util.extension.toVersionInteger
 import org.jetbrains.anko.longToast
 
@@ -22,7 +25,19 @@ class SplashActivity : BaseActivity() {
 
         splashViewModel = ViewModelProviders.of(this, ViewModelFactory.getInstance()).get(SplashViewModel::class.java)
         observeViewModel()
-        splashViewModel.getInitialData()
+
+        if (isOnline()) {
+            splashViewModel.getInitialData()
+        } else {
+            startActivityForResultWithoutCheckingInternet(NoInternetActivity.getLaunchIntentForSplash(this), RC_NO_INTERNET_FOR_SPLASH)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_NO_INTERNET_FOR_SPLASH && resultCode == Activity.RESULT_OK) {
+            splashViewModel.getInitialData()
+        }
     }
 
     private fun observeViewModel() {
