@@ -33,7 +33,6 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
 
     companion object {
 
-        const val RC_CUSTOMISE = 1
 
         fun getLaunchIntent(context: Context, partnerUEN: String, isCart: Boolean): Intent {
             val intent = Intent(context, PartnerDetailsActivity::class.java)

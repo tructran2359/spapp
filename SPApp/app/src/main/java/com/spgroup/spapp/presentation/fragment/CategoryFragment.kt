@@ -12,9 +12,9 @@ import com.spgroup.spapp.domain.model.Category
 import com.spgroup.spapp.domain.model.CheckboxService
 import com.spgroup.spapp.domain.model.ComplexCustomisationService
 import com.spgroup.spapp.domain.model.MultiplierService
+import com.spgroup.spapp.presentation.activity.BaseActivity
 import com.spgroup.spapp.presentation.activity.CustomiseDisplayData
 import com.spgroup.spapp.presentation.activity.CustomiseNewActivity
-import com.spgroup.spapp.presentation.activity.PartnerDetailsActivity
 import com.spgroup.spapp.presentation.adapter.ServiceListingAdapter
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
@@ -100,7 +100,7 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
                     context = it,
                     displayData = displayData,
                     isEdit = false)
-            it.startActivityForResult(intent, PartnerDetailsActivity.RC_CUSTOMISE)
+            it.startActivityForResult(intent, BaseActivity.RC_CUSTOMISE)
         }
     }
 
