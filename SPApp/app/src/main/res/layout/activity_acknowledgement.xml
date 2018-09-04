@@ -8,62 +8,73 @@
     android:background="@color/color_white"
     >
 
-    <ImageView
-        android:id="@+id/iv_confirm"
-        android:layout_width="@dimen/summitted_icon_width"
-        android:layout_height="@dimen/submitted_icon_height"
-        android:src="@drawable/submitted"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/common_vert_xlarge"
-        android:layout_marginBottom="@dimen/common_vert_medium"
-        />
-
-    <TextView
-        style="@style/h3"
-        android:id="@+id/tv_title"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/iv_confirm"
-        android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal"
-        android:layout_marginLeft="@dimen/acknowledgement_act_horz_spacing"
-        android:layout_marginRight="@dimen/acknowledgement_act_horz_spacing"
-        android:textColor="@color/color_black"
-        tools:text="Your request has been submitted."
-        />
-
-    <TextView
-        style="@style/subhead"
-        android:id="@+id/tv_request_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/common_vert_medium_sub"
-        android:background="@drawable/bg_rec_rounded_grey"
-        android:paddingLeft="@dimen/common_horz_medium_sub"
-        android:paddingRight="@dimen/common_horz_medium_sub"
-        android:paddingTop="@dimen/common_vert_xsmall"
-        android:paddingBottom="@dimen/common_vert_xsmall"
-        android:textColor="@color/color_black"
-        tools:text="@string/request_number"
-        />
-
-    <TextView
-        style="@style/body"
-        android:id="@+id/tv_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/tv_request_number"
+        android:layout_height="match_parent"
         android:layout_above="@+id/bottom_button_container"
-        android:layout_marginTop="@dimen/common_vert_medium"
-        android:layout_marginLeft="@dimen/acknowledgement_act_horz_spacing"
-        android:layout_marginRight="@dimen/acknowledgement_act_horz_spacing"
-        android:textColor="@color/color_grey"
-        tools:text="@string/ack_get_in_touch"
-        />
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/common_vert_xlarge"
+            >
+
+            <ImageView
+                android:id="@+id/iv_confirm"
+                android:layout_width="@dimen/summitted_icon_width"
+                android:layout_height="@dimen/submitted_icon_height"
+                android:src="@drawable/submitted"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/common_vert_xlarge"
+                android:layout_marginBottom="@dimen/common_vert_medium"
+                />
+
+            <TextView
+                style="@style/h3"
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/acknowledgement_act_horz_spacing"
+                android:layout_marginRight="@dimen/acknowledgement_act_horz_spacing"
+                android:textColor="@color/color_black"
+                tools:text="Your request has been submitted."
+                />
+
+            <TextView
+                style="@style/subhead"
+                android:id="@+id/tv_request_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/common_vert_medium_sub"
+                android:background="@drawable/bg_rec_rounded_grey"
+                android:paddingLeft="@dimen/common_horz_medium_sub"
+                android:paddingRight="@dimen/common_horz_medium_sub"
+                android:paddingTop="@dimen/common_vert_xsmall"
+                android:paddingBottom="@dimen/common_vert_xsmall"
+                android:textColor="@color/color_black"
+                tools:text="@string/request_number"
+                />
+
+            <TextView
+                style="@style/body"
+                android:id="@+id/tv_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="@dimen/common_vert_medium"
+                android:layout_marginLeft="@dimen/acknowledgement_act_horz_spacing"
+                android:layout_marginRight="@dimen/acknowledgement_act_horz_spacing"
+                android:textColor="@color/color_grey"
+                tools:text="@string/ack_get_in_touch"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <View
         style="@style/buttonShadow"

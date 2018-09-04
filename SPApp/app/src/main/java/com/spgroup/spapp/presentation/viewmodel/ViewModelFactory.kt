@@ -99,7 +99,13 @@ class ViewModelFactory private constructor(
         val selectedServiceUsecase = SelectedServiceUsecase()
         val getOrderSummaryUsecase = GetOrderSummaryUsecase()
         val submitRequestUsecase = SubmitRequestUsecase(schedulerFacade, cloudRepository)
-        return OrderSummaryViewModel(submitRequestUsecase, selectedServiceUsecase, getOrderSummaryUsecase)
+        val appConfigManager = Injection.provideAppConfigManager()
+        return OrderSummaryViewModel(
+                submitRequestUsecase,
+                selectedServiceUsecase,
+                getOrderSummaryUsecase,
+                appConfigManager
+        )
     }
 
     companion object {
