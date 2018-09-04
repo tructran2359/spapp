@@ -5,7 +5,7 @@
     >
 
     <solid
-        android:color="@color/color_white_on_press"/>
+        android:color="@color/color_hoverpress1"/>
 
     <corners
         android:radius="@dimen/common_radius"/>
