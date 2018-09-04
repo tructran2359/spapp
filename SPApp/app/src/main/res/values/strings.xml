@@ -100,5 +100,10 @@
 
     <string name="error_update_app_empty_url">Something went wrong. Can not find url to update Application</string>
     <string name="error_update_app_activity_not_found">Something went wrong. Can not open url to update Application</string>
+    <string name="no_internet_title">Oh Snap!</string>
+    <string name="no_internet_desc">Your internet connection appears to be offline. Please check and try again.</string>
+    <string name="refresh">REFRESH</string>
+    <string name="back">BACK</string>
+    <string name="no_internet_connection_error_message">No Internet Connection</string>
 
 </resources>

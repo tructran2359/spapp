@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_white"
+    >
+
+    <ImageView
+        android:layout_width="@dimen/no_internet_icon_size"
+        android:layout_height="@dimen/no_internet_icon_size"
+        android:src="@drawable/error_no_connection"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/no_internet_icon_margin_top"
+        android:layout_marginBottom="@dimen/common_vert_large"/>
+
+    <TextView
+        style="@style/h3"
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_internet_title"
+        android:textColor="@color/color_black"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <TextView
+        style="@style/body"
+        android:id="@+id/tv_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_internet_desc"
+        android:textColor="@color/color_grey"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/common_vert_small"
+        android:layout_marginLeft="@dimen/common_horz_xlarge"
+        android:layout_marginRight="@dimen/common_horz_xlarge"
+        />
+
+    <TextView
+        style="@style/noInternetButton"
+        android:id="@+id/tv_refresh"
+        android:textColor="@color/color_white"
+        android:text="@string/refresh"
+        android:background="@drawable/selector_btn_main"
+        android:layout_marginTop="@dimen/common_vert_large"
+        />
+
+    <TextView
+        style="@style/noInternetButton"
+        android:id="@+id/tv_back"
+        android:textColor="@color/color_ui01"
+        android:text="@string/back"
+        android:background="@drawable/selector_btn_white"
+        android:layout_marginTop="@dimen/common_vert_small"
+        />
+
+</LinearLayout>

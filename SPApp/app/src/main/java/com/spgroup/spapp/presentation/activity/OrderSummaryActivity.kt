@@ -34,7 +34,6 @@ class OrderSummaryActivity : BaseActivity() {
 
     companion object {
 
-        const val RC_EDIT = 11
         const val EXTRA_SERVICE_MAP = "EXTRA_SERVICE_MAP"
         const val EXTRA_PARTNER_DETAIL = "EXTRA_PARTNER_DETAIL"
 

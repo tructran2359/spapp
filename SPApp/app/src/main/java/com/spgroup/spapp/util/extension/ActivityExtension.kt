@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
@@ -51,4 +52,10 @@ inline fun Context.getPartnerDetailIntent(uen: String, partnerType: String): Int
         else -> throw IllegalArgumentException("Invalid partner type: $partnerType with uen: $uen")
 
     }
+}
+
+inline fun Context.isOnline(): Boolean {
+    val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val networkInfo = cm.activeNetworkInfo
+    return networkInfo != null && networkInfo.isConnected
 }

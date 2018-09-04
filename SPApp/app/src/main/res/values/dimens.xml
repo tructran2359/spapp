@@ -138,6 +138,7 @@
     <dimen name="common_vert_small">10dp</dimen>
     <dimen name="common_vert_xsmall">5dp</dimen>
 
+    <dimen name="common_horz_xxlarge">50dp</dimen>
     <dimen name="common_horz_xlarge">35dp</dimen>
     <dimen name="common_horz_large">30dp</dimen>
     <dimen name="common_horz_medium">20dp</dimen>
@@ -187,5 +188,7 @@
     <dimen name="onboarding_indicator_margin_bot">74dp</dimen>
     <dimen name="onboarding_horz_margin">50dp</dimen>
     <dimen name="onboarding_pager_content_margin_bot">210dp</dimen>
+    <dimen name="no_internet_icon_size">110dp</dimen>
+    <dimen name="no_internet_icon_margin_top">100dp</dimen>
 
 </resources>
