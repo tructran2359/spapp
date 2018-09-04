@@ -10,6 +10,7 @@ import android.net.Uri
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import com.spgroup.spapp.R
+import com.spgroup.spapp.presentation.activity.BaseActivity
 import com.spgroup.spapp.presentation.activity.PartnerDetailsActivity
 import com.spgroup.spapp.presentation.activity.PartnerInformationActivity
 import com.spgroup.spapp.util.ConstUtils
@@ -26,7 +27,7 @@ inline fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>, vi
 inline fun <T : ViewModel> Fragment.obtainViewModelOfActivity(viewModelClass: Class<T>, viewModelFactory: ViewModelProvider.Factory?) =
         ViewModelProviders.of(this.activity!!, viewModelFactory).get(viewModelClass)
 
-inline fun Context.openBrowser(url: String?) {
+inline fun BaseActivity.openBrowser(url: String?) {
     if (url == null || url.isEmpty()) {
         longToast(getString(R.string.website_not_found))
         return

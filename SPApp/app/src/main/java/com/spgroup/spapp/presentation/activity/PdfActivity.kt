@@ -14,7 +14,6 @@ import com.spgroup.spapp.util.doLogE
 import com.spgroup.spapp.util.extension.obtainViewModel
 import com.spgroup.spapp.util.extension.toFullUrl
 import kotlinx.android.synthetic.main.activity_pdf.*
-import org.jetbrains.anko.longToast
 import java.io.File
 
 class PdfActivity: BaseActivity() {
@@ -46,6 +45,9 @@ class PdfActivity: BaseActivity() {
 
         mTitle = intent.getStringExtra(EXTRA_TITLE)
         mUrl = intent.getStringExtra(EXTRA_URL)
+
+//        // To simulate invalid url
+//        mUrl = "test1234"
 
         mViewModel = obtainViewModel(PdfViewModel::class.java, ViewModelFactory.getInstance())
         subscribeUI()
@@ -91,7 +93,7 @@ class PdfActivity: BaseActivity() {
             mErrorMessage.observe(this@PdfActivity, Observer {
                 it?.run {
                     doLogE("LoadPdf", "Error: $this")
-                    this@PdfActivity.longToast(R.string.error_loading_pdf)
+                    onFileNotFound()
                 }
             })
         }
@@ -111,8 +113,13 @@ class PdfActivity: BaseActivity() {
                     .load()
         } catch (ex: Exception) {
             ex.printStackTrace()
-            doLogE("Pdf", "Ex: ${ex.toString()} with message: ${ex.message}")
-            longToast(R.string.error_loading_pdf)
+            doLogE("Pdf", "Ex: $ex with message: ${ex.message}")
+            onFileNotFound()
         }
+    }
+
+    private fun onFileNotFound() {
+        startActivityWithoutInternetChecking(FileNotFoundActivity.getLaunchIntent(this@PdfActivity))
+        finish()
     }
 }
