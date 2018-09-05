@@ -11,7 +11,7 @@ class PartnerMapper : IMapper<PartnerEntity, Partner> {
                     name = name,
                     imgUrl = logo,
                     priceDescription = priceDescription,
-                    highlight = highlight,
+                    highlight = highlight ?: "",
                     partnerType = partnerType
             )
         }

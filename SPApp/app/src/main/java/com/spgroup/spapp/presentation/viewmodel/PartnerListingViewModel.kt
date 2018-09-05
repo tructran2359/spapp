@@ -1,13 +1,14 @@
 package com.spgroup.spapp.presentation.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
-import com.spgroup.spapp.domain.model.PartnersListingData
 import com.spgroup.spapp.domain.model.PartnersListingItem
 import com.spgroup.spapp.domain.model.TopLevelCategory
 import com.spgroup.spapp.domain.usecase.GetPartnerListingUsecase
+import com.spgroup.spapp.domain.usecase.PreProcessPartnerUsecase
 
 class PartnerListingViewModel(
-        private val getPartnerListingUsecase: GetPartnerListingUsecase
+        private val getPartnerListingUsecase: GetPartnerListingUsecase,
+        private val preProccessPartnerUsecase: PreProcessPartnerUsecase
 ) : BaseViewModel() {
 
     val topLevelCategory = MutableLiveData<TopLevelCategory>()
@@ -22,32 +23,12 @@ class PartnerListingViewModel(
                 .getPartnerListing(topLevelCategory.value?.id)
                 .subscribe(
                         {
-                            partnerListingItems.value = mergePartnersWithPromotions(it, 4)
+                            partnerListingItems.value = preProccessPartnerUsecase.run(it)
                         },
                         {
                             error.value = it
                         }
                 )
         disposeBag.addAll(disposable)
-    }
-
-    private fun mergePartnersWithPromotions(data: PartnersListingData, promotionIndex: Int): List<PartnersListingItem> {
-        if (data.promotions.isEmpty()) {
-            return data.partners
-        } else {
-            if (data.partners.size < promotionIndex) {
-                val mergedList: MutableList<PartnersListingItem> = data.partners.toMutableList()
-                mergedList.add(data.promotions[0])
-                return mergedList
-            } else {
-                val mergedList: MutableList<PartnersListingItem> = data.partners.toMutableList()
-                if (data.partners.size == promotionIndex) {
-                    mergedList.add(data.promotions[0])
-                } else {
-                    mergedList.add(promotionIndex, data.promotions[0])
-                }
-                return mergedList
-            }
-        }
     }
 }
