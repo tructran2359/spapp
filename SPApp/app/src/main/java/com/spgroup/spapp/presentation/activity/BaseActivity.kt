@@ -34,7 +34,7 @@ open class BaseActivity: AppCompatActivity() {
         if (requestCode == RC_NO_INTERNET && resultCode == Activity.RESULT_OK) {
             data?.let {
                 val pendingRequestCode = it.getIntExtra(EXTRA_REQUEST_CODE, NO_REQUEST_CODE)
-                val pendingIntent: Intent? = it.extras.getParcelable(EXTRA_PENDING_INTENT)
+                val pendingIntent: Intent? = it.extras?.getParcelable(EXTRA_PENDING_INTENT)
                 if (pendingRequestCode == NO_REQUEST_CODE) {
                     startActivity(pendingIntent)
                 } else {

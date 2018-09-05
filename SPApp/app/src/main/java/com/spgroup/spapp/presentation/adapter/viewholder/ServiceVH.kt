@@ -37,7 +37,7 @@ class ServiceVH(
 
                 ll_item_container.removeAllViews()
 
-                subCat.services.forEachWithIndex { index, absServiceItem ->
+                subCat.services.forEachWithIndex { _, absServiceItem ->
                     val initCount = mapSelectedValue[absServiceItem.getServiceId()] ?: 0
                     val view = when (absServiceItem) {
 

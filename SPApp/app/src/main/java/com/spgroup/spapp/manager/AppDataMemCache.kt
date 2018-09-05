@@ -24,8 +24,8 @@ class AppDataMemCache : AppDataCache {
         saveTopLevelVariables(variables)
     }
 
-    override fun saveTopLevelCategories(categories: List<TopLevelCategory>) {
-        topLevelCategories = categories
+    override fun saveTopLevelCategories(topCategories: List<TopLevelCategory>) {
+        topLevelCategories = topCategories
     }
 
     override fun getTopLevelCategories(): List<TopLevelCategory> {

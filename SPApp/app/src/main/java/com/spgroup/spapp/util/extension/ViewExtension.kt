@@ -150,7 +150,7 @@ fun TextView.setUpClickableUnderlineSpan(
             action.invoke()
         }
 
-        override fun updateDrawState(ds: TextPaint?) {
+        override fun updateDrawState(ds: TextPaint) {
             super.updateDrawState(ds)
             ds?.isUnderlineText = true
             ds?.color = context.getColorFromRes(R.color.color_grey)

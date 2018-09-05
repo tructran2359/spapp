@@ -206,7 +206,7 @@ data class CustomiseDisplayData (
 ): Serializable {
     fun isSameSelectedOptionData(newObj: CustomiseDisplayData): Boolean {
         if (mapSelectedOption.size != newObj.mapSelectedOption.size) return false
-        for ((key, value) in mapSelectedOption) {
+        for ((key, _) in mapSelectedOption) {
             if (mapSelectedOption[key] != newObj.mapSelectedOption[key]) return false
         }
         if (specialInstruction != newObj.specialInstruction) return false
