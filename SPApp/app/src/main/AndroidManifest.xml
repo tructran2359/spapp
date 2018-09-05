@@ -75,12 +75,6 @@
             android:screenOrientation="portrait"
             />
 
-        <!--HomeAcknowledgementActivity-->
-        <activity
-            android:name=".presentation.activity.HomeAcknowledgementActivity"
-            android:screenOrientation="portrait"
-            />
-
         <activity
             android:name=".presentation.activity.EmptyRequestActivity"
             android:screenOrientation="portrait"
