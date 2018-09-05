@@ -50,14 +50,6 @@
             android:screenOrientation="portrait">
         </activity>
 
-        <!-- ServiceCustomisationActivity -->
-        <activity
-            android:name=".presentation.activity.CustomiseActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            >
-        </activity>
-
         <!--ConfirmationActivity-->
         <activity
             android:name=".presentation.activity.AcknowledgementActivity"
