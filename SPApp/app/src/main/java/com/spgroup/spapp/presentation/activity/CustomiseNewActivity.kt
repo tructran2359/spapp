@@ -75,12 +75,27 @@ class CustomiseNewActivity: BaseActivity() {
                 }
             })
 
+            // If it is edit function from Order Summary, need to observe data change
             if (mIsEdit) {
                 isDataChanged.observe(this@CustomiseNewActivity, Observer {
                     it?.run {
                         tv_add_to_request.setText(if (this) R.string.update_and_view_summary else R.string.back_to_view_summary)
                     }
                 })
+            } else {
+                // If it is add service or update service from Partner Detail, need to check add new or update
+                // to update text of Bottom button
+                isUpdateSelectedService.observe(this@CustomiseNewActivity, Observer {
+                    it?.let { isUpdate ->
+                        val strResId = if (isUpdate) {
+                            R.string.update_request
+                        } else {
+                            R.string.add_request
+                        }
+                        tv_add_to_request.setText(strResId)
+                    }
+                })
+
             }
 
             initData(
