@@ -496,8 +496,8 @@ class OrderSummaryActivity : BaseActivity() {
             topMargin = getDimensionPixelSize(R.dimen.common_vert_small)
             bottomMargin = getDimensionPixelSize(R.dimen.common_vert_medium)
         }
-        view.setLayoutParams(layoutParams)
-        view.setTag(tag)
+        view.layoutParams = layoutParams
+        view.tag = tag
         view.setOnEditClickListener {
             val displayData = CustomiseDisplayData(
                     categoryId = cateId,

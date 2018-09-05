@@ -35,7 +35,7 @@ class PriceTextView: RelativeLayout {
     ///////////////////////////////////////////////////////////////////////////
 
     fun setName(name: String) {
-        tv_name.setText(name)
+        tv_title.setText(name)
     }
 
     fun setPrice(price: Float) {
