@@ -84,12 +84,12 @@ class PartnerListingActivity : BaseActivity() {
         when (itemData) {
             is Partner -> {
                 val intent = getPartnerDetailIntent(itemData.uen, itemData.partnerType)
-                startActivity(intent)
+                startActivityWithCheckingInternet(intent)
             }
 
             is Promotion -> {
                 val intent = getPartnerDetailIntent(itemData.partnerId, itemData.partnerType)
-                startActivity(intent)
+                startActivityWithCheckingInternet(intent)
             }
         }
     }

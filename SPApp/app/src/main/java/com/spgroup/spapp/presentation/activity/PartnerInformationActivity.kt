@@ -146,7 +146,7 @@ class PartnerInformationActivity : BaseActivity() {
                                 this@PartnerInformationActivity,
                                 data.name,
                                 data.tnc)
-                        startActivity(intent)
+                        startActivityWithCheckingInternet(intent)
                     } else {
                         longToast(R.string.not_available)
                     }

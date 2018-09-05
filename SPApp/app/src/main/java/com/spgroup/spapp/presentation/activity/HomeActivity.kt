@@ -74,7 +74,7 @@ open class HomeActivity :
     ///////////////////////////////////////////////////////////////////////////
 
     override fun onPromotionClick(promotion: TopLevelPromotion, position: Int) {
-        startActivity(getPartnerDetailIntent(promotion.partnerId, promotion.partnerType))
+        startActivityWithCheckingInternet(getPartnerDetailIntent(promotion.partnerId, promotion.partnerType))
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -82,7 +82,7 @@ open class HomeActivity :
     ///////////////////////////////////////////////////////////////////////////
 
     override fun onMerchantClick(topLevelFeaturedPartner: TopLevelFeaturedPartner, position: Int) {
-        startActivity(getPartnerDetailIntent(topLevelFeaturedPartner.id, topLevelFeaturedPartner.partnerType))
+        startActivityWithCheckingInternet(getPartnerDetailIntent(topLevelFeaturedPartner.id, topLevelFeaturedPartner.partnerType))
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -212,7 +212,7 @@ open class HomeActivity :
     private fun onCategoryClick(position: Int) {
         val category = mViewModel.getCategoryByIndex(position)
         category?.let {
-            startActivity(PartnerListingActivity.getLaunchIntent(this@HomeActivity, category))
+            startActivityWithCheckingInternet(PartnerListingActivity.getLaunchIntent(this@HomeActivity, category))
         }
     }
 

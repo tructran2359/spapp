@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams.MATCH_PARENT
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.FoodMenuItem
+import com.spgroup.spapp.presentation.activity.BaseActivity
 import com.spgroup.spapp.presentation.activity.PdfActivity
 import com.spgroup.spapp.presentation.view.MenuView
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
@@ -97,7 +98,7 @@ class WeeklyMenuFragment: BaseFragment(), MenuView.OnMenuItemClickListener {
         doLogD("PDF", "Title: $title | Uri: $uri")
         activity?.run {
             val intent = PdfActivity.getLaunchIntent(this, title, uri)
-            startActivity(intent)
+            (this as BaseActivity).startActivityWithCheckingInternet(intent)
         }
     }
 }

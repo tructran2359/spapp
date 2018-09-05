@@ -1,5 +1,6 @@
 package com.spgroup.spapp.presentation.activity
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.Intent
@@ -73,7 +74,7 @@ class OrderSummaryActivity : BaseActivity() {
         mViewModel.initData(partnerDetails, mapSelectedServices)
         
         initAnimations()
-        initViews()
+        setUpViews()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -83,6 +84,8 @@ class OrderSummaryActivity : BaseActivity() {
                 val customiseDisplayData = data.getSerializableExtra(CustomiseNewActivity.EXTRA_DISPLAY_DATA) as CustomiseDisplayData
                 mViewModel.updateComplexSelectedServiceItem(customiseDisplayData)
             }
+        } else if (requestCode == RC_NO_INTERNET_FOR_SUBMIT_REQUEST && resultCode == Activity.RESULT_OK) {
+            mViewModel.submitRequest(createContactInfo())
         }
 
     }
@@ -211,7 +214,7 @@ class OrderSummaryActivity : BaseActivity() {
         })
     }
 
-    private fun initViews() {
+    private fun setUpViews() {
 
         action_bar.setTitle(R.string.summary)
         val partnerName = mViewModel.getPartnerName()
@@ -332,7 +335,14 @@ class OrderSummaryActivity : BaseActivity() {
                     } else {
                         mViewModel.removeSavedContactInfo()
                     }
-                    mViewModel.submitRequest(contactInfo)
+                    if (isOnline()) {
+                        mViewModel.submitRequest(contactInfo)
+                    } else {
+                        startActivityForResult(
+                                NoInternetActivity.getLaunchIntent(this@OrderSummaryActivity, null, NO_REQUEST_CODE),
+                                RC_NO_INTERNET_FOR_SUBMIT_REQUEST)
+
+                    }
                 } else {
                     var errorMsg = if (invalidCount == 1) {
                         this@OrderSummaryActivity.getString(R.string.error_detected_1)

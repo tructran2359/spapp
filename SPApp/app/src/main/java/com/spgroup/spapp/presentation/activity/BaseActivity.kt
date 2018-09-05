@@ -15,6 +15,7 @@ open class BaseActivity: AppCompatActivity() {
     companion object {
         const val RC_NO_INTERNET = 1001
         const val RC_NO_INTERNET_FOR_SPLASH = 1002
+        const val RC_NO_INTERNET_FOR_SUBMIT_REQUEST = 1003
         const val RC_CUSTOMISE = 1
         const val RC_EDIT = 11
         const val EXTRA_PENDING_INTENT = "EXTRA_PENDING_INTENT"
@@ -34,7 +35,7 @@ open class BaseActivity: AppCompatActivity() {
         if (requestCode == RC_NO_INTERNET && resultCode == Activity.RESULT_OK) {
             data?.let {
                 val pendingRequestCode = it.getIntExtra(EXTRA_REQUEST_CODE, NO_REQUEST_CODE)
-                val pendingIntent: Intent? = it.extras.getParcelable(EXTRA_PENDING_INTENT)
+                val pendingIntent: Intent? = it.extras?.getParcelable(EXTRA_PENDING_INTENT)
                 if (pendingRequestCode == NO_REQUEST_CODE) {
                     startActivity(pendingIntent)
                 } else {
@@ -44,7 +45,7 @@ open class BaseActivity: AppCompatActivity() {
         }
     }
 
-    override fun startActivity(intent: Intent?) {
+    fun startActivityWithCheckingInternet(intent: Intent?) {
         if (isOnline()) {
             super.startActivity(intent)
         } else {
@@ -52,19 +53,11 @@ open class BaseActivity: AppCompatActivity() {
         }
     }
 
-    override fun startActivityForResult(intent: Intent?, requestCode: Int) {
+    fun startActivityForResultWithCheckingInternet(intent: Intent?, requestCode: Int) {
         if (isOnline()) {
             super.startActivityForResult(intent, requestCode)
         } else {
             super.startActivityForResult(NoInternetActivity.getLaunchIntent(this, intent, requestCode), RC_NO_INTERNET)
         }
-    }
-
-    fun startActivityWithoutCheckingInternet(intent: Intent) {
-        super.startActivity(intent)
-    }
-
-    fun startActivityForResultWithoutCheckingInternet(intent: Intent, requestCode: Int) {
-        super.startActivityForResult(intent, requestCode)
     }
 }

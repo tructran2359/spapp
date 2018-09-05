@@ -32,17 +32,17 @@ class DetailInfoPartnerDetailFragment: BaseFragment() {
     private fun subscribeUI() {
         mViewModel.run {
             partnerDetails.observe(this@DetailInfoPartnerDetailFragment, Observer {
-                it?.let {
-                    val title = it.serviceInfo?.title ?: ""
+                it?.let { partnerDetails ->
+                    val title = partnerDetails.serviceInfo?.title ?: ""
                     tv_title.text = title
                     tv_title.isGone = title.isEmpty()
 
-                    val description = it.serviceInfo?.description ?: ""
+                    val description = partnerDetails.serviceInfo?.description ?: ""
                     tv_description.text = description
                     tv_description.isGone = description.isEmpty()
 
-                    activity?.let { activity ->
-                        ll_list.addIndicatorText(it.serviceInfo?.list)
+                    activity?.let {
+                        ll_list.addIndicatorText(partnerDetails.serviceInfo?.list)
                     }
 
                 }
