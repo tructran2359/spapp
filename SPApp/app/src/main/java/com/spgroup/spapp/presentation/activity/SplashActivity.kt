@@ -29,7 +29,7 @@ class SplashActivity : BaseActivity() {
         if (isOnline()) {
             splashViewModel.getInitialData()
         } else {
-            startActivityForResultWithoutCheckingInternet(NoInternetActivity.getLaunchIntentForSplash(this), RC_NO_INTERNET_FOR_SPLASH)
+            startActivityForResult(NoInternetActivity.getLaunchIntentForSplash(this), RC_NO_INTERNET_FOR_SPLASH)
         }
     }
 

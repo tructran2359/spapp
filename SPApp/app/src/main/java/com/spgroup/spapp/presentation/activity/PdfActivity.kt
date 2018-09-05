@@ -119,7 +119,7 @@ class PdfActivity: BaseActivity() {
     }
 
     private fun onFileNotFound() {
-        startActivityWithoutCheckingInternet(FileNotFoundActivity.getLaunchIntent(this@PdfActivity))
+        startActivity(FileNotFoundActivity.getLaunchIntent(this@PdfActivity))
         finish()
     }
 }

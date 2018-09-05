@@ -44,7 +44,7 @@ open class BaseActivity: AppCompatActivity() {
         }
     }
 
-    override fun startActivity(intent: Intent?) {
+    fun startActivityWithCheckingInternet(intent: Intent?) {
         if (isOnline()) {
             super.startActivity(intent)
         } else {
@@ -52,19 +52,11 @@ open class BaseActivity: AppCompatActivity() {
         }
     }
 
-    override fun startActivityForResult(intent: Intent?, requestCode: Int) {
+    fun startActivityForResultWithCheckingInternet(intent: Intent?, requestCode: Int) {
         if (isOnline()) {
             super.startActivityForResult(intent, requestCode)
         } else {
             super.startActivityForResult(NoInternetActivity.getLaunchIntent(this, intent, requestCode), RC_NO_INTERNET)
         }
-    }
-
-    fun startActivityWithoutCheckingInternet(intent: Intent) {
-        super.startActivity(intent)
-    }
-
-    fun startActivityForResultWithoutCheckingInternet(intent: Intent, requestCode: Int) {
-        super.startActivityForResult(intent, requestCode)
     }
 }
