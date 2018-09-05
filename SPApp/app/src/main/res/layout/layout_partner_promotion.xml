@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/common_vert_medium_sub"
-    android:paddingBottom="@dimen/common_vert_large"
+    android:paddingBottom="@dimen/common_vert_medium_sub"
     android:paddingLeft="@dimen/common_horz_large"
     android:paddingRight="@dimen/common_horz_large"
     >

@@ -17,8 +17,8 @@ import com.spgroup.spapp.domain.model.TopLevelPromotion
 import com.spgroup.spapp.presentation.adapter.HomeMenuItemAdapter
 import com.spgroup.spapp.presentation.adapter.HomeMerchantAdapter
 import com.spgroup.spapp.presentation.adapter.HomePromotionAdapter
-import com.spgroup.spapp.presentation.adapter.item_decoration.HomeMenuItemDecoration
 import com.spgroup.spapp.presentation.adapter.item_decoration.HomeMerchantItemtDecoration
+import com.spgroup.spapp.presentation.adapter.item_decoration.VerticalItemDecoration
 import com.spgroup.spapp.presentation.view.TopLeverCateGroupView
 import com.spgroup.spapp.presentation.viewmodel.HomeViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
@@ -205,7 +205,7 @@ open class HomeActivity :
         })
         recycler_view_home_menu.layoutManager = LinearLayoutManager(this)
         val space = getDimensionPixelSize(R.dimen.home_menu_item_distance)
-        recycler_view_home_menu.addItemDecoration(HomeMenuItemDecoration(space))
+        recycler_view_home_menu.addItemDecoration(VerticalItemDecoration(space))
         recycler_view_home_menu.adapter = mMenuAdapter
     }
 
