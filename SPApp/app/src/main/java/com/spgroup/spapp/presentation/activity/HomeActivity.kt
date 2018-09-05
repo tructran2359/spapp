@@ -212,7 +212,7 @@ open class HomeActivity :
     private fun onCategoryClick(position: Int) {
         val category = mViewModel.getCategoryByIndex(position)
         category?.let {
-            startActivity(PartnerListingActivity.getLaunchIntent(this@HomeActivity, category))
+            startActivityWithCheckingInternet(PartnerListingActivity.getLaunchIntent(this@HomeActivity, category))
         }
     }
 
