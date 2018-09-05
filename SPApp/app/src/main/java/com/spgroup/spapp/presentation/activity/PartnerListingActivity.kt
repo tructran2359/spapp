@@ -14,6 +14,7 @@ import com.spgroup.spapp.domain.model.PartnersListingItem
 import com.spgroup.spapp.domain.model.Promotion
 import com.spgroup.spapp.domain.model.TopLevelCategory
 import com.spgroup.spapp.presentation.adapter.PartnerAdapter
+import com.spgroup.spapp.presentation.adapter.item_decoration.VerticalItemDecoration
 import com.spgroup.spapp.presentation.viewmodel.PartnerListingViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
@@ -147,6 +148,8 @@ class PartnerListingActivity : BaseActivity() {
         }
 
         recycler_view.layoutManager = LinearLayoutManager(this)
+        val space = getDimensionPixelSize(R.dimen.common_vert_small)
+        recycler_view.addItemDecoration(VerticalItemDecoration(space))
         mPartnerListAdapter = PartnerAdapter { view, itemData, position ->
             onPartnerListingItemClick(view, itemData, position)
         }
