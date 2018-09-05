@@ -11,10 +11,16 @@
     <TextView
         style="@style/textH3.white"
         android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_horizontal"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:text="@string/summary"
+        android:layout_toRightOf="@id/fl_back_container"
+        android:layout_marginRight="@dimen/action_bar_back_container_width"
+        tools:ignore="RtlHardcoded"
         />
 
     <FrameLayout
@@ -29,7 +35,6 @@
             android:id="@+id/iv_back"
             android:layout_width="@dimen/common_icon_size_medium"
             android:layout_height="@dimen/common_icon_size_medium"
-            android:layout_marginLeft="@dimen/common_spacing"
             android:src="@drawable/arrow_left"
             android:scaleType="fitXY"
             android:layout_gravity="center_vertical"

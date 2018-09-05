@@ -60,8 +60,12 @@
     <dimen name="common_icon_size_medium_with_padding">33dp</dimen>
     <dimen name="common_icon_size_large">42dp</dimen>
     <dimen name="common_icon_padding">5dp</dimen>
-
     <dimen name="home_menu_icon_size">84dp</dimen>
+
+    <dimen name="action_bar_height">70dp</dimen>
+    <dimen name="action_bar_height_expanded">178dp</dimen>
+    <!--this value = common_icon_size_medium + 2*common_vert_small-->
+    <dimen name="action_bar_back_container_width">48dp</dimen>
 
     <dimen name="text_size_h1">28sp</dimen>
     <dimen name="text_size_h2">23sp</dimen>
@@ -124,7 +128,6 @@
     <dimen name="partner_infor_header_margin_top">20dp</dimen>
     <dimen name="partner_info_desc_margin">11dp</dimen>
     <dimen name="partner_info_service_content_right">39dp</dimen>
-    <dimen name="action_bar_height">70dp</dimen>
 
     <!--OrderSummaryActivity-->
     <dimen name="common_counter_text_width">32dp</dimen>
@@ -153,7 +156,6 @@
 
     <dimen name="pdf_width">30dp</dimen>
     <dimen name="pdf_height">20dp</dimen>
-    <dimen name="action_bar_height_expanded">178dp</dimen>
     <dimen name="partner_listing_logo_size">80dp</dimen>
     <dimen name="sponsored_width">62dp</dimen>
     <dimen name="sponsored_height">18dp</dimen>
