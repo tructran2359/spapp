@@ -178,7 +178,7 @@
         <TextView
             style="@style/bottomButton"
             android:id="@+id/tv_add_to_request"
-            android:text="@string/add_to_request"
+            android:text="@string/add_request"
             />
 
     </RelativeLayout>

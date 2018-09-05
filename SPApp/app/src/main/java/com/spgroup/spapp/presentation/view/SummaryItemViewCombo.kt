@@ -3,9 +3,12 @@ package com.spgroup.spapp.presentation.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.core.view.isGone
 import com.spgroup.spapp.R
+import com.spgroup.spapp.util.extension.getDimensionPixelSize
+import com.spgroup.spapp.util.extension.isGoneWithText
 import kotlinx.android.synthetic.main.layout_summary_view_item_combo.view.*
 
 class SummaryItemViewCombo: RelativeLayout {
@@ -44,6 +47,9 @@ class SummaryItemViewCombo: RelativeLayout {
 
     fun addOption(optionName: String, optionPrice: Float) {
         val optionView = PriceTextView(context)
+        val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        layoutParams.topMargin = context.getDimensionPixelSize(R.dimen.common_vert_medium_sub)
+        optionView.layoutParams = layoutParams
         optionView.setName(optionName)
         optionView.setPrice(optionPrice)
         ll_option_container.addView(optionView)
@@ -55,6 +61,8 @@ class SummaryItemViewCombo: RelativeLayout {
 
     fun setInstruction(instruction: String) {
         tv_instruction.text = instruction
+        tv_instruction.isGoneWithText(instruction)
+        tv_instruction_label.isGoneWithText(instruction)
     }
 
     fun setServiceName(name: String) {

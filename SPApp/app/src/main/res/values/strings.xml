@@ -34,7 +34,8 @@
     <string name="special_instructions">Special Instructions</string>
     <string name="formated_optional">[optional]</string>
     <string name="service_customise_hint">Eg. No beef and peanut. Low salt.</string>
-    <string name="add_to_request">ADD TO REQUEST</string>
+    <string name="add_request">ADD REQUEST</string>
+    <string name="update_request">UPDATE REQUEST</string>
     <string name="estimated_total_price">Estimated Total Price</string>
     <string name="optional_with_symbol">[optional]</string>
     <string name="discount_formatted">Discount (%s)</string>

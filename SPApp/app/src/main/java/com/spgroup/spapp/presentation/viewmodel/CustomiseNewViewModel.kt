@@ -14,6 +14,7 @@ class CustomiseNewViewModel: BaseViewModel() {
     val serviceName = MutableLiveData<String>()
     val serviceDescription = MutableLiveData<String>()
     val isDataChanged = MutableLiveData<Boolean>()
+    val isUpdateSelectedService = MutableLiveData<Boolean>()
 
     fun initData(isEdit: Boolean, displayData: CustomiseDisplayData) {
         mIsEdit = isEdit
@@ -27,6 +28,13 @@ class CustomiseNewViewModel: BaseViewModel() {
         listData.value = listCustomiseData
         serviceName.value = mDisplayData.serviceItem.label
         serviceDescription.value = mDisplayData.serviceItem.serviceDescription
+
+        // If not edit from Order Summary -> add new service from Partner Detail
+        // Check if it is new selection or user updated selected service
+        // in order to set bottom button text
+        if (!mIsEdit) {
+            isUpdateSelectedService.value = mDisplayData.mapSelectedOption.size != 0
+        }
     }
 
     fun notifyDataChanged(optionIndex: Int, selectedPos: Int) {

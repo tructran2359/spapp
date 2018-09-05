@@ -48,13 +48,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/common_vert_small"
             >
 
         </LinearLayout>
 
         <TextView
             style="@style/callout.book"
+            android:id="@+id/tv_instruction_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_vert_medium_sub"

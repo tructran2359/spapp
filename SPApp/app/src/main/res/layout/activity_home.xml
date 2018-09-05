@@ -106,8 +106,8 @@
                 android:layout_marginLeft="@dimen/common_horz_large"
                 android:layout_marginRight="84dp"
                 android:layout_marginTop="@dimen/common_vert_medium_sub"
+                android:layout_marginBottom="@dimen/common_vert_xsmall"
                 android:text="@string/home_short_desc"
-                android:layout_marginBottom="@dimen/common_vert_medium_sub"
                 android:textColor="@color/color_grey"
                 />
 
@@ -131,6 +131,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@color/color_ui0680"
+            android:paddingTop="@dimen/common_vert_medium_sub"
             android:descendantFocusability="blocksDescendants"
             >
 
