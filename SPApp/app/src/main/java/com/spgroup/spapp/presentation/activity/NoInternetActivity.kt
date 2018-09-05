@@ -8,7 +8,6 @@ import androidx.core.view.isGone
 import com.spgroup.spapp.R
 import com.spgroup.spapp.util.extension.isOnline
 import kotlinx.android.synthetic.main.activity_error.*
-import org.jetbrains.anko.longToast
 
 class NoInternetActivity: BaseActivity() {
 
@@ -48,8 +47,6 @@ class NoInternetActivity: BaseActivity() {
             if (isOnline()) {
                 setResult(Activity.RESULT_OK, intent)
                 finish()
-            } else {
-                longToast(R.string.no_internet_connection_error_message)
             }
         }
     }
