@@ -15,6 +15,7 @@ open class BaseActivity: AppCompatActivity() {
     companion object {
         const val RC_NO_INTERNET = 1001
         const val RC_NO_INTERNET_FOR_SPLASH = 1002
+        const val RC_NO_INTERNET_FOR_SUBMIT_REQUEST = 1003
         const val RC_CUSTOMISE = 1
         const val RC_EDIT = 11
         const val EXTRA_PENDING_INTENT = "EXTRA_PENDING_INTENT"
