@@ -19,6 +19,7 @@ import com.spgroup.spapp.presentation.viewmodel.PartnerListingViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.doLogD
+import com.spgroup.spapp.util.doLogE
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_partner_listing.*
 import kotlin.math.max
@@ -59,16 +60,30 @@ class PartnerListingActivity : BaseActivity() {
 
         val cat = intent.getSerializableExtra(ConstUtils.EXTRA_TOP_LEVEL_CATEGORY) as TopLevelCategory
         mViewModel = obtainViewModel(PartnerListingViewModel::class.java, ViewModelFactory.getInstance())
+        subscribeUI()
         mViewModel.setInitialData(cat)
+        mViewModel.loadPartnerListing()
+    }
 
+    private fun subscribeUI() {
         with(mViewModel) {
             topLevelCategory.observe(this@PartnerListingActivity, Observer {
                 it?.let { updateBanner(it) }
             })
+
             partnerListingItems.observe(this@PartnerListingActivity, Observer {
                 mPartnerListAdapter.setData(it)
             })
-            loadPartnerListing()
+
+            error.observe(this@PartnerListingActivity, Observer {
+                it?.let { throwable ->
+                    doLogE("Error", "Error: $throwable with message: ${throwable.message}")
+
+                    // Show error screen and finish so when press back on error screen, app will back to Home
+                    startActivity(ApiErrorActivity.getLaunchIntent(this@PartnerListingActivity))
+                    finish()
+                }
+            })
         }
     }
 

@@ -24,6 +24,9 @@ class PartnerListingViewModel(
                 .subscribe(
                         {
                             partnerListingItems.value = preProccessPartnerUsecase.run(it)
+
+                            // To Simulate error case
+//                            error.value = Throwable("This is a test")
                         },
                         {
                             error.value = it
