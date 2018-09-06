@@ -78,7 +78,7 @@ class PartnerInformationActivity : BaseActivity() {
 
             mPartnerInfo.observe(this@PartnerInformationActivity, Observer {
                 it?.let { partnerInfo ->
-                    showData(partnerInfo)
+                    displayData(partnerInfo)
                 }
             })
 
@@ -119,7 +119,7 @@ class PartnerInformationActivity : BaseActivity() {
         })
     }
 
-    private fun showData(data: PartnerInfo) {
+    private fun displayData(data: PartnerInfo) {
         data.run {
             tv_name.text = name
             tv_description.text = desc
