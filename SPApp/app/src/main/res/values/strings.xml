@@ -111,4 +111,7 @@
     <string name="file_not_found_title">Uh Ooooh!</string>
     <string name="file_not_found_desc">We are unable to locate the file you are looking for.</string>
 
+    <string name="api_error_title">Whoooops!</string>
+    <string name="api_error_desc">Looks like something went wrong. </string>
+
 </resources>

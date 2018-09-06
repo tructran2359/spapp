@@ -90,6 +90,19 @@ fun View.setLayoutParamsWidth(widthInPixel: Int) {
     this.layoutParams = layoutParams
 }
 
+fun View.setLayoutParamsSize(widthInPixel: Int, heightInPixel: Int) {
+    val layoutParams = this.layoutParams
+    layoutParams.width = widthInPixel
+    layoutParams.height = heightInPixel
+    this.layoutParams = layoutParams
+}
+
+fun View.setLayoutParamsSizeFromDimens(widthResId: Int, heightResId: Int) {
+    val widthInPixel = getDimensionPixelSize(widthResId)
+    val heightInPixel = getDimensionPixelSize(heightResId)
+    setLayoutParamsSize(widthInPixel, heightInPixel)
+}
+
 fun View.updateVisibility(show: Boolean) {
     visibility = if (show) View.VISIBLE else View.GONE
 }
