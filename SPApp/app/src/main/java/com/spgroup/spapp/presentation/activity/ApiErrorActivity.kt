@@ -11,6 +11,7 @@ import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.doLogE
 import com.spgroup.spapp.util.extension.obtainViewModel
 import com.spgroup.spapp.util.extension.setLayoutParamsSizeFromDimens
+import com.spgroup.spapp.util.extension.updateMainButtonEnable
 import kotlinx.android.synthetic.main.activity_error.*
 
 class ApiErrorActivity: BaseErrorActivity() {
@@ -48,7 +49,7 @@ class ApiErrorActivity: BaseErrorActivity() {
     private fun subscibeUI() {
         mViewModel?.run {
             isSuccess.observe(this@ApiErrorActivity, Observer {
-                updateEnabled(true)
+                tv_refresh.updateMainButtonEnable(true)
                 it?.let { success ->
                     if (success) {
                         val intent = mViewModel?.getIntentToNextActivity(this@ApiErrorActivity)
@@ -60,7 +61,7 @@ class ApiErrorActivity: BaseErrorActivity() {
 
             error.observe(this@ApiErrorActivity, Observer {
                 doLogE("Error", "Error $it with message: ${it?.message}")
-                updateEnabled(true)
+                tv_refresh.updateMainButtonEnable(true)
             })
         }
     }
@@ -78,16 +79,11 @@ class ApiErrorActivity: BaseErrorActivity() {
         tv_refresh.setText(if (mForSplash) R.string.retry else R.string.back)
         tv_refresh.setOnClickListener {
             if (mForSplash) {
-                updateEnabled(false)
+                tv_refresh.updateMainButtonEnable(false)
                 mViewModel?.getInitialData()
             } else {
                 onBackPressed()
             }
         }
-    }
-
-    private fun updateEnabled(enabled: Boolean) {
-        tv_refresh.isEnabled = enabled
-        tv_refresh.setBackgroundResource(if (enabled) R.drawable.selector_btn_main else R.drawable.bg_rec_rounded_main_disabled)
     }
 }

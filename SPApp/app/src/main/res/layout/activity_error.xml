@@ -9,7 +9,7 @@
     android:background="@color/color_white"
     >
 
-    <ImageView
+    <pl.droidsonroids.gif.GifImageView
         android:id="@+id/iv_error_icon"
         android:layout_width="@dimen/error_screen_no_internet_icon_size"
         android:layout_height="@dimen/error_screen_no_internet_icon_size"
