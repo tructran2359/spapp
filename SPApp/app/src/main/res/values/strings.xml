@@ -106,6 +106,7 @@
     <string name="no_internet_desc">Your internet connection appears to be offline. Please check and try again.</string>
     <string name="refresh">REFRESH</string>
     <string name="back">BACK</string>
+    <string name="retry">RETRY</string>
     <string name="no_internet_connection_error_message">No Internet Connection</string>
 
     <string name="file_not_found_title">Uh Ooooh!</string>
