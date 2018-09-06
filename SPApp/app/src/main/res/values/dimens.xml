@@ -191,7 +191,11 @@
     <dimen name="onboarding_horz_margin">50dp</dimen>
     <dimen name="onboarding_pager_content_margin_bot">210dp</dimen>
 
-    <dimen name="error_screen_icon_size">110dp</dimen>
-    <dimen name="error_screen_icon_margin_top">100dp</dimen>
+    <dimen name="error_screen_no_internet_icon_size">110dp</dimen>
+    <dimen name="error_screen_file_not_found_icon_size_width">104dp</dimen>
+    <dimen name="error_screen_file_not_found_icon_size_height">110dp</dimen>
+    <dimen name="error_screen_api_error_icon_size_width">89dp</dimen>
+    <dimen name="error_screen_api_error_icon_size_height">72dp</dimen>
+    <dimen name="error_screen_icon_margin_top">150dp</dimen>
 
 </resources>

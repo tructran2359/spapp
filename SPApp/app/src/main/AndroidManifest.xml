@@ -104,6 +104,11 @@
             android:screenOrientation="portrait"
             />
 
+        <activity
+            android:name=".presentation.activity.ApiErrorActivity"
+            android:screenOrientation="portrait"
+            />
+
     </application>
 
 </manifest>

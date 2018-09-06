@@ -105,6 +105,9 @@ class OrderSummaryViewModel(
                         { requestAck ->
                             mIsLoading.value = false
                             mRequestAck.value = requestAck
+
+                            // Simulate api call error
+//                            error.value = Throwable("Test API error Order Summary")
                         },
                         { throwable ->
                             mIsLoading.value = false

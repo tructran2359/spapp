@@ -5,11 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.view.isGone
-import com.spgroup.spapp.R
 import com.spgroup.spapp.util.extension.isOnline
 import kotlinx.android.synthetic.main.activity_error.*
 
-class NoInternetActivity: BaseActivity() {
+class NoInternetActivity: BaseErrorActivity() {
 
     companion object {
         fun getLaunchIntent(context: Context, pendingIntent: Intent?, requestCode: Int): Intent {
@@ -30,7 +29,6 @@ class NoInternetActivity: BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_error)
 
         mIsForSplash = intent.getBooleanExtra(EXTRA_FOR_SPLASH, false)
 

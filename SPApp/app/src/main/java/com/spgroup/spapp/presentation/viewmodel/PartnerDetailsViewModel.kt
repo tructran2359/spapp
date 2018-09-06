@@ -39,6 +39,9 @@ class PartnerDetailsViewModel(
                         {
                             preProcessCustomisationLowestPrice(it)
                             partnerDetails.value = it
+
+                            // To simulate api call error
+//                            error.value = Throwable("Test API Error Partner Detail")
                         },
                         { error.value = it }
                 )

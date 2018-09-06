@@ -29,7 +29,6 @@ import com.spgroup.spapp.util.doLogE
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_order_summary.*
 import kotlinx.android.synthetic.main.layout_summary_estimated.*
-import org.jetbrains.anko.longToast
 
 class OrderSummaryActivity : BaseActivity() {
 
@@ -168,9 +167,10 @@ class OrderSummaryActivity : BaseActivity() {
 
             error.observe(this@OrderSummaryActivity, Observer {
                 it?.let { throwable ->
-                    longToast(R.string.error_submit_request)
-                    throwable.printStackTrace()
                     doLogE("SubmitRequest", "Error: ${throwable.toString()} with message: ${throwable.message}")
+
+                    // Start Error Activity without finishing this screen so can come back when press BACK in Error
+                    startActivity(ApiErrorActivity.getLaunchIntent(this@OrderSummaryActivity))
                 }
             })
 

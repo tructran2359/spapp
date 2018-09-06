@@ -12,6 +12,7 @@ import androidx.core.view.isGone
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.viewmodel.PartnerInfoViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.doLogE
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_partner_information.*
 import org.jetbrains.anko.longToast
@@ -54,11 +55,8 @@ class PartnerInformationActivity : BaseActivity() {
         setContentView(R.layout.activity_partner_information)
 
         mViewModel = obtainViewModel(PartnerInfoViewModel::class.java, ViewModelFactory.getInstance())
-        mViewModel.mPartnerInfo.observe(this, Observer {
-            it?.let {
-                showData(it)
-            }
-        })
+        subscribeUI()
+
         val dataAvailable = intent.getBooleanExtra(EXTRA_DATA_AVAILABLE, false)
         rl_bottom_button_container.isGone = dataAvailable
         v_button_shadow.isGone = dataAvailable
@@ -73,6 +71,27 @@ class PartnerInformationActivity : BaseActivity() {
 
         initAnimation()
         initViews()
+    }
+
+    private fun subscribeUI() {
+        mViewModel.run {
+
+            mPartnerInfo.observe(this@PartnerInformationActivity, Observer {
+                it?.let { partnerInfo ->
+                    showData(partnerInfo)
+                }
+            })
+
+            error.observe(this@PartnerInformationActivity, Observer {
+                it?.let { throwable ->
+                    doLogE("Error", "Error: $throwable with message: ${throwable.message}")
+
+                    // Start Error Activity and finish so BACK in error page will back to Partner Listing
+                    startActivity(ApiErrorActivity.getLaunchIntent(this@PartnerInformationActivity))
+                    finish()
+                }
+            })
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////

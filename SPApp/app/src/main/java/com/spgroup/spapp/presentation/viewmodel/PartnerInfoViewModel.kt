@@ -21,6 +21,9 @@ class PartnerInfoViewModel(
                         {
                             it?.run {
                                 mPartnerInfo.value = getPartnerInfoModel()
+
+                                // To simulate api call error
+//                                error.value = Throwable("Test error Partner Info")
                             }
                         },
                         { error.value = it}
