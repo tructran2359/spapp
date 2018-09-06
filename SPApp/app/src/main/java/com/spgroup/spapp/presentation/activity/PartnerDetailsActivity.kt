@@ -131,6 +131,10 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
             error.observe(this@PartnerDetailsActivity, Observer {
                 // do something with error
                 doLogE(msg = "Error: ${it?.message}")
+
+                // Start error activity and finish so BACK on error act will back to partner listing
+                startActivity(ApiErrorActivity.getLaunchIntent(this@PartnerDetailsActivity))
+                finish()
             })
 
             loadServices()
