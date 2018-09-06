@@ -31,8 +31,12 @@ class SplashActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RC_NO_INTERNET_FOR_SPLASH && resultCode == Activity.RESULT_OK) {
-            splashViewModel.getInitialData()
+        if (requestCode == RC_NO_INTERNET_FOR_SPLASH) {
+            if (resultCode == Activity.RESULT_OK) {
+                splashViewModel.getInitialData()
+            } else {
+                finish()
+            }
         }
     }
 
