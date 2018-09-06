@@ -218,3 +218,8 @@ fun View.hideWithAnimation(anim: Animation) {
 fun View.isGoneWithText(string: String?) {
     isGone = string == null || string.isEmpty()
 }
+
+fun View.updateMainButtonEnable(enabled: Boolean) {
+    isEnabled = enabled
+    setBackgroundResource(if (enabled) R.drawable.selector_btn_main else R.drawable.bg_rec_rounded_main_disabled)
+}
