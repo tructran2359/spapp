@@ -10,6 +10,7 @@ import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.util.DisplayMetrics
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,8 +30,8 @@ import com.spgroup.spapp.util.GlideApp
 fun View.setOnGlobalLayoutListener(action: () -> Unit) {
     this.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener{
         override fun onGlobalLayout() {
-            action()
             this@setOnGlobalLayoutListener.viewTreeObserver.removeOnGlobalLayoutListener(this)
+            action()
         }
     })
 }
@@ -68,7 +69,7 @@ fun BaseActivity.getDisplayMetrics(): DisplayMetrics {
 }
 
 fun TextView.setTextUnderline(resId: Int) {
-    val text = "<u> ${context.getString(resId)}</u>"
+    val text = "<u>${context.getString(resId)}</u>"
     val spanned = text.toHtmlSpanned()
     setText(spanned)
 }
@@ -222,4 +223,8 @@ fun View.isGoneWithText(string: String?) {
 fun View.updateMainButtonEnable(enabled: Boolean) {
     isEnabled = enabled
     setBackgroundResource(if (enabled) R.drawable.selector_btn_main else R.drawable.bg_rec_rounded_main_disabled)
+}
+
+fun TextView.setTextSizePixel(sizeInPixel: Float) {
+    this.setTextSize(TypedValue.COMPLEX_UNIT_PX, sizeInPixel)
 }

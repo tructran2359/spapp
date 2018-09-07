@@ -217,6 +217,8 @@
     <style name="textMenuFooter" parent="footnote">
         <item name="android:textSize">@dimen/text_size_menu_footer</item>
         <item name="android:textColor">@color/color_ui02</item>
+        <item name="android:lineSpacingExtra">1sp</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <!--VMLSINPOW-249 - UI Optimisation-->
