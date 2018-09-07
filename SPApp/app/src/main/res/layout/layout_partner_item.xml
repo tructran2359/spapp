@@ -23,7 +23,7 @@
             android:layout_width="@dimen/partner_listing_logo_size"
             android:layout_height="@dimen/partner_listing_logo_size"
             android:layout_centerVertical="true"
-            android:scaleType="fitXY"
+            android:scaleType="centerInside"
             />
 
         <LinearLayout
