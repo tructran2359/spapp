@@ -1,23 +1,18 @@
 package com.spgroup.spapp.manager
 
-import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.spgroup.spapp.domain.model.ContactInfo
 
-class AppConfigManager(context: Context, val mGson: Gson) {
+class AppConfigManager(
+        private val mSharedPreferences: SharedPreferences,
+        private val mGson: Gson
+) {
 
     companion object {
-        const val PREF_NAME = "SPApp_Pref"
         const val KEY_ON_BOADING_SHOWN = "KEY_ON_BOADING_SHOWN"
         const val KEY_REMEMBER_ME = "KEY_REMEMBER_ME"
         const val KEY_CONTACT_INFO = "KEY_CONTACT_INFO"
-    }
-
-    private val mSharedPreferences: SharedPreferences
-
-    init {
-        mSharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
     }
 
     private fun putInt(key: String, value: Int) {

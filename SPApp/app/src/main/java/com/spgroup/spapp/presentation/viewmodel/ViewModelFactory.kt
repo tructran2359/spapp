@@ -10,7 +10,6 @@ import com.spgroup.spapp.manager.AppDataCache
 
 class ViewModelFactory private constructor(
         private val schedulerFacade: SchedulerFacade,
-        private val mockRepository: ServicesRepository,
         private val cloudRepository: ServicesRepository,
         private val appDataCache: AppDataCache
 ) : ViewModelProvider.NewInstanceFactory() {
@@ -118,7 +117,6 @@ class ViewModelFactory private constructor(
             if (INSTANCE == null) {
                 INSTANCE = ViewModelFactory(
                         Injection.provideSchedulerFacade(),
-                        Injection.provideMockRepository(),
                         Injection.provideCloudRepository(),
                         Injection.provideAppDataCache()
                 )

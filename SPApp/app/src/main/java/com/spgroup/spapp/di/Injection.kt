@@ -10,7 +10,6 @@ import com.spgroup.spapp.domain.model.AbsServiceItem
 import com.spgroup.spapp.manager.AppDataMemCache
 import com.spgroup.spapp.presentation.SPApplication
 import com.spgroup.spapp.repository.ServicesCloudDataStore
-import com.spgroup.spapp.repository.ServicesDataMock
 import com.spgroup.spapp.repository.http.SingaporePowerHttpClient
 import com.spgroup.spapp.repository.jsondeserializer.CustomisationJsonDeserializer
 import com.spgroup.spapp.repository.jsondeserializer.ServiceItemJsonDeserializer
@@ -25,8 +24,6 @@ import java.util.concurrent.TimeUnit
 object Injection {
 
     private val MEM_CACHE_INSTANCE = AppDataMemCache()
-
-    fun provideMockRepository(): ServicesRepository = ServicesDataMock()
 
     fun provideCloudRepository(): ServicesRepository {
         val topLevelCatMapper = TopLevelCatMapper()

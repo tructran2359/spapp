@@ -1,12 +1,13 @@
 package com.spgroup.spapp.presentation
 
 import android.app.Application
+import android.content.Context
 import com.spgroup.spapp.R
 import com.spgroup.spapp.di.Injection
 import com.spgroup.spapp.manager.AppConfigManager
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
-class SPApplication: Application() {
+class SPApplication : Application() {
 
     companion object {
         lateinit var mAppInstance: SPApplication
@@ -16,7 +17,10 @@ class SPApplication: Application() {
     override fun onCreate() {
         super.onCreate()
         mAppInstance = this
-        mAppConfig = AppConfigManager(this, Injection.provideGson())
+
+        val pref = this.getSharedPreferences("SPApp_Pref", Context.MODE_PRIVATE)
+        mAppConfig = AppConfigManager(pref, Injection.provideGson())
+
         initCalligraphy()
     }
 
