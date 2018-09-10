@@ -13,6 +13,7 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.activity.BaseActivity
 import com.spgroup.spapp.presentation.activity.PartnerDetailsActivity
 import com.spgroup.spapp.presentation.activity.PartnerInformationActivity
+import com.spgroup.spapp.presentation.fragment.BaseDialog
 import com.spgroup.spapp.util.ConstUtils
 import org.jetbrains.anko.longToast
 
@@ -59,4 +60,13 @@ inline fun Context.isOnline(): Boolean {
     val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val networkInfo = cm.activeNetworkInfo
     return networkInfo != null && networkInfo.isConnected
+}
+
+fun BaseActivity.showDialog(dialog: BaseDialog) {
+    val fragmentTransaction = supportFragmentManager.beginTransaction()
+    val prevDialog = supportFragmentManager.findFragmentByTag(ConstUtils.TAG_DIALOG)
+    if (prevDialog != null) {
+        fragmentTransaction.remove(prevDialog)
+    }
+    dialog.show(fragmentTransaction, ConstUtils.TAG_DIALOG)
 }

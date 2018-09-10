@@ -15,6 +15,7 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.adapter.PartnerImagesAdapter
 import com.spgroup.spapp.presentation.fragment.CartPartnerDetailFragment
 import com.spgroup.spapp.presentation.fragment.DetailInfoPartnerDetailFragment
+import com.spgroup.spapp.presentation.fragment.MinOrderDialog
 import com.spgroup.spapp.presentation.fragment.PartnerImageFragment
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
@@ -274,13 +275,18 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         tv_visit_website.isGone = mIsCart
 
         btn_summary.setOnClickListener {
-            mViewModel.partnerDetails.value?.run {
-                val intent = OrderSummaryActivity.getLaunchIntent(
-                        context = this@PartnerDetailsActivity,
-                        mapSelectedServices = mViewModel.getMapSelectedService(),
-                        partnerDetails = this
-                )
-                startActivity(intent)
+            mViewModel.run {
+
+                if (estimatedPrice.value != null &&  partnerDetails.value != null) {
+//                    val estPrice = -1 //Simulate value smaller than minimum order amount
+                    val estPrice = estimatedPrice.value ?: 0f
+                    val minimumPrice = partnerDetails.value?.getMinimumOrderValue() ?: 0f
+                    if (estPrice < minimumPrice) {
+                        showMinimumOrderPopup()
+                    } else {
+                        moveToOrderSummary()
+                    }
+                }
             }
         }
         btn_summary.setPrice(0f)
@@ -288,6 +294,21 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         tv_visit_website.setOnClickListener {
             val url = mViewModel.partnerDetails.value?.website
             openBrowser(url)
+        }
+    }
+
+    private fun showMinimumOrderPopup() {
+        showDialog(MinOrderDialog())
+    }
+
+    private fun moveToOrderSummary() {
+        mViewModel.partnerDetails.value?.run {
+            val intent = OrderSummaryActivity.getLaunchIntent(
+                    context = this@PartnerDetailsActivity,
+                    mapSelectedServices = mViewModel.getMapSelectedService(),
+                    partnerDetails = this
+            )
+            startActivity(intent)
         }
     }
 

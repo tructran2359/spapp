@@ -59,3 +59,13 @@ fun String.toVersionInteger(): Int {
         -1
     }
 }
+
+fun String.toFloatWithException() = if (isEmpty()) 0f else {
+    try {
+        this.toFloat()
+    } catch (ex: NumberFormatException) {
+        ex.printStackTrace()
+        doLogE("Cast", "Cast to float: ${ex.message}")
+        0f
+    }
+}

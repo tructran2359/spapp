@@ -14,7 +14,6 @@ import com.spgroup.spapp.presentation.view.DropdownSelectionView
 import com.spgroup.spapp.presentation.viewmodel.CustomiseData
 import com.spgroup.spapp.presentation.viewmodel.CustomiseNewViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
-import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_customise_new.*
 import java.io.Serializable
@@ -195,20 +194,14 @@ class CustomiseNewActivity: BaseActivity() {
 
 
     private fun showConfirmDialog() {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        val prevDialog = supportFragmentManager.findFragmentByTag(ConstUtils.TAG_DIALOG)
-        if (prevDialog != null) {
-            fragmentTransaction.remove(prevDialog)
-        }
-
         val newDialog = UnsavedDataDialog()
         with(newDialog) {
             setActions(
                     { super.onBackPressed() },
                     null
             )
-            show(fragmentTransaction, ConstUtils.TAG_DIALOG)
         }
+        showDialog(newDialog)
     }
 }
 

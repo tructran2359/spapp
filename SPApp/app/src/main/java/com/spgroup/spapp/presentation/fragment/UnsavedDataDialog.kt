@@ -1,11 +1,7 @@
 package com.spgroup.spapp.presentation.fragment
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.spgroup.spapp.R
 import kotlinx.android.synthetic.main.dialog_unsaved_data.*
 
@@ -14,13 +10,7 @@ class UnsavedDataDialog: BaseDialog() {
     var actionYes: (() -> Unit)? = null
     var actionNo: (() -> Unit)? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.dialog_unsaved_data, container, false)
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.setCanceledOnTouchOutside(false)
-
-        return view
-    }
+    override fun getLayoutResId() = R.layout.dialog_unsaved_data
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

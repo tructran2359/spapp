@@ -16,6 +16,13 @@
         <item name="colorAccent">@color/color_ui01</item>
     </style>
 
+    <style name="DialogFragment" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
     <!--Text style-->
 
     <style name="textH1">
@@ -123,10 +130,18 @@
         <item name="fontPath">@string/font_regular</item>
     </style>
 
-    <style name="textButton">
-        <item name="android:textSize">@dimen/text_size_button</item>
-        <item name="android:lineSpacingExtra">@dimen/line_space_button</item>
-        <item name="fontPath">@string/font_medium</item>
+    <style name="textButton" parent="h5">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/common_vert_medium</item>
+        <item name="android:paddingBottom">@dimen/common_vert_medium</item>
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:background">@drawable/selector_btn_main</item>
+    </style>
+
+    <style name="textButton.white">
+        <item name="android:textColor">@color/color_ui01</item>
+        <item name="android:background">@drawable/selector_btn_white</item>
     </style>
 
     <style name="textAlert">
