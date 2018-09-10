@@ -282,7 +282,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
                     val estPrice = estimatedPrice.value ?: 0f
                     val minimumPrice = partnerDetails.value?.getMinimumOrderValue() ?: 0f
                     if (estPrice < minimumPrice) {
-                        showMinimumOrderPopup()
+                        showMinimumOrderPopup(minimumPrice)
                     } else {
                         moveToOrderSummary()
                     }
@@ -297,8 +297,15 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         }
     }
 
-    private fun showMinimumOrderPopup() {
-        showDialog(MinOrderDialog())
+    private fun showMinimumOrderPopup(minimumPrice: Float) {
+        val dialog = MinOrderDialog.getInstance(minimumPrice)
+        dialog.setOnContinueListener {
+
+        }
+        dialog.setOnAddMoreListener {
+            dialog.dismiss()
+        }
+        showDialog(dialog)
     }
 
     private fun moveToOrderSummary() {
