@@ -300,7 +300,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     private fun showMinimumOrderPopup(minimumPrice: Float) {
         val dialog = MinOrderDialog.getInstance(minimumPrice)
         dialog.setOnContinueListener {
-
+            moveToOrderSummary()
         }
         dialog.setOnAddMoreListener {
             dialog.dismiss()
