@@ -33,13 +33,49 @@
         <TextView
             style="@style/callout.book"
             android:id="@+id/tv_discount_value"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/tv_discount"
+            android:gravity="right"
             android:textColor="@color/color_alert"
             android:layout_marginRight="@dimen/common_horz_large"
 
             tools:text="-S$5.90"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_difference_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/common_vert_medium_sub"
+        >
+
+        <TextView
+            style="@style/callout.book"
+            android:id="@+id/tv_difference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_horz_large"
+            android:textColor="@color/color_black"
+            android:text="@string/difference_minimum_spend"
+            />
+
+        <TextView
+            style="@style/callout.book"
+            android:id="@+id/tv_difference_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/tv_difference"
+            android:gravity="right"
+            android:textColor="@color/color_black"
+            android:layout_marginRight="@dimen/common_horz_large"
+
+            tools:text="S$5.90"
             />
 
     </RelativeLayout>

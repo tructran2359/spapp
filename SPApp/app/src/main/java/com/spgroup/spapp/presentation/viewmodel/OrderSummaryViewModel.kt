@@ -55,7 +55,11 @@ class OrderSummaryViewModel(
 
     private fun updateCountAndPrice() {
         mTotalCount.value = mSelectedServiceUsecase.calculateTotalCount()
-        mEstPrice.value = EstPriceData(mPartnerDetails.getDiscountValue(), mSelectedServiceUsecase.calculateEstPrice())
+        val discountValue = mPartnerDetails.getDiscountValue()
+        val originalPrice = mSelectedServiceUsecase.calculateEstPrice()
+        val minimumOrderAmount = mPartnerDetails.getMinimumOrderValue()
+        val surcharge = if (minimumOrderAmount > originalPrice) minimumOrderAmount - originalPrice else 0f
+        mEstPrice.value = EstPriceData(discountValue, originalPrice, surcharge)
     }
 
 
@@ -133,5 +137,6 @@ class OrderSummaryViewModel(
 
 data class EstPriceData(
         val discount: Float,
-        val originalPrice: Float
+        val originalPrice: Float,
+        val surcharge: Float
 )
