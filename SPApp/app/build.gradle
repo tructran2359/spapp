@@ -27,7 +27,7 @@ android {
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "BASE_API", "\"http://sp-backend-proto.ap-southeast-1.elasticbeanstalk.com\""
+        buildConfigField "String", "BASE_API", "\"http://checkdev.prod.acquia-sites.com\""
     }
 
 
