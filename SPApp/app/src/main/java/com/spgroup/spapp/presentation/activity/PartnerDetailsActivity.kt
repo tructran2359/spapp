@@ -278,8 +278,8 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
             mViewModel.run {
 
                 if (estimatedPrice.value != null &&  partnerDetails.value != null) {
-//                    val estPrice = -1 //Simulate value smaller than minimum order amount
-                    val estPrice = estimatedPrice.value ?: 0f
+                    val estPrice = -1 //Simulate value smaller than minimum order amount
+//                    val estPrice = estimatedPrice.value ?: 0f
                     val minimumPrice = partnerDetails.value?.getMinimumOrderValue() ?: 0f
                     if (estPrice < minimumPrice) {
                         showMinimumOrderPopup(minimumPrice)
@@ -300,7 +300,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     private fun showMinimumOrderPopup(minimumPrice: Float) {
         val dialog = MinOrderDialog.getInstance(minimumPrice)
         dialog.setOnContinueListener {
-
+            moveToOrderSummary()
         }
         dialog.setOnAddMoreListener {
             dialog.dismiss()
