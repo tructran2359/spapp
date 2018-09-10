@@ -50,29 +50,21 @@
         <TextView
             style="@style/textButton"
             android:id="@+id/tv_yes"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/action_bar_height"
             android:layout_below="@+id/ll_alert_container"
             android:layout_alignLeft="@+id/ll_alert_container"
             android:layout_alignRight="@+id/ll_alert_container"
             android:layout_marginTop="@dimen/common_vert_large"
-            android:background="@drawable/selector_btn_main"
-            android:textColor="@color/color_ui06"
             android:text="@string/yes_all_caps"
             android:gravity="center"
             />
 
         <TextView
-            style="@style/textButton"
+            style="@style/textButton.white"
             android:id="@+id/tv_no"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/action_bar_height"
             android:layout_below="@+id/tv_yes"
             android:layout_alignLeft="@+id/ll_alert_container"
             android:layout_alignRight="@+id/ll_alert_container"
             android:layout_marginTop="@dimen/common_vert_small"
-            android:background="@drawable/selector_btn_white"
-            android:textColor="@color/color_ui01"
             android:text="@string/no_all_caps"
             android:gravity="center"
             />

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/common_vert_large"
+    android:paddingLeft="@dimen/common_horz_large"
+    android:paddingRight="@dimen/common_horz_large"
+    android:background="@color/color_white"
+    >
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dialog_min_order_text_size_title"
+        android:text="@string/dialog_min_order_title"
+        android:textColor="@color/color_grey"
+        android:gravity="center_horizontal"
+        fontPath="@string/font_book"
+        />
+
+
+    <TextView
+        style="@style/body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_min_order_notice"
+        android:textColor="@color/color_grey"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/common_vert_small"
+        />
+    
+    <TextView
+        style="@style/textButton"
+        android:id="@+id/tv_continue"
+        android:layout_marginTop="@dimen/common_vert_medium"
+        android:text="@string/text_continue"
+        android:gravity="center_horizontal"
+        />
+
+    <TextView
+        style="@style/textButton.white"
+        android:id="@+id/tv_add_more"
+        android:layout_marginTop="@dimen/common_vert_medium"
+        android:layout_marginBottom="@dimen/common_vert_small"
+        android:text="@string/add_more_services"
+        android:gravity="center_horizontal"
+        />
+
+
+</LinearLayout>
