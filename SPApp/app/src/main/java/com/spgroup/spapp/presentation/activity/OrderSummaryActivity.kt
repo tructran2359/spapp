@@ -136,21 +136,25 @@ class OrderSummaryActivity : BaseActivity() {
 
             mEstPrice.observe(this@OrderSummaryActivity, Observer {
                 it?.run {
-                    tv_discount.text = getString(R.string.discount_formatted, discount.toPercentageText())
+                    view_discount_percentage.setLabel(getString(R.string.discount_percentage_formatted, discountPercentage.toPercentageText()))
 
                     val estPrice = originalPrice + surcharge
+                    val discountValue = estPrice * discountPercentage / 100
 
-                    val discountValue = estPrice * discount / 100
-                    tv_discount_value.text = discountValue.toDiscountText()
+                    view_discount_percentage.setPrice(discountValue, true)
 
-                    tv_difference_value.text = surcharge.formatPrice()
+                    view_surcharge.setLabel(getString(R.string.difference_minimum_spend))
+                    view_surcharge.setPrice(surcharge, false)
+
+                    view_discount_amount.setLabel("Discount")
+                    view_discount_amount.setPrice(5f, true)
 
                     val finalPrice = estPrice - discountValue
                     tv_total_value.text = finalPrice.formatPrice()
                     btn_summary.setEstPrice(finalPrice)
 
-                    rl_discount_container.isGone = discount == 0f
-                    rl_difference_container.isGone = surcharge == 0f
+                    view_discount_percentage.isGone = discountPercentage == 0f
+                    view_surcharge.isGone = surcharge == 0f
                 }
             })
 

@@ -136,7 +136,7 @@ class OrderSummaryViewModel(
 }
 
 data class EstPriceData(
-        val discount: Float,
+        val discountPercentage: Float,
         val originalPrice: Float,
         val surcharge: Float
 )
