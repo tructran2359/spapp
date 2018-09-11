@@ -504,6 +504,7 @@ class OrderSummaryActivity : BaseActivity() {
     private fun addItemCombo(cateId: String, item: ComplexSelectedService) {
         val tag = createServiceTag(item.service.getServiceId())
         val service = item.service
+        val subCateName = mViewModel.getSubCateName(cateId, item.getId())
         val view = SummaryItemViewCombo(this)
         val layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
 
@@ -518,7 +519,8 @@ class OrderSummaryActivity : BaseActivity() {
                     categoryId = cateId,
                     serviceItem = service,
                     mapSelectedOption = item.selectedCustomisation ?: HashMap(),
-                    specialInstruction = item.specialInstruction
+                    specialInstruction = item.specialInstruction,
+                    subCateName = subCateName
             )
             val intent = CustomiseNewActivity.getLaunchIntent(
                     context = this@OrderSummaryActivity,

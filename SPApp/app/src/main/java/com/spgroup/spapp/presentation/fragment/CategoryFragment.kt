@@ -90,11 +90,14 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
 
     override fun onComplexCustomisationItemClick(itemData: ComplexCustomisationService) {
         activity?.let {
+            val cateId = mCategory!!.id
+            val serviceId = itemData.getServiceId()
             val displayData = CustomiseDisplayData(
                     categoryId = mCategory!!.id,
                     serviceItem = itemData,
-                    mapSelectedOption = mViewModel.getSelectedOptionMap(mCategory!!.id, itemData.getServiceId()) ?: HashMap(),
-                    specialInstruction = mViewModel.getSelectedInstruction(mCategory!!.id, itemData.getServiceId())
+                    mapSelectedOption = mViewModel.getSelectedOptionMap(cateId, serviceId) ?: HashMap(),
+                    specialInstruction = mViewModel.getSelectedInstruction(cateId, serviceId),
+                    subCateName = mViewModel.getSubCateName(cateId, serviceId)
             )
             val intent = CustomiseNewActivity.getLaunchIntent(
                     context = it,

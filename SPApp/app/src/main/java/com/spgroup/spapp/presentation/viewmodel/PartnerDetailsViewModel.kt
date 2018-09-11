@@ -143,6 +143,8 @@ class PartnerDetailsViewModel(
     fun getDiscount() = partnerDetails.value?.discount ?: ""
 
     fun getPartnerName() = partnerDetails.value?.name ?: ""
+
+    fun getSubCateName(categoryId: String, serviceId: Int) = partnerDetails.value?.getSubCateByCateIdAndServiceId(categoryId, serviceId)?.label ?: ""
 }
 
 interface ISelectedService {
