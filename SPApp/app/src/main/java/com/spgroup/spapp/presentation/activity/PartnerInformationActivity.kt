@@ -159,11 +159,12 @@ class PartnerInformationActivity : BaseActivity() {
             } else {
 
                 // Setup TnC link from server
+                val title = getString(R.string.merchant_tnc_title)
                 tv_merchant_tnc.setUpClickableUnderlineSpan(R.string.merchant_tnc_with_format, R.string.merchant_tnc_underline_text) {
                     if (data.tnc != null && !data.tnc.isEmpty()) {
                         val intent = PdfActivity.getLaunchIntent(
                                 this@PartnerInformationActivity,
-                                data.name,
+                                title,
                                 data.tnc)
                         startActivityWithCheckingInternet(intent)
                     } else {

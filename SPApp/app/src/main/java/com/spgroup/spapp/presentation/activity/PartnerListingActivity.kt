@@ -72,6 +72,22 @@ class PartnerListingActivity : BaseActivity() {
             })
 
             partnerListingItems.observe(this@PartnerListingActivity, Observer {
+                // to simulate long text on promotion
+//                val testList = it?.toMutableList() ?: mutableListOf()
+//                val promotionShort = Promotion(
+//                        "test",
+//                        "This is very long text.This is very long text.This is very long text.This is very long text.This is very long text.This is very long text.This is very long text.This is very long text.This is very long text.This is very long text.",
+//                        "Short Name",
+//                        "12",
+//                        "13",
+//                        "1234",
+//                        "cart")
+//
+//                val promotionLong = promotionShort.copy(partnerName = "Long Name Long Name Long Name Long Name Long Name ")
+//                testList.add(promotionShort)
+//                testList.add(promotionLong)
+//                mPartnerListAdapter.setData(testList)
+
                 mPartnerListAdapter.setData(it)
             })
 
