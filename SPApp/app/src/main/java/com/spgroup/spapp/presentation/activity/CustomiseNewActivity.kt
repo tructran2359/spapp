@@ -59,6 +59,7 @@ class CustomiseNewActivity: BaseActivity() {
             serviceDescription.observe(this@CustomiseNewActivity, Observer {
                 it?.run {
                     tv_description.text = it
+                    tv_description.isGoneWithText(it)
                 }
             })
 
