@@ -58,8 +58,14 @@ class OrderSummaryViewModel(
         val discountValue = mPartnerDetails.getDiscountValue()
         val originalPrice = mSelectedServiceUsecase.calculateEstPrice()
         val minimumOrderAmount = mPartnerDetails.getMinimumOrderValue()
-        val surcharge = if (minimumOrderAmount > originalPrice) minimumOrderAmount - originalPrice else 0f
-        mEstPrice.value = EstPriceData(discountValue, originalPrice, surcharge)
+        val surcharge = if (minimumOrderAmount > originalPrice) {
+            minimumOrderAmount - originalPrice
+        } else {
+            0f
+        }
+        val amountDiscount = mPartnerDetails.getAmountDiscountValue()
+        val amountDiscountLabel = mPartnerDetails.amountDiscountLabel ?: ""
+        mEstPrice.value = EstPriceData(discountValue, originalPrice, surcharge, amountDiscount, amountDiscountLabel)
     }
 
 
@@ -138,5 +144,7 @@ class OrderSummaryViewModel(
 data class EstPriceData(
         val discountPercentage: Float,
         val originalPrice: Float,
-        val surcharge: Float
+        val surcharge: Float,
+        val amountDiscount: Float,
+        val amountDiscountLabel: String
 )

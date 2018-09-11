@@ -136,25 +136,30 @@ class OrderSummaryActivity : BaseActivity() {
 
             mEstPrice.observe(this@OrderSummaryActivity, Observer {
                 it?.run {
-                    view_discount_percentage.setLabel(getString(R.string.discount_percentage_formatted, discountPercentage.toPercentageText()))
+                    view_discount_percentage.setLabel(getString(R.string.discount_with_desc, discountPercentage.toPercentageText()))
 
-                    val estPrice = originalPrice + surcharge
-                    val discountValue = estPrice * discountPercentage / 100
+                    val percentageDiscountValue = originalPrice * discountPercentage / 100
+                    val totalPrice = originalPrice + surcharge - percentageDiscountValue - amountDiscount
 
-                    view_discount_percentage.setPrice(discountValue, true)
+                    view_discount_percentage.setPrice(percentageDiscountValue, true)
 
                     view_surcharge.setLabel(getString(R.string.difference_minimum_spend))
                     view_surcharge.setPrice(surcharge, false)
 
-                    view_discount_amount.setLabel("Discount")
-                    view_discount_amount.setPrice(5f, true)
+                    val amountLabel = if (amountDiscountLabel.isEmpty()) {
+                        getString(R.string.discount)
+                    } else {
+                        getString(R.string.discount_with_desc, amountDiscountLabel)
+                    }
+                    view_discount_amount.setLabel(amountLabel)
+                    view_discount_amount.setPrice(amountDiscount, true)
 
-                    val finalPrice = estPrice - discountValue
-                    tv_total_value.text = finalPrice.formatPrice()
-                    btn_summary.setEstPrice(finalPrice)
+                    tv_total_value.text = totalPrice.formatPrice()
+                    btn_summary.setEstPrice(totalPrice)
 
                     view_discount_percentage.isGone = discountPercentage == 0f
                     view_surcharge.isGone = surcharge == 0f
+                    view_discount_amount.isGone = amountDiscount == 0f
                 }
             })
 
@@ -344,6 +349,7 @@ class OrderSummaryActivity : BaseActivity() {
                     } else {
                         mViewModel.removeSavedContactInfo()
                     }
+
                     if (isOnline()) {
                         mViewModel.submitRequest(contactInfo)
                     } else {

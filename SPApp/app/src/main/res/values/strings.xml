@@ -38,7 +38,8 @@
     <string name="update_request">UPDATE REQUEST</string>
     <string name="estimated_total_price">Estimated Total Price</string>
     <string name="optional_with_symbol">[optional]</string>
-    <string name="discount_percentage_formatted">Discount (%s)</string>
+    <string name="discount_with_desc">Discount (%s)</string>
+    <string name="discount">Discount</string>
 
     <string name="see_more_services">SEE MORE SERVICES</string>
     <string name="ack_email_sent">We have sent a copy of your service\nrequest to your email inbox.</string>
