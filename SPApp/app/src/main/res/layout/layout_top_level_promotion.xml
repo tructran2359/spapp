@@ -32,21 +32,25 @@
         <TextView
             style="@style/caption"
             android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_vert_small"
             android:layout_marginLeft="@dimen/common_vert_medium_sub"
+            android:layout_marginRight="@dimen/common_vert_medium_sub"
             android:textColor="@color/color_peach"
-
-            android:text="TINGKAT-A-DAY"
+            android:textAllCaps="true"
+            android:maxLines="1"
+            android:ellipsize="end"
+            tools:text="TINGKAT-A-DAY"
             />
 
         <TextView
             style="@style/banner"
             android:id="@+id/tv_description"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/common_vert_medium_sub"
+            android:layout_marginRight="@dimen/common_vert_medium_sub"
             android:layout_marginBottom="@dimen/common_vert_medium_sub"
             android:textColor="@color/black"
             android:maxLines="1"
