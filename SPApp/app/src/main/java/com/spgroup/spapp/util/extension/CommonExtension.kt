@@ -37,7 +37,7 @@ fun String.toHtmlSpanned() =
             Html.fromHtml(this)
         }
 
-fun Float.toPercentageText() = "${this.toInt()}%"
+fun Float.toPercentageText() = "$this%"
 
 fun Float.toDiscountText() = "-${this.formatPrice()}"
 
