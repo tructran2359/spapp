@@ -119,5 +119,6 @@
     <string name="text_continue">CONTINUE</string>
     <string name="add_more_services">ADD MORE SERVICES</string>
     <string name="difference_minimum_spend">Difference to minimum spend</string>
+    <string name="merchant_tnc_title">Merchant’s Terms &amp; Conditions</string>
 
 </resources>
