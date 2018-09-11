@@ -1,6 +1,7 @@
 package com.spgroup.spapp.presentation.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
+import com.google.gson.Gson
 import com.spgroup.spapp.domain.model.AbsServiceItem
 import com.spgroup.spapp.domain.model.ContactInfo
 import com.spgroup.spapp.domain.model.PartnerDetails
@@ -10,6 +11,7 @@ import com.spgroup.spapp.domain.usecase.SelectedServiceUsecase
 import com.spgroup.spapp.domain.usecase.SubmitRequestUsecase
 import com.spgroup.spapp.manager.AppConfigManager
 import com.spgroup.spapp.presentation.activity.CustomiseDisplayData
+import com.spgroup.spapp.util.doLogD
 
 class OrderSummaryViewModel(
         private val mSubmitRequestUsecase: SubmitRequestUsecase,
@@ -58,8 +60,14 @@ class OrderSummaryViewModel(
         val discountValue = mPartnerDetails.getDiscountValue()
         val originalPrice = mSelectedServiceUsecase.calculateEstPrice()
         val minimumOrderAmount = mPartnerDetails.getMinimumOrderValue()
-        val surcharge = if (minimumOrderAmount > originalPrice) minimumOrderAmount - originalPrice else 0f
-        mEstPrice.value = EstPriceData(discountValue, originalPrice, surcharge)
+        val surcharge = if (minimumOrderAmount > originalPrice) {
+            minimumOrderAmount - originalPrice
+        } else {
+            0f
+        }
+        val amountDiscount = mPartnerDetails.getAmountDiscountValue()
+        val amountDiscountLabel = mPartnerDetails.amountDiscountLabel ?: ""
+        mEstPrice.value = EstPriceData(discountValue, originalPrice, surcharge, amountDiscount, amountDiscountLabel)
     }
 
 
@@ -102,6 +110,7 @@ class OrderSummaryViewModel(
 
     fun submitRequest(contactInfo: ContactInfo) {
         val orderSummary = getOrderSummaryModel(contactInfo)
+        doLogD("Summary", "Submit:\n${Gson().toJson(orderSummary)}")
         val disposable = mSubmitRequestUsecase
                 .submitRequest(orderSummary)
                 .doOnSubscribe { mIsLoading.value = true  }
@@ -136,7 +145,9 @@ class OrderSummaryViewModel(
 }
 
 data class EstPriceData(
-        val discount: Float,
+        val discountPercentage: Float,
         val originalPrice: Float,
-        val surcharge: Float
+        val surcharge: Float,
+        val amountDiscount: Float,
+        val amountDiscountLabel: String
 )

@@ -23,7 +23,9 @@ data class PartnerDetails(
         val menu: FoodMenu?,                           //16 Nullable
         val serviceInfo: PartnerDetailServiceInfo?,      //17 Nullable
         val email: String?,
-        val minimumOrderAmount: String?
+        val minimumOrderAmount: String?,
+        val amountDiscount: String?,
+        val amountDiscountLabel: String?
 
 ): Serializable {
 
@@ -70,4 +72,6 @@ data class PartnerDetails(
     )
 
     fun getMinimumOrderValue() = minimumOrderAmount?.toFloatWithException() ?: 0f
+
+    fun getAmountDiscountValue() = amountDiscount?.toFloatWithException() ?: 0f
 }
