@@ -50,10 +50,10 @@ class SplashViewModel(private val getInitialDataUsecase: GetInitialDataUsecase,
         val localAppVersionInteger = BuildConfig.VERSION_NAME.toVersionInteger()
         val backendAppVersionInteger = getAppVersion().toVersionInteger()
 
-        // To skip check update
-        val needToUpdate = false
+//        // To skip check update
+//        val needToUpdate = false
 
-//        val needToUpdate = (localAppVersionInteger != -1 && backendAppVersionInteger != -1 && localAppVersionInteger < backendAppVersionInteger)
+        val needToUpdate = (localAppVersionInteger != -1 && backendAppVersionInteger != -1 && localAppVersionInteger < backendAppVersionInteger)
 
         doLogD("Version", "Local: $localAppVersionInteger | Backend: $backendAppVersionInteger | Need: $needToUpdate")
         return if (needToUpdate) {
