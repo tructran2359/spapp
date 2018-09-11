@@ -26,7 +26,13 @@ class CustomiseNewViewModel: BaseViewModel() {
             listCustomiseData.add(it.toCustomiseData())
         }
         listData.value = listCustomiseData
-        serviceName.value = mDisplayData.serviceItem.label
+        val subCateName = mDisplayData.subCateName
+        val oriServiceName = mDisplayData.serviceItem.label
+        serviceName.value = if (subCateName.isEmpty()) {
+            oriServiceName
+        } else {
+            "$subCateName - $oriServiceName"
+        }
         serviceDescription.value = mDisplayData.serviceItem.serviceDescription
 
         // If not edit from Order Summary -> add new service from Partner Detail

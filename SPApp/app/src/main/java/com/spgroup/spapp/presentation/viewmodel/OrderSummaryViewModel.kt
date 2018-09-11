@@ -88,6 +88,8 @@ class OrderSummaryViewModel(
 
     fun getCateName(cateId: String) = mPartnerDetails.getCategoryById(cateId)?.label
 
+    fun getSubCateName(categoryId: String, serviceId: Int) = mPartnerDetails.getSubCateByCateIdAndServiceId(categoryId, serviceId)?.label ?: ""
+
     fun updateComplexSelectedServiceItem(customiseDisplayData: CustomiseDisplayData) {
         mSelectedServiceUsecase.updateComplexSelectedServiceItem(customiseDisplayData)
         val updatedService = mSelectedServiceUsecase.getSelectedService(
