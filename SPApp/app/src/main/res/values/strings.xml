@@ -114,5 +114,10 @@
 
     <string name="api_error_title">Whoooops!</string>
     <string name="api_error_desc">Looks like something went wrong. </string>
+    <string name="dialog_min_order_title">You have not met the minimum spend of %s.</string>
+    <string name="dialog_min_order_notice">Additional charge will apply.</string>
+    <string name="text_continue">CONTINUE</string>
+    <string name="add_more_services">ADD MORE SERVICES</string>
+    <string name="difference_minimum_spend">Difference to minimum spend</string>
 
 </resources>

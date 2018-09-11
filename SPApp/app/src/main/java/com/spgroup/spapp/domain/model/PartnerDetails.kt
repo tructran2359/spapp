@@ -1,6 +1,7 @@
 package com.spgroup.spapp.domain.model
 
 import com.spgroup.spapp.presentation.activity.PartnerInformationActivity
+import com.spgroup.spapp.util.extension.toFloatWithException
 import java.io.Serializable
 
 data class PartnerDetails(
@@ -21,11 +22,12 @@ data class PartnerDetails(
         val categories: List<Category>?,                //15 Nullable
         val menu: FoodMenu?,                           //16 Nullable
         val serviceInfo: PartnerDetailServiceInfo?,      //17 Nullable
-        val email: String?
+        val email: String?,
+        val minimumOrderAmount: String?
 
 ): Serializable {
 
-    fun getDiscountValue() = if (discount == null || discount.isEmpty()) 0f else discount.toFloat()
+    fun getDiscountValue() = discount?.toFloatWithException() ?: 0f
 
     fun getCategoryById(cateId: String) = categories?.firstOrNull { cateId == it.id }
 
@@ -66,4 +68,6 @@ data class PartnerDetails(
             tnc = tnc,
             email = email
     )
+
+    fun getMinimumOrderValue() = minimumOrderAmount?.toFloatWithException() ?: 0f
 }
