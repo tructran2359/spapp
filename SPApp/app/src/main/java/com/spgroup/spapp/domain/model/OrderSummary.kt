@@ -7,5 +7,7 @@ data class OrderSummary(
         val orderDiscountPercentage: Int,
         val overallCostBeforeDiscount: Float,
         val overallCostAfterDiscount: Float,
-        val contactInfo: ContactInfo
+        val contactInfo: ContactInfo,
+        val surcharge: Float,
+        val amountDiscount: Float
 )

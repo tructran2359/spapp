@@ -18,8 +18,16 @@ class GetOrderSummaryUsecase: SynchronousUsecase() {
         val partnerId = partnerDetails.uen
         val orderDiscountPercentage = partnerDetails.getDiscountValue().toInt()
 
-        var overallCostBeforeDiscount = totalPrice
-        var overallCostAfterDiscount = (totalPrice * (100 - orderDiscountPercentage) / 100)
+        val overallCostBeforeDiscount = totalPrice
+        val percentageDiscount = totalPrice * orderDiscountPercentage / 100
+        val amountDiscount = partnerDetails.getAmountDiscountValue()
+        val minimumOrderAmount = partnerDetails.getMinimumOrderValue()
+        val surcharge = if (totalPrice < minimumOrderAmount) {
+            minimumOrderAmount - totalPrice
+        } else {
+            0f
+        }
+        var overallCostAfterDiscount = totalPrice - percentageDiscount - amountDiscount + surcharge
 
         val listOrder = mutableListOf<Order>()
 
@@ -57,7 +65,10 @@ class GetOrderSummaryUsecase: SynchronousUsecase() {
                 orderDiscountPercentage = orderDiscountPercentage,
                 overallCostBeforeDiscount = overallCostBeforeDiscount,
                 overallCostAfterDiscount = overallCostAfterDiscount,
-                contactInfo = contactInfo
+                contactInfo = contactInfo,
+                surcharge = surcharge,
+                amountDiscount = amountDiscount
+
         )
     }
 
