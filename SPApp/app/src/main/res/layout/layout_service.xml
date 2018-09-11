@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/service_name_margin_left"
             android:textColor="@color/color_black"
+            android:textAllCaps="true"
             tools:text="GARMENTS"
             />
 
