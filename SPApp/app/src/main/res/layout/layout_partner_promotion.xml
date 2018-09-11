@@ -43,6 +43,9 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_peach"
                 android:layout_marginBottom="@dimen/common_vert_xsmall"
+                android:textAllCaps="true"
+                android:maxLines="2"
+                android:ellipsize="end"
                 tools:text="SGHEARTYMEALS.SG"
                 />
 
@@ -53,6 +56,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:textColor="@color/black"
+                android:ellipsize="end"
                 tools:text="$50 OFF whenyou order from SGHeartyMeals.sg"
                 />
 
