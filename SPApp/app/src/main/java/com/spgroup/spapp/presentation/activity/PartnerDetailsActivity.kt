@@ -7,7 +7,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.CoordinatorLayout
-import android.util.TypedValue
 import android.view.View
 import android.view.animation.Animation
 import androidx.core.view.isGone
@@ -24,7 +23,6 @@ import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.doLogE
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_partner_details.*
-import kotlin.math.max
 
 class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
 
@@ -100,6 +98,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
 
                     doLogD("EmptyResques", "partner detail update UI")
 
+                    tv_hero_section_partner_name.text = it.name
                     tv_partner_name.text = it.name
                     tv_partner_name.requestLayout()
 //                    doLogD("PartnerName", "Set name: ${it.name} textSize: ${tv_partner_name.textSize} visi: ${tv_partner_name.visibility} height ${tv_partner_name.height}")
@@ -157,22 +156,16 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         val mMaxScroll = appBarLayout.totalScrollRange
         val percentage = (currentScroll - mActionBarHeight).toFloat() / (mMaxScroll).toFloat()
 
-        val layoutParam = rl_top_button_container.layoutParams
-        layoutParam.height = max(mActionBarHeight, currentScroll - mPromotionBarHeight)
         if (currentScroll <= mActionBarHeight) {
             v_background_color.alpha = 1f
-            fl_info_container.visibility = View.GONE
+            tv_partner_name.alpha = 1f
+            fl_info_container.visibility = View.INVISIBLE
         } else {
             v_background_color.alpha = 1f - percentage
+            tv_partner_name.alpha = 1f - percentage
             fl_info_container.visibility = View.VISIBLE
             fl_info_container.alpha = percentage
         }
-
-
-        rl_top_button_container.layoutParams = layoutParam
-        val scaledTextSize = mInitTextSize * max(percentage, 0.7f)
-        tv_partner_name.setTextSize(TypedValue.COMPLEX_UNIT_PX, scaledTextSize)
-//        doLogD("Partner", "Offset change height: ${tv_partner_name.height}")
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -264,11 +257,8 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
             val width = rl_hero_section.width
             val height = (width * 9f / 16f).toInt()
             val layoutParams = rl_hero_section.layoutParams
-            val layoutParamsMask = rl_top_button_container.layoutParams
             layoutParams.height = height
-            layoutParamsMask.height = height
             rl_hero_section.layoutParams = layoutParams
-            rl_top_button_container.layoutParams = layoutParamsMask
         }
 
         appbar.addOnOffsetChangedListener(this)
