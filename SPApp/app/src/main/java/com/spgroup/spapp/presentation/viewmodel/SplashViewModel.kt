@@ -12,9 +12,11 @@ import com.spgroup.spapp.presentation.activity.OnBoardingActivity
 import com.spgroup.spapp.presentation.activity.UpdateActivity
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.extension.toVersionInteger
+import javax.inject.Inject
 
-class SplashViewModel(private val getInitialDataUsecase: GetInitialDataUsecase,
-                      private val appDataCache: AppDataCache
+class SplashViewModel @Inject constructor(
+        private val getInitialDataUsecase: GetInitialDataUsecase,
+        private val appDataCache: AppDataCache
 ) : BaseViewModel() {
 
     val isSuccess = MutableLiveData<Boolean>().apply { value = false }
