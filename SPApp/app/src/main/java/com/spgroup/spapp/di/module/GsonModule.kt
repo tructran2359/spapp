@@ -8,6 +8,7 @@ import com.spgroup.spapp.domain.model.AbsCustomisation
 import com.spgroup.spapp.domain.model.AbsServiceItem
 import com.spgroup.spapp.repository.jsondeserializer.CustomisationJsonDeserializer
 import com.spgroup.spapp.repository.jsondeserializer.ServiceItemJsonDeserializer
+import com.spgroup.spapp.repository.jsondeserializer.StringJsonDeserializer
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -23,6 +24,7 @@ object GsonModule {
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss") //2018-09-01T00:00:00
                 .registerTypeAdapter(AbsServiceItem::class.java, ServiceItemJsonDeserializer())
                 .registerTypeAdapter(AbsCustomisation::class.java, CustomisationJsonDeserializer())
+                .registerTypeAdapter(String::class.java, StringJsonDeserializer())
                 .create()
     }
 
