@@ -132,19 +132,27 @@ class SelectedServiceUsecase: SynchronousUsecase() {
     }
 
     fun calculateTotalCount(): Int {
-        return mapSelectedServices
-                .map { it.value } // to list map of List<ISelectedValueItem>
-                .flatten() // to list of all List<ISelectedValueItem>
-                .map { it.getSelectedCount() } // to list of SelectedValueItem#count
-                .sum() // sum of SelectedValueItem#count
+        return if (mapSelectedServices.isEmpty()) {
+            0
+        } else {
+            mapSelectedServices
+                    .map { it.value } // to list map of List<ISelectedValueItem>
+                    .flatten() // to list of all List<ISelectedValueItem>
+                    .map { it.getSelectedCount() } // to list of SelectedValueItem#count
+                    .sum()
+        } // sum of SelectedValueItem#count
     }
 
     fun calculateEstPrice(): Float {
-        return mapSelectedServices
-                .map { it.value }
-                .flatten()
-                .map { it.getEstPrice() }
-                .sum()
+        return if (mapSelectedServices.isEmpty()) {
+            0f
+        } else {
+            mapSelectedServices
+                    .map { it.value }
+                    .flatten()
+                    .map { it.getEstPrice() }
+                    .sum()
+        }
     }
 
     fun getSelectedService(categoryId: String, serviceId: Int): ISelectedService? {
@@ -163,5 +171,9 @@ class SelectedServiceUsecase: SynchronousUsecase() {
 
     fun removeCategory(categoryId: String) {
         mapSelectedServices.remove(categoryId)
+    }
+
+    fun clearAllSelectedServices() {
+        mapSelectedServices.clear()
     }
 }

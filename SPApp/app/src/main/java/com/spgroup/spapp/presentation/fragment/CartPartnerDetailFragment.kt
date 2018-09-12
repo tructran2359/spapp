@@ -11,6 +11,7 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.adapter.CategoryPagerAdapter
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.extension.inflate
 import com.spgroup.spapp.util.extension.obtainViewModelOfActivity
 import com.spgroup.spapp.util.extension.setUpMenuActive
@@ -32,11 +33,24 @@ class CartPartnerDetailFragment: BaseFragment() {
         setUpPages()
 
         mViewModel = obtainViewModelOfActivity(PartnerDetailsViewModel::class.java, ViewModelFactory.getInstance())
+        subcribeUI()
+    }
+
+    private fun subcribeUI() {
         mViewModel.run {
             partnerDetails.observe(this@CartPartnerDetailFragment, Observer {
                 it?.let {
+                    doLogD("EmptyResques", "partner detail update UI")
                     mAdapter.setData(it.categories, it.menu)
                     setUpTabLayout()
+                }
+            })
+
+            refreshData.observe(this@CartPartnerDetailFragment, Observer {
+                it?.let { refresh ->
+                    if (refresh) {
+                        pager_forms.setCurrentItem(0, false)
+                    }
                 }
             })
         }

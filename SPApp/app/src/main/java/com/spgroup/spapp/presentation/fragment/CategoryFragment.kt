@@ -58,13 +58,7 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
                 .of(activity!!, ViewModelFactory.getInstance())
                 .get(PartnerDetailsViewModel::class.java)
 
-        mViewModel.newSelectedComplexServiceWithCateId.observe(this, Observer { pair ->
-            pair?.run {
-                if (mCategory!!.id == first) {
-                    mServiceListingAdapter.addSelectedItem(second, 1)
-                }
-            }
-        })
+        subcribeUI()
 
         arguments?.let {
             val categoryId = it.getString(KEY_CATEGORY_ID)
@@ -82,6 +76,26 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
             recycler_view.adapter = mServiceListingAdapter
         }
 
+    }
+
+    private fun subcribeUI() {
+        mViewModel.run {
+            newSelectedComplexServiceWithCateId.observe(this@CategoryFragment, Observer { pair ->
+                pair?.run {
+                    if (mCategory!!.id == first) {
+                        mServiceListingAdapter.addSelectedItem(second, 1)
+                    }
+                }
+            })
+
+            refreshData.observe(this@CategoryFragment, Observer {
+                it?.let { clear ->
+                    if (clear) {
+                        mServiceListingAdapter.refreshDataState()
+                    }
+                }
+            })
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////

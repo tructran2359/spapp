@@ -85,6 +85,9 @@ class OrderSummaryActivity : BaseActivity() {
             }
         } else if (requestCode == RC_NO_INTERNET_FOR_SUBMIT_REQUEST && resultCode == Activity.RESULT_OK) {
             mViewModel.submitRequest(createContactInfo())
+        } else if (requestCode == RC_EMPTY_REQUEST && resultCode == Activity.RESULT_OK) {
+            setResult(Activity.RESULT_OK)
+            finish()
         }
 
     }
@@ -121,8 +124,7 @@ class OrderSummaryActivity : BaseActivity() {
             mEmpty.observe(this@OrderSummaryActivity, Observer {
                 it?.let {
                     if (it) {
-                        startActivity(EmptyRequestActivity.getLaunchIntent(this@OrderSummaryActivity))
-                        this@OrderSummaryActivity.finish()
+                        startActivityForResult(EmptyRequestActivity.getLaunchIntent(this@OrderSummaryActivity), RC_EMPTY_REQUEST)
                     }
                 }
             })

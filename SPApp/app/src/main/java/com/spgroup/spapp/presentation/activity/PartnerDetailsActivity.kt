@@ -81,6 +81,9 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
                 val customiseDisplayData = data.getSerializableExtra(CustomiseNewActivity.EXTRA_DISPLAY_DATA) as CustomiseDisplayData
                 mViewModel.addComplexSelectedServiceItem(customiseDisplayData)
             }
+        } else if (requestCode == RC_ORDER_SUMMARY && resultCode == Activity.RESULT_OK) {
+            doLogD("EmptyResques", "onActivityResult call refresh")
+            mViewModel.clearAllSelectedService()
         }
     }
 
@@ -94,6 +97,8 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
 
             partnerDetails.observe(this@PartnerDetailsActivity, Observer {
                 it?.let {
+
+                    doLogD("EmptyResques", "partner detail update UI")
 
                     tv_partner_name.text = it.name
                     tv_partner_name.requestLayout()
@@ -300,6 +305,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     private fun showMinimumOrderPopup(minimumPrice: Float) {
         val dialog = MinOrderDialog.getInstance(minimumPrice)
         dialog.setOnContinueListener {
+            dialog.dismiss()
             moveToOrderSummary()
         }
         dialog.setOnAddMoreListener {
@@ -315,7 +321,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
                     mapSelectedServices = mViewModel.getMapSelectedService(),
                     partnerDetails = this
             )
-            startActivity(intent)
+            startActivityForResult(intent, RC_ORDER_SUMMARY)
         }
     }
 
