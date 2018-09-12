@@ -90,4 +90,10 @@ class ValidationInputView: RelativeLayout {
     fun setText(string: String) {
         et_input.setText(string)
     }
+
+    fun setCustomOnFocusChangeListener(action: (Boolean) -> Unit) {
+        et_input.setOnFocusChangeListener { view, focus ->
+            action.invoke(focus)
+        }
+    }
 }

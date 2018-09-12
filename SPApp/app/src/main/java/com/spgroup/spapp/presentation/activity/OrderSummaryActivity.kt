@@ -57,6 +57,8 @@ class OrderSummaryActivity : BaseActivity() {
     private lateinit var mAnimDisappear: Animation
     private var mFirstInvalidView: ValidationInputView? = null
     private lateinit var mViewModel: OrderSummaryViewModel
+    private lateinit var mListValidationField: List<ValidationInputView>
+    private var mErrorViewIsShowing = false
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -242,6 +244,13 @@ class OrderSummaryActivity : BaseActivity() {
             onBackPressed()
         }
 
+        mListValidationField = listOf(
+                validation_postal_code,
+                validation_address,
+                validation_contact_no,
+                validation_email,
+                validation_name)
+
         validation_name.setValidation { name: String -> name.length > 1 }
 
         validation_email.setInputType(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
@@ -322,23 +331,8 @@ class OrderSummaryActivity : BaseActivity() {
             setCount(1)
             setEstPrice(0.01f)
             setOnClickListener {
-                var invalidCount = 0
-                mFirstInvalidView = null
+                val invalidCount = calculateInvalidCount()
 
-                val listValidationField = listOf(
-                        validation_postal_code,
-                        validation_address,
-                        validation_contact_no,
-                        validation_email,
-                        validation_name)
-
-                listValidationField.forEach {
-                    val valid = it.validate()
-                    if (!valid) {
-                        invalidCount++
-                        mFirstInvalidView = it
-                    }
-                }
                 if (invalidCount == 0) {
                     // All fields are valid
                     rl_error_cointainer.visibility = View.GONE
@@ -361,16 +355,43 @@ class OrderSummaryActivity : BaseActivity() {
 
                     }
                 } else {
-                    var errorMsg = if (invalidCount == 1) {
-                        this@OrderSummaryActivity.getString(R.string.error_detected_1)
-                    } else {
-                        this@OrderSummaryActivity.getString(R.string.error_detected_format, invalidCount)
+                    updateInvalidView(invalidCount)
+
+                    mListValidationField.forEach { validationView ->
+                        validationView.setCustomOnFocusChangeListener { focus ->
+                            if (!focus) {
+                                validationView.validate()
+                                updateInvalidView(calculateInvalidCount())
+                            }
+                        }
                     }
-                    tv_error_counter.setText(errorMsg)
                     showErrorView(true)
                 }
             }
         }
+    }
+
+    private fun updateInvalidView(invalidCount: Int) {
+        var errorMsg = if (invalidCount == 1) {
+            this@OrderSummaryActivity.getString(R.string.error_detected_1)
+        } else {
+            this@OrderSummaryActivity.getString(R.string.error_detected_format, invalidCount)
+        }
+        tv_error_counter.setText(errorMsg)
+    }
+
+    private fun calculateInvalidCount(): Int {
+        var invalidCount = 0
+        mFirstInvalidView = null
+
+        mListValidationField.forEach {
+            val valid = it.validate()
+            if (!valid) {
+                invalidCount++
+                mFirstInvalidView = it
+            }
+        }
+        return invalidCount
     }
 
     private fun setUpKeyboardDetection() {
@@ -382,8 +403,13 @@ class OrderSummaryActivity : BaseActivity() {
     }
 
     private fun updateBottomButtonVisibility(show: Boolean) {
-        rl_summary_button_container.updateVisibility(show)
-        v_shadow.updateVisibility(show)
+        rl_summary_button_container.isGone = !show
+        v_shadow.isGone = !show
+        if (show) {
+            rl_error_cointainer.isGone = !mErrorViewIsShowing
+        } else {
+            rl_error_cointainer.isGone = true
+        }
     }
 
     private fun addView(mapSelectedServices: HashMap<String, MutableList<ISelectedService>>) {
@@ -587,8 +613,10 @@ class OrderSummaryActivity : BaseActivity() {
     private fun showErrorView(show: Boolean) {
         if (show && rl_error_cointainer.visibility != View.VISIBLE) {
             rl_error_cointainer.startAnimation(mAnimAppear)
+            mErrorViewIsShowing = true
         } else if (!show && rl_error_cointainer.visibility == View.VISIBLE) {
             rl_error_cointainer.startAnimation(mAnimDisappear)
+            mErrorViewIsShowing = false
         }
     }
 
