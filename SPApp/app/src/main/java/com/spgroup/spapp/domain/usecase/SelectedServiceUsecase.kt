@@ -144,11 +144,15 @@ class SelectedServiceUsecase: SynchronousUsecase() {
     }
 
     fun calculateEstPrice(): Float {
-        return mapSelectedServices
-                .map { it.value }
-                .flatten()
-                .map { it.getEstPrice() }
-                .sum()
+        return if (mapSelectedServices.isEmpty()) {
+            0f
+        } else {
+            mapSelectedServices
+                    .map { it.value }
+                    .flatten()
+                    .map { it.getEstPrice() }
+                    .sum()
+        }
     }
 
     fun getSelectedService(categoryId: String, serviceId: Int): ISelectedService? {
