@@ -73,8 +73,8 @@ fun BaseActivity.showDialog(dialog: BaseDialog) {
     dialog.show(fragmentTransaction, ConstUtils.TAG_DIALOG)
 }
 
-val Fragment.appIntance: SPApplication
+val Fragment.appInstance: SPApplication
     get() = activity?.application as SPApplication
 
-val AppCompatActivity.appIntance: SPApplication
+val AppCompatActivity.appInstance: SPApplication
     get() = application as SPApplication

@@ -3,14 +3,14 @@ package com.spgroup.spapp.presentation.activity
 import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.viewmodel.SplashViewModel
 import com.spgroup.spapp.util.doLogE
-import com.spgroup.spapp.util.extension.appIntance
+import com.spgroup.spapp.util.extension.appInstance
 import com.spgroup.spapp.util.extension.isOnline
+import com.spgroup.spapp.util.extension.obtainViewModel
 import javax.inject.Inject
 
 class SplashActivity : BaseActivity() {
@@ -24,8 +24,8 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        appIntance.appComponent.inject(this)
-        splashViewModel = ViewModelProviders.of(this, vmFactory).get(SplashViewModel::class.java)
+        appInstance.appComponent.inject(this)
+        splashViewModel = obtainViewModel(SplashViewModel::class.java, vmFactory)
 
         subscribeUI()
 
