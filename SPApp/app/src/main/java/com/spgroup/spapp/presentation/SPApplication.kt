@@ -5,13 +5,15 @@ import android.content.Context
 import com.google.android.gms.analytics.GoogleAnalytics
 import com.google.android.gms.analytics.Tracker
 import com.spgroup.spapp.BuildConfig
-
 import com.spgroup.spapp.R
 import com.spgroup.spapp.di.Injection
+import com.spgroup.spapp.di.component.AppComponent
+import com.spgroup.spapp.di.component.DaggerAppComponent
+import com.spgroup.spapp.di.module.AppModule
 import com.spgroup.spapp.manager.AppConfigManager
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
-class SPApplication: Application() {
+class SPApplication : Application() {
 
     companion object {
         lateinit var mAppInstance: SPApplication
@@ -20,8 +22,16 @@ class SPApplication: Application() {
         lateinit var mTracker: Tracker
     }
 
+    val appComponent: AppComponent by lazy {
+        DaggerAppComponent.builder()
+                .appModule(AppModule(this))
+                .build()
+    }
+
     override fun onCreate() {
         super.onCreate()
+        appComponent.inject(this)
+
         mAppInstance = this
 
         val pref = this.getSharedPreferences("SPApp_Pref", Context.MODE_PRIVATE)

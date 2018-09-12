@@ -2,6 +2,8 @@ package com.spgroup.spapp.di.component
 
 import com.spgroup.spapp.di.ApplicationScoped
 import com.spgroup.spapp.di.module.*
+import com.spgroup.spapp.presentation.SPApplication
+import com.spgroup.spapp.presentation.activity.SplashActivity
 import dagger.Component
 
 @Component(modules = [
@@ -9,7 +11,15 @@ import dagger.Component
     RepoModule::class,
     NetworkModule::class,
     MapperModule::class,
-    GsonModule::class
+    GsonModule::class,
+    UsecaseModule::class,
+    ViewModelModule::class
 ])
 @ApplicationScoped
-interface AppComponent
+interface AppComponent {
+
+    fun inject(spApplication: SPApplication)
+
+    fun inject(splashActivity: SplashActivity)
+
+}
