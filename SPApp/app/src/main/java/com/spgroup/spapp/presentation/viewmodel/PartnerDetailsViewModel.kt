@@ -27,6 +27,7 @@ class PartnerDetailsViewModel(
     val selectedCount = MutableLiveData<Int>()
     val estimatedPrice = MutableLiveData<Float>()
     val newSelectedComplexServiceWithCateId = MutableLiveData<Pair<String, Int>>()
+    val refreshData = MutableLiveData<Boolean>()
 
     init {
         selectedCount.value = 0
@@ -145,6 +146,12 @@ class PartnerDetailsViewModel(
     fun getPartnerName() = partnerDetails.value?.name ?: ""
 
     fun getSubCateName(categoryId: String, serviceId: Int) = partnerDetails.value?.getSubCateByCateIdAndServiceId(categoryId, serviceId)?.label ?: ""
+
+    fun clearAllSelectedService() {
+        mSelectedServiceUsecase.clearAllSelectedServices()
+        updateCountAndPrice()
+        refreshData.value = true
+    }
 }
 
 interface ISelectedService {
