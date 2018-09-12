@@ -59,6 +59,7 @@ class CustomiseNewActivity: BaseActivity() {
             serviceDescription.observe(this@CustomiseNewActivity, Observer {
                 it?.run {
                     tv_description.text = it
+                    tv_description.isGoneWithText(it)
                 }
             })
 
@@ -210,7 +211,8 @@ data class CustomiseDisplayData (
         var serviceItem: ComplexCustomisationService,
         var mapSelectedOption: HashMap<Int, Int>,
         var specialInstruction: String?,
-        var estPrice: Float = 0f
+        var estPrice: Float = 0f,
+        var subCateName: String
 ): Serializable {
     fun isSameSelectedOptionData(newObj: CustomiseDisplayData): Boolean {
         if (mapSelectedOption.size != newObj.mapSelectedOption.size) return false
@@ -226,6 +228,6 @@ data class CustomiseDisplayData (
         for ((key, value) in mapSelectedOption) {
             hashMap[key] = value
         }
-        return CustomiseDisplayData(categoryId, serviceItem, hashMap, specialInstruction, estPrice)
+        return CustomiseDisplayData(categoryId, serviceItem, hashMap, specialInstruction, estPrice, subCateName)
     }
 }

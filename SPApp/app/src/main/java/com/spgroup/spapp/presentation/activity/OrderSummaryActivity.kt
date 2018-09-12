@@ -57,6 +57,8 @@ class OrderSummaryActivity : BaseActivity() {
     private lateinit var mAnimDisappear: Animation
     private var mFirstInvalidView: ValidationInputView? = null
     private lateinit var mViewModel: OrderSummaryViewModel
+    private lateinit var mListValidationField: List<ValidationInputView>
+    private var mErrorViewIsShowing = false
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -85,6 +87,9 @@ class OrderSummaryActivity : BaseActivity() {
             }
         } else if (requestCode == RC_NO_INTERNET_FOR_SUBMIT_REQUEST && resultCode == Activity.RESULT_OK) {
             mViewModel.submitRequest(createContactInfo())
+        } else if (requestCode == RC_EMPTY_REQUEST && resultCode == Activity.RESULT_OK) {
+            setResult(Activity.RESULT_OK)
+            finish()
         }
 
     }
@@ -121,8 +126,7 @@ class OrderSummaryActivity : BaseActivity() {
             mEmpty.observe(this@OrderSummaryActivity, Observer {
                 it?.let {
                     if (it) {
-                        startActivity(EmptyRequestActivity.getLaunchIntent(this@OrderSummaryActivity))
-                        this@OrderSummaryActivity.finish()
+                        startActivityForResult(EmptyRequestActivity.getLaunchIntent(this@OrderSummaryActivity), RC_EMPTY_REQUEST)
                     }
                 }
             })
@@ -136,21 +140,30 @@ class OrderSummaryActivity : BaseActivity() {
 
             mEstPrice.observe(this@OrderSummaryActivity, Observer {
                 it?.run {
-                    tv_discount.text = getString(R.string.discount_formatted, discount.toPercentageText())
+                    view_discount_percentage.setLabel(getString(R.string.discount_with_desc, discountPercentage.toPercentageText()))
 
-                    val estPrice = originalPrice + surcharge
+                    val percentageDiscountValue = originalPrice * discountPercentage / 100
+                    val totalPrice = originalPrice + surcharge - percentageDiscountValue - amountDiscount
 
-                    val discountValue = estPrice * discount / 100
-                    tv_discount_value.text = discountValue.toDiscountText()
+                    view_discount_percentage.setPrice(percentageDiscountValue, true)
 
-                    tv_difference_value.text = surcharge.formatPrice()
+                    view_surcharge.setLabel(getString(R.string.difference_minimum_spend))
+                    view_surcharge.setPrice(surcharge, false)
 
-                    val finalPrice = estPrice - discountValue
-                    tv_total_value.text = finalPrice.formatPrice()
-                    btn_summary.setEstPrice(finalPrice)
+                    val amountLabel = if (amountDiscountLabel.isEmpty()) {
+                        getString(R.string.discount)
+                    } else {
+                        getString(R.string.discount_with_desc, amountDiscountLabel)
+                    }
+                    view_discount_amount.setLabel(amountLabel)
+                    view_discount_amount.setPrice(amountDiscount, true)
 
-                    rl_discount_container.isGone = discount == 0f
-                    rl_difference_container.isGone = surcharge == 0f
+                    tv_total_value.text = totalPrice.formatPrice()
+                    btn_summary.setEstPrice(totalPrice)
+
+                    view_discount_percentage.isGone = discountPercentage == 0f
+                    view_surcharge.isGone = surcharge == 0f
+                    view_discount_amount.isGone = amountDiscount == 0f
                 }
             })
 
@@ -230,6 +243,13 @@ class OrderSummaryActivity : BaseActivity() {
         tv_go_back.setOnClickListener {
             onBackPressed()
         }
+
+        mListValidationField = listOf(
+                validation_postal_code,
+                validation_address,
+                validation_contact_no,
+                validation_email,
+                validation_name)
 
         validation_name.setValidation { name: String -> name.length > 1 }
 
@@ -311,23 +331,8 @@ class OrderSummaryActivity : BaseActivity() {
             setCount(1)
             setEstPrice(0.01f)
             setOnClickListener {
-                var invalidCount = 0
-                mFirstInvalidView = null
+                val invalidCount = calculateInvalidCount()
 
-                val listValidationField = listOf(
-                        validation_postal_code,
-                        validation_address,
-                        validation_contact_no,
-                        validation_email,
-                        validation_name)
-
-                listValidationField.forEach {
-                    val valid = it.validate()
-                    if (!valid) {
-                        invalidCount++
-                        mFirstInvalidView = it
-                    }
-                }
                 if (invalidCount == 0) {
                     // All fields are valid
                     rl_error_cointainer.visibility = View.GONE
@@ -340,6 +345,7 @@ class OrderSummaryActivity : BaseActivity() {
                     } else {
                         mViewModel.removeSavedContactInfo()
                     }
+
                     if (isOnline()) {
                         mViewModel.submitRequest(contactInfo)
                     } else {
@@ -349,16 +355,43 @@ class OrderSummaryActivity : BaseActivity() {
 
                     }
                 } else {
-                    var errorMsg = if (invalidCount == 1) {
-                        this@OrderSummaryActivity.getString(R.string.error_detected_1)
-                    } else {
-                        this@OrderSummaryActivity.getString(R.string.error_detected_format, invalidCount)
+                    updateInvalidView(invalidCount)
+
+                    mListValidationField.forEach { validationView ->
+                        validationView.setCustomOnFocusChangeListener { focus ->
+                            if (!focus) {
+                                validationView.validate()
+                                updateInvalidView(calculateInvalidCount())
+                            }
+                        }
                     }
-                    tv_error_counter.setText(errorMsg)
                     showErrorView(true)
                 }
             }
         }
+    }
+
+    private fun updateInvalidView(invalidCount: Int) {
+        var errorMsg = if (invalidCount == 1) {
+            this@OrderSummaryActivity.getString(R.string.error_detected_1)
+        } else {
+            this@OrderSummaryActivity.getString(R.string.error_detected_format, invalidCount)
+        }
+        tv_error_counter.setText(errorMsg)
+    }
+
+    private fun calculateInvalidCount(): Int {
+        var invalidCount = 0
+        mFirstInvalidView = null
+
+        mListValidationField.forEach {
+            val valid = it.validate()
+            if (!valid) {
+                invalidCount++
+                mFirstInvalidView = it
+            }
+        }
+        return invalidCount
     }
 
     private fun setUpKeyboardDetection() {
@@ -370,8 +403,13 @@ class OrderSummaryActivity : BaseActivity() {
     }
 
     private fun updateBottomButtonVisibility(show: Boolean) {
-        rl_summary_button_container.updateVisibility(show)
-        v_shadow.updateVisibility(show)
+        rl_summary_button_container.isGone = !show
+        v_shadow.isGone = !show
+        if (show) {
+            rl_error_cointainer.isGone = !mErrorViewIsShowing
+        } else {
+            rl_error_cointainer.isGone = true
+        }
     }
 
     private fun addView(mapSelectedServices: HashMap<String, MutableList<ISelectedService>>) {
@@ -494,6 +532,7 @@ class OrderSummaryActivity : BaseActivity() {
     private fun addItemCombo(cateId: String, item: ComplexSelectedService) {
         val tag = createServiceTag(item.service.getServiceId())
         val service = item.service
+        val subCateName = mViewModel.getSubCateName(cateId, item.getId())
         val view = SummaryItemViewCombo(this)
         val layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
 
@@ -508,7 +547,8 @@ class OrderSummaryActivity : BaseActivity() {
                     categoryId = cateId,
                     serviceItem = service,
                     mapSelectedOption = item.selectedCustomisation ?: HashMap(),
-                    specialInstruction = item.specialInstruction
+                    specialInstruction = item.specialInstruction,
+                    subCateName = subCateName
             )
             val intent = CustomiseNewActivity.getLaunchIntent(
                     context = this@OrderSummaryActivity,
@@ -573,8 +613,10 @@ class OrderSummaryActivity : BaseActivity() {
     private fun showErrorView(show: Boolean) {
         if (show && rl_error_cointainer.visibility != View.VISIBLE) {
             rl_error_cointainer.startAnimation(mAnimAppear)
+            mErrorViewIsShowing = true
         } else if (!show && rl_error_cointainer.visibility == View.VISIBLE) {
             rl_error_cointainer.startAnimation(mAnimDisappear)
+            mErrorViewIsShowing = false
         }
     }
 

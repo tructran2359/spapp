@@ -84,6 +84,12 @@ class ServiceListingAdapter(
         }
     }
 
+    fun refreshDataState() {
+        mMapSelectedValue.clear()
+        mMapExpandedItem.clear()
+        notifyDataSetChanged()
+    }
+
     private fun collapseItem(position: Int) {
         val expanded = isItemExpanded(position)
         mMapExpandedItem[mData[position].id] = expanded.not()

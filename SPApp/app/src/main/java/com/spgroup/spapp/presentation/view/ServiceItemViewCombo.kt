@@ -32,8 +32,10 @@ class ServiceItemViewCombo(
     }
 
     private fun getPriceTextWithUnit(priceText: String, unit: String?): String {
-        return unit?.let {
+        return if (unit != null && !unit.isEmpty()) {
             "$priceText / $unit"
-        } ?: priceText
+        } else {
+            priceText
+        }
     }
 }

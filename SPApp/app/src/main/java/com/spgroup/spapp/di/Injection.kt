@@ -13,6 +13,7 @@ import com.spgroup.spapp.repository.ServicesCloudDataStore
 import com.spgroup.spapp.repository.http.SingaporePowerHttpClient
 import com.spgroup.spapp.repository.jsondeserializer.CustomisationJsonDeserializer
 import com.spgroup.spapp.repository.jsondeserializer.ServiceItemJsonDeserializer
+import com.spgroup.spapp.repository.jsondeserializer.StringJsonDeserializer
 import com.spgroup.spapp.repository.mapper.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -57,6 +58,7 @@ object Injection {
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 .registerTypeAdapter(AbsServiceItem::class.java, ServiceItemJsonDeserializer())
                 .registerTypeAdapter(AbsCustomisation::class.java, CustomisationJsonDeserializer())
+                .registerTypeAdapter(String::class.java, StringJsonDeserializer())
                 .create()
 
         val loggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {

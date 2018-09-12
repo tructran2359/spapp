@@ -1,5 +1,6 @@
 package com.spgroup.spapp.presentation.activity
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -26,5 +27,10 @@ class EmptyRequestActivity: BaseActivity() {
         tv_see_services.setOnClickListener {
             onBackPressed()
         }
+    }
+
+    override fun onBackPressed() {
+        setResult(Activity.RESULT_OK)
+        finish()
     }
 }

@@ -36,7 +36,6 @@
         android:paddingTop="@dimen/common_spacing"
         android:paddingBottom="@dimen/common_spacing"
         android:layout_above="@+id/ll_ack_tnc"
-        android:background="@drawable/selector_btn_white"
         >
         
         <ImageView
@@ -69,7 +68,6 @@
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/common_spacing"
             android:paddingBottom="@dimen/common_spacing"
-            android:background="@drawable/selector_btn_white"
             >
 
             <TextView
@@ -115,7 +113,6 @@
             android:layout_toRightOf="@+id/divider"
             android:paddingTop="@dimen/common_spacing"
             android:paddingBottom="@dimen/common_spacing"
-            android:background="@drawable/selector_btn_white"
             >
 
             <TextView

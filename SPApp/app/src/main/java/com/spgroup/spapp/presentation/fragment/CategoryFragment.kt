@@ -58,13 +58,7 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
                 .of(activity!!, ViewModelFactory.getInstance())
                 .get(PartnerDetailsViewModel::class.java)
 
-        mViewModel.newSelectedComplexServiceWithCateId.observe(this, Observer { pair ->
-            pair?.run {
-                if (mCategory!!.id == first) {
-                    mServiceListingAdapter.addSelectedItem(second, 1)
-                }
-            }
-        })
+        subcribeUI()
 
         arguments?.let {
             val categoryId = it.getString(KEY_CATEGORY_ID)
@@ -84,17 +78,40 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
 
     }
 
+    private fun subcribeUI() {
+        mViewModel.run {
+            newSelectedComplexServiceWithCateId.observe(this@CategoryFragment, Observer { pair ->
+                pair?.run {
+                    if (mCategory!!.id == first) {
+                        mServiceListingAdapter.addSelectedItem(second, 1)
+                    }
+                }
+            })
+
+            refreshData.observe(this@CategoryFragment, Observer {
+                it?.let { clear ->
+                    if (clear) {
+                        mServiceListingAdapter.refreshDataState()
+                    }
+                }
+            })
+        }
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // OnItemInteractedListener
     ///////////////////////////////////////////////////////////////////////////
 
     override fun onComplexCustomisationItemClick(itemData: ComplexCustomisationService) {
         activity?.let {
+            val cateId = mCategory!!.id
+            val serviceId = itemData.getServiceId()
             val displayData = CustomiseDisplayData(
                     categoryId = mCategory!!.id,
                     serviceItem = itemData,
-                    mapSelectedOption = mViewModel.getSelectedOptionMap(mCategory!!.id, itemData.getServiceId()) ?: HashMap(),
-                    specialInstruction = mViewModel.getSelectedInstruction(mCategory!!.id, itemData.getServiceId())
+                    mapSelectedOption = mViewModel.getSelectedOptionMap(cateId, serviceId) ?: HashMap(),
+                    specialInstruction = mViewModel.getSelectedInstruction(cateId, serviceId),
+                    subCateName = mViewModel.getSubCateName(cateId, serviceId)
             )
             val intent = CustomiseNewActivity.getLaunchIntent(
                     context = it,
