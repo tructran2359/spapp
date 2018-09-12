@@ -60,6 +60,20 @@
                         app:ci_width="@dimen/indicator_size"
                         />
 
+                    <TextView
+                        style="@style/h3"
+                        android:id="@+id/tv_hero_section_partner_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="@dimen/common_horz_large"
+                        android:layout_marginRight="@dimen/common_horz_large"
+                        android:textColor="@color/color_white"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:gravity="center_horizontal"
+                        />
+
                 </RelativeLayout>
 
                 <!--Promotion Bar-->
@@ -165,7 +179,7 @@
     <RelativeLayout
         android:id="@+id/rl_top_button_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/action_bar_height"
         >
 
         <View
@@ -177,8 +191,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/action_bar_height">
-
+            android:layout_height="match_parent"
+            >
 
             <FrameLayout
                 android:id="@+id/fl_back_container"
@@ -197,6 +211,21 @@
                     />
 
             </FrameLayout>
+
+            <TextView
+                style="@style/h5"
+                android:id="@+id/tv_partner_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
+                android:textColor="@color/color_white"
+                android:layout_toLeftOf="@+id/fl_info_container"
+                android:layout_toRightOf="@+id/fl_back_container"
+                tools:text="QuiKlean Laundry"
+                />
 
             <FrameLayout
                 android:id="@+id/fl_info_container"
@@ -218,21 +247,6 @@
             </FrameLayout>
 
         </RelativeLayout>
-
-        <TextView
-            style="@style/h3"
-            android:id="@+id/tv_partner_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:layout_centerInParent="true"
-            android:gravity="center_horizontal"
-            android:paddingLeft="@dimen/common_horz_xlarge"
-            android:paddingRight="@dimen/common_horz_xlarge"
-            android:textColor="@color/color_white"
-            tools:text="QuiKlean Laundry"
-            />
 
     </RelativeLayout>
 
