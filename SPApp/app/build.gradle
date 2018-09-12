@@ -44,17 +44,32 @@ android {
         }
     }
 
+    flavorDimensions "default"
+
+    productFlavors {
+
+        staging {
+            dimension "default"
+            buildConfigField "String", "GA_TRACKING_ID", '"UA-125316984-1"'
+        }
+
+        production {
+            dimension "default"
+            buildConfigField "String", "GA_TRACKING_ID", '"UA-125469843-1"'
+        }
+    }
+
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
 
             def formattedDate = new Date().format('yyyyMMdd')
 
-//            def flavorName = variant.productFlavors[0].name
+            def flavorName = variant.productFlavors[0].name
 
             def buildName = variant.buildType.name
 
-//            def fileName = formattedDate + "_" + "SPApp_Android_" + flavorName + "_" + buildName + "_v" + defaultConfig.versionName + "-" + defaultConfig.versionCode + ".apk"
-            outputFileName = formattedDate + "_" + "SPApp_Android_" + buildName + "_v" + defaultConfig.versionName + "-" + defaultConfig.versionCode + ".apk"
+            outputFileName = formattedDate + "_" + "SPApp_Android_" + flavorName + "_" + buildName + "_v" + defaultConfig.versionName + "-" + defaultConfig.versionCode + ".apk"
+//            outputFileName = formattedDate + "_" + "SPApp_Android_" + buildName + "_v" + defaultConfig.versionName + "-" + defaultConfig.versionCode + ".apk"
 
         }
     }
@@ -108,6 +123,8 @@ dependencies {
     implementation 'com.jeremyfeinstein.slidingmenu:library:1.3@aar'
     // Gif ImageView
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
+    // Google Analytics
+    implementation "com.google.android.gms:play-services-analytics:$rootProject.googlePlayServices"
 
     // Test
     testImplementation 'junit:junit:4.12'
