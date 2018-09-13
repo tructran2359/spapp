@@ -58,4 +58,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PdfViewModel::class)
     abstract fun bindPdfViewModel(vm: PdfViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OrderSummaryViewModel::class)
+    abstract fun bindOrderSummaryViewModel(vm: OrderSummaryViewModel): ViewModel
 }

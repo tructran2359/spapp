@@ -12,8 +12,9 @@ import com.spgroup.spapp.domain.usecase.SubmitRequestUsecase
 import com.spgroup.spapp.manager.AppConfigManager
 import com.spgroup.spapp.presentation.activity.CustomiseDisplayData
 import com.spgroup.spapp.util.doLogD
+import javax.inject.Inject
 
-class OrderSummaryViewModel(
+class OrderSummaryViewModel @Inject constructor(
         private val mSubmitRequestUsecase: SubmitRequestUsecase,
         private val mSelectedServiceUsecase: SelectedServiceUsecase,
         private val mGetOrderSummaryUsecase: GetOrderSummaryUsecase,

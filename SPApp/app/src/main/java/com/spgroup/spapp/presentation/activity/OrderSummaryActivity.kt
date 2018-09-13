@@ -2,6 +2,7 @@ package com.spgroup.spapp.presentation.activity
 
 import android.app.Activity
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -22,13 +23,17 @@ import com.spgroup.spapp.domain.model.*
 import com.spgroup.spapp.presentation.adapter.PreferredTimeAdapter
 import com.spgroup.spapp.presentation.fragment.LoadingDialog
 import com.spgroup.spapp.presentation.view.*
-import com.spgroup.spapp.presentation.viewmodel.*
+import com.spgroup.spapp.presentation.viewmodel.ComplexSelectedService
+import com.spgroup.spapp.presentation.viewmodel.ISelectedService
+import com.spgroup.spapp.presentation.viewmodel.OrderSummaryViewModel
+import com.spgroup.spapp.presentation.viewmodel.SelectedService
 import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.doLogE
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_order_summary.*
 import kotlinx.android.synthetic.main.layout_summary_estimated.*
+import javax.inject.Inject
 
 class OrderSummaryActivity : BaseActivity() {
 
@@ -60,15 +65,21 @@ class OrderSummaryActivity : BaseActivity() {
     private lateinit var mListValidationField: List<ValidationInputView>
     private var mErrorViewIsShowing = false
 
+    @Inject
+    lateinit var vmFactory: ViewModelProvider.Factory
+
     ///////////////////////////////////////////////////////////////////////////
     // Override
     ///////////////////////////////////////////////////////////////////////////
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        appInstance.appComponent.inject(this)
+
         setContentView(R.layout.activity_order_summary)
 
-        mViewModel = obtainViewModel(OrderSummaryViewModel::class.java, ViewModelFactory.getInstance())
+        mViewModel = obtainViewModel(OrderSummaryViewModel::class.java, vmFactory)
         subscribeUI()
         val mapSelectedServices = intent.getSerializableExtra(EXTRA_SERVICE_MAP) as HashMap<String, MutableList<ISelectedService>>
         val partnerDetails = intent.getSerializableExtra(EXTRA_PARTNER_DETAIL) as PartnerDetails

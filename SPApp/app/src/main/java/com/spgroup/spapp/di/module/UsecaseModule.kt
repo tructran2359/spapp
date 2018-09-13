@@ -40,4 +40,22 @@ object UsecaseModule {
     fun provideGetCustomisationLowestPrice(): GetCustomisationLowestPrice {
         return GetCustomisationLowestPrice()
     }
+
+    @JvmStatic
+    @Provides
+    fun provideSelectedServiceUsecase(): SelectedServiceUsecase {
+        return SelectedServiceUsecase()
+    }
+
+    @JvmStatic
+    @Provides
+    fun provideGetOrderSummaryUsecase(): GetOrderSummaryUsecase {
+        return GetOrderSummaryUsecase()
+    }
+
+    @JvmStatic
+    @Provides
+    fun provideSubmitRequestUsecase(schedulerFacade: SchedulerFacade, servicesRepository: ServicesRepository): SubmitRequestUsecase {
+        return SubmitRequestUsecase(schedulerFacade, servicesRepository)
+    }
 }

@@ -40,4 +40,6 @@ interface AppComponent {
 
     fun inject(pdfActivity: PdfActivity)
 
+    fun inject(orderSummaryActivity: OrderSummaryActivity)
+
 }
