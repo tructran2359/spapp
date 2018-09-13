@@ -2,6 +2,7 @@ package com.spgroup.spapp.presentation.activity
 
 import android.app.Activity
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -13,10 +14,10 @@ import com.spgroup.spapp.presentation.fragment.UnsavedDataDialog
 import com.spgroup.spapp.presentation.view.DropdownSelectionView
 import com.spgroup.spapp.presentation.viewmodel.CustomiseData
 import com.spgroup.spapp.presentation.viewmodel.CustomiseNewViewModel
-import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_customise_new.*
 import java.io.Serializable
+import javax.inject.Inject
 
 class CustomiseNewActivity: BaseActivity() {
 
@@ -40,14 +41,18 @@ class CustomiseNewActivity: BaseActivity() {
     private val listDropdownViews = mutableListOf<DropdownSelectionView>()
     private var mIsEdit = false
 
+    @Inject lateinit var vmFactory: ViewModelProvider.Factory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        appInstance.appComponent.inject(this)
 
         setContentView(R.layout.activity_customise_new)
 
         mIsEdit = intent.getBooleanExtra(EXTRA_IS_EDIT, false)
 
-        mViewModel = obtainViewModel(CustomiseNewViewModel::class.java, ViewModelFactory.getInstance())
+        mViewModel = obtainViewModel(CustomiseNewViewModel::class.java, vmFactory)
         mViewModel.run {
 
             serviceName.observe(this@CustomiseNewActivity, Observer {

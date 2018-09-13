@@ -34,4 +34,6 @@ interface AppComponent {
 
     fun inject(partnerInformationActivity: PartnerInformationActivity)
 
+    fun inject(customiseNewActivity: CustomiseNewActivity)
+
 }

@@ -2,8 +2,9 @@ package com.spgroup.spapp.presentation.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import com.spgroup.spapp.presentation.activity.CustomiseDisplayData
+import javax.inject.Inject
 
-class CustomiseNewViewModel: BaseViewModel() {
+class CustomiseNewViewModel @Inject constructor(): BaseViewModel() {
 
     private lateinit var mDisplayData: CustomiseDisplayData
     private var mIsEdit = false

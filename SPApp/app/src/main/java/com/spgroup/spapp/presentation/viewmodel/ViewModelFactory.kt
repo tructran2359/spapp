@@ -23,8 +23,6 @@ class ViewModelFactory private constructor(
 
             modelClass.isAssignableFrom(PartnerListingViewModel::class.java) -> createPartnerListingViewModel()
 
-            modelClass.isAssignableFrom(CustomiseViewModel::class.java) -> createCustomiseViewModel()
-
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> createHomeViewModel()
 
             modelClass.isAssignableFrom(OrderSummaryViewModel::class.java) -> createOrderSummaryViewModel()
@@ -85,10 +83,6 @@ class ViewModelFactory private constructor(
         val getPartnerListingUsecase = GetPartnerListingUsecase(schedulerFacade, cloudRepository)
         val preProcessPartnerUsecase = PreProcessPartnerUsecase()
         return PartnerListingViewModel(getPartnerListingUsecase, preProcessPartnerUsecase)
-    }
-
-    private fun createCustomiseViewModel(): CustomiseViewModel {
-        return CustomiseViewModel()
     }
 
     private fun createHomeViewModel(): HomeViewModel {
