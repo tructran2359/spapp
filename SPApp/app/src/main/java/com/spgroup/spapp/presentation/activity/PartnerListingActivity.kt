@@ -1,6 +1,7 @@
 package com.spgroup.spapp.presentation.activity
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -16,12 +17,12 @@ import com.spgroup.spapp.domain.model.TopLevelCategory
 import com.spgroup.spapp.presentation.adapter.PartnerAdapter
 import com.spgroup.spapp.presentation.adapter.item_decoration.VerticalItemDecoration
 import com.spgroup.spapp.presentation.viewmodel.PartnerListingViewModel
-import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.doLogE
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_partner_listing.*
+import javax.inject.Inject
 import kotlin.math.max
 
 class PartnerListingActivity : BaseActivity() {
@@ -42,6 +43,8 @@ class PartnerListingActivity : BaseActivity() {
     lateinit var mViewModel: PartnerListingViewModel
     lateinit var mPartnerListAdapter: PartnerAdapter
 
+    @Inject lateinit var vmFactory: ViewModelProvider.Factory
+
     private var mBannerHeight = 0
     private var mActionBarHeight: Int = 0
     private var mScreenWidth: Int = 0
@@ -55,11 +58,14 @@ class PartnerListingActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        appInstance.appComponent.inject(this)
+
         setContentView(R.layout.activity_partner_listing)
         initViews()
 
         val cat = intent.getSerializableExtra(ConstUtils.EXTRA_TOP_LEVEL_CATEGORY) as TopLevelCategory
-        mViewModel = obtainViewModel(PartnerListingViewModel::class.java, ViewModelFactory.getInstance())
+        mViewModel = obtainViewModel(PartnerListingViewModel::class.java, vmFactory)
         subscribeUI()
         mViewModel.setInitialData(cat)
         mViewModel.loadPartnerListing()

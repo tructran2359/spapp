@@ -3,10 +3,7 @@ package com.spgroup.spapp.di.component
 import com.spgroup.spapp.di.ApplicationScoped
 import com.spgroup.spapp.di.module.*
 import com.spgroup.spapp.presentation.SPApplication
-import com.spgroup.spapp.presentation.activity.HomeActivity
-import com.spgroup.spapp.presentation.activity.PageActivity
-import com.spgroup.spapp.presentation.activity.SplashActivity
-import com.spgroup.spapp.presentation.activity.UpdateActivity
+import com.spgroup.spapp.presentation.activity.*
 import dagger.Component
 
 @Component(modules = [
@@ -30,5 +27,7 @@ interface AppComponent {
     fun inject(homeActivity: HomeActivity)
 
     fun inject(pageActivity: PageActivity)
+
+    fun inject(partnerListingActivity: PartnerListingActivity)
 
 }

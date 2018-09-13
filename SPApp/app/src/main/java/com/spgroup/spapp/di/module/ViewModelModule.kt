@@ -3,10 +3,7 @@ package com.spgroup.spapp.di.module
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.spgroup.spapp.di.ViewModelKey
-import com.spgroup.spapp.presentation.viewmodel.AppViewModelFactory
-import com.spgroup.spapp.presentation.viewmodel.HomeViewModel
-import com.spgroup.spapp.presentation.viewmodel.PageViewModel
-import com.spgroup.spapp.presentation.viewmodel.SplashViewModel
+import com.spgroup.spapp.presentation.viewmodel.*
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -31,4 +28,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PageViewModel::class)
     abstract fun bindPageViewModel(vm: PageViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PartnerListingViewModel::class)
+    abstract fun bindPartnerListingViewModel(vm: PartnerListingViewModel): ViewModel
 }

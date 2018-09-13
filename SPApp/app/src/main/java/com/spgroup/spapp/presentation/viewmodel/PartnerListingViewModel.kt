@@ -5,8 +5,9 @@ import com.spgroup.spapp.domain.model.PartnersListingItem
 import com.spgroup.spapp.domain.model.TopLevelCategory
 import com.spgroup.spapp.domain.usecase.GetPartnerListingUsecase
 import com.spgroup.spapp.domain.usecase.PreProcessPartnerUsecase
+import javax.inject.Inject
 
-class PartnerListingViewModel(
+class PartnerListingViewModel @Inject constructor(
         private val getPartnerListingUsecase: GetPartnerListingUsecase,
         private val preProccessPartnerUsecase: PreProcessPartnerUsecase
 ) : BaseViewModel() {
