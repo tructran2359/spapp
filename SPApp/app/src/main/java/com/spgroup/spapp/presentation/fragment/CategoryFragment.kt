@@ -1,7 +1,7 @@
 package com.spgroup.spapp.presentation.fragment
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -17,9 +17,11 @@ import com.spgroup.spapp.presentation.activity.CustomiseDisplayData
 import com.spgroup.spapp.presentation.activity.CustomiseNewActivity
 import com.spgroup.spapp.presentation.adapter.ServiceListingAdapter
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
-import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.extension.appInstance
+import com.spgroup.spapp.util.extension.obtainViewModelOfActivity
 import com.spgroup.spapp.util.extension.toInt
 import kotlinx.android.synthetic.main.fragment_category.*
+import javax.inject.Inject
 
 class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedListener {
 
@@ -42,6 +44,8 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
     lateinit var mServiceListingAdapter: ServiceListingAdapter
     lateinit var mViewModel: PartnerDetailsViewModel
     private var mCategory: Category? = null
+    @Inject
+    lateinit var vmFactory: ViewModelProvider.Factory
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -54,9 +58,9 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mViewModel = ViewModelProviders
-                .of(activity!!, ViewModelFactory.getInstance())
-                .get(PartnerDetailsViewModel::class.java)
+        appInstance.appComponent.inject(this)
+
+        mViewModel = obtainViewModelOfActivity(PartnerDetailsViewModel::class.java, vmFactory)
 
         subcribeUI()
 

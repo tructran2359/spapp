@@ -1,6 +1,7 @@
 package com.spgroup.spapp.presentation.fragment
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.view.LayoutInflater
@@ -10,18 +11,18 @@ import android.widget.TextView
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.adapter.CategoryPagerAdapter
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
-import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.doLogD
-import com.spgroup.spapp.util.extension.inflate
-import com.spgroup.spapp.util.extension.obtainViewModelOfActivity
-import com.spgroup.spapp.util.extension.setUpMenuActive
-import com.spgroup.spapp.util.extension.setUpMenuInactive
+import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.fragment_cart_partner_detail.*
+import javax.inject.Inject
 
 class CartPartnerDetailFragment: BaseFragment() {
 
     private lateinit var mViewModel: PartnerDetailsViewModel
     private lateinit var mAdapter: CategoryPagerAdapter
+
+    @Inject
+    lateinit var vmFactory: ViewModelProvider.Factory
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_cart_partner_detail, false)
@@ -30,9 +31,11 @@ class CartPartnerDetailFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        appInstance.appComponent.inject(this)
+
         setUpPages()
 
-        mViewModel = obtainViewModelOfActivity(PartnerDetailsViewModel::class.java, ViewModelFactory.getInstance())
+        mViewModel = obtainViewModelOfActivity(PartnerDetailsViewModel::class.java, vmFactory)
         subcribeUI()
     }
 

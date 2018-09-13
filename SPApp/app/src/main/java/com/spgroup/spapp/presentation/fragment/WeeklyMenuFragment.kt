@@ -1,6 +1,7 @@
 package com.spgroup.spapp.presentation.fragment
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,15 +14,18 @@ import com.spgroup.spapp.presentation.activity.BaseActivity
 import com.spgroup.spapp.presentation.activity.PdfActivity
 import com.spgroup.spapp.presentation.view.MenuView
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
-import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.doLogD
+import com.spgroup.spapp.util.extension.appInstance
 import com.spgroup.spapp.util.extension.getDimensionPixelSize
 import com.spgroup.spapp.util.extension.obtainViewModelOfActivity
 import kotlinx.android.synthetic.main.fragment_weekly_menu.*
+import javax.inject.Inject
 
 class WeeklyMenuFragment: BaseFragment(), MenuView.OnMenuItemClickListener {
 
     private lateinit var mViewModel: PartnerDetailsViewModel
+    @Inject
+    lateinit var vmFactory: ViewModelProvider.Factory
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -35,7 +39,8 @@ class WeeklyMenuFragment: BaseFragment(), MenuView.OnMenuItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mViewModel = obtainViewModelOfActivity(PartnerDetailsViewModel::class.java, ViewModelFactory.getInstance())
+        appInstance.appComponent.inject(this)
+        mViewModel = obtainViewModelOfActivity(PartnerDetailsViewModel::class.java, vmFactory)
         subscribeUI()
     }
 

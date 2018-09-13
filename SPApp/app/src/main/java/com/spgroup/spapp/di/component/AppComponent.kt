@@ -4,6 +4,7 @@ import com.spgroup.spapp.di.ApplicationScoped
 import com.spgroup.spapp.di.module.*
 import com.spgroup.spapp.presentation.SPApplication
 import com.spgroup.spapp.presentation.activity.*
+import com.spgroup.spapp.presentation.fragment.*
 import dagger.Component
 
 @Component(modules = [
@@ -43,5 +44,15 @@ interface AppComponent {
     fun inject(orderSummaryActivity: OrderSummaryActivity)
 
     fun inject(apiErrorActivity: ApiErrorActivity)
+
+    fun inject(cartPartnerDetailFragment: CartPartnerDetailFragment)
+
+    fun inject(categoryFragment: CategoryFragment)
+
+    fun inject(detailInfoPartnerDetailFragment: DetailInfoPartnerDetailFragment)
+
+    fun inject(onBoardingFragment: OnBoardingFragment)
+
+    fun inject(weeklyMenuFragment: WeeklyMenuFragment)
 
 }

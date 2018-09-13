@@ -1,16 +1,17 @@
 package com.spgroup.spapp.presentation.fragment
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.viewmodel.OnBoardingViewModel
-import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.fragment_on_boarding.*
+import javax.inject.Inject
 import kotlin.math.min
 
 class OnBoardingFragment: BaseFragment() {
@@ -28,6 +29,8 @@ class OnBoardingFragment: BaseFragment() {
 
     private var mPosition = -1
     private lateinit var mViewModel: OnBoardingViewModel
+    @Inject
+    lateinit var vmFactory: ViewModelProvider.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +44,8 @@ class OnBoardingFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mViewModel = obtainViewModelOfActivity(OnBoardingViewModel::class.java, ViewModelFactory.getInstance())
+        appInstance.appComponent.inject(this)
+        mViewModel = obtainViewModelOfActivity(OnBoardingViewModel::class.java, vmFactory)
 
         when(mPosition) {
             0 -> {
