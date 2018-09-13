@@ -1,6 +1,7 @@
 package com.spgroup.spapp.presentation.activity
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -17,6 +18,7 @@ import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_partner_information.*
 import org.jetbrains.anko.longToast
 import java.io.Serializable
+import javax.inject.Inject
 
 class PartnerInformationActivity : BaseActivity() {
 
@@ -46,12 +48,17 @@ class PartnerInformationActivity : BaseActivity() {
     private lateinit var mViewModel: PartnerInfoViewModel
     private var mAnimIsRunning = false
 
+    @Inject lateinit var vmFactory: ViewModelProvider.Factory
+
     ///////////////////////////////////////////////////////////////////////////
     // Override
     ///////////////////////////////////////////////////////////////////////////
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        appInstance.appComponent.inject(this)
+
         setContentView(R.layout.activity_partner_information)
 
         mViewModel = obtainViewModel(PartnerInfoViewModel::class.java, ViewModelFactory.getInstance())

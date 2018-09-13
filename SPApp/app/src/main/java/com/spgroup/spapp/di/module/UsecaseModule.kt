@@ -30,9 +30,9 @@ object UsecaseModule {
 
     @JvmStatic
     @Provides
-    fun provideGetServicesListByPartnerUsecase(schedulerFacade: SchedulerFacade, servicesRepository: ServicesRepository)
-            : GetServicesListByPartnerUsecase {
-        return GetServicesListByPartnerUsecase(schedulerFacade, servicesRepository)
+    fun providePartnerDetailsUsecase(schedulerFacade: SchedulerFacade, servicesRepository: ServicesRepository)
+            : GetPartnerDetailsUsecase {
+        return GetPartnerDetailsUsecase(schedulerFacade, servicesRepository)
     }
 
     @JvmStatic

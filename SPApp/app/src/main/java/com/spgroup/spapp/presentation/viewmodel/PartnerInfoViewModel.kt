@@ -1,11 +1,12 @@
 package com.spgroup.spapp.presentation.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
-import com.spgroup.spapp.domain.usecase.GetServicesListByPartnerUsecase
+import com.spgroup.spapp.domain.usecase.GetPartnerDetailsUsecase
 import com.spgroup.spapp.presentation.activity.PartnerInformationActivity.PartnerInfo
+import javax.inject.Inject
 
-class PartnerInfoViewModel(
-        private val getServicesListByPartnerUsecase: GetServicesListByPartnerUsecase
+class PartnerInfoViewModel @Inject constructor(
+        private val getServicesListByPartnerUsecase: GetPartnerDetailsUsecase
 ): BaseViewModel() {
 
     val mPartnerInfo = MutableLiveData<PartnerInfo>()

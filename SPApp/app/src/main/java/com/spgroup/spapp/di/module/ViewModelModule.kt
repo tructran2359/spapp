@@ -38,4 +38,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PartnerDetailsViewModel::class)
     abstract fun bindPartnerDetailsViewModel(vm: PartnerDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PartnerInfoViewModel::class)
+    abstract fun bindPartnerInfoViewModel(vm: PartnerInfoViewModel): ViewModel
 }

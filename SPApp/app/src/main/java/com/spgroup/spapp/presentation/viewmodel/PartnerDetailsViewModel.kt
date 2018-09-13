@@ -6,7 +6,7 @@ import com.spgroup.spapp.domain.model.Category
 import com.spgroup.spapp.domain.model.ComplexCustomisationService
 import com.spgroup.spapp.domain.model.PartnerDetails
 import com.spgroup.spapp.domain.usecase.GetCustomisationLowestPrice
-import com.spgroup.spapp.domain.usecase.GetServicesListByPartnerUsecase
+import com.spgroup.spapp.domain.usecase.GetPartnerDetailsUsecase
 import com.spgroup.spapp.domain.usecase.SelectedServiceUsecase
 import com.spgroup.spapp.presentation.activity.CustomiseDisplayData
 import com.spgroup.spapp.presentation.activity.PartnerInformationActivity
@@ -16,7 +16,7 @@ import java.io.Serializable
 import javax.inject.Inject
 
 class PartnerDetailsViewModel @Inject constructor(
-        private val getServicesListByPartnerUsecase: GetServicesListByPartnerUsecase,
+        private val getServicesListByPartnerUsecase: GetPartnerDetailsUsecase,
         private val getCustomisationLowestPrice: GetCustomisationLowestPrice
 ) : BaseViewModel() {
 

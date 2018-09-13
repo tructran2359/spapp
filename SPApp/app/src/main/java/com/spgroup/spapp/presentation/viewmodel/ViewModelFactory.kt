@@ -52,7 +52,7 @@ class ViewModelFactory private constructor(
     }
 
     private fun createPartnerInfoViewModel(): PartnerInfoViewModel {
-        val getServicesUsecase = GetServicesListByPartnerUsecase(schedulerFacade, cloudRepository)
+        val getServicesUsecase = GetPartnerDetailsUsecase(schedulerFacade, cloudRepository)
         return PartnerInfoViewModel(getServicesUsecase)
     }
 
@@ -76,7 +76,7 @@ class ViewModelFactory private constructor(
     }
 
     private fun createPartnerDetailsViewModel(): PartnerDetailsViewModel {
-        val getServicesUsecase = GetServicesListByPartnerUsecase(schedulerFacade, cloudRepository)
+        val getServicesUsecase = GetPartnerDetailsUsecase(schedulerFacade, cloudRepository)
         val getCustomisationLowestPrice = GetCustomisationLowestPrice()
         return PartnerDetailsViewModel(getServicesUsecase, getCustomisationLowestPrice)
     }
