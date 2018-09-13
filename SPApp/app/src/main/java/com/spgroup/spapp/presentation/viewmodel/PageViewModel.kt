@@ -3,8 +3,10 @@ package com.spgroup.spapp.presentation.viewmodel
 import android.arch.lifecycle.MutableLiveData
 import com.spgroup.spapp.domain.model.TopLevelPage
 import com.spgroup.spapp.manager.AppDataCache
+import javax.inject.Inject
 
-class PageViewModel(val appDataCache: AppDataCache): BaseViewModel() {
+class PageViewModel @Inject constructor(val appDataCache: AppDataCache)
+    : BaseViewModel() {
 
     val page = MutableLiveData<TopLevelPage>()
 

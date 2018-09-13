@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import com.spgroup.spapp.di.ViewModelKey
 import com.spgroup.spapp.presentation.viewmodel.AppViewModelFactory
 import com.spgroup.spapp.presentation.viewmodel.HomeViewModel
+import com.spgroup.spapp.presentation.viewmodel.PageViewModel
 import com.spgroup.spapp.presentation.viewmodel.SplashViewModel
 import dagger.Binds
 import dagger.Module
@@ -25,4 +26,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     abstract fun bindHomeViewModel(vm: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PageViewModel::class)
+    abstract fun bindPageViewModel(vm: PageViewModel): ViewModel
 }

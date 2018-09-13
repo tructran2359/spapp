@@ -1,6 +1,7 @@
 package com.spgroup.spapp.presentation.activity
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -14,13 +15,14 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.*
 import com.spgroup.spapp.presentation.view.IndicatorTextView
 import com.spgroup.spapp.presentation.viewmodel.PageViewModel
-import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
+import com.spgroup.spapp.util.extension.appInstance
 import com.spgroup.spapp.util.extension.getDimensionPixelSize
 import com.spgroup.spapp.util.extension.inflate
 import com.spgroup.spapp.util.extension.obtainViewModel
 import kotlinx.android.synthetic.main.activity_page.*
 import kotlinx.android.synthetic.main.layout_page_about_us.view.*
 import kotlinx.android.synthetic.main.layout_page_acknowledgement.view.*
+import javax.inject.Inject
 
 class PageActivity: BaseActivity() {
 
@@ -41,14 +43,19 @@ class PageActivity: BaseActivity() {
     }
 
     private var mType: String? = null
-//    private lateinit var mPage: Page
     private lateinit var mAnimAppear: Animation
     private lateinit var mAnimDisappear: Animation
     private lateinit var mViewModel: PageViewModel
     private var mAnimIsRunning = false
 
+    @Inject
+    lateinit var vmFactory: ViewModelProvider.Factory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        appInstance.appComponent.inject(this)
+
         setContentView(R.layout.activity_page)
 
         mType = intent.getStringExtra(EXTRA_TYPE)
@@ -56,7 +63,7 @@ class PageActivity: BaseActivity() {
 
 //        mPage = createDummy()
 
-        mViewModel = obtainViewModel(PageViewModel::class.java, ViewModelFactory.getInstance())
+        mViewModel = obtainViewModel(PageViewModel::class.java, vmFactory)
         mViewModel.run {
             page.observe(this@PageActivity, Observer {
                 it?.let {
