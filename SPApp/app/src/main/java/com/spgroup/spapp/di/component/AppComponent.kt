@@ -42,4 +42,6 @@ interface AppComponent {
 
     fun inject(orderSummaryActivity: OrderSummaryActivity)
 
+    fun inject(apiErrorActivity: ApiErrorActivity)
+
 }

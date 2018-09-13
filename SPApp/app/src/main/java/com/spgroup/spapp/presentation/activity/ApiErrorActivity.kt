@@ -1,18 +1,20 @@
 package com.spgroup.spapp.presentation.activity
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.view.isGone
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.viewmodel.SplashViewModel
-import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.doLogE
+import com.spgroup.spapp.util.extension.appInstance
 import com.spgroup.spapp.util.extension.obtainViewModel
 import com.spgroup.spapp.util.extension.setLayoutParamsSizeFromDimens
 import com.spgroup.spapp.util.extension.updateMainButtonEnable
 import kotlinx.android.synthetic.main.activity_error.*
+import javax.inject.Inject
 
 class ApiErrorActivity: BaseErrorActivity() {
 
@@ -30,8 +32,13 @@ class ApiErrorActivity: BaseErrorActivity() {
     private var mForSplash = false
     private var mViewModel: SplashViewModel? = null
 
+    @Inject
+    lateinit var vmFactory: ViewModelProvider.Factory
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        appInstance.appComponent.inject(this)
 
         mForSplash = intent.getBooleanExtra(EXTRA_FOR_SPLASH, false)
 
@@ -42,7 +49,7 @@ class ApiErrorActivity: BaseErrorActivity() {
     }
 
     private fun setUpViewModel() {
-        mViewModel = obtainViewModel(SplashViewModel::class.java, ViewModelFactory.getInstance())
+        mViewModel = obtainViewModel(SplashViewModel::class.java, vmFactory)
         subscibeUI()
     }
 
