@@ -1,7 +1,7 @@
 package com.spgroup.spapp.presentation.activity
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -21,14 +21,12 @@ import com.spgroup.spapp.presentation.adapter.item_decoration.HomeMerchantItemtD
 import com.spgroup.spapp.presentation.adapter.item_decoration.VerticalItemDecoration
 import com.spgroup.spapp.presentation.view.TopLeverCateGroupView
 import com.spgroup.spapp.presentation.viewmodel.HomeViewModel
-import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
-import com.spgroup.spapp.util.extension.getDimensionPixelSize
-import com.spgroup.spapp.util.extension.getDisplayMetrics
-import com.spgroup.spapp.util.extension.getPartnerDetailIntent
+import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.menu_home.*
 import org.jetbrains.anko.longToast
+import javax.inject.Inject
 
 open class HomeActivity :
         BaseActivity(),
@@ -51,12 +49,18 @@ open class HomeActivity :
     private lateinit var mPromotionAdapter: HomePromotionAdapter
     private lateinit var mMerchantAdapter: HomeMerchantAdapter
 
+    @Inject
+    lateinit var vmFactory: ViewModelProvider.Factory
+
     ///////////////////////////////////////////////////////////////////////////
     // Override
     ///////////////////////////////////////////////////////////////////////////
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        appInstance.appComponent.inject(this)
+
         setContentView(R.layout.activity_home)
         setupViewModel()
         subscribeUI()
@@ -64,8 +68,7 @@ open class HomeActivity :
     }
 
     private fun setupViewModel() {
-        val factory = ViewModelFactory.getInstance()
-        mViewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
+        mViewModel = obtainViewModel(HomeViewModel::class.java, vmFactory)
         mViewModel.getInitData()
     }
 

@@ -3,6 +3,7 @@ package com.spgroup.spapp.di.component
 import com.spgroup.spapp.di.ApplicationScoped
 import com.spgroup.spapp.di.module.*
 import com.spgroup.spapp.presentation.SPApplication
+import com.spgroup.spapp.presentation.activity.HomeActivity
 import com.spgroup.spapp.presentation.activity.SplashActivity
 import com.spgroup.spapp.presentation.activity.UpdateActivity
 import dagger.Component
@@ -24,5 +25,7 @@ interface AppComponent {
     fun inject(splashActivity: SplashActivity)
 
     fun inject(updateActivity: UpdateActivity)
+
+    fun inject(homeActivity: HomeActivity)
 
 }

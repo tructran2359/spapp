@@ -6,8 +6,9 @@ import com.spgroup.spapp.domain.model.TopLevelFeaturedPartner
 import com.spgroup.spapp.domain.model.TopLevelPromotion
 import com.spgroup.spapp.domain.model.TopLevelVariable
 import com.spgroup.spapp.manager.AppDataCache
+import javax.inject.Inject
 
-class HomeViewModel(
+class HomeViewModel @Inject constructor(
         private val appDataCache: AppDataCache
 ) : BaseViewModel() {
 
