@@ -38,4 +38,6 @@ interface AppComponent {
 
     fun inject(onBoardingActivity: OnBoardingActivity)
 
+    fun inject(pdfActivity: PdfActivity)
+
 }

@@ -2,8 +2,9 @@ package com.spgroup.spapp.presentation.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import com.spgroup.spapp.repository.http.DownloadFileAsyncTask
+import javax.inject.Inject
 
-class PdfViewModel: BaseViewModel(), DownloadFileAsyncTask.OnDownloadListener {
+class PdfViewModel @Inject constructor(): BaseViewModel(), DownloadFileAsyncTask.OnDownloadListener {
 
     val mFilePath = MutableLiveData<String>()
     val mIsLoading = MutableLiveData<Boolean>()

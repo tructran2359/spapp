@@ -2,6 +2,7 @@ package com.spgroup.spapp.presentation.activity
 
 //import com.spgroup.spapp.R.id.webview
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,10 +12,12 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.viewmodel.PdfViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.doLogE
+import com.spgroup.spapp.util.extension.appInstance
 import com.spgroup.spapp.util.extension.obtainViewModel
 import com.spgroup.spapp.util.extension.toFullUrl
 import kotlinx.android.synthetic.main.activity_pdf.*
 import java.io.File
+import javax.inject.Inject
 
 class PdfActivity: BaseActivity() {
 
@@ -34,6 +37,8 @@ class PdfActivity: BaseActivity() {
     private lateinit var mTitle: String
     private lateinit var mUrl: String
     private lateinit var mViewModel: PdfViewModel
+    @Inject
+    lateinit var vmFactory: ViewModelProvider.Factory
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -41,6 +46,9 @@ class PdfActivity: BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        appInstance.appComponent.inject(this)
+
         setContentView(R.layout.activity_pdf)
 
         mTitle = intent.getStringExtra(EXTRA_TITLE)

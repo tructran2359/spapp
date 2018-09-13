@@ -53,4 +53,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(OnBoardingViewModel::class)
     abstract fun bindOnBoardingViewModel(vm: OnBoardingViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PdfViewModel::class)
+    abstract fun bindPdfViewModel(vm: PdfViewModel): ViewModel
 }
