@@ -22,14 +22,18 @@ class DetailInfoPartnerDetailFragment: BaseFragment() {
     @Inject
     lateinit var vmFactory: ViewModelProvider.Factory
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        appInstance.appComponent.inject(this)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_detail_info_partner_detail)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        appInstance.appComponent.inject(this)
 
         mViewModel = obtainViewModelOfActivity(PartnerDetailsViewModel::class.java, vmFactory)
         subscribeUI()

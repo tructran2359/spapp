@@ -31,6 +31,12 @@ class WeeklyMenuFragment: BaseFragment(), MenuView.OnMenuItemClickListener {
     // Override
     ///////////////////////////////////////////////////////////////////////////
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        appInstance.appComponent.inject(this)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_weekly_menu, container, false)
         return rootView
@@ -39,7 +45,6 @@ class WeeklyMenuFragment: BaseFragment(), MenuView.OnMenuItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        appInstance.appComponent.inject(this)
         mViewModel = obtainViewModelOfActivity(PartnerDetailsViewModel::class.java, vmFactory)
         subscribeUI()
     }

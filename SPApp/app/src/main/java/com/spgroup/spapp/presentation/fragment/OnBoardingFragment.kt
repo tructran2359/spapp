@@ -35,6 +35,8 @@ class OnBoardingFragment: BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mPosition = arguments?.getInt(EXTRA_POSITION, -1) ?: -1
+
+        appInstance.appComponent.inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,8 +45,6 @@ class OnBoardingFragment: BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        appInstance.appComponent.inject(this)
         mViewModel = obtainViewModelOfActivity(OnBoardingViewModel::class.java, vmFactory)
 
         when(mPosition) {

@@ -24,14 +24,18 @@ class CartPartnerDetailFragment: BaseFragment() {
     @Inject
     lateinit var vmFactory: ViewModelProvider.Factory
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        appInstance.appComponent.inject(this)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fragment_cart_partner_detail, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        appInstance.appComponent.inject(this)
 
         setUpPages()
 
