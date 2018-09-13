@@ -18,7 +18,6 @@ import com.spgroup.spapp.presentation.fragment.DetailInfoPartnerDetailFragment
 import com.spgroup.spapp.presentation.fragment.MinOrderDialog
 import com.spgroup.spapp.presentation.fragment.PartnerImageFragment
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
-import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.doLogE
@@ -95,7 +94,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         val partnerUEN = intent.getStringExtra(ConstUtils.EXTRA_PARTNER_UEN)
 //        doLogD("Partner", "onCreate partner: ${partnerUEN ?: "null"}")
         // This is demo for using ViewModel
-        mViewModel = obtainViewModel(PartnerDetailsViewModel::class.java, ViewModelFactory.getInstance())
+        mViewModel = obtainViewModel(PartnerDetailsViewModel::class.java, vmFactory)
                 .apply { this.partnerUEN = partnerUEN }
         with(mViewModel) {
 

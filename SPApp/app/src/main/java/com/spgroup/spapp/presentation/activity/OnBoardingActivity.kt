@@ -11,7 +11,6 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.SPApplication
 import com.spgroup.spapp.presentation.adapter.OnBoardingAdapter
 import com.spgroup.spapp.presentation.viewmodel.OnBoardingViewModel
-import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_on_boarding.*
 import javax.inject.Inject
@@ -45,7 +44,7 @@ class OnBoardingActivity : BaseActivity() {
 
         setContentView(R.layout.activity_on_boarding)
 
-        mViewModel = obtainViewModel(OnBoardingViewModel::class.java, ViewModelFactory.getInstance())
+        mViewModel = obtainViewModel(OnBoardingViewModel::class.java, vmFactory)
 
         setUpAnimation()
         setUpViews()

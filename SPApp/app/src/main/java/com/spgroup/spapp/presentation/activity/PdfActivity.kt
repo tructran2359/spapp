@@ -10,7 +10,6 @@ import android.view.View
 import androidx.core.view.isGone
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.viewmodel.PdfViewModel
-import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.doLogE
 import com.spgroup.spapp.util.extension.appInstance
 import com.spgroup.spapp.util.extension.obtainViewModel
@@ -57,7 +56,7 @@ class PdfActivity: BaseActivity() {
 //        // To simulate invalid url
 //        mUrl = "test1234"
 
-        mViewModel = obtainViewModel(PdfViewModel::class.java, ViewModelFactory.getInstance())
+        mViewModel = obtainViewModel(PdfViewModel::class.java, vmFactory)
         subscribeUI()
 
         action_bar.run {

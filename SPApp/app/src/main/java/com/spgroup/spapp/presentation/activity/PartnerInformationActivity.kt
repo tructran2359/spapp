@@ -12,7 +12,6 @@ import android.view.animation.AnimationUtils
 import androidx.core.view.isGone
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.viewmodel.PartnerInfoViewModel
-import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.doLogE
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_partner_information.*
@@ -61,7 +60,7 @@ class PartnerInformationActivity : BaseActivity() {
 
         setContentView(R.layout.activity_partner_information)
 
-        mViewModel = obtainViewModel(PartnerInfoViewModel::class.java, ViewModelFactory.getInstance())
+        mViewModel = obtainViewModel(PartnerInfoViewModel::class.java, vmFactory)
         subscribeUI()
 
         val dataAvailable = intent.getBooleanExtra(EXTRA_DATA_AVAILABLE, false)
