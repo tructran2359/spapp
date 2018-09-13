@@ -4,6 +4,7 @@ import android.os.Build
 import android.text.Html
 import com.spgroup.spapp.BuildConfig
 import com.spgroup.spapp.util.doLogE
+import org.unbescape.html.HtmlEscape
 
 fun Float.formatPrice() = "S$%.2f".format(this)
 
@@ -36,6 +37,8 @@ fun String.toHtmlSpanned() =
         } else {
             Html.fromHtml(this)
         }
+
+fun String.toNoSpecialCharString() = HtmlEscape.unescapeHtml(this)
 
 fun Float.toPercentageText() = "$this%"
 

@@ -25,6 +25,7 @@ android {
         targetSdkVersion 28
         versionCode 8
         versionName "1.0.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "BASE_API", "\"http://checkdev.prod.acquia-sites.com\""
@@ -125,6 +126,11 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
     // Google Analytics
     implementation "com.google.android.gms:play-services-analytics:$rootProject.googlePlayServices"
+    // Multidex
+    implementation 'com.android.support:multidex:1.0.3'
+
+    // HTML char
+    implementation 'org.unbescape:unbescape:1.1.6.RELEASE'
 
     // Test
     testImplementation 'junit:junit:4.12'

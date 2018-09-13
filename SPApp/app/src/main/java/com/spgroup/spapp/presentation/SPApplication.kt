@@ -1,6 +1,6 @@
 package com.spgroup.spapp.presentation
 
-import android.app.Application
+import android.support.multidex.MultiDexApplication
 import com.google.android.gms.analytics.GoogleAnalytics
 import com.google.android.gms.analytics.Tracker
 import com.spgroup.spapp.BuildConfig
@@ -10,7 +10,7 @@ import com.spgroup.spapp.manager.AppConfigManager
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
 
-class SPApplication: Application() {
+class SPApplication: MultiDexApplication() {
 
     companion object {
         lateinit var mAppInstance: SPApplication
