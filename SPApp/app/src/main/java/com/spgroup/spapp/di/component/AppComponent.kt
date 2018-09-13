@@ -30,4 +30,6 @@ interface AppComponent {
 
     fun inject(partnerListingActivity: PartnerListingActivity)
 
+    fun inject(partnerDetailsActivity: PartnerDetailsActivity)
+
 }

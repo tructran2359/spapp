@@ -13,8 +13,9 @@ import com.spgroup.spapp.presentation.activity.PartnerInformationActivity
 import com.spgroup.spapp.util.extension.formatPrice
 import com.spgroup.spapp.util.extension.toInt
 import java.io.Serializable
+import javax.inject.Inject
 
-class PartnerDetailsViewModel(
+class PartnerDetailsViewModel @Inject constructor(
         private val getServicesListByPartnerUsecase: GetServicesListByPartnerUsecase,
         private val getCustomisationLowestPrice: GetCustomisationLowestPrice
 ) : BaseViewModel() {

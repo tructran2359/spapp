@@ -2,9 +2,7 @@ package com.spgroup.spapp.di.module
 
 import com.spgroup.spapp.domain.SchedulerFacade
 import com.spgroup.spapp.domain.ServicesRepository
-import com.spgroup.spapp.domain.usecase.GetInitialDataUsecase
-import com.spgroup.spapp.domain.usecase.GetPartnerListingUsecase
-import com.spgroup.spapp.domain.usecase.PreProcessPartnerUsecase
+import com.spgroup.spapp.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 
@@ -30,4 +28,16 @@ object UsecaseModule {
         return PreProcessPartnerUsecase()
     }
 
+    @JvmStatic
+    @Provides
+    fun provideGetServicesListByPartnerUsecase(schedulerFacade: SchedulerFacade, servicesRepository: ServicesRepository)
+            : GetServicesListByPartnerUsecase {
+        return GetServicesListByPartnerUsecase(schedulerFacade, servicesRepository)
+    }
+
+    @JvmStatic
+    @Provides
+    fun provideGetCustomisationLowestPrice(): GetCustomisationLowestPrice {
+        return GetCustomisationLowestPrice()
+    }
 }

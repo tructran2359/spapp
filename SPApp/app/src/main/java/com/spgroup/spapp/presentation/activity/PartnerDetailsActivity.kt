@@ -2,6 +2,7 @@ package com.spgroup.spapp.presentation.activity
 
 import android.app.Activity
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -23,6 +24,7 @@ import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.doLogE
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_partner_details.*
+import javax.inject.Inject
 
 class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
 
@@ -45,14 +47,15 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     ///////////////////////////////////////////////////////////////////////////
 
     lateinit var mImageAdapter: PartnerImagesAdapter
-//    lateinit var mCategoryAdapter: CategoryPagerAdapter
     lateinit var mAnimationAppear: Animation
     lateinit var mAnimationDisappear: Animation
     private var mActionBarHeight: Int = 0
     private var mInitTextSize = 0f
     private var mPromotionBarHeight = 0
-    private lateinit var mViewModel: PartnerDetailsViewModel
     private var mIsCart = true
+
+    private lateinit var mViewModel: PartnerDetailsViewModel
+    @Inject lateinit var vmFactory: ViewModelProvider.Factory
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -60,6 +63,9 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        appInstance.appComponent.inject(this)
+
         setContentView(R.layout.activity_partner_details)
 
         mActionBarHeight = getDimensionPixelSize(R.dimen.action_bar_height)
