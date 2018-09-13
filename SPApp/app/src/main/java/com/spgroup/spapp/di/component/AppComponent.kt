@@ -4,6 +4,7 @@ import com.spgroup.spapp.di.ApplicationScoped
 import com.spgroup.spapp.di.module.*
 import com.spgroup.spapp.presentation.SPApplication
 import com.spgroup.spapp.presentation.activity.SplashActivity
+import com.spgroup.spapp.presentation.activity.UpdateActivity
 import dagger.Component
 
 @Component(modules = [
@@ -21,5 +22,7 @@ interface AppComponent {
     fun inject(spApplication: SPApplication)
 
     fun inject(splashActivity: SplashActivity)
+
+    fun inject(updateActivity: UpdateActivity)
 
 }

@@ -5,9 +5,11 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import com.spgroup.spapp.R
-import com.spgroup.spapp.di.Injection
+import com.spgroup.spapp.manager.AppDataCache
+import com.spgroup.spapp.util.extension.appInstance
 import kotlinx.android.synthetic.main.activity_update.*
 import org.jetbrains.anko.longToast
+import javax.inject.Inject
 
 class UpdateActivity: BaseActivity() {
 
@@ -18,10 +20,14 @@ class UpdateActivity: BaseActivity() {
         }
     }
 
-    private val mAppDataCache = Injection.provideAppDataCache()
+    @Inject
+    lateinit var mAppDataCache: AppDataCache
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        appInstance.appComponent.inject(this)
+
         setContentView(R.layout.activity_update)
 
         tv_update.setOnClickListener {
