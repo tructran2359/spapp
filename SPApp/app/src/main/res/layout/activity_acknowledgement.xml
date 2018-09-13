@@ -21,11 +21,11 @@
             android:paddingBottom="@dimen/common_vert_xlarge"
             >
 
-            <ImageView
+            <pl.droidsonroids.gif.GifImageView
                 android:id="@+id/iv_confirm"
                 android:layout_width="@dimen/summitted_icon_width"
                 android:layout_height="@dimen/submitted_icon_height"
-                android:src="@drawable/submitted"
+                android:src="@drawable/submitted_ani"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/common_vert_xlarge"
                 android:layout_marginBottom="@dimen/common_vert_medium"
