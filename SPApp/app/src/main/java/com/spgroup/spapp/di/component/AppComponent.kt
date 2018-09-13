@@ -36,4 +36,6 @@ interface AppComponent {
 
     fun inject(customiseNewActivity: CustomiseNewActivity)
 
+    fun inject(onBoardingActivity: OnBoardingActivity)
+
 }

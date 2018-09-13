@@ -48,4 +48,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CustomiseNewViewModel::class)
     abstract fun bindCustomiseViewModel(vm: CustomiseNewViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OnBoardingViewModel::class)
+    abstract fun bindOnBoardingViewModel(vm: OnBoardingViewModel): ViewModel
 }

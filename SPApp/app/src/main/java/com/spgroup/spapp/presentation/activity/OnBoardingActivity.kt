@@ -1,5 +1,6 @@
 package com.spgroup.spapp.presentation.activity
 
+import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +14,7 @@ import com.spgroup.spapp.presentation.viewmodel.OnBoardingViewModel
 import com.spgroup.spapp.presentation.viewmodel.ViewModelFactory
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_on_boarding.*
+import javax.inject.Inject
 
 class OnBoardingActivity : BaseActivity() {
 
@@ -33,10 +35,14 @@ class OnBoardingActivity : BaseActivity() {
 
     private lateinit var mAdapter: OnBoardingAdapter
 
+    @Inject lateinit var vmFactory: ViewModelProvider.Factory
     private lateinit var mViewModel: OnBoardingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        appInstance.appComponent.inject(this)
+
         setContentView(R.layout.activity_on_boarding)
 
         mViewModel = obtainViewModel(OnBoardingViewModel::class.java, ViewModelFactory.getInstance())

@@ -2,8 +2,9 @@ package com.spgroup.spapp.presentation.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import com.spgroup.spapp.util.doLogD
+import javax.inject.Inject
 
-class OnBoardingViewModel: BaseViewModel() {
+class OnBoardingViewModel @Inject constructor(): BaseViewModel() {
 
     var mPageAnimationState = MutableLiveData<Pair<Int, Boolean>>() //<PagePosition, isAnimationCompleted>
 
