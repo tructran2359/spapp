@@ -3,7 +3,10 @@ package com.spgroup.spapp.presentation.activity
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.google.android.gms.analytics.HitBuilders
+import com.spgroup.spapp.presentation.SPApplication
 import com.spgroup.spapp.util.extension.isOnline
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
@@ -25,6 +28,16 @@ open class BaseActivity: AppCompatActivity() {
         const val EXTRA_FOR_SPLASH = "EXTRA_FOR_SPLASH"
 
         const val NO_REQUEST_CODE = -1
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        SPApplication.mTracker.run {
+            val screenName = this::class.java.simpleName
+//        doLogD("ScreenName", screenName)
+            setScreenName(screenName)
+            send(HitBuilders.ScreenViewBuilder().build())
+        }
     }
 
 
