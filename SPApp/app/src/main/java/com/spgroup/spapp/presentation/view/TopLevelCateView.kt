@@ -41,7 +41,12 @@ class TopLevelCateView: LinearLayout {
      * @param cateImage: drawable id for dummy data
      */
     fun setData(cateName: String, cateImage: String) {
-        tv_cate_name.setText(cateName)
+        val formatedName = if (cateName.equals("housekeeping", true)) {
+            "House-\nkeeping"
+        } else {
+            cateName
+        }
+        tv_cate_name.setText(formatedName)
         iv_cate_image.loadImageWithPlaceholder(cateImage,
                 R.drawable.placeholder_icon,
                 R.drawable.placeholder_icon
