@@ -15,6 +15,7 @@
         app:tabIndicatorHeight="@dimen/common_spacing"
         app:tabPaddingStart="@dimen/common_horz_large"
         app:tabPaddingEnd="@dimen/common_horz_large"
+        app:tabMaxWidth="10000dp"
         />
 
     <android.support.v4.view.ViewPager
