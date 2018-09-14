@@ -5,6 +5,7 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.CheckboxService
 import com.spgroup.spapp.presentation.adapter.ServiceListingAdapter
 import com.spgroup.spapp.util.extension.inflate
+import com.spgroup.spapp.util.extension.isGoneWithText
 import kotlinx.android.synthetic.main.layout_service_item_check_box.view.*
 
 class ServiceItemViewCheckBox(
@@ -20,7 +21,9 @@ class ServiceItemViewCheckBox(
         inflate(R.layout.layout_service_item_check_box, true)
         tv_name.text = service.label
         tv_price.text = service.priceText
+        tv_price.isGoneWithText(service.priceText)
         tv_description.text = service.serviceDescription
+        tv_description.isGoneWithText(service.serviceDescription)
         isChecked = (count == 1)
         onCheckUpdated()
 

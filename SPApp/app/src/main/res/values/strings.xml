@@ -121,5 +121,6 @@
     <string name="add_more_services">ADD MORE SERVICES</string>
     <string name="surcharge_label">Additional Charge</string>
     <string name="merchant_tnc_title">Merchant’s Terms &amp; Conditions</string>
+    <string name="price_est_excludes_with_format">Price estimate excludes %s</string>
 
 </resources>

@@ -437,7 +437,8 @@ class OrderSummaryActivity : BaseActivity() {
         val inflater = LayoutInflater.from(this)
 
         for ((cateId, listSelectedServce) in mapSelectedServices) {
-                addHeader(inflater, mViewModel.getCateName(cateId) ?: "", cateId )
+            val cateName = mViewModel.getCateName(cateId) ?: ""
+            addHeader(inflater, cateName, cateId )
 
             for (selectedService in listSelectedServce) {
                 when (selectedService) {
@@ -446,7 +447,7 @@ class OrderSummaryActivity : BaseActivity() {
                         if (selectedService.service is MultiplierService) {
                             addItemCounter(cateId, selectedService)
                         } else if (selectedService.service is CheckboxService) {
-                            addItemCheckbox(cateId, selectedService)
+                            addItemCheckbox(cateId, cateName, selectedService)
                         }
                     }
 
@@ -524,7 +525,7 @@ class OrderSummaryActivity : BaseActivity() {
         ll_item_container.addView(view)
     }
 
-    private fun addItemCheckbox(cateId: String, item: SelectedService) {
+    private fun addItemCheckbox(cateId: String, cateName: String, item: SelectedService) {
         val service = item.service as CheckboxService
         val tag = createServiceTag(service.id)
         val view = SummaryItemViewEstimated(this)
@@ -538,7 +539,7 @@ class OrderSummaryActivity : BaseActivity() {
         view.run {
             setLayoutParams(layoutParams)
             setName(service.label)
-            setDescription(service.serviceDescription)
+            setDescription(getString(R.string.price_est_excludes_with_format, cateName))
             setTag(tag)
             setOnDeleteListener {
                 mViewModel.deleteService(cateId, service.id)
