@@ -29,6 +29,7 @@ class PartnerDetailsViewModel @Inject constructor(
     val estimatedPrice = MutableLiveData<Float>()
     val newSelectedComplexServiceWithCateId = MutableLiveData<Pair<String, Int>>()
     val refreshData = MutableLiveData<Boolean>()
+    val updateData = MutableLiveData<Boolean>()
 
     init {
         selectedCount.value = 0
@@ -140,7 +141,7 @@ class PartnerDetailsViewModel @Inject constructor(
         return hashMap
     }
 
-    fun getMapSelectedService() = mSelectedServiceUsecase.mapSelectedServices
+    fun getMapSelectedServices() = mSelectedServiceUsecase.mapSelectedServices
 
     fun getDiscount() = partnerDetails.value?.discount ?: ""
 
@@ -152,6 +153,12 @@ class PartnerDetailsViewModel @Inject constructor(
         mSelectedServiceUsecase.clearAllSelectedServices()
         updateCountAndPrice()
         refreshData.value = true
+    }
+
+    fun updateSelectedService(updatedMap: HashMap<String, MutableList<ISelectedService>>) {
+        mSelectedServiceUsecase.mapSelectedServices = updatedMap
+        updateCountAndPrice()
+        updateData.value = true
     }
 }
 

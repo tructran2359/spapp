@@ -9,6 +9,7 @@ import com.spgroup.spapp.domain.model.ComplexCustomisationService
 import com.spgroup.spapp.domain.model.MultiplierService
 import com.spgroup.spapp.domain.model.SubCategory
 import com.spgroup.spapp.presentation.adapter.viewholder.ServiceVH
+import com.spgroup.spapp.presentation.viewmodel.ISelectedService
 import com.spgroup.spapp.util.extension.inflate
 import com.spgroup.spapp.util.extension.toInt
 import kotlinx.android.synthetic.main.layout_service.view.*
@@ -90,6 +91,8 @@ class ServiceListingAdapter(
         notifyDataSetChanged()
     }
 
+//    fun updateData()
+
     private fun collapseItem(position: Int) {
         val expanded = isItemExpanded(position)
         mMapExpandedItem[mData[position].id] = expanded.not()
@@ -110,6 +113,14 @@ class ServiceListingAdapter(
                 return
             }
         }
+    }
+
+    fun updateSelectedServices(listSelectedServices: MutableList<ISelectedService>) {
+        mMapSelectedValue.clear()
+        listSelectedServices.forEach { iSelectedService: ISelectedService ->
+            mMapSelectedValue[iSelectedService.getId()] = iSelectedService.getSelectedCount()
+        }
+        notifyDataSetChanged()
     }
 
     ///////////////////////////////////////////////////////////////////////////

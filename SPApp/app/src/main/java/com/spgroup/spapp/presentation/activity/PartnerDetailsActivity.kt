@@ -17,6 +17,7 @@ import com.spgroup.spapp.presentation.fragment.CartPartnerDetailFragment
 import com.spgroup.spapp.presentation.fragment.DetailInfoPartnerDetailFragment
 import com.spgroup.spapp.presentation.fragment.MinOrderDialog
 import com.spgroup.spapp.presentation.fragment.PartnerImageFragment
+import com.spgroup.spapp.presentation.viewmodel.ISelectedService
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
 import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.doLogD
@@ -84,9 +85,15 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
                 val customiseDisplayData = data.getSerializableExtra(CustomiseNewActivity.EXTRA_DISPLAY_DATA) as CustomiseDisplayData
                 mViewModel.addComplexSelectedServiceItem(customiseDisplayData)
             }
-        } else if (requestCode == RC_ORDER_SUMMARY && resultCode == Activity.RESULT_OK) {
-            doLogD("EmptyResques", "onActivityResult call refresh")
-            mViewModel.clearAllSelectedService()
+        } else if (requestCode == RC_ORDER_SUMMARY) {
+            if (resultCode == Activity.RESULT_OK) {
+                doLogD("EmptyResques", "onActivityResult call refresh")
+                mViewModel.clearAllSelectedService()
+            } else if (resultCode == Activity.RESULT_CANCELED && data != null) {
+                val selectedServiceMap
+                        = data.getSerializableExtra(OrderSummaryActivity.EXTRA_SERVICE_MAP) as HashMap<String, MutableList<ISelectedService>>
+                mViewModel.updateSelectedService(selectedServiceMap)
+            }
         }
     }
 
@@ -313,7 +320,7 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         mViewModel.partnerDetails.value?.run {
             val intent = OrderSummaryActivity.getLaunchIntent(
                     context = this@PartnerDetailsActivity,
-                    mapSelectedServices = mViewModel.getMapSelectedService(),
+                    mapSelectedServices = mViewModel.getMapSelectedServices(),
                     partnerDetails = this
             )
             startActivityForResult(intent, RC_ORDER_SUMMARY)

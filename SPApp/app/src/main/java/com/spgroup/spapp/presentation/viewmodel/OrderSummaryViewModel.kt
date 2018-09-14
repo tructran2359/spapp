@@ -145,6 +145,8 @@ class OrderSummaryViewModel @Inject constructor(
 
     fun isRemembered() = mAppConfigmanager.isRemembered()
 
+    fun getSelectedServicesMap() = mSelectedServiceUsecase.mapSelectedServices
+
 }
 
 data class EstPriceData(

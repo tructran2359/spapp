@@ -105,6 +105,14 @@ class OrderSummaryActivity : BaseActivity() {
 
     }
 
+    override fun onBackPressed() {
+        val intent = Intent()
+        val mapSelectedServices = mViewModel.getSelectedServicesMap()
+        intent.putExtra(EXTRA_SERVICE_MAP, mapSelectedServices)
+        setResult(Activity.RESULT_CANCELED, intent)
+        finish()
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // Other
     ///////////////////////////////////////////////////////////////////////////

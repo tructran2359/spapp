@@ -43,7 +43,7 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
 
     lateinit var mServiceListingAdapter: ServiceListingAdapter
     lateinit var mViewModel: PartnerDetailsViewModel
-    private var mCategory: Category? = null
+    private lateinit var mCategory: Category
     @Inject
     lateinit var vmFactory: ViewModelProvider.Factory
 
@@ -73,7 +73,7 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
             if (categoryId == null) {
                 throw IllegalArgumentException("Category must be provided")
             } else {
-                mCategory = mViewModel.getCategory(categoryId)
+                mCategory = mViewModel.getCategory(categoryId) ?: throw IllegalArgumentException("Category must be provided")
             }
         } ?: throw IllegalArgumentException("Category must be provided")
 
@@ -90,7 +90,7 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
         mViewModel.run {
             newSelectedComplexServiceWithCateId.observe(this@CategoryFragment, Observer { pair ->
                 pair?.run {
-                    if (mCategory!!.id == first) {
+                    if (mCategory.id == first) {
                         mServiceListingAdapter.addSelectedItem(second, 1)
                     }
                 }
@@ -100,6 +100,16 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
                 it?.let { clear ->
                     if (clear) {
                         mServiceListingAdapter.refreshDataState()
+                    }
+                }
+            })
+
+            updateData.observe(this@CategoryFragment, Observer {
+                it?.let { update ->
+                    if (update) {
+                        val mapSelectedServices = mViewModel.getMapSelectedServices()
+                        val listSelectedServices = mapSelectedServices[mCategory.id] ?: mutableListOf()
+                        mServiceListingAdapter.updateSelectedServices(listSelectedServices)
                     }
                 }
             })
@@ -115,7 +125,7 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
             val cateId = mCategory!!.id
             val serviceId = itemData.getServiceId()
             val displayData = CustomiseDisplayData(
-                    categoryId = mCategory!!.id,
+                    categoryId = mCategory.id,
                     serviceItem = itemData,
                     mapSelectedOption = mViewModel.getSelectedOptionMap(cateId, serviceId) ?: HashMap(),
                     specialInstruction = mViewModel.getSelectedInstruction(cateId, serviceId),
@@ -130,14 +140,14 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
     }
 
     override fun onComplexCustomisationItemDelete(itemData: ComplexCustomisationService) {
-        mViewModel.removeSelectedService(mCategory!!.id, itemData.id)
+        mViewModel.removeSelectedService(mCategory.id, itemData.id)
     }
 
     override fun onMultiplierItemChanged(itemData: MultiplierService, count: Int) {
         mViewModel.updateNormalSelectedServiceItem(
                 absServiceItem = itemData,
                 count = count,
-                categoryId = mCategory!!.id
+                categoryId = mCategory.id
         )
     }
 
@@ -145,7 +155,7 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
         mViewModel.updateNormalSelectedServiceItem(
                 absServiceItem = itemData,
                 count = checked.toInt(),
-                categoryId = mCategory!!.id
+                categoryId = mCategory.id
         )
     }
 
