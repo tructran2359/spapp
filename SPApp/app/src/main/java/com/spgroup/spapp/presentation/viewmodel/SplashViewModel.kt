@@ -63,7 +63,7 @@ class SplashViewModel @Inject constructor(
 
             UpdateActivity.getLaunchIntent(context)
 
-        } else if (mAppConfig.isOnBoadingShown()) {
+        } else if (!mAppConfig.isOnBoadingShown()) {
 
             OnBoardingActivity.getLaunchIntent(context)
 
