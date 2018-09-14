@@ -45,6 +45,7 @@
                 android:textColor="@color/color_grey"
                 android:paddingLeft="@dimen/common_radius"
                 android:paddingRight="@dimen/common_radius"
+                android:layout_marginBottom="@dimen/common_spacing"
                 android:textAllCaps="true"
                 fontPath="@string/font_medium"
                 tools:text="Sponsored"
@@ -55,7 +56,6 @@
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_spacing"
                 android:textColor="@color/color_black"
 
                 tools:text="Tingkat-A-Day"
@@ -81,6 +81,7 @@
             android:src="@drawable/arrow_right_grey"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/common_horz_small"
             />
 
     </RelativeLayout>
