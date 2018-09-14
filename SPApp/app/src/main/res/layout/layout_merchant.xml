@@ -12,7 +12,7 @@
         android:layout_width="@dimen/home_category_icon_size"
         android:layout_height="@dimen/home_category_icon_size"
         android:src="@drawable/logo_laundry"
-        android:scaleType="centerInside"
+        android:scaleType="fitCenter"
         android:layout_centerVertical="true"
         app:riv_corner_radius="@dimen/common_radius"
         />
