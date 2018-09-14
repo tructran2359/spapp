@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.Intent
 import com.spgroup.spapp.BuildConfig
 import com.spgroup.spapp.domain.usecase.GetInitialDataUsecase
+import com.spgroup.spapp.manager.AppConfigManager
 import com.spgroup.spapp.manager.AppDataCache
-import com.spgroup.spapp.presentation.SPApplication
 import com.spgroup.spapp.presentation.activity.HomeActivity
 import com.spgroup.spapp.presentation.activity.OnBoardingActivity
 import com.spgroup.spapp.presentation.activity.UpdateActivity
@@ -16,7 +16,8 @@ import javax.inject.Inject
 
 class SplashViewModel @Inject constructor(
         private val getInitialDataUsecase: GetInitialDataUsecase,
-        private val appDataCache: AppDataCache
+        private val appDataCache: AppDataCache,
+        private val mAppConfig: AppConfigManager
 ) : BaseViewModel() {
 
     val isSuccess = MutableLiveData<Boolean>().apply { value = false }
@@ -62,7 +63,7 @@ class SplashViewModel @Inject constructor(
 
             UpdateActivity.getLaunchIntent(context)
 
-        } else if (!SPApplication.mAppConfig.isOnBoadingShown()) {
+        } else if (mAppConfig.isOnBoadingShown()) {
 
             OnBoardingActivity.getLaunchIntent(context)
 

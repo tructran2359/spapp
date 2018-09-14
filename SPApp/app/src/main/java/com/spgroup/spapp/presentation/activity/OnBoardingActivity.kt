@@ -8,7 +8,7 @@ import android.support.v4.view.ViewPager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import com.spgroup.spapp.R
-import com.spgroup.spapp.presentation.SPApplication
+import com.spgroup.spapp.manager.AppConfigManager
 import com.spgroup.spapp.presentation.adapter.OnBoardingAdapter
 import com.spgroup.spapp.presentation.viewmodel.OnBoardingViewModel
 import com.spgroup.spapp.util.extension.*
@@ -34,6 +34,7 @@ class OnBoardingActivity : BaseActivity() {
 
     private lateinit var mAdapter: OnBoardingAdapter
 
+    @Inject lateinit var mAppConfig: AppConfigManager
     @Inject lateinit var vmFactory: ViewModelProvider.Factory
     private lateinit var mViewModel: OnBoardingViewModel
 
@@ -123,7 +124,7 @@ class OnBoardingActivity : BaseActivity() {
         }
 
         tv_get_started.setOnClickListener {
-            SPApplication.mAppConfig.setOnBoadingShown(true)
+            mAppConfig.setOnBoadingShown(true)
             startActivity(HomeActivity.getLaunchIntent(this@OnBoardingActivity))
             finish()
         }

@@ -21,6 +21,8 @@ interface AppComponent {
 
     fun inject(spApplication: SPApplication)
 
+    fun inject(baseActivity: BaseActivity)
+
     fun inject(splashActivity: SplashActivity)
 
     fun inject(updateActivity: UpdateActivity)

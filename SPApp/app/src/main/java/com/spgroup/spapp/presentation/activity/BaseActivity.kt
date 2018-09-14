@@ -6,9 +6,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.google.android.gms.analytics.HitBuilders
-import com.spgroup.spapp.presentation.SPApplication
+import com.google.android.gms.analytics.Tracker
+import com.spgroup.spapp.util.extension.appInstance
 import com.spgroup.spapp.util.extension.isOnline
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
+import javax.inject.Inject
 
 /**
  * Base class for activity
@@ -30,9 +32,13 @@ open class BaseActivity: AppCompatActivity() {
         const val NO_REQUEST_CODE = -1
     }
 
+    @Inject lateinit var mTracker: Tracker
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        SPApplication.mTracker.run {
+
+        appInstance.appComponent.inject(this)
+        mTracker.run {
             val screenName = this::class.java.simpleName
 //        doLogD("ScreenName", screenName)
             setScreenName(screenName)

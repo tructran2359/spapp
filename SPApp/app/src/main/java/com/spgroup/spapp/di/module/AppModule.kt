@@ -2,6 +2,8 @@ package com.spgroup.spapp.di.module
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.android.gms.analytics.GoogleAnalytics
+import com.google.android.gms.analytics.Tracker
 import com.google.gson.Gson
 import com.spgroup.spapp.BuildConfig
 import com.spgroup.spapp.di.ApplicationScoped
@@ -50,6 +52,18 @@ class AppModule(private val application: SPApplication) {
     @ApplicationScoped
     fun provideAppConfigManager(sharedPreferences: SharedPreferences, @Named(DEP_APP_GSON) gson: Gson): AppConfigManager {
         return AppConfigManager(sharedPreferences, gson)
+    }
+
+    @Provides
+    @ApplicationScoped
+    fun provideGoogleAnalytics(@Named(DEP_APP_CONTEXT) context: Context): GoogleAnalytics {
+        return GoogleAnalytics.getInstance(context)
+    }
+
+    @Provides
+    @ApplicationScoped
+    fun provideTracker(googleAnalytics: GoogleAnalytics): Tracker {
+        return googleAnalytics.newTracker(BuildConfig.GA_TRACKING_ID)
     }
 
 }
