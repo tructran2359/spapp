@@ -9,6 +9,6 @@
         android:layout_width="@dimen/splash_image_size"
         android:layout_height="@dimen/splash_image_size"
         android:layout_gravity="center"
-        android:src="@drawable/img_splash" />
+        android:src="@drawable/sp_app_icon_white" />
 
 </FrameLayout>
