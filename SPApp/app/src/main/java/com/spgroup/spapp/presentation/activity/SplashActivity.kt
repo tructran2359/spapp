@@ -68,6 +68,8 @@ class SplashActivity : BaseActivity() {
 
     private fun onDownloadDataSuccess() {
         val intent = splashViewModel.getIntentToNextActivity(this)
+        // To simulate need to update
+//        val intent = UpdateActivity.getLaunchIntent(this)
         startActivityWithAnimation(intent)
     }
 
