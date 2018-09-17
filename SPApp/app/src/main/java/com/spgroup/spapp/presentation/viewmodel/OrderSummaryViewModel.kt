@@ -134,7 +134,9 @@ class OrderSummaryViewModel @Inject constructor(
     }
 
     fun saveContactInfo(contactInfo: ContactInfo) {
-        mAppConfigmanager.setRememberMe(contactInfo)
+        // Do not cache `Notes`
+        val savedContactInfo = contactInfo.copy(notes = "")
+        mAppConfigmanager.setRememberMe(savedContactInfo)
     }
 
     fun removeSavedContactInfo() {
