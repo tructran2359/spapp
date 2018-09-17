@@ -9,24 +9,29 @@ class GetCustomisationLowestPrice : SynchronousUsecase() {
     }
 
     fun run(dataSet: List<AbsCustomisation>): Float {
-        return dataSet
-                .map { absCustomisationItem ->
-                    when (absCustomisationItem) {
-                        is BooleanCustomisation -> listOf(absCustomisationItem.price)
-                        is NumberCustomisation -> listOf(absCustomisationItem.price)
-                        is MatrixCustomisation -> {
-                            absCustomisationItem.matrixOptions
-                                    .map { it.price }
-                        }
-                        is DropdownCustomisation -> {
-                            absCustomisationItem.dropdownOptions
-                                    .map { it.price }
-                        }
-                    }
+        return if (dataSet.isEmpty()) {
+            NO_PRICE
+        } else {
+            val firstCustom = dataSet[0]
+            val listPrice = when (firstCustom) {
+                is BooleanCustomisation -> listOf(firstCustom.price)
+                is NumberCustomisation -> listOf(firstCustom.price)
+                is MatrixCustomisation -> {
+                    firstCustom.matrixOptions
+                            .map { it.price }
                 }
-                .flatten()
-                .filter { it > 0 }
-                .toFloatArray()
-                .min() ?: NO_PRICE
+                is DropdownCustomisation -> {
+                    firstCustom.dropdownOptions
+                            .map { it.price }
+                }
+            }
+
+            // RETURN
+            // Need to call `asSequence` coz Kotlin recommend that when do method chain with collection
+            listPrice
+                    .asSequence()
+                    .filter { it > 0 }
+                    .min() ?: NO_PRICE
+        }
     }
 }
