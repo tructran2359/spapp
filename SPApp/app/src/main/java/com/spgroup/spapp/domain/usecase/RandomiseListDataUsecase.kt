@@ -1,5 +1,6 @@
 package com.spgroup.spapp.domain.usecase
 
+import com.spgroup.spapp.domain.model.TopLevelFeaturedPartner
 import com.spgroup.spapp.domain.model.TopLevelPromotion
 import java.util.*
 
@@ -21,3 +22,5 @@ open class RandomiseListDataUsecase<T>: SynchronousUsecase() {
 }
 
 class RandomiseListFeaturedPromotionUsecase: RandomiseListDataUsecase<TopLevelPromotion>()
+
+class RandomiseListFeaturedMerchantUsecase: RandomiseListDataUsecase<TopLevelFeaturedPartner>()

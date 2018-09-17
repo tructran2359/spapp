@@ -64,4 +64,10 @@ object UsecaseModule {
     fun provideRandomiseListFeaturedPromotionUsecase(): RandomiseListFeaturedPromotionUsecase {
         return RandomiseListFeaturedPromotionUsecase()
     }
+
+    @JvmStatic
+    @Provides
+    fun provideRandomiseListFeaturedMerchantUsecase(): RandomiseListFeaturedMerchantUsecase {
+        return RandomiseListFeaturedMerchantUsecase()
+    }
 }
