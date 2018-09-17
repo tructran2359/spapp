@@ -127,4 +127,6 @@
     <string name="partner_details_alert_desc">If you continue, your current selection(s) will be removed from the Summary page.</string>
     <string name="cancel">CANCEL</string>
 
+    <string name="surcharge_with_price">Surcharge for orders below %s</string>
+
 </resources>

@@ -166,7 +166,7 @@ class OrderSummaryActivity : BaseActivity() {
 
                     view_discount_percentage.setPrice(percentageDiscountValue, true)
 
-                    view_surcharge.setLabel(getString(R.string.surcharge_label))
+                    view_surcharge.setLabel(getString(R.string.surcharge_with_price, minimumOrderAmount.formatPrice()))
                     view_surcharge.setPrice(surcharge, false)
 
                     val amountLabel = if (amountDiscountLabel.isEmpty()) {

@@ -68,7 +68,7 @@ class OrderSummaryViewModel @Inject constructor(
         }
         val amountDiscount = mPartnerDetails.getAmountDiscountValue()
         val amountDiscountLabel = mPartnerDetails.amountDiscountLabel ?: ""
-        mEstPrice.value = EstPriceData(discountValue, originalPrice, surcharge, amountDiscount, amountDiscountLabel)
+        mEstPrice.value = EstPriceData(discountValue, originalPrice, surcharge, amountDiscount, amountDiscountLabel, minimumOrderAmount)
     }
 
 
@@ -156,5 +156,6 @@ data class EstPriceData(
         val originalPrice: Float,
         val surcharge: Float,
         val amountDiscount: Float,
-        val amountDiscountLabel: String
+        val amountDiscountLabel: String,
+        val minimumOrderAmount: Float
 )
