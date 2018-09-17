@@ -11,10 +11,7 @@ class GetCustomisationLowestPriceTest {
         val dumbId = -1
         val dumbLabel = ""
         val dumbValue = -1
-        val dataSet = listOf(
-                BooleanCustomisation(dumbId, dumbLabel, 4F),
-                NumberCustomisation(dumbId, dumbLabel, 7.5F, dumbValue, dumbValue),
-                NumberCustomisation(dumbId, dumbLabel, 5.5F, dumbValue, dumbValue),
+        val dataSet1 = listOf(
                 MatrixCustomisation(dumbId, dumbLabel, dumbValue, dumbValue, listOf(
                         MatrixOptionItem(dumbValue, 3F),
                         MatrixOptionItem(dumbValue, 2F),
@@ -26,8 +23,23 @@ class GetCustomisationLowestPriceTest {
                         DropdownOptionItem(dumbLabel, 4F)
                 ))
         )
+        val dataSet2 = listOf(
 
-        assertEquals(GetCustomisationLowestPrice().run(dataSet), 2F)
+                DropdownCustomisation(dumbId, dumbLabel, listOf(
+                        DropdownOptionItem(dumbLabel, 3F),
+                        DropdownOptionItem(dumbLabel, 5F),
+                        DropdownOptionItem(dumbLabel, 4F)
+                )),
+
+                MatrixCustomisation(dumbId, dumbLabel, dumbValue, dumbValue, listOf(
+                        MatrixOptionItem(dumbValue, 3F),
+                        MatrixOptionItem(dumbValue, 2F),
+                        MatrixOptionItem(dumbValue, 4F)
+                ))
+        )
+
+        assertEquals(2F, GetCustomisationLowestPrice().run(dataSet1))
+        assertEquals(3F, GetCustomisationLowestPrice().run(dataSet2))
     }
 
     @Test
