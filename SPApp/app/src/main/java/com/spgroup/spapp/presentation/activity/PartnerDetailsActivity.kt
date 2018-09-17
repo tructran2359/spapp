@@ -15,8 +15,8 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.adapter.PartnerImagesAdapter
 import com.spgroup.spapp.presentation.fragment.CartPartnerDetailFragment
 import com.spgroup.spapp.presentation.fragment.DetailInfoPartnerDetailFragment
-import com.spgroup.spapp.presentation.fragment.MinOrderDialog
 import com.spgroup.spapp.presentation.fragment.PartnerImageFragment
+import com.spgroup.spapp.presentation.fragment.SpAlertDialog
 import com.spgroup.spapp.presentation.viewmodel.ISelectedService
 import com.spgroup.spapp.presentation.viewmodel.PartnerDetailsViewModel
 import com.spgroup.spapp.util.ConstUtils
@@ -94,6 +94,15 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
                         = data.getSerializableExtra(OrderSummaryActivity.EXTRA_SERVICE_MAP) as HashMap<String, MutableList<ISelectedService>>
                 mViewModel.updateSelectedService(selectedServiceMap)
             }
+        }
+    }
+
+    override fun onBackPressed() {
+        val totalCount = mViewModel.selectedCount.value ?: 0
+        if (totalCount == 0) {
+            super.onBackPressed()
+        } else {
+            showAlertPopup()
         }
     }
 
@@ -305,12 +314,16 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     }
 
     private fun showMinimumOrderPopup(minimumPrice: Float) {
-        val dialog = MinOrderDialog.getInstance(minimumPrice)
-        dialog.setOnContinueListener {
+        val title = getString(R.string.dialog_min_order_title, minimumPrice.formatPrice())
+        val desc = getString(R.string.dialog_min_order_notice)
+        val positiveText = getString(R.string.text_continue)
+        val negativeText = getString(R.string.add_more_services)
+        val dialog = SpAlertDialog.getInstance(title, desc, positiveText, negativeText)
+        dialog.setPositiveAction {
             dialog.dismiss()
             moveToOrderSummary()
         }
-        dialog.setOnAddMoreListener {
+        dialog.setNegativeAction {
             dialog.dismiss()
         }
         showDialog(dialog)
@@ -339,6 +352,25 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         val params = fl_forms_section.layoutParams as CoordinatorLayout.LayoutParams
         params.bottomMargin = if (show) getDimensionPixelSize(R.dimen.bottom_button_total_height) else 0
         fl_forms_section.layoutParams = params
+    }
+
+    private fun showAlertPopup() {
+        val title = getString(R.string.partner_details_alert_title)
+        val desc = getString(R.string.partner_details_alert_desc)
+        val positiveText = getString(R.string.text_continue)
+        val negativeText = getString(R.string.cancel)
+
+        val dialog = SpAlertDialog.getInstance(title, desc, positiveText, negativeText)
+        dialog.setPositiveAction {
+            dialog.dismiss()
+            finish()
+        }
+
+        dialog.setNegativeAction {
+            dialog.dismiss()
+        }
+
+        showDialog(dialog)
     }
 
 }

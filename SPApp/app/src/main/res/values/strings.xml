@@ -123,4 +123,8 @@
     <string name="merchant_tnc_title">Merchant’s Terms &amp; Conditions</string>
     <string name="price_est_excludes_with_format">Price estimate excludes %s</string>
 
+    <string name="partner_details_alert_title">You are about to leave the merchant’s page.</string>
+    <string name="partner_details_alert_desc">If you continue, your current selection(s) will be removed from the Summary page.</string>
+    <string name="cancel">CANCEL</string>
+
 </resources>

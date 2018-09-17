@@ -17,38 +17,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/dialog_min_order_text_size_title"
-        android:text="@string/dialog_min_order_title"
         android:textColor="@color/color_grey"
         android:gravity="center_horizontal"
         fontPath="@string/font_book"
+        tools:text="@string/dialog_min_order_title"
         />
 
 
     <TextView
         style="@style/body"
+        android:id="@+id/tv_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/dialog_min_order_notice"
         android:textColor="@color/color_grey"
         android:gravity="center_horizontal"
         android:layout_marginTop="@dimen/common_vert_small"
+        tools:text="@string/dialog_min_order_notice"
         />
     
     <TextView
         style="@style/textButton"
-        android:id="@+id/tv_continue"
+        android:id="@+id/tv_positive"
         android:layout_marginTop="@dimen/common_vert_medium"
-        android:text="@string/text_continue"
         android:gravity="center_horizontal"
+        android:textAllCaps="true"
+        tools:text="@string/text_continue"
         />
 
     <TextView
         style="@style/textButton.white"
-        android:id="@+id/tv_add_more"
+        android:id="@+id/tv_negative"
         android:layout_marginTop="@dimen/common_vert_medium"
         android:layout_marginBottom="@dimen/common_vert_small"
-        android:text="@string/add_more_services"
         android:gravity="center_horizontal"
+        android:textAllCaps="true"
+        tools:text="@string/add_more_services"
         />
 
 
