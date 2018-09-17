@@ -176,7 +176,7 @@
     <dimen name="home_menu_item_distance">9dp</dimen>
     <dimen name="empty_request_icon_size">82dp</dimen>
 
-    <dimen name="splash_image_size">112dp</dimen>
+    <dimen name="splash_image_size">140dp</dimen>
     <dimen name="page_top_img_width">198dp</dimen>
     <dimen name="page_top_img_height">90dp</dimen>
     <dimen name="promotion_bar_height">60dp</dimen>
@@ -186,7 +186,7 @@
     <dimen name="submitted_icon_height">188dp</dimen>
 
     <dimen name="update_btn_horz_margin">50dp</dimen>
-    <dimen name="update_icon_size">100dp</dimen>
+    <dimen name="update_icon_size">140dp</dimen>
     <dimen name="onboarding_indicator_margin_bot">74dp</dimen>
     <dimen name="onboarding_horz_margin">50dp</dimen>
     <dimen name="onboarding_pager_content_margin_bot">210dp</dimen>

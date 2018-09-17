@@ -13,7 +13,7 @@
     <com.spgroup.spapp.presentation.view.SimpleActionBar
         style="@style/actionBar"
         android:id="@+id/action_bar"
-        app:title="@string/customise"
+        app:title="@string/customise_screen_title"
         />
 
     <!--Dummy EditText to get focus-->
