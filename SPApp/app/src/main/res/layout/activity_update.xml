@@ -55,7 +55,7 @@
     <ImageView
         android:layout_width="@dimen/update_icon_size"
         android:layout_height="@dimen/update_icon_size"
-        android:src="@drawable/img_splash"
+        android:src="@drawable/sp_app_icon_white"
         android:layout_above="@+id/tv_title"
         android:layout_marginBottom="@dimen/common_vert_large"
         android:layout_centerHorizontal="true"
