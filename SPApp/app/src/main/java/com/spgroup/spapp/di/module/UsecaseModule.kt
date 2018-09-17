@@ -58,4 +58,10 @@ object UsecaseModule {
     fun provideSubmitRequestUsecase(schedulerFacade: SchedulerFacade, servicesRepository: ServicesRepository): SubmitRequestUsecase {
         return SubmitRequestUsecase(schedulerFacade, servicesRepository)
     }
+
+    @JvmStatic
+    @Provides
+    fun provideRandomiseListFeaturedPromotionUsecase(): RandomiseListFeaturedPromotionUsecase {
+        return RandomiseListFeaturedPromotionUsecase()
+    }
 }
