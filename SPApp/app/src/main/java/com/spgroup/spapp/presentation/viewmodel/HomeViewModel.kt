@@ -5,14 +5,15 @@ import com.spgroup.spapp.domain.model.TopLevelCategory
 import com.spgroup.spapp.domain.model.TopLevelFeaturedPartner
 import com.spgroup.spapp.domain.model.TopLevelPromotion
 import com.spgroup.spapp.domain.model.TopLevelVariable
+import com.spgroup.spapp.domain.usecase.RandomiseListFeaturedMerchantUsecase
 import com.spgroup.spapp.domain.usecase.RandomiseListFeaturedPromotionUsecase
 import com.spgroup.spapp.manager.AppDataCache
-import com.spgroup.spapp.util.doLogD
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
         private val appDataCache: AppDataCache,
-        private val randomisePromoUsecase: RandomiseListFeaturedPromotionUsecase
+        private val randomisePromoUsecase: RandomiseListFeaturedPromotionUsecase,
+        private val randomiseMerchantUsecase: RandomiseListFeaturedMerchantUsecase
 ) : BaseViewModel() {
 
     ///////////////////////////////////////////////////////////////////////////
@@ -34,10 +35,8 @@ class HomeViewModel @Inject constructor(
     fun getCategoryByIndex(index: Int) = listTopLevelCate.value?.get(index)
 
     fun randomiseData() {
-        val listPromo = randomisePromoUsecase.getRandomisedList(listTopLevelPromotion.value)
-        val listId = listPromo.map { it.partnerName }
-        doLogD("Random", "Promo: $listId")
-        listTopLevelPromotion.value = listPromo
+        listTopLevelPromotion.value = randomisePromoUsecase.getRandomisedList(listTopLevelPromotion.value)
+        listTopLevelPartner.value = randomiseMerchantUsecase.getRandomisedList(listTopLevelPartner.value)
     }
 
 }
