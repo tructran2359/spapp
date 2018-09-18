@@ -29,7 +29,7 @@ data class PartnerDetails(
 
 ): Serializable {
 
-    fun getDiscountValue() = discount?.toFloatWithException() ?: 0f
+    fun getPercentageDiscountValue() = discount?.toFloatWithException() ?: 0f
 
     fun getCategoryById(cateId: String) = categories?.firstOrNull { cateId == it.id }
 

@@ -12,21 +12,17 @@ class GetOrderSummaryUsecase: SynchronousUsecase() {
             partnerDetails: PartnerDetails,
             mapSelectedServices: HashMap<String, MutableList<ISelectedService>>,
             contactInfo: ContactInfo,
-            totalPrice: Float): OrderSummary {
+            totalPrice: Float,
+            surcharge: Float): OrderSummary {
 
         val timestamp = System.currentTimeMillis()
         val partnerId = partnerDetails.uen
-        val orderDiscountPercentage = partnerDetails.getDiscountValue().toInt()
+        val orderDiscountPercentage = partnerDetails.getPercentageDiscountValue()
 
         val overallCostBeforeDiscount = totalPrice
         val percentageDiscount = totalPrice * orderDiscountPercentage / 100
         val amountDiscount = partnerDetails.getAmountDiscountValue()
-        val minimumOrderAmount = partnerDetails.getMinimumOrderValue()
-        val surcharge = if (totalPrice < minimumOrderAmount) {
-            minimumOrderAmount - totalPrice
-        } else {
-            0f
-        }
+
         var overallCostAfterDiscount = totalPrice - percentageDiscount - amountDiscount + surcharge
 
         val listOrder = mutableListOf<Order>()
