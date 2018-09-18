@@ -293,9 +293,7 @@ class OrderSummaryActivity : BaseActivity() {
         spinner_preferred_time.adapter = adapter
 
         tv_disclaimer.setUpClickableUnderlineSpan(R.string.order_summary_disclaimer_with_format, R.string.tnc) {
-            val tncUrl = mViewModel.getPartnerTncUrl()?.toFullUrl() ?: ""
-            val title = getString(R.string.merchant_tnc_title)
-            startActivityWithCheckingInternet(PdfActivity.getLaunchIntent(this@OrderSummaryActivity, title, tncUrl))
+            startActivity(PageActivity.getLaunchIntent(this@OrderSummaryActivity, PageActivity.TYPE_TNC))
         }
 
         rl_error_cointainer.setOnClickListener {
