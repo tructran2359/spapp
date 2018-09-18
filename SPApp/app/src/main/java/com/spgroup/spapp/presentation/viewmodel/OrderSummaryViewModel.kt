@@ -58,17 +58,14 @@ class OrderSummaryViewModel @Inject constructor(
 
     private fun updateCountAndPrice() {
         mTotalCount.value = mSelectedServiceUsecase.calculateTotalCount()
-        val discountValue = mPartnerDetails.getDiscountValue()
+        val percentageDiscountValue = mPartnerDetails.getPercentageDiscountValue()
         val originalPrice = mSelectedServiceUsecase.calculateEstPrice()
-        val minimumOrderAmount = mPartnerDetails.getMinimumOrderValue()
-        val surcharge = if (minimumOrderAmount > originalPrice) {
-            minimumOrderAmount - originalPrice
-        } else {
-            0f
-        }
+        val surcharge = getSurcharge()
         val amountDiscount = mPartnerDetails.getAmountDiscountValue()
         val amountDiscountLabel = mPartnerDetails.amountDiscountLabel ?: ""
-        mEstPrice.value = EstPriceData(discountValue, originalPrice, surcharge, amountDiscount, amountDiscountLabel, minimumOrderAmount)
+        val minimumOrderAmount = mPartnerDetails.getMinimumOrderValue()
+
+        mEstPrice.value = EstPriceData(percentageDiscountValue, originalPrice, surcharge, amountDiscount, amountDiscountLabel, minimumOrderAmount)
     }
 
 
@@ -110,7 +107,8 @@ class OrderSummaryViewModel @Inject constructor(
             mPartnerDetails,
             mSelectedServiceUsecase.mapSelectedServices,
             contactInfo,
-            mSelectedServiceUsecase.calculateEstPrice()
+            mSelectedServiceUsecase.calculateEstPrice(),
+            getSurcharge()
     )
 
     fun submitRequest(contactInfo: ContactInfo) {
@@ -153,10 +151,23 @@ class OrderSummaryViewModel @Inject constructor(
 
     fun getPartnerTncUrl() = mPartnerDetails.tnc
 
+    fun getSurcharge(): Float {
+        val originalPrice = mSelectedServiceUsecase.calculateEstPrice()
+        val minimumOrderAmount = mPartnerDetails.getMinimumOrderValue()
+        return when {
+
+            mSelectedServiceUsecase.hasCheckboxSelected() -> 0f
+
+            minimumOrderAmount > originalPrice -> minimumOrderAmount - originalPrice
+
+            else -> 0f
+        }
+    }
+
 }
 
 data class EstPriceData(
-        val discountPercentage: Float,
+        val percentageDiscount: Float,
         val originalPrice: Float,
         val surcharge: Float,
         val amountDiscount: Float,
