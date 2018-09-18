@@ -447,7 +447,7 @@ class OrderSummaryActivity : BaseActivity() {
                         if (selectedService.service is MultiplierService) {
                             addItemCounter(cateId, selectedService)
                         } else if (selectedService.service is CheckboxService) {
-                            addItemCheckbox(cateId, cateName, selectedService)
+                            addItemCheckbox(cateId, selectedService)
                         }
                     }
 
@@ -525,7 +525,7 @@ class OrderSummaryActivity : BaseActivity() {
         ll_item_container.addView(view)
     }
 
-    private fun addItemCheckbox(cateId: String, cateName: String, item: SelectedService) {
+    private fun addItemCheckbox(cateId: String, item: SelectedService) {
         val service = item.service as CheckboxService
         val tag = createServiceTag(service.id)
         val view = SummaryItemViewEstimated(this)
@@ -539,7 +539,7 @@ class OrderSummaryActivity : BaseActivity() {
         view.run {
             setLayoutParams(layoutParams)
             setName(service.label)
-            setDescription(getString(R.string.price_est_excludes_with_format, cateName))
+            setDescription(getString(R.string.order_summary_checkbox_item_desc))
             setTag(tag)
             setOnDeleteListener {
                 mViewModel.deleteService(cateId, service.id)
