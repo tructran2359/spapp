@@ -592,7 +592,15 @@ class OrderSummaryActivity : BaseActivity() {
             item: ComplexSelectedService) {
 
         val service = item.service
-        view.setServiceName(service.label)
+
+        // Append service name with Sub Category name at the beginning
+        val subCateName = mViewModel.getSubCateNameByServiceId(item.getId())
+        val serviceName = if (subCateName == null || subCateName.isEmpty()) {
+            service.label
+        } else {
+            subCateName + " - " + service.label
+        }
+        view.setServiceName(serviceName)
         view.setServiceDescription(service.serviceDescription)
         view.setInstruction(item.specialInstruction ?: "")
         view.clearOption()

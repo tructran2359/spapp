@@ -91,6 +91,8 @@ class OrderSummaryViewModel @Inject constructor(
 
     fun getSubCateName(categoryId: String, serviceId: Int) = mPartnerDetails.getSubCateByCateIdAndServiceId(categoryId, serviceId)?.label ?: ""
 
+    fun getSubCateNameByServiceId(serviceId: Int) = mPartnerDetails.getSubCateByServiceId(serviceId)?.label ?: ""
+
     fun updateComplexSelectedServiceItem(customiseDisplayData: CustomiseDisplayData) {
         mSelectedServiceUsecase.updateComplexSelectedServiceItem(customiseDisplayData)
         val updatedService = mSelectedServiceUsecase.getSelectedService(
