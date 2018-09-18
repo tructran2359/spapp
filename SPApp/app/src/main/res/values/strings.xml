@@ -79,7 +79,7 @@
     <string name="merchant_tnc_underline_text">terms &amp; conditions</string>
     <string name="visit_website">VISIT WEBSITE</string>
     <string name="website_not_found">Website not found</string>
-    <string name="summary_go_back_instruction">Another item from %s?</string>
+    <string name="summary_go_back_instruction">Add another item from %s?</string>
     <string name="back_to_listing">BACK TO LISTING</string>
 
     <string name="error_loading_pdf">Somethings went wrong. Can not load PDF</string>
