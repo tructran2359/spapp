@@ -38,7 +38,11 @@ fun String.toHtmlSpanned() =
             Html.fromHtml(this)
         }
 
-fun String.toNoSpecialCharString() = HtmlEscape.unescapeHtml(this)
+fun String.toNoSpecialCharString(): String {
+    val noHtml = HtmlEscape.unescapeHtml(this)
+    val unicodeIgnoreChar = '\u2028'
+    return noHtml.replace(Regex("$unicodeIgnoreChar"), "\r\n")
+}
 
 fun Float.toPercentageText() = "$this%"
 
