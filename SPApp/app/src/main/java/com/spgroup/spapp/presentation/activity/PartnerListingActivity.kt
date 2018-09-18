@@ -51,6 +51,7 @@ class PartnerListingActivity : BaseActivity() {
     private var mInitTextSize = 0f
     private var mInitTitleWidth = 0
     private var mHorzMargin = 0
+    private var mFirstOnResume = true
 
     ///////////////////////////////////////////////////////////////////////////
     // Override
@@ -69,6 +70,15 @@ class PartnerListingActivity : BaseActivity() {
         subscribeUI()
         mViewModel.setInitialData(cat)
         mViewModel.loadPartnerListing()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (mFirstOnResume) {
+            mFirstOnResume = false
+        } else {
+            mViewModel.randomisePartnerOrder()
+        }
     }
 
     private fun subscribeUI() {

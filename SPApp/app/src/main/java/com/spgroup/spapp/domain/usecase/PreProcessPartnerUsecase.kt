@@ -11,11 +11,15 @@ import com.spgroup.spapp.domain.model.Promotion
  *
  * Then merge list of partner with list of promotion
  */
-class PreProcessPartnerUsecase: SynchronousUsecase() {
+class PreProcessPartnerUsecase: RandomiseListDataUsecase<Partner>() {
+
+    companion object {
+        const val PROMOTION_INDEX = 4
+    }
 
     fun run(partnerListingData: PartnersListingData): List<PartnersListingItem> {
         val listSortedPartner = sort(partnerListingData.partners)
-        return merge(listSortedPartner, partnerListingData.promotions, 4)
+        return merge(listSortedPartner, partnerListingData.promotions, PROMOTION_INDEX)
     }
 
     private fun sort(partners: List<Partner>): List<Partner> {
@@ -40,6 +44,29 @@ class PreProcessPartnerUsecase: SynchronousUsecase() {
                 return mergedList
             }
         }
+    }
+
+    fun randomisePartnerOrder(listPartnerListingItem: List<PartnersListingItem>): List<PartnersListingItem> {
+        val listHiglightedPartner
+                = listPartnerListingItem
+                .filter { it is Partner && !it.highlight.isEmpty() }
+                .map { it as Partner }
+
+        val listNormalPartner
+                = listPartnerListingItem
+                .filter { it is Partner && it.highlight.isEmpty()}
+                .map { it as Partner }
+
+        val listPromotion
+                = listPartnerListingItem
+                .filter { it is Promotion }
+                .map { it as Promotion }
+
+        val outputList = mutableListOf<Partner>()
+        outputList.addAll(listHiglightedPartner)
+        outputList.addAll(getRandomisedList(listNormalPartner))
+
+        return merge(outputList, listPromotion, PROMOTION_INDEX)
     }
 }
 

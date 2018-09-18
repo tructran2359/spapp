@@ -35,4 +35,11 @@ class PartnerListingViewModel @Inject constructor(
                 )
         disposeBag.addAll(disposable)
     }
+
+    fun randomisePartnerOrder() {
+        partnerListingItems.value?.run {
+            val randomisedList = preProccessPartnerUsecase.randomisePartnerOrder(this)
+            partnerListingItems.value = randomisedList
+        }
+    }
 }
