@@ -279,7 +279,7 @@ class OrderSummaryActivity : BaseActivity() {
         validation_contact_no.setValidation { phone: String -> phone.length == 8 && phone.isNumberOnly() }
 
         validation_postal_code.setInputType(InputType.TYPE_CLASS_NUMBER)
-        validation_postal_code.setValidation { postalCode: String -> postalCode.isNumberOnly() }
+        validation_postal_code.setValidation { postalCode: String -> postalCode.length == 6 && postalCode.isNumberOnly() }
 
         setUpSubmitButton()
 
