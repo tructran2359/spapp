@@ -25,6 +25,7 @@ import androidx.core.view.isGone
 import com.spgroup.spapp.R
 import com.spgroup.spapp.presentation.activity.BaseActivity
 import com.spgroup.spapp.presentation.view.IndicatorTextView
+import com.spgroup.spapp.util.ConstUtils
 import com.spgroup.spapp.util.GlideApp
 
 fun View.setOnGlobalLayoutListener(action: () -> Unit) {
@@ -227,4 +228,24 @@ fun View.updateMainButtonEnable(enabled: Boolean) {
 
 fun TextView.setTextSizePixel(sizeInPixel: Float) {
     this.setTextSize(TypedValue.COMPLEX_UNIT_PX, sizeInPixel)
+}
+
+fun Context.getCustomiseHint(topLevelCateId: String): Int {
+    return when(topLevelCateId) {
+        ConstUtils.CATE_ID_FOOD -> R.string.customise_hint_food
+        ConstUtils.CATE_ID_LAUNDRY -> R.string.customise_hint_laundry
+        ConstUtils.CATE_ID_AIRCON -> R.string.customise_hint_aircon
+        ConstUtils.CATE_ID_HOUSEKEEPING -> R.string.customise_hint_housekeeping
+        else -> -1
+    }
+}
+
+fun Context.getSummaryHint(topLevelCateId: String): Int {
+    return when(topLevelCateId) {
+        ConstUtils.CATE_ID_FOOD -> R.string.summary_hint_food
+        ConstUtils.CATE_ID_LAUNDRY -> R.string.summary_hint_laundry
+        ConstUtils.CATE_ID_AIRCON -> R.string.summary_hint_aircon
+        ConstUtils.CATE_ID_HOUSEKEEPING -> R.string.summary_hint_housekeeping
+        else -> -1
+    }
 }

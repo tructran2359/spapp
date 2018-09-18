@@ -129,7 +129,8 @@ class CategoryFragment : BaseFragment(), ServiceListingAdapter.OnItemInteractedL
                     serviceItem = itemData,
                     mapSelectedOption = mViewModel.getSelectedOptionMap(cateId, serviceId) ?: HashMap(),
                     specialInstruction = mViewModel.getSelectedInstruction(cateId, serviceId),
-                    subCateName = mViewModel.getSubCateName(cateId, serviceId)
+                    subCateName = mViewModel.getSubCateName(cateId, serviceId),
+                    topLevelCateId = mViewModel.getTopLevelCateId()
             )
             val intent = CustomiseNewActivity.getLaunchIntent(
                     context = it,

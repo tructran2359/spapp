@@ -53,6 +53,18 @@ class CustomiseNewActivity: BaseActivity() {
         mIsEdit = intent.getBooleanExtra(EXTRA_IS_EDIT, false)
 
         mViewModel = obtainViewModel(CustomiseNewViewModel::class.java, vmFactory)
+        subcribesUI()
+
+
+        mViewModel.initData(
+                mIsEdit,
+                intent.getSerializableExtra(EXTRA_DISPLAY_DATA) as CustomiseDisplayData
+        )
+
+        setUpViews()
+    }
+
+    private fun subcribesUI() {
         mViewModel.run {
 
             serviceName.observe(this@CustomiseNewActivity, Observer {
@@ -102,14 +114,7 @@ class CustomiseNewActivity: BaseActivity() {
                 })
 
             }
-
-            initData(
-                    mIsEdit,
-                    intent.getSerializableExtra(EXTRA_DISPLAY_DATA) as CustomiseDisplayData
-            )
         }
-
-        setUpViews()
     }
 
     override fun onBackPressed() {
@@ -166,6 +171,10 @@ class CustomiseNewActivity: BaseActivity() {
         action_bar.setOnBackPress {
             this@CustomiseNewActivity.onBackPressed()
         }
+        val hintResId = getCustomiseHint(mViewModel.getTopLevelCateId())
+        if (hintResId != -1) {
+            et_instruction.setHint(hintResId)
+        }
         et_instruction.setText(mViewModel.getDisplayData().specialInstruction)
         tv_add_to_request.setOnClickListener {
             et_instruction.hideKeyboard()
@@ -217,7 +226,8 @@ data class CustomiseDisplayData (
         var mapSelectedOption: HashMap<Int, Int>,
         var specialInstruction: String?,
         var estPrice: Float = 0f,
-        var subCateName: String
+        var subCateName: String,
+        val topLevelCateId: String
 ): Serializable {
     fun isSameSelectedOptionData(newObj: CustomiseDisplayData): Boolean {
         if (mapSelectedOption.size != newObj.mapSelectedOption.size) return false
@@ -233,6 +243,6 @@ data class CustomiseDisplayData (
         for ((key, value) in mapSelectedOption) {
             hashMap[key] = value
         }
-        return CustomiseDisplayData(categoryId, serviceItem, hashMap, specialInstruction, estPrice, subCateName)
+        return CustomiseDisplayData(categoryId, serviceItem, hashMap, specialInstruction, estPrice, subCateName, topLevelCateId)
     }
 }

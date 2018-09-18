@@ -29,5 +29,10 @@ class ConstUtils {
         const val PARTNER_TYPE_DETAIL_INFO = "detail_info"
 
         val LIST_PREFERRED_TIME = listOf("Select Time", "10AM - 12PM", "12PM - 2PM", "2PM - 4PM", "4PM-6PM")
+
+        const val CATE_ID_FOOD = "food"
+        const val CATE_ID_LAUNDRY = "laundry"
+        const val CATE_ID_AIRCON = "aircon"
+        const val CATE_ID_HOUSEKEEPING = "housekeeping"
     }
 }
