@@ -151,6 +151,8 @@ class OrderSummaryViewModel @Inject constructor(
 
     fun getSelectedServicesMap() = mSelectedServiceUsecase.mapSelectedServices
 
+    fun getPartnerTncUrl() = mPartnerDetails.tnc
+
 }
 
 data class EstPriceData(

@@ -128,5 +128,6 @@
     <string name="cancel">CANCEL</string>
 
     <string name="surcharge_with_price">Surcharge for orders below %s</string>
+    <string name="order_summary_disclaimer_with_format">By clicking ‘Submit Request’, you have read and have agreed to our %s. You have also allowed us to send this request to our partnering merchant to connect with you about - mentioned request.</string>
 
 </resources>

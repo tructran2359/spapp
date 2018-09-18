@@ -256,12 +256,13 @@
 
                 <TextView
                     style="@style/callout.regular"
+                    android:id="@+id/tv_disclaimer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/sum_order_agreement"
                     android:layout_marginTop="@dimen/common_vert_medium"
                     android:layout_marginBottom="@dimen/common_vert_large"
                     android:textColor="@color/color_grey"
+                    tools:text="@string/order_summary_disclaimer_with_format"
                     />
 
             </LinearLayout>
