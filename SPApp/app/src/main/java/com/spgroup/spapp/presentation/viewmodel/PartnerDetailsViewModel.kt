@@ -147,7 +147,8 @@ class PartnerDetailsViewModel @Inject constructor(
 
     fun getPartnerName() = partnerDetails.value?.name ?: ""
 
-    fun getSubCateName(categoryId: String, serviceId: Int) = partnerDetails.value?.getSubCateByCateIdAndServiceId(categoryId, serviceId)?.label ?: ""
+    fun getSubCateName(categoryId: String, serviceId: Int)
+            = partnerDetails.value?.getSubCateByCateIdAndServiceId(categoryId, serviceId)?.label ?: ""
 
     fun clearAllSelectedService() {
         mSelectedServiceUsecase.clearAllSelectedServices()
@@ -160,6 +161,9 @@ class PartnerDetailsViewModel @Inject constructor(
         updateCountAndPrice()
         updateData.value = true
     }
+
+    fun hasCheckboxSelected(): Boolean
+            = mSelectedServiceUsecase.hasCheckboxSelected()
 }
 
 interface ISelectedService {

@@ -3,6 +3,7 @@ package com.spgroup.spapp.presentation.fragment
 import android.os.Bundle
 import android.view.View
 import com.spgroup.spapp.R
+import com.spgroup.spapp.util.extension.isGoneWithText
 import kotlinx.android.synthetic.main.dialog_alert.*
 
 class SpAlertDialog: BaseDialog() {
@@ -13,7 +14,12 @@ class SpAlertDialog: BaseDialog() {
         const val EXTRA_POSITIVE = "EXTRA_POSITIVE"
         const val EXTRA_NEGATIVE = "EXTRA_NEGATIVE"
 
-        fun getInstance(title: String, description: String, positiveText: String, negativeText: String): SpAlertDialog {
+        /**
+         * Create instance of Alert dialog
+         *
+         * @param negativeText: text of negative button, set null to hide negative button
+         */
+        fun getInstance(title: String, description: String, positiveText: String, negativeText: String?): SpAlertDialog {
             val dialog = SpAlertDialog()
             val bundle = Bundle()
             bundle.putString(EXTRA_TITLE, title)
@@ -36,14 +42,19 @@ class SpAlertDialog: BaseDialog() {
             tv_title.text = getString(EXTRA_TITLE)
             tv_description.text = getString(EXTRA_DESC)
             tv_positive.text = getString(EXTRA_POSITIVE)
-            tv_negative.text = getString(EXTRA_NEGATIVE)
+
+            val negativeText = getString(EXTRA_NEGATIVE)
+            tv_negative.text = negativeText
+            tv_negative.isGoneWithText(negativeText)
 
             tv_positive.setOnClickListener {
                 actionPositive?.invoke()
             }
 
-            tv_negative.setOnClickListener {
-                actionNegative?.invoke()
+            if (negativeText != null) {
+                tv_negative.setOnClickListener {
+                    actionNegative?.invoke()
+                }
             }
         }
 

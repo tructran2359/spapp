@@ -176,4 +176,20 @@ class SelectedServiceUsecase: SynchronousUsecase() {
     fun clearAllSelectedServices() {
         mapSelectedServices.clear()
     }
+
+    fun hasCheckboxSelected(): Boolean {
+        if (mapSelectedServices.isEmpty()) {
+            return false
+        }
+
+        for ((_, listSelectedServices) in mapSelectedServices) {
+            listSelectedServices.forEach { selectedService ->
+                if (selectedService is SelectedService && selectedService.service is CheckboxService) {
+                    return true
+                }
+            }
+        }
+
+        return false
+    }
 }

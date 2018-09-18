@@ -314,11 +314,25 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
     }
 
     private fun showMinimumOrderPopup(minimumPrice: Float) {
-        val title = getString(R.string.dialog_min_order_title, minimumPrice.formatPrice())
-        val desc = getString(R.string.dialog_min_order_notice)
-        val positiveText = getString(R.string.text_continue)
-        val negativeText = getString(R.string.add_more_services)
-        val dialog = SpAlertDialog.getInstance(title, desc, positiveText, negativeText)
+        var title: String
+        var desc: String
+        var positiveText: String
+        var negativeText: String?
+
+        val hasCheckboxSelected = mViewModel.hasCheckboxSelected()
+        if (hasCheckboxSelected) {
+            title = getString(R.string.dialog_min_order_checkbox_title_with_format, minimumPrice.formatPrice())
+            desc = getString(R.string.dialog_min_order_checkbox_desc)
+            positiveText = getString(R.string.ok)
+            negativeText = null
+        } else {
+            title = getString(R.string.dialog_min_order_title, minimumPrice.formatPrice())
+            desc = getString(R.string.dialog_min_order_notice)
+            positiveText = getString(R.string.text_continue)
+            negativeText = getString(R.string.add_more_services)
+        }
+
+        var dialog = SpAlertDialog.getInstance(title, desc, positiveText, negativeText)
         dialog.setPositiveAction {
             dialog.dismiss()
             moveToOrderSummary()
