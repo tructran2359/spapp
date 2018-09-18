@@ -10,7 +10,7 @@ class PartnerMapper : IMapper<PartnerEntity, Partner> {
                     uen = id,
                     name = name,
                     imgUrl = logo,
-                    priceDescription = priceDescription,
+                    priceDescription = priceDescription ?: "",
                     highlight = highlight ?: "",
                     partnerType = partnerType
             )
