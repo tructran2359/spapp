@@ -4,7 +4,7 @@ data class OrderSummary(
         val timestamp: Long,
         val partnerId: String,
         val orders: List<Order>,
-        val orderDiscountPercentage: Int,
+        val orderDiscountPercentage: Float,
         val overallCostBeforeDiscount: Float,
         val overallCostAfterDiscount: Float,
         val contactInfo: ContactInfo,
