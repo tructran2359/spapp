@@ -45,8 +45,8 @@ class SelectedServiceUsecase: SynchronousUsecase() {
         if (calculatingList != null) {
             var existed = false
             calculatingList.forEach { valueItem ->
-                (valueItem as SelectedService).run {
-                    if (service.getServiceId() == absServiceItem.getServiceId()) {
+                if (valueItem.getId() == absServiceItem.getServiceId()) {
+                    (valueItem as SelectedService).run {
                         existed = true
                         this.count = count
                         this.subTotal = subTotal
