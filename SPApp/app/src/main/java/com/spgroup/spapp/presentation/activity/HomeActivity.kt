@@ -208,10 +208,6 @@ open class HomeActivity :
             startActivity(PageActivity.getLaunchIntent(this@HomeActivity, PageActivity.TYPE_TNC))
         }
 
-        rl_ack_container.setOnClickListener {
-            startActivity(PageActivity.getLaunchIntent(this@HomeActivity, PageActivity.TYPE_ACK))
-        }
-
         mMenuAdapter = HomeMenuItemAdapter()
         mMenuAdapter.setOnItemClickListener(object : HomeMenuItemAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
