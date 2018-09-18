@@ -63,7 +63,9 @@ class OrderSummaryViewModel @Inject constructor(
         val surcharge = getSurcharge()
         val amountDiscount = mPartnerDetails.getAmountDiscountValue()
         val amountDiscountLabel = mPartnerDetails.amountDiscountLabel ?: ""
-        mEstPrice.value = EstPriceData(percentageDiscountValue, originalPrice, surcharge, amountDiscount, amountDiscountLabel)
+        val minimumOrderAmount = mPartnerDetails.getMinimumOrderValue()
+
+        mEstPrice.value = EstPriceData(percentageDiscountValue, originalPrice, surcharge, amountDiscount, amountDiscountLabel, minimumOrderAmount)
     }
 
 
@@ -85,6 +87,8 @@ class OrderSummaryViewModel @Inject constructor(
     fun getCateName(cateId: String) = mPartnerDetails.getCategoryById(cateId)?.label
 
     fun getSubCateName(categoryId: String, serviceId: Int) = mPartnerDetails.getSubCateByCateIdAndServiceId(categoryId, serviceId)?.label ?: ""
+
+    fun getSubCateNameByServiceId(serviceId: Int) = mPartnerDetails.getSubCateByServiceId(serviceId)?.label ?: ""
 
     fun updateComplexSelectedServiceItem(customiseDisplayData: CustomiseDisplayData) {
         mSelectedServiceUsecase.updateComplexSelectedServiceItem(customiseDisplayData)
@@ -145,6 +149,8 @@ class OrderSummaryViewModel @Inject constructor(
 
     fun getSelectedServicesMap() = mSelectedServiceUsecase.mapSelectedServices
 
+    fun getPartnerTncUrl() = mPartnerDetails.tnc
+
     fun getSurcharge(): Float {
         val originalPrice = mSelectedServiceUsecase.calculateEstPrice()
         val minimumOrderAmount = mPartnerDetails.getMinimumOrderValue()
@@ -165,5 +171,6 @@ data class EstPriceData(
         val originalPrice: Float,
         val surcharge: Float,
         val amountDiscount: Float,
-        val amountDiscountLabel: String
+        val amountDiscountLabel: String,
+        val minimumOrderAmount: Float
 )

@@ -29,16 +29,16 @@
         />
 
     <TextView
-        style="@style/body"
         android:id="@+id/tv_description"
+        style="@style/body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/no_internet_desc"
-        android:textColor="@color/color_grey"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="@dimen/common_vert_small"
         android:layout_marginLeft="@dimen/common_horz_xlarge"
         android:layout_marginRight="@dimen/common_horz_xlarge"
+        android:layout_marginTop="@dimen/common_vert_small"
+        android:gravity="center_horizontal"
+        android:text="@string/no_internet_desc"
+        android:textColor="@color/color_grey"
         />
 
     <TextView

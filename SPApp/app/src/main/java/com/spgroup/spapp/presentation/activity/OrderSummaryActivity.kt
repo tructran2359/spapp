@@ -166,7 +166,7 @@ class OrderSummaryActivity : BaseActivity() {
 
                     view_discount_percentage.setPrice(percentageDiscountValue, true)
 
-                    view_surcharge.setLabel(getString(R.string.surcharge_label))
+                    view_surcharge.setLabel(getString(R.string.surcharge_with_price, minimumOrderAmount.formatPrice()))
                     view_surcharge.setPrice(surcharge, false)
 
                     val amountLabel = if (amountDiscountLabel.isEmpty()) {
@@ -291,6 +291,10 @@ class OrderSummaryActivity : BaseActivity() {
         val adapter = PreferredTimeAdapter(this, R.layout.layout_preferred_time, list)
 
         spinner_preferred_time.adapter = adapter
+
+        tv_disclaimer.setUpClickableUnderlineSpan(R.string.order_summary_disclaimer_with_format, R.string.tnc) {
+            startActivity(PageActivity.getLaunchIntent(this@OrderSummaryActivity, PageActivity.TYPE_TNC))
+        }
 
         rl_error_cointainer.setOnClickListener {
             mFirstInvalidView?.let {
@@ -447,7 +451,7 @@ class OrderSummaryActivity : BaseActivity() {
                         if (selectedService.service is MultiplierService) {
                             addItemCounter(cateId, selectedService)
                         } else if (selectedService.service is CheckboxService) {
-                            addItemCheckbox(cateId, cateName, selectedService)
+                            addItemCheckbox(cateId, selectedService)
                         }
                     }
 
@@ -525,7 +529,7 @@ class OrderSummaryActivity : BaseActivity() {
         ll_item_container.addView(view)
     }
 
-    private fun addItemCheckbox(cateId: String, cateName: String, item: SelectedService) {
+    private fun addItemCheckbox(cateId: String, item: SelectedService) {
         val service = item.service as CheckboxService
         val tag = createServiceTag(service.id)
         val view = SummaryItemViewEstimated(this)
@@ -539,7 +543,7 @@ class OrderSummaryActivity : BaseActivity() {
         view.run {
             setLayoutParams(layoutParams)
             setName(service.label)
-            setDescription(getString(R.string.price_est_excludes_with_format, cateName))
+            setDescription(getString(R.string.order_summary_checkbox_item_desc))
             setTag(tag)
             setOnDeleteListener {
                 mViewModel.deleteService(cateId, service.id)
@@ -592,7 +596,15 @@ class OrderSummaryActivity : BaseActivity() {
             item: ComplexSelectedService) {
 
         val service = item.service
-        view.setServiceName(service.label)
+
+        // Append service name with Sub Category name at the beginning
+        val subCateName = mViewModel.getSubCateNameByServiceId(item.getId())
+        val serviceName = if (subCateName == null || subCateName.isEmpty()) {
+            service.label
+        } else {
+            subCateName + " - " + service.label
+        }
+        view.setServiceName(serviceName)
         view.setServiceDescription(service.serviceDescription)
         view.setInstruction(item.specialInstruction ?: "")
         view.clearOption()

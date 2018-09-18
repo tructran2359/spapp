@@ -15,7 +15,7 @@
     <string name="service_desc_header">Exclusive On This App</string>
     <string name="bussiness_info_header">Business Information</string>
     <string name="summary">Summary</string>
-    <string name="your_contact_info">Your Contact Information</string>
+    <string name="your_contact_info">Please enter your details:</string>
     <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="contact_no">Contact Number</string>
@@ -24,12 +24,12 @@
     <string name="postal_code">Postal Code</string>
     <string name="notes">Notes</string>
     <string name="summary_notes_hint">Eg. Delivered items to be placed in the cabinet beside the front gate.</string>
-    <string name="remember_me">Remember me</string>
+    <string name="remember_me">Save my contact details</string>
     <string name="sum_order_agreement">By submitting, you allow us to send this request to our partner to contact you on the above-mentioned request.</string>
     <string name="est_price">Est. Price</string>
     <string name="est_total">Est. Total</string>
     <string name="submit_request">SUBMIT REQUEST</string>
-    <string name="customise">Customise</string>
+    <string name="customise_screen_title">Customise Your Request</string>
     <string name="estimated_price">Estimated Price</string>
     <string name="special_instructions">Special Instructions</string>
     <string name="formated_optional">[optional]</string>
@@ -88,7 +88,7 @@
     <string name="error_submit_request">Somethings went wrong. Can not submit request!</string>
     <string name="this_week_menu">This Week\'s Menu</string>
     <string name="new_version_available">New Version\nAvailable</string>
-    <string name="update_description">We’ve made our app even better!\nPlease update to continue to use it.</string>
+    <string name="update_description">Check out the latest version of the app.</string>
     <string name="update">UPDATE</string>
     <string name="on_boarding_tnc_formatted">By starting, you agree to our %s.</string>
     <string name="get_started">GET STARTED</string>
@@ -111,17 +111,17 @@
     <string name="no_internet_connection_error_message">No Internet Connection</string>
 
     <string name="file_not_found_title">Uh Ooooh!</string>
-    <string name="file_not_found_desc">We are unable to locate the file you are looking for.</string>
+    <string name="file_not_found_desc">Sorry! File not found.</string>
 
     <string name="api_error_title">Whoooops!</string>
-    <string name="api_error_desc">Looks like something went wrong. </string>
+    <string name="api_error_desc">Something went wrong.</string>
     <string name="dialog_min_order_title">You have not met the minimum spend of %s.</string>
-    <string name="dialog_min_order_notice">Additional charge will apply.</string>
+    <string name="dialog_min_order_notice">Additional charges will apply.</string>
     <string name="text_continue">CONTINUE</string>
     <string name="add_more_services">ADD MORE SERVICES</string>
     <string name="surcharge_label">Additional Charge</string>
     <string name="merchant_tnc_title">Merchant’s Terms &amp; Conditions</string>
-    <string name="price_est_excludes_with_format">Price estimate excludes %s</string>
+    <string name="order_summary_checkbox_item_desc">Evaluation will be done on-site, price estimation will not be included in this request.</string>
 
     <string name="partner_details_alert_title">You are about to leave the merchant’s page.</string>
     <string name="partner_details_alert_desc">If you continue, your current selection(s) will be removed from the Summary page.</string>
