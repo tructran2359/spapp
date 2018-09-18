@@ -134,4 +134,14 @@
     <string name="surcharge_with_price">Surcharge for orders below %s</string>
     <string name="order_summary_disclaimer_with_format">By clicking ‘Submit Request’, you have read and have agreed to our %s. You have also allowed us to send this request to our partnering merchant to connect with you about - mentioned request.</string>
 
+    <string name="customise_hint_food">Eg. No beef and peanuts. Less salt.</string>
+    <string name="customise_hint_laundry">Eg. Please dry-clean my formal clothes.</string>
+    <string name="customise_hint_aircon">Eg. Repair living room aircon.</string>
+    <string name="customise_hint_housekeeping">Eg. Clean mattress. Iron clothes.</string>
+
+    <string name="summary_hint_food">Eg. Delivered items to be placed in the cabinet beside the front gate.</string>
+    <string name="summary_hint_laundry">Eg. Please leave laundry on doorstep.</string>
+    <string name="summary_hint_aircon">Eg. Please enter and call unit number code at entrance.</string>
+    <string name="summary_hint_housekeeping">Eg. Please note that I own a big dog.</string>
+
 </resources>

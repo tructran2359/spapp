@@ -292,6 +292,11 @@ class OrderSummaryActivity : BaseActivity() {
 
         spinner_preferred_time.adapter = adapter
 
+        val hintResId = getSummaryHint(mViewModel.getTopLevelCategoryId())
+        if (hintResId != -1) {
+            et_notes.setHint(hintResId)
+        }
+
         tv_disclaimer.setUpClickableUnderlineSpan(R.string.order_summary_disclaimer_with_format, R.string.tnc) {
             startActivity(PageActivity.getLaunchIntent(this@OrderSummaryActivity, PageActivity.TYPE_TNC))
         }
@@ -572,7 +577,8 @@ class OrderSummaryActivity : BaseActivity() {
                     serviceItem = service,
                     mapSelectedOption = item.selectedCustomisation ?: HashMap(),
                     specialInstruction = item.specialInstruction,
-                    subCateName = subCateName
+                    subCateName = subCateName,
+                    topLevelCateId = mViewModel.getTopLevelCategoryId()
             )
             val intent = CustomiseNewActivity.getLaunchIntent(
                     context = this@OrderSummaryActivity,

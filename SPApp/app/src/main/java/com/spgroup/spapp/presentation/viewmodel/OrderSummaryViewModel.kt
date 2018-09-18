@@ -164,6 +164,7 @@ class OrderSummaryViewModel @Inject constructor(
         }
     }
 
+    fun getTopLevelCategoryId() = mPartnerDetails.categoryId
 }
 
 data class EstPriceData(

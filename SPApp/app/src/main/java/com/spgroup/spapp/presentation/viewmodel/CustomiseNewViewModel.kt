@@ -77,6 +77,8 @@ class CustomiseNewViewModel @Inject constructor(): BaseViewModel() {
 
     fun getCategoryId() = mDisplayData.categoryId
 
+    fun getTopLevelCateId() = mDisplayData.topLevelCateId
+
     fun getDisplayData() = mDisplayData
 }
 

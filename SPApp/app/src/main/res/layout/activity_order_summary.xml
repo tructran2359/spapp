@@ -221,7 +221,6 @@
                     style="@style/orderSumInput"
                     android:layout_height="@dimen/common_text_area_height"
                     android:gravity="top|left"
-                    android:hint="@string/summary_notes_hint"
                     android:textColorHint="@color/text_hint"
                     android:inputType="textMultiLine"
                     android:scrollbars="vertical"

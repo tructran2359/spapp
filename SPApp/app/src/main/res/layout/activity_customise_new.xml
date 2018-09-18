@@ -151,7 +151,6 @@
                 android:layout_marginTop="@dimen/common_vert_medium_sub"
                 android:background="@drawable/bg_rec_rounded_white_solid_grey_stroke"
                 android:gravity="top|left"
-                android:hint="@string/service_customise_hint"
                 android:inputType="textMultiLine"
                 android:lines="10"
                 android:padding="@dimen/common_vert_small"

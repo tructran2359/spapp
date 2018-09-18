@@ -164,6 +164,9 @@ class PartnerDetailsViewModel @Inject constructor(
 
     fun hasCheckboxSelected(): Boolean
             = mSelectedServiceUsecase.hasCheckboxSelected()
+
+    fun getTopLevelCateId()
+            = partnerDetails.value?.categoryId ?: ""
 }
 
 interface ISelectedService {
