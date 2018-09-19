@@ -3,6 +3,7 @@ package com.spgroup.spapp.util.extension
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
@@ -78,3 +79,16 @@ val Fragment.appInstance: SPApplication
 
 val AppCompatActivity.appInstance: SPApplication
     get() = application as SPApplication
+
+fun Context.openMailClient(chooserTitle: String = "", emailAddr: String = "", subject: String = "", body: String = "") {
+    val intent = Intent(Intent.ACTION_SENDTO)
+    intent.setData(Uri.parse("mailto:"))
+    intent.putExtra(Intent.EXTRA_EMAIL,  arrayOf(emailAddr))
+    intent.putExtra(Intent.EXTRA_SUBJECT, subject)
+    intent.putExtra(Intent.EXTRA_TEXT, body)
+    try {
+        startActivity(Intent.createChooser(intent, chooserTitle))
+    } catch (ex: ActivityNotFoundException) {
+        longToast(R.string.error_no_mail_client_installed)
+    }
+}
