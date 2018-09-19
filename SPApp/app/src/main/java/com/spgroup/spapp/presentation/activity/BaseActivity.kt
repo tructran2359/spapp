@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity
 import com.google.android.gms.analytics.HitBuilders
 import com.google.android.gms.analytics.Tracker
 import com.spgroup.spapp.R
-import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.extension.appInstance
 import com.spgroup.spapp.util.extension.isOnline
 import org.jetbrains.anko.longToast
@@ -112,8 +111,6 @@ open class BaseActivity: AppCompatActivity() {
             val granted = ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
             if (granted != PackageManager.PERMISSION_GRANTED) {
                 //request permission
-                val shouldShow = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE)
-                doLogD("PhoneCall", "Should show: $shouldShow")
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), RC_REQUEST_CALL_PERMISSION)
                 mPendingPhoneNumber = phoneNumber
                 return
