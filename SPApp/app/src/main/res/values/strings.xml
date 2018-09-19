@@ -146,5 +146,7 @@
 
     <string name="error_no_mail_client_installed">No email application installed.</string>
     <string name="chooser_mail_client">Send email using&#8230;</string>
+    <string name="error_phone_number_empty">Phone number is empty!</string>
+    <string name="error_permission_denied">Permission denied</string>
 
 </resources>
