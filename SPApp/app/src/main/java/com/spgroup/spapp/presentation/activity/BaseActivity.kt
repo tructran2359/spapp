@@ -1,14 +1,20 @@
 package com.spgroup.spapp.presentation.activity
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import com.google.android.gms.analytics.HitBuilders
 import com.google.android.gms.analytics.Tracker
+import com.spgroup.spapp.R
 import com.spgroup.spapp.util.extension.appInstance
 import com.spgroup.spapp.util.extension.isOnline
+import org.jetbrains.anko.longToast
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import javax.inject.Inject
 
@@ -24,6 +30,7 @@ open class BaseActivity: AppCompatActivity() {
         const val RC_CUSTOMISE = 1
         const val RC_ORDER_SUMMARY = 2
         const val RC_EMPTY_REQUEST = 3
+        const val RC_REQUEST_CALL_PERMISSION = 4
         const val RC_EDIT = 11
         const val EXTRA_PENDING_INTENT = "EXTRA_PENDING_INTENT"
         const val EXTRA_REQUEST_CODE = "EXTRA_REQUEST_CODE"
@@ -33,6 +40,8 @@ open class BaseActivity: AppCompatActivity() {
     }
 
     @Inject lateinit var mTracker: Tracker
+
+    private var mPendingPhoneNumber: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +75,19 @@ open class BaseActivity: AppCompatActivity() {
         }
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == RC_REQUEST_CALL_PERMISSION) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                mPendingPhoneNumber?.run {
+                    makePhoneCall(this)
+                }
+            } else {
+                longToast(R.string.error_permission_denied)
+            }
+        }
+    }
+
     fun startActivityWithCheckingInternet(intent: Intent?) {
         if (isOnline()) {
             super.startActivity(intent)
@@ -79,6 +101,26 @@ open class BaseActivity: AppCompatActivity() {
             super.startActivityForResult(intent, requestCode)
         } else {
             super.startActivityForResult(NoInternetActivity.getLaunchIntent(this, intent, requestCode), RC_NO_INTERNET)
+        }
+    }
+
+    fun makePhoneCall(phoneNumber: String) {
+        if (phoneNumber.isEmpty()) {
+            longToast(R.string.error_phone_number_empty)
+        } else {
+            val granted = ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
+            if (granted != PackageManager.PERMISSION_GRANTED) {
+                //request permission
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), RC_REQUEST_CALL_PERMISSION)
+                mPendingPhoneNumber = phoneNumber
+                return
+            }
+
+            mPendingPhoneNumber = null
+
+            val intent = Intent(Intent.ACTION_CALL)
+            intent.data = Uri.parse("tel:$phoneNumber")
+            startActivity(intent)
         }
     }
 }
