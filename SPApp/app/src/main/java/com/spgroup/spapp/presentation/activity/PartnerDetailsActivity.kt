@@ -155,6 +155,12 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
                 })
             }
 
+            isLoading.observe(this@PartnerDetailsActivity, Observer {
+                it?.let { loading ->
+                    ll_partner_detail_loading_container.isGone = !loading
+                }
+            })
+
             error.observe(this@PartnerDetailsActivity, Observer {
                 // do something with error
                 doLogE(msg = "Error: ${it?.message}")
