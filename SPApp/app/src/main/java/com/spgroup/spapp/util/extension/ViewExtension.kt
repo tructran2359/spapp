@@ -221,6 +221,12 @@ fun View.isGoneWithText(string: String?) {
     isGone = string == null || string.isEmpty()
 }
 
+inline var View.isVisible: Boolean
+    get() = visibility == View.VISIBLE
+    set(value) {
+        visibility = if (value) View.VISIBLE else View.GONE
+    }
+
 fun View.updateMainButtonEnable(enabled: Boolean) {
     isEnabled = enabled
     setBackgroundResource(if (enabled) R.drawable.selector_btn_main else R.drawable.bg_rec_rounded_main_disabled)
