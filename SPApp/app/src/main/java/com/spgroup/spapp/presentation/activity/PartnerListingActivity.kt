@@ -9,6 +9,7 @@ import android.support.design.widget.AppBarLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.util.TypedValue
 import android.view.View
+import androidx.core.view.isVisible
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.Partner
 import com.spgroup.spapp.domain.model.PartnersListingItem
@@ -84,7 +85,11 @@ class PartnerListingActivity : BaseActivity() {
     private fun subscribeUI() {
         with(mViewModel) {
             topLevelCategory.observe(this@PartnerListingActivity, Observer {
-                it?.let { updateBanner(it) }
+                it?.run { updateBanner(this) }
+            })
+
+            isLoading.observe(this@PartnerListingActivity, Observer { loading ->
+                ll_loading_container.isVisible = loading ?: true
             })
 
             partnerListingItems.observe(this@PartnerListingActivity, Observer {

@@ -14,6 +14,7 @@ class PartnerListingViewModel @Inject constructor(
 
     val topLevelCategory = MutableLiveData<TopLevelCategory>()
     val partnerListingItems = MutableLiveData<List<PartnersListingItem>>()
+    val isLoading = MutableLiveData<Boolean>()
 
     fun setInitialData(topLevelCategory: TopLevelCategory) {
         this.topLevelCategory.value = topLevelCategory
@@ -22,14 +23,19 @@ class PartnerListingViewModel @Inject constructor(
     fun loadPartnerListing() {
         val disposable = getPartnerListingUsecase
                 .getPartnerListing(topLevelCategory.value?.id)
+                .doOnSubscribe {
+                    isLoading.value = true
+                }
                 .subscribe(
                         {
                             partnerListingItems.value = preProccessPartnerUsecase.run(it)
 
                             // To Simulate error case
 //                            error.value = Throwable("This is a test")
+                            isLoading.value = false
                         },
                         {
+                            isLoading.value = false
                             error.value = it
                         }
                 )
