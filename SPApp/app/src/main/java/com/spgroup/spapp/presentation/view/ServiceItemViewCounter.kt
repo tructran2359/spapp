@@ -19,7 +19,7 @@ class ServiceItemViewCounter(
     init {
         inflate(R.layout.layout_service_item_counter, true)
         tv_name.text = service.label
-        tv_price.text = service.price.formatPriceWithUnit(service.unit)
+        tv_price.text = service.price.formatPriceWithUnit(service.unit ?: "")
         onCountUpdate()
         setOnClickListener {
             if (count < service.max) {
