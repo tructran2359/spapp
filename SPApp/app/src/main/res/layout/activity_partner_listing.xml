@@ -54,19 +54,40 @@
             />
 
         <TextView
-            style="@style/h2"
+            style="@style/partnerListingCateNameText"
             android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="@dimen/common_vert_medium"
-            android:layout_marginLeft="@dimen/common_vert_large"
-            android:gravity="center_horizontal"
-            android:textColor="@color/color_white"
             tools:text="Food"
             />
 
     </FrameLayout>
+    
+    <LinearLayout
+        android:id="@+id/ll_loading_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_ui01"
+            >
+
+            <ImageView
+                android:id="@+id/iv_holder_cate_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                />
+
+            <TextView
+                style="@style/partnerListingCateNameText"
+                android:id="@+id/tv_holder_cate_name"
+                />
+        </FrameLayout>
+        
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_back"

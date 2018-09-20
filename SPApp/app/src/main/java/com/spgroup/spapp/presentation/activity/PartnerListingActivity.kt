@@ -121,7 +121,9 @@ class PartnerListingActivity : BaseActivity() {
 
     private fun updateBanner(topLevelCategory: TopLevelCategory) {
         tv_title.text = topLevelCategory.name
+        tv_holder_cate_name.text = topLevelCategory.name
         iv_banner.loadImage(topLevelCategory.banner.toFullUrl())
+        iv_holder_cate_image.loadImage(topLevelCategory.banner.toFullUrl())
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -153,6 +155,8 @@ class PartnerListingActivity : BaseActivity() {
         mScreenWidth = displayMetrics.widthPixels
         mInitTextSize = tv_title.textSize
         mHorzMargin = getDimensionPixelSize(R.dimen.common_horz_large)
+
+        setUpLoadingView()
 
         tv_title.setOnGlobalLayoutListener {
             mInitTitleWidth = tv_title.width
@@ -201,5 +205,13 @@ class PartnerListingActivity : BaseActivity() {
             onPartnerListingItemClick(view, itemData, position)
         }
         recycler_view.adapter = mPartnerListAdapter
+    }
+
+    private fun setUpLoadingView() {
+        iv_holder_cate_image.setLayoutParamsHeight(mBannerHeight)
+        for (i in 1..5) {
+            val holderView = inflate(R.layout.view_partner_listing_item_placeholder)
+            ll_loading_container.addView(holderView)
+        }
     }
 }

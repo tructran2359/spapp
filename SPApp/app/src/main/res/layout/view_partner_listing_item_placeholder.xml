@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_white"
+    >
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/common_vert_medium"
+        >
+
+        <View
+            android:layout_width="@dimen/partner_listing_logo_size"
+            android:layout_height="@dimen/partner_listing_logo_size"
+            android:background="@drawable/bg_rec_rounded_grey"
+            android:layout_marginLeft="@dimen/common_horz_large"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/common_horz_medium"
+            android:layout_marginRight="@dimen/common_horz_large"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_horz_medium_sub"
+                android:background="@drawable/bg_rec_rounded_grey"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_vert_small"
+                android:background="@drawable/bg_rec_rounded_grey_small_radius"
+                android:layout_marginTop="@dimen/common_vert_small"
+                android:layout_marginRight="@dimen/common_vert_medium"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_vert_small"
+                android:background="@drawable/bg_rec_rounded_grey_small_radius"
+                android:layout_marginTop="@dimen/common_vert_xsmall"
+                android:layout_marginRight="@dimen/common_vert_medium"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <View
+        style="@style/lineDividerDark"
+        android:id="@+id/holder_dark_divider"
+        android:layout_below="@+id/ll_content"
+        android:layout_marginTop="@dimen/common_vert_medium"
+        />
+
+    <View
+        style="@style/lineDividerLight"
+        android:layout_below="@+id/holder_dark_divider"
+        />
+
+</RelativeLayout>

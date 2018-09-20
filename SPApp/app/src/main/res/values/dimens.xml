@@ -46,6 +46,7 @@
 
     <dimen name="common_radius">5dp</dimen>
     <dimen name="common_radius_large">15dp</dimen>
+    <dimen name="common_radius_small">2dp</dimen>
 
     <!--common-->
     <dimen name="common_spacing">4dp</dimen>
