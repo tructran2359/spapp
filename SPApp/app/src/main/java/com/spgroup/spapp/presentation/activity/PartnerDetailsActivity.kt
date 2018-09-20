@@ -24,6 +24,7 @@ import com.spgroup.spapp.util.doLogD
 import com.spgroup.spapp.util.doLogE
 import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_partner_details.*
+import kotlinx.android.synthetic.main.view_partner_details_placeholder.*
 import javax.inject.Inject
 
 class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListener {
@@ -277,9 +278,8 @@ class PartnerDetailsActivity : BaseActivity(), AppBarLayout.OnOffsetChangedListe
         rl_hero_section.setOnGlobalLayoutListener {
             val width = rl_hero_section.width
             val height = (width * 9f / 16f).toInt()
-            val layoutParams = rl_hero_section.layoutParams
-            layoutParams.height = height
-            rl_hero_section.layoutParams = layoutParams
+            rl_hero_section.setLayoutParamsHeight(height)
+            fl_partner_detail_loading_hero_section.setLayoutParamsHeight(height)
         }
 
         appbar.addOnOffsetChangedListener(this)

@@ -203,10 +203,8 @@
                 >
 
                 <ImageView
+                    style="@style/partnerDetailsNavigateIcon"
                     android:id="@+id/iv_back"
-                    android:layout_width="@dimen/common_icon_size"
-                    android:layout_height="@dimen/common_icon_size"
-                    android:layout_gravity="center_vertical"
                     android:src="@drawable/arrow_left"
                     />
 
@@ -237,10 +235,8 @@
                 >
 
                 <ImageView
+                    style="@style/partnerDetailsNavigateIcon"
                     android:id="@+id/iv_information"
-                    android:layout_width="@dimen/common_icon_size"
-                    android:layout_height="@dimen/common_icon_size"
-                    android:layout_gravity="center_vertical"
                     android:src="@drawable/information"
                     />
 
@@ -251,6 +247,14 @@
     </RelativeLayout>
 
     <!--Top button and title===========================================-->
+
+    <!--Loading start===========================================-->
+
+    <include layout="@layout/view_partner_details_placeholder"/>
+
+    <!--Loading end===========================================-->
+
+
 
     
 </FrameLayout>
