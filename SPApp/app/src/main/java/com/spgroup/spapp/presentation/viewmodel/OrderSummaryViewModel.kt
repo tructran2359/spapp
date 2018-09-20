@@ -64,8 +64,16 @@ class OrderSummaryViewModel @Inject constructor(
         val amountDiscount = mPartnerDetails.getAmountDiscountValue()
         val amountDiscountLabel = mPartnerDetails.amountDiscountLabel ?: ""
         val minimumOrderAmount = mPartnerDetails.getMinimumOrderValue()
+        val showCheckboxAdditionChargeNotice = mSelectedServiceUsecase.hasCheckboxSelected() && (originalPrice < minimumOrderAmount)
 
-        mEstPrice.value = EstPriceData(percentageDiscountValue, originalPrice, surcharge, amountDiscount, amountDiscountLabel, minimumOrderAmount)
+        mEstPrice.value = EstPriceData(
+                percentageDiscountValue,
+                originalPrice,
+                surcharge,
+                amountDiscount,
+                amountDiscountLabel,
+                minimumOrderAmount,
+                showCheckboxAdditionChargeNotice)
     }
 
 
@@ -173,5 +181,6 @@ data class EstPriceData(
         val surcharge: Float,
         val amountDiscount: Float,
         val amountDiscountLabel: String,
-        val minimumOrderAmount: Float
+        val minimumOrderAmount: Float,
+        val showCheckboxAdditionChargeNotice: Boolean
 )

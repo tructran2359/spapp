@@ -64,7 +64,17 @@
 
     </RelativeLayout>
 
-
+    <TextView
+        style="@style/callout.regular"
+        android:id="@+id/tv_checkbox_additional_charge_notice"
+        android:layout_width="@dimen/summary_addition_charge_notice_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_vert_small"
+        android:layout_marginLeft="@dimen/common_horz_large"
+        android:layout_marginRight="@dimen/common_horz_large"
+        android:text="@string/additional_charge_checkbox_notice"
+        android:textColor="@color/color_grey"
+        />
 
     <View
         style="@style/lineDividerDark"
