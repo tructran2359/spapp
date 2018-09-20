@@ -29,7 +29,7 @@
             android:layout_toRightOf="@+id/iv_delete"
             android:layout_marginLeft="@dimen/common_spacing_x4"
             android:layout_centerVertical="true"
-            android:textColor="@color/color_grey"
+            android:textColor="@color/color_black"
             android:text="Day Curtains Cleaning"
             />
 
