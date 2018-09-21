@@ -34,6 +34,7 @@ import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_order_summary.*
 import kotlinx.android.synthetic.main.layout_summary_estimated.*
 import javax.inject.Inject
+import kotlin.math.max
 
 class OrderSummaryActivity : BaseActivity() {
 
@@ -162,7 +163,7 @@ class OrderSummaryActivity : BaseActivity() {
                     view_discount_percentage.setLabel(getString(R.string.discount_with_desc, percentageDiscount.toPercentageText()))
 
                     val percentageDiscountValue = originalPrice * percentageDiscount / 100
-                    val totalPrice = originalPrice + surcharge - percentageDiscountValue - amountDiscount
+                    val totalPrice = max(0F, originalPrice + surcharge - percentageDiscountValue - amountDiscount)
 
                     view_discount_percentage.setPrice(percentageDiscountValue, true)
 
