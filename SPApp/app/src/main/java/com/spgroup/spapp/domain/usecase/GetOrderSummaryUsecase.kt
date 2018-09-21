@@ -5,6 +5,7 @@ import com.spgroup.spapp.domain.model.Order
 import com.spgroup.spapp.domain.model.OrderSummary
 import com.spgroup.spapp.domain.model.PartnerDetails
 import com.spgroup.spapp.presentation.viewmodel.ISelectedService
+import kotlin.math.max
 
 class GetOrderSummaryUsecase: SynchronousUsecase() {
 
@@ -23,7 +24,7 @@ class GetOrderSummaryUsecase: SynchronousUsecase() {
         val percentageDiscount = totalPrice * orderDiscountPercentage / 100
         val amountDiscount = partnerDetails.getAmountDiscountValue()
 
-        var overallCostAfterDiscount = totalPrice - percentageDiscount - amountDiscount + surcharge
+        var overallCostAfterDiscount = max(0f, totalPrice - percentageDiscount - amountDiscount + surcharge)
 
         val listOrder = mutableListOf<Order>()
 

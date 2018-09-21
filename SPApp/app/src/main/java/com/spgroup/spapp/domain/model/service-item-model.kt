@@ -48,7 +48,7 @@ data class MultiplierService(
         val price: Float,
         val min: Int,
         val max: Int,
-        val unit: String
+        val unit: String?
 ) : AbsServiceItem() {
     override fun getServiceId() = id
     override fun getServiceType() = "multiplier"

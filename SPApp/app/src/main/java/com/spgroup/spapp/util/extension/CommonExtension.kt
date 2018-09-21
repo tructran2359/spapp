@@ -8,7 +8,8 @@ import org.unbescape.html.HtmlEscape
 
 fun Float.formatPrice() = "S$%.2f".format(this)
 
-fun Float.formatPriceWithUnit(unit: String) = "${this.formatPrice()} / $unit"
+fun Float.formatPriceWithUnit(unit: String)
+        = if(unit.isEmpty()) this.formatPrice() else "${this.formatPrice()} / $unit"
 
 fun Float.formatEstPrice() = "EST: ${this.formatPrice()}"
 

@@ -48,8 +48,7 @@
         android:id="@+id/tv_price"
         android:layout_toRightOf="@+id/tv_from"
         android:layout_alignBaseline="@+id/tv_from"
-
-        android:text="S$6 / item"
+        tools:text="S$6 / item"
         />
 
     <FrameLayout
@@ -71,7 +70,7 @@
         <TextView
             style="@style/textCounterIcon"
             android:id="@+id/tv_count"
-            android:text="1"
+            tools:text="1"
             fontPath="@string/font_book"
             android:visibility="gone"
             />

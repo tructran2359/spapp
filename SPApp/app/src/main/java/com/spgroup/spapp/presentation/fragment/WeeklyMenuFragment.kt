@@ -56,12 +56,16 @@ class WeeklyMenuFragment: BaseFragment(), MenuView.OnMenuItemClickListener {
                     partnerDetails.menu?.let { menu ->
                         tv_name.text = menu.title
                         tv_description.text = menu.summary
-                        menu.items?.forEachIndexed { index, foodMenuItem ->
-                            if (index == 0) {
-                                addMenuItem(foodMenuItem)
-                            } else {
-                                addDivider()
-                                addMenuItem(foodMenuItem)
+                        var isFirstItem = true
+                        menu.items?.forEach { foodMenuItem ->
+                            if (foodMenuItem.isValid()) {
+                                if (isFirstItem) {
+                                    isFirstItem = false
+                                    addMenuItem(foodMenuItem)
+                                } else {
+                                    addDivider()
+                                    addMenuItem(foodMenuItem)
+                                }
                             }
                         }
                     }

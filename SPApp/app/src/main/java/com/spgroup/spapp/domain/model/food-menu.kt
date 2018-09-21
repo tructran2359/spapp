@@ -11,9 +11,28 @@ data class FoodMenu(
 data class FoodMenuItem(
         val label: String?,
         val pdfs: List<Pdf>?
-): Serializable
+): Serializable {
+    fun isValid(): Boolean {
+        if (label == null || label.isEmpty()) return false
+
+        if (pdfs == null || pdfs.isEmpty()) return false
+
+        var valid = false
+        for (i in 0 until pdfs.size) {
+            if (pdfs[i].isValid()) {
+                valid = true
+                break
+            }
+        }
+        return valid
+    }
+}
 
 data class Pdf(
         val title: String?,
         val uri: String?
-): Serializable
+): Serializable {
+    fun isValid(): Boolean
+            = title != null && !title.isEmpty()
+            && uri != null && !uri.isEmpty()
+}
