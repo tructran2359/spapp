@@ -198,5 +198,6 @@
     <dimen name="error_screen_api_error_icon_size_height">72dp</dimen>
     <dimen name="error_screen_icon_margin_top">150dp</dimen>
     <dimen name="dialog_min_order_text_size_title">22sp</dimen>
+    <dimen name="summary_addition_charge_notice_width">192dp</dimen>
 
 </resources>

@@ -108,6 +108,7 @@
                     <TextView
                         style="@style/partnerBusinessInfo"
                         android:id="@+id/tv_phone"
+                        android:textColor="@color/color_ui01"
                         tools:text="6342 4988"
                         />
 
@@ -162,6 +163,7 @@
                     <TextView
                         style="@style/partnerBusinessInfo"
                         android:id="@+id/tv_email"
+                        android:textColor="@color/color_ui01"
                         tools:text="vml@gmail.com"
                         />
 

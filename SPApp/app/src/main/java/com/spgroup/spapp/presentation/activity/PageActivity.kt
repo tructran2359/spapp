@@ -15,10 +15,7 @@ import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.*
 import com.spgroup.spapp.presentation.view.IndicatorTextView
 import com.spgroup.spapp.presentation.viewmodel.PageViewModel
-import com.spgroup.spapp.util.extension.appInstance
-import com.spgroup.spapp.util.extension.getDimensionPixelSize
-import com.spgroup.spapp.util.extension.inflate
-import com.spgroup.spapp.util.extension.obtainViewModel
+import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_page.*
 import kotlinx.android.synthetic.main.layout_page_about_us.view.*
 import kotlinx.android.synthetic.main.layout_page_acknowledgement.view.*
@@ -66,14 +63,14 @@ class PageActivity: BaseActivity() {
         mViewModel = obtainViewModel(PageViewModel::class.java, vmFactory)
         mViewModel.run {
             page.observe(this@PageActivity, Observer {
-                it?.let {
-                    tv_title.text = it.title
-                    when(it.code) {
-                        TYPE_ABOUT -> addAboutViews(it)
+                it?.let {topLevelPage ->
+                    tv_title.text = topLevelPage.title
+                    when(topLevelPage.code) {
+                        TYPE_ABOUT -> addAboutViews(topLevelPage)
 
-                        TYPE_ACK -> addAckViews(it)
+                        TYPE_ACK -> addAckViews(topLevelPage)
 
-                        TYPE_TNC -> addTncViews(it)
+                        TYPE_TNC -> addTncViews(topLevelPage)
                     }
                 }
 
@@ -177,8 +174,8 @@ class PageActivity: BaseActivity() {
                     is TopLevelPageSectionList -> {
                         tv_ack_title.text = it.title
 
-                        it.options.forEach {
-                            val textView = IndicatorTextView(this@PageActivity, it)
+                        it.options.forEach {text ->
+                            val textView = IndicatorTextView(this@PageActivity, text)
                             ll_ack_option_container.addView(textView)
                         }
                     }
@@ -195,7 +192,12 @@ class PageActivity: BaseActivity() {
                 when (it) {
                     is TopLevelPageSectionLink -> {
                         tv_link_title.text = it.title
-                        tv_email.text = it.email
+                        val email = it.email
+                        tv_email.text = email
+                        tv_email.isGoneWithText(email)
+                        tv_email.setOnClickListener { _ ->
+                            openMailClient(getString(R.string.chooser_mail_client), email)
+                        }
                     }
 
                     is TopLevelPageSectionLongText -> {

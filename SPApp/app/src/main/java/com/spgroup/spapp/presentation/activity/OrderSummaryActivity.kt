@@ -184,6 +184,7 @@ class OrderSummaryActivity : BaseActivity() {
                     view_discount_percentage.isGone = percentageDiscount == 0f
                     view_surcharge.isGone = surcharge == 0f
                     view_discount_amount.isGone = amountDiscount == 0f
+                    tv_checkbox_additional_charge_notice.isVisible = showCheckboxAdditionChargeNotice
                 }
             })
 
