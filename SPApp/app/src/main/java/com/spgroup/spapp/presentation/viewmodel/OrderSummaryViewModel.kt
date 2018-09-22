@@ -2,16 +2,14 @@ package com.spgroup.spapp.presentation.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import com.google.gson.Gson
-import com.spgroup.spapp.domain.model.AbsServiceItem
-import com.spgroup.spapp.domain.model.ContactInfo
-import com.spgroup.spapp.domain.model.PartnerDetails
-import com.spgroup.spapp.domain.model.RequestAck
+import com.spgroup.spapp.domain.model.*
 import com.spgroup.spapp.domain.usecase.GetOrderSummaryUsecase
 import com.spgroup.spapp.domain.usecase.SelectedServiceUsecase
 import com.spgroup.spapp.domain.usecase.SubmitRequestUsecase
 import com.spgroup.spapp.manager.AppConfigManager
 import com.spgroup.spapp.presentation.activity.CustomiseDisplayData
 import com.spgroup.spapp.util.doLogD
+import com.spgroup.spapp.util.extension.getPercentageValue
 import javax.inject.Inject
 import kotlin.math.max
 
@@ -139,13 +137,29 @@ class OrderSummaryViewModel @Inject constructor(
 
     fun getPartnerName() = mPartnerDetails.name
 
-    fun getOrderSummaryModel(contactInfo: ContactInfo) = mGetOrderSummaryUsecase.getOrderSummaryModel(
-            mPartnerDetails,
-            mSelectedServiceUsecase.mapSelectedServices,
-            contactInfo,
-            mSelectedServiceUsecase.calculateEstPrice(),
-            getSurcharge()
-    )
+    fun getOrderSummaryModel(contactInfo: ContactInfo): OrderSummary {
+        val originalPrice = mSelectedServiceUsecase.calculateEstPrice()
+        val percentageDiscountValue = originalPrice.getPercentageValue(mPartnerDetails.getPercentageDiscountValue())
+        val amountDiscountValue = mPartnerDetails.getAmountDiscountValue()
+        val surcharge = getSurcharge()
+
+        val finalPrice = getFinalPrice(
+                originalPrice,
+                percentageDiscountValue,
+                amountDiscountValue,
+                surcharge
+        )
+
+        return mGetOrderSummaryUsecase.getOrderSummaryModel(
+                mPartnerDetails,
+                mSelectedServiceUsecase.mapSelectedServices,
+                contactInfo,
+                surcharge,
+                originalPrice,
+                finalPrice
+        )
+    }
+
 
     fun submitRequest(contactInfo: ContactInfo) {
         val orderSummary = getOrderSummaryModel(contactInfo)
