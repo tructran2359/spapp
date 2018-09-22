@@ -115,7 +115,7 @@
 
     <string name="api_error_title">Whoooops!</string>
     <string name="api_error_desc">Something went wrong.</string>
-    <string name="dialog_min_order_title">You have not met the minimum spend of %s.</string>
+    <string name="dialog_min_order_title">You have not met the minimum spend of \n%s.</string>
     <string name="dialog_min_order_notice">Additional charges will apply.</string>
     <string name="text_continue">CONTINUE</string>
     <string name="add_more_services">ADD MORE SERVICES</string>
@@ -127,7 +127,7 @@
     <string name="partner_details_alert_desc">If you continue, your current selection(s) will be removed from the Summary page.</string>
     <string name="cancel">CANCEL</string>
 
-    <string name="dialog_min_order_checkbox_title_with_format">Minimum spend of %s is required.</string>
+    <string name="dialog_min_order_checkbox_title_with_format">Minimum spend of \n%s is required.</string>
     <string name="dialog_min_order_checkbox_desc">Additional charges may apply after on-site estimation.</string>
     <string name="ok">OK</string>
 
