@@ -466,21 +466,23 @@ class OrderSummaryActivity : BaseActivity() {
         val inflater = LayoutInflater.from(this)
 
         for ((cateId, listSelectedServce) in mapSelectedServices) {
-            val cateName = mViewModel.getCateName(cateId) ?: ""
-            addHeader(inflater, cateName, cateId )
+            if (listSelectedServce.isNotEmpty()) {
+                val cateName = mViewModel.getCateName(cateId) ?: ""
+                addHeader(inflater, cateName, cateId)
 
-            for (selectedService in listSelectedServce) {
-                when (selectedService) {
+                for (selectedService in listSelectedServce) {
+                    when (selectedService) {
 
-                    is SelectedService -> {
-                        if (selectedService.service is MultiplierService) {
-                            addItemCounter(cateId, selectedService)
-                        } else if (selectedService.service is CheckboxService) {
-                            addItemCheckbox(cateId, selectedService)
+                        is SelectedService -> {
+                            if (selectedService.service is MultiplierService) {
+                                addItemCounter(cateId, selectedService)
+                            } else if (selectedService.service is CheckboxService) {
+                                addItemCheckbox(cateId, selectedService)
+                            }
                         }
-                    }
 
-                    is ComplexSelectedService -> addItemCombo(cateId, selectedService)
+                        is ComplexSelectedService -> addItemCombo(cateId, selectedService)
+                    }
                 }
             }
         }
