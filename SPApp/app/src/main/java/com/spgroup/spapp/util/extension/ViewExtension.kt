@@ -255,3 +255,8 @@ fun Context.getSummaryHint(topLevelCateId: String): Int {
         else -> -1
     }
 }
+
+fun Any.getLinearLayoutParams(
+        width: Int = LinearLayout.LayoutParams.MATCH_PARENT,
+        height: Int = LinearLayout.LayoutParams.WRAP_CONTENT): LinearLayout.LayoutParams
+        = LinearLayout.LayoutParams(width, height)

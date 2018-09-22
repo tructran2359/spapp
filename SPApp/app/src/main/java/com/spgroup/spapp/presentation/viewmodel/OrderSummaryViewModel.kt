@@ -13,6 +13,7 @@ import com.spgroup.spapp.manager.AppConfigManager
 import com.spgroup.spapp.presentation.activity.CustomiseDisplayData
 import com.spgroup.spapp.util.doLogD
 import javax.inject.Inject
+import kotlin.math.max
 
 class OrderSummaryViewModel @Inject constructor(
         private val mSubmitRequestUsecase: SubmitRequestUsecase,
@@ -58,23 +59,50 @@ class OrderSummaryViewModel @Inject constructor(
 
     private fun updateCountAndPrice() {
         mTotalCount.value = mSelectedServiceUsecase.calculateTotalCount()
-        val percentageDiscountValue = mPartnerDetails.getPercentageDiscountValue()
         val originalPrice = mSelectedServiceUsecase.calculateEstPrice()
-        val surcharge = getSurcharge()
+
+        val percentageDiscount = mPartnerDetails.getPercentageDiscountValue()
+        val percentageDiscountValue = originalPrice * percentageDiscount / 100f
+
         val amountDiscount = mPartnerDetails.getAmountDiscountValue()
         val amountDiscountLabel = mPartnerDetails.amountDiscountLabel ?: ""
+
         val minimumOrderAmount = mPartnerDetails.getMinimumOrderValue()
+        val surcharge = getSurcharge()
+
+        val finalPrice = getFinalPrice(originalPrice, percentageDiscountValue, amountDiscount, surcharge)
         val showCheckboxAdditionChargeNotice = mSelectedServiceUsecase.hasCheckboxSelected() && (originalPrice < minimumOrderAmount)
 
         mEstPrice.value = EstPriceData(
+                percentageDiscount,
                 percentageDiscountValue,
-                originalPrice,
-                surcharge,
                 amountDiscount,
                 amountDiscountLabel,
+                surcharge,
                 minimumOrderAmount,
+                originalPrice,
+                finalPrice,
                 showCheckboxAdditionChargeNotice)
+
+//        //For testing UI
+//        mEstPrice.value = EstPriceData(
+//                1f,
+//                1f,
+//                1f,
+//                "test",
+//                1f,
+//                1f,
+//                1f,
+//                1f,
+//                true)
     }
+
+    private fun getFinalPrice(
+            originalPrice: Float,
+            percentageDiscountValue: Float,
+            amountDiscount: Float,
+            surcharge: Float) =
+            max(0f, originalPrice - percentageDiscountValue - amountDiscount + surcharge)
 
 
     fun deleteService(categoryId: String, serviceId: Int) {
@@ -176,11 +204,13 @@ class OrderSummaryViewModel @Inject constructor(
 }
 
 data class EstPriceData(
-        val percentageDiscount: Float,
-        val originalPrice: Float,
-        val surcharge: Float,
+        val percentageDiscountLabel: Float,
+        val percentageDiscountValue: Float,
         val amountDiscount: Float,
         val amountDiscountLabel: String,
+        val surcharge: Float,
         val minimumOrderAmount: Float,
+        val originalPrice: Float,
+        val finalPrice: Float,
         val showCheckboxAdditionChargeNotice: Boolean
 )

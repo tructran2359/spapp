@@ -34,7 +34,6 @@ import com.spgroup.spapp.util.extension.*
 import kotlinx.android.synthetic.main.activity_order_summary.*
 import kotlinx.android.synthetic.main.layout_summary_estimated.*
 import javax.inject.Inject
-import kotlin.math.max
 
 class OrderSummaryActivity : BaseActivity() {
 
@@ -160,30 +159,49 @@ class OrderSummaryActivity : BaseActivity() {
 
             mEstPrice.observe(this@OrderSummaryActivity, Observer {
                 it?.run {
-                    view_discount_percentage.setLabel(getString(R.string.discount_with_desc, percentageDiscount.toPercentageText()))
 
-                    val percentageDiscountValue = originalPrice * percentageDiscount / 100
-                    val totalPrice = max(0F, originalPrice + surcharge - percentageDiscountValue - amountDiscount)
 
-                    view_discount_percentage.setPrice(percentageDiscountValue, true)
+                    val listDiscountData: MutableList<Triple<String, Float, Boolean>> = mutableListOf() //<Label, Value, IsDiscount>
 
-                    view_surcharge.setLabel(getString(R.string.surcharge_with_price, minimumOrderAmount.formatPrice()))
-                    view_surcharge.setPrice(surcharge, false)
-
-                    val amountLabel = if (amountDiscountLabel.isEmpty()) {
-                        getString(R.string.discount)
-                    } else {
-                        getString(R.string.discount_with_desc, amountDiscountLabel)
+                    //Percentage Discount
+                    if (percentageDiscountValue != 0F) {
+                        val label = getString(R.string.discount_with_desc, percentageDiscountLabel.toPercentageText())
+                        listDiscountData.add(Triple(label, percentageDiscountValue, true))
                     }
-                    view_discount_amount.setLabel(amountLabel)
-                    view_discount_amount.setPrice(amountDiscount, true)
 
-                    tv_total_value.text = totalPrice.formatPrice()
-                    btn_summary.setEstPrice(totalPrice)
+                    //Amount Discount
+                    if (amountDiscount != 0F) {
+                        val label = if (amountDiscountLabel.isEmpty()) {
+                            getString(R.string.discount)
+                        } else {
+                            getString(R.string.discount_with_desc, amountDiscountLabel)
+                        }
+                        listDiscountData.add(Triple(label, amountDiscount, true))
+                    }
 
-                    view_discount_percentage.isGone = percentageDiscount == 0f
-                    view_surcharge.isGone = surcharge == 0f
-                    view_discount_amount.isGone = amountDiscount == 0f
+                    //Surcharge
+                    if (surcharge != 0F) {
+                        val label = getString(R.string.surcharge_with_price, minimumOrderAmount.formatPrice())
+                        listDiscountData.add(Triple(label, surcharge, false))
+                    }
+
+                    //Add view:
+                    listDiscountData.forEachIndexed {index, discountData ->
+                        val view = PriceDetailView(this@OrderSummaryActivity)
+                        view.setLabel(discountData.first)
+                        view.setPrice(discountData.second, discountData.third)
+                        val layoutParams = getLinearLayoutParams()
+                        if (index != 0) {
+                            layoutParams.topMargin = getDimensionPixelSize(R.dimen.summary_discount_line_spacing)
+                        }
+                        view.layoutParams = layoutParams
+                        ll_discount_container.addView(view)
+                    }
+                    ll_discount_container.isGone = listDiscountData.isEmpty()
+
+                    tv_total_value.text = finalPrice.formatPrice()
+                    btn_summary.setEstPrice(finalPrice)
+
                     tv_checkbox_additional_charge_notice.isVisible = showCheckboxAdditionChargeNotice
                 }
             })
