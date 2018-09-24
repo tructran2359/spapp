@@ -6,10 +6,11 @@ sealed class AbsServiceItem: Serializable  {
     abstract fun getServiceId(): Int
     abstract fun getServiceType(): String
     abstract fun getServiceName(): String
-    open fun getSelectedCustomisationLabel(
+    abstract fun getServiceUnit(): String?
+    open fun getSelectedCustomisation(
             customisationIndex: Int,
             selectedOptionIndex: Int
-    ): String? = null
+    ): OrderOption? = null
 }
 
 
@@ -24,9 +25,11 @@ data class ComplexCustomisationService(
     override fun getServiceId() = id
     override fun getServiceType() = "complex"
     override fun getServiceName() = label
-    override fun getSelectedCustomisationLabel(customisationIndex: Int, selectedOptionIndex: Int): String? {
-        return customisations[customisationIndex].getSelectedOptionLabel(selectedOptionIndex)
+    override fun getSelectedCustomisation(customisationIndex: Int, selectedOptionIndex: Int): OrderOption? {
+        return customisations[customisationIndex].getSelectedOption(selectedOptionIndex)
     }
+
+    override fun getServiceUnit(): String? = unit
 }
 
 
@@ -39,6 +42,7 @@ data class CheckboxService(
     override fun getServiceId() = id
     override fun getServiceType() = "checkbox"
     override fun getServiceName() = label
+    override fun getServiceUnit(): String? = ""
 }
 
 
@@ -53,4 +57,5 @@ data class MultiplierService(
     override fun getServiceId() = id
     override fun getServiceType() = "multiplier"
     override fun getServiceName() = label
+    override fun getServiceUnit(): String? = unit
 }
