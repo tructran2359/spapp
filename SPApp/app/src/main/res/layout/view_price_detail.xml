@@ -6,7 +6,6 @@
     tools:ignore="MissingPrefix"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/common_vert_medium_sub"
     android:orientation="horizontal"
     >
 

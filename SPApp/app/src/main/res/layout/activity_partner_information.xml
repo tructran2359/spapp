@@ -108,7 +108,27 @@
                     <TextView
                         style="@style/partnerBusinessInfo"
                         android:id="@+id/tv_phone"
+                        android:textColor="@color/color_ui01"
                         tools:text="6342 4988"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/PartnerInfoLineContainer"
+                    android:id="@+id/ll_email_container"
+                    >
+
+                    <ImageView
+                        style="@style/PartnerInfoLineIcon"
+                        android:src="@drawable/email"
+                        />
+
+                    <TextView
+                        style="@style/partnerBusinessInfo"
+                        android:id="@+id/tv_email"
+                        android:textColor="@color/color_ui01"
+                        tools:text="vml@gmail.com"
                         />
 
                 </LinearLayout>
@@ -145,24 +165,6 @@
                         style="@style/partnerBusinessInfo"
                         android:id="@+id/tv_nea"
                         tools:text="987654321A"
-                        />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    style="@style/PartnerInfoLineContainer"
-                    android:id="@+id/ll_email_container"
-                    >
-
-                    <ImageView
-                        style="@style/PartnerInfoLineIcon"
-                        android:src="@drawable/email"
-                        />
-
-                    <TextView
-                        style="@style/partnerBusinessInfo"
-                        android:id="@+id/tv_email"
-                        tools:text="vml@gmail.com"
                         />
 
                 </LinearLayout>

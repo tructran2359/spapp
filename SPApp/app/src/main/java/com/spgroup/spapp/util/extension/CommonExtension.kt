@@ -77,3 +77,5 @@ fun String.toFloatWithException() = if (isEmpty()) 0f else {
         0f
     }
 }
+
+fun Float.getPercentageValue(percentage: Float) = this * percentage / 100F

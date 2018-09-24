@@ -115,7 +115,7 @@
 
     <string name="api_error_title">Whoooops!</string>
     <string name="api_error_desc">Something went wrong.</string>
-    <string name="dialog_min_order_title">You have not met the minimum spend of %s.</string>
+    <string name="dialog_min_order_title">You have not met the minimum spend of \n%s.</string>
     <string name="dialog_min_order_notice">Additional charges will apply.</string>
     <string name="text_continue">CONTINUE</string>
     <string name="add_more_services">ADD MORE SERVICES</string>
@@ -127,7 +127,7 @@
     <string name="partner_details_alert_desc">If you continue, your current selection(s) will be removed from the Summary page.</string>
     <string name="cancel">CANCEL</string>
 
-    <string name="dialog_min_order_checkbox_title_with_format">Minimum spend of %s is required.</string>
+    <string name="dialog_min_order_checkbox_title_with_format">Minimum spend of \n%s is required.</string>
     <string name="dialog_min_order_checkbox_desc">Additional charges may apply after on-site estimation.</string>
     <string name="ok">OK</string>
 
@@ -143,5 +143,11 @@
     <string name="summary_hint_laundry">Eg. Please leave laundry on doorstep.</string>
     <string name="summary_hint_aircon">Eg. Please enter and call unit number code at entrance.</string>
     <string name="summary_hint_housekeeping">Eg. Please note that I own a big dog.</string>
+
+    <string name="error_no_mail_client_installed">No email application installed.</string>
+    <string name="chooser_mail_client">Send email using&#8230;</string>
+    <string name="error_phone_number_empty">Phone number is empty!</string>
+    <string name="error_permission_denied">Permission denied</string>
+    <string name="additional_charge_checkbox_notice">Additional charges may apply after on-site estimation.</string>
 
 </resources>

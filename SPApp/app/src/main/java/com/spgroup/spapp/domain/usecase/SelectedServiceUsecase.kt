@@ -65,16 +65,26 @@ class SelectedServiceUsecase: SynchronousUsecase() {
 
     fun removeSelectedItem(categoryId: String, serviceId: Int) {
         val listSelectedService = mapSelectedServices[categoryId]
-        var deletedPos = -1
-        listSelectedService?.forEachIndexed { index, item ->
-            if (item.getId() == serviceId) {
-                deletedPos = index
-                return@forEachIndexed
+        listSelectedService?.run {
+            var deletedPos = -1
+
+            this.forEachIndexed { index, item ->
+                if (item.getId() == serviceId) {
+                    deletedPos = index
+                    return@forEachIndexed
+                }
+            }
+
+            if (deletedPos != -1) {
+                this.removeAt(deletedPos)
+            }
+
+            if (this.isEmpty()) {
+                mapSelectedServices.remove(categoryId)
             }
         }
-        if (deletedPos != -1) {
-            listSelectedService?.removeAt(deletedPos)
-        }
+
+
     }
 
     fun updateComplexSelectedServiceItem(customiseDisplayData: CustomiseDisplayData) {

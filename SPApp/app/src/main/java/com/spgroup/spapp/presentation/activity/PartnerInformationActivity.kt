@@ -132,6 +132,11 @@ class PartnerInformationActivity : BaseActivity() {
 
             tv_phone.text = phone
             ll_phone_container.isGoneWithText(phone)
+            ll_phone_container.setOnClickListener {
+                phone?.run {
+                    makePhoneCall(this)
+                }
+            }
 
             tv_uen.text = uen
             ll_uen_container.isGoneWithText(uen)
@@ -141,6 +146,9 @@ class PartnerInformationActivity : BaseActivity() {
 
             tv_email.text = email
             ll_email_container.isGoneWithText(email)
+            ll_email_container.setOnClickListener {
+                openMailClient(chooserTitle = getString(R.string.chooser_mail_client), emailAddr = email ?: "")
+            }
 
             // hide `Business Information` title if all info are not available
             tv_business_info.isGone = (ll_phone_container.isGone && ll_uen_container.isGone && ll_nea_container.isGone)

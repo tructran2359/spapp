@@ -12,25 +12,12 @@
     <View style="@style/lineDividerDark"
         android:layout_marginBottom="@dimen/common_vert_medium"/>
 
-    <com.spgroup.spapp.presentation.view.PriceDetailView
-        android:id="@+id/view_discount_percentage"
+    <LinearLayout
+        android:id="@+id/ll_discount_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/common_vert_small"
-        />
-
-    <com.spgroup.spapp.presentation.view.PriceDetailView
-        android:id="@+id/view_discount_amount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/common_vert_small"
-        />
-
-    <com.spgroup.spapp.presentation.view.PriceDetailView
-        android:id="@+id/view_surcharge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/common_vert_small"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/common_vert_medium"
         />
 
     <RelativeLayout
@@ -64,7 +51,17 @@
 
     </RelativeLayout>
 
-
+    <TextView
+        style="@style/callout.regular"
+        android:id="@+id/tv_checkbox_additional_charge_notice"
+        android:layout_width="@dimen/summary_addition_charge_notice_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_vert_xsmall"
+        android:layout_marginLeft="@dimen/common_horz_large"
+        android:layout_marginRight="@dimen/common_horz_large"
+        android:text="@string/additional_charge_checkbox_notice"
+        android:textColor="@color/color_grey"
+        />
 
     <View
         style="@style/lineDividerDark"
