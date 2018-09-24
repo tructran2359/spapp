@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import com.spgroup.spapp.BuildConfig
 import com.spgroup.spapp.domain.usecase.GetInitialDataUsecase
+import com.spgroup.spapp.domain.usecase.RandomiseListFeaturedMerchantUsecase
+import com.spgroup.spapp.domain.usecase.RandomiseListFeaturedPromotionUsecase
 import com.spgroup.spapp.manager.AppConfigManager
 import com.spgroup.spapp.manager.AppDataCache
 import com.spgroup.spapp.presentation.activity.HomeActivity
@@ -17,7 +19,9 @@ import javax.inject.Inject
 class SplashViewModel @Inject constructor(
         private val getInitialDataUsecase: GetInitialDataUsecase,
         private val appDataCache: AppDataCache,
-        private val mAppConfig: AppConfigManager
+        private val mAppConfig: AppConfigManager,
+        private val randomisePromoUsecase: RandomiseListFeaturedPromotionUsecase,
+        private val randomiseMerchantUsecase: RandomiseListFeaturedMerchantUsecase
 ) : BaseViewModel() {
 
     val isSuccess = MutableLiveData<Boolean>().apply { value = false }
@@ -26,10 +30,12 @@ class SplashViewModel @Inject constructor(
         val disposable = getInitialDataUsecase
                 .run()
                 .doOnSuccess {
+                    val randomisedPromotionList = randomisePromoUsecase.getRandomisedList(it.promotions)
+                    val randomisedPartnerList = randomiseMerchantUsecase.getRandomisedList(it.featuredPartners)
                     appDataCache.saveInitData(
                             it.categories,
-                            it.promotions,
-                            it.featuredPartners,
+                            randomisedPromotionList,
+                            randomisedPartnerList,
                             it.pages,
                             it.variables)
                 }
