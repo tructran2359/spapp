@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/common_horz_large_for_icon"
         android:layout_marginRight="@dimen/common_horz_large_for_icon"
-        android:layout_marginTop="@dimen/common_vert_small"
         android:layout_marginBottom="@dimen/common_vert_medium"
         >
 
@@ -44,7 +43,6 @@
         android:layout_below="@+id/rl_content_container"
         android:layout_marginLeft="@dimen/common_horz_large_for_icon"
         android:layout_marginRight="@dimen/common_horz_large"
-        android:layout_marginBottom="@dimen/common_vert_small"
         android:paddingLeft="@dimen/common_spacing_x3"
         android:paddingRight="@dimen/common_spacing_x3"
         android:paddingTop="@dimen/common_spacing_x2"
@@ -52,6 +50,5 @@
         android:textColor="@color/color_grey"
         android:text="Price estimate excludes curtains &amp; carpets"
         />
-
 
 </RelativeLayout>
