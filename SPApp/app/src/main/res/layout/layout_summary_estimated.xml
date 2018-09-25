@@ -12,6 +12,13 @@
     <View style="@style/lineDividerDark"
         android:layout_marginBottom="@dimen/common_vert_medium"/>
 
+    <com.spgroup.spapp.presentation.view.PriceDetailView
+        android:id="@+id/price_view_subtotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/common_vert_medium_sub"
+        />
+
     <LinearLayout
         android:id="@+id/ll_discount_container"
         android:layout_width="match_parent"

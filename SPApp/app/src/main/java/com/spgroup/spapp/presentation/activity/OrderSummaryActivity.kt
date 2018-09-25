@@ -160,6 +160,7 @@ class OrderSummaryActivity : BaseActivity() {
             mEstPrice.observe(this@OrderSummaryActivity, Observer {
                 it?.run {
 
+                    price_view_subtotal.setData(getString(R.string.subtotal), originalPrice, false)
 
                     val listDiscountData: MutableList<Triple<String, Float, Boolean>> = mutableListOf() //<Label, Value, IsDiscount>
 
@@ -189,8 +190,7 @@ class OrderSummaryActivity : BaseActivity() {
                     ll_discount_container.removeAllViews()
                     listDiscountData.forEachIndexed {index, discountData ->
                         val view = PriceDetailView(this@OrderSummaryActivity)
-                        view.setLabel(discountData.first)
-                        view.setPrice(discountData.second, discountData.third)
+                        view.setData(discountData.first, discountData.second, discountData.third)
                         val layoutParams = getLinearLayoutParams()
                         if (index != 0) {
                             layoutParams.topMargin = getDimensionPixelSize(R.dimen.summary_discount_line_spacing)

@@ -41,4 +41,9 @@ class PriceDetailView: RelativeLayout {
             tv_discount_value.setTextColor(context.getColorFromRes(R.color.color_black))
         }
     }
+
+    fun setData(label: String, price: Float, isDiscount: Boolean) {
+        setLabel(label)
+        setPrice(price, isDiscount)
+    }
 }

@@ -149,5 +149,6 @@
     <string name="error_phone_number_empty">Phone number is empty!</string>
     <string name="error_permission_denied">Permission denied</string>
     <string name="additional_charge_checkbox_notice">Additional charges may apply after on-site estimation.</string>
+    <string name="subtotal">Subtotal</string>
 
 </resources>
