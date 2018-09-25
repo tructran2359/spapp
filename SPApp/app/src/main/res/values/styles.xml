@@ -408,4 +408,33 @@
         <item name="android:layout_height">@dimen/common_icon_size_medium</item>
     </style>
 
+    <style name="partnerListingCateNameText" parent="h2">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:layout_marginBottom">@dimen/common_vert_medium</item>
+        <item name="android:layout_marginLeft">@dimen/common_vert_large</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="partnerListingLineItemHolder">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/bg_rec_rounded_grey</item>
+    </style>
+
+    <style name="partnerDetailsNavigateIcon">
+        <item name="android:layout_width">@dimen/common_icon_size</item>
+        <item name="android:layout_height">@dimen/common_icon_size</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="partnerDetailsTabTitlePlaceHolder">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">28dp</item>
+        <item name="android:background">@drawable/bg_rec_rounded_white</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/common_horz_large</item>
+    </style>
+
 </resources>

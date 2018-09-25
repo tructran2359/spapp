@@ -9,6 +9,7 @@ import android.support.design.widget.AppBarLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.util.TypedValue
 import android.view.View
+import androidx.core.view.isVisible
 import com.spgroup.spapp.R
 import com.spgroup.spapp.domain.model.Partner
 import com.spgroup.spapp.domain.model.PartnersListingItem
@@ -84,7 +85,11 @@ class PartnerListingActivity : BaseActivity() {
     private fun subscribeUI() {
         with(mViewModel) {
             topLevelCategory.observe(this@PartnerListingActivity, Observer {
-                it?.let { updateBanner(it) }
+                it?.run { updateBanner(this) }
+            })
+
+            isLoading.observe(this@PartnerListingActivity, Observer { loading ->
+                ll_loading_container.isVisible = loading ?: true
             })
 
             partnerListingItems.observe(this@PartnerListingActivity, Observer {
@@ -121,7 +126,9 @@ class PartnerListingActivity : BaseActivity() {
 
     private fun updateBanner(topLevelCategory: TopLevelCategory) {
         tv_title.text = topLevelCategory.name
+        tv_holder_cate_name.text = topLevelCategory.name
         iv_banner.loadImage(topLevelCategory.banner.toFullUrl())
+        iv_holder_cate_image.loadImage(topLevelCategory.banner.toFullUrl())
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -153,6 +160,8 @@ class PartnerListingActivity : BaseActivity() {
         mScreenWidth = displayMetrics.widthPixels
         mInitTextSize = tv_title.textSize
         mHorzMargin = getDimensionPixelSize(R.dimen.common_horz_large)
+
+        setUpLoadingView()
 
         tv_title.setOnGlobalLayoutListener {
             mInitTitleWidth = tv_title.width
@@ -201,5 +210,13 @@ class PartnerListingActivity : BaseActivity() {
             onPartnerListingItemClick(view, itemData, position)
         }
         recycler_view.adapter = mPartnerListAdapter
+    }
+
+    private fun setUpLoadingView() {
+        iv_holder_cate_image.setLayoutParamsHeight(mBannerHeight)
+        for (i in 1..5) {
+            val holderView = inflate(R.layout.view_partner_listing_item_placeholder)
+            ll_loading_container.addView(holderView)
+        }
     }
 }

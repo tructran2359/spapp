@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_partner_detail_loading_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <!--Hero section-->
+
+    <FrameLayout
+        android:id="@+id/fl_partner_detail_loading_hero_section"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/color_ui05"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/partner_details_img_placeholder_width"
+            android:layout_height="@dimen/partner_details_img_placeholder_height"
+            android:layout_gravity="center"
+            android:src="@drawable/icon_image_placeholder"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_partner_image"
+            />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/action_bar_height"
+            >
+
+            <ImageView
+                style="@style/partnerDetailsNavigateIcon"
+                android:src="@drawable/arrow_left"
+                android:layout_marginLeft="@dimen/common_spacing_x2"
+                />
+
+            <ImageView
+                style="@style/partnerDetailsNavigateIcon"
+                android:src="@drawable/information"
+                android:layout_marginRight="@dimen/common_spacing_x3"
+                android:layout_gravity="center_vertical|right"
+                />
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <!--Promo bar-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/promotion_bar_height"
+        android:orientation="horizontal"
+        android:background="@color/color_ui01"
+        android:paddingLeft="@dimen/common_horz_large"
+        android:paddingRight="@dimen/common_horz_large"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/promotion_bar_icon_size"
+            android:layout_height="@dimen/promotion_bar_icon_size"
+            android:src="@drawable/oval_promo_placeholder"
+            android:layout_gravity="center_vertical"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_vert_medium"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/common_horz_medium"
+            android:background="@drawable/rec_promo_placeholder"
+            />
+
+    </LinearLayout>
+
+    <!--Tab Layout-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_height"
+        android:orientation="horizontal"
+        android:background="@color/color_ui05"
+        >
+
+        <View style="@style/partnerDetailsTabTitlePlaceHolder"/>
+
+        <View
+            style="@style/partnerDetailsTabTitlePlaceHolder"
+            android:layout_marginLeft="@dimen/common_horz_xlarge"
+            />
+
+        <View
+            style="@style/partnerDetailsTabTitlePlaceHolder"
+            android:layout_marginLeft="@dimen/common_horz_xlarge"
+            />
+
+        <View
+            style="@style/partnerDetailsTabTitlePlaceHolder"
+            android:layout_marginLeft="@dimen/common_horz_xlarge"
+            />
+
+    </LinearLayout>
+
+    <!--List Item-->
+
+    <include layout="@layout/view_partner_details_item_placeholder"/>
+
+    <include layout="@layout/view_partner_details_item_placeholder"/>
+
+</LinearLayout>

@@ -27,6 +27,7 @@ class PartnerDetailsViewModel @Inject constructor(
     val newSelectedComplexServiceWithCateId = MutableLiveData<Pair<String, Int>>()
     val refreshData = MutableLiveData<Boolean>()
     val updateData = MutableLiveData<Boolean>()
+    val isLoading = MutableLiveData<Boolean>()
 
     init {
         selectedCount.value = 0
@@ -35,6 +36,9 @@ class PartnerDetailsViewModel @Inject constructor(
     fun loadServices() {
         val disposable = getServicesListByPartnerUsecase
                 .getPartnerDetails(partnerUEN)
+                .doOnSubscribe {
+                    isLoading.value = true
+                }
                 .subscribe(
                         {
                             preProcessCustomisationLowestPrice(it)
@@ -42,8 +46,12 @@ class PartnerDetailsViewModel @Inject constructor(
 
                             // To simulate api call error
 //                            error.value = Throwable("Test API Error Partner Detail")
+                            isLoading.value = false
                         },
-                        { error.value = it }
+                        {
+                            isLoading.value = false
+                            error.value = it
+                        }
                 )
         disposeBag.add(disposable)
     }

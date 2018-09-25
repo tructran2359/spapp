@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/color_white"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/common_horz_large"
+        android:layout_marginRight="@dimen/common_horz_large"
+        android:layout_marginTop="@dimen/common_horz_medium"
+        android:layout_marginBottom="@dimen/common_horz_large"
+        android:orientation="vertical"
+        >
+
+        <View
+            style="@style/partnerListingLineItemHolder"
+            android:layout_height="@dimen/common_vert_large"
+            android:layout_marginRight="100dp"
+            />
+
+        <View
+            style="@style/partnerListingLineItemHolder"
+            android:layout_height="@dimen/common_vert_medium"
+            android:layout_marginTop="@dimen/common_vert_medium"
+            />
+
+        <View
+            style="@style/partnerListingLineItemHolder"
+            android:layout_height="@dimen/common_vert_medium"
+            android:layout_marginTop="@dimen/common_vert_small"
+            />
+
+        <View
+            style="@style/partnerListingLineItemHolder"
+            android:layout_height="@dimen/action_bar_height"
+            android:layout_marginTop="@dimen/common_vert_medium"
+            />
+
+        <View
+            style="@style/partnerListingLineItemHolder"
+            android:layout_height="@dimen/action_bar_height"
+            android:layout_marginTop="@dimen/common_vert_small"
+            />
+
+    </LinearLayout>
+
+    <View
+        style="@style/lineDividerDark"/>
+
+    <View
+        style="@style/lineDividerLight"/>
+
+</LinearLayout>

@@ -49,4 +49,6 @@
 
     <color name="dim_background">#32000000</color>
 
+    <color name="partner_details_promo_placeholder">#ef6c64</color>
+
 </resources>
