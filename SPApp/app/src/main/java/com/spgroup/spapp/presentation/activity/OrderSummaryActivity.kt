@@ -186,6 +186,7 @@ class OrderSummaryActivity : BaseActivity() {
                     }
 
                     //Add view:
+                    ll_discount_container.removeAllViews()
                     listDiscountData.forEachIndexed {index, discountData ->
                         val view = PriceDetailView(this@OrderSummaryActivity)
                         view.setLabel(discountData.first)
