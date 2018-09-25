@@ -29,21 +29,23 @@ class GetOrderSummaryUsecase: SynchronousUsecase() {
                 val serviceCateName = partnerDetails.getCategoryById(cateId)?.label ?: ""
                 val serviceSubCateName = partnerDetails.getSubCateByCateIdAndServiceId(cateId, serviceId)?.label ?: ""
                 val serviceName = selectedService.getServiceName()
-                val optionValue = selectedService.getSelectedCustomisationLabel()
                 val itemQty = selectedService.getSelectedCount()
                 val itemTotalPrice = selectedService.getEstPrice()
                 val itemCommentsNotes = selectedService.getSpectialInstructions()
+                val itemOptions = selectedService.getSelectedCustomisationList()
+                val itemUnit = selectedService.getItemUnit()
 
                 val order = Order(
-                        serviceType = serviceType,
-                        serviceCategoryName = serviceCateName,
-                        serviceSubcategoryName = serviceSubCateName,
+                        itemCommentsNotes = itemCommentsNotes,
                         itemId = serviceId,
                         itemName = serviceName,
-                        optionValue = optionValue,
+                        itemOptions = itemOptions,
                         itemQty = itemQty,
                         itemTotalPrice = itemTotalPrice,
-                        itemCommentsNotes = itemCommentsNotes
+                        itemUnit = itemUnit,
+                        serviceCategoryName = serviceCateName,
+                        serviceSubcategoryName = serviceSubCateName,
+                        serviceType = serviceType
                 )
                 listOrder.add(order)
             }

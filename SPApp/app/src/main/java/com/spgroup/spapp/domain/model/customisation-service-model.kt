@@ -12,7 +12,7 @@ sealed class AbsCustomisation(
 ): Serializable {
 
     abstract fun toCustomiseData(): CustomiseData
-    abstract fun getSelectedOptionLabel(selectedIndex: Int): String
+    abstract fun getSelectedOption(selectedIndex: Int): OrderOption
 
 }
 
@@ -29,7 +29,8 @@ class BooleanCustomisation(
         return CustomiseData(label, options)
     }
 
-    override fun getSelectedOptionLabel(selectedIndex: Int) = if (selectedIndex == 0) "Yes" else "No"
+    override fun getSelectedOption(selectedIndex: Int)
+            = if (selectedIndex == 0) OrderOption("Yes", price) else OrderOption("No", 0f)
 }
 
 
@@ -46,7 +47,7 @@ class MatrixCustomisation(
         return CustomiseData(label, options)
     }
 
-    override fun getSelectedOptionLabel(selectedIndex: Int) = matrixOptions[selectedIndex].value.toString()
+    override fun getSelectedOption(selectedIndex: Int) = matrixOptions[selectedIndex].run { OrderOption(value.toString(), price) }
 }
 
 
@@ -61,7 +62,8 @@ class DropdownCustomisation(
         return CustomiseData(label, options)
     }
 
-    override fun getSelectedOptionLabel(selectedIndex: Int) = dropdownOptions[selectedIndex].label
+    override fun getSelectedOption(selectedIndex: Int)
+            = dropdownOptions[selectedIndex].run { OrderOption(label, price) }
 
 }
 
@@ -82,8 +84,10 @@ class NumberCustomisation(
         return CustomiseData(label, options)
     }
 
-    override fun getSelectedOptionLabel(selectedIndex: Int) = (min + selectedIndex).toString()
-
+    override fun getSelectedOption(selectedIndex: Int): OrderOption {
+        val selectedValue = (min + selectedIndex)
+        return OrderOption(selectedValue.toString(), selectedValue * price)
+    }
 }
 
 

@@ -1,10 +1,7 @@
 package com.spgroup.spapp.presentation.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
-import com.spgroup.spapp.domain.model.AbsServiceItem
-import com.spgroup.spapp.domain.model.Category
-import com.spgroup.spapp.domain.model.ComplexCustomisationService
-import com.spgroup.spapp.domain.model.PartnerDetails
+import com.spgroup.spapp.domain.model.*
 import com.spgroup.spapp.domain.usecase.GetCustomisationLowestPrice
 import com.spgroup.spapp.domain.usecase.GetPartnerDetailsUsecase
 import com.spgroup.spapp.domain.usecase.SelectedServiceUsecase
@@ -183,8 +180,9 @@ interface ISelectedService {
     fun getId() : Int
     fun getServiceType(): String
     fun getServiceName(): String
-    fun getSelectedCustomisationLabel(): String?
+    fun getSelectedCustomisationList(): List<OrderOption>?
     fun getSpectialInstructions(): String?
+    fun getItemUnit(): String?
 }
 
 data class SelectedService(
@@ -202,9 +200,11 @@ data class SelectedService(
 
     override fun getServiceName() = service.getServiceName()
 
-    override fun getSelectedCustomisationLabel() = null
+    override fun getSelectedCustomisationList() = null
 
     override fun getSpectialInstructions() = null
+
+    override fun getItemUnit(): String? = service.getServiceUnit()
 }
 
 data class ComplexSelectedService(
@@ -223,17 +223,20 @@ data class ComplexSelectedService(
 
     override fun getServiceName() = service.getServiceName()
 
-    override fun getSelectedCustomisationLabel(): String? {
-        selectedCustomisation?.run {
-            val firstKey = keys.first()
-            val firstValue = this[firstKey]
-            if (firstValue != null) {
-                return service.getSelectedCustomisationLabel(firstKey, firstValue)
+    override fun getSelectedCustomisationList(): List<OrderOption>? {
+        selectedCustomisation?.let { customisationMap ->
+            val listOrderOption = mutableListOf<OrderOption>()
+            customisationMap.forEach { (key, value) ->
+                val orderOption = service.getSelectedCustomisation(key, value)
+                orderOption?.run { listOrderOption.add(this) }
             }
+            return listOrderOption
         }
 
         return null
     }
 
     override fun getSpectialInstructions() = specialInstruction
+
+    override fun getItemUnit(): String? = service.getServiceUnit()
 }

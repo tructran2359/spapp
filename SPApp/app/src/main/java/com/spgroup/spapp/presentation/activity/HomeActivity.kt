@@ -52,8 +52,6 @@ open class HomeActivity :
     @Inject
     lateinit var vmFactory: ViewModelProvider.Factory
 
-    private var mFirsOnResume = true
-
     ///////////////////////////////////////////////////////////////////////////
     // Override
     ///////////////////////////////////////////////////////////////////////////
@@ -67,16 +65,6 @@ open class HomeActivity :
         setupViewModel()
         subscribeUI()
         setupViews()
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        if (mFirsOnResume) {
-            mFirsOnResume = false
-        } else {
-            mViewModel.randomiseData()
-        }
     }
 
     private fun setupViewModel() {

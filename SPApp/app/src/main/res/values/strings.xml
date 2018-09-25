@@ -115,19 +115,19 @@
 
     <string name="api_error_title">Whoooops!</string>
     <string name="api_error_desc">Something went wrong.</string>
-    <string name="dialog_min_order_title">You have not met the minimum spend of \n%s.</string>
+    <string name="dialog_min_order_title">You have not met the minimum spend of \n%s</string>
     <string name="dialog_min_order_notice">Additional charges will apply.</string>
     <string name="text_continue">CONTINUE</string>
     <string name="add_more_services">ADD MORE SERVICES</string>
     <string name="surcharge_label">Additional Charge</string>
     <string name="merchant_tnc_title">Merchant’s Terms &amp; Conditions</string>
-    <string name="order_summary_checkbox_item_desc">Evaluation will be done on-site, price estimation will not be included in this request.</string>
+    <string name="order_summary_checkbox_item_desc">Measurement and evaluation will be done on-site. Price estimation will not be included in this request.</string>
 
     <string name="partner_details_alert_title">You are about to leave the merchant’s page.</string>
     <string name="partner_details_alert_desc">If you continue, your current selection(s) will be removed from the Summary page.</string>
     <string name="cancel">CANCEL</string>
 
-    <string name="dialog_min_order_checkbox_title_with_format">Minimum spend of \n%s is required.</string>
+    <string name="dialog_min_order_checkbox_title_with_format">Minimum spend of \n%s is required</string>
     <string name="dialog_min_order_checkbox_desc">Additional charges may apply after on-site estimation.</string>
     <string name="ok">OK</string>
 
@@ -149,5 +149,6 @@
     <string name="error_phone_number_empty">Phone number is empty!</string>
     <string name="error_permission_denied">Permission denied</string>
     <string name="additional_charge_checkbox_notice">Additional charges may apply after on-site estimation.</string>
+    <string name="subtotal">Subtotal</string>
 
 </resources>
