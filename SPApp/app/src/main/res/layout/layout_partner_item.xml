@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingPrefix"
     android:layout_width="match_parent"
@@ -18,12 +19,13 @@
         android:layout_marginBottom="@dimen/common_vert_medium"
         tools:ignore="RtlHardcoded">
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/iv_logo"
             android:layout_width="@dimen/partner_listing_logo_size"
             android:layout_height="@dimen/partner_listing_logo_size"
             android:layout_centerVertical="true"
             android:scaleType="centerInside"
+            app:riv_corner_radius="@dimen/common_radius"
             />
 
         <LinearLayout
