@@ -21,7 +21,7 @@ class PartnerItemVH(
             tv_highlight.text = partner.highlight
             tv_name.text = partner.name
             tv_price.text = partner.priceDescription
-            tv_price.isGoneWithText(partner.priceDescription)
+            ll_price_desc_container.isGoneWithText(partner.priceDescription)
             iv_logo.loadImageWithPlaceholder(
                     partner.imgUrl.toFullUrl(),
                     R.drawable.placeholder_icon,

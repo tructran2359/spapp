@@ -61,16 +61,29 @@
                 tools:text="Tingkat-A-Day"
                 />
 
-
-            <TextView
-                style="@style/callout.book"
-                android:id="@+id/tv_price"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/ll_price_desc_container"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginTop="@dimen/common_vert_small"
-                android:textColor="@color/color_black"
-                tools:text="S$165.00 per month"
-                />
+                >
+
+                <TextView
+                    style="@style/textServiceItemFrom"
+                    />
+
+                <TextView
+                    style="@style/callout.book"
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_black"
+                    android:layout_marginLeft="@dimen/common_horz_xsmall"
+                    tools:text="S$165.00 per month"
+                    />
+
+            </LinearLayout>
 
         </LinearLayout>
 

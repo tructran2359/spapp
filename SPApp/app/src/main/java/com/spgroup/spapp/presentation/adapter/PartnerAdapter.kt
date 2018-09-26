@@ -48,6 +48,8 @@ class PartnerAdapter(
     override fun onBindViewHolder(vh: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             TYPE_PARTNER -> (vh as PartnerItemVH).bind(mData[position] as Partner)
+            // To Simulate empty price desc
+//            TYPE_PARTNER -> (vh as PartnerItemVH).bind((mData[position] as Partner).copy(priceDescription = ""))
             TYPE_PROMOTION -> (vh as PromotionItemVH).bind(mData[position] as Promotion)
             else -> throw IllegalArgumentException("Undefined type")
         }
