@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/email"
         android:drawablePadding="@dimen/common_horz_small"
-        android:textColor="@color/color_ui01"
+        android:textColor="@color/color_grey"
         android:layout_marginTop="@dimen/common_vert_medium"
         android:layout_marginBottom="@dimen/common_vert_xxxlarge"
         tools:text="email@email.com"
