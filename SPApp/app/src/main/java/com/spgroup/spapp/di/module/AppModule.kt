@@ -63,7 +63,9 @@ class AppModule(private val application: SPApplication) {
     @Provides
     @ApplicationScoped
     fun provideTracker(googleAnalytics: GoogleAnalytics): Tracker {
-        return googleAnalytics.newTracker(BuildConfig.GA_TRACKING_ID)
+        val newTracker = googleAnalytics.newTracker(BuildConfig.GA_TRACKING_ID)
+        newTracker.enableExceptionReporting(true)
+        return newTracker
     }
 
 }

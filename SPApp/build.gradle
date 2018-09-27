@@ -18,8 +18,8 @@ ext {
 }
 
 buildscript {
-    ext.kotlin_version = '1.2.60'
-    ext.gradle_plugin_version = '3.1.4'
+    ext.kotlin_version = '1.2.71'
+    ext.gradle_plugin_version = '3.2.0'
     ext.google_services_version = '3.2.1'
 
     repositories {
