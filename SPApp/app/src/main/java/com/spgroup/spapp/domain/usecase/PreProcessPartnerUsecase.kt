@@ -18,7 +18,8 @@ class PreProcessPartnerUsecase: RandomiseListDataUsecase<Partner>() {
     }
 
     fun run(partnerListingData: PartnersListingData): List<PartnersListingItem> {
-        val listSortedPartner = sort(partnerListingData.partners)
+        val randomisePartners = getRandomisedList(partnerListingData.partners)
+        val listSortedPartner = sort(randomisePartners)
         return merge(listSortedPartner, partnerListingData.promotions, PROMOTION_INDEX)
     }
 
