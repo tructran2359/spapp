@@ -5,8 +5,12 @@ import android.text.Html
 import com.spgroup.spapp.BuildConfig
 import com.spgroup.spapp.util.doLogE
 import org.unbescape.html.HtmlEscape
+import java.text.DecimalFormat
 
-fun Float.formatPrice() = "S$%.2f".format(this)
+fun Float.formatPrice(): String {
+    val text = DecimalFormat("#,###.00").format(this)
+    return "S$$text"
+}
 
 fun Float.formatPriceWithUnit(unit: String)
         = if(unit.isEmpty()) this.formatPrice() else "${this.formatPrice()} / $unit"
