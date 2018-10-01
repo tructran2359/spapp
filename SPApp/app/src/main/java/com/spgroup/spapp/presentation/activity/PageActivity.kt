@@ -194,8 +194,8 @@ class PageActivity: BaseActivity() {
                         tv_link_title.text = it.title
                         val email = it.email
                         tv_email.text = email
-                        tv_email.isGoneWithText(email)
-                        tv_email.setOnClickListener { _ ->
+                        ll_email_container.isGoneWithText(email)
+                        ll_email_container.setOnClickListener { _ ->
                             openMailClient(getString(R.string.chooser_mail_client), email)
                         }
                     }
