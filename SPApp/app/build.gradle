@@ -23,12 +23,8 @@ android {
         applicationId "com.spgroup.spapp"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 16
-        versionName "1.0.0"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        buildConfigField "String", "BASE_API", "\"http://checkdev.prod.acquia-sites.com\""
     }
 
 
@@ -49,14 +45,28 @@ android {
 
     productFlavors {
 
+        develop {
+            dimension "default"
+            buildConfigField "String", "GA_TRACKING_ID", '"UA-125316984-1"'
+            buildConfigField "String", "BASE_API", "\"http://checkdev.prod.acquia-sites.com\""
+            versionCode 16
+            versionName "1.0.0"
+        }
+
         staging {
             dimension "default"
             buildConfigField "String", "GA_TRACKING_ID", '"UA-125316984-1"'
+            buildConfigField "String", "BASE_API", "\"http://checkstg.prod.acquia-sites.com\""
+            versionCode 1
+            versionName "1.0.0"
         }
 
         production {
             dimension "default"
             buildConfigField "String", "GA_TRACKING_ID", '"UA-125469843-1"'
+            buildConfigField "String", "BASE_API", "\"http://checkstg.prod.acquia-sites.com\""
+            versionCode 1
+            versionName "1.0.0"
         }
     }
 
@@ -64,14 +74,12 @@ android {
         variant.outputs.all { output ->
 
             def formattedDate = new Date().format('yyyyMMdd')
-
             def flavorName = variant.productFlavors[0].name
-
             def buildName = variant.buildType.name
+            def versionName = variant.productFlavors[0].versionName
+            def versionCode = variant.productFlavors[0].versionCode
 
-            outputFileName = formattedDate + "_" + "SPApp_Android_" + flavorName + "_" + buildName + "_v" + defaultConfig.versionName + "-" + defaultConfig.versionCode + ".apk"
-//            outputFileName = formattedDate + "_" + "SPApp_Android_" + buildName + "_v" + defaultConfig.versionName + "-" + defaultConfig.versionCode + ".apk"
-
+            outputFileName = formattedDate + "_" + "SPApp_Android_" + flavorName + "_" + buildName + "_v" + versionName + "-" + versionCode + ".apk"
         }
     }
 }
