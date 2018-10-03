@@ -2,12 +2,11 @@ package com.spgroup.spapp.di.module
 
 import com.google.gson.Gson
 import com.spgroup.spapp.BuildConfig
-import com.spgroup.spapp.di.ApplicationScoped
-import com.spgroup.spapp.di.DEP_DEBUGGABLE
-import com.spgroup.spapp.di.DEP_NETWORK_GSON
+import com.spgroup.spapp.di.*
 import com.spgroup.spapp.repository.http.SingaporePowerHttpClient
 import dagger.Module
 import dagger.Provides
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -22,6 +21,7 @@ object NetworkModule {
     @JvmStatic
     @Provides
     @ApplicationScoped
+    @Named(DEP_LOGGING_INTERCEPTOR)
     fun provideHttpLogger(@Named(DEP_DEBUGGABLE) isDebug: Boolean): HttpLoggingInterceptor {
         val loggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
             println("OkHttpDebug $it")
@@ -33,13 +33,21 @@ object NetworkModule {
     @JvmStatic
     @Provides
     @ApplicationScoped
-    fun provideOkHttpClient(httpLogger: HttpLoggingInterceptor): OkHttpClient {
-        return OkHttpClient.Builder()
+    fun provideOkHttpClient(
+            @Named(DEP_API_KEY_INTERCEPTOR) headerInterceptor: Interceptor?,
+            @Named(DEP_LOGGING_INTERCEPTOR) httpLogger: HttpLoggingInterceptor): OkHttpClient {
+
+        val builder =  OkHttpClient.Builder()
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
                 .addInterceptor(httpLogger)
-                .build()
+
+        if (headerInterceptor != null) {
+            builder.addInterceptor(headerInterceptor)
+        }
+
+        return builder.build()
     }
 
     @JvmStatic
@@ -59,5 +67,24 @@ object NetworkModule {
     @ApplicationScoped
     fun provideSingaporePowerHttpClient(retrofit: Retrofit): SingaporePowerHttpClient {
         return retrofit.create(SingaporePowerHttpClient::class.java)
+    }
+
+    @JvmStatic
+    @Provides
+    @ApplicationScoped
+    @Named(DEP_API_KEY)
+    fun provideApiKey() = BuildConfig.API_KEY
+
+    @JvmStatic
+    @Provides
+    @ApplicationScoped
+    @Named(DEP_API_KEY_INTERCEPTOR)
+    fun provideHeaderInterceptor(@Named(DEP_API_KEY) apiKey: String): Interceptor? {
+        if (apiKey.isEmpty()) return null
+
+        return Interceptor { chain ->
+            val request = chain.request().newBuilder().addHeader("Authorization", apiKey).build()
+            chain.proceed(request)
+        }
     }
 }

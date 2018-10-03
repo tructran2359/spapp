@@ -49,6 +49,7 @@ android {
             dimension "default"
             buildConfigField "String", "GA_TRACKING_ID", '"UA-125316984-1"'
             buildConfigField "String", "BASE_API", "\"http://checkdev.prod.acquia-sites.com\""
+            buildConfigField "String", "API_KEY", "\"EAAblB0ZC5tqMBACwxJ60nIMjfqHsQpirs3V1VbHw0vXgypof886S2aWnW4RYKGZAF7rsazLMNnLrtR8tddVnKQt6TgxVBDfSbgRwK0MFcZCgRBCbtlCKuMZAWpLP7vrQ2KCMIr76dKVwI50o1ZAKr0cnKvUvNnnUQEyo01zeXVwZDZD\""
             versionCode 16
             versionName "1.0.0"
         }
@@ -57,6 +58,7 @@ android {
             dimension "default"
             buildConfigField "String", "GA_TRACKING_ID", '"UA-125316984-1"'
             buildConfigField "String", "BASE_API", "\"http://checkstg.prod.acquia-sites.com\""
+            buildConfigField "String", "API_KEY", "\"\""
             versionCode 1
             versionName "1.0.0"
         }
@@ -65,6 +67,7 @@ android {
             dimension "default"
             buildConfigField "String", "GA_TRACKING_ID", '"UA-125469843-1"'
             buildConfigField "String", "BASE_API", "\"http://checkstg.prod.acquia-sites.com\""
+            buildConfigField "String", "API_KEY", "\"\""
             versionCode 1
             versionName "1.0.0"
         }
