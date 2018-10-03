@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SP App</string>
+    <string name="app_name">Check</string>
 
     <!--font-->
     <string name="font_default">@string/font_regular</string>
