@@ -24,11 +24,12 @@
     <TextView
         style="@style/subhead"
         android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:textColor="@color/color_black"
         android:layout_toRightOf="@+id/iv_delete"
+        android:layout_toLeftOf="@id/fl_add_btn_container"
         android:layout_marginTop="@dimen/service_item_vert_spacing"
         android:layout_marginBottom="@dimen/common_spacing_x2"
         tools:text="Blouse"

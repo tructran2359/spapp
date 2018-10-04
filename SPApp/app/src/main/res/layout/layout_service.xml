@@ -20,9 +20,11 @@
         <TextView
             style="@style/subhead"
             android:id="@+id/tv_service_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/service_name_margin_left"
+            android:layout_marginRight="@dimen/common_horz_small"
+            android:layout_toLeftOf="@id/iv_collapse"
             android:textColor="@color/color_black"
             android:textAllCaps="true"
             tools:text="GARMENTS"

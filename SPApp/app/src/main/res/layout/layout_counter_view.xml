@@ -23,7 +23,7 @@
         android:layout_marginRight="@dimen/common_spacing_x2"
         android:gravity="center_horizontal"
 
-        android:text="1"
+        tools:text="1"
         />
 
     <ImageView

@@ -33,11 +33,13 @@
         <TextView
             style="@style/callout.regular"
             android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="@string/est_price"
             android:textColor="@color/color_grey"
+            android:layout_toLeftOf="@id/tv_price"
+            android:layout_marginRight="@dimen/common_horz_small"
             />
 
         <TextView

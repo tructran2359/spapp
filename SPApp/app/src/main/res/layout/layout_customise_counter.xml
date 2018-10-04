@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
 
-        android:text="No. of Pax"
+        tools:text="No. of Pax"
         />
 
     <TextView
@@ -27,7 +27,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/common_spacing"
 
-        android:text="[min. 1 pax]"
+        tools:text="[min. 1 pax]"
         />
 
     <com.spgroup.spapp.presentation.view.CounterView

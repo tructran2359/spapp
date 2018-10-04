@@ -58,10 +58,12 @@
 
         <TextView
             style="@style/callout.regular"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:textColor="@color/color_grey"
+            android:layout_toLeftOf="@id/tv_est_price"
+            android:layout_marginRight="@dimen/common_horz_small"
             android:text="@string/est_price"
             />
 

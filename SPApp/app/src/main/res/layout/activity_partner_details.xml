@@ -83,7 +83,6 @@
                     android:layout_height="@dimen/promotion_bar_height"
                     android:orientation="horizontal"
                     android:background="@color/color_ui01"
-                    android:layout_below="@+id/pager_images"
                     android:paddingLeft="@dimen/common_horz_large"
                     android:paddingRight="@dimen/common_horz_large"
                     android:visibility="gone"

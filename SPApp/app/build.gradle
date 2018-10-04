@@ -87,6 +87,11 @@ android {
             outputFileName = formattedDate + "_" + "SPApp_Android_" + flavorName + "_" + buildName + "_v" + versionName + "-" + versionCode + ".apk"
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {

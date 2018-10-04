@@ -17,7 +17,7 @@
         android:lineSpacingExtra="8sp"
         android:textColor="@color/color_ui02"
         fontPath="@string/font_regular"
-        android:text="123456"
+        tools:text="123456"
         />
 
     <TextView
@@ -30,7 +30,7 @@
         android:textColor="@color/color_ui07"
         android:layout_marginTop="@dimen/common_vert_large"
         android:layout_marginBottom="@dimen/common_vert_large"
-        android:text="Copyright and Trademark Notices"
+        tools:text="Copyright and Trademark Notices"
         />
 
     <TextView
@@ -41,7 +41,7 @@
         android:lineSpacingExtra="8sp"
         android:textColor="@color/color_ui02"
         fontPath="@string/font_regular"
-        android:text="123456"
+        tools:text="123456"
         />
 
 </LinearLayout>
