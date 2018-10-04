@@ -1,5 +1,6 @@
 package com.spgroup.spapp
 
+import com.spgroup.spapp.util.extension.toNoSpecialCharString
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.unbescape.html.HtmlEscape
@@ -24,5 +25,12 @@ class ExampleUnitTest {
         val noHtml = HtmlEscape.unescapeHtml(dummy)
 
         assertEquals("This is a \r\n\t test with html char: < \"  #  \$  %  &  '  (  )  *  +  ,  −  .  /  :  ;  <  =  >  ?  @  [  \\  ]  ^  _  `  {  |  } >", noHtml)
+    }
+
+    @Test
+    fun `test html line break tag`() {
+        val dummy = "This is a test<br /> with line break"
+        val expect = "This is a test\r\n with line break"
+        assertEquals(expect, dummy.toNoSpecialCharString())
     }
 }
