@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/common_vert_xlarge"
     android:paddingLeft="@dimen/common_horz_large"
     android:paddingRight="@dimen/common_horz_large"
-    android:paddingTop="@dimen/common_vert_large"
+    android:paddingBottom="@dimen/common_vert_medium"
     tools:ignore="MissingPrefix"
     >
 
@@ -15,6 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingTop="@dimen/common_vert_large"
+        android:paddingBottom="@dimen/bottom_button_total_height"
         >
 
         <TextView
