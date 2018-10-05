@@ -2,6 +2,7 @@ package com.spgroup.spapp.util.extension
 
 import android.os.Build
 import android.text.Html
+import android.text.Spanned
 import com.spgroup.spapp.BuildConfig
 import com.spgroup.spapp.util.doLogE
 import org.unbescape.html.HtmlEscape
@@ -36,12 +37,16 @@ fun Any.getTextOrEmpty(text: String?) = if (text == null) "" else text
 
 fun String.toHtmlUnderlineText() = "<u>$this</u>"
 
-fun String.toHtmlSpanned() =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
-        } else {
-            Html.fromHtml(this)
-        }
+fun String.toHtmlSpanned(): Spanned {
+    var result = this.replace("\r\n", "<br>")
+    result = result.replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;")
+
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Html.fromHtml(result, Html.FROM_HTML_MODE_LEGACY)
+    } else {
+        Html.fromHtml(result)
+    }
+}
 
 fun String.toNoSpecialCharString(): String {
     val noHtml = HtmlEscape.unescapeHtml(this)

@@ -159,7 +159,7 @@ class PageActivity: BaseActivity() {
 
     private fun createTncText(section: TopLevelPageSectionLongText): View {
         val view = inflate(R.layout.layout_tnc_text) as TextView
-        view.text = section.text
+        view.text = section.text.toHtmlSpanned()
         return view
     }
 
