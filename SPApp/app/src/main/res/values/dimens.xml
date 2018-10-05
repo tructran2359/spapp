@@ -205,5 +205,6 @@
 
     <dimen name="summary_addition_charge_notice_width">192dp</dimen>
     <dimen name="summary_discount_line_spacing">8dp</dimen>
+    <dimen name="home_menu_tnc_margin_left">25dp</dimen>
 
 </resources>

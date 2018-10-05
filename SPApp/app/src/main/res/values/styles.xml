@@ -326,10 +326,12 @@
 
     <style name="partnerBusinessInfo" parent="body">
         <item name="android:textColor">@color/color_grey</item>
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_marginLeft">@dimen/partner_info_margin_right</item>
+        <item name="android:padding">@dimen/common_vert_xsmall</item>
+        <item name="android:background">@drawable/selector_grey_transparent</item>
     </style>
 
     <style name="bottomButton" parent="h5">
