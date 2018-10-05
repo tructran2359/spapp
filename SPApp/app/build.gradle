@@ -51,7 +51,8 @@ android {
             buildConfigField "String", "GA_TRACKING_ID", '"UA-125316984-1"'
             buildConfigField "String", "BASE_API", "\"http://checkdev.prod.acquia-sites.com\""
             buildConfigField "String", "API_KEY", "\"EAAblB0ZC5tqMBACwxJ60nIMjfqHsQpirs3V1VbHw0vXgypof886S2aWnW4RYKGZAF7rsazLMNnLrtR8tddVnKQt6TgxVBDfSbgRwK0MFcZCgRBCbtlCKuMZAWpLP7vrQ2KCMIr76dKVwI50o1ZAKr0cnKvUvNnnUQEyo01zeXVwZDZD\""
-            versionCode 19
+            resValue "string", "app_name", "Check Dev"
+            versionCode 20
             versionName "1.0.0"
         }
 
@@ -61,6 +62,7 @@ android {
             buildConfigField "String", "GA_TRACKING_ID", '"UA-125316984-1"'
             buildConfigField "String", "BASE_API", "\"http://checkstg.prod.acquia-sites.com\""
             buildConfigField "String", "API_KEY", "\"EAAblB0ZC5tqMBACwxJ60nIMjfqHsQpirs3V1VbHw0vXgypof886S2aWnW4RYKGZAF7rsazLMNnLrtR8tddVnKQt6TgxVBDfSbgRwK0MFcZCgRBCbtlCKuMZAWpLP7vrQ2KCMIr76dKVwI50o1ZAKr0cnKvUvNnnUQEyo01zeXVwZDZD\""
+            resValue "string", "app_name", "Check Staging"
             versionCode 1
             versionName "1.0.0"
         }
@@ -70,6 +72,8 @@ android {
             buildConfigField "String", "GA_TRACKING_ID", '"UA-125469843-1"'
             buildConfigField "String", "BASE_API", "\"http://www.letscheck.com.sg\""
             buildConfigField "String", "API_KEY", "\"JGr46aeZ9sb2cGqmNiNPf3GiY4z7mMNjKgmTlQRESMmhcxDS1bxfystsqvT32CziY9FkAJ9geJVlZ6QkIpSWoU5cYytIBWl9jCCvEGhGT2fnqwnuuQXNwfHFuYXj5DGebGosFaLCYAuU6EpqfVFGmGyybl5CJFROB7uwYmJjibkzQYdo\""
+
+            resValue "string", "app_name", "Check"
             versionCode 1
             versionName "1.0.0"
         }
