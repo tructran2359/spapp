@@ -52,7 +52,7 @@ android {
             buildConfigField "String", "BASE_API", "\"http://checkdev.prod.acquia-sites.com\""
             buildConfigField "String", "API_KEY", "\"EAAblB0ZC5tqMBACwxJ60nIMjfqHsQpirs3V1VbHw0vXgypof886S2aWnW4RYKGZAF7rsazLMNnLrtR8tddVnKQt6TgxVBDfSbgRwK0MFcZCgRBCbtlCKuMZAWpLP7vrQ2KCMIr76dKVwI50o1ZAKr0cnKvUvNnnUQEyo01zeXVwZDZD\""
             resValue "string", "app_name", "Check Dev"
-            versionCode 20
+            versionCode 21
             versionName "0.0.13"
         }
 
@@ -63,7 +63,7 @@ android {
             buildConfigField "String", "BASE_API", "\"http://checkstg.prod.acquia-sites.com\""
             buildConfigField "String", "API_KEY", "\"EAAblB0ZC5tqMBACwxJ60nIMjfqHsQpirs3V1VbHw0vXgypof886S2aWnW4RYKGZAF7rsazLMNnLrtR8tddVnKQt6TgxVBDfSbgRwK0MFcZCgRBCbtlCKuMZAWpLP7vrQ2KCMIr76dKVwI50o1ZAKr0cnKvUvNnnUQEyo01zeXVwZDZD\""
             resValue "string", "app_name", "Check Staging"
-            versionCode 20
+            versionCode 21
             versionName "0.0.13"
         }
 
