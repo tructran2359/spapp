@@ -51,10 +51,12 @@
         <TextView
             style="@style/body"
             android:id="@+id/tv_email"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/color_grey"
             android:layout_gravity="center_vertical"
+            android:padding="@dimen/common_vert_xsmall"
+            android:background="@drawable/selector_grey_transparent"
             tools:text="email@email.com"
             />
         
