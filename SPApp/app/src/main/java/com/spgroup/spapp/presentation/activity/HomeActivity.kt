@@ -27,6 +27,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.menu_home.*
 import org.jetbrains.anko.longToast
 import javax.inject.Inject
+import kotlin.math.min
 
 open class HomeActivity :
         BaseActivity(),
@@ -109,8 +110,19 @@ open class HomeActivity :
             }
         })
 
+        setupCategoryView()
         setupPromotions()
         setupMerchants()
+    }
+
+    private fun setupCategoryView() {
+        cate_group_view.setOnGlobalLayoutListener {
+            val width = cate_group_view.width
+            val padding = getDimensionPixelSize(R.dimen.common_horz_medium_sub)
+            val iconSize = (width - 2 * padding) / 3
+            val defaultIconSize = getDimensionPixelSize(R.dimen.home_category_icon_size)
+            cate_group_view.setIconSize(min(defaultIconSize, iconSize))
+        }
     }
 
     private fun setupPromotions() {
