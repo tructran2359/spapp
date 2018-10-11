@@ -69,6 +69,12 @@ class TopLeverCateGroupView: LinearLayout {
         mListener = listener
     }
 
+    fun setIconSize(sizeInPixel: Int) {
+        mListCateView.forEach { view ->
+            view.setSizeInPixel(sizeInPixel)
+        }
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // Listener
     ///////////////////////////////////////////////////////////////////////////
