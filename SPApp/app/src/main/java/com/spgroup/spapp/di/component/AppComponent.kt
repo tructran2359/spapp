@@ -2,7 +2,7 @@ package com.spgroup.spapp.di.component
 
 import com.spgroup.spapp.di.ApplicationScoped
 import com.spgroup.spapp.di.module.*
-import com.spgroup.spapp.presentation.SPApplication
+import com.spgroup.spapp.SPApplication
 import com.spgroup.spapp.presentation.activity.*
 import com.spgroup.spapp.presentation.fragment.*
 import dagger.Component

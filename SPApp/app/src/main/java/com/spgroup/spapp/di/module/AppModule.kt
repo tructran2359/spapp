@@ -14,7 +14,7 @@ import com.spgroup.spapp.domain.SchedulerFacade
 import com.spgroup.spapp.manager.AppConfigManager
 import com.spgroup.spapp.manager.AppDataCache
 import com.spgroup.spapp.manager.AppDataMemCache
-import com.spgroup.spapp.presentation.SPApplication
+import com.spgroup.spapp.SPApplication
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named

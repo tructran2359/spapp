@@ -1,7 +1,7 @@
 package com.spgroup.spapp.repository.http
 
 import android.os.AsyncTask
-import com.spgroup.spapp.presentation.SPApplication
+import com.spgroup.spapp.SPApplication
 import java.io.BufferedInputStream
 import java.io.File
 import java.io.FileOutputStream

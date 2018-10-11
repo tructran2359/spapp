@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.spgroup.spapp.R
+import com.spgroup.spapp.SPApplication
 import com.spgroup.spapp.domain.model.Category
 import com.spgroup.spapp.domain.model.FoodMenu
-import com.spgroup.spapp.presentation.SPApplication
 import com.spgroup.spapp.presentation.fragment.CategoryFragment
 import com.spgroup.spapp.presentation.fragment.WeeklyMenuFragment
 

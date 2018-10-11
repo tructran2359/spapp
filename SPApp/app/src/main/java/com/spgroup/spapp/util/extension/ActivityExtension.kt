@@ -12,7 +12,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AppCompatActivity
 import com.spgroup.spapp.R
-import com.spgroup.spapp.presentation.SPApplication
+import com.spgroup.spapp.SPApplication
 import com.spgroup.spapp.presentation.activity.BaseActivity
 import com.spgroup.spapp.presentation.activity.PartnerDetailsActivity
 import com.spgroup.spapp.presentation.activity.PartnerInformationActivity

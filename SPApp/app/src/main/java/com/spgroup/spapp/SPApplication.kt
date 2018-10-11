@@ -1,7 +1,6 @@
-package com.spgroup.spapp.presentation
+package com.spgroup.spapp
 
 import android.support.multidex.MultiDexApplication
-import com.spgroup.spapp.R
 import com.spgroup.spapp.di.component.AppComponent
 import com.spgroup.spapp.di.component.DaggerAppComponent
 import com.spgroup.spapp.di.module.AppModule
