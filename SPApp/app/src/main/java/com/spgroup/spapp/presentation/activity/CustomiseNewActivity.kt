@@ -188,6 +188,9 @@ class CustomiseNewActivity: BaseActivity() {
             setResult(Activity.RESULT_OK, intent)
             finish()
         }
+        ll_content_container.setOnClickListener {
+            it.hideKeyboard()
+        }
     }
 
 
@@ -196,7 +199,13 @@ class CustomiseNewActivity: BaseActivity() {
         view_root.viewTreeObserver.addOnGlobalLayoutListener {
             val diff = view_root.rootView.height - view_root.height
             val keyboardOpen = diff > getDimensionPixelSize(R.dimen.soft_keyboar_detection_height)
-            updateBottomButtonVisibility(!keyboardOpen)
+            if (keyboardOpen) {
+                updateBottomButtonVisibility(false)
+            } else {
+                postDelay(300) {
+                    updateBottomButtonVisibility(true)
+                }
+            }
         }
     }
 

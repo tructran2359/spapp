@@ -92,3 +92,11 @@ fun Context.openMailClient(chooserTitle: String = "", emailAddr: String = "", su
         longToast(R.string.error_no_mail_client_installed)
     }
 }
+
+fun Context.postDelay(delayInMillis: Long, action: () -> Unit) {
+    android.os.Handler().postDelayed(object : Runnable {
+        override fun run() {
+            action.invoke()
+        }
+    }, delayInMillis)
+}
