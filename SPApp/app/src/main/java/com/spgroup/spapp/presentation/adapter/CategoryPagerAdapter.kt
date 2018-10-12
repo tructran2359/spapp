@@ -3,8 +3,6 @@ package com.spgroup.spapp.presentation.adapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.spgroup.spapp.R
-import com.spgroup.spapp.SPApplication
 import com.spgroup.spapp.domain.model.Category
 import com.spgroup.spapp.domain.model.FoodMenu
 import com.spgroup.spapp.presentation.fragment.CategoryFragment
@@ -41,7 +39,7 @@ class CategoryPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePage
             if (position < mData.size) {
                 mData[position].label
             } else {
-                SPApplication.mAppInstance.getString(R.string.this_week_menu)
+                mFoodMenu?.tabTitle
             }
 
     ///////////////////////////////////////////////////////////////////////////
