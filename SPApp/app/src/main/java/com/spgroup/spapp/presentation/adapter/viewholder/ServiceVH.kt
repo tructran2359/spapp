@@ -13,6 +13,7 @@ import com.spgroup.spapp.presentation.view.ServiceItemViewCheckBox
 import com.spgroup.spapp.presentation.view.ServiceItemViewCombo
 import com.spgroup.spapp.presentation.view.ServiceItemViewCounter
 import com.spgroup.spapp.util.doLogD
+import com.spgroup.spapp.util.extension.toHtmlSpanned
 import kotlinx.android.synthetic.main.layout_service.view.*
 import org.jetbrains.anko.collections.forEachWithIndex
 
@@ -29,7 +30,7 @@ class ServiceVH(
                 tv_service_description.isGone = true
             } else {
                 tv_service_description.isGone = false
-                tv_service_description.text = subCat.description
+                tv_service_description.text = subCat.description.toHtmlSpanned()
             }
 
             if (isSingleSubCate || isExpanded) {
