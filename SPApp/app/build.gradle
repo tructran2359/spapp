@@ -70,7 +70,7 @@ android {
         production {
             dimension "default"
             buildConfigField "String", "GA_TRACKING_ID", '"UA-125469843-1"'
-            buildConfigField "String", "BASE_API", "\"http://www.letscheck.com.sg\""
+            buildConfigField "String", "BASE_API", "\"https://www.letscheck.com.sg\""
             buildConfigField "String", "API_KEY", "\"JGr46aeZ9sb2cGqmNiNPf3GiY4z7mMNjKgmTlQRESMmhcxDS1bxfystsqvT32CziY9FkAJ9geJVlZ6QkIpSWoU5cYytIBWl9jCCvEGhGT2fnqwnuuQXNwfHFuYXj5DGebGosFaLCYAuU6EpqfVFGmGyybl5CJFROB7uwYmJjibkzQYdo\""
 
             resValue "string", "app_name", "Check"
