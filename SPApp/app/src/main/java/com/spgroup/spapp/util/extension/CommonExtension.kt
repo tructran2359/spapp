@@ -9,7 +9,7 @@ import org.unbescape.html.HtmlEscape
 import java.text.DecimalFormat
 
 fun Float.formatPrice(): String {
-    val text = DecimalFormat("#,###.00").format(this)
+    val text = DecimalFormat("#,##0.00").format(this)
     return "S$$text"
 }
 

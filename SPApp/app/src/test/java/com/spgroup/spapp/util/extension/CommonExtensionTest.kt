@@ -7,6 +7,8 @@ class CommonExtensionTest {
 
     @Test
     fun `should add comma separator`() {
+        Assert.assertEquals("S$0.50", 0.5f.formatPrice())
+
         Assert.assertEquals("S$1.50", 1.5f.formatPrice())
         Assert.assertEquals("S$100.50", 100.5f.formatPrice())
         Assert.assertEquals("S$1,000.50", 1000.5f.formatPrice())
