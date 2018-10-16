@@ -339,7 +339,7 @@ class OrderSummaryActivity : BaseActivity() {
             }
         }
 
-        setUpKeyboardDetection()
+//        setUpKeyboardDetection()
         fillSavedContactInfoIfNeed()
     }
 
@@ -447,29 +447,27 @@ class OrderSummaryActivity : BaseActivity() {
         return invalidCount
     }
 
-    private fun setUpKeyboardDetection() {
-        view_root.viewTreeObserver.addOnGlobalLayoutListener {
-            val diff = view_root.rootView.height - view_root.height
-            val keyboardOpen = diff > getDimensionPixelSize(R.dimen.soft_keyboar_detection_height)
-            if (keyboardOpen) {
-                updateBottomButtonVisibility(false)
-            } else {
-                postDelay(300) {
-                    updateBottomButtonVisibility(true)
-                }
-            }
-        }
-    }
+//    private fun setUpKeyboardDetection() {
+//        view_root.viewTreeObserver.addOnGlobalLayoutListener {
+//            val diff = view_root.rootView.height - view_root.height
+//            val keyboardOpen = diff > getDimensionPixelSize(R.dimen.soft_keyboar_detection_height)
+//            if (keyboardOpen) {
+//                updateBottomButtonVisibility(false)
+//            } else {
+//                updateBottomButtonVisibility(true)
+//            }
+//        }
+//    }
 
-    private fun updateBottomButtonVisibility(show: Boolean) {
-        rl_summary_button_container.isGone = !show
-        v_shadow.isGone = !show
-        if (show) {
-            rl_error_cointainer.isGone = !mErrorViewIsShowing
-        } else {
-            rl_error_cointainer.isGone = true
-        }
-    }
+//    private fun updateBottomButtonVisibility(show: Boolean) {
+//        rl_summary_button_container.isGone = !show
+//        v_shadow.isGone = !show
+//        if (show) {
+//            rl_error_cointainer.isGone = !mErrorViewIsShowing
+//        } else {
+//            rl_error_cointainer.isGone = true
+//        }
+//    }
 
     private fun addView(mapSelectedServices: HashMap<String, MutableList<ISelectedService>>) {
         ll_item_container.removeAllViews()

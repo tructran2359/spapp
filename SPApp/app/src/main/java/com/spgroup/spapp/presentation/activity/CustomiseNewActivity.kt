@@ -149,7 +149,7 @@ class CustomiseNewActivity: BaseActivity() {
     }
 
     private fun setUpViews() {
-        setUpKeyboardDetection()
+//        setUpKeyboardDetection()
         if (mIsEdit) {
             action_bar.setTitle(R.string.edit)
             tv_add_to_request.setText(R.string.back_to_view_summary)
@@ -195,25 +195,23 @@ class CustomiseNewActivity: BaseActivity() {
 
 
 
-    private fun setUpKeyboardDetection() {
-        view_root.viewTreeObserver.addOnGlobalLayoutListener {
-            val diff = view_root.rootView.height - view_root.height
-            val keyboardOpen = diff > getDimensionPixelSize(R.dimen.soft_keyboar_detection_height)
-            if (keyboardOpen) {
-                updateBottomButtonVisibility(false)
-            } else {
-                postDelay(300) {
-                    updateBottomButtonVisibility(true)
-                }
-            }
-        }
-    }
+//    private fun setUpKeyboardDetection() {
+//        view_root.viewTreeObserver.addOnGlobalLayoutListener {
+//            val diff = view_root.rootView.height - view_root.height
+//            val keyboardOpen = diff > getDimensionPixelSize(R.dimen.soft_keyboar_detection_height)
+//            if (keyboardOpen) {
+//                updateBottomButtonVisibility(false)
+//            } else {
+//                updateBottomButtonVisibility(true)
+//            }
+//        }
+//    }
 
 
-    private fun updateBottomButtonVisibility(show: Boolean) {
-        bottom_button_container.updateVisibility(show)
-        v_shadow.updateVisibility(show)
-    }
+//    private fun updateBottomButtonVisibility(show: Boolean) {
+//        bottom_button_container.updateVisibility(show)
+//        v_shadow.updateVisibility(show)
+//    }
 
 
 
