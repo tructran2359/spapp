@@ -4,24 +4,12 @@ import com.spgroup.spapp.domain.model.Partner
 import com.spgroup.spapp.domain.model.PartnersListingData
 import com.spgroup.spapp.domain.model.PartnersListingItem
 import com.spgroup.spapp.domain.model.Promotion
-import org.junit.Assert
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.anyOf
+import org.junit.Assert.assertThat
 import org.junit.Test
 
 class PreProcessPartnerUsecaseTest {
-
-    @Test
-    fun `should no change if no highlight`() {
-        val dumb = createDumbPartnerModel()
-        val dumb1 = dumb.copy(uen = "1", highlight = "")
-        val dumb2 = dumb.copy(uen = "2", highlight = "")
-        val dumb3 = dumb.copy(uen = "3", highlight = "")
-        val dumbData = PartnersListingData(listOf(dumb1, dumb2, dumb3), listOf())
-
-        val sorted = PreProcessPartnerUsecase().run(dumbData)
-        val listId = getListId(sorted)
-
-        Assert.assertEquals("[1, 2, 3]", listId.toString())
-    }
 
     @Test
     fun `should put 2 on top if 2 is highlighted`() {
@@ -34,7 +22,7 @@ class PreProcessPartnerUsecaseTest {
         val sorted = PreProcessPartnerUsecase().run(dumbData)
         val listId = getListId(sorted)
 
-        Assert.assertEquals("[2, 1, 3]", listId.toString())
+        assertThat(listId.toString(), anyOf(`is`("[2, 1, 3]"), `is`("[2, 3, 1]")))
     }
 
     @Test
@@ -48,7 +36,7 @@ class PreProcessPartnerUsecaseTest {
         val sorted = PreProcessPartnerUsecase().run(dumbData)
         val listId = getListId(sorted)
 
-        Assert.assertEquals("[2, 3, 1]", listId.toString())
+        assertThat(listId.toString(), anyOf(`is`("[2, 3, 1]"), `is`("[3, 2, 1]")))
     }
 
     @Test
@@ -62,7 +50,7 @@ class PreProcessPartnerUsecaseTest {
         val sorted = PreProcessPartnerUsecase().run(dumbData)
         val listId = getListId(sorted)
 
-        Assert.assertEquals("[1, 3, 2]", listId.toString())
+        assertThat(listId.toString(), anyOf(`is`("[1, 3, 2]"), `is`("[3, 1, 2]")))
     }
 
     @Test
@@ -79,7 +67,8 @@ class PreProcessPartnerUsecaseTest {
         val sorted = PreProcessPartnerUsecase().run(dumbData)
         val listId = getListId(sorted)
 
-        Assert.assertEquals("[1, 3, 2, 10]", listId.toString())
+
+        assertThat(listId.toString(), anyOf(`is`("[1, 3, 2, 10]"), `is`("[3, 1, 2, 10]")))
     }
 
     ///////////////////////////////////////////////////////////////////////////
