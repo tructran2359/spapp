@@ -71,7 +71,7 @@
     <string name="behavior_home_menu_view">com.spgroup.spapp.presentation.view.behavior.HomeMenuViewBehavior</string>
     <string name="behavior_partner_detail">com.spgroup.spapp.presentation.view.behavior.PartnerDetailBehavior</string>
     <string name="empty_request_summary">Empty Request\nSummary</string>
-    <string name="no_service_request">You have no service request.</string>
+    <string name="no_service_request">You have no current requests.</string>
     <string name="see_services">SEE SERVICES</string>
     <string name="merchant_tnc_with_format">Merchant’s %s apply.</string>
     <string name="merchant_tnc_underline_text">terms &amp; conditions</string>
