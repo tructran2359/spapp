@@ -36,6 +36,7 @@ android {
         targetSdkVersion 28
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        versionCode 26
     }
 
 
@@ -63,7 +64,6 @@ android {
             buildConfigField "String", "BASE_API", "\"http://checkdev.prod.acquia-sites.com\""
             buildConfigField "String", "API_KEY", "\"EAAblB0ZC5tqMBACwxJ60nIMjfqHsQpirs3V1VbHw0vXgypof886S2aWnW4RYKGZAF7rsazLMNnLrtR8tddVnKQt6TgxVBDfSbgRwK0MFcZCgRBCbtlCKuMZAWpLP7vrQ2KCMIr76dKVwI50o1ZAKr0cnKvUvNnnUQEyo01zeXVwZDZD\""
             resValue "string", "app_name", "Check Dev"
-            versionCode 26
             versionName "0.0.16"
         }
 
@@ -74,7 +74,6 @@ android {
             buildConfigField "String", "BASE_API", "\"http://checkstg.prod.acquia-sites.com\""
             buildConfigField "String", "API_KEY", "\"EAAblB0ZC5tqMBACwxJ60nIMjfqHsQpirs3V1VbHw0vXgypof886S2aWnW4RYKGZAF7rsazLMNnLrtR8tddVnKQt6TgxVBDfSbgRwK0MFcZCgRBCbtlCKuMZAWpLP7vrQ2KCMIr76dKVwI50o1ZAKr0cnKvUvNnnUQEyo01zeXVwZDZD\""
             resValue "string", "app_name", "Check Staging"
-            versionCode 26
             versionName "0.0.16"
         }
 
@@ -84,7 +83,6 @@ android {
             buildConfigField "String", "BASE_API", "\"https://www.letscheck.com.sg\""
             buildConfigField "String", "API_KEY", "\"JGr46aeZ9sb2cGqmNiNPf3GiY4z7mMNjKgmTlQRESMmhcxDS1bxfystsqvT32CziY9FkAJ9geJVlZ6QkIpSWoU5cYytIBWl9jCCvEGhGT2fnqwnuuQXNwfHFuYXj5DGebGosFaLCYAuU6EpqfVFGmGyybl5CJFROB7uwYmJjibkzQYdo\""
             resValue "string", "app_name", "Check"
-            versionCode 1
             versionName "1.0.0"
         }
     }
@@ -96,7 +94,7 @@ android {
             def flavorName = variant.productFlavors[0].name
             def buildName = variant.buildType.name
             def versionName = variant.productFlavors[0].versionName
-            def versionCode = variant.productFlavors[0].versionCode
+            def versionCode = defaultConfig.versionCode
 
             outputFileName = formattedDate + "_" + "SPApp_Android_" + flavorName + "_" + buildName + "_v" + versionName + "-" + versionCode + ".apk"
         }
