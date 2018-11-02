@@ -44,12 +44,14 @@ android {
 
         debug {
             signingConfig signingConfigs.defaultConfig
+            debuggable true
         }
 
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.productionConfig
+            debuggable false
         }
     }
 
