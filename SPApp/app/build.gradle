@@ -36,7 +36,7 @@ android {
         targetSdkVersion 28
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionCode 27
+        versionCode 28
     }
 
 
